@@ -1,0 +1,381 @@
+{
+    "Actor": {
+        "types": ["trinite", "archonte", "lige", "humain"],
+        "templates": {
+            "information": {
+                "prenom": "",
+                "age": 0,
+                "sexe": "",
+                "taille": 0,
+                "description": ""
+            },
+            "signes": {
+                "signes": {
+                    "gemeaux": {
+                        "valeur": 0,
+                        "label": "Gémeaux"
+                    },
+                    "vierge": {
+                        "valeur": 0,
+                        "label": "Vierge"
+                    },
+                    "sagittaire": {
+                        "valeur": 0,
+                        "label": "Sagittaire"
+                    },
+                    "poisson": {
+                        "valeur": 0,
+                        "label": "Poisson"
+                    },
+                    "belier": {
+                        "valeur": 0,
+                        "label": "Bélier"
+                    },
+                    "taureau": {
+                        "valeur": 0,
+                        "label": "Taureau"
+                    },
+                    "balance": {
+                        "valeur": 0,
+                        "label": "Balance"
+                    },
+                    "scorpion": {
+                        "valeur": 0,
+                        "label": "Scorpion"
+                    },
+                    "lion": {
+                        "valeur": 0,
+                        "label": "Lion"
+                    },
+                    "capricorne": {
+                        "valeur": 0,
+                        "label": "Capricorne"
+                    },
+                    "cancer": {
+                        "valeur": 0,
+                        "label": "Cancer"
+                    },
+                    "verseau": {
+                        "valeur": 0,
+                        "label": "Verseau"
+                    }
+                }
+            },
+            "ressources": {
+                "richesse": {
+                    "label": "Richesse",
+                    "valeur": 0,
+                    "diminution": 0,
+                    "dureeDiminution": "",
+                    "epuisee": 0
+                  },
+                "reseau": {
+                    "label": "Réseau",
+                    "valeur": 0,
+                    "diminution": 0,
+                    "dureeDiminution": "",
+                    "epuisee": 0
+                },
+                "influence": {
+                    "label": "Influence",
+                    "valeur": 0,
+                    "diminution": 0,
+                    "dureeDiminution": "",
+                    "epuisee": 0
+                }
+            },
+            "competences": {
+                "competences": {
+                    "gemeaux": {
+                        "art":{
+                            "label": "Art",
+                            "ouverte": 1,
+                            "base": 0
+                        },
+                        "empathie":{
+                            "label": "Empathie",
+                            "ouverte": 1,
+                            "base": 0
+                        },
+                        "seduction":{
+                            "label": "Séduction",
+                            "ouverte": 1,
+                            "base": 0
+                        }
+                    },
+                    "vierge": {
+                        "clairvoyance":{
+                            "label": "Clairvoyance",
+                            "ouverte": 0,
+                            "base": 0
+                        },
+                        "emprise":{
+                            "label": "Emprise",
+                            "ouverte": 0,
+                            "base": 0
+                        },
+                        "meditation":{
+                            "label": "Méditation",
+                            "ouverte": 0,
+                            "base": 0
+                        }
+                    },
+                    "sagittaire": {
+                        "survie":{
+                            "label": "Survie",
+                            "ouverte": 1,
+                            "base": 0
+                        },
+                        "tir":{
+                            "label": "Tir",
+                            "ouverte": 1,
+                            "base": 0
+                        },
+                        "Vigilance":{
+                            "label": "Vigilance",
+                            "ouverte": 1,
+                            "base": 0
+                        }
+                    },
+                    "poisson": {
+                        "erudition":{
+                            "label": "Erudition",
+                            "ouverte": 0,
+                            "base": 0
+                        },
+                        "langues":{
+                            "label": "Langues",
+                            "ouverte": 0,
+                            "base": 0
+                        },
+                        "science":{
+                            "label": "Science",
+                            "ouverte": 0,
+                            "base": 0
+                        }
+                    },
+                    "belier": {
+                        "corpsACorps":{
+                            "label": "Corps à corps",
+                            "ouverte": 1,
+                            "base": 0
+                        },
+                        "melee":{
+                            "label": "Mélée",
+                            "ouverte": 1,
+                            "base": 0
+                        },
+                        "Tactique":{
+                            "label": "Tactique",
+                            "ouverte": 1,
+                            "base": 0
+                        }
+                    },
+                    "taureau": {
+                        "athletisme":{
+                            "label": "Athlétisme",
+                            "ouverte": 1,
+                            "base": 0
+                        },
+                        "endurance":{
+                            "label": "Endurance",
+                            "ouverte": 1,
+                            "base": 0
+                        },
+                        "force":{
+                            "label": "Force",
+                            "ouverte": 1,
+                            "base": 0
+                        }
+                    },
+                    "balance": {
+                        "documentation":{
+                            "label": "Documentation",
+                            "ouverte": 1,
+                            "base": 0
+                        },
+                        "fouille":{
+                            "label": "Fouille",
+                            "ouverte": 1,
+                            "base": 0
+                        },
+                        "intellect":{
+                            "label": "Intellect",
+                            "ouverte": 1,
+                            "base": 0
+                        }
+                    },
+                    "scorpion": {
+                        "discretion":{
+                            "label": "Discrétion",
+                            "ouverte": 1,
+                            "base": 0
+                        },
+                        "intrusion":{
+                            "label": "Intrusion",
+                            "ouverte": 1,
+                            "base": 0
+                        },
+                        "subterfuge":{
+                            "label": "Subterfuge",
+                            "ouverte": 1,
+                            "base": 0
+                        }
+                    },
+                    "lion": {
+                        "commandement":{
+                            "label": "Commandement",
+                            "ouverte": 1,
+                            "base": 0
+                        },
+                        "strategie":{
+                            "label": "Stratégie",
+                            "ouverte": 1,
+                            "base": 0
+                        },
+                        "volonte":{
+                            "label": "Volonté",
+                            "ouverte": 1,
+                            "base": 0
+                        }
+                    },
+                    "capricorne": {
+                        "esquive":{
+                            "label": "Esquive",
+                            "ouverte": 1,
+                            "base": 0
+                        },
+                        "pilotage":{
+                            "label": "Pilotage",
+                            "ouverte": 1,
+                            "base": 0
+                        },
+                        "rapidite":{
+                            "label": "Rapidité",
+                            "ouverte": 1,
+                            "base": 0
+                        }
+                    },
+                    "cancer": {
+                        "artisanat":{
+                            "label": "Artisanat",
+                            "ouverte": 1,
+                            "base": 0
+                        },
+                        "technologies":{
+                            "label": "Technologies",
+                            "ouverte": 0,
+                            "base": 0
+                        },
+                        "soins":{
+                            "label": "Soins",
+                            "ouverte": 1,
+                            "base": 0
+                        }
+                    },
+                    "verseau": {
+                        "astrologie":{
+                            "label": "Astrologie",
+                            "ouverte": 1,
+                            "base": 0
+                        },
+                        "histoireSecrete":{
+                            "label": "Histoire secrète",
+                            "ouverte": 0,
+                            "base": 0
+                        },
+                        "les8":{
+                            "label": "Les 8",
+                            "ouverte": 0,
+                            "base": 0
+                        }
+                    }
+                }    
+            },
+            "theme":{
+                "themeAstral":{
+                    "archetype": "",
+                    "affinite": "",
+                    "ascendant1": "",
+                    "ascendant2": "",
+                    "descendant1": "",
+                    "descendant2": "",
+                    "descendant3": ""
+                }
+            },
+            "trini":{
+                "trinite": {
+                    "deva": {
+                        "choeur": "",
+                        "karma": 0,
+                        "dettes": 0,
+                        "credits": 0
+                    },
+                    "archonte": {
+                        "legion": "",
+                        "karma": 0,
+                        "dettes": 0,
+                        "credits": 0
+                    },
+                    "adam": {
+                        "karma": 0
+                    }
+                }
+            },
+            "lame": {
+                "lameSoeur": {
+                    "messager": "",
+                    "description": ""
+                }
+            }
+        },
+        "trinite": {
+            "templates": [ "information", "signes", "competences", "theme", "trini" ],
+            "vieAnterieure": "",
+            "experience": 0
+        },
+        "archonte": {
+            "templates": [ "information", "signes", "competences", "theme" ]
+        },
+        "lige" : {
+            "templates": [ "information", "signes" ]
+        },
+        "humain": {
+            "templates": [ "information" ]
+        }
+    },
+    "Item": {
+        "types": ["objet", "aura", "verset", "atout", "arme"],
+        "objet": {
+            "description": ""
+        },
+        "aura": {
+            "signe": "",
+            "description": "",
+            "souffle": "",
+            "deploiement": ""
+        },
+        "verset": {
+            "choeurLegion": "",
+            "favori": "",            
+            "sentence": "",
+            "karma": "",
+            "duree": "",
+            "portee": "",
+            "aireEffet": "",
+            "cumul": 0,
+            "description": ""
+        },
+        "atout": {
+            "messager": "",
+            "couleur": "",
+            "description": ""
+        },
+        "arme": {
+            "type": "",
+            "typeDegats": "",
+            "valeurDegats": "",
+            "bonus": ""
+        }
+    }
+}

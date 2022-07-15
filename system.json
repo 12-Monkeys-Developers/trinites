@@ -1,0 +1,29 @@
+{
+    "name": "trinites",
+    "title": "Trinités",
+    "description": "Trinités (non officiel))",
+    "version": "0.0.1",
+    "minimumCoreVersion": "9",
+    "compatibleCoreVersion": "9",
+    "templateVersion": 1,
+    "author": "Dellatosa",
+    "esmodules": [ "module/trinites.js" ],
+    "styles": [ "css/trinites.css" ],
+    "scripts": [],
+    "packs": [],
+    "languages": [
+      {
+        "lang": "fr",
+        "name": "Francais",
+        "path": "lang/fr.json"
+      }
+    ],
+    "gridDistance": 1.5,
+    "gridUnits": "m",
+    "initiative": "1d10",
+    "primaryTokenAttribute": "",
+    "url": "https://github.com/Dellatosa/trinites",
+    "manifest": "https://raw.githubusercontent.com/Dellatosa/trinites/main/system.json",
+    "download": "https://github.com/Dellatosa/trinites/archive/refs/tags/v0.0.1.zip"
+  }
+  

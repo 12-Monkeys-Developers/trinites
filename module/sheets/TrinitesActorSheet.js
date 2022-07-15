@@ -5,9 +5,7 @@ export default class TrinitesActorSheet extends ActorSheet {
             width: 744,
             height: 958,
             classes: ["trinites", "sheet", "actor"],
-            /*tabs: [{ navSelector: ".sheet-tabs", contentSelector: ".sheet-body", initial: "competences" },
-                    { navSelector: ".magie-tabs", contentSelector: ".magie-content", initial: "emprise" },
-                    { navSelector: ".historique-tabs", contentSelector: ".historique-content", initial: "pouvoirs" }]*/
+            tabs: [{ navSelector: ".sheet-tabs", contentSelector: ".sheet-body", initial: "profane" }]
         });
     }
 

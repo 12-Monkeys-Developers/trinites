@@ -3,10 +3,9 @@
         "types": ["trinite", "archonte", "lige", "humain"],
         "templates": {
             "information": {
-                "prenom": "",
                 "age": 0,
                 "sexe": "",
-                "taille": 0,
+                "taille": "",
                 "description": ""
             },
             "signes": {
@@ -131,7 +130,7 @@
                             "ouverte": 1,
                             "base": 0
                         },
-                        "Vigilance":{
+                        "vigilance":{
                             "label": "Vigilance",
                             "ouverte": 1,
                             "base": 0
@@ -148,8 +147,8 @@
                             "ouverte": 0,
                             "base": 0
                         },
-                        "science":{
-                            "label": "Science",
+                        "sciences":{
+                            "label": "Sciences",
                             "ouverte": 0,
                             "base": 0
                         }
@@ -165,7 +164,7 @@
                             "ouverte": 1,
                             "base": 0
                         },
-                        "Tactique":{
+                        "tactique":{
                             "label": "Tactique",
                             "ouverte": 1,
                             "base": 0
@@ -331,6 +330,7 @@
         },
         "trinite": {
             "templates": [ "information", "signes", "competences", "theme", "trini" ],
+            "metier": "",
             "vieAnterieure": "",
             "experience": 0
         },

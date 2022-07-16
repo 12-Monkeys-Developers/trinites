@@ -15,16 +15,12 @@
     padding: 3px;
 }
 
-.ct-center {
-    display: flex;
-    justify-content: center;
-}
-
 .actor-infos-line {
     display: flex;
 }
 
 .trinites.sheet.actor {
+    
     .sheet-header {
 
         img {
@@ -37,13 +33,32 @@
         label {
             padding: 7px 0;
         }
+
+        background-image: url("../images/header-back.jpg");        
+        background-position: 0% 10%;
+
+        color: white;
+
+        input {
+            color: white;
+        }
+
+        input::placeholder {
+            color: lightgray;
+        }
+
     }
     
     .window-content {
         background: url("../images/parchemin-grey.jpg") repeat;
+
+        h3 {
+            color: #1f546f;
+            font-weight: bold;
+        }
     }
 
-    .sheet-body .comp-grid {
+    .comp-grid {
         display: grid;
         grid-template-columns: 3.5em 3em 2em 2fr 1fr 1fr 1em 3.5em 3em 2em 2fr 1fr 1fr;
 
@@ -57,17 +72,22 @@
             border: none;
         }
 
-        input.editor-comp {
-            height: 16px;
-            width: 40px;
-            text-align: center;
-            font-size: 0.9em;
-        }
-
         .col-image-1 {
             grid-column: 1 / 2;
             display: flex;
             justify-content: center;
+        }
+
+        .col-valSigne-1 {
+            grid-column: 2 / 3;
+            display: flex;
+            justify-content: center;
+
+            input {
+                margin-top: 15px;
+                text-align: center;
+                font-size: 0.9em;
+            }
         }
 
         .col-dice-1 {
@@ -78,16 +98,28 @@
         
         .col-nom-1 {
             grid-column: 4 / 5;
+            margin-right: 0px;
+            padding-left: 3px;
         }
 
         .col-base-1 {
             grid-column: 5 / 6;
+            margin-right: 0px;
+            margin-left: 0px;
             display: flex;
             justify-content: center;
+
+            input {
+                height: 16px;
+                width: 40px;
+                text-align: center;
+                font-size: 0.9em; 
+            }
         }
 
         .col-valeur-1 {
             grid-column: 6 / 7;
+            margin-left: 0px;
             display: flex;
             justify-content: center;
         }
@@ -98,6 +130,18 @@
             justify-content: center;
         }
 
+        .col-valSigne-2 {
+            grid-column: 9 / 10;
+            display: flex;
+            justify-content: center;
+
+            input {
+                margin-top: 15px;
+                text-align: center;
+                font-size: 0.9em;
+            }
+        }
+
         .col-dice-2 {
             grid-column: 10 / 11;
             display: flex;
@@ -106,22 +150,36 @@
 
         .col-nom-2 {
             grid-column: 11 / 12;
+            margin-right: 0px;            
+            padding-left: 3px;
         }
 
         .col-base-2 {
             grid-column: 12 / 13;
+            margin-right: 0px;
+            margin-left: 0px;
             display: flex;
             justify-content: center;
+
+            input {
+                height: 16px;
+                width: 40px;
+                text-align: center;
+                font-size: 0.9em;
+            }
         }
 
         .col-valeur-2 {
             grid-column: 13 / 14;
+            margin-left: 0px;
             display: flex;
             justify-content: center;
         }
 
         .lig-titre-1 {
             grid-row: 1 / 2;
+            background-color: #1f546f;
+            color: white;
         }
 
         .lig-image-1 {
@@ -130,6 +188,8 @@
 
         .lig-titre-2 {
             grid-row: 5 / 6;
+            background-color: #1f546f;
+            color: white;
         }
 
         .lig-image-2 {
@@ -138,6 +198,8 @@
 
         .lig-titre-3 {
             grid-row: 9 / 10;
+            background-color: #1f546f;
+            color: white;
         }
 
         .lig-image-3 {
@@ -146,6 +208,8 @@
 
         .lig-titre-4 {
             grid-row: 13 / 14;
+            background-color: #1f546f;
+            color: white;
         }
 
         .lig-image-4 {
@@ -154,6 +218,8 @@
 
         .lig-titre-5 {
             grid-row: 17 / 18;
+            background-color: #1f546f;
+            color: white;
         }
 
         .lig-image-5 {
@@ -162,6 +228,8 @@
 
         .lig-titre-6 {
             grid-row: 21 / 22;
+            background-color: #1f546f;
+            color: white;
         }
 
         .lig-image-6 {
@@ -238,6 +306,72 @@
 
         .lig-comp-18 {
             grid-row: 24 / 25;
+        }
+    }
+
+    .pied-page {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        
+        div {
+            margin: 2px;    
+        }
+    }
+
+    .dom-grid {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+
+        .domaine-item {
+            display: flex;
+
+            div {
+                margin-right: 3px; 
+            }
+        }
+    }
+
+    .ress-grid {
+        display: grid;
+        grid-template-columns: 2em 1fr 3em 1em 3em 1em 1.5fr;
+        
+        .colRess-dice {
+            margin-top: 7px;
+            grid-column: 1 / 2;
+            display: flex;
+            justify-content: center;
+        }
+
+        .colRess-nom {
+            margin-top: 7px;
+            grid-column: 2 / 3;
+            font-size: 0.9em;
+        }
+
+        .colRess-valeur {
+            grid-column: 3 / 4;
+            display: flex;
+            justify-content: center;
+
+            input {                
+                text-align: center;
+                font-size: 0.9em;
+            }
+        }
+
+        .colRess-diminution {
+            grid-column: 5 / 6;
+            display: flex;
+            justify-content: center;
+
+            input {
+                text-align: center;
+                font-size: 0.9em;
+            }
+        }
+
+        .colRess-duree {
+            grid-column: 7 / 8;
         }
     }
 }

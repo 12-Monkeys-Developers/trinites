@@ -329,7 +329,7 @@
             }
         },
         "trinite": {
-            "templates": [ "information", "signes", "competences", "theme", "trini" ],
+            "templates": [ "information", "signes", "competences", "ressources", "theme", "trini" ],
             "metier": "",
             "vieAnterieure": "",
             "experience": 0
@@ -345,9 +345,13 @@
         }
     },
     "Item": {
-        "types": ["objet", "aura", "verset", "atout", "arme"],
+        "types": ["objet", "domaine", "aura", "verset", "atout", "arme"],
         "objet": {
             "description": ""
+        },
+        "domaine" :{
+            "description": "",
+            "epuise": false
         },
         "aura": {
             "signe": "",

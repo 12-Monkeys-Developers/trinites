@@ -332,16 +332,24 @@
             "templates": [ "information", "signes", "competences", "ressources", "theme", "trini" ],
             "metier": "",
             "vieAnterieure": "",
-            "experience": 0
+            "experience": 0,
+            "pointsLigneVie": 8,
+            "nbBlessure": 0
         },
         "archonte": {
-            "templates": [ "information", "signes", "competences", "theme" ]
+            "templates": [ "information", "signes", "competences", "theme" ],
+            "pointsLigneVie": 8,
+            "nbBlessure": 0
         },
         "lige" : {
-            "templates": [ "information", "signes" ]
+            "templates": [ "information", "signes" ],
+            "pointsLigneVie": 4,
+            "nbBlessure": 0
         },
         "humain": {
-            "templates": [ "information" ]
+            "templates": [ "information" ],
+            "pointsLigneVie": 4,
+            "nbBlessure": 0
         }
     },
     "Item": {

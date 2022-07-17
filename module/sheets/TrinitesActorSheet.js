@@ -53,6 +53,9 @@ export default class TrinitesActorSheet extends ActorSheet {
 
                 // Enlever au domaine son statut épuisé
                 html.find('.uncheck-domaine').click(this._onSupprDomaineEtatEpuise.bind(this));
+
+                // Cocher une case de dommages
+                html.find('.case-vie').click(this._onCocherCaseDeVie.bind(this));
             }
         }
     }
@@ -94,5 +97,15 @@ export default class TrinitesActorSheet extends ActorSheet {
         let domaineId = element.closest(".domaine").dataset.itemId;
         const domaine = this.actor.items.get(domaineId);
         domaine.update({"data.epuise": false});
+    }
+
+    _onCocherCaseDeVie(event) {
+        event.preventDefault();
+        const element = event.currentTarget;
+
+        let indexVie = element.dataset.index;
+        let blessureVal = this.actor.data.data.nbBlessure != indexVie ? indexVie : indexVie - 1;
+
+        this.actor.update({"data.nbBlessure": blessureVal});
     }
 }

@@ -25,7 +25,13 @@ export default class TrinitesActor extends Actor {
                 }
             }
         }
+
     }
+
+    // Points de vie maxi
+    data.ligneVie1 = data.pointsLigneVie;
+    data.ligneVie2 = data.pointsLigneVie * 2;
+    data.nbPointsVieMax = data.pointsLigneVie * 3;
 
     console.log(data);
 

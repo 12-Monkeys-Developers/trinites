@@ -297,3 +297,10 @@
 .trinites.sheet.actor .ress-grid .colRess-duree {
   grid-column: 7 / 8;
 }
+.trinites.sheet.actor .ligne-vie {
+  display: flex;
+  justify-content: center;
+}
+.trinites.sheet.actor .case-vie {
+  margin: 5px;
+}

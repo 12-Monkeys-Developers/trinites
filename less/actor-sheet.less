@@ -19,6 +19,16 @@
     display: flex;
 }
 
+.deux-col-50-50 {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.deux-col-66-33 {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+}
+
 .trinites.sheet.actor {
     
     .sheet-header {
@@ -309,9 +319,12 @@
         }
     }
 
-    .deux-col {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
+    .domaine {
+        min-height: 50px;
+
+        h3 {
+            margin-top: 5px;
+        }
     }
 
     .dom-grid {
@@ -324,6 +337,13 @@
             div {
                 margin-right: 3px; 
             }
+        }
+    }
+
+    .col-A, .col-B {
+
+        h3 {
+            margin-top: 5px;
         }
     }
 
@@ -476,8 +496,10 @@
     .stats-trinite {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
+        font-size: 0.9em;
 
         .deva, .archonte {
+
             h3 {
                 text-align: center;
                 margin-top: 50px;
@@ -487,18 +509,27 @@
                 display: grid;
                 grid-template-columns: 1em 1fr 2fr 1em;
 
+
                 .colStats-titre {
                     grid-column: 2 / 3;
+                    margin-top: 7px;
                 }
     
                 .colStats-valeur {
                     grid-column: 3 / 4;
-                }
+                    margin: 2px;
+
+                    input {
+                        width: 3.5em;
+                        text-align: center;
+                    }
+                }                
             }
         }
 
         .adam {
             display: flex;
+            flex-direction: column;
             justify-content: center;
 
             img {
@@ -506,6 +537,101 @@
                 width: 240px;
                 height: 240px;
             }
+
+            h3 {
+                text-align: center;
+                margin-top: 5px;
+            }
+
+            .karma {
+                display: flex;
+                justify-content: center;
+                
+                
+                label {
+                    margin: 2px;
+                    margin-top: 7px;
+                }
+            }
+
+            input {
+                width: 3.5em;
+                text-align: center;
+                margin: 2px;
+            }
+        }
+    }
+
+    .grand-livre {
+        min-height: 75px;
+
+        h3 {
+            margin-top: 5px;
+        }
+    }
+
+    .zodiaque {
+        min-height: 75px;
+
+        h3 {
+            margin-top: 5px;
+        }
+    }
+
+    .lame-soeur {
+
+        h3 {
+            margin-top: 5px;
+        }
+    }
+
+    .grid-grand-livre {
+        display: grid;
+        grid-template-columns: 2em 1fr 2em 2em 1em 2em 1fr 2em 2em;
+        font-size: 0.9em;
+
+        .col-titre-lum {
+            grid-column: 1 / 5;
+            display: flex;
+            justify-content: center;
+        }
+
+        .col-roll-lum {
+            grid-column: 1 / 2;
+        }
+
+        .col-nom-lum {
+            grid-column: 2 / 3;
+        }
+
+        .col-edit-lum {
+            grid-column: 3 / 4;
+        }
+
+        .col-delete-lum {
+            grid-column: 4 / 5;
+        }
+
+        .col-titre-ten {
+            grid-column: 6 / 10;
+            display: flex;
+            justify-content: center;
+        }
+
+        .col-roll-ten {
+            grid-column: 6 / 7;
+        }
+
+        .col-nom-ten {
+            grid-column: 7 / 8;
+        }
+
+        .col-edit-ten {
+            grid-column: 8 / 9;
+        }
+
+        .col-delete-ten {
+            grid-column: 9 / 10;
         }
     }
 }

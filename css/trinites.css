@@ -15,6 +15,14 @@
 .actor-infos-line {
   display: flex;
 }
+.deux-col-50-50 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+.deux-col-66-33 {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+}
 .trinites.sheet.actor .sheet-header {
   background-image: url("../images/header-back.jpg");
   background-position: 0% 10%;
@@ -244,9 +252,11 @@
 .trinites.sheet.actor .comp-grid .lig-comp-18 {
   grid-row: 24 / 25;
 }
-.trinites.sheet.actor .deux-col {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
+.trinites.sheet.actor .domaine {
+  min-height: 50px;
+}
+.trinites.sheet.actor .domaine h3 {
+  margin-top: 5px;
 }
 .trinites.sheet.actor .dom-grid {
   display: grid;
@@ -257,6 +267,10 @@
 }
 .trinites.sheet.actor .dom-grid .domaine-item div {
   margin-right: 3px;
+}
+.trinites.sheet.actor .col-A h3,
+.trinites.sheet.actor .col-B h3 {
+  margin-top: 5px;
 }
 .trinites.sheet.actor .ress-grid {
   display: grid;
@@ -379,6 +393,7 @@
 .trinites.sheet.actor .stats-trinite {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
+  font-size: 0.9em;
 }
 .trinites.sheet.actor .stats-trinite .deva h3,
 .trinites.sheet.actor .stats-trinite .archonte h3 {
@@ -393,17 +408,96 @@
 .trinites.sheet.actor .stats-trinite .deva .grid-stats .colStats-titre,
 .trinites.sheet.actor .stats-trinite .archonte .grid-stats .colStats-titre {
   grid-column: 2 / 3;
+  margin-top: 7px;
 }
 .trinites.sheet.actor .stats-trinite .deva .grid-stats .colStats-valeur,
 .trinites.sheet.actor .stats-trinite .archonte .grid-stats .colStats-valeur {
   grid-column: 3 / 4;
+  margin: 2px;
+}
+.trinites.sheet.actor .stats-trinite .deva .grid-stats .colStats-valeur input,
+.trinites.sheet.actor .stats-trinite .archonte .grid-stats .colStats-valeur input {
+  width: 3.5em;
+  text-align: center;
 }
 .trinites.sheet.actor .stats-trinite .adam {
   display: flex;
+  flex-direction: column;
   justify-content: center;
 }
 .trinites.sheet.actor .stats-trinite .adam img {
   border: none;
   width: 240px;
   height: 240px;
+}
+.trinites.sheet.actor .stats-trinite .adam h3 {
+  text-align: center;
+  margin-top: 5px;
+}
+.trinites.sheet.actor .stats-trinite .adam .karma {
+  display: flex;
+  justify-content: center;
+}
+.trinites.sheet.actor .stats-trinite .adam .karma label {
+  margin: 2px;
+  margin-top: 7px;
+}
+.trinites.sheet.actor .stats-trinite .adam input {
+  width: 3.5em;
+  text-align: center;
+  margin: 2px;
+}
+.trinites.sheet.actor .grand-livre {
+  min-height: 75px;
+}
+.trinites.sheet.actor .grand-livre h3 {
+  margin-top: 5px;
+}
+.trinites.sheet.actor .zodiaque {
+  min-height: 75px;
+}
+.trinites.sheet.actor .zodiaque h3 {
+  margin-top: 5px;
+}
+.trinites.sheet.actor .lame-soeur h3 {
+  margin-top: 5px;
+}
+.trinites.sheet.actor .grid-grand-livre {
+  display: grid;
+  grid-template-columns: 2em 1fr 2em 2em 1em 2em 1fr 2em 2em;
+  font-size: 0.9em;
+}
+.trinites.sheet.actor .grid-grand-livre .col-titre-lum {
+  grid-column: 1 / 5;
+  display: flex;
+  justify-content: center;
+}
+.trinites.sheet.actor .grid-grand-livre .col-roll-lum {
+  grid-column: 1 / 2;
+}
+.trinites.sheet.actor .grid-grand-livre .col-nom-lum {
+  grid-column: 2 / 3;
+}
+.trinites.sheet.actor .grid-grand-livre .col-edit-lum {
+  grid-column: 3 / 4;
+}
+.trinites.sheet.actor .grid-grand-livre .col-delete-lum {
+  grid-column: 4 / 5;
+}
+.trinites.sheet.actor .grid-grand-livre .col-titre-ten {
+  grid-column: 6 / 10;
+  display: flex;
+  justify-content: center;
+}
+.trinites.sheet.actor .grid-grand-livre .col-roll-ten {
+  grid-column: 6 / 7;
+}
+.trinites.sheet.actor .grid-grand-livre .col-nom-ten {
+  grid-column: 7 / 8;
+}
+.trinites.sheet.actor .grid-grand-livre .col-edit-ten {
+  grid-column: 8 / 9;
+}
+.trinites.sheet.actor .grid-grand-livre .col-delete-ten {
+  grid-column: 9 / 10;
 }

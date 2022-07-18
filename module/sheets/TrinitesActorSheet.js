@@ -30,6 +30,7 @@ export default class TrinitesActorSheet extends ActorSheet {
         -----------------------------------------------------*/
 
         data.domaines = data.items.filter(function (item) { return item.type == "domaine"});
+        data.versets  = data.items.filter(function (item) { return item.type == "verset"});
 
         console.log(data);
 

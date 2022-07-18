@@ -1,9 +1,9 @@
 <form class="{{cssClass}}" autocomplete="off">
     <header class="sheet-header">
-        <img src="systems/trinites/images/trinites_defaut.png" data-edit="img" title="{{actor.name}}" height="128" width="128">
+        <img src="{{actor.img}}" data-edit="img" title="{{actor.name}}" height="128" width="128">
         <div class="actor-info">
             <div class="actor-infos-line">
-                <h1 class="charname"><input name="name" type="text" value="{{actor.name}}" placeholder=" Nom"></h1>
+                <h1 class="charname"><input name="name" type="text" value="{{actor.name}}" placeholder="Nom"></h1>
             </div>
             <div class="actor-infos-line">
                 <label>Sexe</label>
@@ -228,22 +228,24 @@
                 <div class="col-base-2 lig-comp-18"><input name="data.competences.verseau.les8.base" type="number" value="{{data.data.competences.verseau.les8.base}}" placeholder="0"></div>
                 <div class="col-valeur-2 lig-comp-18"><label>{{data.data.competences.verseau.les8.valeur}}</label></div>
             </div>
-            <h3>DOMAINES</h3>
-            <div class="dom-grid">
-                {{#each domaines as |domaine id|}}
-                <div class="domaine-item domaine" data-item-id="{{domaine._id}}">
-                    <div>{{domaine.name}}</div>
-                    {{#if domaine.data.epuise }}
-                        <div class="uncheck-domaine"><a title="Domaine épuisé"><i class="far fa-check-square"></i></a></div>
-                    {{else}}
-                        <div class="check-domaine"><a title="Domaine épuisé"><i class="far fa-square"></i></a></div>
-                    {{/if}}
-                    <div><a class="suppr-domaine" title="Supprimer"><i class="fas fa-times-circle"></i></a></div>
+            <div class="domaine">
+                <h3>DOMAINES</h3>
+                <div class="dom-grid">
+                    {{#each domaines as |domaine id|}}
+                    <div class="domaine-item domaine" data-item-id="{{domaine._id}}">
+                        <div>{{domaine.name}}</div>
+                        {{#if domaine.data.epuise }}
+                            <div class="uncheck-domaine"><a title="Domaine épuisé"><i class="far fa-check-square"></i></a></div>
+                        {{else}}
+                            <div class="check-domaine"><a title="Domaine épuisé"><i class="far fa-square"></i></a></div>
+                        {{/if}}
+                        <div><a class="suppr-domaine" title="Supprimer"><i class="fas fa-times-circle"></i></a></div>
+                    </div>
+                    {{/each}}
                 </div>
-                {{/each}}
             </div>
-            <div class="deux-col">
-                <div class="deux-col-1">
+            <div class="deux-col-50-50">
+                <div class="col-A">
                     <h3>RESSOURCES</h3>
                     <div class="ress-grid">
                         <!-- RICHESSE -->
@@ -266,7 +268,7 @@
                         <div class="colRess-duree"><input name="data.influence.duree" type="text" value="{{data.data.influence.duree}}" placeholder="Durée diminution"></div>
                     </div>
                 </div>
-                <div class="deux-col-2">
+                <div class="col-B">
                     <h3>LIGNES DE VIE</h3>
                     <div class="ligne-vie">
                         {{#times data.data.nbPointsVieMax}}
@@ -280,8 +282,8 @@
             </div>
         </div>
         <div class="tab" data-group="principal" data-tab="occulte">
-            <div class="deux-col">
-                <div class="deux-col-1">
+            <div class="deux-col-50-50">
+                <div class="col-A">
                     <h3>THEME ASTRAL</h3>
                     <div class="ligne-theme">
                         <label>Archétype</label>
@@ -341,7 +343,7 @@
                         </select>
                     </div>
                 </div>
-                <div class="deux-col-2">
+                <div class="col-B">
                     <h3>VIE ANTERIEURE</h3>
                     <div class="vie-ante"><textarea name="data.vieAnterieure" placeholder="Premier souvenir d'une vie antérieure">{{data.data.vieAnterieure}}</textarea></div>
                     <h3>EXPERIENCE</h3>
@@ -358,7 +360,7 @@
                 <div class="deva">
                     <h3>DEVA</h3>
                     <div class="grid-stats">
-                        <div class="colStats-titre">Choeur</div>
+                        <div class="colStats-titre"><label>Choeur</label></div>
                         <div class="colStats-valeur">
                             <select name="data.trinite.deva.choeur">
                                 {{#select data.data.trinite.deva.choeur}}
@@ -368,20 +370,70 @@
                                 {{/select}} 
                             </select>
                         </div>
-                        <div class="colStats-titre">Karma</div>
+                        <div class="colStats-titre"><label>Karma</label></div>
                         <div class="colStats-valeur"><input name="data.trinite.deva.karma" type="number" value="{{data.data.trinite.deva.karma}}" placeholder="0"></div>
-                        <div class="colStats-titre">Dettes</div>
+                        <div class="colStats-titre"><label>Dettes</label></div>
                         <div class="colStats-valeur"><input name="data.trinite.deva.dettes" type="number" value="{{data.data.trinite.deva.dettes}}" placeholder="0"></div>
-                        <div class="colStats-titre">Credits</div>
+                        <div class="colStats-titre"><label>Credits</label></div>
                         <div class="colStats-valeur"><input name="data.trinite.deva.credits" type="number" value="{{data.data.trinite.deva.credits}}" placeholder="0"></div>
                     </div>
                 </div>
-                <div class="adam"><img src="systems/trinites/images/trinite_occulte.png" data-edit="img" title="{{actor.name}}"></div>
+                <div class="adam">
+                    <img src="systems/trinites/images/trinite_occulte.png" data-edit="img" title="{{actor.name}}">
+                    <h3>ADAM'</h3>
+                    <div class="karma"><label>Karma</label><input name="data.trinite.adam.karma" type="number" value="{{data.data.trinite.adam.karma}}" placeholder="0"></div>
+                </div>
                 <div class="archonte">
                     <h3>ARCHONTE</h3>
                     <div class="grid-stats">
-
+                        <div class="colStats-titre"><label>Légion</label></div>
+                        <div class="colStats-valeur">
+                            <select name="data.trinite.archonte.legion">
+                                {{#select data.data.trinite.archonte.legion}}
+                                {{#each config.legions as |legion keyLegion|}}
+                                    <option value="{{keyLegion}}">{{legion}}</option>
+                                {{/each}}
+                                {{/select}} 
+                            </select>
+                        </div>
+                        <div class="colStats-titre"><label>Karma</label></div>
+                        <div class="colStats-valeur"><input name="data.trinite.archonte.karma" type="number" value="{{data.data.trinite.archonte.karma}}" placeholder="0"></div>
+                        <div class="colStats-titre"><label>Dettes</label></div>
+                        <div class="colStats-valeur"><input name="data.trinite.archonte.dettes" type="number" value="{{data.data.trinite.archonte.dettes}}" placeholder="0"></div>
+                        <div class="colStats-titre"><label>Credits</label></div>
+                        <div class="colStats-valeur"><input name="data.trinite.archonte.credits" type="number" value="{{data.data.trinite.archonte.credits}}" placeholder="0"></div>
                     </div>
+                </div>
+            </div>
+            <div class="deux-col-66-33">
+                <div class="col-66">
+                    <div class="grand-livre">
+                        <h3>GRAND LIVRE</h3>
+                        <div class="grid-grand-livre">
+                            <div class="col-titre-lum">Versets de Lumière</div>
+                            <div class="col-titre-ten">Versets de Tenèbres</div>
+                            {{#each versets as |verset id|}}
+                                    {{#if (eq verset.data.karma "lumiere")}}
+                                        <div class="col-roll-lum"><a class="roll-verset" title="Jet de verset" data-item-id="{{verset._id}}"><i class="fas fa-dice"></i></a></div>
+                                        <div class="col-nom-lum">{{verset.name}}</div>
+                                        <div class="col-edit-lum"><a class="edit-verset" title="Editer" data-item-id="{{verset._id}}"> <i class="far fa-edit"></i></a></div>
+                                        <div class="col-delete-lum"><a class="suppr-verset" title="Supprimer" data-item-id="{{verset._id}}"><i class="fas fa-times-circle"></i></a></div>
+                                    {{/if}}
+                                    {{#if (eq verset.data.karma "tenebre")}}
+                                        <div class="col-roll-ten"><a class="roll-verset" title="Jet de verset" data-item-id="{{verset._id}}"><i class="fas fa-dice"></i></a></div>
+                                        <div class="col-nom-ten">{{verset.name}}</div>
+                                        <div class="col-edit-ten"><a class="edit-verset" title="Editer" data-item-id="{{verset._id}}"> <i class="far fa-edit"></i></a></div>
+                                        <div class="col-delete-ten"><a class="suppr-verset" title="Supprimer" data-item-id="{{verset._id}}"><i class="fas fa-times-circle"></i></a></div>
+                                    {{/if}}
+                            {{/each}}
+                        </div>
+                    </div>
+                    <div class="zodiaque">
+                        <h3>ZODIAQUE</h3>
+                    </div>
+                </div>
+                <div class="col-33 lame-soeur">
+                    <h3>LAME-SOEUR</h3>
                 </div>
             </div>
         </div>

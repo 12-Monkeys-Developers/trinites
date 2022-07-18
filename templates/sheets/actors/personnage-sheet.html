@@ -242,8 +242,8 @@
                 </div>
                 {{/each}}
             </div>
-            <div class="pied-page">
-                <div>
+            <div class="deux-col">
+                <div class="deux-col-1">
                     <h3>RESSOURCES</h3>
                     <div class="ress-grid">
                         <!-- RICHESSE -->
@@ -266,7 +266,7 @@
                         <div class="colRess-duree"><input name="data.influence.duree" type="text" value="{{data.data.influence.duree}}" placeholder="Durée diminution"></div>
                     </div>
                 </div>
-                <div>
+                <div class="deux-col-2">
                     <h3>LIGNES DE VIE</h3>
                     <div class="ligne-vie">
                         {{#times data.data.nbPointsVieMax}}
@@ -280,6 +280,110 @@
             </div>
         </div>
         <div class="tab" data-group="principal" data-tab="occulte">
+            <div class="deux-col">
+                <div class="deux-col-1">
+                    <h3>THEME ASTRAL</h3>
+                    <div class="ligne-theme">
+                        <label>Archétype</label>
+                        <select name="data.themeAstral.archetype">
+                            {{#select data.data.themeAstral.archetype}}
+                            {{#each config.signes as |signe keySigne|}}
+                                <option value="{{keySigne}}">{{signe}}</option>
+                            {{/each}}
+                            {{/select}} 
+                        </select>
+                        <label>Affinité</label>
+                        <select name="data.themeAstral.affinite">
+                            {{#select data.data.themeAstral.affinite}}
+                            {{#each config.affinites as |affinite keyAffinite|}}
+                                <option value="{{keyAffinite}}">{{affinite}}</option>
+                            {{/each}}
+                            {{/select}} 
+                        </select>
+                    </div>
+                    <div class="grid-theme">
+                        <label class="col-ascendant lig-titre">Ascendants</label>
+                        <select class="col-ascendant lig-theme-1" name="data.themeAstral.ascendant1">
+                            {{#select data.data.themeAstral.ascendant1}}
+                            {{#each config.signes as |signe keySigne|}}
+                                <option value="{{keySigne}}">{{signe}}</option>
+                            {{/each}}
+                            {{/select}} 
+                        </select>
+                        <select class="col-ascendant lig-theme-2" name="data.themeAstral.ascendant2">
+                            {{#select data.data.themeAstral.ascendant2}}
+                            {{#each config.signes as |signe keySigne|}}
+                                <option value="{{keySigne}}">{{signe}}</option>
+                            {{/each}}
+                            {{/select}} 
+                        </select>
+                        <label class="col-descendant lig-titre">Descendants</label>
+                        <select class="col-descendant lig-theme-1" name="data.themeAstral.descendant1">
+                            {{#select data.data.themeAstral.descendant1}}
+                            {{#each config.signes as |signe keySigne|}}
+                                <option value="{{keySigne}}">{{signe}}</option>
+                            {{/each}}
+                            {{/select}} 
+                        </select>
+                        <select class="col-descendant lig-theme-2" name="data.themeAstral.descendant2">
+                            {{#select data.data.themeAstral.descendant2}}
+                            {{#each config.signes as |signe keySigne|}}
+                                <option value="{{keySigne}}">{{signe}}</option>
+                            {{/each}}
+                            {{/select}} 
+                        </select>
+                        <select class="col-descendant lig-theme-3" name="data.themeAstral.descendant3">
+                            {{#select data.data.themeAstral.descendant3}}
+                            {{#each config.signes as |signe keySigne|}}
+                                <option value="{{keySigne}}">{{signe}}</option>
+                            {{/each}}
+                            {{/select}} 
+                        </select>
+                    </div>
+                </div>
+                <div class="deux-col-2">
+                    <h3>VIE ANTERIEURE</h3>
+                    <div class="vie-ante"><textarea name="data.vieAnterieure" placeholder="Premier souvenir d'une vie antérieure">{{data.data.vieAnterieure}}</textarea></div>
+                    <h3>EXPERIENCE</h3>
+                    <div class="experience">
+                        <label>Totale</label>
+                        <input name="data.experience.totale" type="number" value="{{data.data.experience.totale}}" placeholder="0">
+                        <div></div>
+                        <label>Disponible</label>
+                        <input name="data.experience.disponible" type="number" value="{{data.data.experience.disponible}}" placeholder="0">
+                    </div>
+                </div>
+            </div>
+            <div class="stats-trinite">
+                <div class="deva">
+                    <h3>DEVA</h3>
+                    <div class="grid-stats">
+                        <div class="colStats-titre">Choeur</div>
+                        <div class="colStats-valeur">
+                            <select name="data.trinite.deva.choeur">
+                                {{#select data.data.trinite.deva.choeur}}
+                                {{#each config.choeurs as |choeur keyChoeur|}}
+                                    <option value="{{keyChoeur}}">{{choeur}}</option>
+                                {{/each}}
+                                {{/select}} 
+                            </select>
+                        </div>
+                        <div class="colStats-titre">Karma</div>
+                        <div class="colStats-valeur"><input name="data.trinite.deva.karma" type="number" value="{{data.data.trinite.deva.karma}}" placeholder="0"></div>
+                        <div class="colStats-titre">Dettes</div>
+                        <div class="colStats-valeur"><input name="data.trinite.deva.dettes" type="number" value="{{data.data.trinite.deva.dettes}}" placeholder="0"></div>
+                        <div class="colStats-titre">Credits</div>
+                        <div class="colStats-valeur"><input name="data.trinite.deva.credits" type="number" value="{{data.data.trinite.deva.credits}}" placeholder="0"></div>
+                    </div>
+                </div>
+                <div class="adam"><img src="systems/trinites/images/trinite_occulte.png" data-edit="img" title="{{actor.name}}"></div>
+                <div class="archonte">
+                    <h3>ARCHONTE</h3>
+                    <div class="grid-stats">
+
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 </form>

@@ -39,3 +39,10 @@ Trinites.signes = {
     cancer: "Le Cancer",
     verseau: "Le Verseau"
 }
+
+Trinites.affinites = {
+    aucun: "",
+    zodiaque: "Zodiaque",
+    grandLivre : "Grand Livre",
+    lameSoeur : "Lame-soeur"
+}

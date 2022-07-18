@@ -244,12 +244,9 @@
 .trinites.sheet.actor .comp-grid .lig-comp-18 {
   grid-row: 24 / 25;
 }
-.trinites.sheet.actor .pied-page {
+.trinites.sheet.actor .deux-col {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-}
-.trinites.sheet.actor .pied-page div {
-  margin: 2px;
 }
 .trinites.sheet.actor .dom-grid {
   display: grid;
@@ -264,6 +261,10 @@
 .trinites.sheet.actor .ress-grid {
   display: grid;
   grid-template-columns: 2em 1fr 3em 1em 3em 1em 1.5fr;
+  margin: 2px;
+}
+.trinites.sheet.actor .ress-grid div {
+  margin: 2px;
 }
 .trinites.sheet.actor .ress-grid .colRess-dice {
   margin-top: 7px;
@@ -300,7 +301,109 @@
 .trinites.sheet.actor .ligne-vie {
   display: flex;
   justify-content: center;
+  margin: 2px;
 }
 .trinites.sheet.actor .case-vie {
   margin: 5px;
+}
+.trinites.sheet.actor .ligne-theme {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  margin: 2px;
+}
+.trinites.sheet.actor .ligne-theme label {
+  margin: 2px;
+  margin-top: 7px;
+  font-size: 0.9em;
+}
+.trinites.sheet.actor .ligne-theme select {
+  margin: 2px;
+  font-size: 0.9em;
+}
+.trinites.sheet.actor .grid-theme {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin: 5px;
+  margin-top: 10px;
+}
+.trinites.sheet.actor .grid-theme .col-ascendant {
+  grid-column: 1 / 2;
+}
+.trinites.sheet.actor .grid-theme .col-descendant {
+  grid-column: 2 / 3;
+}
+.trinites.sheet.actor .grid-theme .lig-titre {
+  grid-row: 1 / 2;
+  font-size: 0.9em;
+}
+.trinites.sheet.actor .grid-theme .lig-theme-1 {
+  grid-row: 2 / 3;
+}
+.trinites.sheet.actor .grid-theme .lig-theme-2 {
+  grid-row: 3 / 4;
+}
+.trinites.sheet.actor .grid-theme .lig-theme-3 {
+  grid-row: 4 / 5;
+}
+.trinites.sheet.actor .grid-theme label {
+  text-align: center;
+  margin: 2px;
+}
+.trinites.sheet.actor .grid-theme select {
+  margin: 2px;
+  height: 26px;
+  font-size: 0.9em;
+}
+.trinites.sheet.actor .vie-ante {
+  margin: 2px;
+  font-size: 0.9em;
+}
+.trinites.sheet.actor .vie-ante textarea {
+  font-family: 'Signifika', sans-serif;
+  margin: 2px;
+  height: 115px;
+  resize: none;
+}
+.trinites.sheet.actor .experience {
+  display: grid;
+  grid-template-columns: 1fr 3.5em 1em 1fr 3.5em;
+  margin: 5px;
+  font-size: 0.9em;
+}
+.trinites.sheet.actor .experience label {
+  margin-top: 7px;
+}
+.trinites.sheet.actor .experience input {
+  text-align: center;
+}
+.trinites.sheet.actor .stats-trinite {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+.trinites.sheet.actor .stats-trinite .deva h3,
+.trinites.sheet.actor .stats-trinite .archonte h3 {
+  text-align: center;
+  margin-top: 50px;
+}
+.trinites.sheet.actor .stats-trinite .deva .grid-stats,
+.trinites.sheet.actor .stats-trinite .archonte .grid-stats {
+  display: grid;
+  grid-template-columns: 1em 1fr 2fr 1em;
+}
+.trinites.sheet.actor .stats-trinite .deva .grid-stats .colStats-titre,
+.trinites.sheet.actor .stats-trinite .archonte .grid-stats .colStats-titre {
+  grid-column: 2 / 3;
+}
+.trinites.sheet.actor .stats-trinite .deva .grid-stats .colStats-valeur,
+.trinites.sheet.actor .stats-trinite .archonte .grid-stats .colStats-valeur {
+  grid-column: 3 / 4;
+}
+.trinites.sheet.actor .stats-trinite .adam {
+  display: flex;
+  justify-content: center;
+}
+.trinites.sheet.actor .stats-trinite .adam img {
+  border: none;
+  width: 240px;
+  height: 240px;
 }

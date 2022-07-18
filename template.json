@@ -332,7 +332,10 @@
             "templates": [ "information", "signes", "competences", "ressources", "theme", "trini" ],
             "metier": "",
             "vieAnterieure": "",
-            "experience": 0,
+            "experience": {
+                "totale": 0,
+                "disponible": 0
+            },
             "pointsLigneVie": 8,
             "nbBlessure": 0
         },

@@ -30,7 +30,9 @@ export default class TrinitesActorSheet extends ActorSheet {
         -----------------------------------------------------*/
 
         data.domaines = data.items.filter(function (item) { return item.type == "domaine"});
-        data.versets  = data.items.filter(function (item) { return item.type == "verset"});
+        data.versets = data.items.filter(function (item) { return item.type == "verset"});
+        data.auras = data.items.filter(function (item) { return item.type == "aura"});
+        data.atouts = data.items.filter(function (item) { return item.type == "atout"});
 
         console.log(data);
 
@@ -59,14 +61,17 @@ export default class TrinitesActorSheet extends ActorSheet {
                 // Cocher une case de dommages
                 html.find('.case-vie').click(this._onCocherCaseDeVie.bind(this));
 
-                // Jet de dé - Verset
+                // Changer la zone de dépliement d'une aura
+                html.find('.zone-deploiement').click(this._onZoneDeploimentAura.bind(this));
+
+                // Editer un item
+                html.find('.edit-item').click(this._onEditerItem.bind(this));
+
+                // Supprimer un item
+                html.find('.suppr-item').click(this._onSupprimerItem.bind(this));
+
+                // Jet - Verset
                 //html.find('roll-verset').click(this._onJetVerset.bind(this));
-
-                // Editer un verset
-                html.find('.edit-verset').click(this._onEditerVerset.bind(this));
-
-                // Supprimer un verset
-                html.find('.suppr-verset').click(this._onSupprimerVerset.bind(this));
             }
         }
     }
@@ -119,30 +124,41 @@ export default class TrinitesActorSheet extends ActorSheet {
         this.actor.update({"data.nbBlessure": blessureVal});
     }
 
-    _onSupprimerVerset(event) {
+    _onZoneDeploimentAura(event) {
+        event.preventDefault();
+        const element = event.currentTarget;
+
+        let auraId = element.dataset.itemId;
+        const aura = this.actor.items.get(auraId);
+        let zone = element.dataset.zone;
+
+        aura.update({"data.deploiement": zone});
+    }
+
+    _onSupprimerItem(event) {
         event.preventDefault();
         const element = event.currentTarget;
         
-        let versetId = element.dataset.itemId;
-        const verset = this.actor.items.get(versetId);
+        let itemId = element.dataset.itemId;
+        const item = this.actor.items.get(itemId);
 
-        let content = `<p>Verset : ${verset.data.name}<br>Etes-vous certain de vouloir supprimer cet objet ?<p>`
+        let content = `<p>Objet : ${item.data.name}<br>Etes-vous certain de vouloir supprimer cet objet ?<p>`
         let dlg = Dialog.confirm({
             title: "Confirmation de suppression",
             content: content,
-            yes: () => verset.delete(),
+            yes: () => item.delete(),
             //no: () =>, On ne fait rien sur le 'Non'
             defaultYes: false
         });
     }
 
-    _onEditerVerset(event) {
+    _onEditerItem(event) {
         event.preventDefault();
         const element = event.currentTarget;
 
-        let versetId = element.dataset.itemId;
-        let verset = this.actor.items.get(versetId);
+        let itemId = element.dataset.itemId;
+        let item = this.actor.items.get(itemId);
 
-        verset.sheet.render(true);
+        item.sheet.render(true);
     }
 }

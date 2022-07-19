@@ -306,18 +306,28 @@
                 "trinite": {
                     "deva": {
                         "choeur": "",
-                        "karma": 0,
+                        "karma": {
+                            "value": 0,
+                            "max": 0
+                          },
                         "dettes": 0,
                         "credits": 0
                     },
                     "archonte": {
                         "legion": "",
-                        "karma": 0,
+                        "karma": {
+                            "value": 0,
+                            "max": 0
+                          },
                         "dettes": 0,
                         "credits": 0
                     },
                     "adam": {
-                        "karma": 0
+                        "karma": {
+                            "value": 0,
+                            "max": 0,
+                            "type" : ""
+                          }
                     }
                 }
             },
@@ -368,7 +378,7 @@
             "signe": "",
             "description": "",
             "souffle": "",
-            "deploiement": ""
+            "deploiement": "cosme"
         },
         "verset": {
             "choeurLegion": "",

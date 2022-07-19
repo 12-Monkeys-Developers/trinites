@@ -395,6 +395,13 @@
   grid-template-columns: repeat(3, 1fr);
   font-size: 0.9em;
 }
+.trinites.sheet.actor .stats-trinite .logo-karma {
+  display: flex;
+  justify-content: center;
+  margin: 2px;
+  margin-top: 4px;
+  font-size: 1.8em;
+}
 .trinites.sheet.actor .stats-trinite .deva h3,
 .trinites.sheet.actor .stats-trinite .archonte h3 {
   text-align: center;
@@ -414,11 +421,18 @@
 .trinites.sheet.actor .stats-trinite .archonte .grid-stats .colStats-valeur {
   grid-column: 3 / 4;
   margin: 2px;
+  display: flex;
 }
 .trinites.sheet.actor .stats-trinite .deva .grid-stats .colStats-valeur input,
 .trinites.sheet.actor .stats-trinite .archonte .grid-stats .colStats-valeur input {
-  width: 3.5em;
+  width: 3em;
   text-align: center;
+  margin: 2px;
+}
+.trinites.sheet.actor .stats-trinite .deva .grid-stats .colStats-valeur label,
+.trinites.sheet.actor .stats-trinite .archonte .grid-stats .colStats-valeur label {
+  margin: 2px;
+  margin-top: 7px;
 }
 .trinites.sheet.actor .stats-trinite .adam {
   display: flex;
@@ -443,7 +457,7 @@
   margin-top: 7px;
 }
 .trinites.sheet.actor .stats-trinite .adam input {
-  width: 3.5em;
+  width: 3em;
   text-align: center;
   margin: 2px;
 }
@@ -451,15 +465,6 @@
   min-height: 75px;
 }
 .trinites.sheet.actor .grand-livre h3 {
-  margin-top: 5px;
-}
-.trinites.sheet.actor .zodiaque {
-  min-height: 75px;
-}
-.trinites.sheet.actor .zodiaque h3 {
-  margin-top: 5px;
-}
-.trinites.sheet.actor .lame-soeur h3 {
   margin-top: 5px;
 }
 .trinites.sheet.actor .grid-grand-livre {
@@ -496,4 +501,33 @@
   grid-column: 4 / 5;
   display: flex;
   justify-content: center;
+}
+.trinites.sheet.actor .zodiaque {
+  min-height: 75px;
+}
+.trinites.sheet.actor .zodiaque h3 {
+  margin-top: 5px;
+}
+.trinites.sheet.actor .grid-zodiaque {
+  display: grid;
+  grid-template-columns: 2em 1fr repeat(5, 3.5em) 2em 2em;
+  font-size: 0.9em;
+  margin: 3px;
+}
+.trinites.sheet.actor .grid-zodiaque .col-titre {
+  grid-column: 1 / 3;
+}
+.trinites.sheet.actor .grid-zodiaque .col-vide {
+  grid-column: 8 / 10;
+}
+.trinites.sheet.actor .grid-zodiaque .nom-aura {
+  margin: 3px;
+}
+.trinites.sheet.actor .grid-zodiaque .centrer {
+  display: flex;
+  justify-content: center;
+  margin: 3px;
+}
+.trinites.sheet.actor .lame-soeur h3 {
+  margin-top: 5px;
 }

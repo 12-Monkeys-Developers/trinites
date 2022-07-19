@@ -498,6 +498,14 @@
         grid-template-columns: repeat(3, 1fr);
         font-size: 0.9em;
 
+        .logo-karma {
+            display: flex;
+            justify-content: center;
+            margin: 2px;
+            margin-top: 4px;
+            font-size: 1.8em;
+        }
+
         .deva, .archonte {
 
             h3 {
@@ -518,10 +526,17 @@
                 .colStats-valeur {
                     grid-column: 3 / 4;
                     margin: 2px;
+                    display: flex;
 
                     input {
-                        width: 3.5em;
+                        width: 3em;
                         text-align: center;
+                        margin: 2px
+                    }
+
+                    label {
+                        margin: 2px;
+                        margin-top: 7px;
                     }
                 }                
             }
@@ -552,10 +567,11 @@
                     margin: 2px;
                     margin-top: 7px;
                 }
+
             }
 
             input {
-                width: 3.5em;
+                width: 3em;
                 text-align: center;
                 margin: 2px;
             }
@@ -564,21 +580,6 @@
 
     .grand-livre {
         min-height: 75px;
-
-        h3 {
-            margin-top: 5px;
-        }
-    }
-
-    .zodiaque {
-        min-height: 75px;
-
-        h3 {
-            margin-top: 5px;
-        }
-    }
-
-    .lame-soeur {
 
         h3 {
             margin-top: 5px;
@@ -625,6 +626,46 @@
             grid-column: 4 / 5;
             display: flex;
             justify-content: center;
+        }
+    }
+
+    .zodiaque {
+        min-height: 75px;
+
+        h3 {
+            margin-top: 5px;
+        }
+    }
+
+    .grid-zodiaque {
+        display: grid;
+        grid-template-columns: 2em 1fr repeat(5, 3.5em) 2em 2em;
+        font-size: 0.9em;
+        margin: 3px;
+
+        .col-titre {
+            grid-column: 1 / 3;
+        }
+
+        .col-vide {
+            grid-column: 8 / 10;
+        }
+
+        .nom-aura {
+            margin: 3px;
+        }
+
+        .centrer {
+            display: flex;
+            justify-content: center;
+            margin: 3px;
+        }
+    }
+
+    .lame-soeur {
+
+        h3 {
+            margin-top: 5px;
         }
     }
 }

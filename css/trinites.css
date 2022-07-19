@@ -28,6 +28,21 @@
   display: grid;
   grid-template-columns: 2fr 1fr;
 }
+.trinites.sheet.actor input[type="text"]:focus,
+.trinites.sheet.actor input[type="number"]:focus,
+.trinites.sheet.actor input[type="password"]:focus,
+.trinites.sheet.actor input[type="date"]:focus,
+.trinites.sheet.actor input[type="time"]:focus,
+.trinites.sheet.actor select:focus,
+.trinites.sheet.actor textarea:focus {
+  box-shadow: 0 0 5px #2387b9;
+}
+.trinites.sheet.actor a:hover {
+  text-shadow: 0 0 8px #2387b9;
+}
+.trinites.sheet.actor .tabs .item.active {
+  text-shadow: 0 0 10px #2387b9;
+}
 .trinites.sheet.actor .sheet-header {
   background-image: url("../images/header-back.jpg");
   background-position: 0% 10%;
@@ -257,10 +272,10 @@
 .trinites.sheet.actor .comp-grid .lig-comp-18 {
   grid-row: 24 / 25;
 }
-.trinites.sheet.actor .domaine {
+.trinites.sheet.actor .domaines {
   min-height: 50px;
 }
-.trinites.sheet.actor .domaine h3 {
+.trinites.sheet.actor .domaines h3 {
   margin-top: 5px;
 }
 .trinites.sheet.actor .dom-grid {

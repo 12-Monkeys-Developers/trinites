@@ -19,6 +19,12 @@
     display: flex;
 }
 
+.centrer {
+    display: flex;
+    justify-content: center;
+    margin: 3px;
+}
+
 .deux-col-50-50 {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -654,18 +660,52 @@
         .nom-aura {
             margin: 3px;
         }
-
-        .centrer {
-            display: flex;
-            justify-content: center;
-            margin: 3px;
-        }
     }
 
     .lame-soeur {
+        display: flex;
+        flex-direction: column;
 
         h3 {
             margin-top: 5px;
+        }
+    }
+
+    .grid-lame {
+        display: grid;
+        grid-template-columns: 1fr 2fr 2em 4em;
+        font-size: 0.9em;
+        margin: 3px;
+
+        label {
+            margin-top: 7px;
+        }
+
+        select, a {
+            margin: 2px;
+        }
+    }
+
+    .desc-lame {
+        margin: 2px;
+        font-size: 0.9em;
+
+        textarea {
+            font-family: 'Signifika', sans-serif;
+            margin: 2px;
+            height: 30px;
+            resize: none;
+        }
+    }
+
+    .grid-atout {
+        display: grid;
+        grid-template-columns:2em 1fr 2em 2em;
+        font-size: 0.9em;
+        margin: 3px;
+
+        .nom-atout {
+            margin: 3px;
         }
     }
 }

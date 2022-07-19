@@ -46,3 +46,11 @@ Trinites.affinites = {
     grandLivre : "Grand Livre",
     lameSoeur : "Lame-soeur"
 }
+
+Trinites.etatSante = {
+    aucun :"",
+    indemne: "Indemne",
+    endolori : "Endolori",
+    blesse :"Blessé",
+    inconscient: "Inconscient"
+}

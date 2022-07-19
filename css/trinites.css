@@ -15,6 +15,11 @@
 .actor-infos-line {
   display: flex;
 }
+.centrer {
+  display: flex;
+  justify-content: center;
+  margin: 3px;
+}
 .deux-col-50-50 {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -523,11 +528,42 @@
 .trinites.sheet.actor .grid-zodiaque .nom-aura {
   margin: 3px;
 }
-.trinites.sheet.actor .grid-zodiaque .centrer {
+.trinites.sheet.actor .lame-soeur {
   display: flex;
-  justify-content: center;
-  margin: 3px;
+  flex-direction: column;
 }
 .trinites.sheet.actor .lame-soeur h3 {
   margin-top: 5px;
+}
+.trinites.sheet.actor .grid-lame {
+  display: grid;
+  grid-template-columns: 1fr 2fr 2em 4em;
+  font-size: 0.9em;
+  margin: 3px;
+}
+.trinites.sheet.actor .grid-lame label {
+  margin-top: 7px;
+}
+.trinites.sheet.actor .grid-lame select,
+.trinites.sheet.actor .grid-lame a {
+  margin: 2px;
+}
+.trinites.sheet.actor .desc-lame {
+  margin: 2px;
+  font-size: 0.9em;
+}
+.trinites.sheet.actor .desc-lame textarea {
+  font-family: 'Signifika', sans-serif;
+  margin: 2px;
+  height: 30px;
+  resize: none;
+}
+.trinites.sheet.actor .grid-atout {
+  display: grid;
+  grid-template-columns: 2em 1fr 2em 2em;
+  font-size: 0.9em;
+  margin: 3px;
+}
+.trinites.sheet.actor .grid-atout .nom-atout {
+  margin: 3px;
 }

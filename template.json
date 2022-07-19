@@ -347,6 +347,7 @@
                 "disponible": 0
             },
             "pointsLigneVie": 8,
+            "etatSante" : "indemne",
             "nbBlessure": 0
         },
         "archonte": {
@@ -397,10 +398,15 @@
             "description": ""
         },
         "arme": {
-            "type": "",
-            "typeDegats": "",
-            "valeurDegats": "",
-            "bonus": ""
+            "degats": 0,
+            "portee": "",
+            "particularites": "",
+            "epee": false
+        },
+        "armure": {
+            "protectMeleeExplosif": 0,
+            "protectLancerTir": "",
+            "particularites": ""
         }
     }
 }

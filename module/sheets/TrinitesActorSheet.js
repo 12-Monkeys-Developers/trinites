@@ -47,6 +47,7 @@ export default class TrinitesActorSheet extends ActorSheet {
         if(this.actor) {
             if(this.actor.isOwner) {
 
+                // Supprimer un domaine
                 html.find('.suppr-domaine').click(this._onSupprimerDomaine.bind(this));
                 
                 // Ajouter au domaine son statut épuisé
@@ -57,6 +58,15 @@ export default class TrinitesActorSheet extends ActorSheet {
 
                 // Cocher une case de dommages
                 html.find('.case-vie').click(this._onCocherCaseDeVie.bind(this));
+
+                // Jet de dé - Verset
+                //html.find('roll-verset').click(this._onJetVerset.bind(this));
+
+                // Editer un verset
+                html.find('.edit-verset').click(this._onEditerVerset.bind(this));
+
+                // Supprimer un verset
+                html.find('.suppr-verset').click(this._onSupprimerVerset.bind(this));
             }
         }
     }
@@ -65,7 +75,6 @@ export default class TrinitesActorSheet extends ActorSheet {
         event.preventDefault();
         const element = event.currentTarget;
         
-        //let itemId = element.closest(".item").dataset.itemId;
         let domaineId = element.closest(".domaine").dataset.itemId;
         const domaine = this.actor.items.get(domaineId);
 
@@ -108,5 +117,32 @@ export default class TrinitesActorSheet extends ActorSheet {
         let blessureVal = this.actor.data.data.nbBlessure != indexVie ? indexVie : indexVie - 1;
 
         this.actor.update({"data.nbBlessure": blessureVal});
+    }
+
+    _onSupprimerVerset(event) {
+        event.preventDefault();
+        const element = event.currentTarget;
+        
+        let versetId = element.dataset.itemId;
+        const verset = this.actor.items.get(versetId);
+
+        let content = `<p>Verset : ${verset.data.name}<br>Etes-vous certain de vouloir supprimer cet objet ?<p>`
+        let dlg = Dialog.confirm({
+            title: "Confirmation de suppression",
+            content: content,
+            yes: () => verset.delete(),
+            //no: () =>, On ne fait rien sur le 'Non'
+            defaultYes: false
+        });
+    }
+
+    _onEditerVerset(event) {
+        event.preventDefault();
+        const element = event.currentTarget;
+
+        let versetId = element.dataset.itemId;
+        let verset = this.actor.items.get(versetId);
+
+        verset.sheet.render(true);
     }
 }

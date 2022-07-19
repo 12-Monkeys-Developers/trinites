@@ -410,22 +410,30 @@
                     <div class="grand-livre">
                         <h3>GRAND LIVRE</h3>
                         <div class="grid-grand-livre">
-                            <div class="col-titre-lum">Versets de Lumière</div>
-                            <div class="col-titre-ten">Versets de Tenèbres</div>
-                            {{#each versets as |verset id|}}
+                            <div class="titre-grand-livre">Versets de Lumière</div>
+                            <div></div>
+                            <div class="titre-grand-livre">Versets de Tenèbres</div>
+                            <div class="grid-verset">
+                                {{#each versets as |verset id|}}
                                     {{#if (eq verset.data.karma "lumiere")}}
-                                        <div class="col-roll-lum"><a class="roll-verset" title="Jet de verset" data-item-id="{{verset._id}}"><i class="fas fa-dice"></i></a></div>
-                                        <div class="col-nom-lum">{{verset.name}}</div>
-                                        <div class="col-edit-lum"><a class="edit-verset" title="Editer" data-item-id="{{verset._id}}"> <i class="far fa-edit"></i></a></div>
-                                        <div class="col-delete-lum"><a class="suppr-verset" title="Supprimer" data-item-id="{{verset._id}}"><i class="fas fa-times-circle"></i></a></div>
+                                        <div class="col-roll-verset"><a class="roll-verset" title="Jet de verset" data-item-id="{{verset._id}}"><i class="fas fa-dice"></i></a></div>
+                                        <div class="col-nom-verset">{{verset.name}}</div>
+                                        <div class="col-edit-verset"><a class="edit-verset" title="Editer" data-item-id="{{verset._id}}"> <i class="far fa-edit"></i></a></div>
+                                        <div class="col-delete-verset"><a class="suppr-verset" title="Supprimer" data-item-id="{{verset._id}}"><i class="fas fa-times-circle"></i></a></div>
                                     {{/if}}
+                                {{/each}}
+                            </div>
+                            <div></div>
+                            <div class="grid-verset">
+                                {{#each versets as |verset id|}}
                                     {{#if (eq verset.data.karma "tenebre")}}
-                                        <div class="col-roll-ten"><a class="roll-verset" title="Jet de verset" data-item-id="{{verset._id}}"><i class="fas fa-dice"></i></a></div>
-                                        <div class="col-nom-ten">{{verset.name}}</div>
-                                        <div class="col-edit-ten"><a class="edit-verset" title="Editer" data-item-id="{{verset._id}}"> <i class="far fa-edit"></i></a></div>
-                                        <div class="col-delete-ten"><a class="suppr-verset" title="Supprimer" data-item-id="{{verset._id}}"><i class="fas fa-times-circle"></i></a></div>
+                                        <div class="col-roll-verset"><a class="roll-verset" title="Jet de verset" data-item-id="{{verset._id}}"><i class="fas fa-dice"></i></a></div>
+                                        <div class="col-nom-verset">{{verset.name}}</div>
+                                        <div class="col-edit-verset"><a class="edit-verset" title="Editer" data-item-id="{{verset._id}}"> <i class="far fa-edit"></i></a></div>
+                                        <div class="col-delete-verset"><a class="suppr-verset" title="Supprimer" data-item-id="{{verset._id}}"><i class="fas fa-times-circle"></i></a></div>
                                     {{/if}}
-                            {{/each}}
+                                {{/each}}
+                            </div>        
                         </div>
                     </div>
                     <div class="zodiaque">

@@ -587,51 +587,44 @@
 
     .grid-grand-livre {
         display: grid;
-        grid-template-columns: 2em 1fr 2em 2em 1em 2em 1fr 2em 2em;
+        grid-template-columns: 1fr 1em 1fr;
         font-size: 0.9em;
+        margin: 3px;
 
-        .col-titre-lum {
-            grid-column: 1 / 5;
+        div {
+            margin: 2px;
+        }
+
+        .titre-grand-livre {
             display: flex;
             justify-content: center;
         }
 
-        .col-roll-lum {
-            grid-column: 1 / 2;
+        .grid-verset {
+            display: grid;
+            grid-template-columns: 2em 1fr 2em 2em
         }
 
-        .col-nom-lum {
+        .col-roll-verset {
+            grid-column: 1 / 2;
+            display: flex;
+            justify-content: center;
+        }
+
+        .col-nom-verset {
             grid-column: 2 / 3;
         }
 
-        .col-edit-lum {
+        .col-edit-verset {
             grid-column: 3 / 4;
-        }
-
-        .col-delete-lum {
-            grid-column: 4 / 5;
-        }
-
-        .col-titre-ten {
-            grid-column: 6 / 10;
             display: flex;
             justify-content: center;
         }
 
-        .col-roll-ten {
-            grid-column: 6 / 7;
-        }
-
-        .col-nom-ten {
-            grid-column: 7 / 8;
-        }
-
-        .col-edit-ten {
-            grid-column: 8 / 9;
-        }
-
-        .col-delete-ten {
-            grid-column: 9 / 10;
+        .col-delete-verset {
+            grid-column: 4 / 5;
+            display: flex;
+            justify-content: center;
         }
     }
 }

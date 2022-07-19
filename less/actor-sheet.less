@@ -79,13 +79,28 @@
     }
     
     .window-content {
-        background: url("../images/parchemin-grey.jpg") repeat;
+        //background: url("../images/parchemin-grey.jpg") repeat;
+        background: white;
+        
 
         h3 {
             color: #1f546f;
             font-weight: bold;
+            //margin-top: 5px;
+            margin-left: 3px;
         }
     }
+
+    .competences, .domaines, .ressources, .lignes-de-vie, .theme-astral, .vie-ante-bloc, .expe-bloc, .grand-livre, .zodiaque, .lame-soeur {
+        background: url("../images/parchemin-grey.jpg") repeat;
+        padding: 2px;
+        margin: 3px;
+    }
+
+    .domaines, .zodiaque {
+        margin-top: 5px;
+    }
+
 
     .comp-grid {
         display: grid;
@@ -340,10 +355,6 @@
 
     .domaines {
         min-height: 50px;
-
-        h3 {
-            margin-top: 5px;
-        }
     }
 
     .dom-grid {
@@ -354,22 +365,16 @@
             display: flex;
 
             div {
+                margin-left: 3px;
                 margin-right: 3px; 
             }
-        }
-    }
-
-    .col-A, .col-B {
-
-        h3 {
-            margin-top: 5px;
         }
     }
 
     .ress-grid {
         display: grid;
         grid-template-columns: 2em 1fr 3em 1em 3em 1em 1.5fr;
-        margin: 2px;
+        margin: 3px;
 
         div {
             margin: 2px;    
@@ -492,7 +497,7 @@
         textarea {
             font-family: 'Signifika', sans-serif;
             margin: 2px;
-            height: 115px;
+            height: 111px;
             resize: none;
         }
     }
@@ -574,7 +579,6 @@
 
             h3 {
                 text-align: center;
-                margin-top: 5px;
             }
 
             .karma {
@@ -598,11 +602,7 @@
     }
 
     .grand-livre {
-        min-height: 75px;
-
-        h3 {
-            margin-top: 5px;
-        }
+        min-height: 80px;
     }
 
     .grid-grand-livre {
@@ -649,11 +649,7 @@
     }
 
     .zodiaque {
-        min-height: 75px;
-
-        h3 {
-            margin-top: 5px;
-        }
+        min-height: 80px;
     }
 
     .grid-zodiaque {
@@ -678,10 +674,6 @@
     .lame-soeur {
         display: flex;
         flex-direction: column;
-
-        h3 {
-            margin-top: 5px;
-        }
     }
 
     .grid-lame {
@@ -709,6 +701,10 @@
             height: 30px;
             resize: none;
         }
+    }
+
+    .titre-atout {
+        font-size: 0.9em;
     }
 
     .grid-atout {

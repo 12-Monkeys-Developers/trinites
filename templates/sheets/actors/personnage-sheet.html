@@ -28,7 +28,7 @@
     <section class="sheet-body">
         <div class="tab" data-group="principal" data-tab="profane">
             <div class="competences">
-                <h3>COMPETENCES</h3>
+                <h3><i class="fas fa-check"></i> COMPETENCES</h3>
                 <div class="comp-grid">
                     <!-- COLONNE 1 -->
                     <div class="col-base-1 lig-titre-1">Base</div>
@@ -231,7 +231,7 @@
                 </div>
             </div>    
             <div class="domaines">
-                <h3>DOMAINES</h3>
+                <h3><i class="fas fa-check"></i> DOMAINES</h3>
                 <div class="dom-grid">
                     {{#each domaines as |domaine id|}}
                     <div class="domaine-item domaine" data-item-id="{{domaine._id}}">
@@ -249,7 +249,7 @@
             <div class="deux-col-50-50">
                 <div class="col-A">
                     <div class="ressources">
-                        <h3>RESSOURCES</h3>
+                        <h3><i class="fas fa-euro-sign"></i> RESSOURCES</h3>
                         <div class="ress-grid">
                             <!-- RICHESSE -->
                             <div class="colRess-dice"><a class="roll-comp" title="Jet de ressource" data-ressource="richesse"><i class="fas fa-dice"></i></a></div>
@@ -273,8 +273,8 @@
                     </div>    
                 </div>
                 <div class="col-B">
-                    <div class="ligne-vie-bloc">
-                        <h3>LIGNES DE VIE</h3>
+                    <div class="lignes-de-vie">
+                        <h3><i class="fas fa-heart"></i> LIGNES DE VIE</h3>
                         <div class="ligne-vie">
                             {{#times data.data.nbPointsVieMax}}
                                 <a class="case-vie" title="{{@index}}" data-index="{{@index}}">{{#if (gte data.data.nbBlessure @index)}}<i class="fas fa-circle"></i>{{else}}<i class="far fa-circle"></i>{{/if}}</a>
@@ -290,7 +290,7 @@
             <div class="deux-col-50-50">
                 <div class="col-A">
                     <div class="theme-astral">
-                        <h3>THEME ASTRAL</h3>
+                        <h3><i class="fas fa-star"></i> THEME ASTRAL</h3>
                         <div class="ligne-theme">
                             <label>Archétype</label>
                             <select name="data.themeAstral.archetype">
@@ -352,11 +352,11 @@
                 </div>
                 <div class="col-B">
                     <div class="vie-ante-bloc">
-                        <h3>VIE ANTERIEURE</h3>
+                        <h3><i class="fab fa-pied-piper-alt"></i> VIE ANTERIEURE</h3>
                         <div class="vie-ante"><textarea name="data.vieAnterieure" placeholder="Premier souvenir d'une vie antérieure">{{data.data.vieAnterieure}}</textarea></div>
                     </div>
                     <div class="expe-bloc">
-                        <h3>EXPERIENCE</h3>
+                        <h3><i class="fab fa-sketch"></i> EXPERIENCE</h3>
                         <div class="experience">
                             <label>Totale</label>
                             <input name="data.experience.totale" type="number" value="{{data.data.experience.totale}}" placeholder="0" min="0">
@@ -437,7 +437,7 @@
             <div class="deux-col-66-33">
                 <div class="col-66">
                     <div class="grand-livre">
-                        <h3>GRAND LIVRE</h3>
+                        <h3><i class="fas fa-book-open"></i> GRAND LIVRE</h3>
                         <div class="grid-grand-livre">
                             <div class="titre-grand-livre">Versets de Lumière</div>
                             <div></div>
@@ -447,8 +447,8 @@
                                     {{#if (eq verset.data.karma "lumiere")}}
                                         <div class="col-roll-verset"><a class="roll-verset" title="Jet de verset" data-item-id="{{verset._id}}"><i class="fas fa-dice"></i></a></div>
                                         <div class="col-nom-verset">{{verset.name}}</div>
-                                        <div class="col-edit-verset"><a class="edit-verset" title="Editer" data-item-id="{{verset._id}}"> <i class="far fa-edit"></i></a></div>
-                                        <div class="col-delete-verset"><a class="suppr-verset" title="Supprimer" data-item-id="{{verset._id}}"><i class="fas fa-times-circle"></i></a></div>
+                                        <div class="col-edit-verset"><a class="edit-item" title="Editer" data-item-id="{{verset._id}}"> <i class="far fa-edit"></i></a></div>
+                                        <div class="col-delete-verset"><a class="suppr-item" title="Supprimer" data-item-id="{{verset._id}}"><i class="fas fa-times-circle"></i></a></div>
                                     {{/if}}
                                 {{/each}}
                             </div>
@@ -466,7 +466,7 @@
                         </div>
                     </div>
                     <div class="zodiaque">
-                        <h3>ZODIAQUE</h3>
+                        <h3><i class="fas fa-mars-stroke-v"></i> ZODIAQUE</h3>
                         <div class="grid-zodiaque">
                             <div class="col-titre centrer"><label>Auras</label></div>
                             <div class="centrer"><label>Cosme</label></div>
@@ -491,7 +491,7 @@
                 </div>
                 <div class="col-33">
                     <div class="lame-soeur">
-                        <h3>LAME-SOEUR</h3>
+                        <h3><i class="fas fa-khanda"></i> LAME-SOEUR</h3>
                         <div class="grid-lame">
                             <label>Messager</label>
                             <select name="data.lameSoeur.messager">
@@ -505,7 +505,7 @@
                             <label>Dégâts 4</label>
                         </div>
                         <div class="desc-lame"><textarea name="data.lameSoeur.description" placeholder="Description de la lame-soeur">{{data.data.lameSoeur.description}}</textarea></div>
-                        <div class="centrer">Atouts</div>
+                        <div class="centrer titre-atout">Atouts</div>
                         <div class="grid-atout">
                             {{#each atouts as |atout id|}}
                                 <div class="centrer"><a class="roll-atout" title="Jet d'atout" data-item-id="{{atout._id}}"><i class="fas fa-dice"></i></a></div>

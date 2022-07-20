@@ -11,7 +11,7 @@ export default class TrinitesActorSheet extends ActorSheet {
 
     get template() {
         //if(this.actor.data.type == "pj" || this.actor.data.type == "pnj") {
-            console.log(`Trinites | type : ${this.actor.data.type} | chargement du template systems/trinites/templates/sheets/actors/personnage-sheet.html`);
+            console.log(`Trinites | type : ${this.actor.data.type} | Chargement du template systems/trinites/templates/sheets/actors/personnage-sheet.html`);
             return `systems/trinites/templates/sheets/actors/personnage-sheet.html`;
         //} 
         //else {
@@ -23,7 +23,6 @@ export default class TrinitesActorSheet extends ActorSheet {
     getData() {
         const data = super.getData();
         data.config = CONFIG.Trinites;
-        //const actorData = data.data.data;
 
        /* ----------------------------------------------------
         ---- Création des listes d'items filtrées par type ----
@@ -34,7 +33,7 @@ export default class TrinitesActorSheet extends ActorSheet {
         data.auras = data.items.filter(function (item) { return item.type == "aura"});
         data.atouts = data.items.filter(function (item) { return item.type == "atout"});
 
-        console.log(data);
+        //console.log(data);
 
         return data;
     }
@@ -61,7 +60,7 @@ export default class TrinitesActorSheet extends ActorSheet {
                 // Cocher une case de dommages
                 html.find('.case-vie').click(this._onCocherCaseDeVie.bind(this));
 
-                // Changer la zone de dépliement d'une aura
+                // Changer la zone de déploiement d'une aura
                 html.find('.zone-deploiement').click(this._onZoneDeploimentAura.bind(this));
 
                 // Editer un item

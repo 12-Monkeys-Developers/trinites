@@ -1,0 +1,133 @@
+.trinites.sheet.item {
+
+    input[type="text"]:focus, input[type="number"]:focus, input[type="password"]:focus, input[type="date"]:focus, input[type="time"]:focus, select:focus, textarea:focus {
+        box-shadow: 0 0 5px #2387b9;
+    }
+    
+    a:hover {
+        text-shadow: 0 0 8px #2387b9;
+    }
+
+    .tabs .item.active {
+        text-shadow: 0 0 10px #2387b9;
+    }
+
+    .centrer {
+        display: flex;
+        justify-content: center;
+        margin: 3px;
+    }
+
+    .window-content {
+        background: url("../images/parchemin-grey.jpg") repeat;
+    }
+    
+    .sheet-header {
+        
+        img {
+            border: none;
+        }
+    }
+
+    .sheet-content.aura {
+
+        .grid-item-aura {
+            display: grid;
+            grid-template-columns: 1fr 2fr 1fr 2fr;
+            margin: 2px;
+
+            label {
+                margin: 2px;
+                margin-top: 7px;
+            }
+
+            input, select {
+                margin: 2px;
+            }
+
+            .marge-edit {
+                margin-top: 20px;
+            }
+
+            select.marge-edit {
+                margin-top: 15px;
+            }
+        }
+
+        .zone-aura {
+            display: grid;
+            grid-template-columns: repeat(5, 3.5em);
+        }
+
+        .editor {
+            height: 100px;
+        }
+    }
+
+    .sheet-content.domaine {
+        .editor {
+            height: 200px;
+        }
+    }
+
+    .sheet-content.verset {
+
+        .editor {
+            height: 110px;
+        }
+    }
+
+    .sheet-content.atout {
+        
+        .grid-item-atout {
+            display: grid;
+            grid-template-columns: 1fr 2fr 1fr 2fr;
+            margin: 2px;
+
+            label {
+                margin: 2px;
+                margin-top: 7px;
+            }
+
+            input, select {
+                margin: 2px;
+            }
+        }
+
+        .editor {
+            height: 200px;
+        }
+    }
+
+    .sheet-content.verset {
+        
+        .grid-item-verset {
+            display: grid;
+            grid-template-columns: 1fr 2fr 1fr 2fr 1fr 2fr;
+            margin: 2px;
+
+            label {
+                margin: 2px;
+                margin-top: 7px;
+            }
+
+            input, select {
+                margin: 2px;
+            }
+        }
+    }
+
+    .sheet-footer {
+        border-top: solid thin rgb(66, 99, 126);
+        padding: 3px;  
+        color: #1f546f;
+        font-weight: bold;
+        font-size: 1.2em;
+    }
+
+    .titre-desc {
+        color: #1f546f;
+        font-weight: bold;
+        margin: 2px;
+    }
+}

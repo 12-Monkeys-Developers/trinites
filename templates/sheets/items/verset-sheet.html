@@ -1,0 +1,49 @@
+<form class="{{cssClass}}" autocomplete="off">
+    <header class="sheet-header">
+        <img src="{{item.img}}" data-edit="img" title="{{item.name}}" height="64" width="64"/>
+        <h1><input name="name" type="text" value="{{item.name}}" placeholder="Nom du verset"/></h1>
+    </header>
+    <div class="sheet-content verset" data-item-id="{{item.id}}">
+        <div class="grid-item-verset">
+            <label>Karma</label>
+            <select name="data.karma">
+                {{#select data.data.karma}}
+                {{#each config.karmas as |karma keyKarma|}}
+                    <option value="{{keyKarma}}">{{karma}}</option>
+                {{/each}}
+                {{/select}} 
+            </select>
+            {{#if (eq data.data.karma "lumiere")}}
+            <label>Choeur</label>
+            <select name="data.choeurLegion">
+                {{#select data.data.choeurLegion}}
+                {{#each config.choeurs as |choeur keyChoeur|}}
+                    <option value="{{keyChoeur}}">{{choeur}}</option>
+                {{/each}}
+                {{/select}}
+            </select>
+            {{/if}}
+            {{#if (eq data.data.karma "tenebre")}}
+            <label>Légion</label>
+            <select name="data.choeurLegion">
+                {{#select data.data.choeurLegion}}
+                {{#each config.legions as |legion keyLegion|}}
+                    <option value="{{keyLegion}}">{{legion}}</option>
+                {{/each}}
+                {{/select}}
+            </select>
+            {{/if}}
+            {{#if (eq data.data.karma "aucun")}}
+            <label>Groupe</label>
+            <label>Choix du Karma ?</label>
+            {{/if}}
+            <label>Favori</label>
+            <input name="data.favori" type="text" value="{{data.data.favori}}" placeholder="Nom du favori">
+        </div>
+        <div class="titre-desc">Description</div> 
+        {{editor content=data.data.description target="data.description" button=true owner=true editable=true}}
+    </div>
+    <footer class="sheet-footer">
+        <div><i class="fas fa-book-open"></i> Verset</span></div>
+    </footer>
+</form>

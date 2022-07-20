@@ -1,0 +1,31 @@
+<form class="{{cssClass}}" autocomplete="off">
+    <header class="sheet-header">
+        <img src="{{item.img}}" data-edit="img" title="{{item.name}}" height="64" width="64"/>
+        <h1><input name="name" type="text" value="{{item.name}}" placeholder="Nom de l'atout"/></h1>
+    </header>
+    <div class="sheet-content atout" data-item-id="{{item.id}}">
+        <div class="grid-item-atout">
+            <label>Messager</label>
+            <select name="data.messager">
+                {{#select data.data.messager}}
+                {{#each config.messagers as |messager keyMessager|}}
+                    <option value="{{keyMessager}}">{{messager}}</option>
+                {{/each}}
+                {{/select}} 
+            </select>
+            <label>Couleur</label>
+            <select name="data.couleur">
+                {{#select data.data.couleur}}
+                {{#each config.couleurs as |couleur keyCouleur|}}
+                    <option value="{{keyCouleur}}">{{couleur}}</option>
+                {{/each}}
+                {{/select}} 
+            </select>
+        </div>
+        <div class="titre-desc">Effet de l'atout</div> 
+        {{editor content=data.data.description target="data.description" button=true owner=true editable=true}}
+    </div>
+    <footer class="sheet-footer">
+        <div><i class="fas fa-khanda"></i> Atout</span></div>
+    </footer>
+</form>

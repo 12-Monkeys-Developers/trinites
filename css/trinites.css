@@ -64,7 +64,7 @@
   color: lightgray;
 }
 .trinites.sheet.actor .window-content {
-  background: white;
+  background: url("../images/parchemin-grey.jpg") repeat;
 }
 .trinites.sheet.actor .window-content h3 {
   color: #1f546f;
@@ -81,7 +81,6 @@
 .trinites.sheet.actor .grand-livre,
 .trinites.sheet.actor .zodiaque,
 .trinites.sheet.actor .lame-soeur {
-  background: url("../images/parchemin-grey.jpg") repeat;
   padding: 2px;
   margin: 3px;
 }
@@ -587,4 +586,103 @@
 }
 .trinites.sheet.actor .grid-atout .nom-atout {
   margin: 3px;
+}
+.trinites.sheet.item input[type="text"]:focus,
+.trinites.sheet.item input[type="number"]:focus,
+.trinites.sheet.item input[type="password"]:focus,
+.trinites.sheet.item input[type="date"]:focus,
+.trinites.sheet.item input[type="time"]:focus,
+.trinites.sheet.item select:focus,
+.trinites.sheet.item textarea:focus {
+  box-shadow: 0 0 5px #2387b9;
+}
+.trinites.sheet.item a:hover {
+  text-shadow: 0 0 8px #2387b9;
+}
+.trinites.sheet.item .tabs .item.active {
+  text-shadow: 0 0 10px #2387b9;
+}
+.trinites.sheet.item .centrer {
+  display: flex;
+  justify-content: center;
+  margin: 3px;
+}
+.trinites.sheet.item .window-content {
+  background: url("../images/parchemin-grey.jpg") repeat;
+}
+.trinites.sheet.item .sheet-header img {
+  border: none;
+}
+.trinites.sheet.item .sheet-content.aura .grid-item-aura {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr 2fr;
+  margin: 2px;
+}
+.trinites.sheet.item .sheet-content.aura .grid-item-aura label {
+  margin: 2px;
+  margin-top: 7px;
+}
+.trinites.sheet.item .sheet-content.aura .grid-item-aura input,
+.trinites.sheet.item .sheet-content.aura .grid-item-aura select {
+  margin: 2px;
+}
+.trinites.sheet.item .sheet-content.aura .grid-item-aura .marge-edit {
+  margin-top: 20px;
+}
+.trinites.sheet.item .sheet-content.aura .grid-item-aura select.marge-edit {
+  margin-top: 15px;
+}
+.trinites.sheet.item .sheet-content.aura .zone-aura {
+  display: grid;
+  grid-template-columns: repeat(5, 3.5em);
+}
+.trinites.sheet.item .sheet-content.aura .editor {
+  height: 100px;
+}
+.trinites.sheet.item .sheet-content.domaine .editor {
+  height: 200px;
+}
+.trinites.sheet.item .sheet-content.verset .editor {
+  height: 110px;
+}
+.trinites.sheet.item .sheet-content.atout .grid-item-atout {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr 2fr;
+  margin: 2px;
+}
+.trinites.sheet.item .sheet-content.atout .grid-item-atout label {
+  margin: 2px;
+  margin-top: 7px;
+}
+.trinites.sheet.item .sheet-content.atout .grid-item-atout input,
+.trinites.sheet.item .sheet-content.atout .grid-item-atout select {
+  margin: 2px;
+}
+.trinites.sheet.item .sheet-content.atout .editor {
+  height: 200px;
+}
+.trinites.sheet.item .sheet-content.verset .grid-item-verset {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr 2fr 1fr 2fr;
+  margin: 2px;
+}
+.trinites.sheet.item .sheet-content.verset .grid-item-verset label {
+  margin: 2px;
+  margin-top: 7px;
+}
+.trinites.sheet.item .sheet-content.verset .grid-item-verset input,
+.trinites.sheet.item .sheet-content.verset .grid-item-verset select {
+  margin: 2px;
+}
+.trinites.sheet.item .sheet-footer {
+  border-top: solid thin #42637e;
+  padding: 3px;
+  color: #1f546f;
+  font-weight: bold;
+  font-size: 1.2em;
+}
+.trinites.sheet.item .titre-desc {
+  color: #1f546f;
+  font-weight: bold;
+  margin: 2px;
 }

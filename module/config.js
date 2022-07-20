@@ -1,5 +1,11 @@
 export const Trinites = {};
 
+Trinites.karmas = {
+    aucun: "",
+    lumiere: "Lumière",
+    tenebre: "Ténèbre"
+}
+
 Trinites.messagers = {
     aucun: "",
     jibril: "Jibr'il",
@@ -53,4 +59,21 @@ Trinites.etatSante = {
     endolori : "Endolori",
     blesse :"Blessé",
     inconscient: "Inconscient"
+}
+
+Trinites.deploiement = {
+    aucun: "",
+    cosme: "Cosme",
+    corps: "Corps",
+    main: "Main",
+    epee: "Epée",
+    oeil: "Oeil"
+}
+
+Trinites.couleurs = {
+    aucun: "",
+    gueules : "Gueules",
+    azur: "Azur",
+    sable : "Sable",
+    sinople: "Sinople"
 }

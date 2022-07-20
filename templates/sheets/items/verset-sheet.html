@@ -39,9 +39,24 @@
             {{/if}}
             <label>Favori</label>
             <input name="data.favori" type="text" value="{{data.data.favori}}" placeholder="Nom du favori">
+            <div class="col-sentence"><textarea name="data.sentence" placeholder="Phrase de déclenchement du verset">{{data.data.sentence}}</textarea></div>
         </div>
-        <div class="titre-desc">Description</div> 
-        {{editor content=data.data.description target="data.description" button=true owner=true editable=true}}
+        <div class="grid-data-desc">
+            <div class="verset-data">
+                <div class="grid-data-verset">
+                    <label>Durée</label>
+                    <input name="data.duree" type="text" value="{{data.data.duree}}" placeholder="Durée">
+                    <label>Portée</label>
+                    <input name="data.portee" type="text" value="{{data.data.portee}}" placeholder="Portée">
+                    <div class="check"><label>Cumul</label></div>
+                    <input name="data.cumul" type="checkbox" value="{{data.data.cumul}}">
+                </div>
+            </div>
+            <div class="verset-desc">
+                <div class="titre-desc">Effet du verset</div> 
+                {{editor content=data.data.description target="data.description" button=true owner=true editable=true}}
+            </div>
+        </div>
     </div>
     <footer class="sheet-footer">
         <div><i class="fas fa-book-open"></i> Verset</span></div>

@@ -3,7 +3,7 @@ export const Trinites = {};
 Trinites.karmas = {
     aucun: "",
     lumiere: "Lumière",
-    tenebre: "Ténèbre"
+    tenebre: "Ténèbres"
 }
 
 Trinites.messagers = {

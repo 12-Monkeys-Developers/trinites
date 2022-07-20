@@ -1,3 +1,5 @@
+import * as Dice from "../dice.js";
+
 export default class TrinitesActorSheet extends ActorSheet {
 
     static get defaultOptions() {
@@ -69,8 +71,12 @@ export default class TrinitesActorSheet extends ActorSheet {
                 // Supprimer un item
                 html.find('.suppr-item').click(this._onSupprimerItem.bind(this));
 
+                // Jet de compétence
+                html.find('.roll-comp').click(this._onJetCompetence.bind(this));
+
                 // Jet - Verset
-                //html.find('roll-verset').click(this._onJetVerset.bind(this));
+                //html.find('.roll-verset').click(this._onJetVerset.bind(this));
+                
             }
         }
     }
@@ -159,5 +165,18 @@ export default class TrinitesActorSheet extends ActorSheet {
         let item = this.actor.items.get(itemId);
 
         item.sheet.render(true);
+    }
+
+    _onJetCompetence(event) {
+        event.preventDefault();
+        const dataset = event.currentTarget.dataset;
+
+        let compData = this.actor.getCompData(dataset.signe, dataset.competence);
+
+        Dice.jetCompetence({
+            actor: this.actor,
+            valeur: compData.valeurComp,
+            label: compData.labelComp
+        });
     }
 }

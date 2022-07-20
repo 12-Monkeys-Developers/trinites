@@ -640,10 +640,7 @@
   height: 100px;
 }
 .trinites.sheet.item .sheet-content.domaine .editor {
-  height: 200px;
-}
-.trinites.sheet.item .sheet-content.verset .editor {
-  height: 110px;
+  height: 250px;
 }
 .trinites.sheet.item .sheet-content.atout .grid-item-atout {
   display: grid;
@@ -659,7 +656,11 @@
   margin: 2px;
 }
 .trinites.sheet.item .sheet-content.atout .editor {
-  height: 200px;
+  height: 220px;
+}
+.trinites.sheet.item .sheet-content.verset .editor {
+  height: 140px;
+  margin: 2px;
 }
 .trinites.sheet.item .sheet-content.verset .grid-item-verset {
   display: grid;
@@ -672,6 +673,39 @@
 }
 .trinites.sheet.item .sheet-content.verset .grid-item-verset input,
 .trinites.sheet.item .sheet-content.verset .grid-item-verset select {
+  margin: 2px;
+}
+.trinites.sheet.item .sheet-content.verset .grid-item-verset .col-sentence {
+  grid-column: 1 / 7;
+}
+.trinites.sheet.item .sheet-content.verset .grid-item-verset .col-sentence textarea {
+  font-family: 'Signifika', sans-serif;
+  margin: 2px;
+  height: 60px;
+  resize: none;
+}
+.trinites.sheet.item .sheet-content.verset .verset-data,
+.trinites.sheet.item .sheet-content.verset .verset-desc {
+  margin: 2px;
+}
+.trinites.sheet.item .sheet-content.verset .grid-data-desc {
+  display: grid;
+  grid-template-columns: 150px 1fr;
+  margin: 2px;
+}
+.trinites.sheet.item .sheet-content.verset .grid-data-desc .grid-data-verset {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  margin: 2px;
+}
+.trinites.sheet.item .sheet-content.verset .grid-data-desc .check {
+  margin-top: 5px;
+}
+.trinites.sheet.item .sheet-content.verset .grid-data-desc label {
+  margin: 2px;
+  margin-top: 7px;
+}
+.trinites.sheet.item .sheet-content.verset .grid-data-desc input {
   margin: 2px;
 }
 .trinites.sheet.item .sheet-footer {

@@ -4,7 +4,13 @@ import TrinitesItemSheet from "./sheets/TrinitesItemSheet.js";
 import TrinitesActor from "./TrinitesActor.js";
 import TrinitesItem from "./TrinitesItem.js";
 
-Hooks.once("init", function(){
+async function preloadHandlebarsTemplates() {
+    const templatePaths = [
+        "systems/trinites/templates/partials/dice/jet-competence.hbs"
+    ];
+}
+
+Hooks.once("init", function() {
     console.log("Trinités | Initialisation du système Trinités (non officiel))");
 
     game.Trinites = {
@@ -24,7 +30,7 @@ Hooks.once("init", function(){
     Items.unregisterSheet("core", ItemSheet);
     Items.registerSheet("trinites", TrinitesItemSheet, {makeDefault: true});
 
-    //preloadHandlebarsTemplates();
+    preloadHandlebarsTemplates();
 
     Handlebars.registerHelper("configVal", function(liste, val) {
         return Trinites[liste][val];

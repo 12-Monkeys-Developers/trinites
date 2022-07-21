@@ -1,3 +1,6 @@
+.window-app .window-content {
+  background: url("../images/parchemin-grey.jpg") repeat;
+}
 .small-size {
   flex: 0 1 3.5em;
   padding: 3px;
@@ -27,6 +30,10 @@
 .deux-col-66-33 {
   display: grid;
   grid-template-columns: 2fr 1fr;
+}
+.sheet-tabs.tabs a {
+  color: #1f546f;
+  font-weight: bold;
 }
 .trinites.sheet.actor input[type="text"]:focus,
 .trinites.sheet.actor input[type="number"]:focus,
@@ -720,18 +727,69 @@
   font-weight: bold;
   margin: 2px;
 }
+#chat-form textarea {
+  background-image: url("../images/header-back.jpg");
+  color: white;
+}
 .chat-message {
-  background: url("../images/parchemin-grey.jpg") repeat;
+  background-image: url("../images/header-back.jpg");
+  background-position: 30% 9%;
+}
+.chat-message .message-header,
+.chat-message .message-content {
+  color: white;
 }
 .titre-jet-comp {
-  color: #1f546f;
-  font-weight: bold;
+  font-weight: 500;
   font-size: 1.2em;
+  margin: 2px;
+  /*// Essai 2
+    color: white;
+    background: #1f546f;
+    margin-bottom: 0px;
+    border-left: 1px solid var(--color-border-light-2);
+    border-right: 1px solid var(--color-border-light-2);
+    border-top: 1px solid var(--color-border-light-2);    
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    padding: 3px;*/
+  color: white;
+}
+.titre-jet-comp .box {
+  display: grid;
+  grid-template-columns: 5fr 1fr;
 }
 .grid-jet-comp {
   display: grid;
   grid-template-columns: 1fr 1fr;
   margin: 2px;
+  /*// Essai 1
+    border: 1px solid var(--color-border-light-2);
+    border-radius: 3px;
+    box-shadow: 0 0 2px #FFF inset;
+    background: linear-gradient(#1f546fdd, #1f546f44, #1f546fdd);*/
+  /*// Essai 2
+    margin-top: 0px;
+    border-left: 1px solid var(--color-border-light-2);
+    border-right: 1px solid var(--color-border-light-2);
+    border-bottom: 1px solid var(--color-border-light-2);
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+    background: linear-gradient(#1f546f,#1f546f44, #1f546fdd);*/
+  /*// Essai 3
+    border: 1px solid var(--color-border-light-2);
+    border-radius: 3px;
+    box-shadow: 0 0 2px #FFF inset;
+    background: linear-gradient(to left, #1f546f, #1f546f00, #1f546f);*/
+  /*// Essai 3b
+    border: 1px solid var(--color-border-light-2);
+    border-radius: 3px;
+    box-shadow: 0 0 2px #FFF inset;
+    background: linear-gradient(to right, #1f546f, #ebf8e1, #0f2936);*/
+  border: 1px solid var(--color-border-light-2);
+  border-radius: 3px;
+  box-shadow: 0 0 2px #FFF inset;
+  background: linear-gradient(to right, #ebf8e1, #1f546f, #07131a);
 }
 .grid-jet-comp div {
   display: flex;
@@ -765,20 +823,22 @@
   color: white;
   background-size: 40px 40px;
 }
+/*.dice-back {
+    //background: #1f546f88;
+}*/
 .dice-total {
   flex: 0 0 100%;
   line-height: 24px;
   text-align: center;
-  background: rgba(0, 0, 0, 0.1);
-  border: 1px solid var(--color-border-light-2);
-  border-radius: 3px;
-  box-shadow: 0 0 2px #FFF inset;
   font-size: var(--font-size-20);
   font-weight: bold;
 }
 .succes {
-  color: #20b820;
+  color: #178617;
 }
 .echec {
   color: black;
+}
+.echec-critique {
+  color: red;
 }

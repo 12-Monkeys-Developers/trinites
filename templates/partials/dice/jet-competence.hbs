@@ -1,19 +1,40 @@
 <div class="jet-comp">
-    <div class="titre-jet-comp">Compétence {{stats.competence}} [{{stats.valeur}}]</div>
+    <div class="titre-jet-comp">
+        <div class="box">
+            <div class="titre"><i class="fas fa-check"></i> {{stats.competence}} {{stats.valeur}}</div>
+            {{#if stats.difficulte}}<div class="diff"><i class="fas fa-tachometer-alt"></i> {{stats.difficulte}}</div>{{/if}}
+        </div>   
+    </div>
     <div class="grid-jet-comp">
         <div class="titre-esprit deva">Deva</div>
         <div class="titre-esprit archonte">Archonte</div>
-        <div><div class="roll dice-deva">{{stats.resultDeva.dieResult}}</div></div>
-        <div><div class="roll dice-archonte">{{stats.resultArchonte.dieResult}}</div></div>
-        {{#if (gte stats.resultDeva.rollTotal 12)}}
-            <div class="dice-total succes">{{stats.resultDeva.rollTotal}} <!-- <i class="fas fa-trophy"></i> --></div>
+        {{#if (eq stats.resultDeva.dieResult 1)}}
+            <div class="dice-back"><div class="roll dice-deva echec-critique">{{stats.resultDeva.dieResult}}</div></div>
         {{else}}
-            <div class="dice-total echec">{{stats.resultDeva.rollTotal}} <!-- <i class="fas fa-thumbs-down"></i> --></div>
+            <div class="dice-back"><div class="roll dice-deva">{{stats.resultDeva.dieResult}}</div></div>
         {{/if}}
-        {{#if (gte stats.resultArchonte.rollTotal 12)}}
-            <div class="dice-total succes">{{stats.resultArchonte.rollTotal}} <!-- <i class="fas fa-trophy"></i> --></div>
+        {{#if (eq stats.resultArchonte.dieResult 1)}}
+            <div class="dice-back"><div class="roll dice-archonte echec-critique">{{stats.resultArchonte.dieResult}}</div></div>
         {{else}}
-            <div class="dice-total echec">{{stats.resultArchonte.rollTotal}} <!-- <i class="fas fa-thumbs-down"></i> --></div>
+            <div class="dice-back"><div class="roll dice-archonte">{{stats.resultArchonte.dieResult}}</div></div>
         {{/if}}
-    </div>
+        {{#if (eq stats.resultDeva.dieResult 1)}}
+            <div class="dice-total echec-critique">{{stats.resultDeva.rollTotal}}<!-- <i class="fas fa-trophy"></i> --></div>
+        {{else}}
+            {{#if (gte stats.resultDeva.rollTotal 12)}}
+                <div class="dice-total succes">{{stats.resultDeva.rollTotal}}<!-- <i class="fas fa-trophy"></i> --></div>
+            {{else}}
+                <div class="dice-total echec">{{stats.resultDeva.rollTotal}}<!-- <i class="fas fa-thumbs-down"></i> --></div>
+            {{/if}}
+        {{/if}}
+        {{#if (eq stats.resultArchonte.dieResult 1)}}
+            <div class="dice-total echec-critique">{{stats.resultArchonte.rollTotal}}<!-- <i class="fas fa-trophy"></i> --></div>
+        {{else}}    
+            {{#if (gte stats.resultArchonte.rollTotal 12)}}
+                <div class="dice-total succes">{{stats.resultArchonte.rollTotal}}<!-- <i class="fas fa-trophy"></i> --></div>
+            {{else}}
+                <div class="dice-total echec">{{stats.resultArchonte.rollTotal}}<!-- <i class="fas fa-thumbs-down"></i> --></div>
+            {{/if}}
+        {{/if}}
+    </div> <!-- <i class="fas fa-dumbbell"></i> <i class="fas fa-tachometer-alt"></i> difficulte -->
 </div>

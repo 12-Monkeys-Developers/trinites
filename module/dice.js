@@ -28,34 +28,43 @@ export async function jetCompetence({actor = null,
         }
 
         // Définition de la formule de base du jet
-        let rollFormula = "1d12 + @valeur";
+        let baseFormula = "1d12 + @valeur";
 
         // Données de base du jet
         let rollData = {
+            competence: label,
             valeur: valeur
         };
 
-        // Somme des modificateurs d'art magique
+        // Modificateur de difficulté du jet
         if(difficulte) {
             rollData.difficulte = difficulte;
-            rollFormula += " + @difficulte";
+            baseFormula += " + @difficulte";
         }
 
-        //let rollFormula = `{${baseFormula}, ${baseFormula}}`;
+        let rollFormula = `{${baseFormula}, ${baseFormula}}`;
 
-        let rollResultDeva = await new Roll(rollFormula, rollData).roll({async: true});
-        let rollResultArchonte = await new Roll(rollFormula, rollData).roll({async: true});
-
+        let rollResult = await new Roll(rollFormula, rollData).roll({async: true});
         //console.log(rollResult);
+        
+        let resultDeva = {
+            rollFormula: rollResult.terms[0].rolls[0].formula,
+            dieResult: rollResult.terms[0].rolls[0].dice[0].total,
+            rollResult: rollResult.terms[0].rolls[0].result,
+            rollTotal: rollResult.terms[0].rolls[0].total
+        }
+        rollData.resultDeva = resultDeva;
 
-        console.log(rollResultDeva.dice[0].results[0]);
-        console.log(rollResultDeva.result);
-        console.log(rollResultDeva.total);
+        let resultArchonte = {
+            rollFormula: rollResult.terms[0].rolls[1].formula,
+            dieResult: rollResult.terms[0].rolls[1].dice[0].total,
+            rollResult: rollResult.terms[0].rolls[1].result,
+            rollTotal: rollResult.terms[0].rolls[1].total
+        }
+        rollData.resultArchonte = resultArchonte;
 
-        console.log(rollResultArchonte.dice[0].results[0]);
-        console.log(rollResultArchonte.result);
-        console.log(rollResultArchonte.total);
-
+        console.log(rollData.resultDeva);
+        
         if(envoiMessage) {
             // Construction du jeu de données pour alimenter le template
             let rollStats = {
@@ -64,21 +73,20 @@ export async function jetCompetence({actor = null,
 
             // Recupération du template
             const messageTemplate = "systems/trinites/templates/partials/dice/jet-competence.hbs"; 
-            let renderedRollDeva = await rollResultDeva.render();
-            let renderedRollArchonte = await rollResultArchonte.render();
+            let renderedRoll = await rollResult.render();
+
 
             // Assignation des données au template
             let templateContext = {
                 stats : rollStats,
-                rollDeva: renderedRollDeva,
-                rollArchonte: renderedRollArchonte
+                roll: renderedRoll
             }
 
             // Construction du message
             let chatData = {
                 user: game.user.id,
                 speaker: ChatMessage.getSpeaker({ actor: actor }),
-                roll: rollResultDeva,
+                roll: rollResult,
                 content: await renderTemplate(messageTemplate, templateContext),
                 sound: CONFIG.sounds.dice,
                 type: CONST.CHAT_MESSAGE_TYPES.ROLL
@@ -87,15 +95,4 @@ export async function jetCompetence({actor = null,
             // Affichage du message
             await ChatMessage.create(chatData);
         }
-        /*
-        var diceResults = [];
-        diceResults.push(roll.dice[0].total);
-        diceResults.push(roll.dice[1].total);
-
-        <div class="dice-tooltip"><div class="dice-rolls" style="display:flex">
-            <div class="roll die d12" style="float:none; margin:3px;">${diceResults[0]}</div>
-            <div class="roll die d10" style="float:none; margin:3px;">${diceResults[1]}</div>
-        </div>
-        */
-
     }

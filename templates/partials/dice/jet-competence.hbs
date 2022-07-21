@@ -1,6 +1,19 @@
 <div class="jet-comp">
-    <div>Deva</div>
-    <div>{{{rollDeva}}}</div>
-    <div>Archonte</div>
-    <div>{{{rollArchonte}}}</div>
+    <div class="titre-jet-comp">Compétence {{stats.competence}} [{{stats.valeur}}]</div>
+    <div class="grid-jet-comp">
+        <div class="titre-esprit deva">Deva</div>
+        <div class="titre-esprit archonte">Archonte</div>
+        <div><div class="roll dice-deva">{{stats.resultDeva.dieResult}}</div></div>
+        <div><div class="roll dice-archonte">{{stats.resultArchonte.dieResult}}</div></div>
+        {{#if (gte stats.resultDeva.rollTotal 12)}}
+            <div class="dice-total succes">{{stats.resultDeva.rollTotal}} <!-- <i class="fas fa-trophy"></i> --></div>
+        {{else}}
+            <div class="dice-total echec">{{stats.resultDeva.rollTotal}} <!-- <i class="fas fa-thumbs-down"></i> --></div>
+        {{/if}}
+        {{#if (gte stats.resultArchonte.rollTotal 12)}}
+            <div class="dice-total succes">{{stats.resultArchonte.rollTotal}} <!-- <i class="fas fa-trophy"></i> --></div>
+        {{else}}
+            <div class="dice-total echec">{{stats.resultArchonte.rollTotal}} <!-- <i class="fas fa-thumbs-down"></i> --></div>
+        {{/if}}
+    </div>
 </div>

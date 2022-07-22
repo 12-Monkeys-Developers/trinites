@@ -65,22 +65,6 @@ export default class TrinitesActor extends Actor {
     data.ligneVie2 = data.pointsLigneVie * 2;
     data.nbPointsVieMax = data.pointsLigneVie * 3;
 
-    console.log(data);
-
-    }
-
-    getCompData(signe, competence) {
-        let data = this.data.data;
-
-        let result = {
-            valeurComp: 0, 
-            labelComp: "ND", 
-        };
-
-        const comp = data.competences[signe][competence];
-        result.valeurComp = comp.valeur;
-        result.labelComp = comp.label;
-
-        return result;
+    //console.log(data);
     }
 }

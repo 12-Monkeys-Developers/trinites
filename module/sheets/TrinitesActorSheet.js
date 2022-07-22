@@ -171,12 +171,10 @@ export default class TrinitesActorSheet extends ActorSheet {
         event.preventDefault();
         const dataset = event.currentTarget.dataset;
 
-        let compData = this.actor.getCompData(dataset.signe, dataset.competence);
-
         Dice.jetCompetence({
             actor: this.actor,
-            valeur: compData.valeurComp,
-            label: compData.labelComp
+            signe: dataset.signe,
+            competence: dataset.competence
         });
     }
 }

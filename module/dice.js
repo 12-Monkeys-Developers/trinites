@@ -1,10 +1,16 @@
 export async function jetCompetence({actor = null,
-    valeur = null,
-    label = null,
+    signe = null,
+    competence = null,
     difficulte = null,
-    modificateurs = null,
     afficherDialog = true,
     envoiMessage = true} = {}) {
+
+    // Récupération des données de l'acteur
+    let actorData = actor.data.data;
+
+    let valeur = actorData.competences[signe][competence].valeur;
+    let label = actorData.competences[signe][competence].label
+    let karmaAdam = actorData.trinite.adam.karma.type;
 
     // Si la compétence à une valeur de 0, on gènere le message d'erreur et on annule le jet
     if(valeur == 0) {
@@ -31,7 +37,8 @@ export async function jetCompetence({actor = null,
     // Données de base du jet
     let rollData = {
         competence: label,
-        valeur: valeur
+        valeur: valeur,
+        karmaAdam: karmaAdam
     };
 
     // Modificateur de difficulté du jet
@@ -46,22 +53,22 @@ export async function jetCompetence({actor = null,
     //console.log(rollResult);
         
     let resultDeva = {
-        rollFormula: rollResult.terms[0].rolls[0].formula,
+        //rollFormula: rollResult.terms[0].rolls[0].formula,
         dieResult: rollResult.terms[0].rolls[0].dice[0].total,
-        rollResult: rollResult.terms[0].rolls[0].result,
-        rollTotal: rollResult.terms[0].rolls[0].total
+        ///rollResult: rollResult.terms[0].rolls[0].result,
+        rollTotal: rollResult.terms[0].rolls[0].total,
+        reussite: rollResult.terms[0].rolls[0].total >= 12
     }
     rollData.resultDeva = resultDeva;
 
     let resultArchonte = {
-        rollFormula: rollResult.terms[0].rolls[1].formula,
+        //rollFormula: rollResult.terms[0].rolls[1].formula,
         dieResult: rollResult.terms[0].rolls[1].dice[0].total,
-        rollResult: rollResult.terms[0].rolls[1].result,
-        rollTotal: rollResult.terms[0].rolls[1].total
+        //rollResult: rollResult.terms[0].rolls[1].result,
+        rollTotal: rollResult.terms[0].rolls[1].total,
+        reussite: rollResult.terms[0].rolls[1].total >= 12
     }
     rollData.resultArchonte = resultArchonte;
-
-    //console.log(rollData.resultDeva);
         
     if(envoiMessage) {
         // Construction du jeu de données pour alimenter le template

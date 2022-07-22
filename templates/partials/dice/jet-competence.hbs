@@ -21,7 +21,7 @@
         {{#if (eq stats.resultDeva.dieResult 1)}}
             <div class="dice-total echec-crit">{{stats.resultDeva.rollTotal}}</div>
         {{else}}
-            {{#if (gte stats.resultDeva.rollTotal 12)}}
+            {{#if stats.resultDeva.reussite}}
                 <div class="dice-total succes">{{stats.resultDeva.rollTotal}}</div>
             {{else}}
                 <div class="dice-total echec">{{stats.resultDeva.rollTotal}}</div>
@@ -30,13 +30,30 @@
         {{#if (eq stats.resultArchonte.dieResult 1)}}
             <div class="dice-total echec-crit-shadow">{{stats.resultArchonte.rollTotal}}</div>
         {{else}}    
-            {{#if (gte stats.resultArchonte.rollTotal 12)}}
+            {{#if stats.resultArchonte.reussite}}
                 <div class="dice-total succes-shadow">{{stats.resultArchonte.rollTotal}}</div>
             {{else}}
                 <div class="dice-total echec-shadow">{{stats.resultArchonte.rollTotal}}</div>
             {{/if}}
         {{/if}}
-    </div> 
+    </div>
+    {{#if stats.karmaAdam}}
+        {{#if (eq stats.karmaAdam "lumiere")}}
+            {{#if (not stats.resultDeva.reussite)}}
+                {{#if stats.resultArchonte.reussite}}
+                    <div class="btn-dette"><button class="dette archonte" data-esprit="archonte">Dette Archonte</button></div>
+                {{/if}}
+            {{/if}}
+        {{/if}}
+        {{#if (eq stats.karmaAdam "tenebre")}}
+            {{#if (not stats.resultArchonte.reussite)}}
+                {{#if stats.resultDeva.reussite}}
+                    <div class="btn-dette"><button class="dette deva" data-esprit="deva">Dette Deva</button></div>
+                {{/if}}
+            {{/if}}
+        {{/if}}
+    {{/if}}
+    
     <!-- <i class="fas fa-trophy"></i> reussite 
          <i class="fas fa-thumbs-down"></i> echec
          <i class="fas fa-tachometer-alt"></i> difficulte 

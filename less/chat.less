@@ -12,6 +12,14 @@
     background-image: url("../images/header-back.jpg");        
     background-position: 30% 9%;
 
+    input[type="text"]:focus, input[type="number"]:focus, input[type="password"]:focus, input[type="date"]:focus, input[type="time"]:focus, select:focus, textarea:focus {
+        box-shadow: 0 0 5px var(--color-shadow-trinite);
+    }
+
+    button:hover {
+        box-shadow: 0 0 5px var(--color-shadow-trinite);
+    }
+
     .message-header, .message-content {
         color: var(--color-text-message);
         backdrop-filter: grayscale(70%);
@@ -119,4 +127,18 @@
 .echec-crit-shadow {
     color: red;
     text-shadow: rgb(139, 138, 138) 1px 0 10px;
+}
+
+.btn-dette {
+    margin: 2px;
+
+    button.dette.archonte {
+        color : var(--color-text-message);
+        background-color: rgba(0, 0, 0, 0.5); 
+    }
+
+    button.dette.deva {
+        color : black;
+        background-color: rgba(255, 255, 255, 0.5); 
+    }
 }

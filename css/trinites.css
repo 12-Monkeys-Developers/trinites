@@ -744,6 +744,18 @@
   background-image: url("../images/header-back.jpg");
   background-position: 30% 9%;
 }
+.chat-message input[type="text"]:focus,
+.chat-message input[type="number"]:focus,
+.chat-message input[type="password"]:focus,
+.chat-message input[type="date"]:focus,
+.chat-message input[type="time"]:focus,
+.chat-message select:focus,
+.chat-message textarea:focus {
+  box-shadow: 0 0 5px var(--color-shadow-trinite);
+}
+.chat-message button:hover {
+  box-shadow: 0 0 5px var(--color-shadow-trinite);
+}
 .chat-message .message-header,
 .chat-message .message-content {
   color: var(--color-text-message);
@@ -829,4 +841,15 @@
 .echec-crit-shadow {
   color: red;
   text-shadow: #8b8a8a 1px 0 10px;
+}
+.btn-dette {
+  margin: 2px;
+}
+.btn-dette button.dette.archonte {
+  color: var(--color-text-message);
+  background-color: rgba(0, 0, 0, 0.5);
+}
+.btn-dette button.dette.deva {
+  color: black;
+  background-color: rgba(255, 255, 255, 0.5);
 }

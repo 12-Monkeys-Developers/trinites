@@ -1,3 +1,9 @@
+:root {
+    --color-titre-trinite: #1f546f;
+    --color-shadow-trinite: #2387b9;
+    --color-actor-header: white;
+}
+
 .window-app .window-content {
     background: url("../images/parchemin-grey.jpg") repeat;
 }
@@ -40,22 +46,22 @@
 }
 
 .sheet-tabs.tabs a {
-    color: #1f546f;
+    color: var(--color-titre-trinite);
     font-weight: bold;
 }
 
 .trinites.sheet.actor {
 
     input[type="text"]:focus, input[type="number"]:focus, input[type="password"]:focus, input[type="date"]:focus, input[type="time"]:focus, select:focus, textarea:focus {
-        box-shadow: 0 0 5px #2387b9;
+        box-shadow: 0 0 5px var(--color-shadow-trinite);
     }
     
     a:hover {
-        text-shadow: 0 0 8px #2387b9;
+        text-shadow: 0 0 8px var(--color-shadow-trinite);
     }
 
     .tabs .item.active {
-        text-shadow: 0 0 10px #2387b9;
+        text-shadow: 0 0 10px var(--color-shadow-trinite);
     }
 
     .sheet-header {
@@ -74,10 +80,10 @@
         background-image: url("../images/header-back.jpg");        
         background-position: 0% 10%;
 
-        color: white;
+        color: var(--color-actor-header);
 
         input {
-            color: white;
+            color: var(--color-actor-header);
         }
 
         input::placeholder {
@@ -90,14 +96,13 @@
         background: url("../images/parchemin-grey.jpg") repeat;
         
         h3 {
-            color: #1f546f;
+            color: var(--color-titre-trinite);
             font-weight: bold;
             margin-left: 3px;
         }
     }
 
-    .competences, .domaines, .ressources, .lignes-de-vie, .theme-astral, .vie-ante-bloc, .expe-bloc, .grand-livre, .zodiaque, .lame-soeur {
-        //background: url("../images/parchemin-grey.jpg") repeat;
+    .competences, .domaines, .ressources, .lignes-de-vie, .theme-astral, .vie-ante-bloc, .expe-bloc, .grand-livre, .zodiaque, .lame-soeur {        
         padding: 2px;
         margin: 3px;
     }
@@ -227,7 +232,7 @@
 
         .lig-titre-1 {
             grid-row: 1 / 2;
-            background-color: #1f546f;
+            background-color: var(--color-titre-trinite);
             color: white;
         }
 
@@ -237,7 +242,7 @@
 
         .lig-titre-2 {
             grid-row: 5 / 6;
-            background-color: #1f546f;
+            background-color: var(--color-titre-trinite);
             color: white;
         }
 
@@ -247,7 +252,7 @@
 
         .lig-titre-3 {
             grid-row: 9 / 10;
-            background-color: #1f546f;
+            background-color: var(--color-titre-trinite);
             color: white;
         }
 
@@ -257,7 +262,7 @@
 
         .lig-titre-4 {
             grid-row: 13 / 14;
-            background-color: #1f546f;
+            background-color: var(--color-titre-trinite);
             color: white;
         }
 
@@ -267,7 +272,7 @@
 
         .lig-titre-5 {
             grid-row: 17 / 18;
-            background-color: #1f546f;
+            background-color: var(--color-titre-trinite);
             color: white;
         }
 
@@ -277,7 +282,7 @@
 
         .lig-titre-6 {
             grid-row: 21 / 22;
-            background-color: #1f546f;
+            background-color: var(--color-titre-trinite);
             color: white;
         }
 

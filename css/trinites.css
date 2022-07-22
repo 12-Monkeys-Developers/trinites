@@ -1,3 +1,8 @@
+:root {
+  --color-titre-trinite: #1f546f;
+  --color-shadow-trinite: #2387b9;
+  --color-actor-header: white;
+}
 .window-app .window-content {
   background: url("../images/parchemin-grey.jpg") repeat;
 }
@@ -32,7 +37,7 @@
   grid-template-columns: 2fr 1fr;
 }
 .sheet-tabs.tabs a {
-  color: #1f546f;
+  color: var(--color-titre-trinite);
   font-weight: bold;
 }
 .trinites.sheet.actor input[type="text"]:focus,
@@ -42,18 +47,18 @@
 .trinites.sheet.actor input[type="time"]:focus,
 .trinites.sheet.actor select:focus,
 .trinites.sheet.actor textarea:focus {
-  box-shadow: 0 0 5px #2387b9;
+  box-shadow: 0 0 5px var(--color-shadow-trinite);
 }
 .trinites.sheet.actor a:hover {
-  text-shadow: 0 0 8px #2387b9;
+  text-shadow: 0 0 8px var(--color-shadow-trinite);
 }
 .trinites.sheet.actor .tabs .item.active {
-  text-shadow: 0 0 10px #2387b9;
+  text-shadow: 0 0 10px var(--color-shadow-trinite);
 }
 .trinites.sheet.actor .sheet-header {
   background-image: url("../images/header-back.jpg");
   background-position: 0% 10%;
-  color: white;
+  color: var(--color-actor-header);
 }
 .trinites.sheet.actor .sheet-header img {
   flex: 0 0 128px;
@@ -65,7 +70,7 @@
   padding: 7px 0;
 }
 .trinites.sheet.actor .sheet-header input {
-  color: white;
+  color: var(--color-actor-header);
 }
 .trinites.sheet.actor .sheet-header input::placeholder {
   color: lightgray;
@@ -74,7 +79,7 @@
   background: url("../images/parchemin-grey.jpg") repeat;
 }
 .trinites.sheet.actor .window-content h3 {
-  color: #1f546f;
+  color: var(--color-titre-trinite);
   font-weight: bold;
   margin-left: 3px;
 }
@@ -197,7 +202,7 @@
 }
 .trinites.sheet.actor .comp-grid .lig-titre-1 {
   grid-row: 1 / 2;
-  background-color: #1f546f;
+  background-color: var(--color-titre-trinite);
   color: white;
 }
 .trinites.sheet.actor .comp-grid .lig-image-1 {
@@ -205,7 +210,7 @@
 }
 .trinites.sheet.actor .comp-grid .lig-titre-2 {
   grid-row: 5 / 6;
-  background-color: #1f546f;
+  background-color: var(--color-titre-trinite);
   color: white;
 }
 .trinites.sheet.actor .comp-grid .lig-image-2 {
@@ -213,7 +218,7 @@
 }
 .trinites.sheet.actor .comp-grid .lig-titre-3 {
   grid-row: 9 / 10;
-  background-color: #1f546f;
+  background-color: var(--color-titre-trinite);
   color: white;
 }
 .trinites.sheet.actor .comp-grid .lig-image-3 {
@@ -221,7 +226,7 @@
 }
 .trinites.sheet.actor .comp-grid .lig-titre-4 {
   grid-row: 13 / 14;
-  background-color: #1f546f;
+  background-color: var(--color-titre-trinite);
   color: white;
 }
 .trinites.sheet.actor .comp-grid .lig-image-4 {
@@ -229,7 +234,7 @@
 }
 .trinites.sheet.actor .comp-grid .lig-titre-5 {
   grid-row: 17 / 18;
-  background-color: #1f546f;
+  background-color: var(--color-titre-trinite);
   color: white;
 }
 .trinites.sheet.actor .comp-grid .lig-image-5 {
@@ -237,7 +242,7 @@
 }
 .trinites.sheet.actor .comp-grid .lig-titre-6 {
   grid-row: 21 / 22;
-  background-color: #1f546f;
+  background-color: var(--color-titre-trinite);
   color: white;
 }
 .trinites.sheet.actor .comp-grid .lig-image-6 {
@@ -601,13 +606,13 @@
 .trinites.sheet.item input[type="time"]:focus,
 .trinites.sheet.item select:focus,
 .trinites.sheet.item textarea:focus {
-  box-shadow: 0 0 5px #2387b9;
+  box-shadow: 0 0 5px var(--color-shadow-trinite);
 }
 .trinites.sheet.item a:hover {
-  text-shadow: 0 0 8px #2387b9;
+  text-shadow: 0 0 8px var(--color-shadow-trinite);
 }
 .trinites.sheet.item .tabs .item.active {
-  text-shadow: 0 0 10px #2387b9;
+  text-shadow: 0 0 10px var(--color-shadow-trinite);
 }
 .trinites.sheet.item .centrer {
   display: flex;
@@ -718,18 +723,22 @@
 .trinites.sheet.item .sheet-footer {
   border-top: solid thin #42637e;
   padding: 3px;
-  color: #1f546f;
+  color: var(--color-titre-trinite);
   font-weight: bold;
   font-size: 1.2em;
 }
 .trinites.sheet.item .titre-desc {
-  color: #1f546f;
+  color: var(--color-titre-trinite);
   font-weight: bold;
   margin: 2px;
 }
+:root {
+  --color-text-message: white;
+  --color-text-chat: white;
+}
 #chat-form textarea {
   background-image: url("../images/header-back.jpg");
-  color: white;
+  color: var(--color-text-chat);
 }
 .chat-message {
   background-image: url("../images/header-back.jpg");
@@ -737,55 +746,23 @@
 }
 .chat-message .message-header,
 .chat-message .message-content {
-  color: white;
+  color: var(--color-text-message);
+  backdrop-filter: grayscale(70%);
 }
 .titre-jet-comp {
   font-weight: 500;
   font-size: 1.2em;
+  color: var(--color-text-message);
   margin: 2px;
-  /*// Essai 2
-    color: white;
-    background: #1f546f;
-    margin-bottom: 0px;
-    border-left: 1px solid var(--color-border-light-2);
-    border-right: 1px solid var(--color-border-light-2);
-    border-top: 1px solid var(--color-border-light-2);    
-    border-top-left-radius: 3px;
-    border-top-right-radius: 3px;
-    padding: 3px;*/
-  color: white;
 }
 .titre-jet-comp .box {
   display: grid;
-  grid-template-columns: 5fr 1fr;
+  grid-template-columns: 4fr 1fr;
 }
 .grid-jet-comp {
   display: grid;
   grid-template-columns: 1fr 1fr;
   margin: 2px;
-  /*// Essai 1
-    border: 1px solid var(--color-border-light-2);
-    border-radius: 3px;
-    box-shadow: 0 0 2px #FFF inset;
-    background: linear-gradient(#1f546fdd, #1f546f44, #1f546fdd);*/
-  /*// Essai 2
-    margin-top: 0px;
-    border-left: 1px solid var(--color-border-light-2);
-    border-right: 1px solid var(--color-border-light-2);
-    border-bottom: 1px solid var(--color-border-light-2);
-    border-bottom-left-radius: 3px;
-    border-bottom-right-radius: 3px;
-    background: linear-gradient(#1f546f,#1f546f44, #1f546fdd);*/
-  /*// Essai 3
-    border: 1px solid var(--color-border-light-2);
-    border-radius: 3px;
-    box-shadow: 0 0 2px #FFF inset;
-    background: linear-gradient(to left, #1f546f, #1f546f00, #1f546f);*/
-  /*// Essai 3b
-    border: 1px solid var(--color-border-light-2);
-    border-radius: 3px;
-    box-shadow: 0 0 2px #FFF inset;
-    background: linear-gradient(to right, #1f546f, #ebf8e1, #0f2936);*/
   border: 1px solid var(--color-border-light-2);
   border-radius: 3px;
   box-shadow: 0 0 2px #FFF inset;
@@ -802,9 +779,11 @@
 }
 .titre-esprit.deva {
   color: white;
+  text-shadow: #8b8a8a 1px 0 10px;
 }
 .titre-esprit.archonte {
   color: black;
+  text-shadow: #8b8a8a 1px 0 10px;
 }
 .roll {
   width: 40px;
@@ -823,9 +802,6 @@
   color: white;
   background-size: 40px 40px;
 }
-/*.dice-back {
-    //background: #1f546f88;
-}*/
 .dice-total {
   flex: 0 0 100%;
   line-height: 24px;
@@ -836,9 +812,21 @@
 .succes {
   color: #178617;
 }
+.succes-shadow {
+  color: #178617;
+  text-shadow: #8b8a8a 1px 0 10px;
+}
 .echec {
   color: black;
 }
-.echec-critique {
+.echec-shadow {
+  color: black;
+  text-shadow: #8b8a8a 1px 0 10px;
+}
+.echec-crit {
   color: red;
+}
+.echec-crit-shadow {
+  color: red;
+  text-shadow: #8b8a8a 1px 0 10px;
 }

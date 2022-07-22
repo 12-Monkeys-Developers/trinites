@@ -1,20 +1,20 @@
+:root {
+    --color-text-message: white;
+    --color-text-chat: white;
+}
+
 #chat-form textarea {
     background-image: url("../images/header-back.jpg");  
-    color: white;
+    color: var(--color-text-chat);
 }
 
 .chat-message {
-    //background: url("../images/parchemin-grey.jpg") repeat;
-
-    // Essai image back
     background-image: url("../images/header-back.jpg");        
     background-position: 30% 9%;
 
-    //background-position: 35% 74%;
-    //background-position: 50% 58%;
-
     .message-header, .message-content {
-        color: white;
+        color: var(--color-text-message);
+        backdrop-filter: grayscale(70%);
     }
 }
 
@@ -22,33 +22,13 @@
 .titre-jet-comp {
     font-weight: 500;
     font-size: 1.2em;
+    color: var(--color-text-message);
     margin: 2px;
 
     .box {
         display: grid;
-        grid-template-columns: 5fr 1fr;
-
-
+        grid-template-columns: 4fr 1fr;
     }
-    // Essai 1
-    //color: #1f546f;
-
-    /*// Essai 2
-    color: white;
-    background: #1f546f;
-    margin-bottom: 0px;
-    border-left: 1px solid var(--color-border-light-2);
-    border-right: 1px solid var(--color-border-light-2);
-    border-top: 1px solid var(--color-border-light-2);    
-    border-top-left-radius: 3px;
-    border-top-right-radius: 3px;
-    padding: 3px;*/
-
-    // Essai 3
-    //color: #1f546f;
-
-    // Essai image back
-    color: white;
 }
 
 .grid-jet-comp {
@@ -56,39 +36,10 @@
     grid-template-columns: 1fr 1fr;
     margin: 2px;
 
-    /*// Essai 1
-    border: 1px solid var(--color-border-light-2);
-    border-radius: 3px;
-    box-shadow: 0 0 2px #FFF inset;
-    background: linear-gradient(#1f546fdd, #1f546f44, #1f546fdd);*/
-
-    /*// Essai 2
-    margin-top: 0px;
-    border-left: 1px solid var(--color-border-light-2);
-    border-right: 1px solid var(--color-border-light-2);
-    border-bottom: 1px solid var(--color-border-light-2);
-    border-bottom-left-radius: 3px;
-    border-bottom-right-radius: 3px;
-    background: linear-gradient(#1f546f,#1f546f44, #1f546fdd);*/
-
-    /*// Essai 3
-    border: 1px solid var(--color-border-light-2);
-    border-radius: 3px;
-    box-shadow: 0 0 2px #FFF inset;
-    background: linear-gradient(to left, #1f546f, #1f546f00, #1f546f);*/
-
-    /*// Essai 3b
-    border: 1px solid var(--color-border-light-2);
-    border-radius: 3px;
-    box-shadow: 0 0 2px #FFF inset;
-    background: linear-gradient(to right, #1f546f, #ebf8e1, #0f2936);*/
-
-    // Essai 4
     border: 1px solid var(--color-border-light-2);
     border-radius: 3px;
     box-shadow: 0 0 2px #FFF inset;
     background: linear-gradient(to right,  #ebf8e1, #1f546f, #07131a);
-    
 
     div {
         display: flex;
@@ -105,10 +56,12 @@
 
 .titre-esprit.deva {
     color: white;
+    text-shadow: rgb(139, 138, 138) 1px 0 10px;
 }
 
 .titre-esprit.archonte {
     color: black;
+    text-shadow: rgb(139, 138, 138) 1px 0 10px;
 }
 
 // Apparence des dés du roll
@@ -132,10 +85,6 @@
     background-size: 40px 40px;
 }
 
-/*.dice-back {
-    //background: #1f546f88;
-}*/
-
 // Apparence du résultat du jet
 .dice-total {
     flex: 0 0 100%;
@@ -143,25 +92,31 @@
     text-align: center;
     font-size: var(--font-size-20);
     font-weight: bold;
-
-    // Essai 0
-    //background: rgba(0, 0, 0, 0.1);
-    //border: 1px solid var(--color-border-light-2);
-    //border-radius: 3px;
-    //box-shadow: 0 0 2px #FFF inset;
 }
 
 .succes {
-    //color: rgb(32, 184, 32);
-
-    // Essai 4
     color: rgb(23, 134, 23);
+}
+
+.succes-shadow {
+    color: rgb(23, 134, 23);
+    text-shadow: rgb(139, 138, 138) 1px 0 10px;
 }
 
 .echec {
     color: black;
 }
 
-.echec-critique {
+.echec-shadow {
+    color: black;
+    text-shadow: rgb(139, 138, 138) 1px 0 10px;
+}
+
+.echec-crit {
     color: red;
+}
+
+.echec-crit-shadow {
+    color: red;
+    text-shadow: rgb(139, 138, 138) 1px 0 10px;
 }

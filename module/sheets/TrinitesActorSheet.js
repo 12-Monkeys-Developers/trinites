@@ -74,6 +74,9 @@ export default class TrinitesActorSheet extends ActorSheet {
                 // Jet de compétence
                 html.find('.roll-comp').click(this._onJetCompetence.bind(this));
 
+                // Jet de ressources
+                html.find('.roll-ress').click(this._onJetRessource.bind(this));
+
                 // Jet - Verset
                 //html.find('.roll-verset').click(this._onJetVerset.bind(this));
                 
@@ -175,6 +178,16 @@ export default class TrinitesActorSheet extends ActorSheet {
             actor: this.actor,
             signe: dataset.signe,
             competence: dataset.competence
+        });
+    }
+
+    _onJetRessource(event) {
+        event.preventDefault();
+        const dataset = event.currentTarget.dataset;
+
+        Dice.jetRessource({
+            actor: this.actor,
+            signe: dataset.ressource
         });
     }
 }

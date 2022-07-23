@@ -54,10 +54,10 @@ Trinites.affinites = {
 }
 
 Trinites.etatSante = {
-    aucun :"",
+    aucun : "",
     indemne: "Indemne",
     endolori : "Endolori",
-    blesse :"Blessé",
+    blesse : "Blessé",
     inconscient: "Inconscient"
 }
 

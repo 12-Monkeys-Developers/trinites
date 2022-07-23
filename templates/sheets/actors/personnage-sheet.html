@@ -235,7 +235,7 @@
                 <div class="dom-grid">
                     {{#each domaines as |domaine id|}}
                     <div class="domaine-item domaine" data-item-id="{{domaine._id}}">
-                        <div>{{domaine.name}}</div>
+                        <div class="nom-domaine">{{domaine.name}}</div>
                         {{#if domaine.data.epuise }}
                             <div class="uncheck-domaine"><a title="Domaine épuisé"><i class="far fa-check-square"></i></a></div>
                         {{else}}
@@ -251,20 +251,23 @@
                     <div class="ressources">
                         <h3><i class="fas fa-euro-sign"></i> RESSOURCES</h3>
                         <div class="ress-grid">
+                            <!-- TITRE -->
+                            <div class="col-titre-vide"></div>
+                            <div class="col-titre"><label>Diminution</label></div>
                             <!-- RICHESSE -->
-                            <div class="colRess-dice"><a class="roll-comp" title="Jet de ressource" data-ressource="richesse"><i class="fas fa-dice"></i></a></div>
+                            <div class="colRess-dice"><a class="roll-ress" title="Jet de ressource" data-ressource="richesse"><i class="fas fa-dice"></i></a></div>
                             <div class="colRess-nom">{{data.data.richesse.label}}</div>
                             <div class="colRess-valeur"><input name="data.richesse.valeur" type="number" value="{{data.data.richesse.valeur}}" placeholder="0" min="0"></div>
                             <div class="colRess-diminution"><input name="data.richesse.diminution" type="number" value="{{data.data.richesse.diminution}}" placeholder="0" min="0"></div>                
                             <div class="colRess-duree"><input name="data.richesse.duree" type="text" value="{{data.data.richesse.duree}}" placeholder="Durée diminution"></div>
                             <!-- RESEAU -->
-                            <div class="colRess-dice"><a class="roll-comp" title="Jet de ressource" data-ressource="reseau"><i class="fas fa-dice"></i></a></div>
+                            <div class="colRess-dice"><a class="roll-ress" title="Jet de ressource" data-ressource="reseau"><i class="fas fa-dice"></i></a></div>
                             <div class="colRess-nom">{{data.data.reseau.label}}</div>
                             <div class="colRess-valeur"><input name="data.reseau.valeur" type="number" value="{{data.data.reseau.valeur}}" placeholder="0" min="0"></div>
                             <div class="colRess-diminution"><input name="data.reseau.diminution" type="number" value="{{data.data.reseau.diminution}}" placeholder="0" min="0"></div>                
                             <div class="colRess-duree"><input name="data.reseau.duree" type="text" value="{{data.data.reseau.duree}}" placeholder="Durée diminution"></div>
                             <!-- INFLUENCE -->
-                            <div class="colRess-dice"><a class="roll-comp" title="Jet de ressource" data-ressource="influence"><i class="fas fa-dice"></i></a></div>
+                            <div class="colRess-dice"><a class="roll-ress" title="Jet de ressource" data-ressource="influence"><i class="fas fa-dice"></i></a></div>
                             <div class="colRess-nom">{{data.data.influence.label}}</div>
                             <div class="colRess-valeur"><input name="data.influence.valeur" type="number" value="{{data.data.influence.valeur}}" placeholder="0" min="0"></div>
                             <div class="colRess-diminution"><input name="data.influence.diminution" type="number" value="{{data.data.influence.diminution}}" placeholder="0" min="0"></div>                
@@ -282,6 +285,7 @@
                                 {{#if (eq @index data.data.ligneVie2)}}</div><div class="ligne-vie">{{/if}}
                             {{/times}}
                         </div>
+                        <div class="etat-sante">Etat de santé : {{configVal 'etatSante' data.data.etatSante}}</div>
                     </div>    
                 </div>
             </div>

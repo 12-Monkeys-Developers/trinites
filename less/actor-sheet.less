@@ -115,6 +115,7 @@
     .comp-grid {
         display: grid;
         grid-template-columns: 3.5em 3em 2em 2fr 1fr 1fr 1em 3.5em 3em 2em 2fr 1fr 1fr;
+        align-items: center;
 
         div {
             margin: 2px;
@@ -122,7 +123,6 @@
         }
 
         img {
-            margin-top: 8px;
             border: none;
         }
 
@@ -138,7 +138,6 @@
             justify-content: center;
 
             input {
-                margin-top: 15px;
                 text-align: center;
                 font-size: 0.9em;
             }
@@ -190,7 +189,6 @@
             justify-content: center;
 
             input {
-                margin-top: 15px;
                 text-align: center;
                 font-size: 0.9em;
             }
@@ -372,11 +370,18 @@
         grid-template-columns: repeat(5, 1fr);
 
         .domaine-item {
-            display: flex;
+            display: grid;
+            grid-template-columns: 1fr 1.5em 1.5em;
+            align-items: center;
 
-            div {
-                margin-left: 3px;
-                margin-right: 3px; 
+            .uncheck-domaine, .check-domaine, .suppr-domaine {
+                display: flex;
+                justify-content: center;
+                margin: 3px;
+            }
+
+            .nom-domaine {
+                padding-left: 5px;
             }
         }
     }
@@ -385,20 +390,30 @@
         display: grid;
         grid-template-columns: 2em 1fr 3em 1em 3em 1em 1.5fr;
         margin: 3px;
+        align-items: center;
 
         div {
             margin: 2px;    
         }
 
+        .col-titre-vide {
+            grid-column: 1 / 4;
+        }
+
+        .col-titre {
+            grid-column: 4 / 7;
+            font-size: 0.9em;
+            display: flex;
+            justify-content: center;
+        }
+
         .colRess-dice {
-            margin-top: 7px;
             grid-column: 1 / 2;
             display: flex;
             justify-content: center;
         }
 
         .colRess-nom {
-            margin-top: 7px;
             grid-column: 2 / 3;
             font-size: 0.9em;
         }
@@ -440,19 +455,27 @@
         margin: 5px;
     }
 
+    .etat-sante {
+        display: flex;
+        justify-content: center;
+        font-size: 0.9em;
+        margin: 3px;
+    }
+
     .ligne-theme {
         display: grid;
         grid-template-columns: 1fr 2fr;
         margin: 2px;
+        align-items: center;
 
         label {
             margin: 2px;
-            margin-top: 7px;
             font-size: 0.9em;
         }
         
         select {
             margin: 2px;
+            height: 26px;
             font-size: 0.9em;
         }
     }
@@ -517,10 +540,7 @@
         grid-template-columns: 1fr 3.5em 1em 1fr 3.5em;
         margin: 5px;
         font-size: 0.9em;
-
-        label {
-            margin-top: 7px;
-        }
+        align-items: center;
 
         input {
             text-align: center;
@@ -536,7 +556,6 @@
             display: flex;
             justify-content: center;
             margin: 2px;
-            margin-top: 4px;
             font-size: 1.8em;
         }
 
@@ -550,17 +569,17 @@
             .grid-stats {
                 display: grid;
                 grid-template-columns: 1em 1fr 2fr 1em;
-
+                align-items: center;
 
                 .colStats-titre {
                     grid-column: 2 / 3;
-                    margin-top: 7px;
                 }
     
                 .colStats-valeur {
                     grid-column: 3 / 4;
                     margin: 2px;
                     display: flex;
+                    align-items: center;
 
                     input {
                         width: 3em;
@@ -570,7 +589,6 @@
 
                     label {
                         margin: 2px;
-                        margin-top: 7px;
                     }
                 }                
             }
@@ -594,13 +612,11 @@
             .karma {
                 display: flex;
                 justify-content: center;
-                
+                align-items: center;
                 
                 label {
                     margin: 2px;
-                    margin-top: 7px;
                 }
-
             }
 
             input {
@@ -632,7 +648,8 @@
 
         .grid-verset {
             display: grid;
-            grid-template-columns: 2em 1fr 2em 2em
+            grid-template-columns: 2em 1fr 2em 2em;
+            align-items: center;
         }
 
         .col-roll-verset {
@@ -691,10 +708,7 @@
         grid-template-columns: 1fr 2fr 2em 4em;
         font-size: 0.9em;
         margin: 3px;
-
-        label {
-            margin-top: 7px;
-        }
+        align-items: center;
 
         select, a {
             margin: 2px;

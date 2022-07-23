@@ -1,7 +1,7 @@
 <div class="jet-comp">
     <div class="titre-jet-comp">
         <div class="box">
-            <div class="titre"><i class="fas fa-check"></i> {{stats.competence}} {{stats.valeur}}</div>
+            <div class="titre"><i class="fas fa-dice"></i> {{stats.competence}} {{stats.valeur}}</div> <!-- fa-check -->
             {{#if stats.difficulte}}<div class="diff"><i class="fas fa-tachometer-alt"></i> {{#if (gt stats.difficulte 0)}}+{{/if}}{{stats.difficulte}}</div>{{/if}}
         </div>   
     </div>
@@ -41,14 +41,14 @@
         {{#if (eq stats.karmaAdam "lumiere")}}
             {{#if (not stats.resultDeva.reussite)}}
                 {{#if stats.resultArchonte.reussite}}
-                    <div class="btn-dette"><button class="dette archonte" data-esprit="archonte">Dette Archonte</button></div>
+                    <div class="btn-dette"><button class="dette archonte" data-actor-id="{{actorId}}" data-esprit="archonte">Dette envers l'Archonte</button></div>
                 {{/if}}
             {{/if}}
         {{/if}}
         {{#if (eq stats.karmaAdam "tenebre")}}
             {{#if (not stats.resultArchonte.reussite)}}
                 {{#if stats.resultDeva.reussite}}
-                    <div class="btn-dette"><button class="dette deva" data-esprit="deva">Dette Deva</button></div>
+                    <div class="btn-dette"><button class="dette deva" data-actor-id="{{actorId}}" data-esprit="deva">Dette envers le Deva</button></div>
                 {{/if}}
             {{/if}}
         {{/if}}
@@ -56,6 +56,5 @@
     
     <!-- <i class="fas fa-trophy"></i> reussite 
          <i class="fas fa-thumbs-down"></i> echec
-         <i class="fas fa-tachometer-alt"></i> difficulte 
     -->
 </div>

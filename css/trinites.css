@@ -103,13 +103,13 @@
 .trinites.sheet.actor .comp-grid {
   display: grid;
   grid-template-columns: 3.5em 3em 2em 2fr 1fr 1fr 1em 3.5em 3em 2em 2fr 1fr 1fr;
+  align-items: center;
 }
 .trinites.sheet.actor .comp-grid div {
   margin: 2px;
   font-size: 0.9em;
 }
 .trinites.sheet.actor .comp-grid img {
-  margin-top: 8px;
   border: none;
 }
 .trinites.sheet.actor .comp-grid .col-image-1 {
@@ -123,7 +123,6 @@
   justify-content: center;
 }
 .trinites.sheet.actor .comp-grid .col-valSigne-1 input {
-  margin-top: 15px;
   text-align: center;
   font-size: 0.9em;
 }
@@ -167,7 +166,6 @@
   justify-content: center;
 }
 .trinites.sheet.actor .comp-grid .col-valSigne-2 input {
-  margin-top: 15px;
   text-align: center;
   font-size: 0.9em;
 }
@@ -310,28 +308,44 @@
   grid-template-columns: repeat(5, 1fr);
 }
 .trinites.sheet.actor .dom-grid .domaine-item {
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 1.5em 1.5em;
+  align-items: center;
 }
-.trinites.sheet.actor .dom-grid .domaine-item div {
-  margin-left: 3px;
-  margin-right: 3px;
+.trinites.sheet.actor .dom-grid .domaine-item .uncheck-domaine,
+.trinites.sheet.actor .dom-grid .domaine-item .check-domaine,
+.trinites.sheet.actor .dom-grid .domaine-item .suppr-domaine {
+  display: flex;
+  justify-content: center;
+  margin: 3px;
+}
+.trinites.sheet.actor .dom-grid .domaine-item .nom-domaine {
+  padding-left: 5px;
 }
 .trinites.sheet.actor .ress-grid {
   display: grid;
   grid-template-columns: 2em 1fr 3em 1em 3em 1em 1.5fr;
   margin: 3px;
+  align-items: center;
 }
 .trinites.sheet.actor .ress-grid div {
   margin: 2px;
 }
+.trinites.sheet.actor .ress-grid .col-titre-vide {
+  grid-column: 1 / 4;
+}
+.trinites.sheet.actor .ress-grid .col-titre {
+  grid-column: 4 / 7;
+  font-size: 0.9em;
+  display: flex;
+  justify-content: center;
+}
 .trinites.sheet.actor .ress-grid .colRess-dice {
-  margin-top: 7px;
   grid-column: 1 / 2;
   display: flex;
   justify-content: center;
 }
 .trinites.sheet.actor .ress-grid .colRess-nom {
-  margin-top: 7px;
   grid-column: 2 / 3;
   font-size: 0.9em;
 }
@@ -364,18 +378,25 @@
 .trinites.sheet.actor .case-vie {
   margin: 5px;
 }
+.trinites.sheet.actor .etat-sante {
+  display: flex;
+  justify-content: center;
+  font-size: 0.9em;
+  margin: 3px;
+}
 .trinites.sheet.actor .ligne-theme {
   display: grid;
   grid-template-columns: 1fr 2fr;
   margin: 2px;
+  align-items: center;
 }
 .trinites.sheet.actor .ligne-theme label {
   margin: 2px;
-  margin-top: 7px;
   font-size: 0.9em;
 }
 .trinites.sheet.actor .ligne-theme select {
   margin: 2px;
+  height: 26px;
   font-size: 0.9em;
 }
 .trinites.sheet.actor .grid-theme {
@@ -427,9 +448,7 @@
   grid-template-columns: 1fr 3.5em 1em 1fr 3.5em;
   margin: 5px;
   font-size: 0.9em;
-}
-.trinites.sheet.actor .experience label {
-  margin-top: 7px;
+  align-items: center;
 }
 .trinites.sheet.actor .experience input {
   text-align: center;
@@ -443,7 +462,6 @@
   display: flex;
   justify-content: center;
   margin: 2px;
-  margin-top: 4px;
   font-size: 1.8em;
 }
 .trinites.sheet.actor .stats-trinite .deva h3,
@@ -455,17 +473,18 @@
 .trinites.sheet.actor .stats-trinite .archonte .grid-stats {
   display: grid;
   grid-template-columns: 1em 1fr 2fr 1em;
+  align-items: center;
 }
 .trinites.sheet.actor .stats-trinite .deva .grid-stats .colStats-titre,
 .trinites.sheet.actor .stats-trinite .archonte .grid-stats .colStats-titre {
   grid-column: 2 / 3;
-  margin-top: 7px;
 }
 .trinites.sheet.actor .stats-trinite .deva .grid-stats .colStats-valeur,
 .trinites.sheet.actor .stats-trinite .archonte .grid-stats .colStats-valeur {
   grid-column: 3 / 4;
   margin: 2px;
   display: flex;
+  align-items: center;
 }
 .trinites.sheet.actor .stats-trinite .deva .grid-stats .colStats-valeur input,
 .trinites.sheet.actor .stats-trinite .archonte .grid-stats .colStats-valeur input {
@@ -476,7 +495,6 @@
 .trinites.sheet.actor .stats-trinite .deva .grid-stats .colStats-valeur label,
 .trinites.sheet.actor .stats-trinite .archonte .grid-stats .colStats-valeur label {
   margin: 2px;
-  margin-top: 7px;
 }
 .trinites.sheet.actor .stats-trinite .adam {
   display: flex;
@@ -494,10 +512,10 @@
 .trinites.sheet.actor .stats-trinite .adam .karma {
   display: flex;
   justify-content: center;
+  align-items: center;
 }
 .trinites.sheet.actor .stats-trinite .adam .karma label {
   margin: 2px;
-  margin-top: 7px;
 }
 .trinites.sheet.actor .stats-trinite .adam input {
   width: 3em;
@@ -523,6 +541,7 @@
 .trinites.sheet.actor .grid-grand-livre .grid-verset {
   display: grid;
   grid-template-columns: 2em 1fr 2em 2em;
+  align-items: center;
 }
 .trinites.sheet.actor .grid-grand-livre .col-roll-verset {
   grid-column: 1 / 2;
@@ -569,9 +588,7 @@
   grid-template-columns: 1fr 2fr 2em 4em;
   font-size: 0.9em;
   margin: 3px;
-}
-.trinites.sheet.actor .grid-lame label {
-  margin-top: 7px;
+  align-items: center;
 }
 .trinites.sheet.actor .grid-lame select,
 .trinites.sheet.actor .grid-lame a {
@@ -629,20 +646,12 @@
   display: grid;
   grid-template-columns: 1fr 2fr 1fr 2fr;
   margin: 2px;
+  align-items: center;
 }
-.trinites.sheet.item .sheet-content.aura .grid-item-aura label {
-  margin: 2px;
-  margin-top: 7px;
-}
+.trinites.sheet.item .sheet-content.aura .grid-item-aura label,
 .trinites.sheet.item .sheet-content.aura .grid-item-aura input,
 .trinites.sheet.item .sheet-content.aura .grid-item-aura select {
   margin: 2px;
-}
-.trinites.sheet.item .sheet-content.aura .grid-item-aura .marge-edit {
-  margin-top: 20px;
-}
-.trinites.sheet.item .sheet-content.aura .grid-item-aura select.marge-edit {
-  margin-top: 15px;
 }
 .trinites.sheet.item .sheet-content.aura .zone-aura {
   display: grid;
@@ -658,11 +667,9 @@
   display: grid;
   grid-template-columns: 1fr 2fr 1fr 2fr;
   margin: 2px;
+  align-items: center;
 }
-.trinites.sheet.item .sheet-content.atout .grid-item-atout label {
-  margin: 2px;
-  margin-top: 7px;
-}
+.trinites.sheet.item .sheet-content.atout .grid-item-atout label,
 .trinites.sheet.item .sheet-content.atout .grid-item-atout input,
 .trinites.sheet.item .sheet-content.atout .grid-item-atout select {
   margin: 2px;
@@ -678,11 +685,9 @@
   display: grid;
   grid-template-columns: 1fr 2fr 1fr 2fr 1fr 2fr;
   margin: 2px;
+  align-items: center;
 }
-.trinites.sheet.item .sheet-content.verset .grid-item-verset label {
-  margin: 2px;
-  margin-top: 7px;
-}
+.trinites.sheet.item .sheet-content.verset .grid-item-verset label,
 .trinites.sheet.item .sheet-content.verset .grid-item-verset input,
 .trinites.sheet.item .sheet-content.verset .grid-item-verset select {
   margin: 2px;
@@ -709,14 +714,9 @@
   display: grid;
   grid-template-columns: 1fr 2fr;
   margin: 2px;
+  align-items: center;
 }
-.trinites.sheet.item .sheet-content.verset .grid-data-desc .check {
-  margin-top: 5px;
-}
-.trinites.sheet.item .sheet-content.verset .grid-data-desc label {
-  margin: 2px;
-  margin-top: 7px;
-}
+.trinites.sheet.item .sheet-content.verset .grid-data-desc label,
 .trinites.sheet.item .sheet-content.verset .grid-data-desc input {
   margin: 2px;
 }
@@ -771,6 +771,18 @@
   display: grid;
   grid-template-columns: 4fr 1fr;
 }
+.titre-jet-comp i {
+  font-size: 0.9em;
+}
+.titre-jet-comp .diff {
+  display: flex;
+  justify-content: right;
+  align-items: center;
+}
+.titre-jet-comp .diff i {
+  margin-left: 2px;
+  margin-right: 2px;
+}
 .grid-jet-comp {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -787,15 +799,15 @@
 }
 .titre-esprit {
   font-weight: bold;
-  font-size: 1.2em;
+  font-size: 1.5em;
 }
 .titre-esprit.deva {
   color: white;
-  text-shadow: #8b8a8a 1px 0 10px;
+  -webkit-text-stroke: 1px black;
 }
 .titre-esprit.archonte {
   color: black;
-  text-shadow: #8b8a8a 1px 0 10px;
+  -webkit-text-stroke: 0.35px white;
 }
 .roll {
   width: 40px;
@@ -810,7 +822,7 @@
   background-size: 40px 40px;
 }
 .dice-archonte {
-  background: url("../images/d12black.svg") no-repeat;
+  background: url("../images/d12archonte.svg") no-repeat;
   color: white;
   background-size: 40px 40px;
 }
@@ -852,4 +864,35 @@
 .btn-dette button.dette.deva {
   color: black;
   background-color: rgba(255, 255, 255, 0.5);
+}
+.dialog-content .titre {
+  color: var(--color-titre-trinite);
+  font-size: 1.2em;
+  font-weight: bold;
+  margin-left: 3px;
+}
+.dialog-content .grid-diff {
+  display: grid;
+  grid-template-columns: 2fr 1fr 2fr 1fr 2fr 1fr;
+  margin: 3px;
+  margin-top: 6px;
+  margin-bottom: 10px;
+}
+.dialog-content .grid-diff div {
+  display: flex;
+  justify-content: center;
+}
+.dialog-content .grid-data {
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  align-items: center;
+  margin: 5px 3px;
+}
+.dialog-content .grid-data .data {
+  display: flex;
+  justify-content: center;
+}
+.dialog-content .grid-data input[type="number"] {
+  width: 3em;
+  text-align: center;
 }

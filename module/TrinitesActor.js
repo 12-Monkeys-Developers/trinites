@@ -22,9 +22,9 @@ export default class TrinitesActor extends Actor {
             }
         }
 
-        /*-------------------------------------------
-        ---- Calculs des valeurs des compétences ----
-        -------------------------------------------*/
+        /*------------------------------------------
+        ---- Calcul des valeurs des compétences ----
+        ------------------------------------------*/
         
         for(let[keySigne, compsSigne] of Object.entries(data.competences)) {
             for(let[keyComp, competence] of Object.entries(compsSigne)) {
@@ -41,6 +41,10 @@ export default class TrinitesActor extends Actor {
                 }
             }
         }
+
+        /*-----------------------------------
+        ---- Calcul des valeurs de Karma ----
+        -----------------------------------*/
 
         //recalcul des valeurs de karma afin qu'elles ne dépasent pas le max
         if(data.trinite.deva.karma.value > data.trinite.deva.karma.max) { data.trinite.deva.karma.value = data.trinite.deva.karma.max; }
@@ -60,10 +64,29 @@ export default class TrinitesActor extends Actor {
 
     }
 
+    // L'influence ne peut dépasser la valeur de réseau
+    if(data.influence.valeur > data.reseau.valeur) {
+        data.influence.valeur = data.reseau.valeur;
+    }
+
     // Points de vie maxi
     data.ligneVie1 = data.pointsLigneVie;
     data.ligneVie2 = data.pointsLigneVie * 2;
     data.nbPointsVieMax = data.pointsLigneVie * 3;
+
+    //Etat de santé
+    if(data.nbBlessure == 0) {
+        data.etatSante = "indemne";
+    }
+    else if (data.nbBlessure <= data.ligneVie1) {
+        data.etatSante = "endolori";
+    }
+    else if(data.nbBlessure <= data.ligneVie2) {
+        data.etatSante = "blesse";
+    }
+    else {
+        data.etatSante = "inconscient";
+    }
 
     //console.log(data);
     }

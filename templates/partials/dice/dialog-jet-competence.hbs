@@ -1,14 +1,12 @@
 <form>
-    <div style="color: var(--color-titre-trinite); font-size: 1.2em; font-weight: bold; margin-left: 3px;"><label>Difficulté de l'action</label></div>
-    <div style="display: grid; grid-template-columns: 2fr 1fr 2fr 1fr 2fr 1fr; margin: 3px; margin-top: 6px;">
+    <div class="titre"><label>Difficulté de l'action</label></div>
+    <div class="grid-diff">
         <div>Elémentaire</div>
         <div>+6</div>
         <div>Aisée</div>
         <div>+3</div>
         <div>Délicate</div>
         <div>0</div>
-    </div>
-    <div style="display: grid; grid-template-columns: 2fr 1fr 2fr 1fr 2fr 1fr; margin: 3px; margin-bottom: 10px;">
         <div>Ardue</div>
         <div>-3</div>
         <div>Audacieuse</div>
@@ -16,8 +14,13 @@
         <div>Prodigieuse</div>
         <div>-9</div>
     </div>
-    <div class="form-group" style="margin-bottom: 10px;">
+    <div class="grid-data">
         <label>Difficulté</label>
-        <input type="number" name="difficulte" value="0"/>
+        <div class="data"><input type="number" name="difficulte" value="0"/></div>
+    </div>
+    <div class="titre"><label>Domaine requis</label></div>
+    <div class="grid-data">
+        <label>Domaine non maitrisé</label>
+        <div class="data"><input type="checkbox" name="sansDomaine"/></div>
     </div>
 </form>    

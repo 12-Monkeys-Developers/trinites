@@ -37,6 +37,21 @@
         display: grid;
         grid-template-columns: 4fr 1fr;
     }
+
+    i {
+        font-size: 0.9em;
+    }
+
+    .diff {
+        display: flex;
+        justify-content: right;
+        align-items: center;
+
+        i {
+            margin-left: 2px;
+            margin-right: 2px;
+        }
+    }
 }
 
 .grid-jet-comp {
@@ -59,17 +74,19 @@
 // Apparence des noms Deva / Archonte
 .titre-esprit {
     font-weight: bold;
-    font-size: 1.2em;
+    font-size: 1.5em;
 }
 
 .titre-esprit.deva {
     color: white;
-    text-shadow: rgb(139, 138, 138) 1px 0 10px;
+    //text-shadow: rgb(139, 138, 138) 1px 0 10px;
+    -webkit-text-stroke: 1px black;
 }
 
 .titre-esprit.archonte {
     color: black;
-    text-shadow: rgb(139, 138, 138) 1px 0 10px;
+   //text-shadow: rgb(139, 138, 138) 1px 0 10px;
+   -webkit-text-stroke: 0.35px white;
 }
 
 // Apparence des dés du roll
@@ -88,7 +105,7 @@
 }
 
 .dice-archonte {
-    background: url("../images/d12black.svg") no-repeat;
+    background: url("../images/d12archonte.svg") no-repeat;
     color: white;
     background-size: 40px 40px;
 }

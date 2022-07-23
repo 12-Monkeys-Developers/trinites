@@ -3,6 +3,7 @@ import TrinitesActorSheet from "./sheets/TrinitesActorSheet.js";
 import TrinitesItemSheet from "./sheets/TrinitesItemSheet.js";
 import TrinitesActor from "./TrinitesActor.js";
 import TrinitesItem from "./TrinitesItem.js";
+import * as Chat from "./chat.js";
 
 async function preloadHandlebarsTemplates() {
     const templatePaths = [
@@ -47,4 +48,6 @@ Hooks.once("init", function() {
         return accum;
     });
 })
+
+Hooks.on("renderChatLog", (app, html, data) => Chat.addChatListeners(html));
 

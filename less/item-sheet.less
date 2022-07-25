@@ -27,6 +27,10 @@
         img {
             border: none;
         }
+
+        h1.occulte {
+            font-family: "Cabaletta";
+        }
     }
 
     .sheet-content.aura {
@@ -39,6 +43,10 @@
 
             label, input, select {
                 margin: 2px;
+            }
+
+            label {
+                font-family: "Cabaletta";
             }
         }
 
@@ -65,10 +73,13 @@
             grid-template-columns: 1fr 2fr 1fr 2fr;
             margin: 2px;
             align-items: center;  
-        
 
             label, input, select {
                 margin: 2px;
+            }
+
+            label {
+                font-family: "Cabaletta";
             }
         }
 
@@ -94,11 +105,16 @@
                 margin: 2px;
             }
 
+            label {
+                font-family: "Cabaletta";
+            }
+
             .col-sentence {
                 grid-column: 1 / 7;
 
                 textarea {
-                    font-family: 'Signifika', sans-serif;
+                    font-family: "Cabaletta";
+                    font-style: italic;
                     margin: 2px;
                     height: 60px;
                     resize: none;
@@ -125,6 +141,10 @@
             label, input {
                 margin: 2px;
             }
+
+            label {
+                font-family: "Cabaletta";
+            }
         }
     }
 
@@ -136,9 +156,21 @@
         font-size: 1.2em;
     }
 
+    .sheet-footer.occulte {
+        border-top: solid thin rgb(126, 105, 66);
+        font-family: "Cabaletta";
+        color: var(--color-titre-occulte);
+    }
+
     .titre-desc {
         color: var(--color-titre-trinite);
         font-weight: bold;
         margin: 2px;
+        font-size: 1.1em;
+    }
+
+    .titre-desc.occulte {
+        font-family: "Cabaletta";
+        color: var(--color-titre-occulte);
     }
 }

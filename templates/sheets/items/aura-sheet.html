@@ -1,7 +1,7 @@
 <form class="{{cssClass}}" autocomplete="off">
     <header class="sheet-header">
         <img src="{{item.img}}" data-edit="img" title="{{item.name}}" height="64" width="64"/>
-        <h1><input name="name" type="text" value="{{item.name}}" placeholder="Nom de l'aura"/></h1>
+        <h1 class="occulte"><input name="name" type="text" value="{{item.name}}" placeholder="Nom de l'aura"/></h1>
     </header>
     <div class="sheet-content aura" data-item-id="{{item.id}}">
         <div class="grid-item-aura">
@@ -40,12 +40,12 @@
             <input name="" type="text" value="{{configVal 'deploiement' data.data.deploiement}}" readonly>
         {{/if}}
         </div>
-        <div class="titre-desc">Effet de l'aura</div>
+        <div class="titre-desc occulte">Effet de l'aura</div>
         {{editor content=data.data.description target="data.description" button=true owner=true editable=true}}
-        <div class="titre-desc">Effet du Souffle</div>
+        <div class="titre-desc occulte">Effet du Souffle</div>
         {{editor content=data.data.souffle target="data.souffle" button=true owner=true editable=true}}
     </div>
-    <footer class="sheet-footer">
+    <footer class="sheet-footer occulte">
         <div><i class="fas fa-mars-stroke-v"></i> Aura</span></div>
     </footer>
 </form>

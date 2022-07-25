@@ -1,7 +1,7 @@
 <form class="{{cssClass}}" autocomplete="off">
     <header class="sheet-header">
         <img src="{{item.img}}" data-edit="img" title="{{item.name}}" height="64" width="64"/>
-        <h1><input name="name" type="text" value="{{item.name}}" placeholder="Nom du verset"/></h1>
+        <h1 class="occulte"><input name="name" type="text" value="{{item.name}}" placeholder="Nom du verset"/></h1>
     </header>
     <div class="sheet-content verset" data-item-id="{{item.id}}">
         <div class="grid-item-verset">
@@ -53,12 +53,12 @@
                 </div>
             </div>
             <div class="verset-desc">
-                <div class="titre-desc">Effet du verset</div> 
+                <div class="titre-desc occulte">Effet du verset</div> 
                 {{editor content=data.data.description target="data.description" button=true owner=true editable=true}}
             </div>
         </div>
     </div>
-    <footer class="sheet-footer">
+    <footer class="sheet-footer occulte">
         <div><i class="fas fa-book-open"></i> Verset</span></div>
     </footer>
 </form>

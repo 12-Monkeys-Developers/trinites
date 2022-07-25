@@ -79,7 +79,12 @@ export default class TrinitesActorSheet extends ActorSheet {
 
                 // Jet - Verset
                 //html.find('.roll-verset').click(this._onJetVerset.bind(this));
+
+                // Jet - Aura
+                //html.find('.roll-aura').click(this._onJetAura.bind(this));
                 
+                // Jet - Atout
+                html.find('.roll-atout').click(this._onJetAtout.bind(this));
             }
         }
     }
@@ -190,4 +195,12 @@ export default class TrinitesActorSheet extends ActorSheet {
             ressource: dataset.ressource
         });
     }
+
+    _onJetAtout(event) {
+        event.preventDefault();
+        const dataset = event.currentTarget.dataset;
+
+        //Chat
+    }
+
 }

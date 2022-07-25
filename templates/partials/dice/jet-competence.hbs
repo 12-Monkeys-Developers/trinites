@@ -28,12 +28,12 @@
             {{/if}}
         {{/if}}
         {{#if (eq stats.resultArchonte.dieResult 1)}}
-            <div class="dice-total echec-crit-shadow">{{stats.resultArchonte.rollTotal}}</div>
+            <div class="dice-total echec-crit">{{stats.resultArchonte.rollTotal}}</div>
         {{else}}    
             {{#if stats.resultArchonte.reussite}}
-                <div class="dice-total succes-shadow">{{stats.resultArchonte.rollTotal}}</div>
+                <div class="dice-total succes">{{stats.resultArchonte.rollTotal}}</div>
             {{else}}
-                <div class="dice-total echec-shadow">{{stats.resultArchonte.rollTotal}}</div>
+                <div class="dice-total echec">{{stats.resultArchonte.rollTotal}}</div>
             {{/if}}
         {{/if}}
     </div>

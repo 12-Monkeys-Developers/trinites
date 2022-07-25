@@ -1,7 +1,7 @@
 <form class="{{cssClass}}" autocomplete="off">
     <header class="sheet-header">
         <img src="{{item.img}}" data-edit="img" title="{{item.name}}" height="64" width="64"/>
-        <h1><input name="name" type="text" value="{{item.name}}" placeholder="Nom de l'atout"/></h1>
+        <h1 class="occulte"><input name="name" type="text" value="{{item.name}}" placeholder="Nom de l'atout"/></h1>
     </header>
     <div class="sheet-content atout" data-item-id="{{item.id}}">
         <div class="grid-item-atout">
@@ -22,10 +22,10 @@
                 {{/select}} 
             </select>
         </div>
-        <div class="titre-desc">Effet de l'atout</div> 
+        <div class="titre-desc occulte">Effet de l'atout</div> 
         {{editor content=data.data.description target="data.description" button=true owner=true editable=true}}
     </div>
-    <footer class="sheet-footer">
+    <footer class="sheet-footer occulte">
         <div><i class="fas fa-khanda"></i> Atout</span></div>
     </footer>
 </form>

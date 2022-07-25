@@ -1,40 +1,8 @@
-:root {
-  --color-titre-trinite: #1f546f;
-  --color-shadow-trinite: #2387b9;
-  --color-actor-header: white;
-}
 .window-app .window-content {
   background: url("../images/parchemin-grey.jpg") repeat;
 }
-.small-size {
-  flex: 0 1 3.5em;
-  padding: 3px;
-  text-align: center;
-}
-.middle-size {
-  flex: 0 1 5em;
-  padding: 3px;
-  text-align: center;
-}
-.auto-size {
-  flex: 1 1 auto;
-  padding: 3px;
-}
 .actor-infos-line {
   display: flex;
-}
-.centrer {
-  display: flex;
-  justify-content: center;
-  margin: 3px;
-}
-.deux-col-50-50 {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-}
-.deux-col-66-33 {
-  display: grid;
-  grid-template-columns: 2fr 1fr;
 }
 .sheet-tabs.tabs a {
   color: var(--color-titre-trinite);
@@ -69,6 +37,9 @@
 .trinites.sheet.actor .sheet-header label {
   padding: 7px 0;
 }
+.trinites.sheet.actor .sheet-header h1 {
+  font-family: 'Cabaletta';
+}
 .trinites.sheet.actor .sheet-header input {
   color: var(--color-actor-header);
 }
@@ -78,8 +49,14 @@
 .trinites.sheet.actor .window-content {
   background: url("../images/parchemin-grey.jpg") repeat;
 }
-.trinites.sheet.actor .window-content h3 {
+.trinites.sheet.actor .window-content .tab.profane h3 {
   color: var(--color-titre-trinite);
+  font-weight: bold;
+  margin-left: 3px;
+}
+.trinites.sheet.actor .window-content .tab.occulte h3 {
+  font-family: "Cabaletta";
+  color: var(--color-titre-occulte);
   font-weight: bold;
   margin-left: 3px;
 }
@@ -335,10 +312,16 @@
   grid-column: 1 / 4;
 }
 .trinites.sheet.actor .ress-grid .col-titre {
-  grid-column: 4 / 7;
   font-size: 0.9em;
   display: flex;
   justify-content: center;
+  text-decoration: underline;
+}
+.trinites.sheet.actor .ress-grid .col-titre.diminution {
+  grid-column: 4 / 7;
+}
+.trinites.sheet.actor .ress-grid .col-titre.duree {
+  grid-column: 7 / 8;
 }
 .trinites.sheet.actor .ress-grid .colRess-dice {
   grid-column: 1 / 2;
@@ -392,7 +375,7 @@
 }
 .trinites.sheet.actor .ligne-theme label {
   margin: 2px;
-  font-size: 0.9em;
+  font-family: "Cabaletta";
 }
 .trinites.sheet.actor .ligne-theme select {
   margin: 2px;
@@ -413,7 +396,7 @@
 }
 .trinites.sheet.actor .grid-theme .lig-titre {
   grid-row: 1 / 2;
-  font-size: 0.9em;
+  font-family: "Cabaletta";
 }
 .trinites.sheet.actor .grid-theme .lig-theme-1 {
   grid-row: 2 / 3;
@@ -438,7 +421,7 @@
   font-size: 0.9em;
 }
 .trinites.sheet.actor .vie-ante textarea {
-  font-family: 'Signifika', sans-serif;
+  font-family: "Cabaletta";
   margin: 2px;
   height: 111px;
   resize: none;
@@ -447,8 +430,8 @@
   display: grid;
   grid-template-columns: 1fr 3.5em 1em 1fr 3.5em;
   margin: 5px;
-  font-size: 0.9em;
   align-items: center;
+  font-family: "Cabaletta";
 }
 .trinites.sheet.actor .experience input {
   text-align: center;
@@ -456,7 +439,6 @@
 .trinites.sheet.actor .stats-trinite {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  font-size: 0.9em;
 }
 .trinites.sheet.actor .stats-trinite .logo-karma {
   display: flex;
@@ -473,6 +455,7 @@
 .trinites.sheet.actor .stats-trinite .archonte .grid-stats {
   display: grid;
   grid-template-columns: 1em 1fr 2fr 1em;
+  font-size: 0.9em;
   align-items: center;
 }
 .trinites.sheet.actor .stats-trinite .deva .grid-stats .colStats-titre,
@@ -513,6 +496,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  font-size: 0.9em;
 }
 .trinites.sheet.actor .stats-trinite .adam .karma label {
   margin: 2px;
@@ -528,7 +512,6 @@
 .trinites.sheet.actor .grid-grand-livre {
   display: grid;
   grid-template-columns: 1fr 1em 1fr;
-  font-size: 0.9em;
   margin: 3px;
 }
 .trinites.sheet.actor .grid-grand-livre div {
@@ -537,9 +520,11 @@
 .trinites.sheet.actor .grid-grand-livre .titre-grand-livre {
   display: flex;
   justify-content: center;
+  font-family: "Cabaletta";
 }
 .trinites.sheet.actor .grid-grand-livre .grid-verset {
   display: grid;
+  font-size: 0.9em;
   grid-template-columns: 2em 1fr 2em 2em;
   align-items: center;
 }
@@ -567,7 +552,6 @@
 .trinites.sheet.actor .grid-zodiaque {
   display: grid;
   grid-template-columns: 2em 1fr repeat(5, 3.5em) 2em 2em;
-  font-size: 0.9em;
   margin: 3px;
 }
 .trinites.sheet.actor .grid-zodiaque .col-titre {
@@ -579,16 +563,28 @@
 .trinites.sheet.actor .grid-zodiaque .nom-aura {
   margin: 3px;
 }
+.trinites.sheet.actor .grid-zodiaque .titre {
+  font-family: "Cabaletta";
+}
+.trinites.sheet.actor .grid-zodiaque .ligne {
+  font-size: 0.9em;
+}
 .trinites.sheet.actor .lame-soeur {
   display: flex;
   flex-direction: column;
 }
 .trinites.sheet.actor .grid-lame {
   display: grid;
-  grid-template-columns: 1fr 2fr 2em 4em;
-  font-size: 0.9em;
+  grid-template-columns: 1fr 2fr 2em 4.5em;
   margin: 3px;
   align-items: center;
+}
+.trinites.sheet.actor .grid-lame label {
+  font-family: "Cabaletta";
+  margin: 2px;
+}
+.trinites.sheet.actor .grid-lame i {
+  font-size: 0.9em;
 }
 .trinites.sheet.actor .grid-lame select,
 .trinites.sheet.actor .grid-lame a {
@@ -599,13 +595,13 @@
   font-size: 0.9em;
 }
 .trinites.sheet.actor .desc-lame textarea {
-  font-family: 'Signifika', sans-serif;
+  font-family: "Cabaletta";
   margin: 2px;
   height: 30px;
   resize: none;
 }
 .trinites.sheet.actor .titre-atout {
-  font-size: 0.9em;
+  font-family: "Cabaletta";
 }
 .trinites.sheet.actor .grid-atout {
   display: grid;
@@ -642,6 +638,9 @@
 .trinites.sheet.item .sheet-header img {
   border: none;
 }
+.trinites.sheet.item .sheet-header h1.occulte {
+  font-family: "Cabaletta";
+}
 .trinites.sheet.item .sheet-content.aura .grid-item-aura {
   display: grid;
   grid-template-columns: 1fr 2fr 1fr 2fr;
@@ -652,6 +651,9 @@
 .trinites.sheet.item .sheet-content.aura .grid-item-aura input,
 .trinites.sheet.item .sheet-content.aura .grid-item-aura select {
   margin: 2px;
+}
+.trinites.sheet.item .sheet-content.aura .grid-item-aura label {
+  font-family: "Cabaletta";
 }
 .trinites.sheet.item .sheet-content.aura .zone-aura {
   display: grid;
@@ -674,6 +676,9 @@
 .trinites.sheet.item .sheet-content.atout .grid-item-atout select {
   margin: 2px;
 }
+.trinites.sheet.item .sheet-content.atout .grid-item-atout label {
+  font-family: "Cabaletta";
+}
 .trinites.sheet.item .sheet-content.atout .editor {
   height: 220px;
 }
@@ -692,11 +697,15 @@
 .trinites.sheet.item .sheet-content.verset .grid-item-verset select {
   margin: 2px;
 }
+.trinites.sheet.item .sheet-content.verset .grid-item-verset label {
+  font-family: "Cabaletta";
+}
 .trinites.sheet.item .sheet-content.verset .grid-item-verset .col-sentence {
   grid-column: 1 / 7;
 }
 .trinites.sheet.item .sheet-content.verset .grid-item-verset .col-sentence textarea {
-  font-family: 'Signifika', sans-serif;
+  font-family: "Cabaletta";
+  font-style: italic;
   margin: 2px;
   height: 60px;
   resize: none;
@@ -720,6 +729,9 @@
 .trinites.sheet.item .sheet-content.verset .grid-data-desc input {
   margin: 2px;
 }
+.trinites.sheet.item .sheet-content.verset .grid-data-desc label {
+  font-family: "Cabaletta";
+}
 .trinites.sheet.item .sheet-footer {
   border-top: solid thin #42637e;
   padding: 3px;
@@ -727,15 +739,20 @@
   font-weight: bold;
   font-size: 1.2em;
 }
+.trinites.sheet.item .sheet-footer.occulte {
+  border-top: solid thin #7e6942;
+  font-family: "Cabaletta";
+  color: var(--color-titre-occulte);
+}
 .trinites.sheet.item .titre-desc {
   color: var(--color-titre-trinite);
   font-weight: bold;
   margin: 2px;
+  font-size: 1.1em;
 }
-:root {
-  --color-text-message: white;
-  --color-text-chat: white;
-  --color-back-warning: #aa512c;
+.trinites.sheet.item .titre-desc.occulte {
+  font-family: "Cabaletta";
+  color: var(--color-titre-occulte);
 }
 #chat-form textarea {
   background-image: url("../images/header-back.jpg");
@@ -812,16 +829,14 @@
 }
 .titre-esprit {
   margin: 3px;
-  font-weight: bold;
   font-size: 1.5em;
+  font-family: "Cabaletta";
 }
 .titre-esprit.deva {
   color: white;
-  -webkit-text-stroke: 1px black;
 }
 .titre-esprit.archonte {
   color: black;
-  -webkit-text-stroke: 0.35px white;
 }
 .titre-cout-ress {
   margin: 3px;
@@ -874,23 +889,11 @@
 .succes {
   color: #178617;
 }
-.succes-shadow {
-  color: #178617;
-  text-shadow: #8b8a8a 1px 0 10px;
-}
 .echec {
   color: black;
 }
-.echec-shadow {
-  color: black;
-  text-shadow: #8b8a8a 1px 0 10px;
-}
 .echec-crit {
   color: red;
-}
-.echec-crit-shadow {
-  color: red;
-  text-shadow: #8b8a8a 1px 0 10px;
 }
 .btn-dette {
   margin: 2px;
@@ -954,4 +957,52 @@
 .dialog-content .grid-data input[type="number"] {
   width: 3em;
   text-align: center;
+}
+:root {
+  --color-titre-trinite: #1f546f;
+  --color-titre-occulte: #aa512c;
+  --color-shadow-trinite: #2387b9;
+  --color-actor-header: white;
+  --color-text-message: white;
+  --color-text-chat: white;
+  --color-back-warning: #aa512c;
+  --color-atout-sinople: #149414;
+  --color-atout-azur: #0024a3;
+  --color-atout-sable: black;
+  --color-atout-gueules: #b90c0c;
+}
+@font-face {
+  font-family: "Cabaletta";
+  src: url("../fonts/CABALETT.TTF") format("truetype");
+}
+@font-face {
+  font-family: "AvenirLTStd-Heavy";
+  src: url("../AvenirLTStd-Heavy.ttf") format("truetype");
+}
+.small-size {
+  flex: 0 1 3.5em;
+  padding: 3px;
+  text-align: center;
+}
+.middle-size {
+  flex: 0 1 5em;
+  padding: 3px;
+  text-align: center;
+}
+.auto-size {
+  flex: 1 1 auto;
+  padding: 3px;
+}
+.centrer {
+  display: flex;
+  justify-content: center;
+  margin: 3px;
+}
+.deux-col-50-50 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+.deux-col-66-33 {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
 }

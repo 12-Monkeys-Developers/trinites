@@ -1,48 +1,9 @@
-:root {
-    --color-titre-trinite: #1f546f;
-    --color-shadow-trinite: #2387b9;
-    --color-actor-header: white;
-}
-
 .window-app .window-content {
     background: url("../images/parchemin-grey.jpg") repeat;
 }
 
-.small-size {
-    flex: 0 1 3.5em;
-    padding: 3px;
-    text-align: center;
-}
-
-.middle-size {
-    flex: 0 1 5em;
-    padding: 3px;
-    text-align: center;
-}
-
-.auto-size {
-    flex: 1 1 auto;
-    padding: 3px;
-}
-
 .actor-infos-line {
     display: flex;
-}
-
-.centrer {
-    display: flex;
-    justify-content: center;
-    margin: 3px;
-}
-
-.deux-col-50-50 {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-}
-
-.deux-col-66-33 {
-    display: grid;
-    grid-template-columns: 2fr 1fr;
 }
 
 .sheet-tabs.tabs a {
@@ -77,6 +38,10 @@
             padding: 7px 0;
         }
 
+        h1 {
+            font-family: 'Cabaletta';
+        }
+
         background-image: url("../images/header-back.jpg");        
         background-position: 0% 10%;
 
@@ -95,8 +60,16 @@
     .window-content {
         background: url("../images/parchemin-grey.jpg") repeat;
         
-        h3 {
+        .tab.profane h3 {
+            //font-family: "AvenirLTStd-Heavy";
             color: var(--color-titre-trinite);
+            font-weight: bold;
+            margin-left: 3px;
+        }
+
+        .tab.occulte h3 {
+            font-family: "Cabaletta";
+            color: var(--color-titre-occulte);;
             font-weight: bold;
             margin-left: 3px;
         }
@@ -401,10 +374,18 @@
         }
 
         .col-titre {
-            grid-column: 4 / 7;
             font-size: 0.9em;
             display: flex;
             justify-content: center;
+            text-decoration: underline;
+        }
+
+        .col-titre.diminution {
+            grid-column: 4 / 7;
+        }
+
+        .col-titre.duree {
+            grid-column: 7 / 8;
         }
 
         .colRess-dice {
@@ -470,7 +451,8 @@
 
         label {
             margin: 2px;
-            font-size: 0.9em;
+            //font-size: 0.9em;
+            font-family: "Cabaletta";
         }
         
         select {
@@ -496,7 +478,7 @@
 
         .lig-titre {
             grid-row: 1 / 2;
-            font-size: 0.9em;
+            font-family: "Cabaletta";
         }
 
         .lig-theme-1 {
@@ -528,7 +510,7 @@
         font-size: 0.9em;
 
         textarea {
-            font-family: 'Signifika', sans-serif;
+            font-family: "Cabaletta";
             margin: 2px;
             height: 111px;
             resize: none;
@@ -539,8 +521,8 @@
         display: grid;
         grid-template-columns: 1fr 3.5em 1em 1fr 3.5em;
         margin: 5px;
-        font-size: 0.9em;
         align-items: center;
+        font-family: "Cabaletta";
 
         input {
             text-align: center;
@@ -550,7 +532,6 @@
     .stats-trinite {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
-        font-size: 0.9em;
 
         .logo-karma {
             display: flex;
@@ -569,6 +550,7 @@
             .grid-stats {
                 display: grid;
                 grid-template-columns: 1em 1fr 2fr 1em;
+                font-size: 0.9em;
                 align-items: center;
 
                 .colStats-titre {
@@ -613,6 +595,7 @@
                 display: flex;
                 justify-content: center;
                 align-items: center;
+                font-size: 0.9em;
                 
                 label {
                     margin: 2px;
@@ -634,7 +617,6 @@
     .grid-grand-livre {
         display: grid;
         grid-template-columns: 1fr 1em 1fr;
-        font-size: 0.9em;
         margin: 3px;
 
         div {
@@ -644,10 +626,12 @@
         .titre-grand-livre {
             display: flex;
             justify-content: center;
+            font-family: "Cabaletta";
         }
 
         .grid-verset {
             display: grid;
+            font-size: 0.9em;
             grid-template-columns: 2em 1fr 2em 2em;
             align-items: center;
         }
@@ -682,7 +666,6 @@
     .grid-zodiaque {
         display: grid;
         grid-template-columns: 2em 1fr repeat(5, 3.5em) 2em 2em;
-        font-size: 0.9em;
         margin: 3px;
 
         .col-titre {
@@ -696,6 +679,14 @@
         .nom-aura {
             margin: 3px;
         }
+
+        .titre {
+            font-family: "Cabaletta";
+        }
+
+        .ligne {
+            font-size: 0.9em;
+        }
     }
 
     .lame-soeur {
@@ -705,10 +696,18 @@
 
     .grid-lame {
         display: grid;
-        grid-template-columns: 1fr 2fr 2em 4em;
-        font-size: 0.9em;
+        grid-template-columns: 1fr 2fr 2em 4.5em;
         margin: 3px;
         align-items: center;
+
+        label {
+            font-family: "Cabaletta";
+            margin: 2px;
+        }
+
+        i {
+            font-size: 0.9em;
+        }
 
         select, a {
             margin: 2px;
@@ -720,7 +719,7 @@
         font-size: 0.9em;
 
         textarea {
-            font-family: 'Signifika', sans-serif;
+            font-family: "Cabaletta";
             margin: 2px;
             height: 30px;
             resize: none;
@@ -728,7 +727,7 @@
     }
 
     .titre-atout {
-        font-size: 0.9em;
+        font-family: "Cabaletta";
     }
 
     .grid-atout {

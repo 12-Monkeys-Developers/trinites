@@ -77,3 +77,30 @@ Trinites.couleurs = {
     sable : "Sable",
     sinople: "Sinople"
 }
+
+Trinites.dettes = {
+    1: {
+        diminution: 1,
+        duree: "1 mois"
+    },
+    2: {
+        diminution: 1,
+        duree: "3 mois"
+    },
+    3: {
+        diminution: 2,
+        duree: "6 mois"
+    },
+    4: {
+        diminution: 2,
+        duree: "1 an"
+    },
+    5: {
+        diminution: 3,
+        duree: "10 ans"
+    },
+    6: {
+        diminution: 3,
+        duree: "20 ans"
+    }
+}

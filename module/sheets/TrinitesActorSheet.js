@@ -187,7 +187,7 @@ export default class TrinitesActorSheet extends ActorSheet {
 
         Dice.jetRessource({
             actor: this.actor,
-            signe: dataset.ressource
+            ressource: dataset.ressource
         });
     }
 }

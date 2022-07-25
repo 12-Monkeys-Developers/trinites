@@ -65,20 +65,20 @@ export async function jetCompetence({actor = null,
         let rollResult = await new Roll(rollFormula, rollData).roll({async: true});
         
         let resultDeva = {
-            //rollFormula: rollResult.terms[0].rolls[0].formula,
             dieResult: rollResult.terms[0].rolls[0].dice[0].total,
-            ///rollResult: rollResult.terms[0].rolls[0].result,
             rollTotal: rollResult.terms[0].rolls[0].total,
             reussite: rollResult.terms[0].rolls[0].total >= 12
+            //rollFormula: rollResult.terms[0].rolls[0].formula
+            //rollResult: rollResult.terms[0].rolls[0].result
         }
         rollData.resultDeva = resultDeva;
 
         let resultArchonte = {
-            //rollFormula: rollResult.terms[0].rolls[1].formula,
             dieResult: rollResult.terms[0].rolls[1].dice[0].total,
-            //rollResult: rollResult.terms[0].rolls[1].result,
             rollTotal: rollResult.terms[0].rolls[1].total,
             reussite: rollResult.terms[0].rolls[1].total >= 12
+            //rollFormula: rollResult.terms[0].rolls[1].formula
+            //rollResult: rollResult.terms[0].rolls[1].result
         }
         rollData.resultArchonte = resultArchonte;
         
@@ -114,58 +114,229 @@ export async function jetCompetence({actor = null,
         }
     }
 
-// Fonction de contsruction de la boite de dialogue de jet de compétence
-async function getJetCompetenceOptions({cfgData = null}) {
-    // Recupération du template
-    const template = "systems/trinites/templates/partials/dice/dialog-jet-competence.hbs";
-    const html = await renderTemplate(template, {data: cfgData});
+    // Fonction de construction de la boite de dialogue de jet de compétence
+    async function getJetCompetenceOptions({cfgData = null}) {
+        // Recupération du template
+        const template = "systems/trinites/templates/partials/dice/dialog-jet-competence.hbs";
+        const html = await renderTemplate(template, {data: cfgData});
 
-    return new Promise( resolve => {
-        const data = {
-            title: "Jet de compétence",
-            content: html,
-            buttons: {
-                jet: { // Bouton qui lance le jet de dé
-                    icon: '<i class="fas fa-dice"></i>',
-                    label: "Jet",
-                    callback: html => resolve(_processJetCompetenceOptions(html[0].querySelector("form")))
+        return new Promise( resolve => {
+            const data = {
+                title: "Jet de compétence",
+                content: html,
+                buttons: {
+                    jet: { // Bouton qui lance le jet de dé
+                        icon: '<i class="fas fa-dice"></i>',
+                        label: "Jeter les dés",
+                        callback: html => resolve(_processJetCompetenceOptions(html[0].querySelector("form")))
+                    },
+                    annuler: { // Bouton d'annulation
+                        label: "Annuler",
+                        callback: html => resolve({annule: true})
+                    }
                 },
-                annuler: { // Bouton d'annulation
-                    label: "Annuler",
-                    callback: html => resolve({annule: true})
-                }
-            },
-            default: "jet",
-            close: () => resolve({annule: true}) // Annulation sur fermeture de la boite de dialogue
-        }
+                default: "jet",
+                close: () => resolve({annule: true}) // Annulation sur fermeture de la boite de dialogue
+            }
 
-        // Affichage de la boite de dialogue
-        new Dialog(data, null).render(true);
-    });        
-}
+            // Affichage de la boite de dialogue
+            new Dialog(data, null).render(true);
+        });        
+    }
 
     // Gestion des données renseignées dans la boite de dialogue de jet de compétence
-function _processJetCompetenceOptions(form) {
-    let sansDomaine = false;
-    if(form.sansDomaine) {
-        sansDomaine = form.sansDomaine.checked;
-    }
+    function _processJetCompetenceOptions(form) {
+        let sansDomaine = false;
+        if(form.sansDomaine) {
+            sansDomaine = form.sansDomaine.checked;
+        }
 
-    return {
-        difficulte: form.difficulte.value != 0 ? parseInt(form.difficulte.value) : "",
-        sansDomaine: sansDomaine
+        return {
+            difficulte: form.difficulte.value != 0 ? parseInt(form.difficulte.value) : "",
+            sansDomaine: sansDomaine
+        }
     }
-}
 
 export async function jetRessource({actor = null,
     ressource = null,
-    difficulte = null,
+    coutAcquisition = null,
+    domaineId = null,
     afficherDialog = true,
     envoiMessage = true} = {}) {
 
         // Récupération des données de l'acteur
         let actorData = actor.data.data;
 
-        let valeur = actorData[ressource].valeur;
-        let label = actorData[ressource].label;
+        let valeur = actorData.ressources[ressource].valeur - actorData.ressources[ressource].diminution;
+        let label = actorData.ressources[ressource].label;
+        let domaines = actor.items.filter(function (item) { return item.type == "domaine"});
+
+        // Affichage de la fenêtre de dialogue (vrai par défaut)
+        if(afficherDialog) {
+            let dialogOptions = await getJetRessourceOptions({cfgData: CONFIG.Trinites, useDomaine: ressource != "richesse", domaines: domaines});
+            
+            // On annule le jet sur les boutons 'Annuler' ou 'Fermeture'    
+            if(dialogOptions.annule) {
+                return null;
+            }
+
+            // Récupération des données de la fenêtre de dialogue pour ce jet 
+            coutAcquisition = dialogOptions.coutAcquisition;
+            domaineId = dialogOptions.domaine;
+        }
+
+        // TODO - Calcul des paramètres selon le cout d'acquisition
+        let typeTest = typeTestRessource(valeur, coutAcquisition, game.settings.get("trinites","limEndettementCampagne"));
+        console.log(typeTest);
+
+        if(typeTest.type == "anodin") {
+            ui.notifications.info("Cette acquisition est anodine. Elle ne nécessite pas de jet de dés.");
+            return;
+        }
+        else if(typeTest.type == "impossible") {
+            ui.notifications.warn("Cette acquisition est au-dessus de vos moyens. Le jet de dés n'est pas autorisé.")
+            return;
+        }
+        else if(typeTest.type == "dette impossible") {
+            ui.notifications.warn("Votre niveau de ressource ne vous permet pas de vous endetter à ce niveau. Le jet de dés n'est pas autorisé.")
+            return;
+        }
+
+        // Définition de la formule de base du jet
+        let rollFormula = "1d12x + @valeur";
+
+        // Données de base du jet
+        let rollData = {
+            ressource: label,
+            valeur: valeur
+        };
+
+        // Modificateur de difficulté du jet
+        if(coutAcquisition) {
+            rollData.coutAcquisition = coutAcquisition;
+            rollData.difficulte = 7 - coutAcquisition;
+            rollFormula += " + @difficulte";
+        }
+
+        // Domaine
+        if(domaineId) {
+            rollData.domaine = actor.items.get(domaineId);
+        }
+
+        // Dette 
+        if(typeTest.type == "dette") {
+            rollData.dette = CONFIG.Trinites.dettes[typeTest.dette];
+            console.log(rollData.dette);             
+        }
+
+        let rollResult = await new Roll(rollFormula, rollData).roll({async: true});
+
+        rollData.dieResult = rollResult.dice[0].total;
+        rollData.rollTotal = rollResult.total;
+        rollData.reussite = rollResult.total >= 12;
+
+        if(envoiMessage) {
+            // Construction du jeu de données pour alimenter le template
+            let rollStats = {
+                ...rollData
+            }
+
+            // Recupération du template
+            const messageTemplate = "systems/trinites/templates/partials/dice/jet-ressource.hbs"; 
+            let renderedRoll = await rollResult.render();
+
+            // Assignation des données au template
+            let templateContext = {
+                actorId : actor.id,
+                stats : rollStats,
+                roll: renderedRoll
+            }
+
+            // Construction du message
+            let chatData = {
+                user: game.user.id,
+                speaker: ChatMessage.getSpeaker({ actor: actor }),
+                roll: rollResult,
+                content: await renderTemplate(messageTemplate, templateContext),
+                sound: CONFIG.sounds.dice,
+                type: CONST.CHAT_MESSAGE_TYPES.ROLL
+            }
+
+            // Affichage du message
+            await ChatMessage.create(chatData);
+        }
+    }
+
+    // Fonction de construction de la boite de dialogue de jet de ressource
+    async function getJetRessourceOptions({cfgData = null, useDomaine = false, domaines = null}) {
+        // Recupération du template
+        const template = "systems/trinites/templates/partials/dice/dialog-jet-ressource.hbs";
+        const html = await renderTemplate(template, {data: cfgData, useDomaine: useDomaine, domaines: domaines});
+
+        return new Promise( resolve => {
+            const data = {
+                title: "Jet de compétence",
+                content: html,
+                buttons: {
+                    jet: { // Bouton qui lance le jet de dé
+                        icon: '<i class="fas fa-dice"></i>',
+                        label: "Jeter les dés",
+                        callback: html => resolve(_processJetRessourceOptions(html[0].querySelector("form")))
+                    },
+                    annuler: { // Bouton d'annulation
+                        label: "Annuler",
+                        callback: html => resolve({annule: true})
+                    }
+                },
+                default: "jet",
+                close: () => resolve({annule: true}) // Annulation sur fermeture de la boite de dialogue
+            }
+
+            // Affichage de la boite de dialogue
+            new Dialog(data, null).render(true);
+        });        
+    }
+
+    // Gestion des données renseignées dans la boite de dialogue de jet de ressource
+    function _processJetRessourceOptions(form) {
+        return {
+            coutAcquisition: form.coutAcquisition.value != 0 ? parseInt(form.coutAcquisition.value) : "",
+            domaine: form.domaine ? form.domaine.value : ""
+        }
+    }
+
+    function typeTestRessource(valRessource, coutAcquisition, endetteCampagne) {
+        if(coutAcquisition <= valRessource - 3) {
+            return {
+                type: "anodin",
+                dette: null
+            }
+        }
+        else if(coutAcquisition <= valRessource) {
+            return {
+                type: "normal",
+                dette: null
+            }
+        }
+        else if(coutAcquisition <= valRessource + endetteCampagne ? 6 : 3) {
+            let depassement = coutAcquisition - valRessource;
+            if(depassement > valRessource) {
+                return {
+                    type: "dette impossible",
+                    dette: null
+                }
+            }
+            else {
+                return {
+                    type: "dette",
+                    dette: depassement
+                }
+            }
+        }
+        else { 
+            return {
+                type: "impossible",
+                dette: null
+            }
+        }
     }

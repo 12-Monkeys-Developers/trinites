@@ -1,6 +1,7 @@
 :root {
     --color-text-message: white;
     --color-text-chat: white;
+    --color-back-warning: #aa512c;
 }
 
 #chat-form textarea {
@@ -26,8 +27,8 @@
     }
 }
 
-// Structure de la carte 'jet de compétence'
-.titre-jet-comp {
+// Structure des cartes 'jet de compétence', 'jet de ressource'
+.titre-jet-comp, .titre-jet-ress {
     font-weight: 500;
     font-size: 1.2em;
     color: var(--color-text-message);
@@ -62,17 +63,29 @@
     border: 1px solid var(--color-border-light-2);
     border-radius: 3px;
     box-shadow: 0 0 2px #FFF inset;
-    background: linear-gradient(to right,  #ebf8e1, #1f546f, #07131a);
+    //background: linear-gradient(to right,  #ebf8e1, #1f546f, #07131a);
+    background: linear-gradient(to right,  #ebf8e1ee, #1f546fee, #07131aee);
 
     div {
         display: flex;
         justify-content: center;
-        margin: 3px;
+        //margin: 3px;
     }
+}
+
+.grid-jet-ress {
+    display: flex;
+    flex-direction: column;
+
+    border: 1px solid var(--color-border-light-2);
+    border-radius: 3px;
+    box-shadow: 0 0 2px #FFF inset;
+    background-color: #ccc5baee;
 }
 
 // Apparence des noms Deva / Archonte
 .titre-esprit {
+    margin: 3px;
     font-weight: bold;
     font-size: 1.5em;
 }
@@ -89,6 +102,21 @@
    -webkit-text-stroke: 0.35px white;
 }
 
+.titre-cout-ress {
+    margin: 3px;
+    font-size: 1.1em;
+    padding: 3px;
+    background-color: var(--color-titre-trinite);;
+    color: white;
+
+    border: 1px solid var(--color-titre-trinite);
+    border-radius: 3px;    
+
+    i {
+        font-size: 0.9em;
+    }
+}
+
 // Apparence des dés du roll
 .roll {
     width: 40px;
@@ -96,7 +124,14 @@
     font-size: var(--font-size-16);
     font-weight: bold;
     text-align: center;
+    margin: 3px;
   }
+
+.dice-back {
+    display: flex;
+    justify-content: center;
+    margin: 3px;
+}
 
 .dice-deva {
     background: url("../images/d12deva.svg") no-repeat;
@@ -110,6 +145,12 @@
     background-size: 40px 40px;
 }
 
+.dice-ress {
+    background: url("../images/d12ressource.svg") no-repeat;
+    color: white;
+    background-size: 40px 40px;
+}
+
 // Apparence du résultat du jet
 .dice-total {
     flex: 0 0 100%;
@@ -117,6 +158,7 @@
     text-align: center;
     font-size: var(--font-size-20);
     font-weight: bold;
+    margin: 3px;
 }
 
 .succes {
@@ -158,4 +200,14 @@
         color : black;
         background-color: rgba(255, 255, 255, 0.5); 
     }
+}
+
+.dette-ress {
+    margin: 3px;    
+    padding: 3px;
+    background-color: var(--color-back-warning);;
+    color: white;
+
+    border: 1px solid var(--color-back-warning);
+    border-radius: 3px;   
 }

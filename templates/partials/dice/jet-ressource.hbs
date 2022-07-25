@@ -1,0 +1,34 @@
+<div class="jet-ress">
+    <div class="titre-jet-ress">
+        <div class="box">
+            <div class="titre"><i class="fas fa-dice"></i> {{stats.ressource}} {{stats.valeur}}</div>
+            {{#if stats.difficulte}}<div class="diff"><i class="fas fa-tachometer-alt"></i> {{#if (gt stats.difficulte 0)}}+{{/if}}{{stats.difficulte}}</div>{{/if}}
+        </div>   
+    </div>
+    <div class="grid-jet-ress">
+        <div class="titre-cout-ress">
+            {{#if stats.domaine}} 
+                <i class="fas fa-euro-sign"></i> {{stats.domaine.name}} - Coût {{stats.coutAcquisition}}
+            {{else}}
+                <i class="fas fa-euro-sign"></i> Coût d'acquisition {{stats.coutAcquisition}}
+            {{/if}}
+        </div>
+        {{#if (eq stats.dieResult 1)}}
+            <div class="dice-back"><div class="roll dice-ress echec-crit">{{stats.dieResult}}</div></div>
+        {{else}}
+            <div class="dice-back"><div class="roll dice-ress">{{stats.dieResult}}</div></div>
+        {{/if}}
+        {{#if (eq stats.dieResult 1)}}
+            <div class="dice-total echec-crit">{{stats.rollTotal}}</div>
+        {{else}}
+            {{#if stats.reussite}}
+                <div class="dice-total succes">{{stats.rollTotal}}</div>
+            {{else}}
+                <div class="dice-total echec">{{stats.rollTotal}}</div>
+            {{/if}}
+        {{/if}}
+        {{#if stats.reussite}}
+            {{#if stats.dette}}<div class="dette-ress">Votre ressource sera diminuée de {{stats.dette.diminution}} point(s) pendant {{stats.dette.duree}}</div>{{/if}}
+        {{/if}}
+    </div>
+</div>

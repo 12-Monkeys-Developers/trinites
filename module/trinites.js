@@ -11,6 +11,18 @@ async function preloadHandlebarsTemplates() {
     ];
 }
 
+function registerSystemSettings() {
+    // Suggestions des échecs ctitiques envoyées à l'EG
+    game.settings.register("trinites","limEndettementCampagne", {
+        config: true,
+        scope: "world",
+        name: "Limite d'endettement 'Campagne'",
+        hint: "Si cette option est cochée, la limite d'endettement sera celle du mode 'Campagne' (+6). Sinon, elle sera celle du mode 'Partie isolée' (+3).",
+        type: Boolean,
+        default: true
+    });
+}
+
 Hooks.once("init", function() {
     console.log("Trinités | Initialisation du système Trinités (non officiel))");
 
@@ -30,6 +42,8 @@ Hooks.once("init", function() {
 
     Items.unregisterSheet("core", ItemSheet);
     Items.registerSheet("trinites", TrinitesItemSheet, {makeDefault: true});
+
+    registerSystemSettings();
 
     preloadHandlebarsTemplates();
 

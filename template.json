@@ -61,26 +61,28 @@
                 }
             },
             "ressources": {
-                "richesse": {
-                    "label": "Richesse",
-                    "valeur": 0,
-                    "diminution": 0,
-                    "dureeDiminution": "",
-                    "epuisee": 0
-                  },
-                "reseau": {
-                    "label": "Réseau",
-                    "valeur": 0,
-                    "diminution": 0,
-                    "dureeDiminution": "",
-                    "epuisee": 0
-                },
-                "influence": {
-                    "label": "Influence",
-                    "valeur": 0,
-                    "diminution": 0,
-                    "dureeDiminution": "",
-                    "epuisee": 0
+                "ressources": {
+                    "richesse": {
+                        "label": "Richesse",
+                        "valeur": 0,
+                        "diminution": 0,
+                        "dureeDiminution": "",
+                        "epuisee": 0
+                      },
+                    "reseau": {
+                        "label": "Réseau",
+                        "valeur": 0,
+                        "diminution": 0,
+                        "dureeDiminution": "",
+                        "epuisee": 0
+                    },
+                    "influence": {
+                        "label": "Influence",
+                        "valeur": 0,
+                        "diminution": 0,
+                        "dureeDiminution": "",
+                        "epuisee": 0
+                    }
                 }
             },
             "competences": {

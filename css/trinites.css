@@ -735,6 +735,7 @@
 :root {
   --color-text-message: white;
   --color-text-chat: white;
+  --color-back-warning: #aa512c;
 }
 #chat-form textarea {
   background-image: url("../images/header-back.jpg");
@@ -761,25 +762,30 @@
   color: var(--color-text-message);
   backdrop-filter: grayscale(70%);
 }
-.titre-jet-comp {
+.titre-jet-comp,
+.titre-jet-ress {
   font-weight: 500;
   font-size: 1.2em;
   color: var(--color-text-message);
   margin: 2px;
 }
-.titre-jet-comp .box {
+.titre-jet-comp .box,
+.titre-jet-ress .box {
   display: grid;
   grid-template-columns: 4fr 1fr;
 }
-.titre-jet-comp i {
+.titre-jet-comp i,
+.titre-jet-ress i {
   font-size: 0.9em;
 }
-.titre-jet-comp .diff {
+.titre-jet-comp .diff,
+.titre-jet-ress .diff {
   display: flex;
   justify-content: right;
   align-items: center;
 }
-.titre-jet-comp .diff i {
+.titre-jet-comp .diff i,
+.titre-jet-ress .diff i {
   margin-left: 2px;
   margin-right: 2px;
 }
@@ -790,14 +796,22 @@
   border: 1px solid var(--color-border-light-2);
   border-radius: 3px;
   box-shadow: 0 0 2px #FFF inset;
-  background: linear-gradient(to right, #ebf8e1, #1f546f, #07131a);
+  background: linear-gradient(to right, #ebf8e1ee, #1f546fee, #07131aee);
 }
 .grid-jet-comp div {
   display: flex;
   justify-content: center;
-  margin: 3px;
+}
+.grid-jet-ress {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--color-border-light-2);
+  border-radius: 3px;
+  box-shadow: 0 0 2px #FFF inset;
+  background-color: #ccc5baee;
 }
 .titre-esprit {
+  margin: 3px;
   font-weight: bold;
   font-size: 1.5em;
 }
@@ -809,12 +823,30 @@
   color: black;
   -webkit-text-stroke: 0.35px white;
 }
+.titre-cout-ress {
+  margin: 3px;
+  font-size: 1.1em;
+  padding: 3px;
+  background-color: var(--color-titre-trinite);
+  color: white;
+  border: 1px solid var(--color-titre-trinite);
+  border-radius: 3px;
+}
+.titre-cout-ress i {
+  font-size: 0.9em;
+}
 .roll {
   width: 40px;
   line-height: 34px;
   font-size: var(--font-size-16);
   font-weight: bold;
   text-align: center;
+  margin: 3px;
+}
+.dice-back {
+  display: flex;
+  justify-content: center;
+  margin: 3px;
 }
 .dice-deva {
   background: url("../images/d12deva.svg") no-repeat;
@@ -826,12 +858,18 @@
   color: white;
   background-size: 40px 40px;
 }
+.dice-ress {
+  background: url("../images/d12ressource.svg") no-repeat;
+  color: white;
+  background-size: 40px 40px;
+}
 .dice-total {
   flex: 0 0 100%;
   line-height: 24px;
   text-align: center;
   font-size: var(--font-size-20);
   font-weight: bold;
+  margin: 3px;
 }
 .succes {
   color: #178617;
@@ -864,6 +902,27 @@
 .btn-dette button.dette.deva {
   color: black;
   background-color: rgba(255, 255, 255, 0.5);
+}
+.dette-ress {
+  margin: 3px;
+  padding: 3px;
+  background-color: var(--color-back-warning);
+  color: white;
+  border: 1px solid var(--color-back-warning);
+  border-radius: 3px;
+}
+.dialog-buttons button:hover,
+.dialog-buttons button:focus {
+  box-shadow: 0 0 5px var(--color-shadow-trinite);
+}
+.dialog-content input[type="text"]:focus,
+.dialog-content input[type="number"]:focus,
+.dialog-content input[type="password"]:focus,
+.dialog-content input[type="date"]:focus,
+.dialog-content input[type="time"]:focus,
+.dialog-content select:focus,
+.dialog-content textarea:focus {
+  box-shadow: 0 0 5px var(--color-shadow-trinite);
 }
 .dialog-content .titre {
   color: var(--color-titre-trinite);

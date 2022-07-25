@@ -1,0 +1,21 @@
+<form>
+    <div class="titre"><label>Coût d'acquisition de la ressource</label></div>
+    <div class="grid-data">
+        <label>Coût d'acquisition</label>
+        <div class="data"><input type="number" name="coutAcquisition" value="1" min="1"/></div>
+    </div>
+    {{#if useDomaine}}
+        <div class="titre"><label>Domaine</label></div>
+        <div class="grid-data">
+            <label>Domaine appliqué au jet</label>
+            <select name="domaine">
+                {{#select domaine}}
+                <!-- <option value="">Aucun</option> -->
+                {{#each domaines as |domaine keyDomaine|}}
+                    <option value="{{domaine.id}}">{{domaine.name}}</option>
+                {{/each}}
+                {{/select}} 
+            </select>
+        </div>
+    {{/if}}
+</form>    

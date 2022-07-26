@@ -1,4 +1,5 @@
 import * as Dice from "../dice.js";
+import * as Chat from "../chat.js";
 
 export default class TrinitesActorSheet extends ActorSheet {
 
@@ -76,15 +77,15 @@ export default class TrinitesActorSheet extends ActorSheet {
 
                 // Jet de ressources
                 html.find('.roll-ress').click(this._onJetRessource.bind(this));
-
-                // Jet - Verset
-                //html.find('.roll-verset').click(this._onJetVerset.bind(this));
-
-                // Jet - Aura
-                //html.find('.roll-aura').click(this._onJetAura.bind(this));
                 
-                // Jet - Atout
-                html.find('.roll-atout').click(this._onJetAtout.bind(this));
+                // Carte - Atout
+                html.find('.roll-atout').click(this._onCarteAtout.bind(this));
+
+                // Carte - Aura
+                html.find('.roll-aura').click(this._onCarteAura.bind(this));
+
+                // Carte - Verset
+                html.find('.roll-verset').click(this._onCarteVerset.bind(this));
             }
         }
     }
@@ -196,11 +197,33 @@ export default class TrinitesActorSheet extends ActorSheet {
         });
     }
 
-    _onJetAtout(event) {
+    _onCarteAtout(event) {
         event.preventDefault();
         const dataset = event.currentTarget.dataset;
 
-        //Chat
+        Chat.carteAtout({
+            actor: this.actor,
+            atoutId: dataset.itemId
+        })
     }
 
+    _onCarteAura(event) {
+        event.preventDefault();
+        const dataset = event.currentTarget.dataset;
+
+        Chat.carteAura({
+            actor: this.actor,
+            auraId: dataset.itemId
+        })
+    }
+
+    _onCarteVerset(event) {
+        event.preventDefault();
+        const dataset = event.currentTarget.dataset;
+
+        Chat.carteVerset({
+            actor: this.actor,
+            versetId: dataset.itemId
+        })
+    }
 }

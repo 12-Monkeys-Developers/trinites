@@ -771,6 +771,9 @@
 .chat-message textarea:focus {
   box-shadow: 0 0 5px var(--color-shadow-trinite);
 }
+.chat-message a:hover {
+  text-shadow: 0 0 8px var(--color-shadow-trinite);
+}
 .chat-message button:hover {
   box-shadow: 0 0 5px var(--color-shadow-trinite);
 }
@@ -819,14 +822,6 @@
   display: flex;
   justify-content: center;
 }
-.grid-jet-ress {
-  display: flex;
-  flex-direction: column;
-  border: 1px solid var(--color-border-light-2);
-  border-radius: 3px;
-  box-shadow: 0 0 2px #FFF inset;
-  background-color: #ccc5baee;
-}
 .titre-esprit {
   margin: 3px;
   font-size: 1.5em;
@@ -837,6 +832,14 @@
 }
 .titre-esprit.archonte {
   color: black;
+}
+.grid-jet-ress {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--color-border-light-2);
+  border-radius: 3px;
+  box-shadow: 0 0 2px #FFF inset;
+  background-color: #ccc5baee;
 }
 .titre-cout-ress {
   margin: 3px;
@@ -914,6 +917,152 @@
   border: 1px solid var(--color-back-warning);
   border-radius: 3px;
 }
+.carte {
+  border: 1px solid var(--color-border-light-2);
+  border-radius: 3px;
+  box-shadow: 0 0 2px #FFF inset;
+  background: url("../images/parchemin-grey.jpg") repeat;
+}
+.carte a:hover {
+  text-shadow: 0 0 8px var(--color-shadow-occulte);
+}
+.carte .entete {
+  display: flex;
+  justify-content: center;
+  background-color: var(--color-titre-occulte);
+  color: var(--color-text-chat-occulte);
+  border: 1px solid var(--color-titre-occulte);
+  border-radius: 3px;
+  font-family: "Cabaletta";
+  font-size: 1.5em;
+  margin: 3px;
+  padding: 3px;
+}
+.carte .desc {
+  margin: 5px;
+  color: black;
+}
+.carte .titre {
+  font-family: "Cabaletta";
+  color: var(--color-titre-occulte);
+  font-size: 1.2em;
+}
+.carte .grid-carte-atout {
+  display: grid;
+  grid-template-columns: 3em 1fr 3em;
+  margin: 3px;
+  align-items: center;
+}
+.carte .grid-carte-atout .couleur {
+  display: flex;
+  justify-content: center;
+  margin: 3px;
+}
+.carte .grid-carte-atout .couleur img {
+  border: none;
+}
+.carte .grid-carte-atout .messager {
+  display: flex;
+  justify-content: center;
+  color: var(--color-titre-occulte);
+  font-family: "Cabaletta";
+  font-size: 2em;
+  margin: 3px;
+}
+.carte .grid-carte-atout .action {
+  display: flex;
+  justify-content: center;
+  font-size: 1.5em;
+  color: var(--color-titre-occulte);
+  margin: 3px;
+  margin-top: 9px;
+}
+.carte .grid-carte-atout .titre {
+  grid-column: 1 / 4;
+  margin-top: 7px;
+  margin-left: 3px;
+  margin-right: 3px;
+}
+.carte .grid-carte-aura {
+  display: grid;
+  grid-template-columns: 3em 1fr 3em;
+  margin: 3px;
+  align-items: center;
+}
+.carte .grid-carte-aura .signe {
+  display: flex;
+  justify-content: center;
+  margin: 3px;
+}
+.carte .grid-carte-aura .signe img {
+  border: none;
+}
+.carte .grid-carte-aura .deploiement {
+  grid-column: 2 / 4;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--color-titre-occulte);
+  font-family: "Cabaletta";
+  font-size: 1.3em;
+  margin: 3px;
+}
+.carte .grid-carte-aura .deploiement .logo {
+  margin-right: 5px;
+}
+.carte .grid-carte-aura .deploiement .zone {
+  margin-left: 5px;
+}
+.carte .grid-carte-aura .action {
+  display: flex;
+  justify-content: center;
+  font-size: 1.5em;
+  color: var(--color-titre-occulte);
+  margin: 3px;
+  margin-top: 9px;
+}
+.carte .grid-carte-aura .titre {
+  grid-column: 1 / 4;
+  margin-top: 7px;
+  margin-left: 3px;
+  margin-right: 3px;
+}
+.carte .grid-carte-aura .souffle {
+  grid-column: 1 / 3;
+  margin-top: 7px;
+  margin-left: 3px;
+  margin-right: 3px;
+}
+.carte .grid-carte-verset {
+  display: grid;
+  grid-template-columns: 3em 1fr 3em;
+  margin: 3px;
+  align-items: center;
+}
+.carte .grid-carte-verset .karma {
+  display: flex;
+  justify-content: center;
+  margin: 3px;
+}
+.carte .grid-carte-verset .karma img {
+  border: none;
+}
+.carte .grid-carte-verset .favori {
+  display: flex;
+  justify-content: center;
+  color: var(--color-titre-occulte);
+  font-family: "Cabaletta";
+  font-size: 2em;
+  margin: 3px;
+}
+.carte .grid-carte-verset .action {
+  display: flex;
+  justify-content: center;
+  font-size: 1.5em;
+  color: var(--color-titre-occulte);
+  margin: 3px;
+  margin-top: 9px;
+}
 .dialog-buttons button:hover,
 .dialog-buttons button:focus {
   box-shadow: 0 0 5px var(--color-shadow-trinite);
@@ -960,11 +1109,14 @@
 }
 :root {
   --color-titre-trinite: #1f546f;
-  --color-titre-occulte: #aa512c;
   --color-shadow-trinite: #2387b9;
+  --color-titre-occulte: #aa512c;
+  --color-shadow-occulte: #d15d2b;
   --color-actor-header: white;
   --color-text-message: white;
   --color-text-chat: white;
+  --color-text-chat-occulte: #d9d4cb;
+  --color-back-chat: #ccc5baee;
   --color-back-warning: #aa512c;
   --color-atout-sinople: #149414;
   --color-atout-azur: #0024a3;

@@ -21,8 +21,16 @@
         text-shadow: 0 0 8px var(--color-shadow-trinite);
     }
 
+    a:hover.occulte {
+        text-shadow: 0 0 8px var(--color-shadow-occulte);
+    }
+
     .tabs .item.active {
         text-shadow: 0 0 10px var(--color-shadow-trinite);
+    }
+
+    .tabs .item.active.occulte {
+        text-shadow: 0 0 10px var(--color-shadow-occulte);
     }
 
     .sheet-header {
@@ -60,6 +68,15 @@
     .window-content {
         background: url("../images/parchemin-grey.jpg") repeat;
         
+        nav .profane {
+            color: var(--color-titre-trinite);
+        }
+
+        nav .occulte {
+            font-family: "Cabaletta";
+            color: var(--color-titre-occulte);
+        }
+
         .tab.profane h3 {
             //font-family: "AvenirLTStd-Heavy";
             color: var(--color-titre-trinite);

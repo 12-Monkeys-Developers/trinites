@@ -2,6 +2,7 @@ import * as Dice from "./dice.js";
 
 export function addChatListeners(html) {
     html.on('click', 'button.dette', onDetteEsprit);
+    html.on('click', 'a.activer.aura', onActiverAura);
 }
 
 function onDetteEsprit(event) {
@@ -33,6 +34,36 @@ function onDetteEsprit(event) {
     element.innerHTML = "Dette de Karma payée";
 }
 
+function onActiverAura(event) {
+    event.preventDefault();
+    const element = event.currentTarget;
+
+    if (element.classList.contains("deployee"))
+    {
+        return;
+    }
+
+    const actorId = element.closest(".carte.aura").dataset.actorId;
+    let actor = game.actors.get(actorId);
+
+    const auraId = element.closest(".carte.aura").dataset.itemId;
+    let aura = actor.items.get(auraId);
+
+    console.log();
+
+    if(aura.data.data.deploiement != "") {
+        ui.notifications.warn("Cette aura est déjà déployée !");
+        return;
+    }
+
+    aura.update({"data.deploiement": "cosme"});
+
+
+    element.title = `Vous avez déployée l'aura '${aura.data.name}'`;
+    element.classList.add("deployee");
+    element.closest(".carte.aura").getElementsByClassName("zone")[0].innerHTML = "Cosme";
+}
+
 export async function carteAtout({actor = null,
     atoutId = null} = {}) {
 
@@ -40,7 +71,8 @@ export async function carteAtout({actor = null,
 
     // Récupération des données de l'item
     let cardData = {
-        atout: atout.data
+        atout: atout.data,
+        actorId: actor.id
     }
 
     console.log(cardData);
@@ -64,9 +96,13 @@ export async function carteAura({actor = null,
 
     let aura = actor.items.get(auraId);
 
+    console.log(actor.data.data.themeAstral.affinite);
+
     // Récupération des données de l'item
     let cardData = {
-        aura: aura.data
+        aura: aura.data,
+        actorId: actor.id,
+        affinite: actor.data.data.themeAstral.affinite
     }
 
     console.log(cardData);
@@ -92,7 +128,8 @@ export async function carteVerset({actor = null,
 
     // Récupération des données de l'item
     let cardData = {
-        verset: verset.data
+        verset: verset.data,
+        actorId: actor.id
     }
 
     console.log(cardData);

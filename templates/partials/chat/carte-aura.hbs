@@ -1,4 +1,4 @@
-<div class="carte aura" data-item-id="{{aura._id}}">
+<div class="carte aura" data-item-id="{{aura._id}}" data-actor-id="{{actorId}}">
     <div class="entete">{{aura.name}}</div>
     <div class="grid-carte-aura">
         <div class="signe">
@@ -6,13 +6,25 @@
         </div>
         <div class="deploiement">
             <div class="logo"><i class="far fa-dot-circle"></i></div>
-            <div class="zone">{{configVal 'deploiement' aura.data.deploiement}}</div></div> <!-- <i class="fas fa-bullseye"></i>  -->
+            {{#if aura.data.deploiement}} 
+                <div class="zone">{{configVal 'deploiement' aura.data.deploiement}}</div>
+            {{else}}
+                <div class="zone">Non déployée</div>
+            {{/if}}            
+        </div>
         <div class="titre"><label>Effet de l'Aura</label></div>
+        {{#if aura.data.deploiement}}
+            <div class="action"><a class="activer aura deployee" title="L'aura '{{aura.name}}' est déjà déployée"><i class="fas fa-bolt"></i></a></div>
+        {{else}}
+            <div class="action"><a class="activer aura" title="Activer l'aura '{{aura.name}}'"><i class="fas fa-bolt"></i></a></div>
+        {{/if}}
     </div>
     <div class="desc">{{editor content=aura.data.description target="aura.data.description" owner=true}}</div>
+    {{#if (eq affinite "zodiaque")}}
     <div class="grid-carte-aura">
-        <div class="titre souffle"><label>Effet du Souffle</label></div>
-        <div class="action"><a class="activer aura" title="Activer le Souffle de '{{aura.name}}'"><i class="fas fa-bolt"></i></a></div>
+        <div class="titre"><label>Effet du Souffle</label></div>
+        <div class="action"><a class="activer souffle" title="Activer le Souffle de '{{aura.name}}'"><i class="fas fa-bolt"></i></a></div>
     </div>
     <div class="desc">{{editor content=aura.data.souffle target="aura.data.souffle" owner=true}}</div>
+    {{/if}}
 </div>

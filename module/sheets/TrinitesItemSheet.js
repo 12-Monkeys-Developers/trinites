@@ -2,7 +2,7 @@ export default class TrinitesItemSheet extends ItemSheet {
      
     static get defaultOptions() {
         return mergeObject(super.defaultOptions, {
-            width: 550,
+            width: 650,
             height: 450,
             classes: ["trinites", "sheet", "item"],
             //tabs: [{ navSelector: ".sheet-tabs", contentSelector: ".sheet-body", initial: "description" }]

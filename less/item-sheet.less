@@ -95,6 +95,10 @@
             margin: 2px;
         }
 
+        label {
+            font-family: "Cabaletta";
+        }
+
         .grid-item-verset {
             display: grid;
             grid-template-columns: 1fr 2fr 1fr 2fr 1fr 2fr;
@@ -103,10 +107,6 @@
 
             label, input, select {
                 margin: 2px;
-            }
-
-            label {
-                font-family: "Cabaletta";
             }
 
             .col-sentence {
@@ -128,22 +128,27 @@
 
         .grid-data-desc {
             display: grid;
-            grid-template-columns: 150px 1fr;
+            grid-template-columns: 250px 1fr;
             margin: 2px;
+            align-items: center;
 
             .grid-data-verset {
                 display: grid;
-                grid-template-columns: 1fr 2fr;
+                grid-template-columns: 1fr 2fr 1fr 2em;
                 margin: 2px;
                 align-items: center;
             }
 
             label, input {
-                margin: 2px;
+                margin: 3px;
             }
 
-            label {
-                font-family: "Cabaletta";
+            .check {
+                padding-left: 3px;
+            }
+
+            .col-mono {
+                grid-column: 1 / 5;
             }
         }
     }

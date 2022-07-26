@@ -20,8 +20,14 @@
 .trinites.sheet.actor a:hover {
   text-shadow: 0 0 8px var(--color-shadow-trinite);
 }
+.trinites.sheet.actor a:hover.occulte {
+  text-shadow: 0 0 8px var(--color-shadow-occulte);
+}
 .trinites.sheet.actor .tabs .item.active {
   text-shadow: 0 0 10px var(--color-shadow-trinite);
+}
+.trinites.sheet.actor .tabs .item.active.occulte {
+  text-shadow: 0 0 10px var(--color-shadow-occulte);
 }
 .trinites.sheet.actor .sheet-header {
   background-image: url("../images/header-back.jpg");
@@ -48,6 +54,13 @@
 }
 .trinites.sheet.actor .window-content {
   background: url("../images/parchemin-grey.jpg") repeat;
+}
+.trinites.sheet.actor .window-content nav .profane {
+  color: var(--color-titre-trinite);
+}
+.trinites.sheet.actor .window-content nav .occulte {
+  font-family: "Cabaletta";
+  color: var(--color-titre-occulte);
 }
 .trinites.sheet.actor .window-content .tab.profane h3 {
   color: var(--color-titre-trinite);
@@ -686,6 +699,9 @@
   height: 140px;
   margin: 2px;
 }
+.trinites.sheet.item .sheet-content.verset label {
+  font-family: "Cabaletta";
+}
 .trinites.sheet.item .sheet-content.verset .grid-item-verset {
   display: grid;
   grid-template-columns: 1fr 2fr 1fr 2fr 1fr 2fr;
@@ -696,9 +712,6 @@
 .trinites.sheet.item .sheet-content.verset .grid-item-verset input,
 .trinites.sheet.item .sheet-content.verset .grid-item-verset select {
   margin: 2px;
-}
-.trinites.sheet.item .sheet-content.verset .grid-item-verset label {
-  font-family: "Cabaletta";
 }
 .trinites.sheet.item .sheet-content.verset .grid-item-verset .col-sentence {
   grid-column: 1 / 7;
@@ -716,21 +729,25 @@
 }
 .trinites.sheet.item .sheet-content.verset .grid-data-desc {
   display: grid;
-  grid-template-columns: 150px 1fr;
+  grid-template-columns: 250px 1fr;
   margin: 2px;
+  align-items: center;
 }
 .trinites.sheet.item .sheet-content.verset .grid-data-desc .grid-data-verset {
   display: grid;
-  grid-template-columns: 1fr 2fr;
+  grid-template-columns: 1fr 2fr 1fr 2em;
   margin: 2px;
   align-items: center;
 }
 .trinites.sheet.item .sheet-content.verset .grid-data-desc label,
 .trinites.sheet.item .sheet-content.verset .grid-data-desc input {
-  margin: 2px;
+  margin: 3px;
 }
-.trinites.sheet.item .sheet-content.verset .grid-data-desc label {
-  font-family: "Cabaletta";
+.trinites.sheet.item .sheet-content.verset .grid-data-desc .check {
+  padding-left: 3px;
+}
+.trinites.sheet.item .sheet-content.verset .grid-data-desc .col-mono {
+  grid-column: 1 / 5;
 }
 .trinites.sheet.item .sheet-footer {
   border-top: solid thin #42637e;
@@ -1021,13 +1038,10 @@
   margin: 3px;
   margin-top: 9px;
 }
-.carte .grid-carte-aura .titre {
-  grid-column: 1 / 4;
-  margin-top: 7px;
-  margin-left: 3px;
-  margin-right: 3px;
+.carte .grid-carte-aura .action .deployee {
+  color: gray;
 }
-.carte .grid-carte-aura .souffle {
+.carte .grid-carte-aura .titre {
   grid-column: 1 / 3;
   margin-top: 7px;
   margin-left: 3px;
@@ -1042,6 +1056,8 @@
 .carte .grid-carte-verset .karma {
   display: flex;
   justify-content: center;
+  font-size: 1.5em;
+  color: var(--color-titre-occulte);
   margin: 3px;
 }
 .carte .grid-carte-verset .karma img {
@@ -1062,6 +1078,35 @@
   color: var(--color-titre-occulte);
   margin: 3px;
   margin-top: 9px;
+}
+.carte .grid-carte-verset .titre {
+  grid-column: 1 / 4;
+  margin-top: 7px;
+  margin-left: 3px;
+  margin-right: 3px;
+}
+.carte .grid-carte-verset .sentence {
+  grid-column: 1 / 4;
+  margin: 5px 3px;
+  font-family: "Cabaletta";
+  color: black;
+  text-align: justify;
+  font-style: italic;
+}
+.carte .grid-stats-verset {
+  display: grid;
+  grid-template-columns: 2em 1fr;
+  margin: 3px;
+  align-items: center;
+}
+.carte .grid-stats-verset .logo {
+  display: flex;
+  justify-content: center;
+  color: var(--color-titre-occulte);
+}
+.carte .grid-stats-verset .stats {
+  color: black;
+  font-size: 0.9em;
 }
 .dialog-buttons button:hover,
 .dialog-buttons button:focus {

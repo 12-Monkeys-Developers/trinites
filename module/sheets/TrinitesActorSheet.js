@@ -146,7 +146,18 @@ export default class TrinitesActorSheet extends ActorSheet {
         const aura = this.actor.items.get(auraId);
         let zone = element.dataset.zone;
 
-        aura.update({"data.deploiement": zone});
+        if(aura.data.data.deploiement == "") {
+            ui.notifications.warn("vous devez déployer l'aura avant de changer sa zone d'effet !");
+        }
+        else if(aura.data.data.deploiement == "cosme" && zone == "cosme") {
+            aura.update({"data.deploiement": ""});    
+        }
+        else if(zone != "cosme") {
+            // TODO - verifier autres Auras
+        }
+        else {
+            aura.update({"data.deploiement": zone});
+        }       
     }
 
     _onSupprimerItem(event) {

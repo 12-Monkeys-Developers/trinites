@@ -3,12 +3,23 @@
     <div class="grid-carte-verset">
         <div class="karma">
             <!-- <img src="systems/trinites/images/karma-{{verset.data.karma}}.png" title="{{configVal 'karmas' verset.data.karma}}"> -->
-            {{#if (eq verset.data.karma "lumiere")}}<i class="fas fa-sun"></i>{{/if}}
-            {{#if (eq verset.data.karma "tenebre")}}<i class="fas fa-moon"></i>{{/if}}
+            {{#if (eq verset.data.karma "lumiere")}}<i class="fas fa-sun" title="Karma {{verset.data.karma}}"></i>{{/if}}
+            {{#if (eq verset.data.karma "tenebre")}}<i class="fas fa-moon" title="Karma {{verset.data.karma}}"></i>{{/if}}
         </div>
         <div class="favori">{{verset.data.favori}}</div>
         <div class="action"><a class="activer verset" title="Activer le Verset '{{verset.name}}'"><i class="fas fa-bolt"></i></a></div>
+        <div class="sentence">"{{verset.data.sentence}}"</div>
     </div>
-    <div class="titre"><label>Effet du Verset</label></div>
+    <div class="grid-stats-verset">
+        <div class="logo"><i class="fas fa-clock" title="Durée"></i></div>
+        <div class="stats">{{verset.data.duree}}</div>
+        <div class="logo"><i class="fas fa-binoculars" title="Portée"></i></div>
+        <div class="stats">{{verset.data.portee}}</div>
+        <div class="logo"><i class="far fa-dot-circle" titel="Aire d'effet"></i></div>
+        <div class="stats">{{verset.data.aireEffet}}</div>
+    </div>
+    <div class="grid-carte-verset">
+        <div class="titre"><label>Effet du Verset</label></div>
+    </div>
     <div class="desc">{{editor content=verset.data.description target="verset.data.description" owner=true}}</div>
 </div>

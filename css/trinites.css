@@ -17,6 +17,18 @@
 .trinites.sheet.actor textarea:focus {
   box-shadow: 0 0 5px var(--color-shadow-trinite);
 }
+.trinites.sheet.actor .tab.occulte input[type="text"]:focus,
+.trinites.sheet.actor .tab.occulte input[type="number"]:focus,
+.trinites.sheet.actor .tab.occulte input[type="password"]:focus,
+.trinites.sheet.actor .tab.occulte input[type="date"]:focus,
+.trinites.sheet.actor .tab.occulte input[type="time"]:focus,
+.trinites.sheet.actor .tab.occulte select:focus,
+.trinites.sheet.actor .tab.occulte textarea:focus {
+  box-shadow: 0 0 5px var(--color-shadow-occulte);
+}
+.trinites.sheet.actor .tab.occulte a:hover {
+  text-shadow: 0 0 8px var(--color-shadow-occulte);
+}
 .trinites.sheet.actor a:hover {
   text-shadow: 0 0 8px var(--color-shadow-trinite);
 }

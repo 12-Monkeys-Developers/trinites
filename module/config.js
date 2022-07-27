@@ -62,7 +62,7 @@ Trinites.etatSante = {
 }
 
 Trinites.deploiement = {
-    aucun: "",
+    aucun: "Non déployée",
     cosme: "Cosme",
     corps: "Corps",
     main: "Main",

@@ -3,6 +3,7 @@ import * as Dice from "./dice.js";
 export function addChatListeners(html) {
     html.on('click', 'button.dette', onDetteEsprit);
     html.on('click', 'a.activer.aura', onActiverAura);
+    html.on('click', 'a.activer.souffle', onActiverSouffle);
 }
 
 function onDetteEsprit(event) {
@@ -32,16 +33,16 @@ function onDetteEsprit(event) {
 
     element.classList.add("used");
     element.innerHTML = "Dette de Karma payée";
+
+    element.closest(".jet-comp").getElementsByClassName("carte")[0].classList.remove("hidden");
 }
 
 function onActiverAura(event) {
     event.preventDefault();
     const element = event.currentTarget;
 
-    if (element.classList.contains("deployee"))
-    {
-        return;
-    }
+    // Aura déjà déployée
+    if (element.classList.contains("deployee")) { return; }
 
     const actorId = element.closest(".carte.aura").dataset.actorId;
     let actor = game.actors.get(actorId);
@@ -49,8 +50,7 @@ function onActiverAura(event) {
     const auraId = element.closest(".carte.aura").dataset.itemId;
     let aura = actor.items.get(auraId);
 
-    console.log();
-
+    // Aura déjà déployée - test par sécurité
     if(aura.data.data.deploiement != "") {
         ui.notifications.warn("Cette aura est déjà déployée !");
         return;
@@ -58,11 +58,50 @@ function onActiverAura(event) {
 
     aura.update({"data.deploiement": "cosme"});
 
-
+    // MAJ de la carte
     element.title = `Vous avez déployée l'aura '${aura.data.name}'`;
     element.classList.add("deployee");
     element.closest(".carte.aura").getElementsByClassName("zone")[0].innerHTML = "Cosme";
 }
+
+function onActiverSouffle(event) {
+    event.preventDefault();
+    const element = event.currentTarget;
+
+    // Aura déjà déployée
+    if (element.classList.contains("cosme")) { return; }
+
+    const actorId = element.closest(".carte.aura").dataset.actorId;
+    let actor = game.actors.get(actorId);
+
+    const auraId = element.closest(".carte.aura").dataset.itemId;
+    let aura = actor.items.get(auraId);
+
+    if(aura.data.data.deploiement == "" || aura.data.data.deploiement == "cosme") {
+        ui.notifications.warn("Le Souffle a déjà été déclenché !");
+        return;
+    }
+
+    Dice.jetCompetence({
+        actor: actor,
+        type: "souffle",
+        aura: aura.data,
+        signe: "vierge",
+        competence: "emprise",
+        afficherDialog: false
+    });
+
+    aura.update({"data.deploiement": "cosme"});
+
+    element.title = `Le Souffle est sans effet à cette portée d'aura`;
+    element.classList.add("cosme");
+    element.closest(".carte.aura").getElementsByClassName("zone")[0].innerHTML = "Cosme";
+}
+
+
+/*------------------------------------
+---- Affichage des cartes de chat ----
+------------------------------------*/
 
 export async function carteAtout({actor = null,
     atoutId = null} = {}) {

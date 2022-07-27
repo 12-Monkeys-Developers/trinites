@@ -23,7 +23,15 @@
     {{#if (eq affinite "zodiaque")}}
     <div class="grid-carte-aura">
         <div class="titre"><label>Effet du Souffle</label></div>
-        <div class="action"><a class="activer souffle" title="Activer le Souffle de '{{aura.name}}'"><i class="fas fa-bolt"></i></a></div>
+        {{#unless aura.data.deploiement}}
+            <div class="action"><a class="activer souffle cosme" title="Le Souffle est sans effet à cette portée d'aura"><i class="fas fa-bolt"></i></a></div>
+        {{else}}
+            {{#if (eq aura.data.deploiement "cosme")}}
+                <div class="action"><a class="activer souffle cosme" title="Le Souffle est sans effet à cette portée d'aura"><i class="fas fa-bolt"></i></a></div>
+            {{else}}
+                <div class="action"><a class="activer souffle" title="Activer le Souffle de '{{aura.name}}'"><i class="fas fa-bolt"></i></a></div>
+            {{/if}}
+        {{/unless}}
     </div>
     <div class="desc">{{editor content=aura.data.souffle target="aura.data.souffle" owner=true}}</div>
     {{/if}}

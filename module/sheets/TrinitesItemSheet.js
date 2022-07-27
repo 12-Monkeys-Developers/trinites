@@ -49,6 +49,31 @@ export default class TrinitesItemSheet extends ItemSheet {
         const aura = this.actor.items.get(auraId);
         let zone = element.dataset.zone;
 
-        aura.update({"data.deploiement": zone});
+        if(aura.data.data.deploiement == "") {
+            ui.notifications.warn("Vous devez déployer l'aura avant de changer sa zone d'effet !");
+            return;
+        }
+        
+        let auraActive = false;
+        if(zone != "cosme") {
+            let auras = this.actor.items.filter(function (item) { return item.type == "aura" && item.id != auraId});            
+            auraActive = auras.some(autreAura => {
+                if(autreAura.data.data.deploiement != "" && autreAura.data.data.deploiement != "cosme") {
+                    return true;
+                }
+            });
+        }
+
+        if(auraActive) {
+            ui.notifications.warn("Vous avez une autre aura déployée au delà du Cosme !");
+            return;
+        }
+
+        if(aura.data.data.deploiement == "cosme" && zone == "cosme") {
+            aura.update({"data.deploiement": ""});    
+        }
+        else {
+            aura.update({"data.deploiement": zone});
+        }    
     }
 }

@@ -791,7 +791,8 @@
 .chat-message a:hover {
   text-shadow: 0 0 8px var(--color-shadow-trinite);
 }
-.chat-message button:hover {
+.chat-message button:hover,
+.chat-message button:focus {
   box-shadow: 0 0 5px var(--color-shadow-trinite);
 }
 .chat-message .message-header,
@@ -934,6 +935,9 @@
   border: 1px solid var(--color-back-warning);
   border-radius: 3px;
 }
+.carte.hidden {
+  display: none;
+}
 .carte {
   border: 1px solid var(--color-border-light-2);
   border-radius: 3px;
@@ -964,6 +968,21 @@
   color: var(--color-titre-occulte);
   font-size: 1.2em;
 }
+.carte summary {
+  font-family: "Cabaletta";
+  color: var(--color-titre-occulte);
+  font-size: 1.2em;
+  margin: 3px;
+  margin-top: 7px;
+}
+.carte .action {
+  display: flex;
+  justify-content: center;
+  font-size: 1.5em;
+  color: var(--color-titre-occulte);
+  margin: 3px;
+  margin-top: 9px;
+}
 .carte .grid-carte-atout {
   display: grid;
   grid-template-columns: 3em 1fr 3em;
@@ -985,14 +1004,6 @@
   font-family: "Cabaletta";
   font-size: 2em;
   margin: 3px;
-}
-.carte .grid-carte-atout .action {
-  display: flex;
-  justify-content: center;
-  font-size: 1.5em;
-  color: var(--color-titre-occulte);
-  margin: 3px;
-  margin-top: 9px;
 }
 .carte .grid-carte-atout .titre {
   grid-column: 1 / 4;
@@ -1030,15 +1041,8 @@
 .carte .grid-carte-aura .deploiement .zone {
   margin-left: 5px;
 }
-.carte .grid-carte-aura .action {
-  display: flex;
-  justify-content: center;
-  font-size: 1.5em;
-  color: var(--color-titre-occulte);
-  margin: 3px;
-  margin-top: 9px;
-}
-.carte .grid-carte-aura .action .deployee {
+.carte .grid-carte-aura .action .deployee,
+.carte .grid-carte-aura .action .cosme {
   color: gray;
 }
 .carte .grid-carte-aura .titre {
@@ -1071,14 +1075,6 @@
   font-size: 2em;
   margin: 3px;
 }
-.carte .grid-carte-verset .action {
-  display: flex;
-  justify-content: center;
-  font-size: 1.5em;
-  color: var(--color-titre-occulte);
-  margin: 3px;
-  margin-top: 9px;
-}
 .carte .grid-carte-verset .titre {
   grid-column: 1 / 4;
   margin-top: 7px;
@@ -1107,6 +1103,21 @@
 .carte .grid-stats-verset .stats {
   color: black;
   font-size: 0.9em;
+}
+.carte .ligne-souffle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--color-titre-occulte);
+  font-family: "Cabaletta";
+  font-size: 1.3em;
+  margin: 6px;
+}
+.carte .ligne-souffle .logo {
+  margin-right: 5px;
+}
+.carte .ligne-souffle .zone {
+  margin-left: 5px;
 }
 .dialog-buttons button:hover,
 .dialog-buttons button:focus {

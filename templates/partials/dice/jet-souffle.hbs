@@ -1,7 +1,7 @@
 <div class="jet-comp">
     <div class="titre-jet-comp">
         <div class="box">
-            <div class="titre"><i class="fas fa-dice"></i> {{stats.competence}} {{stats.valeur}}</div> <!-- fa-check -->
+            <div class="titre"><i class="fas fa-mars-stroke-v"></i> Souffle {{stats.valeur}}</div> <!-- fa-check -->
             {{#if stats.difficulte}}<div class="diff"><i class="fas fa-tachometer-alt"></i> {{#if (gt stats.difficulte 0)}}+{{/if}}{{stats.difficulte}}</div>{{/if}}
         </div>   
     </div>
@@ -39,8 +39,34 @@
     </div>
     {{#if (eq stats.resultatJet "detteArchonte")}}
         <div class="btn-dette"><button class="dette archonte" data-actor-id="{{actorId}}" data-esprit="archonte">Dette envers l'Archonte</button></div>
+        <div class="carte hidden">
+            <div class="entete">{{stats.aura.name}}</div>
+            <div class="souffle">Le Souffle se manifeste</div>
+            <div class="souffle">
+                <div class="logo"><i class="far fa-dot-circle"></i></div>
+                <div class="zone">{{stats.deploieInit}}</div>
+            </div>    
+        </div>
     {{/if}}
     {{#if (eq stats.resultatJet "detteDeva")}}
         <div class="btn-dette"><button class="dette deva" data-actor-id="{{actorId}}" data-esprit="deva">Dette envers le Deva</button></div>
+        <div class="carte hidden">
+            <div class="entete">{{stats.aura.name}}</div>
+            <div class="souffle">Le Souffle se manifeste</div>
+            <div class="souffle">
+                <div class="logo"><i class="far fa-dot-circle"></i></div>
+                <div class="zone">{{stats.deploieInit}}</div>
+            </div>    
+        </div>
+    {{/if}}
+    {{#if (eq stats.resultatJet "reussite")}}
+        <div class="carte">
+            <div class="entete">{{stats.aura.name}}</div>
+            <div class="ligne-souffle">Le Souffle est déclenché</div>
+            <div class="ligne-souffle">
+                <div class="logo"><i class="far fa-dot-circle"></i></div>
+                <div class="zone">{{stats.deploieInit}}</div>
+            </div>    
+        </div>
     {{/if}}
 </div>

@@ -15,7 +15,7 @@
         text-shadow: 0 0 8px var(--color-shadow-trinite);
     }
 
-    button:hover {
+    button:hover, button:focus {
         box-shadow: 0 0 5px var(--color-shadow-trinite);
     }
 
@@ -109,6 +109,7 @@
     padding: 3px;
     background-color: var(--color-titre-trinite);;
     color: white;
+    
 
     border: 1px solid var(--color-titre-trinite);
     border-radius: 3px;    
@@ -200,6 +201,10 @@
     border-radius: 3px;   
 }
 
+.carte.hidden {
+    display: none;
+}
+
 .carte {
     border: 1px solid var(--color-border-light-2);
     border-radius: 3px;
@@ -236,6 +241,24 @@
         font-size: 1.2em;
     }
 
+    summary {
+        font-family: "Cabaletta";
+        color: var(--color-titre-occulte);
+        font-size: 1.2em;
+        
+        margin: 3px;
+        margin-top: 7px;
+    }
+
+    .action {
+        display: flex;
+        justify-content: center;
+        font-size: 1.5em;
+        color: var(--color-titre-occulte);
+        margin: 3px;
+        margin-top: 9px;
+    }
+
     .grid-carte-atout {
         display: grid;
         grid-template-columns: 3em 1fr 3em;
@@ -260,15 +283,6 @@
             font-family: "Cabaletta";
             font-size: 2em;
             margin: 3px;
-        }
-
-        .action {
-            display: flex;
-            justify-content: center;
-            font-size: 1.5em;
-            color: var(--color-titre-occulte);
-            margin: 3px;
-            margin-top: 9px;
         }
 
         .titre {
@@ -315,17 +329,8 @@
             }
         }
 
-        .action {
-            display: flex;
-            justify-content: center;
-            font-size: 1.5em;
-            color: var(--color-titre-occulte);
-            margin: 3px;
-            margin-top: 9px;
-
-            .deployee {
-                color: gray;
-            }
+        .action .deployee, .action .cosme {
+            color: gray;
         }
 
         .titre {
@@ -364,15 +369,6 @@
             margin: 3px;
         }
 
-        .action {
-            display: flex;
-            justify-content: center;
-            font-size: 1.5em;
-            color: var(--color-titre-occulte);
-            margin: 3px;
-            margin-top: 9px;
-        }
-
         .titre {
             grid-column: 1 / 4;
             margin-top: 7px;
@@ -405,6 +401,25 @@
         .stats {
             color: black;
             font-size: 0.9em;
+        }
+    }
+
+    .ligne-souffle {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        color: var(--color-titre-occulte);
+        font-family: "Cabaletta";
+        font-size: 1.3em;
+        margin: 6px;
+
+        .logo {
+            margin-right: 5px;
+        }
+
+        .zone {
+            margin-left: 5px;
         }
     }
 }

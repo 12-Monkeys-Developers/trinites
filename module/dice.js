@@ -3,6 +3,8 @@ export async function jetCompetence({actor = null,
     competence = null,
     difficulte = null,
     sansDomaine = null,
+    type = null,
+    aura = null,
     afficherDialog = true,
     envoiMessage = true} = {}) {
 
@@ -42,7 +44,7 @@ export async function jetCompetence({actor = null,
                 ui.notifications.warn(`Le jet n'est pas autorisé pour une compétence fermée dont la valeur est à zéro.`)
                 return null;
             }
-        }
+        }        
 
         // Définition de la formule de base du jet
         let baseFormula = "1d12x + @valeur";
@@ -53,6 +55,20 @@ export async function jetCompetence({actor = null,
             valeur: valeur,
             karmaAdam: karmaAdam
         };
+
+        if(type == "souffle") {
+            console.log(aura);
+
+            if(aura.data.signe == actorData.themeAstral.archetype) {
+                difficulte = 6;
+            }
+            else if(aura.data.signe == actorData.themeAstral.ascendant1 || aura.data.signe == actorData.themeAstral.ascendant2) {
+                difficulte = 3;
+            }
+            
+            rollData.deploieInit = aura.data.deploiement;
+            rollData.aura = aura;
+        }
 
         // Modificateur de difficulté du jet
         if(difficulte) {
@@ -82,14 +98,46 @@ export async function jetCompetence({actor = null,
         }
         rollData.resultArchonte = resultArchonte;
         
+        // Gestion de la réussite selon le Karma
+        let resultatJet = "echec";
+        if(karmaAdam == "lumiere") {
+            if(resultDeva.reussite) {
+                resultatJet = "reussite";    
+            }
+            else if(resultArchonte.reussite) {
+                resultatJet = "detteArchonte";
+            }
+        }
+        else if(karmaAdam == "tenebre") {
+            if(resultArchonte.reussite) {
+                resultatJet = "reussite";    
+            }
+            else if(resultDeva.reussite) {
+                resultatJet = "detteDeva";
+            }
+        }
+        else {
+            if(resultDeva.reussite || resultArchonte.reussite) {
+                resultatJet = "reussite";
+            }
+        }
+        rollData.resultatJet = resultatJet;
+
         if(envoiMessage) {
             // Construction du jeu de données pour alimenter le template
             let rollStats = {
                 ...rollData
             }
 
+            let messageTemplate;
             // Recupération du template
-            const messageTemplate = "systems/trinites/templates/partials/dice/jet-competence.hbs"; 
+            if(type == "souffle") {
+                messageTemplate = "systems/trinites/templates/partials/dice/jet-souffle.hbs"; 
+            }
+            else {
+                messageTemplate = "systems/trinites/templates/partials/dice/jet-competence.hbs"; 
+            }
+            
             let renderedRoll = await rollResult.render();
 
             // Assignation des données au template

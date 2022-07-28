@@ -108,4 +108,22 @@ export default class TrinitesActor extends Actor {
             data.etatSante = "inconscient";
         }
     }
+ 
+    karmaDisponible(typeKarma) {
+        // TODO - Correct bug
+        let data = this.data.data;
+        let karmaDisponible = 0;
+
+        if(typeKarma == "lumiere") {
+            karmaDisponible = data.trinite.deva.karma.valeur;
+        } 
+        else if (typeKarma == "tenebre") {
+            karmaDisponible = data.trinite.archonte.karma.valeur;
+        }
+        if(typeKarma == data.trinite.adam.karma.type) {
+            karmaDisponible = karmaDisponible + data.trinite.adam.karma.valeur;
+        }
+
+        return karmaDisponible;
+    }
 }

@@ -326,7 +326,7 @@
 }
 .trinites.sheet.actor .ress-grid {
   display: grid;
-  grid-template-columns: 2em 1fr 3em 1em 3em 1em 1.5fr;
+  grid-template-columns: 2em 1fr 1.5em 3em 1em 3em 1em 1.5fr;
   margin: 3px;
   align-items: center;
 }
@@ -334,7 +334,7 @@
   margin: 2px;
 }
 .trinites.sheet.actor .ress-grid .col-titre-vide {
-  grid-column: 1 / 4;
+  grid-column: 1 / 5;
 }
 .trinites.sheet.actor .ress-grid .col-titre {
   font-size: 0.9em;
@@ -343,10 +343,10 @@
   text-decoration: underline;
 }
 .trinites.sheet.actor .ress-grid .col-titre.diminution {
-  grid-column: 4 / 7;
+  grid-column: 5 / 8;
 }
 .trinites.sheet.actor .ress-grid .col-titre.duree {
-  grid-column: 7 / 8;
+  grid-column: 8 / 9;
 }
 .trinites.sheet.actor .ress-grid .colRess-dice {
   grid-column: 1 / 2;
@@ -357,8 +357,13 @@
   grid-column: 2 / 3;
   font-size: 0.9em;
 }
-.trinites.sheet.actor .ress-grid .colRess-valeur {
+.trinites.sheet.actor .ress-grid .colRess-epuisee {
   grid-column: 3 / 4;
+  display: flex;
+  justify-content: center;
+}
+.trinites.sheet.actor .ress-grid .colRess-valeur {
+  grid-column: 4 / 5;
   display: flex;
   justify-content: center;
 }
@@ -367,7 +372,7 @@
   font-size: 0.9em;
 }
 .trinites.sheet.actor .ress-grid .colRess-diminution {
-  grid-column: 5 / 6;
+  grid-column: 6 / 7;
   display: flex;
   justify-content: center;
 }
@@ -376,7 +381,7 @@
   font-size: 0.9em;
 }
 .trinites.sheet.actor .ress-grid .colRess-duree {
-  grid-column: 7 / 8;
+  grid-column: 8 / 9;
 }
 .trinites.sheet.actor .ligne-vie {
   display: flex;
@@ -787,28 +792,41 @@
   background-image: url("../images/header-back.jpg");
   color: var(--color-text-chat);
 }
-.chat-message {
+.chat-message,
+.chat-message.whisper {
   background-image: url("../images/header-back.jpg");
   background-position: 30% 9%;
 }
 .chat-message input[type="text"]:focus,
+.chat-message.whisper input[type="text"]:focus,
 .chat-message input[type="number"]:focus,
+.chat-message.whisper input[type="number"]:focus,
 .chat-message input[type="password"]:focus,
+.chat-message.whisper input[type="password"]:focus,
 .chat-message input[type="date"]:focus,
+.chat-message.whisper input[type="date"]:focus,
 .chat-message input[type="time"]:focus,
+.chat-message.whisper input[type="time"]:focus,
 .chat-message select:focus,
-.chat-message textarea:focus {
+.chat-message.whisper select:focus,
+.chat-message textarea:focus,
+.chat-message.whisper textarea:focus {
   box-shadow: 0 0 5px var(--color-shadow-trinite);
 }
-.chat-message a:hover {
+.chat-message a:hover,
+.chat-message.whisper a:hover {
   text-shadow: 0 0 8px var(--color-shadow-trinite);
 }
 .chat-message button:hover,
-.chat-message button:focus {
+.chat-message.whisper button:hover,
+.chat-message button:focus,
+.chat-message.whisper button:focus {
   box-shadow: 0 0 5px var(--color-shadow-trinite);
 }
 .chat-message .message-header,
-.chat-message .message-content {
+.chat-message.whisper .message-header,
+.chat-message .message-content,
+.chat-message.whisper .message-content {
   color: var(--color-text-message);
   backdrop-filter: grayscale(70%);
 }
@@ -869,7 +887,7 @@
   border: 1px solid var(--color-border-light-2);
   border-radius: 3px;
   box-shadow: 0 0 2px #FFF inset;
-  background-color: #ccc5baee;
+  background: url("../images/parchemin-grey.jpg") repeat;
 }
 .titre-cout-ress {
   margin: 3px;
@@ -939,7 +957,8 @@
   color: black;
   background-color: rgba(255, 255, 255, 0.5);
 }
-.dette-ress {
+.dette-ress,
+.ress-epuise {
   margin: 3px;
   padding: 3px;
   background-color: var(--color-back-warning);

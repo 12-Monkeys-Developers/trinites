@@ -60,6 +60,12 @@ export default class TrinitesActorSheet extends ActorSheet {
                 // Enlever au domaine son statut épuisé
                 html.find('.uncheck-domaine').click(this._onSupprDomaineEtatEpuise.bind(this));
 
+                // Ajouter à la richesse son statut épuisé
+                html.find('.check-richesse').click(this._onAjoutRichesseEtatEpuise.bind(this));
+
+                // Enlever à la richesse son statut épuisé
+                html.find('.uncheck-richesse').click(this._onSupprRichesseEtatEpuise.bind(this));
+
                 // Cocher une case de dommages
                 html.find('.case-vie').click(this._onCocherCaseDeVie.bind(this));
 
@@ -113,9 +119,6 @@ export default class TrinitesActorSheet extends ActorSheet {
         
         let domaineId = element.closest(".domaine").dataset.itemId;
         const domaine = this.actor.items.get(domaineId);
-        console.log(this.actor.items);
-        console.log(domaineId);
-        console.log(domaine);
         domaine.update({"data.epuise": true});
     }
 
@@ -126,6 +129,20 @@ export default class TrinitesActorSheet extends ActorSheet {
         let domaineId = element.closest(".domaine").dataset.itemId;
         const domaine = this.actor.items.get(domaineId);
         domaine.update({"data.epuise": false});
+    }
+
+    _onAjoutRichesseEtatEpuise(event) {
+        event.preventDefault();
+        const element = event.currentTarget;
+        
+        this.actor.update({"data.ressources.richesse.epuisee": true});
+    }
+
+    _onSupprRichesseEtatEpuise(event) {
+        event.preventDefault();
+        const element = event.currentTarget;
+        
+        this.actor.update({"data.ressources.richesse.epuisee": false});
     }
 
     _onCocherCaseDeVie(event) {

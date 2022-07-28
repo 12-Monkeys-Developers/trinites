@@ -1,9 +1,11 @@
 import * as Dice from "./dice.js";
+import DepenseKarmaFormApplication from "./appli/DepenseKarmaFormApp.js";
 
 export function addChatListeners(html) {
     html.on('click', 'button.dette', onDetteEsprit);
     html.on('click', 'a.activer.aura', onActiverAura);
     html.on('click', 'a.activer.souffle', onActiverSouffle);
+    html.on('click', 'a.activer.verset', onActiverVerset);
 }
 
 function onDetteEsprit(event) {
@@ -21,13 +23,13 @@ function onDetteEsprit(event) {
 
     let actor = game.actors.get(actorId);
     if(esprit == "deva") {
-        console.log(actor.data.data.trinite.deva.dettes);
+        //console.log(actor.data.data.trinite.deva.dettes);
         actor.update({"data.trinite.deva.dettes": actor.data.data.trinite.deva.dettes + 1});
     }
 
     if(esprit == 'archonte')
     {
-        console.log(actor.data.data.trinite.archonte.dettes);
+        //console.log(actor.data.data.trinite.archonte.dettes);
         actor.update({"data.trinite.archonte.dettes": actor.data.data.trinite.archonte.dettes + 1});
     }
 
@@ -98,6 +100,31 @@ function onActiverSouffle(event) {
     element.closest(".carte.aura").getElementsByClassName("zone")[0].innerHTML = "Cosme";
 }
 
+function onActiverVerset(event) {
+    event.preventDefault();
+    const element = event.currentTarget;
+
+    const actorId = element.closest(".carte.verset").dataset.actorId;
+    let actor = game.actors.get(actorId);
+
+    const versetId = element.closest(".carte.verset").dataset.itemId;
+    let verset = actor.items.get(versetId);
+
+    let typeKarma = verset.data.data.karma;
+    
+    let karmaDisponible = actor.karmaDisponible(typeKarma);
+    let coutPouvoir = actor.data.data.themeAstral.affinite == "grandLivre" ? 1 : 2;
+
+    console.log(karmaDisponible, coutPouvoir);
+    
+    if(karmaDisponible < coutPouvoir) {
+        ui.notifications.warn("Vous n'avez pas assez de Karma disponible pour réciter ce verset !");
+        return;
+    }
+
+    console.log(actor.data.data.trinite);
+    new DepenseKarmaFormApplication(actor, actor.data.data.trinite, typeKarma, coutPouvoir).render(true);
+}
 
 /*------------------------------------
 ---- Affichage des cartes de chat ----
@@ -135,8 +162,6 @@ export async function carteAura({actor = null,
 
     let aura = actor.items.get(auraId);
 
-    console.log(actor.data.data.themeAstral.affinite);
-
     // Récupération des données de l'item
     let cardData = {
         aura: aura.data,
@@ -144,7 +169,6 @@ export async function carteAura({actor = null,
         affinite: actor.data.data.themeAstral.affinite
     }
 
-    console.log(cardData);
     // Recupération du template
     const messageTemplate = "systems/trinites/templates/partials/chat/carte-aura.hbs"; 
 

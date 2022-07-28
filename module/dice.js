@@ -216,8 +216,21 @@ export async function jetRessource({actor = null,
         let actorData = actor.data.data;
 
         let valeur = actorData.ressources[ressource].valeur - actorData.ressources[ressource].diminution;
+        let ressEpuisee = actorData.ressources[ressource].epuisee
         let label = actorData.ressources[ressource].label;
-        let domaines = actor.items.filter(function (item) { return item.type == "domaine"});
+        let domaines = actor.items.filter(function (item) { return item.type == "domaine" && !item.data.data.epuise});
+
+        // Pas de jet si Richesse est épuisée ou tous les dommaines épuisés
+        if(ressource == "richesse" && ressEpuisee) {
+            ui.notifications.warn("Votre Richesse est épuisée. Le jet de dés n'est pas autorisé.")
+            return;
+        }
+        else {
+            if(domaines.length == 0) {
+                ui.notifications.warn("Tous vos Domaines sont épuisés. Le jet de dés n'est pas autorisé.")
+            return;
+            }
+        }
 
         // Affichage de la fenêtre de dialogue (vrai par défaut)
         if(afficherDialog) {
@@ -233,7 +246,7 @@ export async function jetRessource({actor = null,
             domaineId = dialogOptions.domaine;
         }
 
-        // TODO - Calcul des paramètres selon le cout d'acquisition
+        // Calcul des paramètres selon le cout d'acquisition
         let typeTest = typeTestRessource(valeur, coutAcquisition, game.settings.get("trinites","limEndettementCampagne"));
         console.log(typeTest);
 
@@ -313,6 +326,18 @@ export async function jetRessource({actor = null,
             // Affichage du message
             await ChatMessage.create(chatData);
         }
+
+        if(rollData.reussite) {
+            // Gestion endettement
+        }
+        else {
+            if(ressource == "richesse") {
+                actor.update({"data.ressources.richesse.epuisee": true});
+            }
+            else if (rollData.domaine){
+                rollData.domaine.update({"data.epuise": true});
+            }
+        }
     }
 
     // Fonction de construction de la boite de dialogue de jet de ressource
@@ -323,7 +348,7 @@ export async function jetRessource({actor = null,
 
         return new Promise( resolve => {
             const data = {
-                title: "Jet de compétence",
+                title: "Jet de ressource",
                 content: html,
                 buttons: {
                     jet: { // Bouton qui lance le jet de dé

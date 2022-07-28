@@ -28,7 +28,13 @@
             {{/if}}
         {{/if}}
         {{#if stats.reussite}}
-            {{#if stats.dette}}<div class="dette-ress">Votre ressource sera diminuée de {{stats.dette.diminution}} point(s) pendant {{stats.dette.duree}}</div>{{/if}}
+            {{#if stats.dette}}<div class="dette-ress">Votre ressource '{{stats.ressource}}' sera diminuée de {{stats.dette.diminution}} point(s) pendant {{stats.dette.duree}}</div>{{/if}}
+        {{else}}
+            {{#if stats.domaine}}
+                <div class="ress-epuise">Votre domaine '{{stats.domaine.name}}' est épuisé</div>
+            {{else}}
+                <div class="ress-epuise">Votre ressource '{{stats.ressource}}' est épuisée</div>
+            {{/if}}
         {{/if}}
     </div>
 </div>

@@ -1,4 +1,4 @@
-<div class="carte verset" data-item-id="{{verset._id}}">
+<div class="carte verset" data-item-id="{{verset._id}}" data-actor-id="{{actorId}}">
     <div class="entete">{{verset.name}}</div>
     <div class="grid-carte-verset">
         <div class="karma">
@@ -7,7 +7,7 @@
             {{#if (eq verset.data.karma "tenebre")}}<i class="fas fa-moon" title="Karma {{verset.data.karma}}"></i>{{/if}}
         </div>
         <div class="favori">{{verset.data.favori}}</div>
-        <div class="action"><a class="activer verset" title="Activer le Verset '{{verset.name}}'"><i class="fas fa-bolt"></i></a></div>
+        <div class="action"><a class="activer verset" title="Réciter le Verset '{{verset.name}}'"><i class="fas fa-bolt"></i></a></div>
         <div class="sentence">"{{verset.data.sentence}}"</div>
     </div>
     <div class="grid-stats-verset">

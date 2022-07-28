@@ -258,6 +258,13 @@
                             <!-- RICHESSE -->
                             <div class="colRess-dice"><a class="roll-ress" title="Jet de ressource" data-ressource="richesse"><i class="fas fa-dice"></i></a></div>
                             <div class="colRess-nom">{{data.data.ressources.richesse.label}}</div>
+                            <div class="colRess-epuisee">
+                                {{#if data.data.ressources.richesse.epuisee }}
+                                    <div class="uncheck-richesse"><a title="Richesse épuisée"><i class="far fa-check-square"></i></a></div>
+                                {{else}}
+                                    <div class="check-richesse"><a title="Richesse épuisée"><i class="far fa-square"></i></a></div>
+                                {{/if}}
+                            </div>
                             <div class="colRess-valeur"><input name="data.ressources.richesse.valeur" type="number" value="{{data.data.ressources.richesse.valeur}}" placeholder="0" min="0"></div>
                             <div class="colRess-diminution"><input name="data.ressources.richesse.diminution" type="number" value="{{data.data.ressources.richesse.diminution}}" placeholder="0" min="0" max="{{data.data.ressources.richesse.valeur}}"></div>                
                             <div class="colRess-duree"><input name="data.ressources.richesse.duree" type="text" value="{{data.data.ressources.richesse.duree}}" placeholder="Durée diminution"></div>

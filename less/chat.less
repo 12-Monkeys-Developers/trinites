@@ -3,7 +3,7 @@
     color: var(--color-text-chat);
 }
 
-.chat-message {
+.chat-message, .chat-message.whisper {
     background-image: url("../images/header-back.jpg");        
     background-position: 30% 9%;
 
@@ -62,8 +62,10 @@
     border: 1px solid var(--color-border-light-2);
     border-radius: 3px;
     box-shadow: 0 0 2px #FFF inset;
-    //background: linear-gradient(to right,  #ebf8e1, #1f546f, #07131a);
     background: linear-gradient(to right,  #ebf8e1ee, #1f546fee, #07131aee);
+
+    // Test harmonisation carte Deva-Arch
+    //background: url("../images/parchemin-grey.jpg") repeat;
 
     div {
         display: flex;
@@ -78,6 +80,11 @@
     //font-weight: bold;
     font-size: 1.5em;
     font-family: "Cabaletta";
+
+    // Test harmonisation carte Deva-Arch
+    //background-color: var(--color-titre-trinite);
+    //border: 1px solid var(--color-titre-trinite);
+    //border-radius: 3px;  
 }
 
 .titre-esprit.deva {
@@ -100,7 +107,9 @@
     border: 1px solid var(--color-border-light-2);
     border-radius: 3px;
     box-shadow: 0 0 2px #FFF inset;
-    background-color: #ccc5baee;
+    //background-color: var(--color-back-chat);
+    background: url("../images/parchemin-grey.jpg") repeat;
+    //filter: opacity(95%);
 }
 
 .titre-cout-ress {
@@ -110,7 +119,6 @@
     background-color: var(--color-titre-trinite);;
     color: white;
     
-
     border: 1px solid var(--color-titre-trinite);
     border-radius: 3px;    
 
@@ -190,8 +198,8 @@
     }
 }
 
-// Dette de ressource
-.dette-ress {
+// Dette de ressource / Ressource épuisée
+.dette-ress, .ress-epuise {
     margin: 3px;    
     padding: 3px;
     background-color: var(--color-back-warning);;
@@ -211,6 +219,7 @@
     box-shadow: 0 0 2px #FFF inset;
     //background-color: var(--color-back-chat);
     background: url("../images/parchemin-grey.jpg") repeat;
+    //filter: opacity(95%);
 
     a:hover {
         text-shadow: 0 0 8px var(--color-shadow-occulte);

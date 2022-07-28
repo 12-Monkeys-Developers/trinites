@@ -1,9 +1,10 @@
 export default class DepenseKarmaFormApplication extends FormApplication {
-    constructor(actor, trinite, typeKarma, coutPouvoir) {
+    constructor(actor, trinite, typeKarma, typePouvoir, coutPouvoir) {
         super();
         this.actor = actor;
         this.trinite = trinite;
         this.typeKarma = typeKarma;
+        this.typePouvoir = typePouvoir
         this.coutPouvoir = coutPouvoir;
       }
     
@@ -24,34 +25,44 @@ export default class DepenseKarmaFormApplication extends FormApplication {
         // Send data to the template
         console.log(this.trinite);
 
+        let templateData = {
+            typeKarma: this.typeKarma,
+            coutPouvoir: this.coutPouvoir,
+            typePouvoir: this.typePouvoir,
+            configData: CONFIG.Trinites
+        };
+
         let karmaDeva = {
-            valeurInit: this.trinite.deva.karma.value,
-            valeur: this.trinite.deva.karma.value
+          valeurInit: this.trinite.deva.karma.value,
+          valeur: this.trinite.deva.karma.value
         };
 
         let karmaArchonte = {
-            valeurInit: this.trinite.archonte.karma.value,
-            valeur: this.trinite.archonte.karma.value
+          valeurInit: this.trinite.archonte.karma.value,
+          valeur: this.trinite.archonte.karma.value
         };
 
-        let karmaAdam;
-
-        if(this.typeKarma == this.trinite.adam.karma.type || this.typeKarma == "") {
-            karmaAdam = {
-                type: this.trinite.adam.karma.type,
-                valeurInit: this.trinite.adam.karma.value,
-                valeur: this.trinite.adam.karma.value
-            };
+        let karmaAdam = {
+          type: this.trinite.adam.karma.type,
+          valeurInit: this.trinite.adam.karma.value,
+          valeur: this.trinite.adam.karma.value
+        };
+      
+        if(this.typeKarma == "lumiere") {
+          templateData.karmaDeva = karmaDeva;
+          templateData.karmaAdam = this.typeKarma == karmaAdam.type ? karmaAdam : "";
+        }
+        else if(this.typeKarma == "tenebre") {
+          templateData.karmaArchonte = karmaArchonte;
+          templateData.karmaAdam = this.typeKarma == karmaAdam.type ? karmaAdam : "";
+        }
+        else {
+          templateData.karmaDeva = karmaDeva;
+          templateData.karmaArchonte = karmaArchonte;
+          templateData.karmaAdam = karmaAdam;
         }
         
-        return {
-            karmaDeva: karmaDeva,
-            karmaArchonte: karmaArchonte,
-            karmaAdam: karmaAdam ? karmaAdam : "",
-            typeKarma: this.typeKarma,
-            coutPouvoir: this.coutPouvoir,
-            configData: CONFIG.Trinites
-        };
+        return templateData;
       }
     
       activateListeners(html) {

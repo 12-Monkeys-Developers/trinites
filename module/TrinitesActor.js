@@ -108,22 +108,51 @@ export default class TrinitesActor extends Actor {
             data.etatSante = "inconscient";
         }
     }
- 
+
+    // Nombre de points de Karma disponible du type donné (Lumière ou Ténèbre)
     karmaDisponible(typeKarma) {
-        // TODO - Correct bug
         let data = this.data.data;
         let karmaDisponible = 0;
 
         if(typeKarma == "lumiere") {
-            karmaDisponible = data.trinite.deva.karma.valeur;
+            karmaDisponible = data.trinite.deva.karma.value;
         } 
         else if (typeKarma == "tenebre") {
-            karmaDisponible = data.trinite.archonte.karma.valeur;
+            karmaDisponible = data.trinite.archonte.karma.value;
         }
+
         if(typeKarma == data.trinite.adam.karma.type) {
-            karmaDisponible = karmaDisponible + data.trinite.adam.karma.valeur;
+            karmaDisponible = karmaDisponible + data.trinite.adam.karma.value;
         }
 
         return karmaDisponible;
+    }
+
+    // Vide toutes les sources de Karma (Esprit et Adam) du type donné
+    viderKarma(typeKarma) {
+        let data = this.data.data;
+
+        if(typeKarma == "lumiere") {
+            this.update({"data.trinite.deva.karma.value": 0});
+        }
+        else if (typeKarma == "tenebre") {
+            this.update({"data.trinite.archonte.karma.value": 0});
+        }
+
+        if(typeKarma == data.trinite.adam.karma.type) {
+            this.update({"data.trinite.adam.karma.value": 0});
+        }
+    }
+
+    // Consomme un nombre de points de Karma (Esprit) du type donné
+    consommerKarma(typeKarma, coutPouvoir) {
+        let data = this.data.data;
+
+        if(typeKarma == "lumiere") {
+            this.update({"data.trinite.deva.karma.value": data.trinite.deva.karma.value - coutPouvoir});
+        }
+        else if (typeKarma == "tenebre") {
+            this.update({"data.trinite.archonte.karma.value": data.trinite.archonte.karma.value - coutPouvoir});
+        }
     }
 }

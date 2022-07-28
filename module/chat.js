@@ -23,13 +23,11 @@ function onDetteEsprit(event) {
 
     let actor = game.actors.get(actorId);
     if(esprit == "deva") {
-        //console.log(actor.data.data.trinite.deva.dettes);
         actor.update({"data.trinite.deva.dettes": actor.data.data.trinite.deva.dettes + 1});
     }
 
     if(esprit == 'archonte')
     {
-        //console.log(actor.data.data.trinite.archonte.dettes);
         actor.update({"data.trinite.archonte.dettes": actor.data.data.trinite.archonte.dettes + 1});
     }
 
@@ -114,16 +112,26 @@ function onActiverVerset(event) {
     
     let karmaDisponible = actor.karmaDisponible(typeKarma);
     let coutPouvoir = actor.data.data.themeAstral.affinite == "grandLivre" ? 1 : 2;
-
-    console.log(karmaDisponible, coutPouvoir);
     
+    // Pas assez de Karma
     if(karmaDisponible < coutPouvoir) {
         ui.notifications.warn("Vous n'avez pas assez de Karma disponible pour réciter ce verset !");
         return;
     }
+    // Juste ce qu'il faut de Karma
+    else if (karmaDisponible == coutPouvoir) {
+        actor.viderKarma(typeKarma);
+        console.log("TODO - Enchainer sur la carte de chat");
+        return;
+    }
+    // Uniquement le Karma de l'Esprit
+    else if(typeKarma != actor.data.data.trinite.adam.karma.type) {
+        actor.consommerKarma(typeKarma, coutPouvoir);
+        console.log("TODO - Enchainer sur la carte de chat");
+        return;
+    }
 
-    console.log(actor.data.data.trinite);
-    new DepenseKarmaFormApplication(actor, actor.data.data.trinite, typeKarma, coutPouvoir).render(true);
+    new DepenseKarmaFormApplication(actor, actor.data.data.trinite, typeKarma, "verset", coutPouvoir).render(true);
 }
 
 /*------------------------------------

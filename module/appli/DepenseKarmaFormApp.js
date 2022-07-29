@@ -14,8 +14,9 @@ export default class DepenseKarmaFormApplication extends FormApplication {
           popOut: true,
           template: "systems/trinites/templates/application/dep-karma-form-app.hbs",
           id: "dep-karma-app",
-          title: game.i18n.localize("Sélection de la source de Karma"),
-          height: 200,
+          classes: ["trinites", "dialog"],
+          title: game.i18n.localize("Source de Karma"),
+          height: 250,
           width: 400,
           resizable: true
         });
@@ -48,6 +49,9 @@ export default class DepenseKarmaFormApplication extends FormApplication {
           valeur: this.trinite.adam.karma.value
         };
       
+        //TEST
+        //this.typeKarma = "neutre";
+
         if(this.typeKarma == "lumiere") {
           templateData.karmaDeva = karmaDeva;
           templateData.karmaAdam = this.typeKarma == karmaAdam.type ? karmaAdam : "";
@@ -57,6 +61,7 @@ export default class DepenseKarmaFormApplication extends FormApplication {
           templateData.karmaAdam = this.typeKarma == karmaAdam.type ? karmaAdam : "";
         }
         else {
+          templateData.typeKarma = "neutre";
           templateData.karmaDeva = karmaDeva;
           templateData.karmaArchonte = karmaArchonte;
           templateData.karmaAdam = karmaAdam;

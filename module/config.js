@@ -8,10 +8,22 @@ Trinites.karmas = {
 
 Trinites.messagers = {
     aucun: "",
-    jibril: "Jibr'il",
-    izrail: "Izrâ'il",
-    mickhail: "Mickha'il",
-    israfil: "Israf'il"
+    jibril: {
+        label: "Jibr'il",
+        karma: "lumiere"
+    },
+    izrail: {
+        label: "Izrâ'il",
+        karma: "lumiere"
+    },
+    mickhail: {
+        label: "Mickha'il",
+        karma: "lumiere"
+    },
+    israfil: {
+        label: "Israf'il",
+        karma: "lumiere"
+    }
 }
 
 Trinites.choeurs = {

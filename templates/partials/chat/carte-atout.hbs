@@ -1,10 +1,10 @@
-<div class="carte atout" data-item-id="{{atout._id}}">
+<div class="carte atout" data-item-id="{{atout._id}}" data-actor-id="{{actorId}}">
     <div class="entete">{{atout.name}}</div>
     <div class="grid-carte-atout">
         <div class="couleur">
             <img src="systems/trinites/images/couleurs/blason-{{atout.data.couleur}}.png" title="{{configVal 'couleurs' atout.data.couleur}}">
         </div>
-        <div class="messager">{{configVal 'messagers' atout.data.messager}}</div>
+        <div class="messager">{{configLabel 'messagers' atout.data.messager}}</div>
         <div class="action"><a class="activer atout" title="Activer l'atout '{{atout.name}}'"><i class="fas fa-bolt"></i></a></div>
         <div class="titre"><label>Effet de l'Atout</label></div>
     </div>

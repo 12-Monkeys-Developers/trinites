@@ -9,7 +9,7 @@
             <select name="data.messager">
                 {{#select data.data.messager}}
                 {{#each config.messagers as |messager keyMessager|}}
-                    <option value="{{keyMessager}}">{{messager}}</option>
+                    <option value="{{keyMessager}}">{{messager.label}}</option>
                 {{/each}}
                 {{/select}} 
             </select>

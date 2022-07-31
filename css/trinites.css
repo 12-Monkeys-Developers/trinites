@@ -412,6 +412,9 @@
   height: 26px;
   font-size: 0.9em;
 }
+.trinites.sheet.actor .theme-astral select {
+  font-family: "Cabaletta";
+}
 .trinites.sheet.actor .grid-theme {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -469,6 +472,10 @@
 .trinites.sheet.actor .stats-trinite {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
+  font-family: "Cabaletta";
+}
+.trinites.sheet.actor .stats-trinite select {
+  font-family: "Cabaletta";
 }
 .trinites.sheet.actor .stats-trinite .logo-karma {
   display: flex;
@@ -485,7 +492,6 @@
 .trinites.sheet.actor .stats-trinite .archonte .grid-stats {
   display: grid;
   grid-template-columns: 1em 1fr 2fr 1em;
-  font-size: 0.9em;
   align-items: center;
 }
 .trinites.sheet.actor .stats-trinite .deva .grid-stats .colStats-titre,
@@ -526,7 +532,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 0.9em;
 }
 .trinites.sheet.actor .stats-trinite .adam .karma label {
   margin: 2px;
@@ -608,6 +613,9 @@
   grid-template-columns: 1fr 2fr 2em 4.5em;
   margin: 3px;
   align-items: center;
+}
+.trinites.sheet.actor .grid-lame select {
+  font-family: "Cabaletta";
 }
 .trinites.sheet.actor .grid-lame label {
   font-family: "Cabaletta";
@@ -1206,6 +1214,13 @@
 .trinites.dialog .karma textarea:focus {
   box-shadow: 0 0 5px var(--color-shadow-occulte);
 }
+.trinites.dialog .karma button:hover,
+.trinites.dialog .karma button:focus {
+  box-shadow: 0 0 5px var(--color-shadow-occulte);
+}
+.trinites.dialog .karma a:hover {
+  text-shadow: 0 0 8px var(--color-shadow-occulte);
+}
 .trinites.dialog .karma .entete {
   display: flex;
   flex-direction: column;
@@ -1257,6 +1272,25 @@
   margin: 3px;
   margin-left: 8px;
 }
+.trinites.dialog .karma .pouvoir {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 5px;
+  font-family: "Cabaletta";
+}
+.trinites.dialog .karma .pouvoir .lib {
+  display: flex;
+  justify-content: left;
+  margin: 3px;
+  margin-right: 8px;
+}
+.trinites.dialog .karma .pouvoir .val {
+  display: flex;
+  justify-content: right;
+  margin: 3px;
+  margin-left: 8px;
+}
 .trinites.dialog .karma input[type="number"] {
   width: 3em;
   text-align: center;
@@ -1266,23 +1300,22 @@
   grid-template-columns: repeat(4, 1fr);
   align-items: center;
   margin: 5px;
+  font-family: "Cabaletta";
 }
 .trinites.dialog .karma .grid-karma-3col {
   display: grid;
   grid-template-columns: repeat(6, 1fr);
   align-items: center;
   margin: 5px;
+  font-family: "Cabaletta";
 }
-.trinites.dialog .karma .grid-pouvoir {
-  display: grid;
-  grid-template-columns: 1fr 3.5em 1fr 3.5em;
-  align-items: center;
-  margin: 5px;
+.trinites.dialog .karma .btn-valider {
+  font-family: "Cabaletta";
+  font-size: 1.2em;
+  color: var(--color-titre-occulte);
 }
-.trinites.dialog .karma .grid-pouvoir .data {
-  display: flex;
-  justify-content: left;
-  margin: 3px;
+.trinites.dialog .karma .btn-valider.masque {
+  display: none;
 }
 :root {
   --color-titre-trinite: #1f546f;

@@ -51,6 +51,10 @@ Hooks.once("init", function() {
         return Trinites[liste][val];
     });
 
+    Handlebars.registerHelper("configLabel", function(liste, val) {
+        return Trinites[liste][val].label;
+    });
+
     Handlebars.registerHelper('times', function(n, block) {
         var accum = '';
         for(var i = 1; i <= n; ++i) {

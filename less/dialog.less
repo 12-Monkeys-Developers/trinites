@@ -55,6 +55,14 @@
         box-shadow: 0 0 5px var(--color-shadow-occulte);
     }
     
+    button:hover, button:focus {
+        box-shadow: 0 0 5px var(--color-shadow-occulte);
+    }
+
+    a:hover {
+        text-shadow: 0 0 8px var(--color-shadow-occulte);
+    }
+
     color: var(--color-titre-occulte); 
 
     .entete {
@@ -117,6 +125,28 @@
         margin-left: 8px;
     }
 
+    .pouvoir {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 5px;
+        font-family: "Cabaletta";
+        
+        .lib {
+            display: flex;
+            justify-content: left;
+            margin: 3px;
+            margin-right: 8px;
+        }
+
+        .val {
+            display: flex;
+            justify-content: right;
+            margin: 3px;
+            margin-left: 8px;
+        }
+    }
+
     input[type="number"] {
         width: 3em;
         text-align: center;
@@ -127,6 +157,7 @@
         grid-template-columns: repeat(4, 1fr);
         align-items: center;
         margin: 5px;
+        font-family: "Cabaletta";
     }
 
     .grid-karma-3col {
@@ -134,18 +165,16 @@
         grid-template-columns: repeat(6, 1fr);
         align-items: center;
         margin: 5px;
+        font-family: "Cabaletta";
     }
 
-    .grid-pouvoir {
-        display: grid; 
-        grid-template-columns: 1fr 3.5em 1fr 3.5em;
-        align-items: center;
-        margin: 5px;
+    .btn-valider {
+        font-family: "Cabaletta";
+        font-size: 1.2em;
+        color : var(--color-titre-occulte);
+    }
 
-        .data {
-            display: flex;
-            justify-content: left;
-            margin: 3px;
-        }
+    .btn-valider.masque {
+        display: none;
     }
 }

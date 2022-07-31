@@ -6,6 +6,7 @@ export function addChatListeners(html) {
     html.on('click', 'a.activer.aura', onActiverAura);
     html.on('click', 'a.activer.souffle', onActiverSouffle);
     html.on('click', 'a.activer.verset', onActiverVerset);
+    html.on('click', 'a.activer.atout', onActiverAtout);
 }
 
 function onDetteEsprit(event) {
@@ -18,15 +19,12 @@ function onDetteEsprit(event) {
         return;
     }
 
-    const esprit = element.dataset.esprit;
-    const actorId = element.dataset.actorId;
-
-    let actor = game.actors.get(actorId);
-    if(esprit == "deva") {
+    let actor = game.actors.get(element.dataset.actorId);
+    if(element.dataset.esprit == "deva") {
         actor.update({"data.trinite.deva.dettes": actor.data.data.trinite.deva.dettes + 1});
     }
 
-    if(esprit == 'archonte')
+    if(element.dataset.esprit == 'archonte')
     {
         actor.update({"data.trinite.archonte.dettes": actor.data.data.trinite.archonte.dettes + 1});
     }
@@ -44,10 +42,8 @@ function onActiverAura(event) {
     // Aura déjà déployée
     if (element.classList.contains("deployee")) { return; }
 
-    const actorId = element.closest(".carte.aura").dataset.actorId;
-    let actor = game.actors.get(actorId);
-
-    const auraId = element.closest(".carte.aura").dataset.itemId;
+    let actor = game.actors.get(element.closest(".carte.aura").dataset.actorId);
+    let auraId = element.closest(".carte.aura").dataset.itemId;
     let aura = actor.items.get(auraId);
 
     // Aura déjà déployée - test par sécurité
@@ -56,12 +52,44 @@ function onActiverAura(event) {
         return;
     }
 
-    aura.update({"data.deploiement": "cosme"});
+    let typeKarma = "neutre";
+    let karmaDisponible = actor.karmaDisponible(typeKarma);
+    let coutPouvoir = actor.coutPouvoir("zodiaque");
+    let activationOk = false;
 
-    // MAJ de la carte
-    element.title = `Vous avez déployée l'aura '${aura.data.name}'`;
-    element.classList.add("deployee");
-    element.closest(".carte.aura").getElementsByClassName("zone")[0].innerHTML = "Cosme";
+    // Pas assez de Karma
+    if(karmaDisponible < coutPouvoir) {
+        ui.notifications.warn("Vous n'avez pas assez de Karma disponible pour déployer cette aura !");
+        return;
+    }
+    // Juste ce qu'il faut de Karma
+    else if (karmaDisponible == coutPouvoir) {
+        actor.viderKarma(typeKarma);
+        activationOk = true;
+    }
+    // Uniquement le Karma de l'Esprit
+    else if(typeKarma != actor.data.data.trinite.adam.karma.type && typeKarma != "neutre") {
+        actor.consommerKarma(typeKarma, coutPouvoir);
+        activationOk = true;
+    }
+    else {
+        console.log("DialogKarma");
+        new DepenseKarmaFormApplication(actor, actor.data.data.trinite, typeKarma, "aura", coutPouvoir, auraId).render(true);
+
+         // MAJ de la carte - dialog
+         element.title = `La fenêtre de sélection de Karma a été affichée`;
+         element.classList.add("deployee");
+         element.closest(".carte.aura").getElementsByClassName("zone")[0].innerHTML = "A déterminer";
+    }
+
+    if(activationOk) {
+        aura.update({"data.deploiement": "cosme"});
+
+        // MAJ de la carte
+        element.title = `Vous avez déployée l'aura '${aura.data.name}'`;
+        element.classList.add("deployee");
+        element.closest(".carte.aura").getElementsByClassName("zone")[0].innerHTML = "Cosme";
+    }
 }
 
 function onActiverSouffle(event) {
@@ -71,11 +99,8 @@ function onActiverSouffle(event) {
     // Aura déjà déployée
     if (element.classList.contains("cosme")) { return; }
 
-    const actorId = element.closest(".carte.aura").dataset.actorId;
-    let actor = game.actors.get(actorId);
-
-    const auraId = element.closest(".carte.aura").dataset.itemId;
-    let aura = actor.items.get(auraId);
+    let actor = game.actors.get(element.closest(".carte.aura").dataset.actorId);
+    let aura = actor.items.get(element.closest(".carte.aura").dataset.itemId);
 
     if(aura.data.data.deploiement == "" || aura.data.data.deploiement == "cosme") {
         ui.notifications.warn("Le Souffle a déjà été déclenché !");
@@ -102,17 +127,16 @@ function onActiverVerset(event) {
     event.preventDefault();
     const element = event.currentTarget;
 
-    const actorId = element.closest(".carte.verset").dataset.actorId;
-    let actor = game.actors.get(actorId);
+    let actor = game.actors.get(element.closest(".carte.verset").dataset.actorId);
 
     const versetId = element.closest(".carte.verset").dataset.itemId;
     let verset = actor.items.get(versetId);
-
     let typeKarma = verset.data.data.karma;
     
     let karmaDisponible = actor.karmaDisponible(typeKarma);
-    let coutPouvoir = actor.data.data.themeAstral.affinite == "grandLivre" ? 1 : 2;
-    
+    let coutPouvoir = actor.coutPouvoir("grandLivre");
+    let activationOk = false;
+
     // Pas assez de Karma
     if(karmaDisponible < coutPouvoir) {
         ui.notifications.warn("Vous n'avez pas assez de Karma disponible pour réciter ce verset !");
@@ -121,17 +145,58 @@ function onActiverVerset(event) {
     // Juste ce qu'il faut de Karma
     else if (karmaDisponible == coutPouvoir) {
         actor.viderKarma(typeKarma);
-        console.log("TODO - Enchainer sur la carte de chat");
-        return;
+        activationOk = true;
     }
     // Uniquement le Karma de l'Esprit
     else if(typeKarma != actor.data.data.trinite.adam.karma.type) {
         actor.consommerKarma(typeKarma, coutPouvoir);
-        console.log("TODO - Enchainer sur la carte de chat");
-        return;
+        activationOk = true;
+    }
+    else {
+        new DepenseKarmaFormApplication(actor, actor.data.data.trinite, typeKarma, "verset", coutPouvoir, versetId).render(true);
     }
 
-    new DepenseKarmaFormApplication(actor, actor.data.data.trinite, typeKarma, "verset", coutPouvoir).render(true);
+    if(activationOk) {
+        console.log("TODO - Enchainer sur la carte Verset activée dans le chat");
+    }
+}
+
+function onActiverAtout(event) {
+    event.preventDefault();
+    const element = event.currentTarget;
+
+    let actor = game.actors.get(element.closest(".carte.atout").dataset.actorId);
+
+    const atoutId = element.closest(".carte.atout").dataset.itemId;
+    let atout = actor.items.get(atoutId);
+    let typeKarma = atout.data.data.karma;
+    
+    let karmaDisponible = actor.karmaDisponible(typeKarma);
+    let coutPouvoir = actor.coutPouvoir("lameSoeur");
+    let activationOk = false;
+
+    // Pas assez de Karma
+    if(karmaDisponible < coutPouvoir) {
+        ui.notifications.warn("Vous n'avez pas assez de Karma disponible activer cet atout !");
+        return;
+    }
+    // Juste ce qu'il faut de Karma
+    else if (karmaDisponible == coutPouvoir) {
+        actor.viderKarma(typeKarma);
+        activationOk = true;
+    }
+    // Uniquement le Karma de l'Esprit
+    else if(typeKarma != actor.data.data.trinite.adam.karma.type) {
+        actor.consommerKarma(typeKarma, coutPouvoir);
+        activationOk = true;
+    }
+    else {
+        new DepenseKarmaFormApplication(actor, actor.data.data.trinite, typeKarma, "atout", coutPouvoir, atoutId).render(true);
+    }
+
+    if(activationOk) {
+        console.log("TODO - Enchainer sur la carte Atout activée dans le chat");
+    }
 }
 
 /*------------------------------------

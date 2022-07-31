@@ -374,7 +374,7 @@
                             <input name="data.experience.totale" type="number" value="{{data.data.experience.totale}}" placeholder="0" min="0">
                             <div></div>
                             <label>Disponible</label>
-                            <input name="data.experience.disponible" type="number" value="{{data.data.experience.disponible}}" placeholder="0" min="0">
+                            <input name="data.experience.disponible" type="number" value="{{data.data.experience.disponible}}" placeholder="0" min="0" max="{{data.data.experience.totale}}">
                         </div>
                     </div>
                 </div>
@@ -509,7 +509,7 @@
                             <select name="data.lameSoeur.messager">
                                 {{#select data.data.lameSoeur.messager}}
                                 {{#each config.messagers as |messager keyMessager|}}
-                                    <option value="{{keyMessager}}">{{messager}}</option>
+                                    <option value="{{keyMessager}}">{{messager.label}}</option>
                                 {{/each}}
                                 {{/select}} 
                             </select>

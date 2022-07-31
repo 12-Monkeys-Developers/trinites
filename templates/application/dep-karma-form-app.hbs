@@ -2,30 +2,35 @@
     <div class="entete">
         <div class="titre-entete">Sélectionnez la source de {{#if (eq typeKarma "neutre")}} Karma{{/if}}</div>
         {{#if (eq typeKarma "lumiere")}}<div class="titre-entete">Karma-Lumière</div>{{/if}}
-        {{#if (eq typeKarma "tenebre")}}<div class="titre-entete"></div>Karma-Ténèbre</div>{{/if}}
+        {{#if (eq typeKarma "tenebre")}}<div class="titre-entete">Karma-Ténèbre</div>{{/if}}
+    </div>
+    <div class="pouvoir">
+        <div class="lib">Coût en Karma 
+            {{#if (eq typePouvoir "verset")}}du Verset{{else}}du pouvoir{{/if}}</div>
+        <div class="val"><input name="" type="number" value="{{coutPouvoir}}" readonly></div>
     </div>
     {{#if (eq typeKarma "lumiere")}}
         <div class="grid-karma-2col">
             <div class="col1 titre">Deva</div>
             <div class="col2 titre">Adam'</div>
-            <div class="col1"><input name="karmaDeva.valeur" type="number" value="{{karmaDeva.valeur}}" placeholder="0" min="0" max="{{karmaDeva.valeurInit}}" readonly></div>
-            <div class="col2"><input name="karmaAdam.valeur" type="number" value="{{karmaAdam.valeur}}" placeholder="0" min="0" max="{{karmaAdam.valeurInit}}" readonly></div>
-            <div class="moins"><!-- <i class="fas fa-minus-circle"></i> --><i class="fas fa-arrow-circle-down"></i></div>
-            <div class="plus"><!-- <i class="fas fa-plus-circle"></i> --><i class="fas fa-arrow-circle-up"></i></div>
-            <div class="moins"><!-- <i class="fas fa-minus-circle"></i> --><i class="fas fa-arrow-circle-down"></i></div>
-            <div class="plus"><!-- <i class="fas fa-plus-circle"></i> --><i class="fas fa-arrow-circle-up"></i></div>
+            <div class="col1"><input class="karmaDeva" name="karmaDeva.valeur" type="number" value="{{karmaDeva.valeur}}" placeholder="0" min="0" max="{{karmaDeva.valeurInit}}" readonly></div>
+            <div class="col2"><input class="karmaAdam" name="karmaAdam.valeur" type="number" value="{{karmaAdam.valeur}}" placeholder="0" min="0" max="{{karmaAdam.valeurInit}}" readonly></div>
+            <div class="moins"><a class="select deva" title="Utiliser"><i class="fas fa-arrow-circle-down"></i></a></div>
+            <div class="plus"><a class="deselect deva" title="Rétablir"><i class="fas fa-arrow-circle-up"></i></a></div>
+            <div class="moins"><a class="select adam" title="Utiliser"><i class="fas fa-arrow-circle-down"></i></a></div>
+            <div class="plus"><a class="deselect adam" title="Rétablir"><i class="fas fa-arrow-circle-up"></i></a></div>
         </div>
     {{/if}}
     {{#if (eq typeKarma "tenebre")}}
         <div class="grid-karma-2col">
             <div class="col1 titre">Adam'</div>
             <div class="col2 titre">Archonte</div>            
-            <div class="col1"><input name="karmaAdam.valeur" type="number" value="{{karmaAdam.valeur}}" placeholder="0" min="0" max="{{karmaAdam.valeurInit}}"></div>
-            <div class="col2"><input name="karmaArchonte.valeur" type="number" value="{{karmaArchonte.valeur}}" placeholder="0" min="0" max="{{karmaArchonte.valeurInit}}"></div>
-            <div class="moins"><!-- <i class="fas fa-minus-circle"></i> --><i class="fas fa-arrow-circle-down"></i></div>
-            <div class="plus"><!-- <i class="fas fa-plus-circle"></i> --><i class="fas fa-arrow-circle-up"></i></div>
-            <div class="moins"><!-- <i class="fas fa-minus-circle"></i> --><i class="fas fa-arrow-circle-down"></i></div>
-            <div class="plus"><!-- <i class="fas fa-plus-circle"></i> --><i class="fas fa-arrow-circle-up"></i></div>
+            <div class="col1"><input class="karmaAdam" name="karmaAdam.valeur" type="number" value="{{karmaAdam.valeur}}" placeholder="0" min="0" max="{{karmaAdam.valeurInit}}" readonly></div>
+            <div class="col2"><input class="karmaArchonte" name="karmaArchonte.valeur" type="number" value="{{karmaArchonte.valeur}}" placeholder="0" min="0" max="{{karmaArchonte.valeurInit}}" readonly></div>
+            <div class="moins"><a class="select adam" title="Utiliser"><i class="fas fa-arrow-circle-down"></i></a></div>
+            <div class="plus"><a class="deselect adam" title="Rétablir"><i class="fas fa-arrow-circle-up"></i></a></div>
+            <div class="moins"><a class="select archonte" title="Utiliser"><i class="fas fa-arrow-circle-down"></i></a></div>
+            <div class="plus"><a class="deselect archonte" title="Rétablir"><i class="fas fa-arrow-circle-up"></i></a></div>
         </div>
     {{/if}}
     {{#if (eq typeKarma "neutre")}}
@@ -33,22 +38,24 @@
             <div class="col1 titre">Deva</div>
             <div class="col2 titre">Adam'</div>
             <div class="col3 titre">Archonte</div>
-            <div class="col1"><input name="karmaDeva.valeur" type="number" value="{{karmaDeva.valeur}}" placeholder="0" min="0" max="{{karmaDeva.valeurInit}}" readonly></div>
-            <div class="col2"><input name="karmaAdam.valeur" type="number" value="{{karmaAdam.valeur}}" placeholder="0" min="0" max="{{karmaAdam.valeurInit}}" readonly></div>
-            <div class="col3"><input name="karmaArchonte.valeur" type="number" value="{{karmaArchonte.valeur}}" placeholder="0" min="0" max="{{karmaArchonte.valeurInit}}" readonly></div>
-            <div class="moins"><!-- <i class="fas fa-minus-circle"></i> --><i class="fas fa-arrow-circle-down"></i></div>
-            <div class="plus"><!-- <i class="fas fa-plus-circle"></i> --><i class="fas fa-arrow-circle-up"></i></div>
-            <div class="moins"><!-- <i class="fas fa-minus-circle"></i> --><i class="fas fa-arrow-circle-down"></i></div>
-            <div class="plus"><!-- <i class="fas fa-plus-circle"></i> --><i class="fas fa-arrow-circle-up"></i></div>
-            <div class="moins"><!-- <i class="fas fa-minus-circle"></i> --><i class="fas fa-arrow-circle-down"></i></div>
-            <div class="plus"><!-- <i class="fas fa-plus-circle"></i> --><i class="fas fa-arrow-circle-up"></i></div>
+            <div class="col1"><input class="karmaDeva" name="karmaDeva.valeur" type="number" value="{{karmaDeva.valeur}}" placeholder="0" min="0" max="{{karmaDeva.valeurInit}}" readonly></div>
+            <div class="col2"><input class="karmaAdam" name="karmaAdam.valeur" type="number" value="{{karmaAdam.valeur}}" placeholder="0" min="0" max="{{karmaAdam.valeurInit}}" readonly></div>
+            <div class="col3"><input class="karmaArchonte" name="karmaArchonte.valeur" type="number" value="{{karmaArchonte.valeur}}" placeholder="0" min="0" max="{{karmaArchonte.valeurInit}}" readonly></div>
+            <div class="moins"><a class="select deva" title="Utiliser"><i class="fas fa-arrow-circle-down"></i></a></div>
+            <div class="plus"><a class="deselect deva" title="Rétablir"><i class="fas fa-arrow-circle-up"></i></a></div>
+            <div class="moins"><a class="select adam" title="Utiliser"><i class="fas fa-arrow-circle-down"></i></a></div>
+            <div class="plus"><a class="deselect adam" title="Rétablir"><i class="fas fa-arrow-circle-up"></i></a></div>
+            <div class="moins"><a class="select archonte" title="Utiliser"><i class="fas fa-arrow-circle-down"></i></a></div>
+            <div class="plus"><a class="deselect archonte" title="Rétablir"><i class="fas fa-arrow-circle-up"></i></a></div>
         </div>
     {{/if}}
-    <div class="grid-pouvoir">
-        <div class="data">Coût du pouvoir</div>
-        <div class="data"><input name="" type="number" value="{{coutPouvoir}}" readonly></div>
-        <div class="data">Karma attribué</div>
-        <div class="data"><input name="" type="number" value="0" readonly></div>
+    <div class="pouvoir">
+        <div class="lib">Karma attribué</div>
+        <div class="val"><input name="karmaAttribue" type="number" value="{{karmaAttribue}}" readonly></div>
     </div>
-    <!-- <div>typePouvoir : {{typePouvoir}}</div> -->
+    <footer class="sheet-footer flexrow">
+        {{#if btnVisible}}
+            <button class="btn-valider" type="submit" name="valider"><i class="fas fa-bolt"></i> {{#if (eq typePouvoir "verset")}}Réciter{{else}}Activer{{/if}}</button>
+        {{/if}}
+    </footer>
 </form>

@@ -6,7 +6,10 @@ export default class TrinitesActor extends Actor {
 
         if(this.type == "trinite")
         {
-            //Calcul des bonus de Signes
+            /*----------------------------------
+            ---- Calcul des bonus de Signes ----
+            ----------------------------------*/
+
             for(let[keySigne, signe] of Object.entries(data.signes)) {
                 if(data.themeAstral.archetype == keySigne) {
                     signe.valeur = 6;
@@ -107,6 +110,13 @@ export default class TrinitesActor extends Actor {
         else {
             data.etatSante = "inconscient";
         }
+
+        /*--------------
+        ---- Divers ----
+        --------------*/
+        if(data.experience.disponible > data.experience.totale) {
+            data.experience.disponible = data.experience.totale;
+        }
     }
 
     // Nombre de points de Karma disponible du type donné (Lumière ou Ténèbre)
@@ -114,18 +124,32 @@ export default class TrinitesActor extends Actor {
         let data = this.data.data;
         let karmaDisponible = 0;
 
-        if(typeKarma == "lumiere") {
-            karmaDisponible = data.trinite.deva.karma.value;
-        } 
-        else if (typeKarma == "tenebre") {
-            karmaDisponible = data.trinite.archonte.karma.value;
+        if(typeKarma == "neutre") {
+            karmaDisponible += data.trinite.deva.karma.value;
+            karmaDisponible += data.trinite.archonte.karma.value;
+            karmaDisponible += data.trinite.adam.karma.value;
         }
-
-        if(typeKarma == data.trinite.adam.karma.type) {
-            karmaDisponible = karmaDisponible + data.trinite.adam.karma.value;
+        else {
+            if(typeKarma == "lumiere") {
+                karmaDisponible += data.trinite.deva.karma.value;
+            } 
+            else if (typeKarma == "tenebre") {
+                karmaDisponible += data.trinite.archonte.karma.value;
+            }
+    
+            if(typeKarma == data.trinite.adam.karma.type) {
+                karmaDisponible += data.trinite.adam.karma.value;
+            }
         }
 
         return karmaDisponible;
+    }
+
+    // Cout du pouvoir selon l'Affinité du personnage
+    coutPouvoir(typePouvoir) {
+        let data = this.data.data;
+        
+        if(data.themeAstral.affinite == typePouvoir) { return 1; } else { return 2; } 
     }
 
     // Vide toutes les sources de Karma (Esprit et Adam) du type donné
@@ -154,5 +178,11 @@ export default class TrinitesActor extends Actor {
         else if (typeKarma == "tenebre") {
             this.update({"data.trinite.archonte.karma.value": data.trinite.archonte.karma.value - coutPouvoir});
         }
+    }
+
+    // Mise à jour de la réserve de karma du type donné à la valeur cible
+    majKarma(reserve, valeur) {
+        let reserveData = `data.trinite.${reserve}.karma.value`;
+        this.update({[reserveData]: valeur});
     }
 }

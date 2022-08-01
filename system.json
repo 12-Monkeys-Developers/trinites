@@ -23,7 +23,7 @@
     "initiative": "1d10",
     "primaryTokenAttribute": "",
     "url": "https://github.com/Dellatosa/trinites",
-    "manifest": "https://raw.githubusercontent.com/Dellatosa/trinites/main/system.json",
+    "manifest": "https://raw.githubusercontent.com/Dellatosa/trinites/master/system.json",
     "download": "https://github.com/Dellatosa/trinites/archive/refs/tags/v0.0.1.zip"
   }
   

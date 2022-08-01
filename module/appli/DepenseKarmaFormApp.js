@@ -1,3 +1,5 @@
+import * as Chat from "../chat.js";
+
 export default class DepenseKarmaFormApplication extends FormApplication {
     constructor(actor, trinite, typeKarma, typePouvoir, coutPouvoir, idPouvoir) {
         super();
@@ -151,6 +153,19 @@ export default class DepenseKarmaFormApplication extends FormApplication {
           let aura = this.actor.items.get(this.idPouvoir);
           aura.update({"data.deploiement": "cosme"});
         }
+
+        if(this.typePouvoir == "atout") {
+          Chat.carteAtoutActive({
+            actor: this.actor,
+            atoutId: this.idPouvoir});
+        }
+
+        if(this.typePouvoir == "verset") {
+          Chat.carteVersetActive({
+            actor: this.actor,
+            versetId: this.idPouvoir});
+        }
+        
       }
   }
     

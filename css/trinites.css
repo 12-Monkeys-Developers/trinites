@@ -1162,7 +1162,9 @@
   color: black;
   font-size: 0.9em;
 }
-.carte .ligne-souffle {
+.carte .ligne-souffle,
+.carte .ligne-atout,
+.carte .ligne-verset {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -1171,10 +1173,14 @@
   font-size: 1.3em;
   margin: 6px;
 }
-.carte .ligne-souffle .logo {
+.carte .ligne-souffle .logo,
+.carte .ligne-atout .logo,
+.carte .ligne-verset .logo {
   margin-right: 5px;
 }
-.carte .ligne-souffle .zone {
+.carte .ligne-souffle .zone,
+.carte .ligne-atout .zone,
+.carte .ligne-verset .zone {
   margin-left: 5px;
 }
 .dialog-buttons button:hover,

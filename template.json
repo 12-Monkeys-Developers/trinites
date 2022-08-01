@@ -1,6 +1,6 @@
 {
     "Actor": {
-        "types": ["trinite", "archonte", "lige", "humain"],
+        "types": ["trinite", "archonteRoi", "lige", "humain"],
         "templates": {
             "information": {
                 "age": 0,
@@ -333,6 +333,15 @@
                     }
                 }
             },
+            "archRoi": {
+                "archonteRoi": {
+                    "legion": "",
+                    "karma": {
+                        "value": 0,
+                        "max": 0
+                    }
+                }
+            },
             "lame": {
                 "lameSoeur": {
                     "messager": "",
@@ -352,8 +361,8 @@
             "etatSante" : "indemne",
             "nbBlessure": 0
         },
-        "archonte": {
-            "templates": [ "information", "signes", "competences", "theme" ],
+        "archonteRoi": {
+            "templates": [ "information", "signes", "competences", "ressources", "theme", "archRoi" ],
             "pointsLigneVie": 8,
             "nbBlessure": 0
         },

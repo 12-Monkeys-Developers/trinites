@@ -167,6 +167,9 @@ function onActiverVerset(event) {
 
     if(activationOk) {
         console.log("TODO - Enchainer sur la carte Verset activée dans le chat");
+        carteVersetActive({
+            actor: actor,
+            versetId: versetId});
     }
 }
 
@@ -204,7 +207,9 @@ function onActiverAtout(event) {
     }
 
     if(activationOk) {
-        console.log("TODO - Enchainer sur la carte Atout activée dans le chat");
+        carteAtoutActive({
+            actor: actor,
+            atoutId: atoutId});
     }
 }
 
@@ -299,6 +304,33 @@ export async function carteAtout({actor = null,
     await ChatMessage.create(chatData);
 }
 
+export async function carteAtoutActive({actor = null,
+    atoutId = null} = {}) {
+
+    console.log(actor);
+    let atout = actor.items.get(atoutId);
+
+    // Récupération des données de l'item
+    let cardData = {
+        atout: atout.data,
+        nomPersonnage: actor.data.name
+    }
+
+    // Recupération du template
+    const messageTemplate = "systems/trinites/templates/partials/chat/carte-atout-active.hbs"; 
+
+    // Construction du message
+    let chatData = {
+        user: game.user.id,
+        speaker: ChatMessage.getSpeaker({ actor: actor }),
+        content: await renderTemplate(messageTemplate, cardData),
+        roll: true
+    }
+
+    // Affichage du message
+    await ChatMessage.create(chatData);
+}
+
 export async function carteAura({actor = null,
     auraId = null,
     whisper = null} = {}) {
@@ -357,6 +389,33 @@ export async function carteVerset({actor = null,
 
     if(whisper) {
         chatData = ChatMessage.applyRollMode(chatData, "gmroll");
+    }
+
+    // Affichage du message
+    await ChatMessage.create(chatData);
+}
+
+export async function carteVersetActive({actor = null,
+    versetId = null} = {}) {
+
+    let verset = actor.items.get(versetId);
+
+    // Récupération des données de l'item
+    let cardData = {
+        verset: verset.data,
+        nomPersonnage: actor.data.name
+    }
+
+    console.log(cardData);
+    // Recupération du template
+    const messageTemplate = "systems/trinites/templates/partials/chat/carte-verset-active.hbs"; 
+
+    // Construction du message
+    let chatData = {
+        user: game.user.id,
+        speaker: ChatMessage.getSpeaker({ actor: actor }),
+        content: await renderTemplate(messageTemplate, cardData),
+        roll: true
     }
 
     // Affichage du message

@@ -7,7 +7,16 @@ export function addChatListeners(html) {
     html.on('click', 'a.activer.souffle', onActiverSouffle);
     html.on('click', 'a.activer.verset', onActiverVerset);
     html.on('click', 'a.activer.atout', onActiverAtout);
+    html.on('click', 'a.details.aura', onDetailsAura);
+    html.on('click', 'a.details.souffle', onDetailsSouffle);
+    html.on('click', 'a.details.atout', onDetailsAtout);
+    html.on('click', 'a.details.verset', onDetailsVerset);
+    
 }
+
+/*------------------------
+---- Boutons d'action ----
+------------------------*/
 
 function onDetteEsprit(event) {
     event.preventDefault();
@@ -177,7 +186,7 @@ function onActiverAtout(event) {
 
     // Pas assez de Karma
     if(karmaDisponible < coutPouvoir) {
-        ui.notifications.warn("Vous n'avez pas assez de Karma disponible activer cet atout !");
+        ui.notifications.warn("Vous n'avez pas assez de Karma disponible utiliser cet atout !");
         return;
     }
     // Juste ce qu'il faut de Karma
@@ -199,12 +208,69 @@ function onActiverAtout(event) {
     }
 }
 
+function onDetailsAtout(event) {
+    event.preventDefault();
+    const element = event.currentTarget;
+    
+    if(element.innerHTML.includes("angle-right")) {
+        element.closest(".carte.atout").getElementsByClassName("desc")[0].classList.add("visible");
+        element.innerHTML = '<i class="fas fa-angle-down"></i>';
+    }
+    else {
+        element.closest(".carte.atout").getElementsByClassName("desc")[0].classList.remove("visible");
+        element.innerHTML = '<i class="fas fa-angle-right"></i>';
+    }
+}
+
+function onDetailsVerset(event) {
+    event.preventDefault();
+    const element = event.currentTarget;
+    
+    if(element.innerHTML.includes("angle-right")) {
+        element.closest(".carte.verset").getElementsByClassName("desc")[0].classList.add("visible");
+        element.innerHTML = '<i class="fas fa-angle-down"></i>';
+    }
+    else {
+        element.closest(".carte.verset").getElementsByClassName("desc")[0].classList.remove("visible");
+        element.innerHTML = '<i class="fas fa-angle-right"></i>';
+    }
+}
+
+function onDetailsAura(event) {
+    event.preventDefault();
+    const element = event.currentTarget;
+    
+    if(element.innerHTML.includes("angle-right")) {
+        element.closest(".carte.aura").getElementsByClassName("desc")[0].classList.add("visible");
+        element.innerHTML = '<i class="fas fa-angle-down"></i>';
+    }
+    else {
+        element.closest(".carte.aura").getElementsByClassName("desc")[0].classList.remove("visible");
+        element.innerHTML = '<i class="fas fa-angle-right"></i>';
+    }
+}
+
+function onDetailsSouffle(event) {
+    event.preventDefault();
+    const element = event.currentTarget;
+    
+    if(element.innerHTML.includes("angle-right")) {
+        element.closest(".carte.aura").getElementsByClassName("descSouffle")[0].classList.add("visible");
+        element.innerHTML = '<i class="fas fa-angle-down"></i>';
+    }
+    else {
+        element.closest(".carte.aura").getElementsByClassName("descSouffle")[0].classList.remove("visible");
+        element.innerHTML = '<i class="fas fa-angle-right"></i>';
+    }
+}
+
 /*------------------------------------
 ---- Affichage des cartes de chat ----
 ------------------------------------*/
 
 export async function carteAtout({actor = null,
-    atoutId = null} = {}) {
+    atoutId = null,
+    whisper = null} = {}) {
 
     let atout = actor.items.get(atoutId);
 
@@ -214,7 +280,6 @@ export async function carteAtout({actor = null,
         actorId: actor.id
     }
 
-    console.log(cardData);
     // Recupération du template
     const messageTemplate = "systems/trinites/templates/partials/chat/carte-atout.hbs"; 
 
@@ -226,12 +291,17 @@ export async function carteAtout({actor = null,
         roll: true
     }
 
+    if(whisper) {
+        chatData = ChatMessage.applyRollMode(chatData, "gmroll");
+    }
+
     // Affichage du message
     await ChatMessage.create(chatData);
 }
 
 export async function carteAura({actor = null,
-    auraId = null} = {}) {
+    auraId = null,
+    whisper = null} = {}) {
 
     let aura = actor.items.get(auraId);
 
@@ -253,12 +323,17 @@ export async function carteAura({actor = null,
         roll: true
     }
 
+    if(whisper) {
+        chatData = ChatMessage.applyRollMode(chatData, "gmroll");
+    }
+
     // Affichage du message
     await ChatMessage.create(chatData);
 }
 
 export async function carteVerset({actor = null,
-    versetId = null} = {}) {
+    versetId = null,
+    whisper = null} = {}) {
 
     let verset = actor.items.get(versetId);
 
@@ -278,6 +353,10 @@ export async function carteVerset({actor = null,
         speaker: ChatMessage.getSpeaker({ actor: actor }),
         content: await renderTemplate(messageTemplate, cardData),
         roll: true
+    }
+
+    if(whisper) {
+        chatData = ChatMessage.applyRollMode(chatData, "gmroll");
     }
 
     // Affichage du message

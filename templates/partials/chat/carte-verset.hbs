@@ -1,8 +1,8 @@
+<div class="whisper-logo"><span>message privé </span><i class="far fa-eye-slash"></i></div>
 <div class="carte verset" data-item-id="{{verset._id}}" data-actor-id="{{actorId}}">
     <div class="entete">{{verset.name}}</div>
     <div class="grid-carte-verset">
         <div class="karma">
-            <!-- <img src="systems/trinites/images/karma-{{verset.data.karma}}.png" title="{{configVal 'karmas' verset.data.karma}}"> -->
             {{#if (eq verset.data.karma "lumiere")}}<i class="fas fa-sun" title="Karma {{verset.data.karma}}"></i>{{/if}}
             {{#if (eq verset.data.karma "tenebre")}}<i class="fas fa-moon" title="Karma {{verset.data.karma}}"></i>{{/if}}
         </div>
@@ -19,7 +19,7 @@
         <div class="stats">{{verset.data.aireEffet}}</div>
     </div>
     <div class="grid-carte-verset">
-        <div class="titre"><label>Effet du Verset</label></div>
+        <div class="titre"><a class="details verset"><i class="fas fa-angle-right"></i></a><label>Effet du Verset</label></div>
     </div>
     <div class="desc">{{editor content=verset.data.description target="verset.data.description" owner=true}}</div>
 </div>

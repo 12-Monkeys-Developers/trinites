@@ -245,7 +245,8 @@ export default class TrinitesActorSheet extends ActorSheet {
 
         Chat.carteAtout({
             actor: this.actor,
-            atoutId: dataset.itemId
+            atoutId: dataset.itemId,
+            whisper: !event.shiftKey
         })
     }
 
@@ -255,7 +256,8 @@ export default class TrinitesActorSheet extends ActorSheet {
 
         Chat.carteAura({
             actor: this.actor,
-            auraId: dataset.itemId
+            auraId: dataset.itemId,
+            whisper: !event.shiftKey
         })
     }
 
@@ -265,7 +267,8 @@ export default class TrinitesActorSheet extends ActorSheet {
 
         Chat.carteVerset({
             actor: this.actor,
-            versetId: dataset.itemId
+            versetId: dataset.itemId,
+            whisper: !event.shiftKey
         })
     }
 }

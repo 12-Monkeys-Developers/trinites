@@ -805,6 +805,13 @@
   background-image: url("../images/header-back.jpg");
   background-position: 30% 9%;
 }
+.chat-message .message-header,
+.chat-message.whisper .message-header,
+.chat-message .message-content,
+.chat-message.whisper .message-content {
+  color: var(--color-text-message);
+  backdrop-filter: grayscale(70%);
+}
 .chat-message input[type="text"]:focus,
 .chat-message.whisper input[type="text"]:focus,
 .chat-message input[type="number"]:focus,
@@ -825,18 +832,28 @@
 .chat-message.whisper a:hover {
   text-shadow: 0 0 8px var(--color-shadow-trinite);
 }
+.chat-message .carte a:hover,
+.chat-message.whisper .carte a:hover {
+  text-shadow: 0 0 8px var(--color-shadow-occulte);
+}
 .chat-message button:hover,
 .chat-message.whisper button:hover,
 .chat-message button:focus,
 .chat-message.whisper button:focus {
   box-shadow: 0 0 5px var(--color-shadow-trinite);
 }
-.chat-message .message-header,
-.chat-message.whisper .message-header,
-.chat-message .message-content,
-.chat-message.whisper .message-content {
-  color: var(--color-text-message);
-  backdrop-filter: grayscale(70%);
+.chat-message .whisper-logo {
+  display: none;
+}
+.chat-message.whisper .whisper-logo {
+  display: flex;
+  justify-content: right;
+  align-items: center;
+  font-size: var(--font-size-12);
+  margin: 2px 0px;
+}
+.chat-message.whisper .whisper-logo i {
+  margin-left: 2px;
 }
 .titre-jet-comp,
 .titre-jet-ress {
@@ -983,9 +1000,6 @@
   box-shadow: 0 0 2px #FFF inset;
   background: url("../images/parchemin-grey.jpg") repeat;
 }
-.carte a:hover {
-  text-shadow: 0 0 8px var(--color-shadow-occulte);
-}
 .carte .entete {
   display: flex;
   justify-content: center;
@@ -998,21 +1012,26 @@
   margin: 3px;
   padding: 3px;
 }
-.carte .desc {
+.carte .desc,
+.carte .descSouffle {
+  display: none;
+}
+.carte .desc.visible,
+.carte .descSouffle.visible {
+  display: block;
   margin: 5px;
   color: black;
 }
 .carte .titre {
+  display: flex;
+  align-items: center;
   font-family: "Cabaletta";
   color: var(--color-titre-occulte);
   font-size: 1.2em;
 }
-.carte summary {
-  font-family: "Cabaletta";
-  color: var(--color-titre-occulte);
-  font-size: 1.2em;
-  margin: 3px;
-  margin-top: 7px;
+.carte .titre i,
+.carte .titre label {
+  margin: 0px 2px;
 }
 .carte .action {
   display: flex;

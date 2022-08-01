@@ -51,6 +51,7 @@ export async function jetCompetence({actor = null,
 
         // Données de base du jet
         let rollData = {
+            nomPersonnage : actor.data.name,
             competence: label,
             valeur: valeur,
             karmaAdam: karmaAdam
@@ -84,8 +85,6 @@ export async function jetCompetence({actor = null,
             dieResult: rollResult.terms[0].rolls[0].dice[0].total,
             rollTotal: rollResult.terms[0].rolls[0].total,
             reussite: rollResult.terms[0].rolls[0].total >= 12
-            //rollFormula: rollResult.terms[0].rolls[0].formula
-            //rollResult: rollResult.terms[0].rolls[0].result
         }
         rollData.resultDeva = resultDeva;
 
@@ -93,8 +92,6 @@ export async function jetCompetence({actor = null,
             dieResult: rollResult.terms[0].rolls[1].dice[0].total,
             rollTotal: rollResult.terms[0].rolls[1].total,
             reussite: rollResult.terms[0].rolls[1].total >= 12
-            //rollFormula: rollResult.terms[0].rolls[1].formula
-            //rollResult: rollResult.terms[0].rolls[1].result
         }
         rollData.resultArchonte = resultArchonte;
         
@@ -286,8 +283,7 @@ export async function jetRessource({actor = null,
 
         // Dette 
         if(typeTest.type == "dette") {
-            rollData.dette = CONFIG.Trinites.dettes[typeTest.dette];
-            console.log(rollData.dette);             
+            rollData.dette = CONFIG.Trinites.dettes[typeTest.dette];      
         }
 
         let rollResult = await new Roll(rollFormula, rollData).roll({async: true});

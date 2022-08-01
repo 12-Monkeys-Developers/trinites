@@ -55,7 +55,11 @@
     </div>
     <footer class="sheet-footer flexrow">
         {{#if btnVisible}}
-            <button class="btn-valider" type="submit" name="valider"><i class="fas fa-bolt"></i> {{#if (eq typePouvoir "verset")}}Réciter{{else}}Activer{{/if}}</button>
+            <button class="btn-valider" type="submit" name="valider"><i class="fas fa-bolt"></i> 
+                {{#if (eq typePouvoir "verset")}}Réciter{{/if}}
+                {{#if (eq typePouvoir "aura")}}Activer{{/if}}
+                {{#if (eq typePouvoir "atout")}}Utiliser{{/if}}
+            </button>
         {{/if}}
     </footer>
 </form>

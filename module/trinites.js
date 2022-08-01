@@ -37,6 +37,8 @@ Hooks.once("init", function() {
     CONFIG.Actor.documentClass = TrinitesActor;
     CONFIG.Item.documentClass = TrinitesItem;
 
+    console.log(CONFIG);
+
     Actors.unregisterSheet("core", ActorSheet);
     Actors.registerSheet("trinites", TrinitesActorSheet, {makeDefault: true});
 

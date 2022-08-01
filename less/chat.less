@@ -7,6 +7,11 @@
     background-image: url("../images/header-back.jpg");        
     background-position: 30% 9%;
 
+    .message-header, .message-content {
+        color: var(--color-text-message);
+        backdrop-filter: grayscale(70%);
+    }
+
     input[type="text"]:focus, input[type="number"]:focus, input[type="password"]:focus, input[type="date"]:focus, input[type="time"]:focus, select:focus, textarea:focus {
         box-shadow: 0 0 5px var(--color-shadow-trinite);
     }
@@ -15,13 +20,32 @@
         text-shadow: 0 0 8px var(--color-shadow-trinite);
     }
 
+    .carte {
+        a:hover {
+            text-shadow: 0 0 8px var(--color-shadow-occulte);
+        }
+    }
+
     button:hover, button:focus {
         box-shadow: 0 0 5px var(--color-shadow-trinite);
     }
 
-    .message-header, .message-content {
-        color: var(--color-text-message);
-        backdrop-filter: grayscale(70%);
+    
+}
+
+.chat-message .whisper-logo {
+    display: none;
+}
+
+.chat-message.whisper .whisper-logo {
+    display: flex;
+    justify-content: right;
+    align-items: center;
+    font-size: var(--font-size-12);
+    margin: 2px 0px;
+
+    i {
+        margin-left: 2px;
     }
 }
 
@@ -221,10 +245,6 @@
     background: url("../images/parchemin-grey.jpg") repeat;
     //filter: opacity(95%);
 
-    a:hover {
-        text-shadow: 0 0 8px var(--color-shadow-occulte);
-    }
-
     .entete {
         display: flex;
         justify-content: center;
@@ -239,24 +259,27 @@
         padding: 3px;        
     }
 
-    .desc {
+    .desc, .descSouffle {
+        display: none;
+    }
+
+    .desc.visible, .descSouffle.visible {
+        display: block;
         margin: 5px;
         color: black;
     }
 
     .titre {
-        font-family: "Cabaletta";
-        color: var(--color-titre-occulte);
-        font-size: 1.2em;
-    }
+        display: flex;
+        align-items: center;
 
-    summary {
         font-family: "Cabaletta";
         color: var(--color-titre-occulte);
         font-size: 1.2em;
-        
-        margin: 3px;
-        margin-top: 7px;
+
+        i, label {
+            margin: 0px 2px;
+        }
     }
 
     .action {

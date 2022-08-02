@@ -12,6 +12,21 @@
         text-shadow: 0 0 10px var(--color-shadow-trinite);
     }
 
+    .occulte {
+
+        input[type="text"]:focus, input[type="number"]:focus, input[type="password"]:focus, input[type="date"]:focus, input[type="time"]:focus, select:focus, textarea:focus {
+            box-shadow: 0 0 5px var(--color-shadow-occulte);
+        }
+        
+        a:hover {
+            text-shadow: 0 0 8px var(--color-shadow-occulte);
+        }
+    
+        .tabs .item.active {
+            text-shadow: 0 0 10px var(--color-shadow-occulte);
+        }
+    }
+
     .centrer {
         display: flex;
         justify-content: center;

@@ -9,7 +9,7 @@ export default class TrinitesItem extends Item {
 
         if(this.data.type == "atout") {
             if(data.messager != "") {
-                data.karma = this.data.config.messagers[data.messager].karma;
+                data.karma = this.data.config.epeesFeu[data.messager].karma;
             }
         }
     }

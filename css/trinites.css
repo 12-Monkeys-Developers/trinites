@@ -91,7 +91,10 @@
 .trinites.sheet.actor .lignes-de-vie,
 .trinites.sheet.actor .theme-astral,
 .trinites.sheet.actor .vie-ante-bloc,
+.trinites.sheet.actor .histo-bloc,
 .trinites.sheet.actor .expe-bloc,
+.trinites.sheet.actor .karma-ten,
+.trinites.sheet.actor .pouvoirs-gen,
 .trinites.sheet.actor .grand-livre,
 .trinites.sheet.actor .zodiaque,
 .trinites.sheet.actor .lame-soeur {
@@ -397,22 +400,26 @@
   font-size: 0.9em;
   margin: 3px;
 }
-.trinites.sheet.actor .ligne-theme {
+.trinites.sheet.actor .ligne-theme,
+.trinites.sheet.actor .ligne-histo {
   display: grid;
   grid-template-columns: 1fr 2fr;
   margin: 2px;
   align-items: center;
 }
-.trinites.sheet.actor .ligne-theme label {
+.trinites.sheet.actor .ligne-theme label,
+.trinites.sheet.actor .ligne-histo label {
   margin: 2px;
   font-family: "Cabaletta";
 }
-.trinites.sheet.actor .ligne-theme select {
+.trinites.sheet.actor .ligne-theme select,
+.trinites.sheet.actor .ligne-histo select {
   margin: 2px;
   height: 26px;
   font-size: 0.9em;
 }
-.trinites.sheet.actor .theme-astral select {
+.trinites.sheet.actor .theme-astral select,
+.trinites.sheet.actor .histo-bloc select {
   font-family: "Cabaletta";
 }
 .trinites.sheet.actor .grid-theme {
@@ -457,6 +464,16 @@
   font-family: "Cabaletta";
   margin: 2px;
   height: 111px;
+  resize: none;
+}
+.trinites.sheet.actor .histo {
+  margin: 2px;
+  font-size: 0.9em;
+}
+.trinites.sheet.actor .histo textarea {
+  font-family: "Cabaletta";
+  margin: 2px;
+  height: 113px;
   resize: none;
 }
 .trinites.sheet.actor .experience {
@@ -552,31 +569,31 @@
 .trinites.sheet.actor .grid-grand-livre div {
   margin: 2px;
 }
-.trinites.sheet.actor .grid-grand-livre .titre-grand-livre {
+.trinites.sheet.actor .titre-grand-livre {
   display: flex;
   justify-content: center;
   font-family: "Cabaletta";
 }
-.trinites.sheet.actor .grid-grand-livre .grid-verset {
+.trinites.sheet.actor .grid-verset {
   display: grid;
   font-size: 0.9em;
   grid-template-columns: 2em 1fr 2em 2em;
   align-items: center;
 }
-.trinites.sheet.actor .grid-grand-livre .col-roll-verset {
+.trinites.sheet.actor .col-roll-verset {
   grid-column: 1 / 2;
   display: flex;
   justify-content: center;
 }
-.trinites.sheet.actor .grid-grand-livre .col-nom-verset {
+.trinites.sheet.actor .col-nom-verset {
   grid-column: 2 / 3;
 }
-.trinites.sheet.actor .grid-grand-livre .col-edit-verset {
+.trinites.sheet.actor .col-edit-verset {
   grid-column: 3 / 4;
   display: flex;
   justify-content: center;
 }
-.trinites.sheet.actor .grid-grand-livre .col-delete-verset {
+.trinites.sheet.actor .col-delete-verset {
   grid-column: 4 / 5;
   display: flex;
   justify-content: center;
@@ -604,7 +621,8 @@
 .trinites.sheet.actor .grid-zodiaque .ligne {
   font-size: 0.9em;
 }
-.trinites.sheet.actor .lame-soeur {
+.trinites.sheet.actor .lame-soeur,
+.trinites.sheet.actor .lame-noire {
   display: flex;
   flex-direction: column;
 }
@@ -650,6 +668,30 @@
 .trinites.sheet.actor .grid-atout .nom-atout {
   margin: 3px;
 }
+.trinites.sheet.actor .grid-karma-ten {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  font-family: "Cabaletta";
+  margin: 3px;
+}
+.trinites.sheet.actor .grid-karma-ten .karma-ten-titre {
+  margin: 2px;
+}
+.trinites.sheet.actor .grid-karma-ten .karma-ten-valeur {
+  margin: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.trinites.sheet.actor .grid-karma-ten .karma-ten-valeur input {
+  width: 3em;
+  text-align: center;
+  margin: 2px;
+}
+.trinites.sheet.actor .grid-karma-ten .karma-ten-valeur label {
+  margin: 2px;
+}
 .trinites.sheet.item input[type="text"]:focus,
 .trinites.sheet.item input[type="number"]:focus,
 .trinites.sheet.item input[type="password"]:focus,
@@ -664,6 +706,21 @@
 }
 .trinites.sheet.item .tabs .item.active {
   text-shadow: 0 0 10px var(--color-shadow-trinite);
+}
+.trinites.sheet.item .occulte input[type="text"]:focus,
+.trinites.sheet.item .occulte input[type="number"]:focus,
+.trinites.sheet.item .occulte input[type="password"]:focus,
+.trinites.sheet.item .occulte input[type="date"]:focus,
+.trinites.sheet.item .occulte input[type="time"]:focus,
+.trinites.sheet.item .occulte select:focus,
+.trinites.sheet.item .occulte textarea:focus {
+  box-shadow: 0 0 5px var(--color-shadow-occulte);
+}
+.trinites.sheet.item .occulte a:hover {
+  text-shadow: 0 0 8px var(--color-shadow-occulte);
+}
+.trinites.sheet.item .occulte .tabs .item.active {
+  text-shadow: 0 0 10px var(--color-shadow-occulte);
 }
 .trinites.sheet.item .centrer {
   display: flex;

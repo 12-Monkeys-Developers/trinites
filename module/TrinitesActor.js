@@ -4,7 +4,7 @@ export default class TrinitesActor extends Actor {
         super.prepareData();
         let data = this.data.data;
 
-        if(this.type == "trinite")
+        if(this.type == "trinite" || this.type == "archonteRoi")
         {
             /*----------------------------------
             ---- Calcul des bonus de Signes ----
@@ -44,7 +44,9 @@ export default class TrinitesActor extends Actor {
                     }
                 }
             }
+        }
 
+        if(this.type == "trinite") {
             /*-----------------------------------
             ---- Calcul des valeurs de Karma ----
             -----------------------------------*/
@@ -64,6 +66,23 @@ export default class TrinitesActor extends Actor {
             else {
                 data.trinite.adam.karma.type = data.trinite.deva.karma.max > data.trinite.archonte.karma.max ? "lumiere" : "tenebre";
             }
+
+            /*--------------
+            ---- Divers ----
+            --------------*/
+
+            if(data.experience.disponible > data.experience.totale) {
+                data.experience.disponible = data.experience.totale;
+            }
+        }
+
+        if(this.type == "archonteRoi") {
+            /*------------------------------------
+            ---- Calcul de la valeur de Karma ----
+            ------------------------------------*/
+
+            //recalcul des valeurs de karma afin qu'elles ne dépasent pas le max            
+            if(data.archonteRoi.karma.value > data.archonteRoi.karma.max) { data.archonteRoi.karma.value = data.archonteRoi.karma.max; }
         }
 
         /*----------------------------------------
@@ -109,13 +128,6 @@ export default class TrinitesActor extends Actor {
         }
         else {
             data.etatSante = "inconscient";
-        }
-
-        /*--------------
-        ---- Divers ----
-        --------------*/
-        if(data.experience.disponible > data.experience.totale) {
-            data.experience.disponible = data.experience.totale;
         }
     }
 

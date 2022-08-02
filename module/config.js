@@ -26,6 +26,54 @@ Trinites.messagers = {
     }
 }
 
+Trinites.vagabonds = {
+    aucun: "",
+    jabaan: {
+        label: "Jaba’an",
+        karma: "tenebre"
+    },
+    radwaan: {
+        label: "Radwa'an",
+        karma: "tenebre"
+    },
+    malakan: {
+        label: "Malak'an",
+        karma: "tenebre"
+    }
+}
+
+Trinites.epeesFeu = {
+    aucun: "",
+    jibril: {
+        label: "Jibr'il",
+        karma: "lumiere"
+    },
+    izrail: {
+        label: "Izrâ'il",
+        karma: "lumiere"
+    },
+    mickhail: {
+        label: "Mickha'il",
+        karma: "lumiere"
+    },
+    israfil: {
+        label: "Israf'il",
+        karma: "lumiere"
+    },
+    jabaan: {
+        label: "Jaba’an",
+        karma: "tenebre"
+    },
+    radwaan: {
+        label: "Radwa'an",
+        karma: "tenebre"
+    },
+    malakan: {
+        label: "Malak'an",
+        karma: "tenebre"
+    }
+}
+
 Trinites.choeurs = {
     aucun: "",
     sepherims: "Les Sepherims",

@@ -103,7 +103,8 @@
         }
     }
 
-    .competences, .domaines, .ressources, .lignes-de-vie, .theme-astral, .vie-ante-bloc, .expe-bloc, .grand-livre, .zodiaque, .lame-soeur {        
+    .competences, .domaines, .ressources, .lignes-de-vie, .theme-astral, .vie-ante-bloc, .histo-bloc, 
+    .expe-bloc, .karma-ten, .pouvoirs-gen, .grand-livre, .zodiaque, .lame-soeur {        
         padding: 2px;
         margin: 3px;
     }
@@ -476,7 +477,7 @@
         margin: 3px;
     }
 
-    .ligne-theme {
+    .ligne-theme, .ligne-histo {
         display: grid;
         grid-template-columns: 1fr 2fr;
         margin: 2px;
@@ -494,7 +495,7 @@
         }
     }
 
-    .theme-astral {
+    .theme-astral, .histo-bloc {
         
         select {
             font-family: "Cabaletta";
@@ -552,6 +553,18 @@
             font-family: "Cabaletta";
             margin: 2px;
             height: 111px;
+            resize: none;
+        }
+    }
+
+    .histo {
+        margin: 2px;
+        font-size: 0.9em;
+
+        textarea {
+            font-family: "Cabaletta";
+            margin: 2px;
+            height: 113px;
             resize: none;
         }
     }
@@ -663,44 +676,44 @@
 
         div {
             margin: 2px;
-        }
-
-        .titre-grand-livre {
-            display: flex;
-            justify-content: center;
-            font-family: "Cabaletta";
-        }
-
-        .grid-verset {
-            display: grid;
-            font-size: 0.9em;
-            grid-template-columns: 2em 1fr 2em 2em;
-            align-items: center;
-        }
-
-        .col-roll-verset {
-            grid-column: 1 / 2;
-            display: flex;
-            justify-content: center;
-        }
-
-        .col-nom-verset {
-            grid-column: 2 / 3;
-        }
-
-        .col-edit-verset {
-            grid-column: 3 / 4;
-            display: flex;
-            justify-content: center;
-        }
-
-        .col-delete-verset {
-            grid-column: 4 / 5;
-            display: flex;
-            justify-content: center;
-        }
+        } 
+    }
+    ///
+    .titre-grand-livre {
+        display: flex;
+        justify-content: center;
+        font-family: "Cabaletta";
+    }
+    
+    .grid-verset {
+        display: grid;
+        font-size: 0.9em;
+        grid-template-columns: 2em 1fr 2em 2em;
+        align-items: center;
     }
 
+    .col-roll-verset {
+        grid-column: 1 / 2;
+        display: flex;
+        justify-content: center;
+    }
+
+    .col-nom-verset {
+        grid-column: 2 / 3;
+    }
+
+    .col-edit-verset {
+        grid-column: 3 / 4;
+        display: flex;
+        justify-content: center;
+    }
+
+    .col-delete-verset {
+        grid-column: 4 / 5;
+        display: flex;
+        justify-content: center;
+    }
+    ///
     .zodiaque {
         min-height: 80px;
     }
@@ -731,7 +744,7 @@
         }
     }
 
-    .lame-soeur {
+    .lame-soeur, .lame-noire {
         display: flex;
         flex-direction: column;
     }
@@ -785,5 +798,34 @@
         .nom-atout {
             margin: 3px;
         }
+    }
+
+    .grid-karma-ten {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        align-items: center;
+        font-family: "Cabaletta";
+        margin: 3px;
+
+        .karma-ten-titre {
+            margin: 2px;
+        }
+
+        .karma-ten-valeur {
+            margin: 2px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            input {
+                width: 3em;
+                text-align: center;
+                margin: 2px
+            }
+
+            label {
+                margin: 2px;
+            }
+        }                
     }
 }

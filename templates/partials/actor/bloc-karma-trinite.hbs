@@ -1,0 +1,66 @@
+<div class="stats-trinite">
+    <div class="deva">
+        <h3>Deva</h3>
+        <div class="grid-stats">
+            <div class="colStats-titre"><label>Choeur</label></div>
+            <div class="colStats-valeur">
+                <select name="data.trinite.deva.choeur">
+                    {{#select data.data.trinite.deva.choeur}}
+                    {{#each config.choeurs as |choeur keyChoeur|}}
+                        <option value="{{keyChoeur}}">{{choeur}}</option>
+                    {{/each}}
+                    {{/select}} 
+                </select>
+            </div>
+            <div class="colStats-titre"><label>Karma</label></div>
+            <div class="colStats-valeur">
+                <input name="data.trinite.deva.karma.value" type="number" value="{{data.data.trinite.deva.karma.value}}" placeholder="0" min="0" max="{{data.data.trinite.deva.karma.max}}">
+                <label> / </label>
+                <input name="data.trinite.deva.karma.max" type="number" value="{{data.data.trinite.deva.karma.max}}" placeholder="0" min="0">
+                <div class="logo-karma"><i class="fas fa-sun"></i></div>
+            </div>
+            <div class="colStats-titre"><label>Dettes</label></div>
+            <div class="colStats-valeur"><input name="data.trinite.deva.dettes" type="number" value="{{data.data.trinite.deva.dettes}}" placeholder="0" min="0"></div>
+            <div class="colStats-titre"><label>Credits</label></div>
+            <div class="colStats-valeur"><input name="data.trinite.deva.credits" type="number" value="{{data.data.trinite.deva.credits}}" placeholder="0" min="0"></div>
+        </div>
+    </div>
+    <div class="adam">
+        <img src="systems/trinites/images/trinite_occulte.png" title="{{actor.name}}">
+        <h3>Adam'</h3>
+        <div class="karma">
+            <label>Karma</label>
+            <input name="data.trinite.adam.karma.value" type="number" value="{{data.data.trinite.adam.karma.value}}" placeholder="0" min="0" max="{{data.data.trinite.adam.karma.max}}">
+            <label> / </label>
+            <input name="data.trinite.adam.karma.max" type="number" value="{{data.data.trinite.adam.karma.max}}" placeholder="0" min="0">
+            {{#if (eq data.data.trinite.adam.karma.type "lumiere")}}<div class="logo-karma"><i class="fas fa-sun"></i></div>{{/if}} 
+            {{#if (eq data.data.trinite.adam.karma.type "tenebre")}}<div class="logo-karma"><i class="fas fa-moon"></i></div>{{/if}}            
+        </div>
+    </div>
+    <div class="archonte">
+        <h3>Archonte</h3>
+        <div class="grid-stats">
+            <div class="colStats-titre"><label>Légion</label></div>
+            <div class="colStats-valeur">
+                <select name="data.trinite.archonte.legion">
+                    {{#select data.data.trinite.archonte.legion}}
+                    {{#each config.legions as |legion keyLegion|}}
+                        <option value="{{keyLegion}}">{{legion}}</option>
+                    {{/each}}
+                    {{/select}} 
+                </select>
+            </div>
+            <div class="colStats-titre"><label>Karma</label></div>
+            <div class="colStats-valeur">
+                <input name="data.trinite.archonte.karma.value" type="number" value="{{data.data.trinite.archonte.karma.value}}" placeholder="0" min="0" max="{{data.data.trinite.archonte.karma.max}}">
+                <label> / </label>
+                <input name="data.trinite.archonte.karma.max" type="number" value="{{data.data.trinite.archonte.karma.max}}" placeholder="0" min="0">
+                <div class="logo-karma"><i class="fas fa-moon"></i></div>
+            </div>
+            <div class="colStats-titre"><label>Dettes</label></div>
+            <div class="colStats-valeur"><input name="data.trinite.archonte.dettes" type="number" value="{{data.data.trinite.archonte.dettes}}" placeholder="0" min="0"></div>
+            <div class="colStats-titre"><label>Credits</label></div>
+            <div class="colStats-valeur"><input name="data.trinite.archonte.credits" type="number" value="{{data.data.trinite.archonte.credits}}" placeholder="0" min="0"></div>
+        </div>
+    </div>
+</div>                

@@ -1,15 +1,15 @@
 <form class="{{cssClass}}" autocomplete="off">
-    <header class="sheet-header">
+    <header class="sheet-header occulte">
         <img src="{{item.img}}" data-edit="img" title="{{item.name}}" height="64" width="64"/>
         <h1 class="occulte"><input name="name" type="text" value="{{item.name}}" placeholder="Nom de l'atout"/></h1>
     </header>
-    <div class="sheet-content atout" data-item-id="{{item.id}}">
+    <div class="sheet-content atout occulte" data-item-id="{{item.id}}">
         <div class="grid-item-atout">
-            <label>Messager</label>
+            <label>Epée de Feu</label>
             <select name="data.messager">
                 {{#select data.data.messager}}
-                {{#each config.messagers as |messager keyMessager|}}
-                    <option value="{{keyMessager}}">{{messager.label}}</option>
+                {{#each config.epeesFeu as |epee keyEpee|}}
+                    <option value="{{keyEpee}}">{{epee.label}}</option>
                 {{/each}}
                 {{/select}} 
             </select>

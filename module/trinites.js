@@ -7,12 +7,15 @@ import * as Chat from "./chat.js";
 
 async function preloadHandlebarsTemplates() {
     const templatePaths = [
-        "systems/trinites/templates/partials/dice/jet-competence.hbs",
+        /*"systems/trinites/templates/partials/dice/jet-competence.hbs",
         "systems/trinites/templates/partials/dice/jet-ressource.hbs",
-        "systems/trinites/templates/partials/dice/jet-souffle.hbs",
+        "systems/trinites/templates/partials/dice/jet-souffle.hbs",*/
         "systems/trinites/templates/partials/actor/bloc-profane-personnage.hbs",
         "systems/trinites/templates/partials/actor/bloc-info-personnage.hbs",
-        "systems/trinites/templates/partials/actor/bloc-themeAstral-personnage.hbs"
+        "systems/trinites/templates/partials/actor/bloc-themeAstral-personnage.hbs",
+        "systems/trinites/templates/partials/actor/bloc-karma-trinite.hbs",
+        "systems/trinites/templates/partials/actor/bloc-grandLivre-trinite.hbs",
+        "systems/trinites/templates/partials/actor/bloc-zodiaque-personnage.hbs"
     ];
 
     return loadTemplates(templatePaths);

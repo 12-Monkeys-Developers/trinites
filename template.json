@@ -347,10 +347,16 @@
                     "messager": "",
                     "description": ""
                 }
+            },
+            "lameN": {
+                "lameNoire": {
+                    "vagabond": "",
+                    "description": ""
+                }
             }
         },
         "trinite": {
-            "templates": [ "information", "signes", "competences", "ressources", "theme", "trini" ],
+            "templates": [ "information", "signes", "competences", "ressources", "theme", "trini", "lame" ],
             "metier": "",
             "vieAnterieure": "",
             "experience": {
@@ -362,7 +368,9 @@
             "nbBlessure": 0
         },
         "archonteRoi": {
-            "templates": [ "information", "signes", "competences", "ressources", "theme", "archRoi" ],
+            "templates": [ "information", "signes", "competences", "ressources", "theme", "archRoi", "lameN" ],
+            "couverture": "",
+            "historique": "",
             "pointsLigneVie": 8,
             "nbBlessure": 0
         },

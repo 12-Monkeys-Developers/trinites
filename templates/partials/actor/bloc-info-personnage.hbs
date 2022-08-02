@@ -10,8 +10,14 @@
         <div class="small-size"><input name="data.age" type="number" value="{{data.data.age}}" placeholder="Age"></div>
         <label>Taille</label>
         <div class="middle-size"><input name="data.taille" type="text" value="{{data.data.taille}}" placeholder="Taille"></div>
-        <label>Métier</label>
-        <div class="auto-size"><input name="data.metier" type="text" value="{{data.data.metier}}" placeholder="Métier"></div>
+        {{#if (eq data.type "trinite")}}
+            <label>Métier</label>
+            <div class="auto-size"><input name="data.metier" type="text" value="{{data.data.metier}}" placeholder="Métier"></div>
+        {{/if}}
+        {{#if (eq data.type "archonteRoi")}}
+            <label>Couverture</label>
+            <div class="auto-size"><input name="data.couverture" type="text" value="{{data.data.metier}}" placeholder="Couverture - activité apparente"></div>
+        {{/if}}
     </div>
     <div class="actor-infos-line">
         <label>Description</label>

@@ -1,9 +1,9 @@
 <form class="{{cssClass}}" autocomplete="off">
-    <header class="sheet-header">
+    <header class="sheet-header occulte">
         <img src="{{item.img}}" data-edit="img" title="{{item.name}}" height="64" width="64"/>
         <h1 class="occulte"><input name="name" type="text" value="{{item.name}}" placeholder="Nom de l'aura"/></h1>
     </header>
-    <div class="sheet-content aura" data-item-id="{{item.id}}">
+    <div class="sheet-content aura occulte" data-item-id="{{item.id}}">
         <div class="grid-item-aura">
         {{#if data.edit}}
             <label class="marge-edit">Signe</label>

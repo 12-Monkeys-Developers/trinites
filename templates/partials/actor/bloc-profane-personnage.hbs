@@ -264,7 +264,12 @@
                                 {{#if (eq @index data.data.ligneVie2)}}</div><div class="ligne-vie">{{/if}}
                             {{/times}}
                         </div>
-                        <div class="etat-sante">Etat de santé : {{configVal 'etatSante' data.data.etatSante}}</div>
+                        <div class="etat-sante">
+                            <label>Etat de santé : {{configVal 'etatSante' data.data.etatSante}} </label>
+                            {{#unless (eq data.data.etatSante "indemne")}}
+                                <div class="regen-btn"><a class="regen" title="Régénération par le Karma"><i class="fas fa-hand-holding-medical"></i></a></div>
+                            {{/unless}}
+                        </div>
                     </div>    
                 </div>
             </div>

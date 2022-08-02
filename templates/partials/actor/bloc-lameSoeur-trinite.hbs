@@ -1,0 +1,25 @@
+<div class="lame-soeur">
+    <h3><i class="fas fa-khanda"></i> Lame-soeur</h3>
+    <div class="grid-lame">
+        <label>Messager</label>
+        <select name="data.lameSoeur.messager">
+            {{#select data.data.lameSoeur.messager}}
+            {{#each config.messagers as |messager keyMessager|}}
+                <option value="{{keyMessager}}">{{messager.label}}</option>
+            {{/each}}
+            {{/select}} 
+        </select>
+        <div class="centrer"><a class="roll-lame" title="Jet de lame-soeur"><i class="fas fa-dice"></i></a></div>
+        <label>Dégâts 4</label>
+    </div>
+    <div class="desc-lame"><textarea name="data.lameSoeur.description" placeholder="Description de la lame-soeur">{{data.data.lameSoeur.description}}</textarea></div>
+    <div class="centrer titre-atout">Atouts</div>
+    <div class="grid-atout">
+        {{#each atouts as |atout id|}}
+            <div class="centrer"><a class="roll-atout" title="Jet d'atout" data-item-id="{{atout._id}}"><i class="fas fa-dice"></i></a></div>
+            <div class="nom-atout">{{atout.name}}</div>
+            <div class="centrer"><a class="edit-item" title="Editer" data-item-id="{{atout._id}}"> <i class="far fa-edit"></i></a></div>
+            <div class="centrer"><a class="suppr-item" title="Supprimer" data-item-id="{{atout._id}}"><i class="fas fa-times-circle"></i></a></div>
+        {{/each}}     
+    </div>
+</div>

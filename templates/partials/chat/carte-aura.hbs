@@ -21,7 +21,7 @@
         {{/if}}
     </div>
     <div class="desc">{{editor content=aura.data.description target="aura.data.description" owner=true}}</div>
-    {{#if (eq affinite "zodiaque")}}
+    {{#if souffleDispo}}
     <div class="grid-carte-aura">
         <div class="titre"><a class="details souffle"><i class="fas fa-angle-right"></i></a><label>Effet du Souffle</label></div>
         {{#unless aura.data.deploiement}}

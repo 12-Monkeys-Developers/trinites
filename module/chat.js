@@ -76,13 +76,12 @@ function onActiverAura(event) {
         actor.viderKarma(typeKarma);
         activationOk = true;
     }
-    // Uniquement le Karma de l'Esprit
-    else if(typeKarma != actor.data.data.trinite.adam.karma.type && typeKarma != "neutre") {
-        actor.consommerKarma(typeKarma, coutPouvoir);
+    // Uniquement le Karma d'une source
+    else if(actor.sourceUnique(typeKarma)) {
+        actor.consommerSourceKarma(actor.sourceUnique(typeKarma), coutPouvoir);
         activationOk = true;
     }
     else {
-        console.log("DialogKarma");
         new DepenseKarmaFormApplication(actor, actor.data.data.trinite, typeKarma, "aura", coutPouvoir, auraId).render(true);
 
          // MAJ de la carte - dialog
@@ -156,9 +155,9 @@ function onActiverVerset(event) {
         actor.viderKarma(typeKarma);
         activationOk = true;
     }
-    // Uniquement le Karma de l'Esprit
-    else if(typeKarma != actor.data.data.trinite.adam.karma.type) {
-        actor.consommerKarma(typeKarma, coutPouvoir);
+    // Uniquement le Karma d'une source
+    else if(actor.sourceUnique(typeKarma)) {
+        actor.consommerSourceKarma(actor.sourceUnique(typeKarma), coutPouvoir);
         activationOk = true;
     }
     else {
@@ -166,7 +165,6 @@ function onActiverVerset(event) {
     }
 
     if(activationOk) {
-        console.log("TODO - Enchainer sur la carte Verset activée dans le chat");
         carteVersetActive({
             actor: actor,
             versetId: versetId});
@@ -197,9 +195,9 @@ function onActiverAtout(event) {
         actor.viderKarma(typeKarma);
         activationOk = true;
     }
-    // Uniquement le Karma de l'Esprit
-    else if(typeKarma != actor.data.data.trinite.adam.karma.type) {
-        actor.consommerKarma(typeKarma, coutPouvoir);
+    // Uniquement le Karma d'une source
+    else if(actor.sourceUnique(typeKarma)) {
+        actor.consommerSourceKarma(actor.sourceUnique(typeKarma), coutPouvoir);
         activationOk = true;
     }
     else {
@@ -336,12 +334,14 @@ export async function carteAura({actor = null,
     whisper = null} = {}) {
 
     let aura = actor.items.get(auraId);
+    
+    let souffleDispo = actor.data.type == "archonteRoi" || actor.data.data.themeAstral.affinite == "zodiaque";
 
     // Récupération des données de l'item
     let cardData = {
         aura: aura.data,
         actorId: actor.id,
-        affinite: actor.data.data.themeAstral.affinite
+        souffleDispo: souffleDispo
     }
 
     // Recupération du template

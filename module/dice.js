@@ -54,7 +54,8 @@ export async function jetCompetence({actor = null,
             nomPersonnage : actor.data.name,
             competence: label,
             valeur: valeur,
-            karmaAdam: karmaAdam
+            karmaAdam: karmaAdam,
+            typeActor: actor.data.type
         };
 
         if(type == "souffle") {

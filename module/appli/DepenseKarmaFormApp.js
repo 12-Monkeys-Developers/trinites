@@ -166,6 +166,9 @@ export default class DepenseKarmaFormApplication extends FormApplication {
             versetId: this.idPouvoir});
         }
         
+        if(this.typePouvoir == "regen") {
+          this.actor.regeneration();
+        }
       }
   }
     

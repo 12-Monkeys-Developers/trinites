@@ -397,7 +397,15 @@
 .trinites.sheet.actor .etat-sante {
   display: flex;
   justify-content: center;
+  align-items: center;
+  margin: 3px;
+}
+.trinites.sheet.actor .etat-sante label {
   font-size: 0.9em;
+  margin: 3px;
+}
+.trinites.sheet.actor .etat-sante .regen-btn {
+  font-size: 1.3em;
   margin: 3px;
 }
 .trinites.sheet.actor .ligne-theme,
@@ -952,10 +960,20 @@
   display: flex;
   justify-content: center;
 }
+.grid-jet-comp.archonte-roi {
+  background: linear-gradient(to right, #1f546fee, #07131aee);
+}
 .titre-esprit {
   margin: 3px;
   font-size: 1.5em;
   font-family: "Cabaletta";
+}
+.titre-archonte-roi {
+  grid-column: 1 / 3;
+  margin: 3px;
+  font-size: 1.5em;
+  font-family: "Cabaletta";
+  color: black;
 }
 .titre-esprit.deva {
   color: white;
@@ -1090,7 +1108,8 @@
 .carte .titre label {
   margin: 0px 2px;
 }
-.carte .action {
+.carte .action,
+.carte .atout-tenebre {
   display: flex;
   justify-content: center;
   font-size: 1.5em;

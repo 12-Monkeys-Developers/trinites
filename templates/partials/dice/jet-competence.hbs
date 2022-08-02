@@ -6,14 +6,25 @@
             {{#if stats.difficulte}}<div class="diff"><i class="fas fa-tachometer-alt"></i> {{#if (gt stats.difficulte 0)}}+{{/if}}{{stats.difficulte}}</div>{{/if}}
         </div>   
     </div>
-    <div class="grid-jet-comp">
-        <div class="titre-esprit deva">Deva</div>
-        <div class="titre-esprit archonte">Archonte</div>
-        {{#if (eq stats.resultDeva.dieResult 1)}}
-            <div class="dice-back"><div class="roll dice-deva echec-crit">{{stats.resultDeva.dieResult}}</div></div>
-        {{else}}
-            <div class="dice-back"><div class="roll dice-deva">{{stats.resultDeva.dieResult}}</div></div>
-        {{/if}}
+    {{#if (eq stats.typeActor "trinite")}}
+        <div class="grid-jet-comp">
+            <div class="titre-esprit deva">Deva</div>
+            <div class="titre-esprit archonte">Archonte</div>
+            {{#if (eq stats.resultDeva.dieResult 1)}}
+                <div class="dice-back"><div class="roll dice-deva echec-crit">{{stats.resultDeva.dieResult}}</div></div>
+            {{else}}
+                <div class="dice-back"><div class="roll dice-deva">{{stats.resultDeva.dieResult}}</div></div>
+            {{/if}}
+    {{/if}}
+    {{#if (eq stats.typeActor "archonteRoi")}}
+        <div class="grid-jet-comp archonte-roi">
+            <div class="titre-archonte-roi">Archonte-roi</div>
+            {{#if (eq stats.resultDeva.dieResult 1)}}
+                <div class="dice-back"><div class="roll dice-archonte echec-crit">{{stats.resultDeva.dieResult}}</div></div>
+            {{else}}
+                <div class="dice-back"><div class="roll dice-archonte">{{stats.resultDeva.dieResult}}</div></div>
+            {{/if}}
+    {{/if}}
         {{#if (eq stats.resultArchonte.dieResult 1)}}
             <div class="dice-back"><div class="roll dice-archonte echec-crit">{{stats.resultArchonte.dieResult}}</div></div>
         {{else}}

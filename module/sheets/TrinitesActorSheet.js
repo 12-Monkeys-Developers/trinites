@@ -73,6 +73,9 @@ export default class TrinitesActorSheet extends ActorSheet {
                 // Cocher une case de dommages
                 html.find('.case-vie').click(this._onCocherCaseDeVie.bind(this));
 
+                // Régénérer des cases de vie en dépensant du Karma
+                html.find('.regen').click(this._onRegenerationSante.bind(this));
+
                 // Changer la zone de déploiement d'une aura
                 html.find('.zone-deploiement').click(this._onZoneDeploimentAura.bind(this));
 
@@ -157,6 +160,55 @@ export default class TrinitesActorSheet extends ActorSheet {
         let blessureVal = this.actor.data.data.nbBlessure != indexVie ? indexVie : indexVie - 1;
 
         this.actor.update({"data.nbBlessure": blessureVal});
+    }
+
+    _onRegenerationSante(event) {
+        event.preventDefault();
+        //const element = event.currentTarget;
+
+        let typeKarma = "";
+        if(this.actor.data.type == "trinite") {
+            switch(this.actor.data.data.etatSante) {
+                case "endolori":
+                    typeKarma = "neutre";
+                    break;
+                case "blesse":
+                    typeKarma = "lumiere";
+                    break;
+                case "inconscient":
+                    typeKarma = "tenebre";
+                    break;
+            }
+        }
+        else if(this.actor.data.type == "archonteRoi") {
+            typeKarma = "tenebre";
+        }
+        
+        let karmaDisponible = this.actor.karmaDisponible(typeKarma);
+        let activationOk = false;
+
+        // Pas assez de Karma
+        if(karmaDisponible == 0) {
+            ui.notifications.warn("Vous n'avez pas assez de Karma disponible utiliser la régénération !");
+            return;
+        }
+        // Juste ce qu'il faut de Karma
+        else if (karmaDisponible == 1) {
+            this.actor.viderKarma(typeKarma);
+            activationOk = true;
+        }
+        // Uniquement le Karma d'une source'
+        else if(this.actor.sourceUnique(typeKarma)) {
+            this.actor.consommerSourceKarma(this.actor.sourceUnique(typeKarma), 1);
+            activationOk = true;
+        }
+        else {
+            new DepenseKarmaFormApplication(this.actor, this.actor.data.data.trinite, typeKarma, "regen", 1, null).render(true);
+        }
+    
+        if(activationOk) {
+            this.actor.regeneration();
+        }
     }
 
     _onZoneDeploimentAura(event) {

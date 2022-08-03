@@ -164,3 +164,75 @@ Trinites.dettes = {
         duree: "20 ans"
     }
 }
+
+Trinites.primes = {
+    aucun: "",
+    acceleration: { 
+        label: "Accélération",
+        combat: false 
+    },
+    attaquesMultiples: { 
+        label: "Attaques multiples",
+        combat: true 
+    },
+    blessureGrave: { 
+        label: "Blessure grave",
+        combat: true 
+    },
+    blessureNonLetale: { 
+        label: "Blessure non létale",
+        combat: true 
+    },
+    blessurePrecise: { 
+        label: "Blessure précise",
+        combat: true 
+    },
+    circonspection: { 
+        label: "Circonspection",
+        combat: false 
+    },
+    efficacite: { 
+        label: "Efficacité",
+        combat: false 
+    },
+    debordement: { 
+        label: "Débordement",
+        combat: false 
+    },
+    prudence: { 
+        label: "Prudence",
+        combat: false 
+    }
+}
+
+Trinites.penalites = {
+    aucun: "",
+    consommationRessource: { 
+        label: "Consommation d’une ressource",
+        combat: false 
+    },
+    blessureLegere: { 
+        label: "Blessure légère",
+        combat: true 
+    },
+    danger: { 
+        label: "Danger",
+        combat: false 
+    },
+    difficulte: { 
+        label: "Difficulté",
+        combat: false 
+    },
+    facilite: { 
+        label: "Facilité",
+        combat: false 
+    },
+    ralentissement: { 
+        label: "Ralentissement",
+        combat: false 
+    },
+    risque: { 
+        label: "Risque",
+        combat: false 
+    }
+}

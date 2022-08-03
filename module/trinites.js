@@ -1,4 +1,5 @@
 import { Trinites } from "./config.js";
+import { registerSystemSettings } from "./settings.js";
 import TrinitesActorSheet from "./sheets/TrinitesActorSheet.js";
 import TrinitesItemSheet from "./sheets/TrinitesItemSheet.js";
 import TrinitesActor from "./TrinitesActor.js";
@@ -14,22 +15,11 @@ async function preloadHandlebarsTemplates() {
         "systems/trinites/templates/partials/actor/bloc-grandLivre-trinite.hbs",
         "systems/trinites/templates/partials/actor/bloc-zodiaque-personnage.hbs",
         "systems/trinites/templates/partials/actor/bloc-lameSoeur-trinite.hbs",
-        "systems/trinites/templates/partials/actor/bloc-grandLivre-archonte.hbs"
+        "systems/trinites/templates/partials/actor/bloc-grandLivre-archonte.hbs",
+        "systems/trinites/templates/partials/actor/bloc-lameNoire-archonte.hbs"
     ];
 
     return loadTemplates(templatePaths);
-}
-
-function registerSystemSettings() {
-    // Suggestions des échecs ctitiques envoyées à l'EG
-    game.settings.register("trinites","limEndettementCampagne", {
-        config: true,
-        scope: "world",
-        name: "Limite d'endettement 'Campagne'",
-        hint: "Si cette option est cochée, la limite d'endettement sera celle du mode 'Campagne' (+6). Sinon, elle sera celle du mode 'Partie isolée' (+3).",
-        type: Boolean,
-        default: true
-    });
 }
 
 Hooks.once("init", function() {

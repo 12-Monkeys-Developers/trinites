@@ -12,9 +12,7 @@ export async function jetCompetence({actor = null,
         let actorData = actor.data.data;
 
         let valeur = actorData.competences[signe][competence].valeur;
-        let label = actorData.competences[signe][competence].label
         let compOuverte = actorData.competences[signe][competence].ouverte;
-        let karmaAdam = actorData.trinite.adam.karma.type;
 
         // Si la compétence à une valeur de 0, on gènere le message d'erreur et on annule le jet
         if(valeur == 0 && !compOuverte) {
@@ -22,9 +20,23 @@ export async function jetCompetence({actor = null,
             return null;
         }
 
+
+        // Informations nécessaires à la fenêtre de dialogue
+        // ID du journal de description des primes et pénalités
+        let infoPrimesID = game.settings.get("trinites","lienJournalPrimesPenalites");
+        // Competence de combat
+        let compCombat = (competence == "tir" || competence == "melee" || competence == "corpsACorps");
+        // Compétence qui autorise les actions libres
+        let compLibre = actorData.competences[signe][competence].libre;
+
+        // Valeurs récupérées par la fenêtre de dialogue
+        let actionLibre = null;
+        let prime = null;
+        let penalite = null;
+
         // Affichage de la fenêtre de dialogue (vrai par défaut)
         if(afficherDialog) {
-            let dialogOptions = await getJetCompetenceOptions({cfgData: CONFIG.Trinites});
+            let dialogOptions = await getJetCompetenceOptions({cfgData: CONFIG.Trinites, compCombat: compCombat, compLibre: compLibre, infoPrimesID: infoPrimesID});
             
             // On annule le jet sur les boutons 'Annuler' ou 'Fermeture'    
             if(dialogOptions.annule) {
@@ -34,7 +46,10 @@ export async function jetCompetence({actor = null,
             // Récupération des données de la fenêtre de dialogue pour ce jet 
             difficulte = dialogOptions.difficulte;
             sansDomaine = dialogOptions.sansDomaine;
-        }
+            actionLibre = dialogOptions.actionLibre;
+            prime = dialogOptions.prime;
+            penalite = dialogOptions.penalite;
+        }        
 
         if(sansDomaine) {
             if(compOuverte) {
@@ -50,6 +65,9 @@ export async function jetCompetence({actor = null,
         let baseFormula = "1d12x + @valeur";
 
         // Données de base du jet
+        let label = actorData.competences[signe][competence].label
+        let karmaAdam = actorData.trinite.adam.karma.type;
+
         let rollData = {
             nomPersonnage : actor.data.name,
             competence: label,
@@ -58,6 +76,7 @@ export async function jetCompetence({actor = null,
             typeActor: actor.data.type
         };
 
+        // Bonus de difficulte en cas de jet d'Emprise - Souffle
         if(type == "souffle") {
             console.log(aura);
 
@@ -75,7 +94,18 @@ export async function jetCompetence({actor = null,
         // Modificateur de difficulté du jet
         if(difficulte) {
             rollData.difficulte = difficulte;
+            rollData.modifsJet = true;
             baseFormula += " + @difficulte";
+        }
+
+        // Malus lié au nombre d'actions libres consécutives
+        if(actionLibre > 1) {
+            let malusActionLibre = (actionLibre - 1) * -3;
+
+            rollData.actionLibre = actionLibre;
+            rollData.malusActionLibre = malusActionLibre;
+            rollData.modifsJet = true;
+            baseFormula += " + @malusActionLibre";
         }
 
         let rollFormula = `{${baseFormula}, ${baseFormula}}`;
@@ -161,10 +191,10 @@ export async function jetCompetence({actor = null,
     }
 
     // Fonction de construction de la boite de dialogue de jet de compétence
-    async function getJetCompetenceOptions({cfgData = null}) {
+    async function getJetCompetenceOptions({cfgData = null, compCombat = false, compLibre = false, infoPrimesID = null}) {
         // Recupération du template
         const template = "systems/trinites/templates/partials/dice/dialog-jet-competence.hbs";
-        const html = await renderTemplate(template, {data: cfgData});
+        const html = await renderTemplate(template, {cfgData: cfgData, compCombat: compCombat, compLibre: compLibre, infoPrimesID: infoPrimesID});
 
         return new Promise( resolve => {
             const data = {
@@ -197,9 +227,17 @@ export async function jetCompetence({actor = null,
             sansDomaine = form.sansDomaine.checked;
         }
 
+        let actionLibre = null;
+        if(form.actionLibre) {
+            actionLibre = parseInt(form.actionLibre.value);
+        }
+
         return {
-            difficulte: form.difficulte.value != 0 ? parseInt(form.difficulte.value) : "",
-            sansDomaine: sansDomaine
+            difficulte: form.difficulte.value != 0 ? parseInt(form.difficulte.value) : null,
+            sansDomaine: sansDomaine,
+            actionLibre: actionLibre,
+            prime: form.prime.value != "aucun" ? form.prime.value : null,
+            penalite: form.penalite.value != "aucun" ? form.penalite.value : null
         }
     }
 
@@ -246,7 +284,6 @@ export async function jetRessource({actor = null,
 
         // Calcul des paramètres selon le cout d'acquisition
         let typeTest = typeTestRessource(valeur, coutAcquisition, game.settings.get("trinites","limEndettementCampagne"));
-        console.log(typeTest);
 
         if(typeTest.type == "anodin") {
             ui.notifications.info("Cette acquisition est anodine. Elle ne nécessite pas de jet de dés.");
@@ -341,7 +378,7 @@ export async function jetRessource({actor = null,
     async function getJetRessourceOptions({cfgData = null, useDomaine = false, domaines = null}) {
         // Recupération du template
         const template = "systems/trinites/templates/partials/dice/dialog-jet-ressource.hbs";
-        const html = await renderTemplate(template, {data: cfgData, useDomaine: useDomaine, domaines: domaines});
+        const html = await renderTemplate(template, {cfgData: cfgData, useDomaine: useDomaine, domaines: domaines});
 
         return new Promise( resolve => {
             const data = {

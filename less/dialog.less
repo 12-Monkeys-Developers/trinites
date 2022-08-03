@@ -16,6 +16,19 @@
         font-size: 1.2em; 
         font-weight: bold; 
         margin-left: 3px;
+
+        a.content-link {
+            border: none;
+            background: none;
+            
+            i {
+                color: var(--color-titre-trinite);
+            }
+        }
+
+        a.content-link:hover {
+            text-shadow: 0 0 8px var(--color-shadow-trinite);
+        }
     }
 
     .grid-diff {
@@ -25,9 +38,15 @@
         margin-top: 6px;
         margin-bottom: 10px;
         
+        border: 1px solid var(--color-border-light-2);
+        border-radius: 3px;
+        box-shadow: 0 0 2px #FFF inset;
+        background: #c0b8b877;
+        
         div {
             display: flex;
             justify-content: center;
+            padding: 3px;
         }
     }
 
@@ -40,6 +59,7 @@
         .data {
             display: flex;
             justify-content: center;
+            margin: 2px;
         }
 
         input[type="number"] {

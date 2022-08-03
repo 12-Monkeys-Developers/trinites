@@ -3,7 +3,7 @@
         <div class="whisper-logo"><span>message privé </span><i class="far fa-eye-slash"></i></div>
         <div class="box">
             <div class="titre"><i class="fas fa-dice"></i> {{stats.competence}} {{stats.valeur}}</div> <!-- fa-check -->
-            {{#if stats.difficulte}}<div class="diff"><i class="fas fa-tachometer-alt"></i> {{#if (gt stats.difficulte 0)}}+{{/if}}{{stats.difficulte}}</div>{{/if}}
+            {{#if stats.modifsJet}}<div class="diff">{{#if stats.malusActionLibre}}<i class="fas fa-bolt"></i> {{stats.malusActionLibre}} {{/if}}{{#if stats.difficulte}}<i class="fas fa-tachometer-alt"></i> {{#if (gt stats.difficulte 0)}}+{{/if}}{{stats.difficulte}}{{/if}}</div>{{/if}}
         </div>   
     </div>
     {{#if (eq stats.typeActor "trinite")}}

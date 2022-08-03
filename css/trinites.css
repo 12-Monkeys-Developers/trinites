@@ -930,7 +930,7 @@
 .titre-jet-comp .box,
 .titre-jet-ress .box {
   display: grid;
-  grid-template-columns: 4fr 1fr;
+  grid-template-columns: 2.5fr 1fr;
 }
 .titre-jet-comp i,
 .titre-jet-ress i {
@@ -1278,16 +1278,31 @@
   font-weight: bold;
   margin-left: 3px;
 }
+.dialog-content .titre a.content-link {
+  border: none;
+  background: none;
+}
+.dialog-content .titre a.content-link i {
+  color: var(--color-titre-trinite);
+}
+.dialog-content .titre a.content-link:hover {
+  text-shadow: 0 0 8px var(--color-shadow-trinite);
+}
 .dialog-content .grid-diff {
   display: grid;
   grid-template-columns: 2fr 1fr 2fr 1fr 2fr 1fr;
   margin: 3px;
   margin-top: 6px;
   margin-bottom: 10px;
+  border: 1px solid var(--color-border-light-2);
+  border-radius: 3px;
+  box-shadow: 0 0 2px #FFF inset;
+  background: #c0b8b877;
 }
 .dialog-content .grid-diff div {
   display: flex;
   justify-content: center;
+  padding: 3px;
 }
 .dialog-content .grid-data {
   display: grid;
@@ -1298,6 +1313,7 @@
 .dialog-content .grid-data .data {
   display: flex;
   justify-content: center;
+  margin: 2px;
 }
 .dialog-content .grid-data input[type="number"] {
   width: 3em;

@@ -1,0 +1,27 @@
+<div class="lame-noire">
+    <h3><i class="fas fa-khanda"></i> Lame noire</h3>
+    <div class="grid-lame">
+        <label>Vagabond</label>
+        <select name="data.lameNoire.vagabond">
+            {{#select data.data.lameNoire.vagabond}}
+            {{#each config.vagabonds as |vagabond keyVagabond|}}
+                <option value="{{keyVagabond}}">{{vagabond.label}}</option>
+            {{/each}}
+            {{/select}} 
+        </select>
+        <div class="centrer"><a class="roll-lame" title="Jet de lame-noire"><i class="fas fa-dice"></i></a></div>
+        <label>Dégâts 4</label>
+    </div>
+    <div class="desc-lame"><textarea name="data.lameNoire.description" placeholder="Description de la lame noire">{{data.data.lameNoire.description}}</textarea></div>
+    <div class="centrer titre-atout">Atouts</div>
+    <div class="grid-atout">
+        {{#each atouts as |atout id|}}
+            {{#if (eq atout.data.karma "tenebre")}}
+                <div class="centrer"><a class="roll-atout" title="Jet d'atout" data-item-id="{{atout._id}}"><i class="fas fa-dice"></i></a></div>
+                <div class="nom-atout">{{atout.name}}</div>
+                <div class="centrer"><a class="edit-item" title="Editer" data-item-id="{{atout._id}}"> <i class="far fa-edit"></i></a></div>
+                <div class="centrer"><a class="suppr-item" title="Supprimer" data-item-id="{{atout._id}}"><i class="fas fa-times-circle"></i></a></div>
+            {{/if}}
+        {{/each}}     
+    </div>
+</div>

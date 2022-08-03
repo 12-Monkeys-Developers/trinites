@@ -91,6 +91,9 @@ export default class TrinitesActorSheet extends ActorSheet {
                 // Jet de ressources
                 html.find('.roll-ress').click(this._onJetRessource.bind(this));
                 
+                // jet de Lame-soeur / Lame noire
+                html.find('.roll-lame').click(this._onJetLame.bind(this));
+
                 // Carte - Atout
                 html.find('.roll-atout').click(this._onCarteAtout.bind(this));
 
@@ -292,6 +295,27 @@ export default class TrinitesActorSheet extends ActorSheet {
         Dice.jetRessource({
             actor: this.actor,
             ressource: dataset.ressource
+        });
+    }
+
+    _onJetLame(event) {
+        event.preventDefault();
+        //const dataset = event.currentTarget.dataset;
+
+        let lame = {
+            "competence": "melee",
+            "degats": 4,
+            "portee": "",
+            "particularites": "",
+            "epee": true
+        };
+
+        Dice.jetArme({
+            actor: this.actor,
+            signe: "belier",
+            competence: lame.competence,
+            arme: lame,
+            type: this.actor.data.type == "trinite" ? "lameSoeur" : "lameNoire"
         });
     }
 

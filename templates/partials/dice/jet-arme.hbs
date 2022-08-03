@@ -1,10 +1,22 @@
-<div class="jet-comp">
-    <div class="titre-jet-comp">
+<div class="jet-arme">
+    <div class="titre-jet-arme">
         <div class="whisper-logo"><span>message privé </span><i class="far fa-eye-slash"></i></div>
         <div class="bloc-titre">
-            <div class="titre"><i class="fas fa-dice"></i> {{stats.competence}} {{stats.valeur}}</div> <!-- fa-check -->
+            <div class="titre"><i class="fas fa-dice"></i> {{stats.competence}} {{stats.valeur}}</div>
             {{#if stats.modifsJet}}<div class="diff">{{#if stats.malusActionLibre}}<i class="fas fa-bolt"></i> {{stats.malusActionLibre}} {{/if}}{{#if stats.difficulte}}<i class="fas fa-tachometer-alt"></i> {{#if (gt stats.difficulte 0)}}+{{/if}}{{stats.difficulte}}{{/if}}</div>{{/if}}
-        </div>   
+        </div>
+    </div>
+    <div class="bloc-arme">
+        {{#if (eq stats.typeArme "lameSoeur")}}
+            <div class="logo"><img src="systems/trinites/images/lames/lame-soeur.png"></div>
+        {{/if}}
+        {{#if (eq stats.typeArme "lameNoire")}}
+            <div class="logo"><img src="systems/trinites/images/lames/lame-noire.png"></div>
+        {{/if}}
+        <div class="infos-arme">
+            <div>{{stats.typeArme}}</div>
+            <div>Dégâts {{stats.arme.degats}}</div>
+        </div>
     </div>
     {{#if (eq stats.typeActor "trinite")}}
         <div class="grid-jet-comp">

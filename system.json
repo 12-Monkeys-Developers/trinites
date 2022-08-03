@@ -20,7 +20,7 @@
     ],
     "gridDistance": 1.5,
     "gridUnits": "m",
-    "initiative": "(@competences.capricorne.rapidite + 1d12) / 2",
+    "initiative": "round((1d12 + @competences.capricorne.rapidite.base) / 2)",
     "primaryTokenAttribute": "",
     "url": "https://github.com/Dellatosa/trinites",
     "manifest": "https://raw.githubusercontent.com/Dellatosa/trinites/master/system.json",

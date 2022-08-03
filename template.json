@@ -231,7 +231,7 @@
                         "discretion":{
                             "label": "Discrétion",
                             "ouverte": 1,
-                            "libre": false,
+                            "libre": true,
                             "base": 0
                         },
                         "intrusion":{
@@ -243,7 +243,7 @@
                         "subterfuge":{
                             "label": "Subterfuge",
                             "ouverte": 1,
-                            "libre": false,
+                            "libre": true,
                             "base": 0
                         }
                     },
@@ -457,6 +457,7 @@
             "description": ""
         },
         "arme": {
+            "competence": "",
             "degats": 0,
             "portee": "",
             "particularites": "",

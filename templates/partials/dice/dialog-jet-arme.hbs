@@ -1,0 +1,70 @@
+<form>
+    <div class="titre"><label>Difficulté de l'action</label></div>
+    <div class="grid-diff">
+        <!-- <i class="fas fa-bullseye" title="Cible"></i> -->
+        <div>Cible inerte</div>
+        <div>+3</div>
+        <div>Attaquant en hauteur</div>
+        <div>+3</div>
+        <div>Cible de grande taille</div>
+        <div>+3</div>
+        <div>Cible en hauteur</div>
+        <div>-3</div>
+        <div>Obscurité</div>
+        <div>-3</div>
+        <div>Cible de petite taille</div>
+        <div>-3</div>
+    </div>
+    <div class="grid-data">
+        <label>Difficulté</label>
+        <div class="data"><input type="number" name="difficulte" value="0"/></div>
+        <label>Nombre d'actions libres simultanées</label>
+        <div class="data"><input type="number" name="actionLibre" value="1" min="1"/></div>
+    </div>
+    <div class="titre">
+        <label>Primes / Pénalités </label>
+        {{#if infoPrimesID}}
+            <a class="content-link" data-type="JournalEntry" data-id="{{infoPrimesID}}" title="Consultez l'entrée de journal dédiée pour une description des primes et pénalités"><i class="fas fa-info-circle"></i></a>
+        {{/if}}
+    </div>
+    <div class="grid-data">
+        <label>Prime</label>
+        <div class="data">
+            <select name="prime">
+            {{#select prime}}
+            {{#if compCombat}}
+                {{#each cfgData.primes as |prime keyPrime|}}
+                    <option value="{{keyPrime}}">{{prime.label}}</option>
+                {{/each}}
+            {{else}}
+                {{#each cfgData.primes as |prime keyPrime|}}
+                    {{#unless prime.combat}}
+                        <option value="{{keyPrime}}">{{prime.label}}</option>
+                    {{/unless}}
+                {{/each}}
+            {{/if}}
+            {{/select}}
+            </select> 
+        </div>
+    </div>
+    <div class="grid-data">
+        <label>Pénalité</label>
+        <div class="data">
+            <select name="penalite">
+            {{#select penalite}}
+            {{#if compCombat}}
+                {{#each cfgData.penalites as |penalite keyPenalite|}}
+                    <option value="{{keyPenalite}}">{{penalite.label}}</option>
+                {{/each}}
+            {{else}}
+                {{#each cfgData.penalites as |penalite keyPenalite|}}
+                    {{#unless penalite.combat}}
+                        <option value="{{keyPenalite}}">{{penalite.label}}</option>
+                    {{/unless}}
+                {{/each}}
+            {{/if}}
+            {{/select}}
+            </select> 
+        </div>
+    </div>
+</form>    

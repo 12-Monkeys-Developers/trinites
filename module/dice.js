@@ -447,3 +447,198 @@ export async function jetRessource({actor = null,
             }
         }
     }
+
+    export async function jetArme({actor = null,
+        signe = null,
+        competence = null,
+        arme = null,
+        type = null,
+        difficulte = null,
+        afficherDialog = true,
+        envoiMessage = true} = {}) {
+
+        // Récupération des données de l'acteur
+        let actorData = actor.data.data;
+
+        // Informations nécessaires à la fenêtre de dialogue
+        // ID du journal de description des primes et pénalités
+        let infoPrimesID = game.settings.get("trinites","lienJournalPrimesPenalites");
+        
+        // Valeurs récupérées par la fenêtre de dialogue
+        let actionLibre = null;
+        let prime = null;
+        let penalite = null;
+
+        // Affichage de la fenêtre de dialogue (vrai par défaut)
+        if(afficherDialog) {
+            let dialogOptions = await getJetArmeOptions({cfgData: CONFIG.Trinites, infoPrimesID: infoPrimesID});
+            
+            // On annule le jet sur les boutons 'Annuler' ou 'Fermeture'    
+            if(dialogOptions.annule) {
+                return null;
+            }
+
+            // Récupération des données de la fenêtre de dialogue pour ce jet 
+            difficulte = dialogOptions.difficulte;
+            actionLibre = dialogOptions.actionLibre;
+            prime = dialogOptions.prime;
+            penalite = dialogOptions.penalite;
+        }
+
+        // Définition de la formule de base du jet
+        let baseFormula = "1d12x + @valeur";
+
+        // Données de base du jet
+        let valeur = actorData.competences[signe][competence].valeur;
+        let label = actorData.competences[signe][competence].label
+        let karmaAdam = actorData.trinite.adam.karma.type;
+
+        let rollData = {
+            nomPersonnage : actor.data.name,
+            competence: label,
+            valeur: valeur,
+            karmaAdam: karmaAdam,
+            typeActor: actor.data.type,
+            typeArme: type,
+            arme: arme
+        };
+
+        // Modificateur de difficulté du jet
+        if(difficulte) {
+            rollData.difficulte = difficulte;
+            rollData.modifsJet = true;
+            baseFormula += " + @difficulte";
+        }
+
+        // Malus lié au nombre d'actions libres consécutives
+        if(actionLibre > 1) {
+            let malusActionLibre = (actionLibre - 1) * -3;
+
+            rollData.actionLibre = actionLibre;
+            rollData.malusActionLibre = malusActionLibre;
+            rollData.modifsJet = true;
+            baseFormula += " + @malusActionLibre";
+        }
+
+        let rollFormula = `{${baseFormula}, ${baseFormula}}`;
+
+        let rollResult = await new Roll(rollFormula, rollData).roll({async: true});
+        
+        let resultDeva = {
+            dieResult: rollResult.terms[0].rolls[0].dice[0].total,
+            rollTotal: rollResult.terms[0].rolls[0].total,
+            reussite: rollResult.terms[0].rolls[0].total >= 12
+        }
+        rollData.resultDeva = resultDeva;
+
+        let resultArchonte = {
+            dieResult: rollResult.terms[0].rolls[1].dice[0].total,
+            rollTotal: rollResult.terms[0].rolls[1].total,
+            reussite: rollResult.terms[0].rolls[1].total >= 12
+        }
+        rollData.resultArchonte = resultArchonte;
+        
+        // Gestion de la réussite selon le Karma
+        let resultatJet = "echec";
+        if(karmaAdam == "lumiere") {
+            if(resultDeva.reussite) {
+                resultatJet = "reussite";    
+            }
+            else if(resultArchonte.reussite) {
+                resultatJet = "detteArchonte";
+            }
+        }
+        else if(karmaAdam == "tenebre") {
+            if(resultArchonte.reussite) {
+                resultatJet = "reussite";    
+            }
+            else if(resultDeva.reussite) {
+                resultatJet = "detteDeva";
+            }
+        }
+        else {
+            if(resultDeva.reussite || resultArchonte.reussite) {
+                resultatJet = "reussite";
+            }
+        }
+        rollData.resultatJet = resultatJet;
+
+        if(envoiMessage) {
+            // Construction du jeu de données pour alimenter le template
+            let rollStats = {
+                ...rollData
+            }
+
+            let messageTemplate;
+            // Recupération du template
+            messageTemplate = "systems/trinites/templates/partials/dice/jet-arme.hbs"; 
+            
+            let renderedRoll = await rollResult.render();
+
+            // Assignation des données au template
+            let templateContext = {
+                actorId : actor.id,
+                stats : rollStats,
+                roll: renderedRoll
+            }
+
+            // Construction du message
+            let chatData = {
+                user: game.user.id,
+                speaker: ChatMessage.getSpeaker({ actor: actor }),
+                roll: rollResult,
+                content: await renderTemplate(messageTemplate, templateContext),
+                sound: CONFIG.sounds.dice,
+                type: CONST.CHAT_MESSAGE_TYPES.ROLL
+            }
+
+            // Affichage du message
+            await ChatMessage.create(chatData);
+        }
+    }
+
+    // Fonction de construction de la boite de dialogue de jet de compétence
+    async function getJetArmeOptions({cfgData = null, infoPrimesID = null}) {
+        // Recupération du template
+        const template = "systems/trinites/templates/partials/dice/dialog-jet-arme.hbs";
+        const html = await renderTemplate(template, {cfgData: cfgData, infoPrimesID: infoPrimesID});
+
+        return new Promise( resolve => {
+            const data = {
+                title: "Jet de combat",
+                content: html,
+                buttons: {
+                    jet: { // Bouton qui lance le jet de dé
+                        icon: '<i class="fas fa-dice"></i>',
+                        label: "Jeter les dés",
+                        callback: html => resolve(_processJetArmeOptions(html[0].querySelector("form")))
+                    },
+                    annuler: { // Bouton d'annulation
+                        label: "Annuler",
+                        callback: html => resolve({annule: true})
+                    }
+                },
+                default: "jet",
+                close: () => resolve({annule: true}) // Annulation sur fermeture de la boite de dialogue
+            }
+
+            // Affichage de la boite de dialogue
+            new Dialog(data, null).render(true);
+        });        
+    }
+
+    // Gestion des données renseignées dans la boite de dialogue de jet de compétence
+    function _processJetArmeOptions(form) {
+        
+        let actionLibre = null;
+        if(form.actionLibre) {
+            actionLibre = parseInt(form.actionLibre.value);
+        }
+
+        return {
+            difficulte: form.difficulte.value != 0 ? parseInt(form.difficulte.value) : null,
+            actionLibre: actionLibre,
+            prime: form.prime.value != "aucun" ? form.prime.value : null,
+            penalite: form.penalite.value != "aucun" ? form.penalite.value : null
+        }
+    }

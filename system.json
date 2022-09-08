@@ -2,9 +2,7 @@
     "name": "trinites",
     "title": "Trinités",
     "description": "Trinités (non officiel))",
-    "version": "0.0.1",
-    "minimumCoreVersion": "9",
-    "compatibleCoreVersion": "9",
+    "version": "0.1.0",
     "templateVersion": 1,
     "author": "Dellatosa",
     "esmodules": [ "module/trinites.js" ],
@@ -22,6 +20,11 @@
     "gridUnits": "m",
     "initiative": "round((1d12 + @competences.capricorne.rapidite.base) / 2)",
     "primaryTokenAttribute": "",
+    "compatibility": {
+      "minimum": "10.278",
+      "verified": "10.284",
+      "maximum": 10
+    },
     "url": "https://github.com/Dellatosa/trinites",
     "manifest": "https://raw.githubusercontent.com/Dellatosa/trinites/master/system.json",
     "download": "https://github.com/Dellatosa/trinites/archive/refs/tags/v0.0.1.zip"

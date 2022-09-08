@@ -28,7 +28,6 @@ export default class DepenseKarmaFormApplication extends FormApplication {
       }
     
       getData() {
-        //console.log("Passage dans getData");
 
         // Send data to the template
         let templateData = {
@@ -137,7 +136,24 @@ export default class DepenseKarmaFormApplication extends FormApplication {
       async _updateObject(event, formData) {
         this.render();
 
+        if(this.karmaDeva.valeur != this.karmaDeva.valeurInit) {
+          this.actor.majKarma("deva", this.karmaDeva.valeur);
+        }
+
+        if(this.karmaAdam.valeur != this.karmaAdam.valeurInit) {
+          this.actor.majKarma("adam", this.karmaAdam.valeur);
+        }
+
+        if(this.karmaArchonte.valeur != this.karmaArchonte.valeurInit) {
+          this.actor.majKarma("archonte", this.karmaArchonte.valeur);
+        }
+
+        /*console.log("Update Object form Karma", event, formData, this);
+
         for (const [key, value] of Object.entries(formData)) {
+          
+          console.log(key, value);
+
           if(key.startsWith("karmaDeva")) {
             this.actor.majKarma("deva", value);
           }
@@ -147,11 +163,11 @@ export default class DepenseKarmaFormApplication extends FormApplication {
           if(key.startsWith("karmaArchonte")) {
             this.actor.majKarma("archonte", value);
           }
-        }
+        }*/
 
         if(this.typePouvoir == "aura") {
           let aura = this.actor.items.get(this.idPouvoir);
-          aura.update({"data.deploiement": "cosme"});
+          aura.update({"system.deploiement": "cosme"});
         }
 
         if(this.typePouvoir == "atout") {

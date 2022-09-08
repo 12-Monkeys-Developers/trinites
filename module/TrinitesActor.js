@@ -2,7 +2,7 @@ export default class TrinitesActor extends Actor {
 
     prepareData() {
         super.prepareData();
-        let data = this.data.data;
+        let data = this.system;
 
         if(this.type == "trinite" || this.type == "archonteRoi")
         {
@@ -133,10 +133,10 @@ export default class TrinitesActor extends Actor {
 
     // Nombre de points de Karma disponible du type donné (Lumière ou Ténèbre)
     karmaDisponible(typeKarma) {
-        let data = this.data.data;
+        let data = this.system;
         let karmaDisponible = 0;
 
-        if(this.data.type == "trinite") {
+        if(this.type == "trinite") {
             if(typeKarma == "neutre") {
                 karmaDisponible += data.trinite.deva.karma.value;
                 karmaDisponible += data.trinite.archonte.karma.value;
@@ -155,7 +155,7 @@ export default class TrinitesActor extends Actor {
                 }
             }
         }
-        else if(this.data.type == "archonteRoi") {
+        else if(this.type == "archonteRoi") {
             if(typeKarma != "lumiere") {
                 karmaDisponible += data.archonteRoi.karma.value;
             }
@@ -166,11 +166,11 @@ export default class TrinitesActor extends Actor {
 
     // Cout du pouvoir selon l'Affinité du personnage
     coutPouvoir(typePouvoir) {
-        let data = this.data.data;
-        if(this.data.type == "archonteRoi") {
+        let data = this.system;
+        if(this.type == "archonteRoi") {
             return 1;
         } 
-        else if(this.data.type == "trinite") {
+        else if(this.type == "trinite") {
             if(data.themeAstral.affinite == typePouvoir) { return 1; } else { return 2; } 
         }
         else {
@@ -181,10 +181,10 @@ export default class TrinitesActor extends Actor {
 
     // renvoi le code de la source de Karma si elle est la seule à contenir des points, sinon null
     sourceUnique(typeKarma) {
-        let data = this.data.data;
+        let data = this.system;
         let source = null;
 
-        if(this.data.type == "trinite") {
+        if(this.type == "trinite") {
             if(typeKarma == "lumiere") {
                 if(typeKarma != data.trinite.adam.karma.type) {
                     source = "deva";
@@ -223,7 +223,7 @@ export default class TrinitesActor extends Actor {
                 }
             }
         }
-        else if(this.data.type == "archonteRoi") {
+        else if(this.type == "archonteRoi") {
             source = "archonteRoi";
         }
 
@@ -232,66 +232,66 @@ export default class TrinitesActor extends Actor {
 
     // Vide toutes les sources de Karma (Esprit et Adam) du type donné
     viderKarma(typeKarma) {
-        let data = this.data.data;
+        let data = this.system;
 
-        if(this.data.type == "trinite") {
+        if(this.type == "trinite") {
             if(typeKarma == "neutre") {
-                this.update({"data.trinite.deva.karma.value": 0});
-                this.update({"data.trinite.archonte.karma.value": 0});
-                this.update({"data.trinite.adam.karma.value": 0});
+                this.update({"system.trinite.deva.karma.value": 0});
+                this.update({"system.trinite.archonte.karma.value": 0});
+                this.update({"system.trinite.adam.karma.value": 0});
             }
             if(typeKarma == "lumiere") {
-                this.update({"data.trinite.deva.karma.value": 0});
+                this.update({"system.trinite.deva.karma.value": 0});
             }
             else if (typeKarma == "tenebre") {
-                this.update({"data.trinite.archonte.karma.value": 0});
+                this.update({"system.trinite.archonte.karma.value": 0});
             }
     
             if(typeKarma == data.trinite.adam.karma.type) {
-                this.update({"data.trinite.adam.karma.value": 0});
+                this.update({"system.trinite.adam.karma.value": 0});
             }
         }
-        else if(this.data.type == "archonteRoi") {
-            this.update({"data.archonteRoi.karma.value": 0});
+        else if(this.type == "archonteRoi") {
+            this.update({"system.archonteRoi.karma.value": 0});
         }
         
     }
 
     consommerSourceKarma(typeSource, coutPouvoir) {
-        let data = this.data.data;
+        let data = this.system;
 
         switch(typeSource) {
             case "adam":
-                this.update({"data.trinite.adam.karma.value": data.trinite.adam.karma.value - coutPouvoir});
+                this.update({"system.trinite.adam.karma.value": data.trinite.adam.karma.value - coutPouvoir});
                 break;
             case "deva":
-                this.update({"data.trinite.deva.karma.value": data.trinite.deva.karma.value - coutPouvoir});
+                this.update({"system.trinite.deva.karma.value": data.trinite.deva.karma.value - coutPouvoir});
                 break;
             case "archonte":
-                this.update({"data.trinite.archonte.karma.value": data.trinite.archonte.karma.value - coutPouvoir});
+                this.update({"system.trinite.archonte.karma.value": data.trinite.archonte.karma.value - coutPouvoir});
                 break;
             case "archonteRoi":
-                this.update({"data.archonteRoi.karma.value": data.archonteRoi.karma.value - coutPouvoir});
+                this.update({"system.archonteRoi.karma.value": data.archonteRoi.karma.value - coutPouvoir});
                 break
         }
     }
 
     // Mise à jour de la réserve de karma du type donné à la valeur cible
     majKarma(reserve, valeur) {
-        if(this.data.type == "trinite") {
-            let reserveData = `data.trinite.${reserve}.karma.value`;
+        if(this.type == "trinite") {
+            let reserveData = `system.trinite.${reserve}.karma.value`;
             this.update({[reserveData]: valeur});
         }
-        else if(this.data.type == "archonteRoi") {
-            this.update({"data.archonteRoi.karma.value": valeur});
+        else if(this.type == "archonteRoi") {
+            this.update({"system.archonteRoi.karma.value": valeur});
         }
         
     }
 
     regeneration() {
-        let data = this.data.data;
+        let data = this.system;
 
         let blessureVal = Math.max(data.nbBlessure - 4, 0);
-        this.update({"data.nbBlessure": blessureVal});
+        this.update({"system.nbBlessure": blessureVal});
     }
 }

@@ -6,16 +6,16 @@
     <div class="sheet-content atout occulte" data-item-id="{{item.id}}">
         <div class="grid-item-atout">
             <label>Epée de Feu</label>
-            <select name="data.messager">
-                {{#select data.data.messager}}
+            <select name="system.messager">
+                {{#select data.system.messager}}
                 {{#each config.epeesFeu as |epee keyEpee|}}
                     <option value="{{keyEpee}}">{{epee.label}}</option>
                 {{/each}}
                 {{/select}} 
             </select>
             <label>Couleur</label>
-            <select name="data.couleur">
-                {{#select data.data.couleur}}
+            <select name="system.couleur">
+                {{#select data.system.couleur}}
                 {{#each config.couleurs as |couleur keyCouleur|}}
                     <option value="{{keyCouleur}}">{{couleur}}</option>
                 {{/each}}
@@ -23,7 +23,7 @@
             </select>
         </div>
         <div class="titre-desc occulte">Effet de l'atout</div> 
-        {{editor content=data.data.description target="data.description" button=true owner=true editable=true}}
+        {{editor data.system.description target="system.description" button=true owner=true editable=true}}
     </div>
     <footer class="sheet-footer occulte">
         <div><i class="fas fa-khanda"></i> Atout</span></div>

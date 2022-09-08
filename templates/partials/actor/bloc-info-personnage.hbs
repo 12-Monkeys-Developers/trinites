@@ -5,22 +5,22 @@
     </div>
     <div class="actor-infos-line">
         <label>Sexe</label>
-        <div class="small-size"><input name="data.sexe" type="text" value="{{data.data.sexe}}" placeholder="Sexe"></div>
+        <div class="small-size"><input name="system.sexe" type="text" value="{{data.system.sexe}}" placeholder="Sexe"></div>
         <label>Age</label>
-        <div class="small-size"><input name="data.age" type="number" value="{{data.data.age}}" placeholder="Age"></div>
+        <div class="small-size"><input name="system.age" type="number" value="{{data.system.age}}" placeholder="Age"></div>
         <label>Taille</label>
-        <div class="middle-size"><input name="data.taille" type="text" value="{{data.data.taille}}" placeholder="Taille"></div>
+        <div class="middle-size"><input name="system.taille" type="text" value="{{data.system.taille}}" placeholder="Taille"></div>
         {{#if (eq data.type "trinite")}}
             <label>Métier</label>
-            <div class="auto-size"><input name="data.metier" type="text" value="{{data.data.metier}}" placeholder="Métier"></div>
+            <div class="auto-size"><input name="system.metier" type="text" value="{{data.system.metier}}" placeholder="Métier"></div>
         {{/if}}
         {{#if (eq data.type "archonteRoi")}}
             <label>Couverture</label>
-            <div class="auto-size"><input name="data.couverture" type="text" value="{{data.data.metier}}" placeholder="Couverture - activité apparente"></div>
+            <div class="auto-size"><input name="system.couverture" type="text" value="{{data.system.metier}}" placeholder="Couverture - activité apparente"></div>
         {{/if}}
     </div>
     <div class="actor-infos-line">
         <label>Description</label>
-        <div class="auto-size"><input name="data.description" type="text" value="{{data.data.description}}" placeholder="Description"></div>
+        <div class="auto-size"><input name="system.description" type="text" value="{{data.system.description}}" placeholder="Description"></div>
     </div>
 </div>

@@ -6,7 +6,7 @@
         <div class="titre-grand-livre">Versets de Tenèbres</div>
         <div class="grid-verset">
             {{#each versets as |verset id|}}
-                {{#if (eq verset.data.karma "lumiere")}}
+                {{#if (eq verset.system.karma "lumiere")}}
                     <div class="col-roll-verset"><a class="roll-verset" title="Jet de verset" data-item-id="{{verset._id}}"><i class="fas fa-dice"></i></a></div>
                     <div class="col-nom-verset">{{verset.name}}</div>
                     <div class="col-edit-verset"><a class="edit-item" title="Editer" data-item-id="{{verset._id}}"> <i class="far fa-edit"></i></a></div>
@@ -17,7 +17,7 @@
         <div></div>
         <div class="grid-verset">
             {{#each versets as |verset id|}}
-                {{#if (eq verset.data.karma "tenebre")}}
+                {{#if (eq verset.system.karma "tenebre")}}
                     <div class="col-roll-verset"><a class="roll-verset" title="Jet de verset" data-item-id="{{verset._id}}"><i class="fas fa-dice"></i></a></div>
                     <div class="col-nom-verset">{{verset.name}}</div>
                     <div class="col-edit-verset"><a class="edit-item" title="Editer" data-item-id="{{verset._id}}"> <i class="far fa-edit"></i></a></div>

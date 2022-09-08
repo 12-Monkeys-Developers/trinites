@@ -20,15 +20,15 @@
                         <h3><i class="fab fa-pied-piper-alt"></i> Historique</h3>
                         <div class="ligne-histo">
                             <label>Légion</label>                            
-                            <select name="data.trinite.archonte.legion">
-                                {{#select data.data.trinite.archonte.legion}}
+                            <select name="system.trinite.archonte.legion">
+                                {{#select data.system.trinite.archonte.legion}}
                                 {{#each config.legions as |legion keyLegion|}}
                                     <option value="{{keyLegion}}">{{legion}}</option>
                                 {{/each}}
                                 {{/select}} 
                             </select>
                         </div>
-                        <div class="histo"><textarea name="data.historique" placeholder="Histoire de l'Archonte-Roi">{{data.data.historique}}</textarea></div>
+                        <div class="histo"><textarea name="system.historique" placeholder="Histoire de l'Archonte-Roi">{{data.system.historique}}</textarea></div>
                     </div>
                 </div>
             </div>
@@ -38,9 +38,9 @@
                     <div class="grid-karma-ten">
                         <div class="karma-ten-titre"><label>Réserve de Karma</label></div>
                         <div class="karma-ten-valeur">
-                            <input name="data.archonteRoi.karma.value" type="number" value="{{data.data.archonteRoi.karma.value}}" placeholder="0" min="0" max="{{data.data.archonteRoi.karma.max}}">
+                            <input name="system.archonteRoi.karma.value" type="number" value="{{data.system.archonteRoi.karma.value}}" placeholder="0" min="0" max="{{data.system.archonteRoi.karma.max}}">
                             <label> / </label>
-                            <input name="data.archonteRoi.karma.max" type="number" value="{{data.data.archonteRoi.karma.max}}" placeholder="0" min="0">
+                            <input name="system.archonteRoi.karma.max" type="number" value="{{data.system.archonteRoi.karma.max}}" placeholder="0" min="0">
                             <!-- <div class="logo-karma"><i class="fas fa-moon"></i></div> -->
                         </div>
                     </div>

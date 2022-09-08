@@ -30,18 +30,21 @@ function onDetteEsprit(event) {
 
     let actor = game.actors.get(element.dataset.actorId);
     if(element.dataset.esprit == "deva") {
-        actor.update({"data.trinite.deva.dettes": actor.data.data.trinite.deva.dettes + 1});
+        actor.update({"system.trinite.deva.dettes": actor.system.trinite.deva.dettes + 1});
     }
 
     if(element.dataset.esprit == 'archonte')
     {
-        actor.update({"data.trinite.archonte.dettes": actor.data.data.trinite.archonte.dettes + 1});
+        actor.update({"system.trinite.archonte.dettes": actor.system.trinite.archonte.dettes + 1});
     }
 
     element.classList.add("used");
     element.innerHTML = "Dette de Karma payée";
 
-    element.closest(".jet-comp").getElementsByClassName("carte")[0].classList.remove("hidden");
+    let elemSouffle = element.closest(".jet-comp").getElementsByClassName("carte")[0];
+    if(elemSouffle) {
+        elemSouffle.classList.remove("hidden");
+    }
 }
 
 function onActiverAura(event) {
@@ -56,7 +59,7 @@ function onActiverAura(event) {
     let aura = actor.items.get(auraId);
 
     // Aura déjà déployée - test par sécurité
-    if(aura.data.data.deploiement != "") {
+    if(aura.system.deploiement != "") {
         ui.notifications.warn("Cette aura est déjà déployée !");
         return;
     }
@@ -82,7 +85,7 @@ function onActiverAura(event) {
         activationOk = true;
     }
     else {
-        new DepenseKarmaFormApplication(actor, actor.data.data.trinite, typeKarma, "aura", coutPouvoir, auraId).render(true);
+        new DepenseKarmaFormApplication(actor, actor.system.trinite, typeKarma, "aura", coutPouvoir, auraId).render(true);
 
          // MAJ de la carte - dialog
          element.title = `La fenêtre de sélection de Karma a été affichée`;
@@ -94,7 +97,7 @@ function onActiverAura(event) {
         aura.update({"data.deploiement": "cosme"});
 
         // MAJ de la carte
-        element.title = `Vous avez déployée l'aura '${aura.data.name}'`;
+        element.title = `Vous avez déployée l'aura '${aura.name}'`;
         element.classList.add("deployee");
         element.closest(".carte.aura").getElementsByClassName("zone")[0].innerHTML = "Cosme";
     }
@@ -110,7 +113,7 @@ function onActiverSouffle(event) {
     let actor = game.actors.get(element.closest(".carte.aura").dataset.actorId);
     let aura = actor.items.get(element.closest(".carte.aura").dataset.itemId);
 
-    if(aura.data.data.deploiement == "" || aura.data.data.deploiement == "cosme") {
+    if(aura.system.deploiement == "" || aura.system.deploiement == "cosme") {
         ui.notifications.warn("Le Souffle a déjà été déclenché !");
         return;
     }
@@ -118,13 +121,13 @@ function onActiverSouffle(event) {
     Dice.jetCompetence({
         actor: actor,
         type: "souffle",
-        aura: aura.data,
+        aura: aura,
         signe: "vierge",
         competence: "emprise",
         afficherDialog: false
     });
 
-    aura.update({"data.deploiement": "cosme"});
+    aura.update({"system.deploiement": "cosme"});
 
     element.title = `Le Souffle est sans effet à cette portée d'aura`;
     element.classList.add("cosme");
@@ -139,7 +142,7 @@ function onActiverVerset(event) {
 
     const versetId = element.closest(".carte.verset").dataset.itemId;
     let verset = actor.items.get(versetId);
-    let typeKarma = verset.data.data.karma;
+    let typeKarma = verset.system.karma;
     
     let karmaDisponible = actor.karmaDisponible(typeKarma);
     let coutPouvoir = actor.coutPouvoir("grandLivre");
@@ -161,7 +164,7 @@ function onActiverVerset(event) {
         activationOk = true;
     }
     else {
-        new DepenseKarmaFormApplication(actor, actor.data.data.trinite, typeKarma, "verset", coutPouvoir, versetId).render(true);
+        new DepenseKarmaFormApplication(actor, actor.system.trinite, typeKarma, "verset", coutPouvoir, versetId).render(true);
     }
 
     if(activationOk) {
@@ -179,7 +182,7 @@ function onActiverAtout(event) {
 
     const atoutId = element.closest(".carte.atout").dataset.itemId;
     let atout = actor.items.get(atoutId);
-    let typeKarma = atout.data.data.karma;
+    let typeKarma = atout.system.karma;
     
     let karmaDisponible = actor.karmaDisponible(typeKarma);
     let coutPouvoir = actor.coutPouvoir("lameSoeur");
@@ -201,7 +204,7 @@ function onActiverAtout(event) {
         activationOk = true;
     }
     else {
-        new DepenseKarmaFormApplication(actor, actor.data.data.trinite, typeKarma, "atout", coutPouvoir, atoutId).render(true);
+        new DepenseKarmaFormApplication(actor, actor.system.trinite, typeKarma, "atout", coutPouvoir, atoutId).render(true);
     }
 
     if(activationOk) {
@@ -279,7 +282,7 @@ export async function carteAtout({actor = null,
 
     // Récupération des données de l'item
     let cardData = {
-        atout: atout.data,
+        atout: atout,
         actorId: actor.id
     }
 
@@ -290,8 +293,8 @@ export async function carteAtout({actor = null,
     let chatData = {
         user: game.user.id,
         speaker: ChatMessage.getSpeaker({ actor: actor }),
-        content: await renderTemplate(messageTemplate, cardData),
-        roll: true
+        content: await renderTemplate(messageTemplate, cardData)
+        //roll: true
     }
 
     if(whisper) {
@@ -310,8 +313,8 @@ export async function carteAtoutActive({actor = null,
 
     // Récupération des données de l'item
     let cardData = {
-        atout: atout.data,
-        nomPersonnage: actor.data.name
+        atout: atout,
+        nomPersonnage: actor.name
     }
 
     // Recupération du template
@@ -321,8 +324,8 @@ export async function carteAtoutActive({actor = null,
     let chatData = {
         user: game.user.id,
         speaker: ChatMessage.getSpeaker({ actor: actor }),
-        content: await renderTemplate(messageTemplate, cardData),
-        roll: true
+        content: await renderTemplate(messageTemplate, cardData)
+        //roll: true
     }
 
     // Affichage du message
@@ -335,11 +338,11 @@ export async function carteAura({actor = null,
 
     let aura = actor.items.get(auraId);
     
-    let souffleDispo = actor.data.type == "archonteRoi" || actor.data.data.themeAstral.affinite == "zodiaque";
+    let souffleDispo = actor.type == "archonteRoi" || actor.system.themeAstral.affinite == "zodiaque";
 
     // Récupération des données de l'item
     let cardData = {
-        aura: aura.data,
+        aura: aura,
         actorId: actor.id,
         souffleDispo: souffleDispo
     }
@@ -351,8 +354,8 @@ export async function carteAura({actor = null,
     let chatData = {
         user: game.user.id,
         speaker: ChatMessage.getSpeaker({ actor: actor }),
-        content: await renderTemplate(messageTemplate, cardData),
-        roll: true
+        content: await renderTemplate(messageTemplate, cardData)
+        //roll: true
     }
 
     if(whisper) {
@@ -371,11 +374,10 @@ export async function carteVerset({actor = null,
 
     // Récupération des données de l'item
     let cardData = {
-        verset: verset.data,
+        verset: verset,
         actorId: actor.id
     }
 
-    console.log(cardData);
     // Recupération du template
     const messageTemplate = "systems/trinites/templates/partials/chat/carte-verset.hbs"; 
 
@@ -383,8 +385,8 @@ export async function carteVerset({actor = null,
     let chatData = {
         user: game.user.id,
         speaker: ChatMessage.getSpeaker({ actor: actor }),
-        content: await renderTemplate(messageTemplate, cardData),
-        roll: true
+        content: await renderTemplate(messageTemplate, cardData)
+        //roll: true
     }
 
     if(whisper) {
@@ -402,8 +404,8 @@ export async function carteVersetActive({actor = null,
 
     // Récupération des données de l'item
     let cardData = {
-        verset: verset.data,
-        nomPersonnage: actor.data.name
+        verset: verset,
+        nomPersonnage: actor.name
     }
 
     console.log(cardData);
@@ -414,8 +416,8 @@ export async function carteVersetActive({actor = null,
     let chatData = {
         user: game.user.id,
         speaker: ChatMessage.getSpeaker({ actor: actor }),
-        content: await renderTemplate(messageTemplate, cardData),
-        roll: true
+        content: await renderTemplate(messageTemplate, cardData)
+        //roll: true
     }
 
     // Affichage du message

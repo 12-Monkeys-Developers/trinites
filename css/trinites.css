@@ -78,12 +78,14 @@
   color: var(--color-titre-trinite);
   font-weight: bold;
   margin-left: 3px;
+  border-bottom: none;
 }
 .trinites.sheet.actor .window-content .tab.occulte h3 {
   font-family: "Cabaletta";
   color: var(--color-titre-occulte);
   font-weight: bold;
   margin-left: 3px;
+  border-bottom: none;
 }
 .trinites.sheet.actor .competences,
 .trinites.sheet.actor .domaines,
@@ -993,6 +995,9 @@
   border: 1px solid var(--color-border-light-2);
   border-radius: 3px;
   box-shadow: 0 0 2px #FFF inset;
+  /*.infos-arme {
+         
+    }*/
 }
 .bloc-arme .logo {
   display: flex;

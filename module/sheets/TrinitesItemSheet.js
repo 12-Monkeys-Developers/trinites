@@ -11,14 +11,15 @@ export default class TrinitesItemSheet extends ItemSheet {
 
     get template() {
 
-        console.log(`Trinites | Chargement du template systems/trinites/templates/sheets/items/${this.item.data.type.toLowerCase()}-sheet.html`);
-        return `systems/trinites/templates/sheets/items/${this.item.data.type.toLowerCase()}-sheet.html`
+        console.log(`Trinites | Chargement du template systems/trinites/templates/sheets/items/${this.item.type.toLowerCase()}-sheet.html`);
+        return `systems/trinites/templates/sheets/items/${this.item.type.toLowerCase()}-sheet.html`
     }
 
     getData() {
         const data = super.getData();
         data.config = CONFIG.Trinites;
-        const myItemData = data.data;
+
+        const myItemData = data.data.system;
 
         if(this.item.type == "aura")
         {
@@ -49,7 +50,7 @@ export default class TrinitesItemSheet extends ItemSheet {
         const aura = this.actor.items.get(auraId);
         let zone = element.dataset.zone;
 
-        if(aura.data.data.deploiement == "") {
+        if(aura.system.deploiement == "") {
             ui.notifications.warn("Vous devez déployer l'aura avant de changer sa zone d'effet !");
             return;
         }
@@ -58,7 +59,7 @@ export default class TrinitesItemSheet extends ItemSheet {
         if(zone != "cosme") {
             let auras = this.actor.items.filter(function (item) { return item.type == "aura" && item.id != auraId});            
             auraActive = auras.some(autreAura => {
-                if(autreAura.data.data.deploiement != "" && autreAura.data.data.deploiement != "cosme") {
+                if(autreAura.system.deploiement != "" && autreAura.system.deploiement != "cosme") {
                     return true;
                 }
             });
@@ -69,11 +70,11 @@ export default class TrinitesItemSheet extends ItemSheet {
             return;
         }
 
-        if(aura.data.data.deploiement == "cosme" && zone == "cosme") {
-            aura.update({"data.deploiement": ""});    
+        if(aura.system.deploiement == "cosme" && zone == "cosme") {
+            aura.update({"system.deploiement": ""});    
         }
         else {
-            aura.update({"data.deploiement": zone});
+            aura.update({"system.deploiement": zone});
         }    
     }
 }

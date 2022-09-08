@@ -9,7 +9,7 @@ export async function jetCompetence({actor = null,
     envoiMessage = true} = {}) {
 
         // Récupération des données de l'acteur
-        let actorData = actor.data.data;
+        let actorData = actor.system;
 
         let valeur = actorData.competences[signe][competence].valeur;
         let compOuverte = actorData.competences[signe][competence].ouverte;
@@ -69,25 +69,25 @@ export async function jetCompetence({actor = null,
         let karmaAdam = actorData.trinite.adam.karma.type;
 
         let rollData = {
-            nomPersonnage : actor.data.name,
+            nomPersonnage : actor.name,
             competence: label,
             valeur: valeur,
             karmaAdam: karmaAdam,
-            typeActor: actor.data.type
+            typeActor: actor.type
         };
 
         // Bonus de difficulte en cas de jet d'Emprise - Souffle
         if(type == "souffle") {
-            console.log(aura);
+            //console.log(aura);
 
-            if(aura.data.signe == actorData.themeAstral.archetype) {
+            if(aura.system.signe == actorData.themeAstral.archetype) {
                 difficulte = 6;
             }
-            else if(aura.data.signe == actorData.themeAstral.ascendant1 || aura.data.signe == actorData.themeAstral.ascendant2) {
+            else if(aura.system.signe == actorData.themeAstral.ascendant1 || aura.system.signe == actorData.themeAstral.ascendant2) {
                 difficulte = 3;
             }
             
-            rollData.deploieInit = aura.data.deploiement;
+            rollData.deploieInit = aura.system.deploiement;
             rollData.aura = aura;
         }
 
@@ -249,12 +249,12 @@ export async function jetRessource({actor = null,
     envoiMessage = true} = {}) {
 
         // Récupération des données de l'acteur
-        let actorData = actor.data.data;
+        let actorData = actor.system;
 
         let valeur = actorData.ressources[ressource].valeur - actorData.ressources[ressource].diminution;
         let ressEpuisee = actorData.ressources[ressource].epuisee
         let label = actorData.ressources[ressource].label;
-        let domaines = actor.items.filter(function (item) { return item.type == "domaine" && !item.data.data.epuise});
+        let domaines = actor.items.filter(function (item) { return item.type == "domaine" && !item.system.epuise});
 
         // Pas de jet si Richesse est épuisée ou tous les dommaines épuisés
         if(ressource == "richesse" && ressEpuisee) {
@@ -458,7 +458,7 @@ export async function jetRessource({actor = null,
         envoiMessage = true} = {}) {
 
         // Récupération des données de l'acteur
-        let actorData = actor.data.data;
+        let actorData = actor.system;
 
         // Informations nécessaires à la fenêtre de dialogue
         // ID du journal de description des primes et pénalités
@@ -494,11 +494,11 @@ export async function jetRessource({actor = null,
         let karmaAdam = actorData.trinite.adam.karma.type;
 
         let rollData = {
-            nomPersonnage : actor.data.name,
+            nomPersonnage : actor.name,
             competence: label,
             valeur: valeur,
             karmaAdam: karmaAdam,
-            typeActor: actor.data.type,
+            typeActor: actor.type,
             typeArme: type,
             arme: arme
         };

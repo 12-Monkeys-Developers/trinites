@@ -13,12 +13,12 @@ export default class TrinitesActorSheet extends ActorSheet {
     }
 
     get template() {
-        if(this.actor.data.type == "trinite") {
-            console.log(`Trinites | type : ${this.actor.data.type} | Chargement du template systems/trinites/templates/sheets/actors/personnage-sheet.html`);
+        if(this.actor.type == "trinite") {
+            console.log(`Trinites | type : ${this.actor.type} | Chargement du template systems/trinites/templates/sheets/actors/personnage-sheet.html`);
             return `systems/trinites/templates/sheets/actors/personnage-sheet.html`;
         } 
-        else if(this.actor.data.type == "archonteRoi") {
-            console.log(`Trinites | type : ${this.actor.data.type} | Chargement du template systems/trinites/templates/sheets/actors/archonteRoi-sheet.html`);
+        else if(this.actor.type == "archonteRoi") {
+            console.log(`Trinites | type : ${this.actor.type} | Chargement du template systems/trinites/templates/sheets/actors/archonteRoi-sheet.html`);
             return `systems/trinites/templates/sheets/actors/archonteRoi-sheet.html`;
         }
         //else {
@@ -129,7 +129,7 @@ export default class TrinitesActorSheet extends ActorSheet {
         
         let domaineId = element.closest(".domaine").dataset.itemId;
         const domaine = this.actor.items.get(domaineId);
-        domaine.update({"data.epuise": true});
+        domaine.update({"system.epuise": true});
     }
 
     _onSupprDomaineEtatEpuise(event) {
@@ -138,21 +138,21 @@ export default class TrinitesActorSheet extends ActorSheet {
         
         let domaineId = element.closest(".domaine").dataset.itemId;
         const domaine = this.actor.items.get(domaineId);
-        domaine.update({"data.epuise": false});
+        domaine.update({"system.epuise": false});
     }
 
     _onAjoutRichesseEtatEpuise(event) {
         event.preventDefault();
         const element = event.currentTarget;
         
-        this.actor.update({"data.ressources.richesse.epuisee": true});
+        this.actor.update({"system.ressources.richesse.epuisee": true});
     }
 
     _onSupprRichesseEtatEpuise(event) {
         event.preventDefault();
         const element = event.currentTarget;
         
-        this.actor.update({"data.ressources.richesse.epuisee": false});
+        this.actor.update({"system.ressources.richesse.epuisee": false});
     }
 
     _onCocherCaseDeVie(event) {
@@ -160,9 +160,9 @@ export default class TrinitesActorSheet extends ActorSheet {
         const element = event.currentTarget;
 
         let indexVie = element.dataset.index;
-        let blessureVal = this.actor.data.data.nbBlessure != indexVie ? indexVie : indexVie - 1;
+        let blessureVal = this.actor.system.nbBlessure != indexVie ? indexVie : indexVie - 1;
 
-        this.actor.update({"data.nbBlessure": blessureVal});
+        this.actor.update({"system.nbBlessure": blessureVal});
     }
 
     _onRegenerationSante(event) {
@@ -170,8 +170,8 @@ export default class TrinitesActorSheet extends ActorSheet {
         //const element = event.currentTarget;
 
         let typeKarma = "";
-        if(this.actor.data.type == "trinite") {
-            switch(this.actor.data.data.etatSante) {
+        if(this.actor.type == "trinite") {
+            switch(this.actor.system.etatSante) {
                 case "endolori":
                     typeKarma = "neutre";
                     break;
@@ -183,7 +183,7 @@ export default class TrinitesActorSheet extends ActorSheet {
                     break;
             }
         }
-        else if(this.actor.data.type == "archonteRoi") {
+        else if(this.actor.type == "archonteRoi") {
             typeKarma = "tenebre";
         }
         
@@ -222,7 +222,7 @@ export default class TrinitesActorSheet extends ActorSheet {
         const aura = this.actor.items.get(auraId);
         let zone = element.dataset.zone;
 
-        if(aura.data.data.deploiement == "") {
+        if(aura.system.deploiement == "") {
             ui.notifications.warn("Vous devez déployer l'aura avant de changer sa zone d'effet !");
             return;
         }
@@ -231,7 +231,7 @@ export default class TrinitesActorSheet extends ActorSheet {
         if(zone != "cosme") {
             let auras = this.actor.items.filter(function (item) { return item.type == "aura" && item.id != auraId});            
             auraActive = auras.some(autreAura => {
-                if(autreAura.data.data.deploiement != "" && autreAura.data.data.deploiement != "cosme") {
+                if(autreAura.system.deploiement != "" && autreAura.system.deploiement != "cosme") {
                     return true;
                 }
             });
@@ -242,11 +242,11 @@ export default class TrinitesActorSheet extends ActorSheet {
             return;
         }
 
-        if(aura.data.data.deploiement == "cosme" && zone == "cosme") {
-            aura.update({"data.deploiement": ""});    
+        if(aura.system.deploiement == "cosme" && zone == "cosme") {
+            aura.update({"system.deploiement": ""});    
         }
         else {
-            aura.update({"data.deploiement": zone});
+            aura.update({"system.deploiement": zone});
         }       
     }
 
@@ -315,7 +315,7 @@ export default class TrinitesActorSheet extends ActorSheet {
             signe: "belier",
             competence: lame.competence,
             arme: lame,
-            type: this.actor.data.type == "trinite" ? "lameSoeur" : "lameNoire"
+            type: this.actor.type == "trinite" ? "lameSoeur" : "lameNoire"
         });
     }
 

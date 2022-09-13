@@ -113,7 +113,7 @@ export default class TrinitesActorSheet extends ActorSheet {
         let domaineId = element.closest(".domaine").dataset.itemId;
         const domaine = this.actor.items.get(domaineId);
 
-        let content = `<p>Domaine : ${domaine.system.name}<br>Etes-vous certain de vouloir supprimer cet objet ?<p>`
+        let content = `<p>Domaine : ${domaine.name}<br>Etes-vous certain de vouloir supprimer cet objet ?<p>`
         let dlg = Dialog.confirm({
             title: "Confirmation de suppression",
             content: content,

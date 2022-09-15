@@ -1,5 +1,5 @@
 export const registerSystemSettings = function() {
-    // Suggestions des échecs ctitiques envoyées à l'EG
+    
     game.settings.register("trinites","limEndettementCampagne", {
         config: true,
         scope: "world",

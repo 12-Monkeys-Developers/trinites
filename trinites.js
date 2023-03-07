@@ -9,8 +9,10 @@ import TrinitesItemSheet from "./module/item/sheet/TrinitesItemSheet.js";
 import TrinitesActor from "./module/actor/TrinitesActor.js";
 import TrinitesItem from "./module/item/TrinitesItem.js";
 
+import { Log } from "./module/common/log.js";
+
 Hooks.once("init", function() {
-    console.log("Trinités | Initialisation du système Trinités (non officiel))");
+    Log.info("Initialisation du système Trinités (non officiel))");
 
     game.trinites = {
         TrinitesActor,
@@ -23,7 +25,7 @@ Hooks.once("init", function() {
     CONFIG.Actor.documentClass = TrinitesActor;
     CONFIG.Item.documentClass = TrinitesItem;
 
-    console.log(CONFIG);
+    Log.info(CONFIG);
 
     Actors.unregisterSheet("core", ActorSheet);
     Actors.registerSheet("trinites", TrinitesActorSheet, {makeDefault: true});

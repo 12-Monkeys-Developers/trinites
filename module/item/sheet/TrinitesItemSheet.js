@@ -1,3 +1,4 @@
+import { Log } from "../../common/log.js";
 export default class TrinitesItemSheet extends ItemSheet {
      
     static get defaultOptions() {
@@ -11,7 +12,7 @@ export default class TrinitesItemSheet extends ItemSheet {
 
     get template() {
 
-        console.log(`Trinites | Chargement du template systems/trinites/templates/sheets/items/${this.item.type.toLowerCase()}-sheet.html`);
+        Log.info(`Chargement du template systems/trinites/templates/sheets/items/${this.item.type.toLowerCase()}-sheet.html`);
         return `systems/trinites/templates/sheets/items/${this.item.type.toLowerCase()}-sheet.html`
     }
 

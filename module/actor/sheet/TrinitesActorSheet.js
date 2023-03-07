@@ -1,5 +1,6 @@
 import * as Dice from "../../common/dice.js";
 import * as Chat from "../../common/chat.js";
+import { Log } from "../../common/log.js";
 
 export default class TrinitesActorSheet extends ActorSheet {
 
@@ -14,11 +15,11 @@ export default class TrinitesActorSheet extends ActorSheet {
 
     get template() {
         if(this.actor.type == "trinite") {
-            console.log(`Trinites | type : ${this.actor.type} | Chargement du template systems/trinites/templates/sheets/actors/personnage-sheet.html`);
+            Log.info(`type : ${this.actor.type} | Chargement du template systems/trinites/templates/sheets/actors/personnage-sheet.html`);
             return `systems/trinites/templates/sheets/actors/personnage-sheet.html`;
         } 
         else if(this.actor.type == "archonteRoi") {
-            console.log(`Trinites | type : ${this.actor.type} | Chargement du template systems/trinites/templates/sheets/actors/archonteRoi-sheet.html`);
+            Log.info(`type : ${this.actor.type} | Chargement du template systems/trinites/templates/sheets/actors/archonteRoi-sheet.html`);
             return `systems/trinites/templates/sheets/actors/archonteRoi-sheet.html`;
         }
         //else {

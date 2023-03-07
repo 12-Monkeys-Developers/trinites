@@ -2,7 +2,7 @@ export default class TrinitesItem extends Item {
 
     prepareData() {
         super.prepareData();
-        this.system.config = CONFIG.Trinites;
+        this.system.config = game.trinites.config;
         let data = this.system;
 
         if(this.type == "atout") {

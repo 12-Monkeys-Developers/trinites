@@ -1,12 +1,12 @@
-export const Trinites = {};
+export const TRINITES = {};
 
-Trinites.karmas = {
+TRINITES.karmas = {
     aucun: "",
     lumiere: "Lumière",
     tenebre: "Ténèbres"
 }
 
-Trinites.messagers = {
+TRINITES.messagers = {
     aucun: "",
     jibril: {
         label: "Jibr'il",
@@ -26,7 +26,7 @@ Trinites.messagers = {
     }
 }
 
-Trinites.vagabonds = {
+TRINITES.vagabonds = {
     aucun: "",
     jabaan: {
         label: "Jaba’an",
@@ -42,7 +42,7 @@ Trinites.vagabonds = {
     }
 }
 
-Trinites.epeesFeu = {
+TRINITES.epeesFeu = {
     aucun: "",
     jibril: {
         label: "Jibr'il",
@@ -74,7 +74,7 @@ Trinites.epeesFeu = {
     }
 }
 
-Trinites.choeurs = {
+TRINITES.choeurs = {
     aucun: "",
     sepherims: "Les Sepherims",
     seneverims: "Les Seneverims",
@@ -82,7 +82,7 @@ Trinites.choeurs = {
     berekhimes: "Les Barakhims"
 }
 
-Trinites.legions = {
+TRINITES.legions = {
     aucun: "",
     adon: "Les Adôn",
     houhalon: "Les Houhalôn",
@@ -90,7 +90,7 @@ Trinites.legions = {
     tehon: "Les Tehôn"
 }
 
-Trinites.signes = {
+TRINITES.signes = {
     aucun: "",
     gemeaux: "Les Gémeaux",
     vierge: "La Vierge",
@@ -106,14 +106,14 @@ Trinites.signes = {
     verseau: "Le Verseau"
 }
 
-Trinites.affinites = {
+TRINITES.affinites = {
     aucun: "",
     zodiaque: "Zodiaque",
     grandLivre : "Grand Livre",
     lameSoeur : "Lame-soeur"
 }
 
-Trinites.etatSante = {
+TRINITES.etatSante = {
     aucun : "",
     indemne: "Indemne",
     endolori : "Endolori",
@@ -121,7 +121,7 @@ Trinites.etatSante = {
     inconscient: "Inconscient"
 }
 
-Trinites.deploiement = {
+TRINITES.deploiement = {
     aucun: "Non déployée",
     cosme: "Cosme",
     corps: "Corps",
@@ -130,7 +130,7 @@ Trinites.deploiement = {
     oeil: "Oeil"
 }
 
-Trinites.couleurs = {
+TRINITES.couleurs = {
     aucun: "",
     gueules : "Gueules",
     azur: "Azur",
@@ -138,7 +138,7 @@ Trinites.couleurs = {
     sinople: "Sinople"
 }
 
-Trinites.dettes = {
+TRINITES.dettes = {
     1: {
         diminution: 1,
         duree: "1 mois"
@@ -165,7 +165,7 @@ Trinites.dettes = {
     }
 }
 
-Trinites.primes = {
+TRINITES.primes = {
     aucun: "",
     acceleration: { 
         label: "Accélération",
@@ -205,7 +205,7 @@ Trinites.primes = {
     }
 }
 
-Trinites.penalites = {
+TRINITES.penalites = {
     aucun: "",
     consommationRessource: { 
         label: "Consommation d’une ressource",

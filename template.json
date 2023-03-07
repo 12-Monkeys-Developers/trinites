@@ -90,19 +90,19 @@
                     "gemeaux": {
                         "art":{
                             "label": "Art",
-                            "ouverte": 1,
+                            "ouverte": true,
                             "libre": false,
                             "base": 0
                         },
                         "empathie":{
                             "label": "Empathie",
-                            "ouverte": 1,
+                            "ouverte": true,
                             "libre": false,
                             "base": 0
                         },
                         "seduction":{
                             "label": "Séduction",
-                            "ouverte": 1,
+                            "ouverte": true,
                             "libre": false,
                             "base": 0
                         }
@@ -110,19 +110,19 @@
                     "vierge": {
                         "clairvoyance":{
                             "label": "Clairvoyance",
-                            "ouverte": 0,
+                            "ouverte": false,
                             "libre": true,
                             "base": 0
                         },
                         "emprise":{
                             "label": "Emprise",
-                            "ouverte": 0,
+                            "ouverte": false,
                             "libre": true,
                             "base": 0
                         },
                         "meditation":{
                             "label": "Méditation",
-                            "ouverte": 0,
+                            "ouverte": false,
                             "libre": false,
                             "base": 0
                         }
@@ -130,19 +130,19 @@
                     "sagittaire": {
                         "survie":{
                             "label": "Survie",
-                            "ouverte": 1,
+                            "ouverte": true,
                             "libre": false,
                             "base": 0
                         },
                         "tir":{
                             "label": "Tir",
-                            "ouverte": 1,
+                            "ouverte": true,
                             "libre": true,
                             "base": 0
                         },
                         "vigilance":{
                             "label": "Vigilance",
-                            "ouverte": 1,
+                            "ouverte": true,
                             "libre": true,
                             "base": 0
                         }
@@ -150,19 +150,19 @@
                     "poisson": {
                         "erudition":{
                             "label": "Erudition",
-                            "ouverte": 0,
+                            "ouverte": false,
                             "libre": false,
                             "base": 0
                         },
                         "langues":{
                             "label": "Langues",
-                            "ouverte": 0,
+                            "ouverte": false,
                             "libre": false,
                             "base": 0
                         },
                         "sciences":{
                             "label": "Sciences",
-                            "ouverte": 0,
+                            "ouverte": false,
                             "libre": false,
                             "base": 0
                         }
@@ -170,19 +170,19 @@
                     "belier": {
                         "corpsACorps":{
                             "label": "Corps à corps",
-                            "ouverte": 1,
+                            "ouverte": true,
                             "libre": true,
                             "base": 0
                         },
                         "melee":{
                             "label": "Mélée",
-                            "ouverte": 1,
+                            "ouverte": true,
                             "libre": true,
                             "base": 0
                         },
                         "tactique":{
                             "label": "Tactique",
-                            "ouverte": 1,
+                            "ouverte": true,
                             "libre": true,
                             "base": 0
                         }
@@ -190,19 +190,19 @@
                     "taureau": {
                         "athletisme":{
                             "label": "Athlétisme",
-                            "ouverte": 1,
+                            "ouverte": true,
                             "libre": true,
                             "base": 0
                         },
                         "endurance":{
                             "label": "Endurance",
-                            "ouverte": 1,
+                            "ouverte": true,
                             "libre": false,
                             "base": 0
                         },
                         "force":{
                             "label": "Force",
-                            "ouverte": 1,
+                            "ouverte": true,
                             "libre": true,
                             "base": 0
                         }
@@ -210,19 +210,19 @@
                     "balance": {
                         "documentation":{
                             "label": "Documentation",
-                            "ouverte": 1,
+                            "ouverte": true,
                             "libre": false,
                             "base": 0
                         },
                         "fouille":{
                             "label": "Fouille",
-                            "ouverte": 1,
+                            "ouverte": true,
                             "libre": false,
                             "base": 0
                         },
                         "intellect":{
                             "label": "Intellect",
-                            "ouverte": 1,
+                            "ouverte": true,
                             "libre": false,
                             "base": 0
                         }
@@ -230,19 +230,19 @@
                     "scorpion": {
                         "discretion":{
                             "label": "Discrétion",
-                            "ouverte": 1,
+                            "ouverte": true,
                             "libre": true,
                             "base": 0
                         },
                         "intrusion":{
                             "label": "Intrusion",
-                            "ouverte": 1,
+                            "ouverte": true,
                             "libre": false,
                             "base": 0
                         },
                         "subterfuge":{
                             "label": "Subterfuge",
-                            "ouverte": 1,
+                            "ouverte": true,
                             "libre": true,
                             "base": 0
                         }
@@ -250,19 +250,19 @@
                     "lion": {
                         "commandement":{
                             "label": "Commandement",
-                            "ouverte": 1,
+                            "ouverte": true,
                             "libre": true,
                             "base": 0
                         },
                         "strategie":{
                             "label": "Stratégie",
-                            "ouverte": 1,
+                            "ouverte": true,
                             "libre": false,
                             "base": 0
                         },
                         "volonte":{
                             "label": "Volonté",
-                            "ouverte": 1,
+                            "ouverte": true,
                             "libre": true,
                             "base": 0
                         }
@@ -270,19 +270,19 @@
                     "capricorne": {
                         "esquive":{
                             "label": "Esquive",
-                            "ouverte": 1,
+                            "ouverte": true,
                             "libre": true,
                             "base": 0
                         },
                         "pilotage":{
                             "label": "Pilotage",
-                            "ouverte": 1,
+                            "ouverte": true,
                             "libre": true,
                             "base": 0
                         },
                         "rapidite":{
                             "label": "Rapidité",
-                            "ouverte": 1,
+                            "ouverte": true,
                             "libre": true,
                             "base": 0
                         }
@@ -290,19 +290,19 @@
                     "cancer": {
                         "artisanat":{
                             "label": "Artisanat",
-                            "ouverte": 1,
+                            "ouverte": true,
                             "libre": false,
                             "base": 0
                         },
                         "technologies":{
                             "label": "Technologies",
-                            "ouverte": 0,
+                            "ouverte": false,
                             "libre": false,
                             "base": 0
                         },
                         "soins":{
                             "label": "Soins",
-                            "ouverte": 1,
+                            "ouverte": true,
                             "libre": false,
                             "base": 0
                         }
@@ -310,19 +310,19 @@
                     "verseau": {
                         "astrologie":{
                             "label": "Astrologie",
-                            "ouverte": 1,
+                            "ouverte": true,
                             "libre": false,
                             "base": 0
                         },
                         "histoireSecrete":{
                             "label": "Histoire secrète",
-                            "ouverte": 0,
+                            "ouverte": false,
                             "libre": false,
                             "base": 0
                         },
                         "les8":{
                             "label": "Les 8",
-                            "ouverte": 0,
+                            "ouverte": false,
                             "libre": false,
                             "base": 0
                         }

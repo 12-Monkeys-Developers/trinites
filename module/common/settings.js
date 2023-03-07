@@ -1,4 +1,4 @@
-export const registerSystemSettings = function() {
+export default function registerSystemSettings() {
     
     game.settings.register("trinites","limEndettementCampagne", {
         config: true,
@@ -13,7 +13,7 @@ export const registerSystemSettings = function() {
         config: true,
         scope: "world",
         name: "Journal descriptif des Primes et Pénalités",
-        hint: "Renseignez l'ID de l'article de journal pour afficher un lien d'information sur les Priems et Pénalités dans le dialogue de jet de dés.",
+        hint: "Renseignez l'ID de l'article de journal pour afficher un lien d'information sur les Primes et Pénalités dans le dialogue de jet de dés.",
         type:String,
         default: ""
     });

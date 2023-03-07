@@ -1,0 +1,161 @@
+.trinites.sheet.item input[type="text"]:focus,
+.trinites.sheet.item input[type="number"]:focus,
+.trinites.sheet.item input[type="password"]:focus,
+.trinites.sheet.item input[type="date"]:focus,
+.trinites.sheet.item input[type="time"]:focus,
+.trinites.sheet.item select:focus,
+.trinites.sheet.item textarea:focus {
+  box-shadow: 0 0 5px var(--color-shadow-trinite);
+}
+.trinites.sheet.item a:hover {
+  text-shadow: 0 0 8px var(--color-shadow-trinite);
+}
+.trinites.sheet.item .tabs .item.active {
+  text-shadow: 0 0 10px var(--color-shadow-trinite);
+}
+.trinites.sheet.item .occulte input[type="text"]:focus,
+.trinites.sheet.item .occulte input[type="number"]:focus,
+.trinites.sheet.item .occulte input[type="password"]:focus,
+.trinites.sheet.item .occulte input[type="date"]:focus,
+.trinites.sheet.item .occulte input[type="time"]:focus,
+.trinites.sheet.item .occulte select:focus,
+.trinites.sheet.item .occulte textarea:focus {
+  box-shadow: 0 0 5px var(--color-shadow-occulte);
+}
+.trinites.sheet.item .occulte a:hover {
+  text-shadow: 0 0 8px var(--color-shadow-occulte);
+}
+.trinites.sheet.item .occulte .tabs .item.active {
+  text-shadow: 0 0 10px var(--color-shadow-occulte);
+}
+.trinites.sheet.item .centrer {
+  display: flex;
+  justify-content: center;
+  margin: 3px;
+}
+.trinites.sheet.item .window-content {
+  background: url("images/parchemin-grey.jpg") repeat;
+}
+.trinites.sheet.item .sheet-header img {
+  border: none;
+}
+.trinites.sheet.item .sheet-header h1.occulte {
+  font-family: "Cabaletta";
+}
+.trinites.sheet.item .sheet-content.aura .grid-item-aura {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr 2fr;
+  margin: 2px;
+  align-items: center;
+}
+.trinites.sheet.item .sheet-content.aura .grid-item-aura label,
+.trinites.sheet.item .sheet-content.aura .grid-item-aura input,
+.trinites.sheet.item .sheet-content.aura .grid-item-aura select {
+  margin: 2px;
+}
+.trinites.sheet.item .sheet-content.aura .grid-item-aura label {
+  font-family: "Cabaletta";
+}
+.trinites.sheet.item .sheet-content.aura .zone-aura {
+  display: grid;
+  grid-template-columns: repeat(5, 3.5em);
+}
+.trinites.sheet.item .sheet-content.aura .editor {
+  height: 100px;
+}
+.trinites.sheet.item .sheet-content.domaine .editor {
+  height: 250px;
+}
+.trinites.sheet.item .sheet-content.atout .grid-item-atout {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr 2fr;
+  margin: 2px;
+  align-items: center;
+}
+.trinites.sheet.item .sheet-content.atout .grid-item-atout label,
+.trinites.sheet.item .sheet-content.atout .grid-item-atout input,
+.trinites.sheet.item .sheet-content.atout .grid-item-atout select {
+  margin: 2px;
+}
+.trinites.sheet.item .sheet-content.atout .grid-item-atout label {
+  font-family: "Cabaletta";
+}
+.trinites.sheet.item .sheet-content.atout .editor {
+  height: 220px;
+}
+.trinites.sheet.item .sheet-content.verset .editor {
+  height: 140px;
+  margin: 2px;
+}
+.trinites.sheet.item .sheet-content.verset label {
+  font-family: "Cabaletta";
+}
+.trinites.sheet.item .sheet-content.verset .grid-item-verset {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr 2fr 1fr 2fr;
+  margin: 2px;
+  align-items: center;
+}
+.trinites.sheet.item .sheet-content.verset .grid-item-verset label,
+.trinites.sheet.item .sheet-content.verset .grid-item-verset input,
+.trinites.sheet.item .sheet-content.verset .grid-item-verset select {
+  margin: 2px;
+}
+.trinites.sheet.item .sheet-content.verset .grid-item-verset .col-sentence {
+  grid-column: 1 / 7;
+}
+.trinites.sheet.item .sheet-content.verset .grid-item-verset .col-sentence textarea {
+  font-family: "Cabaletta";
+  font-style: italic;
+  margin: 2px;
+  height: 60px;
+  resize: none;
+}
+.trinites.sheet.item .sheet-content.verset .verset-data,
+.trinites.sheet.item .sheet-content.verset .verset-desc {
+  margin: 2px;
+}
+.trinites.sheet.item .sheet-content.verset .grid-data-desc {
+  display: grid;
+  grid-template-columns: 250px 1fr;
+  margin: 2px;
+  align-items: center;
+}
+.trinites.sheet.item .sheet-content.verset .grid-data-desc .grid-data-verset {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr 2em;
+  margin: 2px;
+  align-items: center;
+}
+.trinites.sheet.item .sheet-content.verset .grid-data-desc label,
+.trinites.sheet.item .sheet-content.verset .grid-data-desc input {
+  margin: 3px;
+}
+.trinites.sheet.item .sheet-content.verset .grid-data-desc .check {
+  padding-left: 3px;
+}
+.trinites.sheet.item .sheet-content.verset .grid-data-desc .col-mono {
+  grid-column: 1 / 5;
+}
+.trinites.sheet.item .sheet-footer {
+  border-top: solid thin #42637e;
+  padding: 3px;
+  color: var(--color-titre-trinite);
+  font-weight: bold;
+  font-size: 1.2em;
+}
+.trinites.sheet.item .sheet-footer.occulte {
+  border-top: solid thin #7e6942;
+  font-family: "Cabaletta";
+  color: var(--color-titre-occulte);
+}
+.trinites.sheet.item .titre-desc {
+  color: var(--color-titre-trinite);
+  font-weight: bold;
+  margin: 2px;
+  font-size: 1.1em;
+}
+.trinites.sheet.item .titre-desc.occulte {
+  font-family: "Cabaletta";
+  color: var(--color-titre-occulte);
+}

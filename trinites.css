@@ -1,5 +1,5 @@
 .window-app .window-content {
-  background: url("../images/parchemin-grey.jpg") repeat;
+  background: url("./images/parchemin-grey.jpg") repeat;
 }
 .actor-infos-line {
   display: flex;
@@ -42,7 +42,7 @@
   text-shadow: 0 0 10px var(--color-shadow-occulte);
 }
 .trinites.sheet.actor .sheet-header {
-  background-image: url("../images/header-back.jpg");
+  background-image: url("./images/header-back.jpg");
   background-position: 0% 10%;
   color: var(--color-actor-header);
 }
@@ -65,7 +65,7 @@
   color: lightgray;
 }
 .trinites.sheet.actor .window-content {
-  background: url("../images/parchemin-grey.jpg") repeat;
+  background: url("./images/parchemin-grey.jpg") repeat;
 }
 .trinites.sheet.actor .window-content nav .profane {
   color: var(--color-titre-trinite);
@@ -738,7 +738,7 @@
   margin: 3px;
 }
 .trinites.sheet.item .window-content {
-  background: url("../images/parchemin-grey.jpg") repeat;
+  background: url("./images/parchemin-grey.jpg") repeat;
 }
 .trinites.sheet.item .sheet-header img {
   border: none;
@@ -864,12 +864,12 @@
   color: var(--color-titre-occulte);
 }
 #chat-form textarea {
-  background-image: url("../images/header-back.jpg");
+  background-image: url("./images/header-back.jpg");
   color: var(--color-text-chat);
 }
 .chat-message,
 .chat-message.whisper {
-  background-image: url("../images/header-back.jpg");
+  background-image: url("./images/header-back.jpg");
   background-position: 30% 9%;
 }
 .chat-message .message-header,
@@ -1014,7 +1014,7 @@
   border: 1px solid var(--color-border-light-2);
   border-radius: 3px;
   box-shadow: 0 0 2px #FFF inset;
-  background: url("../images/parchemin-grey.jpg") repeat;
+  background: url("./images/parchemin-grey.jpg") repeat;
 }
 .titre-cout-ress {
   margin: 3px;
@@ -1042,17 +1042,17 @@
   margin: 3px;
 }
 .dice-deva {
-  background: url("../images/d12deva.svg") no-repeat;
+  background: url("./images/d12deva.svg") no-repeat;
   color: black;
   background-size: 40px 40px;
 }
 .dice-archonte {
-  background: url("../images/d12archonte.svg") no-repeat;
+  background: url("./images/d12archonte.svg") no-repeat;
   color: white;
   background-size: 40px 40px;
 }
 .dice-ress {
-  background: url("../images/d12ressource.svg") no-repeat;
+  background: url("./images/d12ressource.svg") no-repeat;
   color: white;
   background-size: 40px 40px;
 }
@@ -1100,7 +1100,7 @@
   border: 1px solid var(--color-border-light-2);
   border-radius: 3px;
   box-shadow: 0 0 2px #FFF inset;
-  background: url("../images/parchemin-grey.jpg") repeat;
+  background: url("./images/parchemin-grey.jpg") repeat;
 }
 .carte .entete {
   display: flex;

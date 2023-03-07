@@ -36,7 +36,7 @@ export async function jetCompetence({actor = null,
 
         // Affichage de la fenêtre de dialogue (vrai par défaut)
         if(afficherDialog) {
-            let dialogOptions = await getJetCompetenceOptions({cfgData: CONFIG.Trinites, compCombat: compCombat, compLibre: compLibre, infoPrimesID: infoPrimesID});
+            let dialogOptions = await getJetCompetenceOptions({cfgData: game.trinites.config, compCombat: compCombat, compLibre: compLibre, infoPrimesID: infoPrimesID});
             
             // On annule le jet sur les boutons 'Annuler' ou 'Fermeture'    
             if(dialogOptions.annule) {
@@ -270,7 +270,7 @@ export async function jetRessource({actor = null,
 
         // Affichage de la fenêtre de dialogue (vrai par défaut)
         if(afficherDialog) {
-            let dialogOptions = await getJetRessourceOptions({cfgData: CONFIG.Trinites, useDomaine: ressource != "richesse", domaines: domaines});
+            let dialogOptions = await getJetRessourceOptions({cfgData: game.trinites.config, useDomaine: ressource != "richesse", domaines: domaines});
             
             // On annule le jet sur les boutons 'Annuler' ou 'Fermeture'    
             if(dialogOptions.annule) {
@@ -321,7 +321,7 @@ export async function jetRessource({actor = null,
 
         // Dette 
         if(typeTest.type == "dette") {
-            rollData.dette = CONFIG.Trinites.dettes[typeTest.dette];      
+            rollData.dette = game.trinites.config.dettes[typeTest.dette];      
         }
 
         let rollResult = await new Roll(rollFormula, rollData).roll({async: true});
@@ -471,7 +471,7 @@ export async function jetRessource({actor = null,
 
         // Affichage de la fenêtre de dialogue (vrai par défaut)
         if(afficherDialog) {
-            let dialogOptions = await getJetArmeOptions({cfgData: CONFIG.Trinites, infoPrimesID: infoPrimesID});
+            let dialogOptions = await getJetArmeOptions({cfgData: game.trinites.config, infoPrimesID: infoPrimesID});
             
             // On annule le jet sur les boutons 'Annuler' ou 'Fermeture'    
             if(dialogOptions.annule) {

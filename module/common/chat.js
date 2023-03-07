@@ -1,5 +1,5 @@
 import * as Dice from "./dice.js";
-import DepenseKarmaFormApplication from "./appli/DepenseKarmaFormApp.js";
+import DepenseKarmaFormApplication from "../appli/DepenseKarmaFormApp.js";
 
 export function addChatListeners(html) {
     html.on('click', 'button.dette', onDetteEsprit);

@@ -1,5 +1,5 @@
-import * as Dice from "../dice.js";
-import * as Chat from "../chat.js";
+import * as Dice from "../../common/dice.js";
+import * as Chat from "../../common/chat.js";
 
 export default class TrinitesActorSheet extends ActorSheet {
 
@@ -29,7 +29,7 @@ export default class TrinitesActorSheet extends ActorSheet {
 
     getData() {
         const data = super.getData();
-        data.config = CONFIG.Trinites;
+        data.config = game.trinites.config;
 
        /* ----------------------------------------------------
         ---- Création des listes d'items filtrées par type ----

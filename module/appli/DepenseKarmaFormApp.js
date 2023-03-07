@@ -1,4 +1,4 @@
-import * as Chat from "../chat.js";
+import * as Chat from "../common/chat.js";
 
 export default class DepenseKarmaFormApplication extends FormApplication {
     constructor(actor, trinite, typeKarma, typePouvoir, coutPouvoir, idPouvoir) {
@@ -36,7 +36,7 @@ export default class DepenseKarmaFormApplication extends FormApplication {
             typePouvoir: this.typePouvoir,
             karmaAttribue: this.karmaAttribue,
             btnVisible: this.btnVisible,
-            configData: CONFIG.Trinites
+            configData: game.trinites.config
         };
 
         let karmaDeva = {

@@ -17,7 +17,7 @@ export default class TrinitesItemSheet extends ItemSheet {
 
     getData() {
         const data = super.getData();
-        data.config = CONFIG.Trinites;
+        data.config = game.trinites.config;
 
         const myItemData = data.data.system;
 

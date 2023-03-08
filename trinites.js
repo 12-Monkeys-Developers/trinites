@@ -10,9 +10,11 @@ import TrinitesActor from "./module/actor/TrinitesActor.js";
 import TrinitesItem from "./module/item/TrinitesItem.js";
 
 import { Log } from "./module/common/log.js";
+import { LOG_HEAD } from "./module/common/constants.js";
+import registerHooks from "./module/common/hooks.js";
 
 Hooks.once("init", function() {
-    Log.info("Initialisation du système Trinités (non officiel))");
+    Log.info("Initialisation du système)");
 
     game.trinites = {
         TrinitesActor,
@@ -41,7 +43,12 @@ Hooks.once("init", function() {
 
     // Register System Settings
 	registerSystemSettings();
+
+	// Register Hooks
+	registerHooks();    
+
+    Log.info("Système initialisé");
 })
 
-Hooks.on("renderChatLog", (app, html, data) => Chat.addChatListeners(html));
+
 

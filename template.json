@@ -3,9 +3,6 @@
         "types": ["trinite", "archonteRoi", "lige", "humain"],
         "templates": {
             "information": {
-                "age": 0,
-                "sexe": "",
-                "taille": "",
                 "description": ""
             },
             "signes": {
@@ -54,19 +51,19 @@
                         "valeur": 0,
                         "diminution": 0,
                         "dureeDiminution": "",
-                        "epuisee": 0
+                        "epuisee": false
                       },
                     "reseau": {
                         "valeur": 0,
                         "diminution": 0,
                         "dureeDiminution": "",
-                        "epuisee": 0
+                        "epuisee": false
                     },
                     "influence": {
                         "valeur": 0,
                         "diminution": 0,
                         "dureeDiminution": "",
-                        "epuisee": 0
+                        "epuisee": false
                     }
                 }
             },
@@ -76,204 +73,348 @@
                         "art":{
                             "ouverte": true,
                             "libre": false,
-                            "base": 0
+                            "base": 0,
+                            "baseMetier": 0,
+                            "pointsCrea": 0,
+                            "bonusVA": 0,
+                            "pointsExp": 0
                         },
                         "empathie":{
                             "ouverte": true,
                             "libre": false,
-                            "base": 0
+                            "base": 0,
+                            "baseMetier": 0,
+                            "pointsCrea": 0,
+                            "bonusVA": 0,
+                            "pointsExp": 0
                         },
                         "seduction":{
                             "ouverte": true,
                             "libre": false,
-                            "base": 0
+                            "base": 0,
+                            "baseMetier": 0,
+                            "pointsCrea": 0,
+                            "bonusVA": 0,
+                            "pointsExp": 0
                         }
                     },
                     "vierge": {
                         "clairvoyance":{
                             "ouverte": false,
                             "libre": true,
-                            "base": 0
+                            "base": 0,
+                            "baseMetier": 0,
+                            "pointsCrea": 0,
+                            "bonusVA": 0,
+                            "pointsExp": 0
                         },
                         "emprise":{
                             "ouverte": false,
                             "libre": true,
-                            "base": 0
+                            "base": 0,
+                            "baseMetier": 0,
+                            "pointsCrea": 0,
+                            "bonusVA": 0,
+                            "pointsExp": 0
                         },
                         "meditation":{
                             "ouverte": false,
                             "libre": false,
-                            "base": 0
+                            "base": 0,
+                            "baseMetier": 0,
+                            "pointsCrea": 0,
+                            "bonusVA": 0,
+                            "pointsExp": 0
                         }
                     },
                     "sagittaire": {
                         "survie":{
                             "ouverte": true,
                             "libre": false,
-                            "base": 0
+                            "base": 0,
+                            "baseMetier": 0,
+                            "pointsCrea": 0,
+                            "bonusVA": 0,
+                            "pointsExp": 0
                         },
                         "tir":{
                             "ouverte": true,
                             "libre": true,
-                            "base": 0
+                            "base": 0,
+                            "baseMetier": 0,
+                            "pointsCrea": 0,
+                            "bonusVA": 0,
+                            "pointsExp": 0
                         },
                         "vigilance":{
                             "ouverte": true,
                             "libre": true,
-                            "base": 0
+                            "base": 0,
+                            "baseMetier": 0,
+                            "pointsCrea": 0,
+                            "bonusVA": 0,
+                            "pointsExp": 0
                         }
                     },
                     "poisson": {
                         "erudition":{
                             "ouverte": false,
                             "libre": false,
-                            "base": 0
+                            "base": 0,
+                            "baseMetier": 0,
+                            "pointsCrea": 0,
+                            "bonusVA": 0,
+                            "pointsExp": 0
                         },
                         "langues":{
                             "ouverte": false,
                             "libre": false,
-                            "base": 0
+                            "base": 0,
+                            "baseMetier": 0,
+                            "pointsCrea": 0,
+                            "bonusVA": 0,
+                            "pointsExp": 0
                         },
                         "sciences":{
                             "ouverte": false,
                             "libre": false,
-                            "base": 0
+                            "base": 0,
+                            "baseMetier": 0,
+                            "pointsCrea": 0,
+                            "bonusVA": 0,
+                            "pointsExp": 0
                         }
                     },
                     "belier": {
                         "corpsACorps":{
                             "ouverte": true,
                             "libre": true,
-                            "base": 0
+                            "base": 0,
+                            "baseMetier": 0,
+                            "pointsCrea": 0,
+                            "bonusVA": 0,
+                            "pointsExp": 0
                         },
                         "melee":{
                             "ouverte": true,
                             "libre": true,
-                            "base": 0
+                            "base": 0,
+                            "baseMetier": 0,
+                            "pointsCrea": 0,
+                            "bonusVA": 0,
+                            "pointsExp": 0
                         },
                         "tactique":{
                             "ouverte": true,
                             "libre": true,
-                            "base": 0
+                            "base": 0,
+                            "baseMetier": 0,
+                            "pointsCrea": 0,
+                            "bonusVA": 0,
+                            "pointsExp": 0
                         }
                     },
                     "taureau": {
                         "athletisme":{
                             "ouverte": true,
                             "libre": true,
-                            "base": 0
+                            "base": 0,
+                            "baseMetier": 0,
+                            "pointsCrea": 0,
+                            "bonusVA": 0,
+                            "pointsExp": 0
                         },
                         "endurance":{
                             "ouverte": true,
                             "libre": false,
-                            "base": 0
+                            "base": 0,
+                            "baseMetier": 0,
+                            "pointsCrea": 0,
+                            "bonusVA": 0,
+                            "pointsExp": 0
                         },
                         "force":{
                             "ouverte": true,
                             "libre": true,
-                            "base": 0
+                            "base": 0,
+                            "baseMetier": 0,
+                            "pointsCrea": 0,
+                            "bonusVA": 0,
+                            "pointsExp": 0
                         }
                     },
                     "balance": {
                         "documentation":{
                             "ouverte": true,
                             "libre": false,
-                            "base": 0
+                            "base": 0,
+                            "baseMetier": 0,
+                            "pointsCrea": 0,
+                            "bonusVA": 0,
+                            "pointsExp": 0
                         },
                         "fouille":{
                             "ouverte": true,
                             "libre": false,
-                            "base": 0
+                            "base": 0,
+                            "baseMetier": 0,
+                            "pointsCrea": 0,
+                            "bonusVA": 0,
+                            "pointsExp": 0
                         },
                         "intellect":{
                             "ouverte": true,
                             "libre": false,
-                            "base": 0
+                            "base": 0,
+                            "baseMetier": 0,
+                            "pointsCrea": 0,
+                            "bonusVA": 0,
+                            "pointsExp": 0
                         }
                     },
                     "scorpion": {
                         "discretion":{
                             "ouverte": true,
                             "libre": true,
-                            "base": 0
+                            "base": 0,
+                            "baseMetier": 0,
+                            "pointsCrea": 0,
+                            "bonusVA": 0,
+                            "pointsExp": 0
                         },
                         "intrusion":{
                             "ouverte": true,
                             "libre": false,
-                            "base": 0
+                            "base": 0,
+                            "baseMetier": 0,
+                            "pointsCrea": 0,
+                            "bonusVA": 0,
+                            "pointsExp": 0
                         },
                         "subterfuge":{
                             "ouverte": true,
                             "libre": true,
-                            "base": 0
+                            "base": 0,
+                            "baseMetier": 0,
+                            "pointsCrea": 0,
+                            "bonusVA": 0,
+                            "pointsExp": 0
                         }
                     },
                     "lion": {
                         "commandement":{
                             "ouverte": true,
                             "libre": true,
-                            "base": 0
+                            "base": 0,
+                            "baseMetier": 0,
+                            "pointsCrea": 0,
+                            "bonusVA": 0,
+                            "pointsExp": 0
                         },
                         "strategie":{
                             "ouverte": true,
                             "libre": false,
-                            "base": 0
+                            "base": 0,
+                            "baseMetier": 0,
+                            "pointsCrea": 0,
+                            "bonusVA": 0,
+                            "pointsExp": 0
                         },
                         "volonte":{
                             "ouverte": true,
                             "libre": true,
-                            "base": 0
+                            "base": 0,
+                            "baseMetier": 0,
+                            "pointsCrea": 0,
+                            "bonusVA": 0,
+                            "pointsExp": 0
                         }
                     },
                     "capricorne": {
                         "esquive":{
                             "ouverte": true,
                             "libre": true,
-                            "base": 0
+                            "base": 0,
+                            "baseMetier": 0,
+                            "pointsCrea": 0,
+                            "bonusVA": 0,
+                            "pointsExp": 0
                         },
                         "pilotage":{
                             "ouverte": true,
                             "libre": true,
-                            "base": 0
+                            "base": 0,
+                            "baseMetier": 0,
+                            "pointsCrea": 0,
+                            "bonusVA": 0,
+                            "pointsExp": 0
                         },
                         "rapidite":{
                             "ouverte": true,
                             "libre": true,
-                            "base": 0
+                            "base": 0,
+                            "baseMetier": 0,
+                            "pointsCrea": 0,
+                            "bonusVA": 0,
+                            "pointsExp": 0
                         }
                     },
                     "cancer": {
                         "artisanat":{
                             "ouverte": true,
                             "libre": false,
-                            "base": 0
+                            "base": 0,
+                            "baseMetier": 0,
+                            "pointsCrea": 0,
+                            "bonusVA": 0,
+                            "pointsExp": 0
                         },
                         "technologies":{
                             "ouverte": false,
                             "libre": false,
-                            "base": 0
+                            "base": 0,
+                            "baseMetier": 0,
+                            "pointsCrea": 0,
+                            "bonusVA": 0,
+                            "pointsExp": 0
                         },
                         "soins":{
                             "ouverte": true,
                             "libre": false,
-                            "base": 0
+                            "base": 0,
+                            "baseMetier": 0,
+                            "pointsCrea": 0,
+                            "bonusVA": 0,
+                            "pointsExp": 0
                         }
                     },
                     "verseau": {
                         "astrologie":{
                             "ouverte": true,
                             "libre": false,
-                            "base": 0
+                            "base": 0,
+                            "baseMetier": 0,
+                            "pointsCrea": 0,
+                            "bonusVA": 0,
+                            "pointsExp": 0
                         },
                         "histoireSecrete":{
                             "ouverte": false,
                             "libre": false,
-                            "base": 0
+                            "base": 0,
+                            "baseMetier": 0,
+                            "pointsCrea": 0,
+                            "bonusVA": 0,
+                            "pointsExp": 0
                         },
                         "les8":{
                             "ouverte": false,
                             "libre": false,
-                            "base": 0
+                            "base": 0,
+                            "baseMetier": 0,
+                            "pointsCrea": 0,
+                            "bonusVA": 0,
+                            "pointsExp": 0
                         }
                     }
                 }    

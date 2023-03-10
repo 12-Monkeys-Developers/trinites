@@ -30,25 +30,12 @@ export default class TrinitesActorSheet extends ActorSheet {
     const data = super.getData();
     data.config = game.trinites.config;
 
-    /* ----------------------------------------------------
-        ---- Création des listes d'items filtrées par type ----
-        -----------------------------------------------------*/
+    data.domaines = data.items.filter((item) => item.type == "domaine");
+    data.versets = data.items.filter((item) => item.type == "verset");
+    data.auras = data.items.filter((item) => item.type == "aura");
+    data.atouts = data.items.filter((item) => item.type == "atout");
 
-    data.domaines = data.items.filter(function (item) {
-      return item.type == "domaine";
-    });
-    data.versets = data.items.filter(function (item) {
-      return item.type == "verset";
-    });
-    data.auras = data.items.filter(function (item) {
-      return item.type == "aura";
-    });
-    data.atouts = data.items.filter(function (item) {
-      return item.type == "atout";
-    });
-
-    //console.log(data);
-
+    data.unlocked = this.actor.getFlag(game.system.id, "SheetUnlocked");
     return data;
   }
 
@@ -107,6 +94,8 @@ export default class TrinitesActorSheet extends ActorSheet {
 
         // Carte - Verset
         html.find(".roll-verset").click(this._onCarteVerset.bind(this));
+
+        html.find(".sheet-change-lock").click(this._onSheetChangelock.bind(this));
       }
     }
   }
@@ -355,4 +344,17 @@ export default class TrinitesActorSheet extends ActorSheet {
       whisper: !event.shiftKey,
     });
   }
+
+    /**
+   * @description Manage the lock/unlock button on the sheet
+   * @param {*} event
+   */
+    async _onSheetChangelock(event) {
+      event.preventDefault();
+  
+      let flagData = await this.actor.getFlag(game.system.id, "SheetUnlocked");
+      flagData ? await this.actor.unsetFlag(game.system.id, "SheetUnlocked") : await this.actor.setFlag(game.system.id, "SheetUnlocked", "SheetUnlocked");
+  
+      this.actor.sheet.render(true);
+    }
 }

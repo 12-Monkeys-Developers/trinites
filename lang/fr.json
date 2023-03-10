@@ -1,6 +1,6 @@
 {
     "TRINITES": {
-        "label": {            
+        "label": {
             "signes": {
                 "gemeaux": "Gémeaux",
                 "vierge": "Vierge",
@@ -83,7 +83,16 @@
                 }
             },
             "jetCompetence": "Jet de compétence",
-            "jetRessource": "Jet de ressource"
+            "jetRessource": "Jet de ressource",
+            "metier": "Métier",
+            "couverture": "Couverture",
+            "description": "Description",
+            "unlockSheet": "Verrouiller/Déverrouiller la feuille",
+            "competence": {
+                "enteteLocked": "Base",
+                "enteteUnlocked": "Métier / PC / VA / PEX",
+                "valeur": "Valeur"
+            }
         }
     }
 }

@@ -1,26 +1,21 @@
-<img src="{{actor.img}}" data-edit="img" title="{{actor.name}}" height="128" width="128">
+<img src="{{actor.img}}" data-edit="img" title="{{actor.name}}" height="128" width="128" />
 <div class="actor-info">
-    <div class="actor-infos-line">
-        <h1 class="charname"><input name="name" type="text" value="{{actor.name}}" placeholder="Nom"></h1>
-    </div>
-    <div class="actor-infos-line">
-        <label>Sexe</label>
-        <div class="small-size"><input name="system.sexe" type="text" value="{{data.system.sexe}}" placeholder="Sexe"></div>
-        <label>Age</label>
-        <div class="small-size"><input name="system.age" type="number" value="{{data.system.age}}" placeholder="Age"></div>
-        <label>Taille</label>
-        <div class="middle-size"><input name="system.taille" type="text" value="{{data.system.taille}}" placeholder="Taille"></div>
-        {{#if (eq data.type "trinite")}}
-            <label>Métier</label>
-            <div class="auto-size"><input name="system.metier" type="text" value="{{data.system.metier}}" placeholder="Métier"></div>
-        {{/if}}
-        {{#if (eq data.type "archonteRoi")}}
-            <label>Couverture</label>
-            <div class="auto-size"><input name="system.couverture" type="text" value="{{data.system.metier}}" placeholder="Couverture - activité apparente"></div>
-        {{/if}}
-    </div>
-    <div class="actor-infos-line">
-        <label>Description</label>
-        <div class="auto-size"><input name="system.description" type="text" value="{{data.system.description}}" placeholder="Description"></div>
-    </div>
+  <div class="actor-infos-line">
+    <h1 class="charname"><input name="name" type="text" value="{{actor.name}}" placeholder="Nom" /></h1>
+  </div>
+  <div class="actor-infos-line">
+    {{#if (eq data.type "trinite")}}
+      <label>{{localize "TRINITES.label.metier"}}</label>
+      <div class="auto-size"><input name="system.metier" type="text" value="{{data.system.metier}}" placeholder="Métier" /></div>
+      <div class="auto-size"><a class="sheet-change-lock" title="{{localize 'TRINITES.label.unlockSheet'}}">{{#if unlocked}}<i class="fas fa-lock-open"></i>{{else}}<i class="fas fa-lock"></i>{{/if}}</a></div>
+    {{/if}}
+    {{#if (eq data.type "archonteRoi")}}
+      <label>{{localize "TRINITES.label.couverture"}}</label>
+      <div class="auto-size"><input name="system.couverture" type="text" value="{{data.system.metier}}" placeholder="Couverture - activité apparente" /></div>
+    {{/if}}
+  </div>
+  <div class="actor-infos-line">
+    <label>{{localize "TRINITES.label.description"}}</label>
+    <div class="auto-size"><input name="system.description" type="text" value="{{data.system.description}}" placeholder="Description" /></div>
+  </div>
 </div>

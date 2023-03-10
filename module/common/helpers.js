@@ -24,4 +24,12 @@ export default function registerHandlebarsHelpers() {
     return val.toUpperCase();
   });
 
+  Handlebars.registerHelper("getCompetence", function (actor, signe, competence, champ) {
+    return eval(`actor.system.competences.${signe}.${competence}.${champ}`);
+  });
+
+  Handlebars.registerHelper("getCompetenceLabel", function (signe, competence) {
+    const key = `TRINITES.label.competences.${signe}.${competence}`;
+    return game.i18n.localize(key);
+  });  
 }

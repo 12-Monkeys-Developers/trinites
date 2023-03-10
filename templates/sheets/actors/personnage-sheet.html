@@ -9,7 +9,11 @@
     </nav>
     <section class="sheet-body">
         <div class="tab profane" data-group="principal" data-tab="profane">
-            {{> "systems/trinites/templates/partials/actor/bloc-profane-personnage.hbs"}}
+            {{#if unlocked}}
+                {{> "systems/trinites/templates/partials/actor/bloc-profane-personnage-unlocked.hbs"}}
+            {{else}}
+                {{> "systems/trinites/templates/partials/actor/bloc-profane-personnage.hbs"}}
+            {{/if}}            
         </div>
         <div class="tab occulte" data-group="principal" data-tab="occulte">
             <div class="deux-col-50-50">

@@ -20,10 +20,18 @@ export default class TrinitesActor extends Actor {
         }
       }
 
-      /*------------------------------------------
-            ---- Calcul des valeurs des compétences ----
-            ------------------------------------------*/
+      /*
+       * Calcul de la base des compétences : base = baseMetier + baseMetier + bonusVA + pointsExp
+       */
+      for (let [keySigne, compsSigne] of Object.entries(data.competences)) {
+        for (let [keyComp, competence] of Object.entries(compsSigne)) {
+          data.competences[keySigne][keyComp].base = data.competences[keySigne][keyComp].baseMetier + data.competences[keySigne][keyComp].pointsCrea + data.competences[keySigne][keyComp].bonusVA + data.competences[keySigne][keyComp].pointsExp;
+        }
+      }
 
+      /*
+       * Calcul de la valeur de la compétence : valeur = base + bonus zodiacal
+       */
       for (let [keySigne, compsSigne] of Object.entries(data.competences)) {
         for (let [keyComp, competence] of Object.entries(compsSigne)) {
           if (data.competences[keySigne][keyComp].ouverte) {

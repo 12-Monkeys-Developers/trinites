@@ -14,7 +14,7 @@ import { LOG_HEAD } from "./module/common/constants.js";
 import registerHooks from "./module/common/hooks.js";
 
 Hooks.once("init", function() {
-    Log.info("Initialisation du système)");
+    Log.info("Initialisation du système");
 
     game.trinites = {
         TrinitesActor,

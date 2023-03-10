@@ -11,73 +11,58 @@
             "signes": {
                 "signes": {
                     "gemeaux": {
-                        "valeur": 0,
-                        "label": "Gémeaux"
+                        "valeur": 0
                     },
                     "vierge": {
-                        "valeur": 0,
-                        "label": "Vierge"
+                        "valeur": 0
                     },
                     "sagittaire": {
-                        "valeur": 0,
-                        "label": "Sagittaire"
+                        "valeur": 0
                     },
                     "poisson": {
-                        "valeur": 0,
-                        "label": "Poisson"
+                        "valeur": 0
                     },
                     "belier": {
-                        "valeur": 0,
-                        "label": "Bélier"
+                        "valeur": 0
                     },
                     "taureau": {
-                        "valeur": 0,
-                        "label": "Taureau"
+                        "valeur": 0
                     },
                     "balance": {
-                        "valeur": 0,
-                        "label": "Balance"
+                        "valeur": 0
                     },
                     "scorpion": {
-                        "valeur": 0,
-                        "label": "Scorpion"
+                        "valeur": 0
                     },
                     "lion": {
-                        "valeur": 0,
-                        "label": "Lion"
+                        "valeur": 0
                     },
                     "capricorne": {
-                        "valeur": 0,
-                        "label": "Capricorne"
+                        "valeur": 0
                     },
                     "cancer": {
-                        "valeur": 0,
-                        "label": "Cancer"
+                        "valeur": 0
                     },
                     "verseau": {
-                        "valeur": 0,
-                        "label": "Verseau"
+                        "valeur": 0
                     }
                 }
             },
             "ressources": {
                 "ressources": {
                     "richesse": {
-                        "label": "Richesse",
                         "valeur": 0,
                         "diminution": 0,
                         "dureeDiminution": "",
                         "epuisee": 0
                       },
                     "reseau": {
-                        "label": "Réseau",
                         "valeur": 0,
                         "diminution": 0,
                         "dureeDiminution": "",
                         "epuisee": 0
                     },
                     "influence": {
-                        "label": "Influence",
                         "valeur": 0,
                         "diminution": 0,
                         "dureeDiminution": "",
@@ -89,19 +74,16 @@
                 "competences": {
                     "gemeaux": {
                         "art":{
-                            "label": "Art",
                             "ouverte": true,
                             "libre": false,
                             "base": 0
                         },
                         "empathie":{
-                            "label": "Empathie",
                             "ouverte": true,
                             "libre": false,
                             "base": 0
                         },
                         "seduction":{
-                            "label": "Séduction",
                             "ouverte": true,
                             "libre": false,
                             "base": 0
@@ -109,19 +91,16 @@
                     },
                     "vierge": {
                         "clairvoyance":{
-                            "label": "Clairvoyance",
                             "ouverte": false,
                             "libre": true,
                             "base": 0
                         },
                         "emprise":{
-                            "label": "Emprise",
                             "ouverte": false,
                             "libre": true,
                             "base": 0
                         },
                         "meditation":{
-                            "label": "Méditation",
                             "ouverte": false,
                             "libre": false,
                             "base": 0
@@ -129,19 +108,16 @@
                     },
                     "sagittaire": {
                         "survie":{
-                            "label": "Survie",
                             "ouverte": true,
                             "libre": false,
                             "base": 0
                         },
                         "tir":{
-                            "label": "Tir",
                             "ouverte": true,
                             "libre": true,
                             "base": 0
                         },
                         "vigilance":{
-                            "label": "Vigilance",
                             "ouverte": true,
                             "libre": true,
                             "base": 0
@@ -149,19 +125,16 @@
                     },
                     "poisson": {
                         "erudition":{
-                            "label": "Erudition",
                             "ouverte": false,
                             "libre": false,
                             "base": 0
                         },
                         "langues":{
-                            "label": "Langues",
                             "ouverte": false,
                             "libre": false,
                             "base": 0
                         },
                         "sciences":{
-                            "label": "Sciences",
                             "ouverte": false,
                             "libre": false,
                             "base": 0
@@ -169,19 +142,16 @@
                     },
                     "belier": {
                         "corpsACorps":{
-                            "label": "Corps à corps",
                             "ouverte": true,
                             "libre": true,
                             "base": 0
                         },
                         "melee":{
-                            "label": "Mélée",
                             "ouverte": true,
                             "libre": true,
                             "base": 0
                         },
                         "tactique":{
-                            "label": "Tactique",
                             "ouverte": true,
                             "libre": true,
                             "base": 0
@@ -189,19 +159,16 @@
                     },
                     "taureau": {
                         "athletisme":{
-                            "label": "Athlétisme",
                             "ouverte": true,
                             "libre": true,
                             "base": 0
                         },
                         "endurance":{
-                            "label": "Endurance",
                             "ouverte": true,
                             "libre": false,
                             "base": 0
                         },
                         "force":{
-                            "label": "Force",
                             "ouverte": true,
                             "libre": true,
                             "base": 0
@@ -209,19 +176,16 @@
                     },
                     "balance": {
                         "documentation":{
-                            "label": "Documentation",
                             "ouverte": true,
                             "libre": false,
                             "base": 0
                         },
                         "fouille":{
-                            "label": "Fouille",
                             "ouverte": true,
                             "libre": false,
                             "base": 0
                         },
                         "intellect":{
-                            "label": "Intellect",
                             "ouverte": true,
                             "libre": false,
                             "base": 0
@@ -229,19 +193,16 @@
                     },
                     "scorpion": {
                         "discretion":{
-                            "label": "Discrétion",
                             "ouverte": true,
                             "libre": true,
                             "base": 0
                         },
                         "intrusion":{
-                            "label": "Intrusion",
                             "ouverte": true,
                             "libre": false,
                             "base": 0
                         },
                         "subterfuge":{
-                            "label": "Subterfuge",
                             "ouverte": true,
                             "libre": true,
                             "base": 0
@@ -249,19 +210,16 @@
                     },
                     "lion": {
                         "commandement":{
-                            "label": "Commandement",
                             "ouverte": true,
                             "libre": true,
                             "base": 0
                         },
                         "strategie":{
-                            "label": "Stratégie",
                             "ouverte": true,
                             "libre": false,
                             "base": 0
                         },
                         "volonte":{
-                            "label": "Volonté",
                             "ouverte": true,
                             "libre": true,
                             "base": 0
@@ -269,19 +227,16 @@
                     },
                     "capricorne": {
                         "esquive":{
-                            "label": "Esquive",
                             "ouverte": true,
                             "libre": true,
                             "base": 0
                         },
                         "pilotage":{
-                            "label": "Pilotage",
                             "ouverte": true,
                             "libre": true,
                             "base": 0
                         },
                         "rapidite":{
-                            "label": "Rapidité",
                             "ouverte": true,
                             "libre": true,
                             "base": 0
@@ -289,19 +244,16 @@
                     },
                     "cancer": {
                         "artisanat":{
-                            "label": "Artisanat",
                             "ouverte": true,
                             "libre": false,
                             "base": 0
                         },
                         "technologies":{
-                            "label": "Technologies",
                             "ouverte": false,
                             "libre": false,
                             "base": 0
                         },
                         "soins":{
-                            "label": "Soins",
                             "ouverte": true,
                             "libre": false,
                             "base": 0
@@ -309,19 +261,16 @@
                     },
                     "verseau": {
                         "astrologie":{
-                            "label": "Astrologie",
                             "ouverte": true,
                             "libre": false,
                             "base": 0
                         },
                         "histoireSecrete":{
-                            "label": "Histoire secrète",
                             "ouverte": false,
                             "libre": false,
                             "base": 0
                         },
                         "les8":{
-                            "label": "Les 8",
                             "ouverte": false,
                             "libre": false,
                             "base": 0
@@ -396,6 +345,10 @@
             "metier": "",
             "vieAnterieure": "",
             "experience": {
+                "totale": 0,
+                "disponible": 0
+            },
+            "creation": {
                 "totale": 0,
                 "disponible": 0
             },

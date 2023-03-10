@@ -19,4 +19,9 @@ export default function registerHandlebarsHelpers() {
     }
     return accum;
   });
+
+  Handlebars.registerHelper("uppercase", function (val) {
+    return val.toUpperCase();
+  });
+
 }

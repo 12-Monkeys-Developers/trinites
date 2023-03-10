@@ -1,1 +1,89 @@
-{}
+{
+    "TRINITES": {
+        "label": {            
+            "signes": {
+                "gemeaux": "Gémeaux",
+                "vierge": "Vierge",
+                "sagittaire": "Sagittaire",
+                "poisson": "Poisson",
+                "belier": "Bélier",
+                "taureau": "Taureau",
+                "balance": "Balance",
+                "scorpion": "Scorpion",
+                "lion": "Lion",
+                "capricorne": "Capricorne",
+                "cancer": "Cancer",
+                "verseau": "Verseau"
+            },
+            "ressources": {
+                "richesse": "Richesse",
+                "reseau": "Réseau",
+                "influence": "Influence"
+            },
+            "competences": {
+                "gemeaux": {
+                    "art": "Art",
+                    "empathie": "Empathie",
+                    "seduction": "Séduction"
+                },
+                "vierge": {
+                    "clairvoyance": "Clairvoyance",
+                    "emprise": "Emprise",
+                    "meditation": "Méditation"
+                },
+                "sagittaire": {
+                    "survie": "Survie",
+                    "tir": "Tir",
+                    "vigilance": "Vigilance"
+                },
+                "poisson": {
+                    "erudition": "Erudition",
+                    "langues": "Langues",
+                    "sciences": "Sciences"
+                },
+                "belier": {
+                    "corpsACorps": "Corps à corps",
+                    "melee": "Mélée",
+                    "tactique": "Tactique"
+                },
+                "taureau": {
+                    "athletisme": "Athlétisme",
+                    "endurance": "Endurance",
+                    "force": "Force"
+                },
+                "balance": {
+                    "documentation": "Documentation",
+                    "fouille": "Fouille",
+                    "intellect": "Intellect"
+                },
+                "scorpion": {
+                    "discretion": "Discrétion",
+                    "intrusion": "Intrusion",
+                    "subterfuge": "Subterfuge"
+                },
+                "lion": {
+                    "commandement": "Commandement",
+                    "strategie": "Stratégie",
+                    "volonte": "Volonté"
+                },
+                "capricorne": {
+                    "esquive": "Esquive",
+                    "pilotage": "Pilotage",
+                    "rapidite": "Rapidité"
+                },
+                "cancer": {
+                    "artisanat": "Artisanat",
+                    "technologies": "Technologies",
+                    "soins": "Soins"
+                },
+                "verseau": {
+                    "astrologie": "Astrologie",
+                    "histoireSecrete": "Histoire secrète",
+                    "les8": "Les 8"
+                }
+            },
+            "jetCompetence": "Jet de compétence",
+            "jetRessource": "Jet de ressource"
+        }
+    }
+}

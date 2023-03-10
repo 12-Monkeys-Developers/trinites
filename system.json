@@ -22,8 +22,14 @@
     "packs": [],
     "languages": [
       {
+        "lang": "en",
+        "name": "English",
+        "path": "lang/fr.json",
+        "flags": {}
+      },
+      {
         "lang": "fr",
-        "name": "Francais",
+        "name": "French",
         "path": "lang/fr.json"
       }
     ],

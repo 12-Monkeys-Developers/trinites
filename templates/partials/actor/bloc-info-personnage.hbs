@@ -6,7 +6,8 @@
   <div class="actor-infos-line">
     {{#if (eq data.type "trinite")}}
       <label>{{localize "TRINITES.label.metier"}}</label>
-      <div class="auto-size"><input name="system.metier" type="text" value="{{data.system.metier}}" placeholder="Métier" /></div>
+      <div class="auto-size"><input name="system.metier" type="text" value="{{data.system.metier}}" placeholder="Métier" readonly/></div>
+      {{#if hasMetier}}{{#if unlocked}}<div><a class="delete-metier" title="Supprimer le métier"><i class="fas fa-times"></i></a></div>{{/if}}{{/if}}
       <div class="auto-size"><a class="sheet-change-lock" title="{{localize 'TRINITES.label.unlockSheet'}}">{{#if unlocked}}<i class="fas fa-lock-open"></i>{{else}}<i class="fas fa-lock"></i>{{/if}}</a></div>
     {{/if}}
     {{#if (eq data.type "archonteRoi")}}

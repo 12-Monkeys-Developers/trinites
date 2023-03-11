@@ -35,9 +35,86 @@ export default class TrinitesActorSheet extends ActorSheet {
     data.auras = data.items.filter((item) => item.type == "aura");
     data.atouts = data.items.filter((item) => item.type == "atout");
 
-    data.unlocked = this.actor.getFlag(game.system.id, "SheetUnlocked");
+    data.unlocked = this.actor.isUnlocked;
+    data.hasMetier = this.actor.hasMetier;
     return data;
   }
+
+
+   /** @override */
+   _onDrop(event) {
+    event.preventDefault();
+    if (!this.options.editable) return false;
+    // Get dropped data
+    let data;
+    try {
+      data = JSON.parse(event.dataTransfer.getData("text/plain"));
+    } catch (err) {
+      return false;
+    }
+    if (!data) return false;
+
+    // Case 1 - Dropped Item
+    if (data.type === "Item") {
+      return this._onDropItem(event, data);
+    }
+    // Case 2 - Dropped Actor
+    if (data.type === "Actor") {
+      return false;
+    }
+  }
+
+  /**
+   * @name _onDropItem
+   * @description Handle dropping of an item reference or item data onto an Item Sheet
+   * @param {DragEvent} event     The concluding DragEvent which contains drop data
+   * @param {Object} data         The data transfer extracted from the event
+   * @private
+   */
+  _onDropItem(event, data) {
+    Item.fromDropData(data).then((item) => {
+      const itemData = duplicate(item);
+      switch (itemData.type) {
+        case "metier":
+          return this._onDropMetierItem(event, itemData);
+        default:
+          return super._onDropItem(event, data);
+      }
+    });
+  }
+
+  /**
+   * @name _onDropSkillItem
+   * @description Handle the drop of a metier item on the actor sheet
+   * @param {*} event
+   * @param {*} itemData
+   * @returns
+   */
+  async _onDropMetierItem(event, itemData) {
+    event.preventDefault();
+
+    if (!this.actor.isUnlocked) return;
+
+    if (this.actor.hasMetier) {
+      ui.notifications.warn("Vous avez déjà un métier !");
+      return;
+    }
+
+    Log.info('_onDropMetierItem',itemData);
+
+    this.actor.update({'system.metier': itemData.name});
+    const comp1 = "system.competences." + itemData.system.competence1 + ".baseMetier";
+    const comp2 = "system.competences." + itemData.system.competence2 + ".baseMetier";
+    const comp3 = "system.competences." + itemData.system.competence3 + ".baseMetier";
+    const updateObj = {};
+    updateObj[comp1] = 6;
+    updateObj[comp2] = 6;
+    updateObj[comp3] = 6;
+    this.actor.update(updateObj);
+
+    return await this.actor.createEmbeddedDocuments('Item', [itemData]);
+  }
+
 
   activateListeners(html) {
     super.activateListeners(html);
@@ -96,6 +173,8 @@ export default class TrinitesActorSheet extends ActorSheet {
         html.find(".roll-verset").click(this._onCarteVerset.bind(this));
 
         html.find(".sheet-change-lock").click(this._onSheetChangelock.bind(this));
+
+        html.find(".delete-metier").click(this._onDeleteMetier.bind(this));
       }
     }
   }
@@ -345,6 +424,23 @@ export default class TrinitesActorSheet extends ActorSheet {
     });
   }
 
+  async _onDeleteMetier(event) {
+    event.preventDefault();    
+    const metier = this.actor.items.find(i=>i.type=='metier');
+
+    const comp1 = "system.competences." + metier.system.competence1 + ".baseMetier";
+    const comp2 = "system.competences." + metier.system.competence2 + ".baseMetier";
+    const comp3 = "system.competences." + metier.system.competence3 + ".baseMetier";
+    const met = "system.metier";
+    const updateObj = {};
+    updateObj[comp1] = 0;
+    updateObj[comp2] = 0;
+    updateObj[comp3] = 0;
+    updateObj[met] = "";
+    this.actor.update(updateObj);
+    await this.actor.deleteEmbeddedDocuments("Item",[metier._id]);
+  }
+  
     /**
    * @description Manage the lock/unlock button on the sheet
    * @param {*} event

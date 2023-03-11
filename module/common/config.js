@@ -3,26 +3,26 @@ export const TRINITES = {};
 TRINITES.karmas = {
   aucun: "",
   lumiere: "Lumière",
-  tenebre: "Ténèbres",
+  tenebre: "Ténèbres"
 };
 
 TRINITES.messagers = {
   aucun: "",
   jibril: {
     label: "Jibr'il",
-    karma: "lumiere",
+    karma: "lumiere"
   },
   izrail: {
     label: "Izrâ'il",
-    karma: "lumiere",
+    karma: "lumiere"
   },
   mickhail: {
     label: "Mickha'il",
-    karma: "lumiere",
+    karma: "lumiere"
   },
   israfil: {
     label: "Israf'il",
-    karma: "lumiere",
+    karma: "lumiere"
   },
 };
 
@@ -30,15 +30,15 @@ TRINITES.vagabonds = {
   aucun: "",
   jabaan: {
     label: "Jaba’an",
-    karma: "tenebre",
+    karma: "tenebre"
   },
   radwaan: {
     label: "Radwa'an",
-    karma: "tenebre",
+    karma: "tenebre"
   },
   malakan: {
     label: "Malak'an",
-    karma: "tenebre",
+    karma: "tenebre"
   },
 };
 
@@ -46,15 +46,15 @@ TRINITES.epeesFeu = {
   aucun: "",
   jibril: {
     label: "Jibr'il",
-    karma: "lumiere",
+    karma: "lumiere"
   },
   izrail: {
     label: "Izrâ'il",
-    karma: "lumiere",
+    karma: "lumiere"
   },
   mickhail: {
     label: "Mickha'il",
-    karma: "lumiere",
+    karma: "lumiere"
   },
   israfil: {
     label: "Israf'il",
@@ -62,15 +62,15 @@ TRINITES.epeesFeu = {
   },
   jabaan: {
     label: "Jaba’an",
-    karma: "tenebre",
+    karma: "tenebre"
   },
   radwaan: {
     label: "Radwa'an",
-    karma: "tenebre",
+    karma: "tenebre"
   },
   malakan: {
     label: "Malak'an",
-    karma: "tenebre",
+    karma: "tenebre"
   },
 };
 
@@ -79,7 +79,7 @@ TRINITES.choeurs = {
   sepherims: "Les Sepherims",
   seneverims: "Les Seneverims",
   keroubims: "Les Keroubims",
-  berekhimes: "Les Barakhims",
+  berekhimes: "Les Barakhims"
 };
 
 TRINITES.legions = {
@@ -87,7 +87,7 @@ TRINITES.legions = {
   adon: "Les Adôn",
   houhalon: "Les Houhalôn",
   aramon: "Les Aramôn",
-  tehon: "Les Tehôn",
+  tehon: "Les Tehôn"
 };
 
 TRINITES.signes = {
@@ -103,14 +103,53 @@ TRINITES.signes = {
   lion: "Le Lion",
   capricorne: "Le Capricorne",
   cancer: "Le Cancer",
-  verseau: "Le Verseau",
+  verseau: "Le Verseau"
+};
+
+TRINITES.competences = {
+  "gemeaux.art": "Art",
+  "gemeaux.empathie": "Empathie",
+  "gemeaux.seduction": "Séduction",
+  "vierge.clairvoyance": "Clairvoyance",
+  "vierge.emprise": "Emprise",
+  "vierge.meditation": "Méditation",
+  "sagittaire.survie": "Survie",
+  "sagittaire.tir": "Tir",
+  "sagittaire.vigilance": "Vigilance",
+  "poisson.erudition": "Erudition",
+  "poisson.langues": "Langues",
+  "poisson.sciences": "Sciences",
+  "belier.corpsACorps": "Corps à corps",
+  "belier.melee": "Mêlée",
+  "belier.tactique": "Tactique",
+  "taureau.athletisme": "Athlétisme",
+  "taureau.endurance": "Endurance",
+  "taureau.force": "Force",
+  "balance.documentation": "Documentation",
+  "balance.fouille": "Fouille",
+  "balance.intellect": "Intellect",
+  "scorpion.discretion": "Discrétion",
+  "scorpion.intrusion": "Intrusion",
+  "scorpion.subterfuge": "Subterfuge",
+  "lion.commandement": "Commandement",
+  "lion.strategie": "Stratégie",
+  "lion.volonte": "Volonté",
+  "capricorne.esquive": "Esquive",
+  "capricorne.pilotage": "Pilotage",
+  "capricorne.rapidite": "Rapidité",
+  "cancer.artisanat": "Artisanat",
+  "cancer.technologies": "Technologies",
+  "cancer.soins": "Soins",
+  "verseau.astrologie": "Astrologie",
+  "verseau.histoireSecrete": "Histoire Secrète",
+  "verseau.les8": "Les 8"
 };
 
 TRINITES.affinites = {
   aucun: "",
   zodiaque: "Zodiaque",
   grandLivre: "Grand Livre",
-  lameSoeur: "Lame-soeur",
+  lameSoeur: "Lame-soeur"
 };
 
 TRINITES.etatSante = {
@@ -118,7 +157,7 @@ TRINITES.etatSante = {
   indemne: "Indemne",
   endolori: "Endolori",
   blesse: "Blessé",
-  inconscient: "Inconscient",
+  inconscient: "Inconscient"
 };
 
 TRINITES.deploiement = {
@@ -127,7 +166,7 @@ TRINITES.deploiement = {
   corps: "Corps",
   main: "Main",
   epee: "Epée",
-  oeil: "Oeil",
+  oeil: "Oeil"
 };
 
 TRINITES.couleurs = {
@@ -135,7 +174,7 @@ TRINITES.couleurs = {
   gueules: "Gueules",
   azur: "Azur",
   sable: "Sable",
-  sinople: "Sinople",
+  sinople: "Sinople"
 };
 
 TRINITES.dettes = {

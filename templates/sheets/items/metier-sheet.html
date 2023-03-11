@@ -1,0 +1,47 @@
+<form class="{{cssClass}}" autocomplete="off">
+    <header class="sheet-header occulte">
+        <img src="{{item.img}}" data-edit="img" title="{{item.name}}" height="64" width="64"/>
+        <h1 class="occulte"><input name="name" type="text" value="{{item.name}}" placeholder="Nom du métier"/></h1>
+    </header>
+    <div class="sheet-content aura occulte" data-item-id="{{item.id}}">
+        <div class="grid-item-aura">
+            <label class="marge-edit">Signe</label>
+            <select class="marge-edit" name="system.signe">
+                {{#select data.system.signe}}
+                {{#each config.signes as |signe keySigne|}}
+                    <option value="{{keySigne}}">{{signe}}</option>
+                {{/each}}
+                {{/select}} 
+            </select>
+            <label class="marge-edit">Compétence 1</label>
+            <select class="marge-edit" name="system.competence1">
+                {{#select data.system.competence1}}
+                {{#each config.competences as |competence keyCompetence|}}
+                    <option value="{{keyCompetence}}">{{competence}}</option>
+                {{/each}}
+                {{/select}} 
+            </select>
+            <label class="marge-edit">Compétence 2</label>
+            <select class="marge-edit" name="system.competence2">
+                {{#select data.system.competence2}}
+                {{#each config.competences as |competence keyCompetence|}}
+                    <option value="{{keyCompetence}}">{{competence}}</option>
+                {{/each}}
+                {{/select}} 
+            </select>
+            <label class="marge-edit">Compétence 3</label>
+            <select class="marge-edit" name="system.competence3">
+                {{#select data.system.competence3}}
+                {{#each config.competences as |competence keyCompetence|}}
+                    <option value="{{keyCompetence}}">{{competence}}</option>
+                {{/each}}
+                {{/select}} 
+            </select>
+        </div>
+        <div class="titre-desc occulte">Description</div>
+        {{editor data.system.description target="system.description" button=true owner=true editable=true}}
+    </div>
+    <footer class="sheet-footer occulte">
+        <div><i class="fas fa-mars-stroke-v"></i> Métier</span></div>
+    </footer>
+</form>

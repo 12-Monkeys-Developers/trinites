@@ -12,6 +12,7 @@ export default async function preloadTemplates() {
     "systems/trinites/templates/sheets/items/aura-sheet.html",
     "systems/trinites/templates/sheets/items/domaine-sheet.html",
     "systems/trinites/templates/sheets/items/verset-sheet.html",
+    "systems/trinites/templates/sheets/items/metier-sheet.html",
     "systems/trinites/templates/partials/actor/bloc-grandLivre-archonte.hbs",
     "systems/trinites/templates/partials/actor/bloc-grandLivre-trinite.hbs",
     "systems/trinites/templates/partials/actor/bloc-info-personnage.hbs",

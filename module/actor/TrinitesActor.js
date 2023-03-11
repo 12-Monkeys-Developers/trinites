@@ -285,4 +285,16 @@ export default class TrinitesActor extends Actor {
     let blessureVal = Math.max(data.nbBlessure - 4, 0);
     this.update({ "system.nbBlessure": blessureVal });
   }
+
+  get hasMetier() {
+    if (this.type == "trinite") {
+      if (this.items.find(i=>i.type == "metier")) return true;
+    }
+    return false;
+  }
+
+  get isUnlocked() {
+    if (this.getFlag(game.system.id, "SheetUnlocked")) return true;
+    return false;
+  }
 }

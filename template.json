@@ -519,7 +519,20 @@
         }
     },
     "Item": {
-        "types": ["objet", "domaine", "aura", "verset", "atout", "arme"],
+        "types": ["metier","objet", "domaine", "aura", "verset", "atout", "arme"],
+        "metier": {
+            "signe": "",
+            "description": "",
+            "competence1": "",
+            "competence2": "",
+            "competence3": "",
+            "nbDomaines": 0,
+            "domaines": [],
+            "pc": {
+                "max": 0,
+                "utilise": 0
+            }
+        },
         "objet": {
             "description": ""
         },

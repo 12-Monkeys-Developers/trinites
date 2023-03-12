@@ -1,24 +1,20 @@
 {
     "TRINITES": {
         "label": {
-            "signes": {
-                "gemeaux": "Gémeaux",
-                "vierge": "Vierge",
-                "sagittaire": "Sagittaire",
-                "poisson": "Poisson",
-                "belier": "Bélier",
-                "taureau": "Taureau",
-                "balance": "Balance",
-                "scorpion": "Scorpion",
-                "lion": "Lion",
-                "capricorne": "Capricorne",
-                "cancer": "Cancer",
-                "verseau": "Verseau"
-            },
-            "ressources": {
-                "richesse": "Richesse",
-                "reseau": "Réseau",
-                "influence": "Influence"
+            "science_occulte":{
+                "art": "Art",
+                "augure": "Augure",
+                "autre": "Autre",
+                "alchimie": "Alchimie",
+                "kaya": "Kâyas-Yoga",
+                "hades": "Hadès",
+                "hanahata": "Hânahata-Yoga",
+                "memoire": "Mémoire",
+                "piece": "Pouvoir de Pièce",
+                "rite": "Rite",
+                "science": "Science",
+                "tyrannie": "Tyrannie",
+                "vie_eternelle": "Vie éternelle"
             },
             "competences": {
                 "gemeaux": {
@@ -81,6 +77,25 @@
                     "histoireSecrete": "Histoire secrète",
                     "les8": "Les 8"
                 }
+            },
+            "ressources": {
+                "richesse": "Richesse",
+                "reseau": "Réseau",
+                "influence": "Influence"
+            },
+            "signes": {
+                "gemeaux": "Gémeaux",
+                "vierge": "Vierge",
+                "sagittaire": "Sagittaire",
+                "poisson": "Poisson",
+                "belier": "Bélier",
+                "taureau": "Taureau",
+                "balance": "Balance",
+                "scorpion": "Scorpion",
+                "lion": "Lion",
+                "capricorne": "Capricorne",
+                "cancer": "Cancer",
+                "verseau": "Verseau"
             },
             "jetCompetence": "Jet de compétence",
             "jetRessource": "Jet de ressource",

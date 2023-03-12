@@ -519,7 +519,7 @@
         }
     },
     "Item": {
-        "types": ["metier","objet", "domaine", "aura", "verset", "atout", "arme"],
+        "types": ["metier","objet", "domaine", "aura", "verset", "atout", "arme", "pouvoir"],
         "metier": {
             "signe": "",
             "description": "",
@@ -574,6 +574,10 @@
             "protectMeleeExplosif": 0,
             "protectLancerTir": "",
             "particularites": ""
+        },
+        "science_occulte": {
+            "science_occulte": "autre",
+            "description": ""
         }
     }
 }

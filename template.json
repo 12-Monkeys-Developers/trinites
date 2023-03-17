@@ -48,19 +48,25 @@
             "ressources": {
                 "ressources": {
                     "richesse": {
-                        "valeur": 0,
+                        "baseMetier": 0,
+                        "pointsCrea": 0,
+                        "pointsExp": 0,
                         "diminution": 0,
                         "dureeDiminution": "",
                         "epuisee": false
                       },
                     "reseau": {
-                        "valeur": 0,
+                        "baseMetier": 0,
+                        "pointsCrea": 0,
+                        "pointsExp": 0,
                         "diminution": 0,
                         "dureeDiminution": "",
                         "epuisee": false
                     },
                     "influence": {
-                        "valeur": 0,
+                        "baseMetier": 0,
+                        "pointsCrea": 0,
+                        "pointsExp": 0,
                         "diminution": 0,
                         "dureeDiminution": "",
                         "epuisee": false
@@ -484,14 +490,15 @@
         "trinite": {
             "templates": [ "information", "signes", "competences", "ressources", "theme", "trini", "lame" ],
             "metier": "",
-            "vieAnterieure": "",
+            "vieAnterieure": "",            
             "experience": {
                 "totale": 0,
                 "disponible": 0
             },
             "creation": {
                 "totale": 0,
-                "disponible": 0
+                "disponible": 0,
+                "finie": false
             },
             "pointsLigneVie": 8,
             "etatSante" : "indemne",
@@ -526,6 +533,9 @@
             "competence1": "",
             "competence2": "",
             "competence3": "",
+            "richesse": 0,
+            "reseau": 0,
+            "influence": 0,
             "nbDomaines": 0,
             "domaines": [],
             "pc": {
@@ -575,8 +585,8 @@
             "protectLancerTir": "",
             "particularites": ""
         },
-        "science_occulte": {
-            "science_occulte": "autre",
+        "pouvoir": {
+            "scienceOcculte": "autre",
             "description": ""
         }
     }

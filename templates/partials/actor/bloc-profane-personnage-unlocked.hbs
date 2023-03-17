@@ -1,9 +1,9 @@
 <div class="competences">
-                <h3><i class="fas fa-check"></i> COMPETENCES</h3>
+                <h3 {{#if (and (lt data.system.creation.disponible 0) (not data.system.creation.finie))}}style="color: red;"{{/if}}><i class="fas fa-check"></i> COMPETENCES {{#unless data.system.creation.finie}}  (Points de création : {{data.system.creation.disponible}}/{{data.system.creation.totale}}){{/unless}}{{#if (and (eq data.system.creation.disponible 0) (not data.system.creation.finie))}}  <i class="fa-solid fa-user-lock" title="Finaliser la dépense des points de création"></i>{{/if}}</h3>
                 <div class="comp-grid">
                     <!-- COLONNE 1 -->
                     <div class="col-base-1 lig-titre-1">{{localize 'TRINITES.label.competence.enteteUnlocked'}}</div>
-                    <div class="col-valeur-1 lig-titre-1">{{localize 'TRINITES.label.competence.valeur'}}</div>
+                    <div class="col-valeur-1 lig-titre-1">{{localize 'TRINITES.label.competence.base'}}</div>
 
                     <!-- GEMEAUX -->
                     <div class="col-image-1 lig-image-1"><img src="systems/trinites/images/signes/gemeaux.png" title="{{localize 'TRINITES.label.signes.gemeaux'}}" height="40" width="40"></div>                
@@ -61,7 +61,7 @@
 
                     <!-- COLONNE 2 -->
                     <div class="col-base-2 lig-titre-1">{{localize 'TRINITES.label.competence.enteteUnlocked'}}</div>
-                    <div class="col-valeur-2 lig-titre-1">{{localize 'TRINITES.label.competence.valeur'}}</div>
+                    <div class="col-valeur-2 lig-titre-1">{{localize 'TRINITES.label.competence.base'}}</div>
 
                     <!-- BALANCE -->
                     <div class="col-image-2 lig-image-1"><img src="systems/trinites/images/signes/balance.png" title="{{localize 'TRINITES.label.signes.balance'}}" height="40" width="40"></div>
@@ -139,9 +139,12 @@
                 <div class="col-A">
                     <div class="ressources">
                         <h3><i class="fas fa-euro-sign"></i> RESSOURCES</h3>
-                        <div class="ress-grid">
+                        <div class="ress-grid-unlocked">
                             <!-- TITRE -->
                             <div class="col-titre-vide"></div>
+                            <div class="col-titre metier"><label>Métier</label></div>
+                            <div class="col-titre pc"><label>PC</label></div>
+                            <div class="col-titre pex"><label>Pex</label></div>
                             <div class="col-titre diminution"><label>Diminution</label></div>
                             <div class="col-titre duree"><label>Durée</label></div>
                             <!-- RICHESSE -->
@@ -154,19 +157,25 @@
                                     <div class="check-richesse"><a title="Richesse épuisée"><i class="far fa-square"></i></a></div>
                                 {{/if}}
                             </div>
-                            <div class="colRess-valeur"><input name="system.ressources.richesse.valeur" type="number" value="{{data.system.ressources.richesse.valeur}}" placeholder="0" min="0"></div>
+                            <div class="colRess-metier"><input name="system.ressources.richesse.baseMetier" type="number" value="{{data.system.ressources.richesse.baseMetier}}" placeholder="0" min="0" readonly/></div>
+                            <div class="colRess-crea"><input name="system.ressources.richesse.pointsCrea" type="number" value="{{data.system.ressources.richesse.pointsCrea}}" placeholder="0" min="0" {{#if @root.data.system.creation.finie}}readonly{{/if}}/></div>
+                            <div class="colRess-exp"><input name="system.ressources.richesse.pointsExp" type="number" value="{{data.system.ressources.richesse.pointsExp}}" placeholder="0" min="0" /></div>
                             <div class="colRess-diminution"><input name="system.ressources.richesse.diminution" type="number" value="{{data.system.ressources.richesse.diminution}}" placeholder="0" min="0" max="{{data.system.ressources.richesse.valeur}}"></div>                
                             <div class="colRess-duree"><input name="system.ressources.richesse.duree" type="text" value="{{data.system.ressources.richesse.duree}}" placeholder="Durée diminution"></div>
                             <!-- RESEAU -->
                             <div class="colRess-dice"><a class="roll-ress" title="{{localize 'TRINITES.label.jetRessource'}}" data-ressource="reseau"><i class="fas fa-dice"></i></a></div>
                             <div class="colRess-nom">{{localize 'TRINITES.label.ressources.reseau'}}</div>
-                            <div class="colRess-valeur"><input name="system.ressources.reseau.valeur" type="number" value="{{data.system.ressources.reseau.valeur}}" placeholder="0" min="0"></div>
+                            <div class="colRess-metier"><input name="system.ressources.reseau.baseMetier" type="number" value="{{data.system.ressources.reseau.baseMetier}}" placeholder="0" min="0" readonly/></div>
+                            <div class="colRess-crea"><input name="system.ressources.reseau.pointsCrea" type="number" value="{{data.system.ressources.reseau.pointsCrea}}" placeholder="0" min="0" {{#if @root.data.system.creation.finie}}readonly{{/if}}/></div>
+                            <div class="colRess-exp"><input name="system.ressources.reseau.pointsExp" type="number" value="{{data.system.ressources.reseau.pointsExp}}" placeholder="0" min="0" /></div>
                             <div class="colRess-diminution"><input name="system.ressources.reseau.diminution" type="number" value="{{data.system.ressources.reseau.diminution}}" placeholder="0" min="0" max="{{data.system.ressources.reseau.valeur}}"></div>                
                             <div class="colRess-duree"><input name="system.ressources.reseau.duree" type="text" value="{{data.system.ressources.reseau.duree}}" placeholder="Durée diminution"></div>
                             <!-- INFLUENCE -->
                             <div class="colRess-dice"><a class="roll-ress" title="{{localize 'TRINITES.label.jetRessource'}}" data-ressource="influence"><i class="fas fa-dice"></i></a></div>
                             <div class="colRess-nom">{{localize 'TRINITES.label.ressources.influence'}}</div>
-                            <div class="colRess-valeur"><input name="system.ressources.influence.valeur" type="number" value="{{data.system.ressources.influence.valeur}}" placeholder="0" min="0"></div>
+                            <div class="colRess-metier"><input name="system.ressources.influence.baseMetier" type="number" value="{{data.system.ressources.influence.baseMetier}}" placeholder="0" min="0" readonly/></div>
+                            <div class="colRess-crea"><input name="system.ressources.influence.pointsCrea" type="number" value="{{data.system.ressources.influence.pointsCrea}}" placeholder="0" min="0" {{#if @root.data.system.creation.finie}}readonly{{/if}}/></div>
+                            <div class="colRess-exp"><input name="system.ressources.influence.pointsExp" type="number" value="{{data.system.ressources.influence.pointsExp}}" placeholder="0" min="0" /></div>
                             <div class="colRess-diminution"><input name="system.ressources.influence.diminution" type="number" value="{{data.system.ressources.influence.diminution}}" placeholder="0" min="0" max="{{data.system.ressources.influence.valeur}}"></div>                
                             <div class="colRess-duree"><input name="system.ressources.influence.duree" type="text" value="{{data.system.ressources.influence.duree}}" placeholder="Durée diminution"></div>
                         </div>

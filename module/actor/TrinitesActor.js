@@ -1,19 +1,31 @@
 export default class TrinitesActor extends Actor {
   prepareData() {
     super.prepareData();
-    let data = this.system;
+    let system = this.system;
+
+    let pointsCreDepenses = 0;
+
+    if (this.type == "trinite") {
+      /*
+       * Bonus de 1 pour les 3 compétences de la vierge et dans Langues
+       */
+      system.competences.vierge.clairvoyance.base = 1;
+      system.competences.vierge.emprise.base = 1;
+      system.competences.vierge.meditation.base = 1;
+      system.competences.poisson.langues.base = 1;
+    }
 
     if (this.type == "trinite" || this.type == "archonteRoi") {
-      /*----------------------------------
-            ---- Calcul des bonus de Signes ----
-            ----------------------------------*/
+      /*
+       *  Calcul des bonus de Signes
+       */
 
-      for (let [keySigne, signe] of Object.entries(data.signes)) {
-        if (data.themeAstral.archetype == keySigne) {
+      for (let [keySigne, signe] of Object.entries(system.signes)) {
+        if (system.themeAstral.archetype == keySigne) {
           signe.valeur = 6;
-        } else if (data.themeAstral.ascendant1 == keySigne || data.themeAstral.ascendant2 == keySigne) {
+        } else if (system.themeAstral.ascendant1 == keySigne || system.themeAstral.ascendant2 == keySigne) {
           signe.valeur = 4;
-        } else if (data.themeAstral.descendant1 == keySigne || data.themeAstral.descendant2 == keySigne || data.themeAstral.descendant3 == keySigne) {
+        } else if (system.themeAstral.descendant1 == keySigne || system.themeAstral.descendant2 == keySigne || system.themeAstral.descendant3 == keySigne) {
           signe.valeur = 2;
         } else {
           signe.valeur = 0;
@@ -21,26 +33,66 @@ export default class TrinitesActor extends Actor {
       }
 
       /*
-       * Calcul de la base des compétences : base = baseMetier + baseMetier + bonusVA + pointsExp
+       * Vérification du max des points de création
        */
-      for (let [keySigne, compsSigne] of Object.entries(data.competences)) {
-        for (let [keyComp, competence] of Object.entries(compsSigne)) {
-          data.competences[keySigne][keyComp].base = data.competences[keySigne][keyComp].baseMetier + data.competences[keySigne][keyComp].pointsCrea + data.competences[keySigne][keyComp].bonusVA + data.competences[keySigne][keyComp].pointsExp;
+      if (this.type == "trinite") {
+        for (let [keySigne, compsSigne] of Object.entries(system.competences)) {
+          for (let [keyComp, competence] of Object.entries(compsSigne)) {
+            // Compétence de métier
+            if (system.competences[keySigne][keyComp].baseMetier == 6) {
+              if (system.competences[keySigne][keyComp].pointsCrea > 0) system.competences[keySigne][keyComp].pointsCrea = 0;
+            }
+            // Les autres
+            else {
+              // Competence par défaut
+              if (["clairvoyance", "emprise", "meditation", "base"].includes(keyComp)) {
+                if (system.competences[keySigne][keyComp].pointsCrea > 4) system.competences[keySigne][keyComp].pointsCrea = 4;
+              } else if (system.competences[keySigne][keyComp].pointsCrea > 5) system.competences[keySigne][keyComp].pointsCrea = 5;
+            }
+            if (system.competences[keySigne][keyComp].pointsCrea < 0) system.competences[keySigne][keyComp].pointsCrea = 0;
+          }
+          
         }
+      }
+
+      /*
+       * Calcul de la base des compétences : base = baseMetier + points de Création du métier + bonus de la Vie Antérieure + niveau obtenu par l'expérience
+       */
+      for (let [keySigne, compsSigne] of Object.entries(system.competences)) {
+        for (let [keyComp, competence] of Object.entries(compsSigne)) {
+          system.competences[keySigne][keyComp].base +=
+            system.competences[keySigne][keyComp].baseMetier +
+            system.competences[keySigne][keyComp].pointsCrea +
+            system.competences[keySigne][keyComp].bonusVA +
+            system.competences[keySigne][keyComp].pointsExp;
+        }
+      }
+
+      if (this.type == "trinite") {
+        /*
+         * Calcul des points de création dépensés pour les compétences
+         */
+
+        for (let [keySigne, compsSigne] of Object.entries(system.competences)) {
+          for (let [keyComp, competence] of Object.entries(compsSigne)) {
+            pointsCreDepenses += system.competences[keySigne][keyComp].pointsCrea;
+          }
+        }
+        // if (system.creation.totale > 0) system.creation.disponible = system.creation.totale - pointsCreDepenses;
       }
 
       /*
        * Calcul de la valeur de la compétence : valeur = base + bonus zodiacal
        */
-      for (let [keySigne, compsSigne] of Object.entries(data.competences)) {
+      for (let [keySigne, compsSigne] of Object.entries(system.competences)) {
         for (let [keyComp, competence] of Object.entries(compsSigne)) {
-          if (data.competences[keySigne][keyComp].ouverte) {
-            data.competences[keySigne][keyComp].valeur = data.competences[keySigne][keyComp].base + data.signes[keySigne].valeur;
+          if (system.competences[keySigne][keyComp].ouverte) {
+            system.competences[keySigne][keyComp].valeur = system.competences[keySigne][keyComp].base + system.signes[keySigne].valeur;
           } else {
-            if (data.competences[keySigne][keyComp].base > 0) {
-              data.competences[keySigne][keyComp].valeur = data.competences[keySigne][keyComp].base + data.signes[keySigne].valeur;
+            if (system.competences[keySigne][keyComp].base > 0) {
+              system.competences[keySigne][keyComp].valeur = system.competences[keySigne][keyComp].base + system.signes[keySigne].valeur;
             } else {
-              data.competences[keySigne][keyComp].valeur = 0;
+              system.competences[keySigne][keyComp].valeur = 0;
             }
           }
         }
@@ -48,71 +100,82 @@ export default class TrinitesActor extends Actor {
     }
 
     if (this.type == "trinite") {
-      /*-----------------------------------
-            ---- Calcul des valeurs de Karma ----
-            -----------------------------------*/
+      /* Calcul des valeurs de Karma */
 
-      //recalcul des valeurs de karma afin qu'elles ne dépasent pas le max
-      if (data.trinite.deva.karma.value > data.trinite.deva.karma.max) {
-        data.trinite.deva.karma.value = data.trinite.deva.karma.max;
+      // Recalcul des valeurs de karma afin qu'elles ne dépasent pas le max
+      if (system.trinite.deva.karma.value > system.trinite.deva.karma.max) {
+        system.trinite.deva.karma.value = system.trinite.deva.karma.max;
       }
-      if (data.trinite.archonte.karma.value > data.trinite.archonte.karma.max) {
-        data.trinite.archonte.karma.value = data.trinite.archonte.karma.max;
+      if (system.trinite.archonte.karma.value > system.trinite.archonte.karma.max) {
+        system.trinite.archonte.karma.value = system.trinite.archonte.karma.max;
       }
 
       // La valeur de Karma de l'adam est calculée en fonction des valeurs du Deva et de l'Archonte
-      data.trinite.adam.karma.max = Math.abs(data.trinite.deva.karma.max - data.trinite.archonte.karma.max);
-      if (data.trinite.adam.karma.value > data.trinite.adam.karma.max) {
-        data.trinite.adam.karma.value = data.trinite.adam.karma.max;
+      system.trinite.adam.karma.max = Math.abs(system.trinite.deva.karma.max - system.trinite.archonte.karma.max);
+      if (system.trinite.adam.karma.value > system.trinite.adam.karma.max) {
+        system.trinite.adam.karma.value = system.trinite.adam.karma.max;
       }
 
       // Son type dépend du plus fort des deux
-      if (data.trinite.adam.karma.max == 0) {
-        data.trinite.adam.karma.type = "";
+      if (system.trinite.adam.karma.max == 0) {
+        system.trinite.adam.karma.type = "";
       } else {
-        data.trinite.adam.karma.type = data.trinite.deva.karma.max > data.trinite.archonte.karma.max ? "lumiere" : "tenebre";
+        system.trinite.adam.karma.type = system.trinite.deva.karma.max > system.trinite.archonte.karma.max ? "lumiere" : "tenebre";
       }
 
-      /*--------------
-            ---- Divers ----
-            --------------*/
+      /* Divers */
 
-      if (data.experience.disponible > data.experience.totale) {
-        data.experience.disponible = data.experience.totale;
+      if (system.experience.disponible > system.experience.totale) {
+        system.experience.disponible = system.experience.totale;
       }
     }
 
     if (this.type == "archonteRoi") {
-      /*------------------------------------
-            ---- Calcul de la valeur de Karma ----
-            ------------------------------------*/
+      /* Calcul de la valeur de Karma */
 
       //recalcul des valeurs de karma afin qu'elles ne dépasent pas le max
-      if (data.archonteRoi.karma.value > data.archonteRoi.karma.max) {
-        data.archonteRoi.karma.value = data.archonteRoi.karma.max;
+      if (system.archonteRoi.karma.value > system.archonteRoi.karma.max) {
+        system.archonteRoi.karma.value = system.archonteRoi.karma.max;
       }
     }
 
-    /*----------------------------------------
-        ---- Calcul des valeurs de ressources ----
-        ----------------------------------------*/
+    /*
+     * Calcul des valeurs de ressources : valeur = baseMetier + points de Création du métier + points obtenus par l'expérience
+     */
+    if (system.ressources.richesse.pointsCrea < 0) system.ressources.richesse.pointsCrea = 0;
+    if (system.ressources.reseau.pointsCrea < 0) system.ressources.reseau.pointsCrea = 0;
+    if (system.ressources.influence.pointsCrea < 0) system.ressources.influence.pointsCrea = 0;
+
+    system.ressources.richesse.valeur = parseInt(system.ressources.richesse.baseMetier) + system.ressources.richesse.pointsCrea + system.ressources.richesse.pointsExp;
+    system.ressources.reseau.valeur = parseInt(system.ressources.reseau.baseMetier) + system.ressources.reseau.pointsCrea + system.ressources.reseau.pointsExp;
+    system.ressources.influence.valeur = parseInt(system.ressources.influence.baseMetier) + system.ressources.influence.pointsCrea + system.ressources.influence.pointsExp;
+
+    if (this.type == "trinite") {
+      /*
+       * Calcul des points de création dépensés pour les ressources
+       */
+      pointsCreDepenses += 2 * system.ressources.richesse.pointsCrea;
+      pointsCreDepenses += 2 * system.ressources.reseau.pointsCrea;
+      pointsCreDepenses += 2 * system.ressources.influence.pointsCrea;
+      if (system.creation.totale > 0) system.creation.disponible = system.creation.totale - pointsCreDepenses;
+    }
 
     // L'influence ne peut dépasser la valeur de réseau
-    if (data.ressources.influence.valeur > data.ressources.reseau.valeur) {
-      data.ressources.influence.valeur = data.ressources.reseau.valeur;
+    if (system.ressources.influence.valeur > system.ressources.reseau.valeur) {
+      system.ressources.influence.valeur = system.ressources.reseau.valeur;
     }
 
     // Les diminutions ne peuvent dépasser le score de ressource
-    if (data.ressources.richesse.diminution > data.ressources.richesse.valeur) {
-      data.ressources.richesse.diminution = data.ressources.richesse.valeur;
+    if (system.ressources.richesse.diminution > system.ressources.richesse.valeur) {
+      system.ressources.richesse.diminution = system.ressources.richesse.valeur;
     }
 
-    if (data.ressources.influence.diminution > data.ressources.influence.valeur) {
-      data.ressources.influence.diminution = data.ressources.influence.valeur;
+    if (system.ressources.influence.diminution > system.ressources.influence.valeur) {
+      system.ressources.influence.diminution = system.ressources.influence.valeur;
     }
 
-    if (data.ressources.reseau.diminution > data.ressources.reseau.valeur) {
-      data.ressources.reseau.diminution = data.ressources.reseau.valeur;
+    if (system.ressources.reseau.diminution > system.ressources.reseau.valeur) {
+      system.ressources.reseau.diminution = system.ressources.reseau.valeur;
     }
 
     /*-----------------------------------
@@ -120,19 +183,19 @@ export default class TrinitesActor extends Actor {
         -----------------------------------*/
 
     // Points de vie maxi
-    data.ligneVie1 = data.pointsLigneVie;
-    data.ligneVie2 = data.pointsLigneVie * 2;
-    data.nbPointsVieMax = data.pointsLigneVie * 3;
+    system.ligneVie1 = system.pointsLigneVie;
+    system.ligneVie2 = system.pointsLigneVie * 2;
+    system.nbPointsVieMax = system.pointsLigneVie * 3;
 
     //Etat de santé
-    if (data.nbBlessure == 0) {
-      data.etatSante = "indemne";
-    } else if (data.nbBlessure <= data.ligneVie1) {
-      data.etatSante = "endolori";
-    } else if (data.nbBlessure <= data.ligneVie2) {
-      data.etatSante = "blesse";
+    if (system.nbBlessure == 0) {
+      system.etatSante = "indemne";
+    } else if (system.nbBlessure <= system.ligneVie1) {
+      system.etatSante = "endolori";
+    } else if (system.nbBlessure <= system.ligneVie2) {
+      system.etatSante = "blesse";
     } else {
-      data.etatSante = "inconscient";
+      system.etatSante = "inconscient";
     }
   }
 
@@ -288,7 +351,7 @@ export default class TrinitesActor extends Actor {
 
   get hasMetier() {
     if (this.type == "trinite") {
-      if (this.items.find(i=>i.type == "metier")) return true;
+      if (this.items.find((i) => i.type == "metier")) return true;
     }
     return false;
   }

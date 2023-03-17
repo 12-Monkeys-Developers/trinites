@@ -1,3 +1,4 @@
+{{log 'item' this}}
 <form class="{{cssClass}}" autocomplete="off">
     <header class="sheet-header occulte">
         <img src="{{item.img}}" data-edit="img" title="{{item.name}}" height="64" width="64"/>
@@ -5,38 +6,48 @@
     </header>
     <div class="sheet-content aura occulte" data-item-id="{{item.id}}">
         <div class="grid-item-aura">
-            <label class="marge-edit">Signe</label>
-            <select class="marge-edit" name="system.signe">
+            <label>Signe</label>
+            <select name="system.signe">
                 {{#select data.system.signe}}
                 {{#each config.signes as |signe keySigne|}}
                     <option value="{{keySigne}}">{{signe}}</option>
                 {{/each}}
                 {{/select}} 
             </select>
-            <label class="marge-edit">Compétence 1</label>
-            <select class="marge-edit" name="system.competence1">
+            <label>Compétence 1</label>
+            <select name="system.competence1">
                 {{#select data.system.competence1}}
                 {{#each config.competences as |competence keyCompetence|}}
                     <option value="{{keyCompetence}}">{{competence}}</option>
                 {{/each}}
                 {{/select}} 
             </select>
-            <label class="marge-edit">Compétence 2</label>
-            <select class="marge-edit" name="system.competence2">
+            <label>Compétence 2</label>
+            <select name="system.competence2">
                 {{#select data.system.competence2}}
                 {{#each config.competences as |competence keyCompetence|}}
                     <option value="{{keyCompetence}}">{{competence}}</option>
                 {{/each}}
                 {{/select}} 
             </select>
-            <label class="marge-edit">Compétence 3</label>
-            <select class="marge-edit" name="system.competence3">
+            <label>Compétence 3</label>
+            <select name="system.competence3">
                 {{#select data.system.competence3}}
                 {{#each config.competences as |competence keyCompetence|}}
                     <option value="{{keyCompetence}}">{{competence}}</option>
                 {{/each}}
                 {{/select}} 
             </select>
+        </div>
+        <div class="grid-item-aura">
+            <label>Richesse</label>
+            <input name="system.richesse.baseMetier" type="number" value="{{item.system.richesse.baseMetier}}"/>
+            <label>Réseau</label>
+            <input name="system.reseau.baseMetier" type="number" value="{{item.system.reseau.baseMetier}}"/>
+            <label>Influence</label>
+            <input name="system.influence.baseMetier" type="number" value="{{item.system.influence.baseMetier}}"/>
+            <label>Points de création</label>
+            <input name="system.pc.max" type="number" value="{{item.system.pc.max}}"/>
         </div>
         <div class="titre-desc occulte">Description</div>
         {{editor data.system.description target="system.description" button=true owner=true editable=true}}

@@ -106,8 +106,14 @@
             "competence": {
                 "enteteLocked": "Base",
                 "enteteUnlocked": "Métier / PC / VA / PEX",
-                "valeur": "Valeur"
+                "valeur": "Valeur",
+                "base": "Base"
             }
+        },
+        "notification": {
+            "warning": {
+                "metierExistant": "Vous avez déjà un métier !"
+            }            
         }
     }
 }

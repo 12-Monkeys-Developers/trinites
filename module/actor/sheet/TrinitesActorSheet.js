@@ -96,20 +96,29 @@ export default class TrinitesActorSheet extends ActorSheet {
     if (!this.actor.isUnlocked) return;
 
     if (this.actor.hasMetier) {
-      ui.notifications.warn("Vous avez déjà un métier !");
+      ui.notifications.warn(game.i18n.localize("TRINITES.notification.warning.metierExistant"));
       return;
     }
 
-    Log.info('_onDropMetierItem',itemData);
+    Log.info('_onDropMetierItem', itemData);
+    
+    const updateObj = {};
+    
+    updateObj['system.metier'] = itemData.name;
 
-    this.actor.update({'system.metier': itemData.name});
     const comp1 = "system.competences." + itemData.system.competence1 + ".baseMetier";
     const comp2 = "system.competences." + itemData.system.competence2 + ".baseMetier";
-    const comp3 = "system.competences." + itemData.system.competence3 + ".baseMetier";
-    const updateObj = {};
+    const comp3 = "system.competences." + itemData.system.competence3 + ".baseMetier";    
     updateObj[comp1] = 6;
     updateObj[comp2] = 6;
     updateObj[comp3] = 6;
+
+    updateObj['system.ressources.richesse.baseMetier'] = itemData.system.richesse.baseMetier;
+    updateObj['system.ressources.reseau.baseMetier'] = itemData.system.reseau.baseMetier;
+    updateObj['system.ressources.influence.baseMetier'] = itemData.system.influence.baseMetier;
+
+    updateObj['system.creation.totale'] = itemData.system.pc.max;
+    updateObj['system.creation.disponible'] = itemData.system.pc.max;
     this.actor.update(updateObj);
 
     return await this.actor.createEmbeddedDocuments('Item', [itemData]);
@@ -172,9 +181,14 @@ export default class TrinitesActorSheet extends ActorSheet {
         // Carte - Verset
         html.find(".roll-verset").click(this._onCarteVerset.bind(this));
 
+        // Lock/Unlock la fiche
         html.find(".sheet-change-lock").click(this._onSheetChangelock.bind(this));
 
+        // Supprime le métier
         html.find(".delete-metier").click(this._onDeleteMetier.bind(this));
+
+        // Finalise la dépense des points de création
+        html.find(".fa-user-lock").click(this._onEndCreation.bind(this));
       }
     }
   }
@@ -437,6 +451,15 @@ export default class TrinitesActorSheet extends ActorSheet {
     updateObj[comp2] = 0;
     updateObj[comp3] = 0;
     updateObj[met] = "";
+
+    updateObj['system.ressources.richesse.baseMetier'] = 0;
+    updateObj['system.ressources.reseau.baseMetier'] = 0;
+    updateObj['system.ressources.influence.baseMetier'] = 0;
+
+    updateObj['system.creation.totale'] = 0;
+    updateObj['system.creation.disponible'] = 0;
+    updateObj['system.creation.finie'] = false;
+
     this.actor.update(updateObj);
     await this.actor.deleteEmbeddedDocuments("Item",[metier._id]);
   }
@@ -452,5 +475,9 @@ export default class TrinitesActorSheet extends ActorSheet {
       flagData ? await this.actor.unsetFlag(game.system.id, "SheetUnlocked") : await this.actor.setFlag(game.system.id, "SheetUnlocked", "SheetUnlocked");
   
       this.actor.sheet.render(true);
+    }
+
+    async _onEndCreation(event){
+      await this.actor.update({'system.creation.finie': true});
     }
 }

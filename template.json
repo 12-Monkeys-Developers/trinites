@@ -429,7 +429,7 @@
                     },
                     "verseau": {
                         "astrologie":{
-                            "ouverte": true,
+                            "ouverte": false,
                             "domaine": false,
                             "libre": false,
                             "base": 0,

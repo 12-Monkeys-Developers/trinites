@@ -15,11 +15,11 @@ export async function jetCompetence({
   let actorData = actor.system;
 
   let valeur = actorData.competences[signe][competence].valeur;
-  let compOuverte = actorData.competences[signe][competence].ouverte;
+  let ouverte = actorData.competences[signe][competence].ouverte;
 
-  // Si la compétence à une valeur de 0, on gènere le message d'erreur et on annule le jet
-  if (valeur == 0 && !compOuverte) {
-    ui.notifications.warn(`Le jet n'est pas autorisé pour une compétence fermée dont la valeur est à zéro.`);
+  // Si la compétence a une base de 0, on gènere le message d'erreur et on annule le jet
+  if (valeur == 0 && !ouverte) {
+    ui.notifications.warn(`Le jet n'est pas autorisé pour une compétence fermée dont la base est à zéro.`);
     return null;
   }
 
@@ -54,7 +54,7 @@ export async function jetCompetence({
   }
 
   if (sansDomaine) {
-    if (compOuverte) {
+    if (ouverte) {
       valeur = actorData.signes[signe].valeur;
     } else {
       ui.notifications.warn(`Le jet n'est pas autorisé pour une compétence fermée dont la valeur est à zéro.`);

@@ -856,6 +856,27 @@
 .trinites.sheet.item .sheet-content.domaine .editor {
   height: 250px;
 }
+.trinites.sheet.item .sheet-content.metier .grid-item-metier {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1.5fr 0.5fr;
+  margin: 2px;
+  align-items: center;
+}
+.trinites.sheet.item .sheet-content.metier .grid-item-metier label,
+.trinites.sheet.item .sheet-content.metier .grid-item-metier input,
+.trinites.sheet.item .sheet-content.metier .grid-item-metier select {
+  margin: 2px;
+}
+.trinites.sheet.item .sheet-content.metier .grid-item-metier label {
+  font-family: "Cabaletta";
+}
+.trinites.sheet.item .sheet-content.metier .zone-metier {
+  display: grid;
+  grid-template-columns: repeat(5, 3.5em);
+}
+.trinites.sheet.item .sheet-content.metier .editor {
+  height: 100px;
+}
 .trinites.sheet.item .sheet-content.atout .grid-item-atout {
   display: grid;
   grid-template-columns: 1fr 2fr 1fr 2fr;

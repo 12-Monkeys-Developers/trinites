@@ -5,7 +5,7 @@ export default class TrinitesActor extends Actor {
 
     let pointsCreDepenses = 0;
 
-    if (this.type == "trinite") {
+    if (this.type === "trinite") {
       /*
        * Bonus de 1 pour les 3 compétences de la vierge et dans Langues
        */
@@ -15,7 +15,7 @@ export default class TrinitesActor extends Actor {
       system.competences.poisson.langues.base = 1;
     }
 
-    if (this.type == "trinite" || this.type == "archonteRoi") {
+    if (this.type === "trinite" || this.type === "archonteRoi") {
       /*
        *  Calcul des bonus de Signes
        */
@@ -35,23 +35,21 @@ export default class TrinitesActor extends Actor {
       /*
        * Vérification du max des points de création
        */
-      if (this.type == "trinite") {
+      if (this.type === "trinite") {
         for (let [keySigne, compsSigne] of Object.entries(system.competences)) {
           for (let [keyComp, competence] of Object.entries(compsSigne)) {
             // Compétence de métier
-            if (system.competences[keySigne][keyComp].baseMetier == 6) {
+            if (system.competences[keySigne][keyComp].baseMetier === 6) {
               if (system.competences[keySigne][keyComp].pointsCrea > 0) system.competences[keySigne][keyComp].pointsCrea = 0;
             }
             // Les autres
             else {
               // Competence par défaut
-              if (["clairvoyance", "emprise", "meditation", "base"].includes(keyComp)) {
-                if (system.competences[keySigne][keyComp].pointsCrea > 4) system.competences[keySigne][keyComp].pointsCrea = 4;
-              } else if (system.competences[keySigne][keyComp].pointsCrea > 5) system.competences[keySigne][keyComp].pointsCrea = 5;
+              const max = ["clairvoyance", "emprise", "meditation", "base"].includes(keyComp) ? 4 : 5;
+              if (system.competences[keySigne][keyComp].pointsCrea > max) system.competences[keySigne][keyComp].pointsCrea = max;
             }
             if (system.competences[keySigne][keyComp].pointsCrea < 0) system.competences[keySigne][keyComp].pointsCrea = 0;
           }
-          
         }
       }
 
@@ -68,7 +66,7 @@ export default class TrinitesActor extends Actor {
         }
       }
 
-      if (this.type == "trinite") {
+      if (this.type === "trinite") {
         /*
          * Calcul des points de création dépensés pour les compétences
          */
@@ -99,7 +97,7 @@ export default class TrinitesActor extends Actor {
       }
     }
 
-    if (this.type == "trinite") {
+    if (this.type === "trinite") {
       /* Calcul des valeurs de Karma */
 
       // Recalcul des valeurs de karma afin qu'elles ne dépasent pas le max
@@ -130,7 +128,7 @@ export default class TrinitesActor extends Actor {
       }
     }
 
-    if (this.type == "archonteRoi") {
+    if (this.type === "archonteRoi") {
       /* Calcul de la valeur de Karma */
 
       //recalcul des valeurs de karma afin qu'elles ne dépasent pas le max
@@ -146,11 +144,11 @@ export default class TrinitesActor extends Actor {
     if (system.ressources.reseau.pointsCrea < 0) system.ressources.reseau.pointsCrea = 0;
     if (system.ressources.influence.pointsCrea < 0) system.ressources.influence.pointsCrea = 0;
 
-    system.ressources.richesse.valeur = parseInt(system.ressources.richesse.baseMetier) + system.ressources.richesse.pointsCrea + system.ressources.richesse.pointsExp;
-    system.ressources.reseau.valeur = parseInt(system.ressources.reseau.baseMetier) + system.ressources.reseau.pointsCrea + system.ressources.reseau.pointsExp;
-    system.ressources.influence.valeur = parseInt(system.ressources.influence.baseMetier) + system.ressources.influence.pointsCrea + system.ressources.influence.pointsExp;
+    system.ressources.richesse.valeur = parseInt(system.ressources.richesse.baseMetier) + system.ressources.richesse.pointsCrea + system.ressources.richesse.bonusVA + system.ressources.richesse.pointsExp;  
+    system.ressources.reseau.valeur = parseInt(system.ressources.reseau.baseMetier) + system.ressources.reseau.pointsCrea + system.ressources.reseau.bonusVA + system.ressources.reseau.pointsExp;
+    system.ressources.influence.valeur = parseInt(system.ressources.influence.baseMetier) + system.ressources.influence.pointsCrea + system.ressources.influence.bonusVA + system.ressources.influence.pointsExp;
 
-    if (this.type == "trinite") {
+    if (this.type === "trinite") {
       /*
        * Calcul des points de création dépensés pour les ressources
        */
@@ -204,23 +202,23 @@ export default class TrinitesActor extends Actor {
     let data = this.system;
     let karmaDisponible = 0;
 
-    if (this.type == "trinite") {
-      if (typeKarma == "neutre") {
+    if (this.type === "trinite") {
+      if (typeKarma === "neutre") {
         karmaDisponible += data.trinite.deva.karma.value;
         karmaDisponible += data.trinite.archonte.karma.value;
         karmaDisponible += data.trinite.adam.karma.value;
       } else {
-        if (typeKarma == "lumiere") {
+        if (typeKarma === "lumiere") {
           karmaDisponible += data.trinite.deva.karma.value;
-        } else if (typeKarma == "tenebre") {
+        } else if (typeKarma === "tenebre") {
           karmaDisponible += data.trinite.archonte.karma.value;
         }
 
-        if (typeKarma == data.trinite.adam.karma.type) {
+        if (typeKarma === data.trinite.adam.karma.type) {
           karmaDisponible += data.trinite.adam.karma.value;
         }
       }
-    } else if (this.type == "archonteRoi") {
+    } else if (this.type === "archonteRoi") {
       if (typeKarma != "lumiere") {
         karmaDisponible += data.archonteRoi.karma.value;
       }
@@ -232,10 +230,10 @@ export default class TrinitesActor extends Actor {
   // Cout du pouvoir selon l'Affinité du personnage
   coutPouvoir(typePouvoir) {
     let data = this.system;
-    if (this.type == "archonteRoi") {
+    if (this.type === "archonteRoi") {
       return 1;
-    } else if (this.type == "trinite") {
-      if (data.themeAstral.affinite == typePouvoir) {
+    } else if (this.type === "trinite") {
+      if (data.themeAstral.affinite === typePouvoir) {
         return 1;
       } else {
         return 2;
@@ -250,8 +248,8 @@ export default class TrinitesActor extends Actor {
     let data = this.system;
     let source = null;
 
-    if (this.type == "trinite") {
-      if (typeKarma == "lumiere") {
+    if (this.type === "trinite") {
+      if (typeKarma === "lumiere") {
         if (typeKarma != data.trinite.adam.karma.type) {
           source = "deva";
         } else {
@@ -262,18 +260,18 @@ export default class TrinitesActor extends Actor {
             source = "adam";
           }
         }
-      } else if (typeKarma == "tenebre") {
+      } else if (typeKarma === "tenebre") {
         if (typeKarma != data.trinite.adam.karma.type) {
           source = "archonte";
         } else {
-          if (data.trinite.adam.karma.value == 0) {
+          if (data.trinite.adam.karma.value === 0) {
             source = "archonte";
           }
           if (data.trinite.archonte.karma.value == 0) {
             source = "adam";
           }
         }
-      } else if (typeKarma == "neutre") {
+      } else if (typeKarma === "neutre") {
         if (data.trinite.deva.karma.value != 0 && data.trinite.adam.karma.value == 0 && data.trinite.archonte.karma.value == 0) {
           source = "deva";
         } else if (data.trinite.adam.karma.value != 0 && data.trinite.archonte.karma.value == 0 && data.trinite.deva.karma.value == 0) {
@@ -282,7 +280,7 @@ export default class TrinitesActor extends Actor {
           source = "archonte";
         }
       }
-    } else if (this.type == "archonteRoi") {
+    } else if (this.type === "archonteRoi") {
       source = "archonteRoi";
     }
 
@@ -293,22 +291,22 @@ export default class TrinitesActor extends Actor {
   viderKarma(typeKarma) {
     let data = this.system;
 
-    if (this.type == "trinite") {
-      if (typeKarma == "neutre") {
+    if (this.type === "trinite") {
+      if (typeKarma === "neutre") {
         this.update({ "system.trinite.deva.karma.value": 0 });
         this.update({ "system.trinite.archonte.karma.value": 0 });
         this.update({ "system.trinite.adam.karma.value": 0 });
       }
-      if (typeKarma == "lumiere") {
+      if (typeKarma === "lumiere") {
         this.update({ "system.trinite.deva.karma.value": 0 });
-      } else if (typeKarma == "tenebre") {
+      } else if (typeKarma === "tenebre") {
         this.update({ "system.trinite.archonte.karma.value": 0 });
       }
 
-      if (typeKarma == data.trinite.adam.karma.type) {
+      if (typeKarma === data.trinite.adam.karma.type) {
         this.update({ "system.trinite.adam.karma.value": 0 });
       }
-    } else if (this.type == "archonteRoi") {
+    } else if (this.type === "archonteRoi") {
       this.update({ "system.archonteRoi.karma.value": 0 });
     }
   }
@@ -334,10 +332,10 @@ export default class TrinitesActor extends Actor {
 
   // Mise à jour de la réserve de karma du type donné à la valeur cible
   majKarma(reserve, valeur) {
-    if (this.type == "trinite") {
+    if (this.type === "trinite") {
       let reserveData = `system.trinite.${reserve}.karma.value`;
       this.update({ [reserveData]: valeur });
-    } else if (this.type == "archonteRoi") {
+    } else if (this.type === "archonteRoi") {
       this.update({ "system.archonteRoi.karma.value": valeur });
     }
   }
@@ -350,8 +348,15 @@ export default class TrinitesActor extends Actor {
   }
 
   get hasMetier() {
-    if (this.type == "trinite") {
-      if (this.items.find((i) => i.type == "metier")) return true;
+    if (this.type === "trinite") {
+      if (this.items.find((i) => i.type === "metier")) return true;
+    }
+    return false;
+  }
+
+  get hasVieAnterieure() {
+    if (this.type === "trinite") {
+      if (this.items.find((i) => i.type === "vieAnterieure")) return true;
     }
     return false;
   }
@@ -359,5 +364,60 @@ export default class TrinitesActor extends Actor {
   get isUnlocked() {
     if (this.getFlag(game.system.id, "SheetUnlocked")) return true;
     return false;
+  }
+
+  /**
+   *
+   * @param {Object*} va itemData from Drag n Drop
+   * @returns
+   */
+  async addVieAnterieure(va) {
+    const updateObj = {};
+
+    updateObj["system.vieAnterieure"] = va.name;
+
+    this._updateBonus(va.system.bonus1, updateObj);
+    this._updateBonus(va.system.bonus2, updateObj);
+    this._updateBonus(va.system.bonus3, updateObj);
+
+    this.update(updateObj);
+
+    await this.createEmbeddedDocuments("Item", [va]);
+  }
+
+  _updateBonus(bonusInfo, updateObj, reset = false) {
+    let bonus = null;
+    const bonusType = bonusInfo.type;
+    if (bonusType !== "aucun") {
+      if (["ressource", "influence", "richesse"].includes(bonusType)) {
+        bonus = `system.ressources.${bonusType}.bonusVA`;
+      } else if (bonusType === "karma-lumiere") {
+        // Handle "karma-lumiere" case if needed
+      } else {
+        bonus = `system.competences.${bonusType}.bonusVA`;
+      }
+    }
+    if (bonus !== null) {
+      updateObj[bonus] = reset ? 0 : bonusInfo.valeur;
+    }
+  }
+
+  /**
+   * 
+   * @param {Item} embedded Item Vie antérieure
+   */
+  async deleteVieAnterieure(va) {
+   
+    const updateObj = {};
+    updateObj["system.vieAnterieure"] = "";
+
+    this._updateBonus(va.system.bonus1, updateObj, true);
+    this._updateBonus(va.system.bonus2, updateObj, true);
+    this._updateBonus(va.system.bonus3, updateObj, true);
+
+    this.update(updateObj);
+    
+    await this.deleteEmbeddedDocuments("Item", [va._id]);
+
   }
 }

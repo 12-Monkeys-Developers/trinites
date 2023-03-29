@@ -100,6 +100,7 @@
             "jetCompetence": "Jet de compétence",
             "jetRessource": "Jet de ressource",
             "metier": "Métier",
+            "vieAnterieure": "Vie antérieure",
             "couverture": "Couverture",
             "description": "Description",
             "unlockSheet": "Verrouiller/Déverrouiller la feuille",
@@ -112,7 +113,8 @@
         },
         "notification": {
             "warning": {
-                "metierExistant": "Vous avez déjà un métier !"
+                "metierExistant": "Vous avez déjà un métier !",
+                "vieAnterieureExistant": "Vous avez déjà une vie antérieure !"
             }            
         }
     }

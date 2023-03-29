@@ -8,48 +8,49 @@ export default class TrinitesActorSheet extends ActorSheet {
       width: 744,
       height: 958,
       classes: ["trinites", "sheet", "actor"],
-      tabs: [{ navSelector: ".sheet-tabs", contentSelector: ".sheet-body", initial: "profane" }],
+      tabs: [{ navSelector: ".sheet-tabs", contentSelector: ".sheet-body", initial: "profane" }]
     });
   }
 
   get template() {
-    if (this.actor.type == "trinite") {
+    if (this.actor.type === "trinite") {
       Log.info(`type : ${this.actor.type} | Chargement du template systems/trinites/templates/sheets/actors/personnage-sheet.html`);
-      return `systems/trinites/templates/sheets/actors/personnage-sheet.html`;
-    } else if (this.actor.type == "archonteRoi") {
+      return "systems/trinites/templates/sheets/actors/personnage-sheet.html";
+    } else if (this.actor.type === "archonteRoi") {
       Log.info(`type : ${this.actor.type} | Chargement du template systems/trinites/templates/sheets/actors/archonteRoi-sheet.html`);
-      return `systems/trinites/templates/sheets/actors/archonteRoi-sheet.html`;
+      return "systems/trinites/templates/sheets/actors/archonteRoi-sheet.html";
     }
-    //else {
+    // Else {
     //    console.log(`Trinites | chargement du template systems/trinites/templates/sheets/actors/${this.actor.data.type}-sheet.html`);
     //    return `systems/trinites/templates/sheets/actors/${this.actor.data.type}-sheet.html`
-    //}
+    // }
   }
 
   getData() {
     const data = super.getData();
     data.config = game.trinites.config;
 
-    data.domaines = data.items.filter((item) => item.type == "domaine");
-    data.versets = data.items.filter((item) => item.type == "verset");
-    data.auras = data.items.filter((item) => item.type == "aura");
-    data.atouts = data.items.filter((item) => item.type == "atout");
+    data.domaines = data.items.filter(item => item.type === "domaine");
+    data.versets = data.items.filter(item => item.type === "verset");
+    data.auras = data.items.filter(item => item.type === "aura");
+    data.atouts = data.items.filter(item => item.type === "atout");
 
     data.unlocked = this.actor.isUnlocked;
     data.hasMetier = this.actor.hasMetier;
+    data.hasVieAnterieure = this.actor.hasVieAnterieure;
+
     return data;
   }
 
-
-   /** @override */
-   _onDrop(event) {
+  /** @override */
+  _onDrop(event) {
     event.preventDefault();
     if (!this.options.editable) return false;
     // Get dropped data
     let data;
     try {
       data = JSON.parse(event.dataTransfer.getData("text/plain"));
-    } catch (err) {
+    } catch(err) {
       return false;
     }
     if (!data) return false;
@@ -65,18 +66,21 @@ export default class TrinitesActorSheet extends ActorSheet {
   }
 
   /**
+   * Handle dropping of an item reference or item data onto an Item Sheet
+   *
    * @name _onDropItem
-   * @description Handle dropping of an item reference or item data onto an Item Sheet
    * @param {DragEvent} event     The concluding DragEvent which contains drop data
    * @param {Object} data         The data transfer extracted from the event
    * @private
    */
   _onDropItem(event, data) {
-    Item.fromDropData(data).then((item) => {
+    Item.fromDropData(data).then(item => {
       const itemData = duplicate(item);
       switch (itemData.type) {
         case "metier":
           return this._onDropMetierItem(event, itemData);
+        case "vieAnterieure":
+          return this._onDropVieAnterieureItem(event, itemData);  
         default:
           return super._onDropItem(event, data);
       }
@@ -84,11 +88,11 @@ export default class TrinitesActorSheet extends ActorSheet {
   }
 
   /**
-   * @name _onDropSkillItem
-   * @description Handle the drop of a metier item on the actor sheet
+   * Handle the drop of a metier item on the actor sheet
+   *
+   * @name _onDropMetierItem
    * @param {*} event
    * @param {*} itemData
-   * @returns
    */
   async _onDropMetierItem(event, itemData) {
     event.preventDefault();
@@ -100,29 +104,52 @@ export default class TrinitesActorSheet extends ActorSheet {
       return;
     }
 
-    Log.info('_onDropMetierItem', itemData);
-    
-    const updateObj = {};
-    
-    updateObj['system.metier'] = itemData.name;
+    Log.info("_onDropMetierItem", itemData);
 
-    const comp1 = "system.competences." + itemData.system.competence1 + ".baseMetier";
-    const comp2 = "system.competences." + itemData.system.competence2 + ".baseMetier";
-    const comp3 = "system.competences." + itemData.system.competence3 + ".baseMetier";    
+    const updateObj = {};
+
+    updateObj["system.metier"] = itemData.name;
+
+    const comp1 = `system.competences.${itemData.system.competence1}.baseMetier`;
+    const comp2 = `system.competences.${itemData.system.competence2}.baseMetier`;
+    const comp3 = `system.competences.${itemData.system.competence3}.baseMetier`;
     updateObj[comp1] = 6;
     updateObj[comp2] = 6;
     updateObj[comp3] = 6;
 
-    updateObj['system.ressources.richesse.baseMetier'] = itemData.system.richesse.baseMetier;
-    updateObj['system.ressources.reseau.baseMetier'] = itemData.system.reseau.baseMetier;
-    updateObj['system.ressources.influence.baseMetier'] = itemData.system.influence.baseMetier;
+    updateObj["system.ressources.richesse.baseMetier"] = itemData.system.richesse.baseMetier;
+    updateObj["system.ressources.reseau.baseMetier"] = itemData.system.reseau.baseMetier;
+    updateObj["system.ressources.influence.baseMetier"] = itemData.system.influence.baseMetier;
 
-    updateObj['system.creation.totale'] = itemData.system.pc.max;
-    updateObj['system.creation.disponible'] = itemData.system.pc.max;
+    updateObj["system.creation.totale"] = itemData.system.pc.max;
+    updateObj["system.creation.disponible"] = itemData.system.pc.max;
     this.actor.update(updateObj);
 
-    return await this.actor.createEmbeddedDocuments('Item', [itemData]);
+    return await this.actor.createEmbeddedDocuments("Item", [itemData]);
   }
+
+  /**
+   * Handle the drop of a Vie Anterieure item on the actor sheet
+   *
+   * @name _onDropVieAnterieureItem
+   * @param {*} event
+   * @param {*} itemData
+   */
+  _onDropVieAnterieureItem(event, itemData) {
+    event.preventDefault();
+
+    if (!this.actor.isUnlocked) return;
+
+    if (this.actor.hasVieAnterieure) {
+      ui.notifications.warn(game.i18n.localize("TRINITES.notification.warning.vieAnterieureExistant"));
+      return;
+    }
+
+    Log.info("_onDropVieAnterieureItem", itemData);
+
+    this.actor.addVieAnterieure(itemData);
+  }
+
 
 
   activateListeners(html) {
@@ -169,7 +196,7 @@ export default class TrinitesActorSheet extends ActorSheet {
         // Jet de ressources
         html.find(".roll-ress").click(this._onJetRessource.bind(this));
 
-        // jet de Lame-soeur / Lame noire
+        // Jet de Lame-soeur / Lame noire
         html.find(".roll-lame").click(this._onJetLame.bind(this));
 
         // Carte - Atout
@@ -187,6 +214,9 @@ export default class TrinitesActorSheet extends ActorSheet {
         // Supprime le métier
         html.find(".delete-metier").click(this._onDeleteMetier.bind(this));
 
+        // Supprime la vie antérieure
+        html.find(".delete-vie-anterieure").click(this._onDeleteVieAnterieure.bind(this));
+        
         // Finalise la dépense des points de création
         html.find(".fa-user-lock").click(this._onEndCreation.bind(this));
       }
@@ -205,8 +235,8 @@ export default class TrinitesActorSheet extends ActorSheet {
       title: "Confirmation de suppression",
       content: content,
       yes: () => domaine.delete(),
-      //no: () =>, On ne fait rien sur le 'Non'
-      defaultYes: false,
+      // No: () =>, On ne fait rien sur le 'Non'
+      defaultYes: false
     });
   }
 
@@ -247,17 +277,17 @@ export default class TrinitesActorSheet extends ActorSheet {
     const element = event.currentTarget;
 
     let indexVie = element.dataset.index;
-    let blessureVal = this.actor.system.nbBlessure != indexVie ? indexVie : indexVie - 1;
+    let blessureVal = this.actor.system.nbBlessure !== indexVie ? indexVie : indexVie - 1;
 
     this.actor.update({ "system.nbBlessure": blessureVal });
   }
 
   _onRegenerationSante(event) {
     event.preventDefault();
-    //const element = event.currentTarget;
+    // Const element = event.currentTarget;
 
     let typeKarma = "";
-    if (this.actor.type == "trinite") {
+    if (this.actor.type === "trinite") {
       switch (this.actor.system.etatSante) {
         case "endolori":
           typeKarma = "neutre";
@@ -348,8 +378,8 @@ export default class TrinitesActorSheet extends ActorSheet {
       title: "Confirmation de suppression",
       content: content,
       yes: () => item.delete(),
-      //no: () =>, On ne fait rien sur le 'Non'
-      defaultYes: false,
+      // No: () =>, On ne fait rien sur le 'Non'
+      defaultYes: false
     });
   }
 
@@ -370,7 +400,7 @@ export default class TrinitesActorSheet extends ActorSheet {
     Roll.jetCompetence({
       actor: this.actor,
       signe: dataset.signe,
-      competence: dataset.competence,
+      competence: dataset.competence
     });
   }
 
@@ -380,20 +410,20 @@ export default class TrinitesActorSheet extends ActorSheet {
 
     Roll.jetRessource({
       actor: this.actor,
-      ressource: dataset.ressource,
+      ressource: dataset.ressource
     });
   }
 
   _onJetLame(event) {
     event.preventDefault();
-    //const dataset = event.currentTarget.dataset;
+    // Const dataset = event.currentTarget.dataset;
 
     let lame = {
       competence: "melee",
       degats: 4,
       portee: "",
       particularites: "",
-      epee: true,
+      epee: true
     };
 
     Roll.jetArme({
@@ -401,7 +431,7 @@ export default class TrinitesActorSheet extends ActorSheet {
       signe: "belier",
       competence: lame.competence,
       arme: lame,
-      type: this.actor.type == "trinite" ? "lameSoeur" : "lameNoire",
+      type: this.actor.type === "trinite" ? "lameSoeur" : "lameNoire"
     });
   }
 
@@ -412,7 +442,7 @@ export default class TrinitesActorSheet extends ActorSheet {
     Chat.carteAtout({
       actor: this.actor,
       atoutId: dataset.itemId,
-      whisper: !event.shiftKey,
+      whisper: !event.shiftKey
     });
   }
 
@@ -423,7 +453,7 @@ export default class TrinitesActorSheet extends ActorSheet {
     Chat.carteAura({
       actor: this.actor,
       auraId: dataset.itemId,
-      whisper: !event.shiftKey,
+      whisper: !event.shiftKey
     });
   }
 
@@ -434,17 +464,17 @@ export default class TrinitesActorSheet extends ActorSheet {
     Chat.carteVerset({
       actor: this.actor,
       versetId: dataset.itemId,
-      whisper: !event.shiftKey,
+      whisper: !event.shiftKey
     });
   }
 
   async _onDeleteMetier(event) {
-    event.preventDefault();    
-    const metier = this.actor.items.find(i=>i.type=='metier');
+    event.preventDefault();
+    const metier = this.actor.items.find(i => i.type === "metier");
 
-    const comp1 = "system.competences." + metier.system.competence1 + ".baseMetier";
-    const comp2 = "system.competences." + metier.system.competence2 + ".baseMetier";
-    const comp3 = "system.competences." + metier.system.competence3 + ".baseMetier";
+    const comp1 = `system.competences.${metier.system.competence1}.baseMetier`;
+    const comp2 = `system.competences.${metier.system.competence2}.baseMetier`;
+    const comp3 = `system.competences.${metier.system.competence3}.baseMetier`;
     const met = "system.metier";
     const updateObj = {};
     updateObj[comp1] = 0;
@@ -452,32 +482,41 @@ export default class TrinitesActorSheet extends ActorSheet {
     updateObj[comp3] = 0;
     updateObj[met] = "";
 
-    updateObj['system.ressources.richesse.baseMetier'] = 0;
-    updateObj['system.ressources.reseau.baseMetier'] = 0;
-    updateObj['system.ressources.influence.baseMetier'] = 0;
+    updateObj["system.ressources.richesse.baseMetier"] = 0;
+    updateObj["system.ressources.reseau.baseMetier"] = 0;
+    updateObj["system.ressources.influence.baseMetier"] = 0;
 
-    updateObj['system.creation.totale'] = 0;
-    updateObj['system.creation.disponible'] = 0;
-    updateObj['system.creation.finie'] = false;
+    updateObj["system.creation.totale"] = 0;
+    updateObj["system.creation.disponible"] = 0;
+    updateObj["system.creation.finie"] = false;
 
     this.actor.update(updateObj);
-    await this.actor.deleteEmbeddedDocuments("Item",[metier._id]);
+    await this.actor.deleteEmbeddedDocuments("Item", [metier._id]);
   }
-  
-    /**
-   * @description Manage the lock/unlock button on the sheet
+
+  async _onDeleteVieAnterieure(event) {
+    event.preventDefault();
+    const va = this.actor.items.find(i => i.type === "vieAnterieure");
+
+    this.actor.deleteVieAnterieure(va);
+  }
+
+  /**
+   * Manage the lock/unlock button on the sheet
+   *
+   * @name _onSheetChangelock
    * @param {*} event
    */
-    async _onSheetChangelock(event) {
-      event.preventDefault();
-  
-      let flagData = await this.actor.getFlag(game.system.id, "SheetUnlocked");
-      flagData ? await this.actor.unsetFlag(game.system.id, "SheetUnlocked") : await this.actor.setFlag(game.system.id, "SheetUnlocked", "SheetUnlocked");
-  
-      this.actor.sheet.render(true);
-    }
+  async _onSheetChangelock(event) {
+    event.preventDefault();
 
-    async _onEndCreation(event){
-      await this.actor.update({'system.creation.finie': true});
-    }
+    let flagData = await this.actor.getFlag(game.system.id, "SheetUnlocked");
+    if (flagData) await this.actor.unsetFlag(game.system.id, "SheetUnlocked");
+    else await this.actor.setFlag(game.system.id, "SheetUnlocked", "SheetUnlocked");
+    this.actor.sheet.render(true);
+  }
+
+  async _onEndCreation(event) {
+    await this.actor.update({ "system.creation.finie": true });
+  }
 }

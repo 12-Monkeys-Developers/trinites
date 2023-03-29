@@ -107,6 +107,33 @@
             height: 100px;
         }
     }    
+    
+    .sheet-content.vie-anterieure {
+
+        .grid-item-vie-anterieure {
+            display: grid;
+            /*grid-template-columns: 1fr 1fr 0.5fr 1fr 1fr 0.5fr 1fr 1fr 0.5fr;*/
+            margin: 2px;
+            align-items: center;
+
+            label, input, select {
+                margin: 2px;
+            }
+
+            label {
+                font-family: "Cabaletta";
+            }
+        }
+
+        .zone-vie-anterieure {
+            display: grid;
+            grid-template-columns: repeat(5, 3.5em);
+        }
+
+        .editor {
+            height: 100px;
+        }
+    } 
 
     .sheet-content.atout {
         
@@ -175,6 +202,71 @@
             align-items: center;
 
             .grid-data-verset {
+                display: grid;
+                grid-template-columns: 1fr 2fr 1fr 2em;
+                margin: 2px;
+                align-items: center;
+            }
+
+            label, input {
+                margin: 3px;
+            }
+
+            .check {
+                padding-left: 3px;
+            }
+
+            .col-mono {
+                grid-column: 1 / 5;
+            }
+        }
+    }
+
+    .sheet-content.vie-anterieure {
+        
+        .editor {
+            height: 140px;
+            margin: 2px;
+        }
+
+        label {
+            font-family: "Cabaletta";
+        }
+
+        .grid-item-vie-anterieure {
+            display: grid;
+            grid-template-columns: 1fr 2fr 1fr 2fr 1fr 2fr;
+            margin: 2px;
+            align-items: center;
+
+            label, input, select {
+                margin: 2px;
+            }
+
+            .col-sentence {
+                grid-column: 1 / 7;
+
+                textarea {
+                    font-family: "Cabaletta";
+                    font-style: italic;
+                    margin: 2px;
+                    height: 60px;
+                    resize: none;
+                }
+            }
+        }
+
+        .vie-anterieure-data, .verset-desc {
+            margin: 2px;
+        }
+
+        .grid-data-desc {
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            margin: 2px;
+            align-items: center;
+
+            .grid-data-vie-anterieure {
                 display: grid;
                 grid-template-columns: 1fr 2fr 1fr 2em;
                 margin: 2px;

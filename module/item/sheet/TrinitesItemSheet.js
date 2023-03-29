@@ -10,13 +10,17 @@ export default class TrinitesItemSheet extends ItemSheet {
   }
 
   get template() {
-    Log.info(`Chargement du template systems/trinites/templates/sheets/items/${this.item.type.toLowerCase()}-sheet.html`);
+    Log.debug(`Chargement du template systems/trinites/templates/sheets/items/${this.item.type.toLowerCase()}-sheet.html`);
     return `systems/trinites/templates/sheets/items/${this.item.type.toLowerCase()}-sheet.html`;
   }
 
   getData() {
     const data = super.getData();
     data.config = game.trinites.config;
+
+    const sortedCompetencesArray = Object.entries(game.trinites.config.competences).sort((a, b) => a[1].localeCompare(b[1]));
+    const competencesTriees = Object.fromEntries(sortedCompetencesArray);
+    data.config.competencesTriees = competencesTriees;
 
     const myItemData = data.data.system;
 

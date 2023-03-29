@@ -107,6 +107,7 @@ TRINITES.signes = {
 };
 
 TRINITES.competences = {
+  "aucun": "",
   "gemeaux.art": "Art",
   "gemeaux.empathie": "Empathie",
   "gemeaux.seduction": "Séduction",

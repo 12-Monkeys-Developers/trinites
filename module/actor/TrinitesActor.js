@@ -144,9 +144,12 @@ export default class TrinitesActor extends Actor {
     if (system.ressources.reseau.pointsCrea < 0) system.ressources.reseau.pointsCrea = 0;
     if (system.ressources.influence.pointsCrea < 0) system.ressources.influence.pointsCrea = 0;
 
-    system.ressources.richesse.valeur = parseInt(system.ressources.richesse.baseMetier) + system.ressources.richesse.pointsCrea + system.ressources.richesse.bonusVA + system.ressources.richesse.pointsExp;  
-    system.ressources.reseau.valeur = parseInt(system.ressources.reseau.baseMetier) + system.ressources.reseau.pointsCrea + system.ressources.reseau.bonusVA + system.ressources.reseau.pointsExp;
-    system.ressources.influence.valeur = parseInt(system.ressources.influence.baseMetier) + system.ressources.influence.pointsCrea + system.ressources.influence.bonusVA + system.ressources.influence.pointsExp;
+    system.ressources.richesse.valeur =
+      parseInt(system.ressources.richesse.baseMetier) + system.ressources.richesse.pointsCrea + system.ressources.richesse.bonusVA + system.ressources.richesse.pointsExp;
+    system.ressources.reseau.valeur =
+      parseInt(system.ressources.reseau.baseMetier) + system.ressources.reseau.pointsCrea + system.ressources.reseau.bonusVA + system.ressources.reseau.pointsExp;
+    system.ressources.influence.valeur =
+      parseInt(system.ressources.influence.baseMetier) + system.ressources.influence.pointsCrea + system.ressources.influence.bonusVA + system.ressources.influence.pointsExp;
 
     if (this.type === "trinite") {
       /*
@@ -371,7 +374,7 @@ export default class TrinitesActor extends Actor {
    * @param {Object*} va itemData from Drag n Drop
    * @returns
    */
-  async addVieAnterieure(va) {
+  async ajouterVieAnterieure(va) {
     const updateObj = {};
 
     updateObj["system.vieAnterieure"] = va.name;
@@ -402,12 +405,9 @@ export default class TrinitesActor extends Actor {
     }
   }
 
-  /**
-   * 
-   * @param {Item} embedded Item Vie antérieure
-   */
-  async deleteVieAnterieure(va) {
-   
+  async supprimerVieAnterieure() {
+    const va = this.items.find((i) => i.type === "vieAnterieure");
+
     const updateObj = {};
     updateObj["system.vieAnterieure"] = "";
 
@@ -416,8 +416,38 @@ export default class TrinitesActor extends Actor {
     this._updateBonus(va.system.bonus3, updateObj, true);
 
     this.update(updateObj);
-    
-    await this.deleteEmbeddedDocuments("Item", [va._id]);
 
+    await this.deleteEmbeddedDocuments("Item", [va._id]);
+  }
+
+  async supprimerMetier() {
+    const metier = this.items.find((i) => i.type === "metier");
+
+    const comp1 = `system.competences.${metier.system.competence1}.baseMetier`;
+    const comp2 = `system.competences.${metier.system.competence2}.baseMetier`;
+    const comp3 = `system.competences.${metier.system.competence3}.baseMetier`;
+    const met = "system.metier";
+
+    const updateObj = {};
+    updateObj[comp1] = 0;
+    updateObj[comp2] = 0;
+    updateObj[comp3] = 0;
+    updateObj[met] = "";
+
+    updateObj["system.ressources.richesse.baseMetier"] = 0;
+    updateObj["system.ressources.reseau.baseMetier"] = 0;
+    updateObj["system.ressources.influence.baseMetier"] = 0;
+
+    updateObj["system.creation.totale"] = 0;
+    updateObj["system.creation.disponible"] = 0;
+    updateObj["system.creation.finie"] = false;
+
+    this.update(updateObj);
+    await this.deleteEmbeddedDocuments("Item", [metier._id]);
+  }
+
+  changeDomaineEtatEpuise(domaineId, statut) {
+    const domaine = this.items.get(domaineId);
+    if (domaine) domaine.update({ "system.epuise": statut });
   }
 }

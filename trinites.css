@@ -390,7 +390,7 @@
 }
 .trinites.sheet.actor .ress-grid-unlocked {
   display: grid;
-  grid-template-columns: 2em 1fr 1.5em 3em 0.5em 3em 0.5em 3em 0.5em 3em 1em 1.5fr;
+  grid-template-columns: 2em 1fr 1.5em 3em 0.5em 3em 0.5em 3em 0.5em 3em 0.5em 3em 1em 1.5fr;
   margin: 3px;
   align-items: center;
 }
@@ -412,14 +412,17 @@
 .trinites.sheet.actor .ress-grid-unlocked .col-titre.pc {
   grid-column: 6 / 7;
 }
-.trinites.sheet.actor .ress-grid-unlocked .col-titre.pex {
+.trinites.sheet.actor .ress-grid-unlocked .col-titre.va {
   grid-column: 8 / 9;
 }
+.trinites.sheet.actor .ress-grid-unlocked .col-titre.pex {
+  grid-column: 10 / 11;
+}
 .trinites.sheet.actor .ress-grid-unlocked .col-titre.diminution {
-  grid-column: 9 / 12;
+  grid-column: 11 / 14;
 }
 .trinites.sheet.actor .ress-grid-unlocked .col-titre.duree {
-  grid-column: 12 / 13;
+  grid-column: 14 / 15;
 }
 .trinites.sheet.actor .ress-grid-unlocked .colRess-dice {
   grid-column: 1 / 2;
@@ -453,8 +456,17 @@
   text-align: center;
   font-size: 0.9em;
 }
-.trinites.sheet.actor .ress-grid-unlocked .colRess-exp {
+.trinites.sheet.actor .ress-grid-unlocked .colRess-va {
   grid-column: 8 / 9;
+  display: flex;
+  justify-content: center;
+}
+.trinites.sheet.actor .ress-grid-unlocked .colRess-va input {
+  text-align: center;
+  font-size: 0.9em;
+}
+.trinites.sheet.actor .ress-grid-unlocked .colRess-exp {
+  grid-column: 10 / 11;
   display: flex;
   justify-content: center;
 }
@@ -463,7 +475,7 @@
   font-size: 0.9em;
 }
 .trinites.sheet.actor .ress-grid-unlocked .colRess-diminution {
-  grid-column: 10 / 11;
+  grid-column: 12 / 13;
   display: flex;
   justify-content: center;
 }
@@ -472,7 +484,7 @@
   font-size: 0.9em;
 }
 .trinites.sheet.actor .ress-grid-unlocked .colRess-duree {
-  grid-column: 12 / 13;
+  grid-column: 14 / 15;
 }
 .trinites.sheet.actor .ligne-vie {
   display: flex;

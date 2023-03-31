@@ -144,7 +144,8 @@
                             <div class="col-titre-vide"></div>
                             <div class="col-titre metier"><label>Métier</label></div>
                             <div class="col-titre pc"><label>PC</label></div>
-                            <div class="col-titre pex"><label>Pex</label></div>
+                            <div class="col-titre va"><label>VA</label></div>
+                            <div class="col-titre pex"><label>PEX</label></div>
                             <div class="col-titre diminution"><label>Diminution</label></div>
                             <div class="col-titre duree"><label>Durée</label></div>
                             <!-- RICHESSE -->
@@ -159,7 +160,8 @@
                             </div>
                             <div class="colRess-metier"><input name="system.ressources.richesse.baseMetier" type="number" value="{{data.system.ressources.richesse.baseMetier}}" placeholder="0" min="0" readonly/></div>
                             <div class="colRess-crea"><input name="system.ressources.richesse.pointsCrea" type="number" value="{{data.system.ressources.richesse.pointsCrea}}" placeholder="0" min="0" {{#if @root.data.system.creation.finie}}readonly{{/if}}/></div>
-                            <div class="colRess-exp"><input name="system.ressources.richesse.pointsExp" type="number" value="{{data.system.ressources.richesse.pointsExp}}" placeholder="0" min="0" /></div>
+                            <div class="colRess-va"><input name="system.ressources.richesse.bonusVA" type="number" value="{{data.system.ressources.richesse.pointsExp}}" placeholder="0" min="0" /></div>
+                            <div class="colRess-exp"><input name="system.ressources.richesse.pointsExp" type="number" value="{{data.system.ressources.richesse.bonusVA}}" placeholder="0" min="0" /></div>                            
                             <div class="colRess-diminution"><input name="system.ressources.richesse.diminution" type="number" value="{{data.system.ressources.richesse.diminution}}" placeholder="0" min="0" max="{{data.system.ressources.richesse.valeur}}"></div>                
                             <div class="colRess-duree"><input name="system.ressources.richesse.duree" type="text" value="{{data.system.ressources.richesse.duree}}" placeholder="Durée diminution"></div>
                             <!-- RESEAU -->
@@ -167,7 +169,8 @@
                             <div class="colRess-nom">{{localize 'TRINITES.label.ressources.reseau'}}</div>
                             <div class="colRess-metier"><input name="system.ressources.reseau.baseMetier" type="number" value="{{data.system.ressources.reseau.baseMetier}}" placeholder="0" min="0" readonly/></div>
                             <div class="colRess-crea"><input name="system.ressources.reseau.pointsCrea" type="number" value="{{data.system.ressources.reseau.pointsCrea}}" placeholder="0" min="0" {{#if @root.data.system.creation.finie}}readonly{{/if}}/></div>
-                            <div class="colRess-exp"><input name="system.ressources.reseau.pointsExp" type="number" value="{{data.system.ressources.reseau.pointsExp}}" placeholder="0" min="0" /></div>
+                            <div class="colRess-va"><input name="system.ressources.reseau.bonusVA" type="number" value="{{data.system.ressources.reseau.pointsExp}}" placeholder="0" min="0" /></div>
+                            <div class="colRess-exp"><input name="system.ressources.reseau.pointsExp" type="number" value="{{data.system.ressources.reseau.bonusVA}}" placeholder="0" min="0" /></div>                            
                             <div class="colRess-diminution"><input name="system.ressources.reseau.diminution" type="number" value="{{data.system.ressources.reseau.diminution}}" placeholder="0" min="0" max="{{data.system.ressources.reseau.valeur}}"></div>                
                             <div class="colRess-duree"><input name="system.ressources.reseau.duree" type="text" value="{{data.system.ressources.reseau.duree}}" placeholder="Durée diminution"></div>
                             <!-- INFLUENCE -->
@@ -175,7 +178,8 @@
                             <div class="colRess-nom">{{localize 'TRINITES.label.ressources.influence'}}</div>
                             <div class="colRess-metier"><input name="system.ressources.influence.baseMetier" type="number" value="{{data.system.ressources.influence.baseMetier}}" placeholder="0" min="0" readonly/></div>
                             <div class="colRess-crea"><input name="system.ressources.influence.pointsCrea" type="number" value="{{data.system.ressources.influence.pointsCrea}}" placeholder="0" min="0" {{#if @root.data.system.creation.finie}}readonly{{/if}}/></div>
-                            <div class="colRess-exp"><input name="system.ressources.influence.pointsExp" type="number" value="{{data.system.ressources.influence.pointsExp}}" placeholder="0" min="0" /></div>
+                            <div class="colRess-va"><input name="system.ressources.influence.bonusVA" type="number" value="{{data.system.ressources.influence.pointsExp}}" placeholder="0" min="0" /></div>
+                            <div class="colRess-exp"><input name="system.ressources.influence.pointsExp" type="number" value="{{data.system.ressources.influence.bonusVA}}" placeholder="0" min="0" /></div>                            
                             <div class="colRess-diminution"><input name="system.ressources.influence.diminution" type="number" value="{{data.system.ressources.influence.diminution}}" placeholder="0" min="0" max="{{data.system.ressources.influence.valeur}}"></div>                
                             <div class="colRess-duree"><input name="system.ressources.influence.duree" type="text" value="{{data.system.ressources.influence.duree}}" placeholder="Durée diminution"></div>
                         </div>

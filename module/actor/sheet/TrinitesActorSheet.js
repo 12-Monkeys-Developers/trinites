@@ -147,10 +147,8 @@ export default class TrinitesActorSheet extends ActorSheet {
 
     Log.info("_onDropVieAnterieureItem", itemData);
 
-    this.actor.addVieAnterieure(itemData);
+    this.actor.ajouterVieAnterieure(itemData);
   }
-
-
 
   activateListeners(html) {
     super.activateListeners(html);
@@ -212,10 +210,10 @@ export default class TrinitesActorSheet extends ActorSheet {
         html.find(".sheet-change-lock").click(this._onSheetChangelock.bind(this));
 
         // Supprime le métier
-        html.find(".delete-metier").click(this._onDeleteMetier.bind(this));
+        html.find(".delete-metier").click(this._onSupprimerMetier.bind(this));
 
         // Supprime la vie antérieure
-        html.find(".delete-vie-anterieure").click(this._onDeleteVieAnterieure.bind(this));
+        html.find(".delete-vie-anterieure").click(this._onSupprimerVieAnterieure.bind(this));
         
         // Finalise la dépense des points de création
         html.find(".fa-user-lock").click(this._onEndCreation.bind(this));
@@ -243,10 +241,9 @@ export default class TrinitesActorSheet extends ActorSheet {
   _onAjoutDomaineEtatEpuise(event) {
     event.preventDefault();
     const element = event.currentTarget;
-
+    
     let domaineId = element.closest(".domaine").dataset.itemId;
-    const domaine = this.actor.items.get(domaineId);
-    domaine.update({ "system.epuise": true });
+    this.actor.changeDomaineEtatEpuise(domaineId, true);
   }
 
   _onSupprDomaineEtatEpuise(event) {
@@ -254,21 +251,16 @@ export default class TrinitesActorSheet extends ActorSheet {
     const element = event.currentTarget;
 
     let domaineId = element.closest(".domaine").dataset.itemId;
-    const domaine = this.actor.items.get(domaineId);
-    domaine.update({ "system.epuise": false });
+    this.actor.changeDomaineEtatEpuise(domaineId, false);
   }
 
   _onAjoutRichesseEtatEpuise(event) {
     event.preventDefault();
-    const element = event.currentTarget;
-
     this.actor.update({ "system.ressources.richesse.epuisee": true });
   }
 
   _onSupprRichesseEtatEpuise(event) {
     event.preventDefault();
-    const element = event.currentTarget;
-
     this.actor.update({ "system.ressources.richesse.epuisee": false });
   }
 
@@ -299,7 +291,7 @@ export default class TrinitesActorSheet extends ActorSheet {
           typeKarma = "tenebre";
           break;
       }
-    } else if (this.actor.type == "archonteRoi") {
+    } else if (this.actor.type === "archonteRoi") {
       typeKarma = "tenebre";
     }
 
@@ -468,37 +460,14 @@ export default class TrinitesActorSheet extends ActorSheet {
     });
   }
 
-  async _onDeleteMetier(event) {
+  async _onSupprimerMetier(event) {
     event.preventDefault();
-    const metier = this.actor.items.find(i => i.type === "metier");
-
-    const comp1 = `system.competences.${metier.system.competence1}.baseMetier`;
-    const comp2 = `system.competences.${metier.system.competence2}.baseMetier`;
-    const comp3 = `system.competences.${metier.system.competence3}.baseMetier`;
-    const met = "system.metier";
-    const updateObj = {};
-    updateObj[comp1] = 0;
-    updateObj[comp2] = 0;
-    updateObj[comp3] = 0;
-    updateObj[met] = "";
-
-    updateObj["system.ressources.richesse.baseMetier"] = 0;
-    updateObj["system.ressources.reseau.baseMetier"] = 0;
-    updateObj["system.ressources.influence.baseMetier"] = 0;
-
-    updateObj["system.creation.totale"] = 0;
-    updateObj["system.creation.disponible"] = 0;
-    updateObj["system.creation.finie"] = false;
-
-    this.actor.update(updateObj);
-    await this.actor.deleteEmbeddedDocuments("Item", [metier._id]);
+    this.actor.supprimerMetier();
   }
 
-  async _onDeleteVieAnterieure(event) {
+  async _onSupprimerVieAnterieure(event) {
     event.preventDefault();
-    const va = this.actor.items.find(i => i.type === "vieAnterieure");
-
-    this.actor.deleteVieAnterieure(va);
+    this.actor.supprimerVieAnterieure();
   }
 
   /**

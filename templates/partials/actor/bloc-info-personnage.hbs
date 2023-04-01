@@ -7,7 +7,7 @@
   {{#if (eq data.type "trinite")}}
     <div class="actor-infos-line">
       <label>{{localize "TRINITES.label.metier"}}</label>
-      <div class="middle-size"><input name="system.metier" type="text" value="{{data.system.metier}}" placeholder="Métier" readonly /></div>
+      <div class="middle-size"><input name="system.metier" type="text" value="{{data.system.metier}}" readonly /></div>
       {{#if hasMetier}}
         {{#if unlocked}}
           <div><a class="delete-metier" title="Supprimer le métier"><i class="fa fa-trash"></i></a></div>
@@ -19,7 +19,7 @@
   </div>
   <div class="actor-infos-line">
     <label>{{localize "TRINITES.label.vieAnterieure"}}</label>
-    <div class="big-size"><input name="system.vieAnterieure" type="text" value="{{data.system.vieAnterieure}}" placeholder="Vie antérieure" readonly /></div>
+    <div class="big-size"><input name="system.vieAnterieure" type="text" value="{{data.system.vieAnterieure}}" readonly /></div>
     {{#if hasVieAnterieure}}{{#if unlocked}}<div><a class="delete-vie-anterieure" title="Supprimer la vie antérieure"><i class="fa fa-trash"></i></a></div>{{/if}}{{/if}}
   </div>
   {{/if}}

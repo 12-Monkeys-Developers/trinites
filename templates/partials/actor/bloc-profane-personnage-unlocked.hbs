@@ -1,5 +1,5 @@
 <div class="competences">
-                <h3 {{#if (and (lt data.system.creation.disponible 0) (not data.system.creation.finie))}}style="color: red;"{{/if}}><i class="fas fa-check"></i> COMPETENCES {{#unless data.system.creation.finie}}  (Points de création : {{data.system.creation.disponible}}/{{data.system.creation.totale}}){{/unless}}{{#if (and (eq data.system.creation.disponible 0) (not data.system.creation.finie))}}  <i class="fa-solid fa-user-lock" title="Finaliser la dépense des points de création"></i>{{/if}}</h3>
+                <h3 {{#if (and (lt data.system.creation.disponible 0) (not data.system.creation.finie))}}style="color: red;"{{/if}}><i class="fas fa-check"></i> COMPETENCES {{#unless data.system.creation.finie}}  (Points de création : {{data.system.creation.disponible}}/{{data.system.creation.totale}}){{/unless}}{{#if (and (eq data.system.creation.disponible 0) (not data.system.creation.finie))}}  <i class="fa-solid fa-user-lock" title="Finaliser la dépense des points de création"></i>{{else}}<i class="fa-solid fa-user-unlock" title="Permettre la dépense des points de création"></i>{{/if}}</h3>
                 <div class="comp-grid">
                     <!-- COLONNE 1 -->
                     <div class="col-base-1 lig-titre-1">{{localize 'TRINITES.label.competence.enteteUnlocked'}}</div>

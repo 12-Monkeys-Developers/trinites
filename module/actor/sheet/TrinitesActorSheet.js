@@ -198,6 +198,10 @@ export default class TrinitesActorSheet extends ActorSheet {
         
         // Finalise la dépense des points de création
         html.find(".fa-user-lock").click(this._onEndCreation.bind(this));
+
+        // Permet la dépense des points de création
+        html.find(".fa-user-unlock").click(this._onAllowCreation.bind(this));
+
       }
     }
   }
@@ -467,6 +471,13 @@ export default class TrinitesActorSheet extends ActorSheet {
   }
 
   async _onEndCreation(event) {
+    event.preventDefault();
     await this.actor.update({ "system.creation.finie": true });
   }
+
+  async _onAllowCreation(event) {
+    event.preventDefault();
+    await this.actor.update({ "system.creation.finie": false });
+  }
+
 }

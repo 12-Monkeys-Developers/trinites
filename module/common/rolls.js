@@ -63,8 +63,7 @@ export async function jetCompetence({
   }
 
   // Définition de la formule de base du jet
-  let baseFormula = "1d12x + @valeur";
-
+  let modFormula = " + @valeur";
   // Données de base du jet
   let label = actorData.competences[signe][competence].label;
   let karmaAdam = actorData.trinite.adam.karma.type;
@@ -95,7 +94,7 @@ export async function jetCompetence({
   if (difficulte) {
     rollData.difficulte = difficulte;
     rollData.modifsJet = true;
-    baseFormula += " + @difficulte";
+    modFormula += " + @difficulte";
   }
 
   // Malus lié au nombre d'actions libres consécutives
@@ -105,10 +104,12 @@ export async function jetCompetence({
     rollData.actionLibre = actionLibre;
     rollData.malusActionLibre = malusActionLibre;
     rollData.modifsJet = true;
-    baseFormula += " + @malusActionLibre";
+    modFormula += " + @malusActionLibre";
   }
 
-  let rollFormula = `{${baseFormula}, ${baseFormula}}`;
+  let baseFormulaWhite = "1d12x[white]"+modFormula;
+  let baseFormulaBlack = "1d12x[black]"+modFormula;
+  let rollFormula = `{${baseFormulaWhite}, ${baseFormulaBlack}}`;
 
   let rollResult = await new Roll(rollFormula, rollData).roll({ async: true });
 

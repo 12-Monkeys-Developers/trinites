@@ -17,6 +17,7 @@ export default async function preloadTemplates() {
     "systems/trinites/templates/partials/actor/bloc-grandLivre-trinite.hbs",
     "systems/trinites/templates/partials/actor/bloc-info-personnage.hbs",
     "systems/trinites/templates/partials/actor/bloc-karma-trinite.hbs",
+    "systems/trinites/templates/partials/actor/bloc-karma-trinite-unlocked.hbs",
     "systems/trinites/templates/partials/actor/bloc-lameNoire-archonte.hbs",
     "systems/trinites/templates/partials/actor/bloc-lameSoeur-trinite.hbs",
     "systems/trinites/templates/partials/actor/bloc-profane-personnage.hbs",

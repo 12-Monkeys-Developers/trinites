@@ -8,11 +8,11 @@
     {{#if (eq data.type "trinite")}}
       <label>{{localize "TRINITES.label.metier"}}</label>
       <div class="middle-size"><input name="system.metier" type="text" value="{{data.system.metier}}" placeholder="Métier" readonly/></div>
-      {{#if hasMetier}}{{#if unlocked}}<div><a class="delete-metier" title="Supprimer le métier"><i class="fas fa-times"></i></a></div>{{/if}}{{/if}}
+      {{#if hasMetier}}{{#if unlocked}}<div><a class="delete-metier" title="Supprimer le métier"><i class="fa fa-trash"></i></a></div>{{/if}}{{/if}}
       <div class="middle-size"><a class="sheet-change-lock" title="{{localize 'TRINITES.label.unlockSheet'}}">{{#if unlocked}}<i class="fas fa-lock-open"></i>{{else}}<i class="fas fa-lock"></i>{{/if}}</a></div>
       <label>{{localize "TRINITES.label.vieAnterieure"}}</label>
       <div class="auto-size"><input name="system.vieAnterieure" type="text" value="{{data.system.vieAnterieure}}" placeholder="Vie antérieure" readonly/></div>
-      {{#if hasVieAnterieure}}{{#if unlocked}}<div><a class="delete-vie-anterieure" title="Supprimer la vie antérieure"><i class="fas fa-times"></i></a></div>{{/if}}{{/if}}
+      {{#if hasVieAnterieure}}{{#if unlocked}}<div><a class="delete-vie-anterieure" title="Supprimer la vie antérieure"><i class="fa fa-trash"></i></a></div>{{/if}}{{/if}}
     {{/if}}
     {{#if (eq data.type "archonteRoi")}}
       <label>{{localize "TRINITES.label.couverture"}}</label>

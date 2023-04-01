@@ -17,6 +17,9 @@
 .trinites.sheet.actor textarea:focus {
   box-shadow: 0 0 5px var(--color-shadow-trinite);
 }
+.trinites.sheet.actor input[type="number"]:read-only {
+  background-color: floralwhite;
+}
 .trinites.sheet.actor .tab.occulte input[type="text"]:focus,
 .trinites.sheet.actor .tab.occulte input[type="number"]:focus,
 .trinites.sheet.actor .tab.occulte input[type="password"]:focus,

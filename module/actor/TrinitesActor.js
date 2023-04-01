@@ -100,6 +100,10 @@ export default class TrinitesActor extends Actor {
     if (this.type === "trinite") {
       /* Calcul des valeurs de Karma */
 
+      // Calcul du max
+      system.trinite.deva.karma.max = system.trinite.deva.karma.base + system.trinite.deva.karma.bonusVA;
+      system.trinite.archonte.karma.max = system.trinite.archonte.karma.base + system.trinite.archonte.karma.bonusVA;
+
       // Recalcul des valeurs de karma afin qu'elles ne dépasent pas le max
       if (system.trinite.deva.karma.value > system.trinite.deva.karma.max) {
         system.trinite.deva.karma.value = system.trinite.deva.karma.max;
@@ -370,9 +374,8 @@ export default class TrinitesActor extends Actor {
   }
 
   /**
-   *
+   * Ajoute le nom et les bonus d'une vie antérieure
    * @param {Object*} va itemData from Drag n Drop
-   * @returns
    */
   async ajouterVieAnterieure(va) {
     const updateObj = {};
@@ -388,23 +391,9 @@ export default class TrinitesActor extends Actor {
     await this.createEmbeddedDocuments("Item", [va]);
   }
 
-  _updateBonus(bonusInfo, updateObj, reset = false) {
-    let bonus = null;
-    const bonusType = bonusInfo.type;
-    if (bonusType !== "aucun") {
-      if (["ressource", "influence", "richesse"].includes(bonusType)) {
-        bonus = `system.ressources.${bonusType}.bonusVA`;
-      } else if (bonusType === "karma-lumiere") {
-        // Handle "karma-lumiere" case if needed
-      } else {
-        bonus = `system.competences.${bonusType}.bonusVA`;
-      }
-    }
-    if (bonus !== null) {
-      updateObj[bonus] = reset ? 0 : bonusInfo.valeur;
-    }
-  }
-
+  /**
+   * Supprime le nom et les bonus d'une vie antérieure
+   */
   async supprimerVieAnterieure() {
     const va = this.items.find((i) => i.type === "vieAnterieure");
 
@@ -418,6 +407,57 @@ export default class TrinitesActor extends Actor {
     this.update(updateObj);
 
     await this.deleteEmbeddedDocuments("Item", [va._id]);
+  }
+
+  /**
+   *
+   * @param {Object} bonusInfo {type, valeur}
+   * @param {*} updateObj
+   * @param {*} reset true pour remettre la valeur à 0
+   */
+  _updateBonus(bonusInfo, updateObj, reset = false) {
+    let bonus = null;
+    const bonusType = bonusInfo.type;
+    if (bonusType !== "aucun") {
+      if (["ressource", "influence", "richesse"].includes(bonusType)) {
+        bonus = `system.ressources.${bonusType}.bonusVA`;
+      } else if (bonusType === "karma-lumiere") {
+        bonus = "system.trinite.deva.karma.bonusVA";
+      } else if (bonusType === "karma-tenebres") {
+        bonus = "system.trinite.archonte.karma.bonusVA";
+      } else {
+        bonus = `system.competences.${bonusType}.bonusVA`;
+      }
+    }
+    if (bonus !== null) {
+      updateObj[bonus] = reset ? 0 : bonusInfo.valeur;
+    }
+  }
+
+  /**
+   * Ajoute le nom et les bonus d'un métier
+   * @param {Object*} metier itemData from Drag n Drop
+   */
+  async ajouterMetier(metier) {
+    
+    const updateObj = {};
+
+    updateObj["system.metier"] = metier.name;
+
+    updateObj[`system.competences.${metier.system.competence1}.baseMetier`] = 6;
+    updateObj[`system.competences.${metier.system.competence2}.baseMetier`] = 6;
+    updateObj[`system.competences.${metier.system.competence3}.baseMetier`] = 6;
+
+    updateObj["system.ressources.richesse.baseMetier"] = metier.system.richesse.baseMetier;
+    updateObj["system.ressources.reseau.baseMetier"] = metier.system.reseau.baseMetier;
+    updateObj["system.ressources.influence.baseMetier"] = metier.system.influence.baseMetier;
+
+    updateObj["system.creation.totale"] = metier.system.pc.max;
+    updateObj["system.creation.disponible"] = metier.system.pc.max;
+
+    this.update(updateObj);
+
+    return await this.createEmbeddedDocuments("Item", [metier]);
   }
 
   async supprimerMetier() {

@@ -106,26 +106,7 @@ export default class TrinitesActorSheet extends ActorSheet {
 
     Log.info("_onDropMetierItem", itemData);
 
-    const updateObj = {};
-
-    updateObj["system.metier"] = itemData.name;
-
-    const comp1 = `system.competences.${itemData.system.competence1}.baseMetier`;
-    const comp2 = `system.competences.${itemData.system.competence2}.baseMetier`;
-    const comp3 = `system.competences.${itemData.system.competence3}.baseMetier`;
-    updateObj[comp1] = 6;
-    updateObj[comp2] = 6;
-    updateObj[comp3] = 6;
-
-    updateObj["system.ressources.richesse.baseMetier"] = itemData.system.richesse.baseMetier;
-    updateObj["system.ressources.reseau.baseMetier"] = itemData.system.reseau.baseMetier;
-    updateObj["system.ressources.influence.baseMetier"] = itemData.system.influence.baseMetier;
-
-    updateObj["system.creation.totale"] = itemData.system.pc.max;
-    updateObj["system.creation.disponible"] = itemData.system.pc.max;
-    this.actor.update(updateObj);
-
-    return await this.actor.createEmbeddedDocuments("Item", [itemData]);
+    this.actor.ajouterMetier(itemData);
   }
 
   /**

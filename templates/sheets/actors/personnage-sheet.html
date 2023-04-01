@@ -37,7 +37,11 @@
                     </div>
                 </div>
             </div>
-            {{> "systems/trinites/templates/partials/actor/bloc-karma-trinite.hbs"}}
+            {{#if unlocked}}
+                {{> "systems/trinites/templates/partials/actor/bloc-karma-trinite-unlocked.hbs"}}
+            {{else}}
+                {{> "systems/trinites/templates/partials/actor/bloc-karma-trinite.hbs"}}
+            {{/if}}            
             <div class="deux-col-66-33">
                 <div class="col-66">
                     {{> "systems/trinites/templates/partials/actor/bloc-grandLivre-trinite.hbs"}}

@@ -2,7 +2,7 @@
 <div class="col-base-{{col}} lig-comp-{{row}}">
   <input name="system.competences.{{signe}}.{{competence}}.baseMetier" type="number" value="{{getCompetence actor signe competence 'baseMetier'}}" placeholder="0" min="0" readonly/>
   <input name="system.competences.{{signe}}.{{competence}}.pointsCrea" type="number" value="{{getCompetence actor signe competence 'pointsCrea'}}" placeholder="0" min="0" {{#if @root.data.system.creation.finie}}readonly{{/if}}/>
-  <input name="system.competences.{{signe}}.{{competence}}.bonusVA" type="number" value="{{getCompetence actor signe competence 'bonusVA'}}" placeholder="0" min="0" />
+  <input name="system.competences.{{signe}}.{{competence}}.bonusVA" type="number" value="{{getCompetence actor signe competence 'bonusVA'}}" placeholder="0" min="0" readonly/>
   <input name="system.competences.{{signe}}.{{competence}}.pointsExp" type="number" value="{{getCompetence actor signe competence 'pointsExp'}}" placeholder="0" min="0" />
 </div>
 <div class="col-valeur-{{col}} lig-comp-{{row}}"><label>{{getCompetence actor signe competence 'base'}}</label></div>

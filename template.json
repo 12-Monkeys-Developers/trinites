@@ -481,7 +481,9 @@
                         "choeur": "",
                         "karma": {
                             "value": 0,
-                            "max": 0
+                            "max": 0,
+                            "base": 0,
+	                        "bonusVA": 0
                           },
                         "dettes": 0,
                         "credits": 0
@@ -490,7 +492,9 @@
                         "legion": "",
                         "karma": {
                             "value": 0,
-                            "max": 0
+                            "max": 0,
+                            "base": 0,
+	                        "bonusVA": 0
                           },
                         "dettes": 0,
                         "credits": 0

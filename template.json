@@ -545,7 +545,10 @@
             },
             "pointsLigneVie": 8,
             "etatSante" : "indemne",
-            "nbBlessure": 0
+            "nbBlessure": 0,
+            "affinite":"",
+            "oratoire":"",
+            "experience_apprentissages":0
         },
         "archonteRoi": {
             "templates": [ "information", "signes", "competences", "ressources", "theme", "archRoi", "lameN" ],
@@ -569,7 +572,48 @@
         }
     },
     "Item": {
-        "types": ["metier","objet", "domaine", "aura", "verset", "atout", "arme", "pouvoir","vieAnterieure"],
+        "types": ["ame","metier","objet", "domaine", "aura", "verset", "atout", "arme", "pouvoir","vieAnterieure","jardin", "majeste"],
+        "ame":{
+            "epreuve":"",
+            "description":""
+        },
+        "arme": {
+            "competence": "",
+            "degats": 0,
+            "portee": "",
+            "particularites": "",
+            "epee": false
+        },
+        "armure": {
+            "protectMeleeExplosif": 0,
+            "protectLancerTir": "",
+            "particularites": ""
+        },
+        "atout": {
+            "messager": "",
+            "karma": "",
+            "couleur": "",
+            "description": ""
+        },
+        "aura": {
+            "signe": "",
+            "description": "",
+            "souffle": "",
+            "deploiement": ""
+        },
+        "domaine" :{
+            "description": "",
+            "epuise": false
+        },
+        "jardin":{
+            "lieu":"",
+            "signe":""
+        },
+        "majeste": {
+            "signe": "",
+            "manifestation": "",
+            "effet": ""
+        },
         "metier": {
             "signe": "",
             "description": "",
@@ -589,15 +633,9 @@
         "objet": {
             "description": ""
         },
-        "domaine" :{
-            "description": "",
-            "epuise": false
-        },
-        "aura": {
-            "signe": "",
-            "description": "",
-            "souffle": "",
-            "deploiement": ""
+        "pouvoir": {
+            "scienceOcculte": "autre",
+            "description": ""
         },
         "verset": {
             "choeurLegion": "",
@@ -608,28 +646,6 @@
             "portee": "",
             "aireEffet": "",
             "cumul": 0,
-            "description": ""
-        },
-        "atout": {
-            "messager": "",
-            "karma": "",
-            "couleur": "",
-            "description": ""
-        },
-        "arme": {
-            "competence": "",
-            "degats": 0,
-            "portee": "",
-            "particularites": "",
-            "epee": false
-        },
-        "armure": {
-            "protectMeleeExplosif": 0,
-            "protectLancerTir": "",
-            "particularites": ""
-        },
-        "pouvoir": {
-            "scienceOcculte": "autre",
             "description": ""
         },
         "vieAnterieure": {

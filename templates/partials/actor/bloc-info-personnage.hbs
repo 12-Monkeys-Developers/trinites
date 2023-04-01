@@ -1,7 +1,7 @@
 <img src="{{actor.img}}" data-edit="img" title="{{actor.name}}" height="128" width="128" />
 <div class="actor-info">
   <div class="actor-infos-line">
-    <h1 class="charname"><input name="name" type="text" value="{{actor.name}}" placeholder="Nom" /></h1>
+    <h1 class="charname"><input name="name" type="text" value="{{actor.name}}" {{#unless unlocked}}readonly{{/unless}}//></h1>
   </div>
 
   {{#if (eq data.type "trinite")}}
@@ -19,7 +19,7 @@
   </div>
   <div class="actor-infos-line">
     <label>{{localize "TRINITES.label.vieAnterieure"}}</label>
-    <div class="auto-size"><input name="system.vieAnterieure" type="text" value="{{data.system.vieAnterieure}}" placeholder="Vie antérieure" readonly /></div>
+    <div class="big-size"><input name="system.vieAnterieure" type="text" value="{{data.system.vieAnterieure}}" placeholder="Vie antérieure" readonly /></div>
     {{#if hasVieAnterieure}}{{#if unlocked}}<div><a class="delete-vie-anterieure" title="Supprimer la vie antérieure"><i class="fa fa-trash"></i></a></div>{{/if}}{{/if}}
   </div>
   {{/if}}

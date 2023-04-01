@@ -3,7 +3,8 @@
         "types": ["trinite", "archonteRoi", "lige", "humain"],
         "templates": {
             "information": {
-                "description": ""
+                "description": "",
+                "notes": ""
             },
             "signes": {
                 "signes": {
@@ -548,7 +549,7 @@
             "nbBlessure": 0,
             "affinite":"",
             "oratoire":"",
-            "experience_apprentissages":0
+            "experienceApprentissages":0
         },
         "archonteRoi": {
             "templates": [ "information", "signes", "competences", "ressources", "theme", "archRoi", "lameN" ],

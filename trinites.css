@@ -23,6 +23,10 @@
 }
 .trinites.sheet.actor input[type="text"]:read-only {
   cursor: default;
+  border: none;
+}
+.trinites.sheet.actor select:disabled {
+  color: black;
 }
 .trinites.sheet.actor .tab.occulte input[type="text"]:focus,
 .trinites.sheet.actor .tab.occulte input[type="number"]:focus,
@@ -1694,6 +1698,11 @@
 }
 .middle-size {
   flex: 0 1 5em;
+  padding: 3px;
+  text-align: center;
+}
+.big-size {
+  flex: 0 1 25em;
   padding: 3px;
   text-align: center;
 }

@@ -19,6 +19,10 @@
 }
 .trinites.sheet.actor input[type="number"]:read-only {
   background-color: floralwhite;
+  cursor: default;
+}
+.trinites.sheet.actor input[type="text"]:read-only {
+  cursor: default;
 }
 .trinites.sheet.actor .tab.occulte input[type="text"]:focus,
 .trinites.sheet.actor .tab.occulte input[type="number"]:focus,

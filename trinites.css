@@ -8,6 +8,9 @@
   color: var(--color-titre-trinite);
   font-weight: bold;
 }
+.trinites.sheet.actor .sheet-tabs.tabs {
+  height: 50px;
+}
 .trinites.sheet.actor input[type="text"]:focus,
 .trinites.sheet.actor input[type="number"]:focus,
 .trinites.sheet.actor input[type="password"]:focus,
@@ -28,16 +31,40 @@
 .trinites.sheet.actor select:disabled {
   color: black;
 }
-.trinites.sheet.actor .tab.occulte input[type="text"]:focus,
-.trinites.sheet.actor .tab.occulte input[type="number"]:focus,
-.trinites.sheet.actor .tab.occulte input[type="password"]:focus,
-.trinites.sheet.actor .tab.occulte input[type="date"]:focus,
-.trinites.sheet.actor .tab.occulte input[type="time"]:focus,
-.trinites.sheet.actor .tab.occulte select:focus,
-.trinites.sheet.actor .tab.occulte textarea:focus {
+.trinites.sheet.actor .tab.tab-occulte input[type="text"]:focus,
+.trinites.sheet.actor .tab.tab-grand-livre input[type="text"]:focus,
+.trinites.sheet.actor .tab.tab-lame-soeur input[type="text"]:focus,
+.trinites.sheet.actor .tab.tab-zodiaque input[type="text"]:focus,
+.trinites.sheet.actor .tab.tab-occulte input[type="number"]:focus,
+.trinites.sheet.actor .tab.tab-grand-livre input[type="number"]:focus,
+.trinites.sheet.actor .tab.tab-lame-soeur input[type="number"]:focus,
+.trinites.sheet.actor .tab.tab-zodiaque input[type="number"]:focus,
+.trinites.sheet.actor .tab.tab-occulte input[type="password"]:focus,
+.trinites.sheet.actor .tab.tab-grand-livre input[type="password"]:focus,
+.trinites.sheet.actor .tab.tab-lame-soeur input[type="password"]:focus,
+.trinites.sheet.actor .tab.tab-zodiaque input[type="password"]:focus,
+.trinites.sheet.actor .tab.tab-occulte input[type="date"]:focus,
+.trinites.sheet.actor .tab.tab-grand-livre input[type="date"]:focus,
+.trinites.sheet.actor .tab.tab-lame-soeur input[type="date"]:focus,
+.trinites.sheet.actor .tab.tab-zodiaque input[type="date"]:focus,
+.trinites.sheet.actor .tab.tab-occulte input[type="time"]:focus,
+.trinites.sheet.actor .tab.tab-grand-livre input[type="time"]:focus,
+.trinites.sheet.actor .tab.tab-lame-soeur input[type="time"]:focus,
+.trinites.sheet.actor .tab.tab-zodiaque input[type="time"]:focus,
+.trinites.sheet.actor .tab.tab-occulte select:focus,
+.trinites.sheet.actor .tab.tab-grand-livre select:focus,
+.trinites.sheet.actor .tab.tab-lame-soeur select:focus,
+.trinites.sheet.actor .tab.tab-zodiaque select:focus,
+.trinites.sheet.actor .tab.tab-occulte textarea:focus,
+.trinites.sheet.actor .tab.tab-grand-livre textarea:focus,
+.trinites.sheet.actor .tab.tab-lame-soeur textarea:focus,
+.trinites.sheet.actor .tab.tab-zodiaque textarea:focus {
   box-shadow: 0 0 5px var(--color-shadow-occulte);
 }
-.trinites.sheet.actor .tab.occulte a:hover {
+.trinites.sheet.actor .tab.tab-occulte a:hover,
+.trinites.sheet.actor .tab.tab-grand-livre a:hover,
+.trinites.sheet.actor .tab.tab-lame-soeur a:hover,
+.trinites.sheet.actor .tab.tab-zodiaque a:hover {
   text-shadow: 0 0 8px var(--color-shadow-occulte);
 }
 .trinites.sheet.actor a:hover {
@@ -49,7 +76,7 @@
 .trinites.sheet.actor .tabs .item.active {
   text-shadow: 0 0 10px var(--color-shadow-trinite);
 }
-.trinites.sheet.actor .tabs .item.active.occulte {
+.trinites.sheet.actor .tabs .item.active.tab-occulte {
   text-shadow: 0 0 10px var(--color-shadow-occulte);
 }
 .trinites.sheet.actor .sheet-header {
@@ -78,20 +105,32 @@
 .trinites.sheet.actor .window-content {
   background: url("./images/parchemin-grey.jpg") repeat;
 }
-.trinites.sheet.actor .window-content nav .profane {
+.trinites.sheet.actor .window-content nav .tab-profane,
+.trinites.sheet.actor .window-content nav .tab-equipement,
+.trinites.sheet.actor .window-content nav .tab-description,
+.trinites.sheet.actor .window-content nav .tab-notes {
   color: var(--color-titre-trinite);
 }
-.trinites.sheet.actor .window-content nav .occulte {
+.trinites.sheet.actor .window-content nav .tab-occulte,
+.trinites.sheet.actor .window-content nav .tab-grand-livre,
+.trinites.sheet.actor .window-content nav .tab-lame-soeur,
+.trinites.sheet.actor .window-content nav .tab-zodiaque {
   font-family: "Cabaletta";
   color: var(--color-titre-occulte);
 }
-.trinites.sheet.actor .window-content .tab.profane h3 {
+.trinites.sheet.actor .window-content .tab.tab-profane h3,
+.trinites.sheet.actor .window-content .tab.tab-equipement h3,
+.trinites.sheet.actor .window-content .tab.tab-description h3,
+.trinites.sheet.actor .window-content .tab.tab-notes h3 {
   color: var(--color-titre-trinite);
   font-weight: bold;
   margin-left: 3px;
   border-bottom: none;
 }
-.trinites.sheet.actor .window-content .tab.occulte h3 {
+.trinites.sheet.actor .window-content .tab.tab-occulte h3,
+.trinites.sheet.actor .window-content .tab.tab-grand-livre h3,
+.trinites.sheet.actor .window-content .tab.tab-lame-soeur h3,
+.trinites.sheet.actor .window-content .tab.tab-zodiaque h3 {
   font-family: "Cabaletta";
   color: var(--color-titre-occulte);
   font-weight: bold;
@@ -810,6 +849,25 @@
 }
 .trinites.sheet.actor .grid-karma-ten .karma-ten-valeur label {
   margin: 2px;
+}
+.trinites.sheet.actor .editor .editor-edit {
+  background: var(--primary);
+  color: white;
+}
+.trinites.sheet.actor .editor .tox.tox-tinymce {
+  height: 200px!important;
+}
+.trinites.sheet.actor .editor .tox .tox-editor-container .tox-editor-header .tox-toolbar-overlord {
+  background-color: var(--secondary);
+}
+.trinites.sheet.actor .editor .tox .tox-editor-container .tox-editor-header .tox-toolbar-overlord .tox-toolbar__primary {
+  background-color: var(--alt);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.3);
+}
+.trinites.sheet.actor .editor .editor-content {
+  background: rgba(0, 0, 0, 0.05);
+  min-height: 75px;
+  overflow-y: inherit;
 }
 .trinites.sheet.item input[type="text"]:focus,
 .trinites.sheet.item input[type="number"]:focus,

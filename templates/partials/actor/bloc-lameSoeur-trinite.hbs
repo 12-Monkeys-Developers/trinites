@@ -2,7 +2,7 @@
     <h3><i class="fas fa-khanda"></i> Lame-soeur</h3>
     <div class="grid-lame">
         <label>Messager</label>
-        <select name="system.lameSoeur.messager">
+        <select name="system.lameSoeur.messager" {{#unless unlocked}}disabled {{/unless}}>
             {{#select data.system.lameSoeur.messager}}
             {{#each config.messagers as |messager keyMessager|}}
                 <option value="{{keyMessager}}">{{messager.label}}</option>

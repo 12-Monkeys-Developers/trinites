@@ -869,6 +869,22 @@
   min-height: 75px;
   overflow-y: inherit;
 }
+.trinites.sheet.item .window-content {
+  background: url("./images/parchemin-grey.jpg") repeat;
+}
+.trinites.sheet.item .window-content form {
+  display: flex;
+  flex-direction: column;
+}
+.trinites.sheet.item .window-content form .sheet-header {
+  flex: 0 0 auto;
+}
+.trinites.sheet.item .window-content form .sheet-content {
+  flex: 1 0 auto;
+}
+.trinites.sheet.item .window-content form .sheet-footer {
+  flex: 0 0 auto;
+}
 .trinites.sheet.item input[type="text"]:focus,
 .trinites.sheet.item input[type="number"]:focus,
 .trinites.sheet.item input[type="password"]:focus,
@@ -904,9 +920,6 @@
   justify-content: center;
   margin: 3px;
 }
-.trinites.sheet.item .window-content {
-  background: url("./images/parchemin-grey.jpg") repeat;
-}
 .trinites.sheet.item .sheet-header img {
   border: none;
 }
@@ -939,8 +952,9 @@
 }
 .trinites.sheet.item .sheet-content.metier .grid-item-metier {
   display: grid;
-  grid-template-columns: 1fr 2fr 1.5fr 1fr;
-  margin: 2px;
+  grid-template-columns: 0.5fr repeat(2, minmax(50px, 0.8fr)) 0.5fr;
+  grid-gap: 5px;
+  margin: 20px 2px 20px 2px;
   align-items: center;
 }
 .trinites.sheet.item .sheet-content.metier .grid-item-metier label,
@@ -951,12 +965,15 @@
 .trinites.sheet.item .sheet-content.metier .grid-item-metier label {
   font-family: "Cabaletta";
 }
-.trinites.sheet.item .sheet-content.metier .zone-metier {
-  display: grid;
-  grid-template-columns: repeat(5, 3.5em);
+.trinites.sheet.item .sheet-content.metier .grid-item-metier input {
+  width: 40px;
+  text-align: center;
 }
-.trinites.sheet.item .sheet-content.metier .editor {
-  height: 100px;
+.trinites.sheet.item .sheet-content.metier .grid-item:nth-child(2) {
+  grid-column-end: span 2;
+}
+.trinites.sheet.item .sheet-content.metier .tox-edit-area {
+  height: 100%;
 }
 .trinites.sheet.item .sheet-content.vie-anterieure .grid-item-vie-anterieure {
   display: grid;

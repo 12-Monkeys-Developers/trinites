@@ -1,5 +1,26 @@
 .trinites.sheet.item {
 
+    .window-content {
+        background: url("./images/parchemin-grey.jpg") repeat;
+
+        form {
+            display: flex;
+            flex-direction: column;
+
+            .sheet-header {
+                flex: 0 0 auto;
+            }
+
+            .sheet-content {
+                flex: 1 0 auto;
+            }
+
+            .sheet-footer {
+                flex: 0 0 auto;
+            }
+        }
+    }
+
     input[type="text"]:focus, input[type="number"]:focus, input[type="password"]:focus, input[type="date"]:focus, input[type="time"]:focus, select:focus, textarea:focus {
         box-shadow: 0 0 5px var(--color-shadow-trinite);
     }
@@ -33,10 +54,6 @@
         margin: 3px;
     }
 
-    .window-content {
-        background: url("./images/parchemin-grey.jpg") repeat;
-    }
-    
     .sheet-header {
         
         img {
@@ -85,8 +102,9 @@
 
         .grid-item-metier {
             display: grid;
-            grid-template-columns: 1fr 2fr 1.5fr 1fr;
-            margin: 2px;
+            grid-template-columns: 0.5fr repeat(2, minmax(50px, 0.8fr)) 0.5fr;
+            grid-gap: 5px;
+            margin: 20px 2px 20px 2px;
             align-items: center;
 
             label, input, select {
@@ -96,15 +114,19 @@
             label {
                 font-family: "Cabaletta";
             }
+
+            input {
+                width: 40px;
+                text-align: center;
+            }
         }
 
-        .zone-metier {
-            display: grid;
-            grid-template-columns: repeat(5, 3.5em);
+        .grid-item:nth-child(2) {
+            grid-column-end: span 2;
         }
 
-        .editor {
-            height: 100px;
+        .tox-edit-area {
+            height: 100%;
         }
     }    
     

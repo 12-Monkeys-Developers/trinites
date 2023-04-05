@@ -14,16 +14,12 @@ export default class TrinitesActorSheet extends ActorSheet {
 
   get template() {
     if (this.actor.type === "trinite") {
-      Log.info(`type : ${this.actor.type} | Chargement du template systems/trinites/templates/sheets/actors/personnage-sheet.html`);
+      Log.debug(`type : ${this.actor.type} | Chargement du template systems/trinites/templates/sheets/actors/personnage-sheet.html`);
       return "systems/trinites/templates/sheets/actors/personnage-sheet.html";
     } else if (this.actor.type === "archonteRoi") {
-      Log.info(`type : ${this.actor.type} | Chargement du template systems/trinites/templates/sheets/actors/archonteRoi-sheet.html`);
+      Log.debug(`type : ${this.actor.type} | Chargement du template systems/trinites/templates/sheets/actors/archonteRoi-sheet.html`);
       return "systems/trinites/templates/sheets/actors/archonteRoi-sheet.html";
     }
-    // Else {
-    //    console.log(`Trinites | chargement du template systems/trinites/templates/sheets/actors/${this.actor.data.type}-sheet.html`);
-    //    return `systems/trinites/templates/sheets/actors/${this.actor.data.type}-sheet.html`
-    // }
   }
 
   getData() {

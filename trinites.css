@@ -109,6 +109,7 @@
 .trinites.sheet.actor .window-content nav .tab-equipement,
 .trinites.sheet.actor .window-content nav .tab-description,
 .trinites.sheet.actor .window-content nav .tab-notes {
+  font-family: "Cabaletta";
   color: var(--color-titre-trinite);
 }
 .trinites.sheet.actor .window-content nav .tab-occulte,
@@ -869,6 +870,14 @@
   min-height: 75px;
   overflow-y: inherit;
 }
+.trinites.sheet.item {
+  /* .sheet-header.vie-anterieure {
+          flex: 0 0 auto;
+            font: "Cabaletta";
+            padding-top: 1em;
+            color: #aa502b;
+    }*/
+}
 .trinites.sheet.item .window-content {
   background: url("./images/parchemin-grey.jpg") repeat;
 }
@@ -972,29 +981,78 @@
 .trinites.sheet.item .sheet-content.metier .grid-item:nth-child(2) {
   grid-column-end: span 2;
 }
-.trinites.sheet.item .sheet-content.metier .tox-edit-area {
-  height: 100%;
+.trinites.sheet.item .sheet-content.metier .editor .tox.tox-tinymce {
+  height: 200px!important;
+}
+.trinites.sheet.item .sheet-content.metier .editor .editor-content {
+  background: rgba(0, 0, 0, 0.05);
+  min-height: 75px;
+  overflow-y: inherit;
+}
+.trinites.sheet.item .sheet-header.vie-anterieure input {
+  font-family: "Cabaletta";
+  color: #aa502b;
+  border: none;
+}
+.trinites.sheet.item .sheet-footer.vie-anterieure {
+  flex: 0 0 auto;
 }
 .trinites.sheet.item .sheet-content.vie-anterieure .grid-item-vie-anterieure {
   display: grid;
-  /*grid-template-columns: 1fr 1fr 0.5fr 1fr 1fr 0.5fr 1fr 1fr 0.5fr;*/
+  grid-template-columns: 30% 70%;
+  grid-template-rows: 0.8fr 0.2fr;
+  height: 100%;
   margin: 2px;
-  align-items: center;
-}
-.trinites.sheet.item .sheet-content.vie-anterieure .grid-item-vie-anterieure label,
-.trinites.sheet.item .sheet-content.vie-anterieure .grid-item-vie-anterieure input,
-.trinites.sheet.item .sheet-content.vie-anterieure .grid-item-vie-anterieure select {
-  margin: 2px;
+  grid-gap: 10px;
 }
 .trinites.sheet.item .sheet-content.vie-anterieure .grid-item-vie-anterieure label {
   font-family: "Cabaletta";
 }
-.trinites.sheet.item .sheet-content.vie-anterieure .zone-vie-anterieure {
-  display: grid;
-  grid-template-columns: repeat(5, 3.5em);
+.trinites.sheet.item .sheet-content.vie-anterieure .grid-item-vie-anterieure img {
+  grid-row: 1 / span 2;
+  grid-column: 1;
+  height: 98%;
+  width: auto;
+  border: none;
 }
-.trinites.sheet.item .sheet-content.vie-anterieure .editor {
-  height: 100px;
+.trinites.sheet.item .sheet-content.vie-anterieure .grid-item-vie-anterieure .text-block {
+  grid-row: 1;
+  grid-column: 2;
+  height: 100%;
+  overflow: auto;
+  padding: 10px;
+}
+.trinites.sheet.item .sheet-content.vie-anterieure .grid-item-vie-anterieure .text-block .editor {
+  min-height: 300px;
+}
+.trinites.sheet.item .sheet-content.vie-anterieure .grid-item-vie-anterieure .text-block .editor .tox.tox-tinymce {
+  height: 200px!important;
+}
+.trinites.sheet.item .sheet-content.vie-anterieure .grid-item-vie-anterieure .text-block .editor .editor-content {
+  min-height: 100px;
+  overflow-y: inherit;
+}
+.trinites.sheet.item .sheet-content.vie-anterieure .grid-item-vie-anterieure .form-container {
+  grid-row: 2;
+  grid-column: 2;
+  display: grid;
+  grid-template-columns: 0.5fr 0.5fr 0.5fr;
+  gap: 10px;
+  align-items: center;
+  /* Ajouté pour aligner les éléments verticalement au centre */
+}
+.trinites.sheet.item .sheet-content.vie-anterieure .grid-item-vie-anterieure .form-container label {
+  text-align: right;
+  height: 30px;
+  line-height: 30px;
+  /* Cette propriété aligne verticalement le texte au milieu du label */
+}
+.trinites.sheet.item .sheet-content.vie-anterieure .grid-item-vie-anterieure .form-container select {
+  height: 30px;
+}
+.trinites.sheet.item .sheet-content.vie-anterieure .grid-item-vie-anterieure .form-container input {
+  width: 40px;
+  text-align: center;
 }
 .trinites.sheet.item .sheet-content.atout .grid-item-atout {
   display: grid;
@@ -1067,60 +1125,6 @@
 .trinites.sheet.item .sheet-content.verset .grid-data-desc .col-mono {
   grid-column: 1 / 5;
 }
-.trinites.sheet.item .sheet-content.vie-anterieure .editor {
-  height: 140px;
-  margin: 2px;
-}
-.trinites.sheet.item .sheet-content.vie-anterieure label {
-  font-family: "Cabaletta";
-}
-.trinites.sheet.item .sheet-content.vie-anterieure .grid-item-vie-anterieure {
-  display: grid;
-  grid-template-columns: 1fr 2fr 1fr 2fr 1fr 2fr;
-  margin: 2px;
-  align-items: center;
-}
-.trinites.sheet.item .sheet-content.vie-anterieure .grid-item-vie-anterieure label,
-.trinites.sheet.item .sheet-content.vie-anterieure .grid-item-vie-anterieure input,
-.trinites.sheet.item .sheet-content.vie-anterieure .grid-item-vie-anterieure select {
-  margin: 2px;
-}
-.trinites.sheet.item .sheet-content.vie-anterieure .grid-item-vie-anterieure .col-sentence {
-  grid-column: 1 / 7;
-}
-.trinites.sheet.item .sheet-content.vie-anterieure .grid-item-vie-anterieure .col-sentence textarea {
-  font-family: "Cabaletta";
-  font-style: italic;
-  margin: 2px;
-  height: 60px;
-  resize: none;
-}
-.trinites.sheet.item .sheet-content.vie-anterieure .vie-anterieure-data,
-.trinites.sheet.item .sheet-content.vie-anterieure .verset-desc {
-  margin: 2px;
-}
-.trinites.sheet.item .sheet-content.vie-anterieure .grid-data-desc {
-  display: grid;
-  grid-template-columns: 250px 1fr;
-  margin: 2px;
-  align-items: center;
-}
-.trinites.sheet.item .sheet-content.vie-anterieure .grid-data-desc .grid-data-vie-anterieure {
-  display: grid;
-  grid-template-columns: 1fr 2fr 1fr 2em;
-  margin: 2px;
-  align-items: center;
-}
-.trinites.sheet.item .sheet-content.vie-anterieure .grid-data-desc label,
-.trinites.sheet.item .sheet-content.vie-anterieure .grid-data-desc input {
-  margin: 3px;
-}
-.trinites.sheet.item .sheet-content.vie-anterieure .grid-data-desc .check {
-  padding-left: 3px;
-}
-.trinites.sheet.item .sheet-content.vie-anterieure .grid-data-desc .col-mono {
-  grid-column: 1 / 5;
-}
 .trinites.sheet.item .sheet-footer {
   border-top: solid thin #42637e;
   padding: 3px;
@@ -1134,10 +1138,12 @@
   color: var(--color-titre-occulte);
 }
 .trinites.sheet.item .titre-desc {
+  font-family: "Cabaletta";
   color: var(--color-titre-trinite);
   font-weight: bold;
   margin: 2px;
-  font-size: 1.1em;
+  font-size: 1.4em;
+  padding-bottom: 10px;
 }
 .trinites.sheet.item .titre-desc.occulte {
   font-family: "Cabaletta";

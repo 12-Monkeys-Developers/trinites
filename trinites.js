@@ -6,6 +6,8 @@ import * as Chat from "./module/common/chat.js";
 
 import TrinitesActorSheet from "./module/actor/sheet/TrinitesActorSheet.js";
 import TrinitesItemSheet from "./module/item/sheet/TrinitesItemSheet.js";
+import TrinitesVieAnterieureSheet from "./module/item/sheet/TrinitesVieAnterieureSheet.js";
+import TrinitesAuraSheet from "./module/item/sheet/TrinitesAuraSheet.js";
 import TrinitesActor from "./module/actor/TrinitesActor.js";
 import TrinitesItem from "./module/item/TrinitesItem.js";
 
@@ -33,7 +35,9 @@ Hooks.once("init", function() {
     Actors.registerSheet("trinites", TrinitesActorSheet, {makeDefault: true});
 
     Items.unregisterSheet("core", ItemSheet);
-    Items.registerSheet("trinites", TrinitesItemSheet, {makeDefault: true});
+    Items.registerSheet("trinites", TrinitesItemSheet, {types: ["ame","metier","objet", "domaine", "verset", "atout", "arme", "pouvoir","jardin", "majeste"], makeDefault: true});
+    Items.registerSheet("trinites", TrinitesVieAnterieureSheet, { types: ["vieAnterieure"], makeDefault: true});  
+    Items.registerSheet("trinites", TrinitesAuraSheet, { types: ["aura"], makeDefault: true});
 
 	// Preload Handlebars Templates
 	preloadTemplates();

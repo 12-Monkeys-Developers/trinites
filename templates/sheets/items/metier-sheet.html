@@ -18,8 +18,8 @@
             <input name="system.pc.max" type="number" value="{{item.system.pc.max}}"/>            
             <label>Compétence 1</label>
             <select name="system.competence1">
-                {{#select data.system.competence1}}
-                {{#each config.competences as |competence keyCompetence|}}
+                {{#select data.system.competence1}}           
+                {{#each config.competencesTriees as |competence keyCompetence|}}
                     <option value="{{keyCompetence}}">{{competence}}</option>
                 {{/each}}
                 {{/select}} 
@@ -29,7 +29,7 @@
             <label>Compétence 2</label>
             <select name="system.competence2">
                 {{#select data.system.competence2}}
-                {{#each config.competences as |competence keyCompetence|}}
+                {{#each config.competencesTriees as |competence keyCompetence|}}
                     <option value="{{keyCompetence}}">{{competence}}</option>
                 {{/each}}
                 {{/select}} 
@@ -39,7 +39,7 @@
             <label>Compétence 3</label>
             <select name="system.competence3">
                 {{#select data.system.competence3}}
-                {{#each config.competences as |competence keyCompetence|}}
+                {{#each config.competencesTriees as |competence keyCompetence|}}
                     <option value="{{keyCompetence}}">{{competence}}</option>
                 {{/each}}
                 {{/select}} 

@@ -476,8 +476,6 @@ export async function carteVersetActive({ actor = null, versetId = null } = {}) 
     nomPersonnage: actor.name,
   };
 
-  console.log(cardData);
-
   // Recupération du template
   const messageTemplate = "systems/trinites/templates/partials/chat/carte-verset-active.hbs";
 

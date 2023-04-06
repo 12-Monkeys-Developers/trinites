@@ -573,7 +573,7 @@
         }
     },
     "Item": {
-        "types": ["ame","metier","objet", "domaine", "aura", "verset", "atout", "arme", "pouvoir","vieAnterieure","jardin", "majeste"],
+        "types": ["ame","arme","atout","aura","domaine","jardin","majeste","metier","objet","pouvoir","verset","vieAnterieure"],
         "ame":{
             "epreuve":"",
             "description":""

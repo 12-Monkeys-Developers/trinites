@@ -1,4 +1,23 @@
 {
+    "ACTOR": {
+        "TypeTrinite": "Trinité",
+        "TypeArchonteroi": "ArchonteRoi",
+        "TypeLige": "Lige",
+        "TypeHumain": "Humain"
+    },
+    
+    "ITEM": {
+        "TypeObjet": "Objet",
+        "TypeMetier": "Métier",
+        "TypeDomaine": "Domaine",
+        "TypeAura": "Aura",
+        "TypeVerset": "Verset",
+        "TypeAtout": "Atout",
+        "TypeArme": "Arme",
+        "TypePouvoir": "Pouvoir",
+        "TypeVieanterieure": "Vie Antérieure" 
+    },
+
     "TRINITES": {
         "label": {
             "science_occulte":{

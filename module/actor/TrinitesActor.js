@@ -204,7 +204,11 @@ export default class TrinitesActor extends Actor {
     }
   }
 
-  // Nombre de points de Karma disponible du type donné (Lumière ou Ténèbre)
+  /**
+   * Nombre de points de Karma disponible du type donné (Lumière ou Ténèbre)
+   * @param {*} typeKarma 
+   * @returns 
+   */
   karmaDisponible(typeKarma) {
     let data = this.system;
     let karmaDisponible = 0;
@@ -221,6 +225,7 @@ export default class TrinitesActor extends Actor {
           karmaDisponible += data.trinite.archonte.karma.value;
         }
 
+        // Si le Karma de l'Adam' correspond au type de Karma 
         if (typeKarma === data.trinite.adam.karma.type) {
           karmaDisponible += data.trinite.adam.karma.value;
         }

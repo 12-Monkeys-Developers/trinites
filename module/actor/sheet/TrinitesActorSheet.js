@@ -349,7 +349,7 @@ export default class TrinitesActorSheet extends ActorSheet {
     let itemId = element.dataset.itemId;
     const item = this.actor.items.get(itemId);
 
-    let content = `<p>Objet : ${item.data.name}<br>Etes-vous certain de vouloir supprimer cet objet ?<p>`;
+    let content = `<p>Objet : ${item.name}<br>Etes-vous certain de vouloir supprimer cet objet ?<p>`;
     let dlg = Dialog.confirm({
       title: "Confirmation de suppression",
       content: content,

@@ -35,7 +35,7 @@ Hooks.once("init", function() {
     Actors.registerSheet("trinites", TrinitesActorSheet, {makeDefault: true});
 
     Items.unregisterSheet("core", ItemSheet);
-    Items.registerSheet("trinites", TrinitesItemSheet, {types: ["ame","metier","objet", "domaine", "verset", "atout", "arme", "pouvoir","jardin", "majeste"], makeDefault: true});
+    Items.registerSheet("trinites", TrinitesItemSheet, {types: ["atout", "ame","arme","domaine","jardin","majeste","metier","objet","pouvoir","verset"], makeDefault: true});
     Items.registerSheet("trinites", TrinitesVieAnterieureSheet, { types: ["vieAnterieure"], makeDefault: true});  
     Items.registerSheet("trinites", TrinitesAuraSheet, { types: ["aura"], makeDefault: true});
 

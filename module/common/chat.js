@@ -262,45 +262,21 @@ export class TrinitesChat {
     element.closest(".carte.aura").getElementsByClassName("zone")[0].innerHTML = "Cosme";
   }
 
+  // Activer un verset dans le la fenêtre de chat
   static onActiverVerset(event) {
     event.preventDefault();
     const element = event.currentTarget;
+    // Shift + Click si le verset a été murmuré
+    const murmure = event.shiftKey;
+    const options = {};
+    options['murmure'] = murmure;
 
     let actor = game.actors.get(element.closest(".carte.verset").dataset.actorId);
-
     const versetId = element.closest(".carte.verset").dataset.itemId;
-    let verset = actor.items.get(versetId);
-    let typeKarma = verset.system.karma;
 
-    let karmaDisponible = actor.karmaDisponible(typeKarma);
-    let coutPouvoir = actor.coutPouvoir("grandLivre");
-    let activationOk = false;
-
-    // Pas assez de Karma
-    if (karmaDisponible < coutPouvoir) {
-      ui.notifications.warn("Vous n'avez pas assez de Karma disponible pour réciter ce verset !");
-      return;
-    }
-    // Juste ce qu'il faut de Karma
-    else if (karmaDisponible == coutPouvoir) {
-      actor.viderKarma(typeKarma);
-      activationOk = true;
-    }
-    // Uniquement le Karma d'une source
-    else if (actor.sourceUnique(typeKarma)) {
-      actor.consommerSourceKarma(actor.sourceUnique(typeKarma), coutPouvoir);
-      activationOk = true;
-    } else {
-      new DepenseKarmaFormApplication(actor, actor.system.trinite, typeKarma, "verset", coutPouvoir, versetId).render(true);
-    }
-
-    if (activationOk) {
-      carteVersetActive({
-        actor: actor,
-        versetId: versetId,
-      });
-    }
+    actor.reciterVerset(versetId, options);
   }
+
 
   static onActiverAtout(event) {
     event.preventDefault();

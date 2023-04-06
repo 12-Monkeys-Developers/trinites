@@ -1,8 +1,10 @@
+
+import TrinitesActorSheet from "./actor-sheet.js";
 import * as Roll from "../../common/rolls.js";
 import * as Chat from "../../common/chat.js";
 import { Log } from "../../common/log.js";
 
-export default class TrinitesActorSheet extends ActorSheet {
+export default class TrinitesArchonteRoiSheet extends TrinitesActorSheet {
   static get defaultOptions() {
     return mergeObject(super.defaultOptions, {
       width: 744,
@@ -13,13 +15,7 @@ export default class TrinitesActorSheet extends ActorSheet {
   }
 
   get template() {
-    if (this.actor.type === "trinite") {
-      Log.debug(`type : ${this.actor.type} | Chargement du template systems/trinites/templates/sheets/actors/personnage-sheet.html`);
-      return "systems/trinites/templates/sheets/actors/personnage-sheet.html";
-    } else if (this.actor.type === "archonteRoi") {
-      Log.debug(`type : ${this.actor.type} | Chargement du template systems/trinites/templates/sheets/actors/archonteRoi-sheet.html`);
-      return "systems/trinites/templates/sheets/actors/archonteRoi-sheet.html";
-    }
+         return "systems/trinites/templates/sheets/actors/archonteRoi-sheet.html";
   }
 
   getData() {
@@ -76,58 +72,10 @@ export default class TrinitesActorSheet extends ActorSheet {
     Item.fromDropData(data).then(item => {
       const itemData = duplicate(item);
       switch (itemData.type) {
-        case "metier":
-          return this._onDropMetierItem(event, itemData);
-        case "vieAnterieure":
-          return this._onDropVieAnterieureItem(event, itemData);  
         default:
           return super._onDropItem(event, data);
       }
     });
-  }
-
-  /**
-   * Handle the drop of a metier item on the actor sheet
-   *
-   * @name _onDropMetierItem
-   * @param {*} event
-   * @param {*} itemData
-   */
-  async _onDropMetierItem(event, itemData) {
-    event.preventDefault();
-
-    if (!this.actor.isUnlocked) return;
-
-    if (this.actor.hasMetier) {
-      ui.notifications.warn(game.i18n.localize("TRINITES.notification.warning.metierExistant"));
-      return;
-    }
-
-    Log.info("_onDropMetierItem", itemData);
-
-    this.actor.ajouterMetier(itemData);
-  }
-
-  /**
-   * Handle the drop of a Vie Anterieure item on the actor sheet
-   *
-   * @name _onDropVieAnterieureItem
-   * @param {*} event
-   * @param {*} itemData
-   */
-  _onDropVieAnterieureItem(event, itemData) {
-    event.preventDefault();
-
-    if (!this.actor.isUnlocked) return;
-
-    if (this.actor.hasVieAnterieure) {
-      ui.notifications.warn(game.i18n.localize("TRINITES.notification.warning.vieAnterieureExistant"));
-      return;
-    }
-
-    Log.info("_onDropVieAnterieureItem", itemData);
-
-    this.actor.ajouterVieAnterieure(itemData);
   }
 
   activateListeners(html) {
@@ -183,9 +131,12 @@ export default class TrinitesActorSheet extends ActorSheet {
         // Carte - Aura
         html.find(".roll-aura").click(this._onCarteAura.bind(this));
 
+        // Carte - Verset
+        html.find(".roll-verset").click(this._onCarteVerset.bind(this));
+
         // Lock/Unlock la fiche
         html.find(".sheet-change-lock").click(this._onSheetChangelock.bind(this));
-        
+       
         // Finalise la dépense des points de création
         html.find(".fa-user-lock").click(this._onEndCreation.bind(this));
 
@@ -253,22 +204,7 @@ export default class TrinitesActorSheet extends ActorSheet {
     event.preventDefault();
     // Const element = event.currentTarget;
 
-    let typeKarma = "";
-    if (this.actor.type === "trinite") {
-      switch (this.actor.system.etatSante) {
-        case "endolori":
-          typeKarma = "neutre";
-          break;
-        case "blesse":
-          typeKarma = "lumiere";
-          break;
-        case "inconscient":
-          typeKarma = "tenebre";
-          break;
-      }
-    } else if (this.actor.type === "archonteRoi") {
-      typeKarma = "tenebre";
-    }
+    const typeKarma = "tenebre";
 
     let karmaDisponible = this.actor.karmaDisponible(typeKarma);
     let activationOk = false;
@@ -433,16 +369,6 @@ export default class TrinitesActorSheet extends ActorSheet {
       versetId: dataset.itemId,
       whisper: !event.shiftKey
     });
-  }
-
-  async _onSupprimerMetier(event) {
-    event.preventDefault();
-    this.actor.supprimerMetier();
-  }
-
-  async _onSupprimerVieAnterieure(event) {
-    event.preventDefault();
-    this.actor.supprimerVieAnterieure();
   }
 
   /**

@@ -181,11 +181,6 @@ export default class TrinitesArchonteRoi extends TrinitesActor {
     return false;
   }
 
-  get isUnlocked() {
-    if (this.getFlag(game.system.id, "SheetUnlocked")) return true;
-    return false;
-  }
-
   changeDomaineEtatEpuise(domaineId, statut) {
     const domaine = this.items.get(domaineId);
     if (domaine) domaine.update({ "system.epuise": statut });

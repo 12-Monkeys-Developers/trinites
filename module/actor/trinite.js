@@ -1,4 +1,6 @@
 import TrinitesActor from "./actor.js";
+import DepenseKarmaFormApplication from "../appli/DepenseKarmaFormApp.js";
+import { carteVersetActive } from "../common/chat.js";
 
 export default class TrinitesTrinite extends TrinitesActor {
   prepareData() {
@@ -217,12 +219,8 @@ export default class TrinitesTrinite extends TrinitesActor {
 
   // Cout du pouvoir selon l'Affinité du personnage
   coutPouvoir(typePouvoir) {
-    let data = this.system;
-    if (data.themeAstral.affinite === typePouvoir) {
-      return 1;
-    } else {
-      return 2;
-    }
+    if (this.system.themeAstral.affinite === typePouvoir) return 1;
+    return 2;
   }
 
   // renvoi le code de la source de Karma si elle est la seule à contenir des points, sinon null
@@ -327,11 +325,6 @@ export default class TrinitesTrinite extends TrinitesActor {
     return false;
   }
 
-  get isUnlocked() {
-    if (this.getFlag(game.system.id, "SheetUnlocked")) return true;
-    return false;
-  }
-
   /**
    * Ajoute le nom et les bonus d'une vie antérieure
    * @param {Object*} va itemData from Drag n Drop
@@ -418,6 +411,9 @@ export default class TrinitesTrinite extends TrinitesActor {
     return await this.createEmbeddedDocuments("Item", [metier]);
   }
 
+  /**
+   * 
+   */
   async supprimerMetier() {
     const metier = this.items.find((i) => i.type === "metier");
 
@@ -444,8 +440,57 @@ export default class TrinitesTrinite extends TrinitesActor {
     await this.deleteEmbeddedDocuments("Item", [metier._id]);
   }
 
+  /**
+   * 
+   * @param {*} domaineId 
+   * @param {*} statut 
+   */
   changeDomaineEtatEpuise(domaineId, statut) {
     const domaine = this.items.get(domaineId);
     if (domaine) domaine.update({ "system.epuise": statut });
+  }
+
+  /**
+   * 
+   * @param {*} versetId 
+   * @param {Object} options 
+   * murmure = true si le verset a été murmuré : le coût augmente de 1
+   * @returns 
+   */
+  reciterVerset(versetId, options) {
+    let verset = this.items.get(versetId);
+    let typeKarma = verset.system.karma;
+
+    let karmaDisponible = this.karmaDisponible(typeKarma);
+    let coutPouvoir = this.coutPouvoir("grandLivre");
+    if (options?.murmure) coutPouvoir += 1;
+
+    let activationOk = false;
+
+    // Pas assez de Karma
+    if (karmaDisponible < coutPouvoir) {
+      if (options?.murmure) ui.notifications.warn("Vous n'avez pas assez de Karma disponible pour réciter ce verset à voix basse !");
+      else ui.notifications.warn("Vous n'avez pas assez de Karma disponible pour réciter ce verset !");
+      return;
+    }
+    // Juste ce qu'il faut de Karma
+    else if (karmaDisponible == coutPouvoir) {
+      this.viderKarma(typeKarma);
+      activationOk = true;
+    }
+    // Uniquement le Karma d'une source
+    else if (this.sourceUnique(typeKarma)) {
+      this.consommerSourceKarma(this.sourceUnique(typeKarma), coutPouvoir);
+      activationOk = true;
+    } else {
+      new DepenseKarmaFormApplication(this, this.system.trinite, typeKarma, "verset", coutPouvoir, versetId).render(true);
+    }
+
+    if (activationOk) {
+      carteVersetActive({
+        actor: this,
+        versetId: versetId,
+      });
+    }
   }
 }

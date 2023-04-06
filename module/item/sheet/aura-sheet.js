@@ -1,5 +1,5 @@
 import { Log } from "../../common/log.js";
-import TrinitesItemSheet from "./TrinitesItemSheet.js";
+import TrinitesItemSheet from "./item-sheet.js";
 
 export default class TrinitesAuraSheet extends TrinitesItemSheet {
   getData() {

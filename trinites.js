@@ -2,32 +2,30 @@ import { TRINITES } from "./module/common/config.js";
 import preloadTemplates from "./module/common/templates.js";
 import registerHandlebarsHelpers from "./module/common/helpers.js"
 import registerSystemSettings from './module/common/settings.js';
-import * as Chat from "./module/common/chat.js";
 
-import TrinitesActorSheet from "./module/actor/sheet/TrinitesActorSheet.js";
-import TrinitesItemSheet from "./module/item/sheet/TrinitesItemSheet.js";
-import TrinitesVieAnterieureSheet from "./module/item/sheet/TrinitesVieAnterieureSheet.js";
-import TrinitesAuraSheet from "./module/item/sheet/TrinitesAuraSheet.js";
-import TrinitesActor from "./module/actor/TrinitesActor.js";
-import TrinitesItem from "./module/item/TrinitesItem.js";
+import TrinitesActorSheet from "./module/actor/sheet/actor-sheet.js";
+import TrinitesItemSheet from "./module/item/sheet/item-sheet.js";
+import TrinitesVieAnterieureSheet from "./module/item/sheet/vie-anterieure-sheet.js";
+import TrinitesAuraSheet from "./module/item/sheet/aura-sheet.js";
+import { TrinitesItemProxy } from "./module/item/proxy.js";
+import { TrinitesActorProxy } from "./module/actor/proxy.js";
 
 import { Log } from "./module/common/log.js";
 import { LOG_HEAD } from "./module/common/constants.js";
 import registerHooks from "./module/common/hooks.js";
 
+
 Hooks.once("init", function() {
     Log.info("Initialisation du système");
 
     game.trinites = {
-        TrinitesActor,
-        TrinitesItem,
         config: TRINITES
     };
 
     //CONFIG.debug.hooks = true;
 
-    CONFIG.Actor.documentClass = TrinitesActor;
-    CONFIG.Item.documentClass = TrinitesItem;
+    CONFIG.Actor.documentClass = TrinitesActorProxy;
+    CONFIG.Item.documentClass = TrinitesItemProxy;
 
     Log.info(CONFIG);
 

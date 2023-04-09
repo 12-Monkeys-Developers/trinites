@@ -172,60 +172,25 @@ export class TrinitesChat {
     }
   }
 
-  static onActiverAura(event) {
+  static async onActiverAura(event) {
     event.preventDefault();
     const element = event.currentTarget;
 
     // Aura déjà déployée
     if (element.classList.contains("deployee")) {
+      console.log("Aura déjà déployée");
       return;
     }
 
     let actor = game.actors.get(element.closest(".carte.aura").dataset.actorId);
-    let auraId = element.closest(".carte.aura").dataset.itemId;
-    let aura = actor.items.get(auraId);
+    const auraId = element.closest(".carte.aura").dataset.itemId;
 
-    // Aura déjà déployée - test par sécurité
-    if (aura.system.deploiement != "") {
-      ui.notifications.warn("Cette aura est déjà déployée !");
-      return;
-    }
+    let activation = await actor.activerAura(auraId, null);
 
-    let typeKarma = "neutre";
-    let karmaDisponible = actor.karmaDisponible(typeKarma);
-    let coutPouvoir = actor.coutPouvoir("zodiaque");
-    let activationOk = false;
-
-    // Pas assez de Karma
-    if (karmaDisponible < coutPouvoir) {
-      ui.notifications.warn("Vous n'avez pas assez de Karma disponible pour déployer cette aura !");
-      return;
-    }
-    // Juste ce qu'il faut de Karma
-    else if (karmaDisponible == coutPouvoir) {
-      actor.viderKarma(typeKarma);
-      activationOk = true;
-    }
-    // Uniquement le Karma d'une source
-    else if (actor.sourceUnique(typeKarma)) {
-      actor.consommerSourceKarma(actor.sourceUnique(typeKarma), coutPouvoir);
-      activationOk = true;
-    } else {
-      new DepenseKarmaFormApplication(actor, actor.system.trinite, typeKarma, "aura", coutPouvoir, auraId).render(true);
-
-      // MAJ de la carte - dialog
-      element.title = `La fenêtre de sélection de Karma a été affichée`;
-      element.classList.add("deployee");
-      element.closest(".carte.aura").getElementsByClassName("zone")[0].innerHTML = "A déterminer";
-    }
-
-    if (activationOk) {
-      aura.update({ "data.deploiement": "cosme" });
-
-      // MAJ de la carte
-      element.title = `Vous avez déployée l'aura '${aura.name}'`;
-      element.classList.add("deployee");
-      element.closest(".carte.aura").getElementsByClassName("zone")[0].innerHTML = "Cosme";
+    if (typeof activation === 'object' && activation !== null) {
+      element.title = activation.title;
+      element.classList.add(activation.classList);
+      element.closest(".carte.aura").getElementsByClassName("zone")[0].innerHTML = activation.zone;
     }
   }
 

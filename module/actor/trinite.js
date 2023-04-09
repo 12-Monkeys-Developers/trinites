@@ -198,10 +198,9 @@ export default class TrinitesTrinite extends TrinitesActor {
     let karmaDisponible = 0;
 
     if (typeKarma === "neutre") {
-      karmaDisponible += data.trinite.deva.karma.value;
-      karmaDisponible += data.trinite.archonte.karma.value;
-      karmaDisponible += data.trinite.adam.karma.value;
-    } else {
+      karmaDisponible += data.trinite.deva.karma.value + data.trinite.archonte.karma.value + data.trinite.adam.karma.value;
+    } 
+    else {
       if (typeKarma === "lumiere") {
         karmaDisponible += data.trinite.deva.karma.value;
       } else if (typeKarma === "tenebre") {
@@ -272,9 +271,10 @@ export default class TrinitesTrinite extends TrinitesActor {
       this.update({ "system.trinite.archonte.karma.value": 0 });
       this.update({ "system.trinite.adam.karma.value": 0 });
     }
-    if (typeKarma === "lumiere") {
+    else if (typeKarma === "lumiere") {
       this.update({ "system.trinite.deva.karma.value": 0 });
-    } else if (typeKarma === "tenebre") {
+    } 
+    else if (typeKarma === "tenebre") {
       this.update({ "system.trinite.archonte.karma.value": 0 });
     }
 
@@ -458,14 +458,15 @@ export default class TrinitesTrinite extends TrinitesActor {
    * @returns 
    */
   reciterVerset(versetId, options) {
-    let verset = this.items.get(versetId);
-    let typeKarma = verset.system.karma;
+    const verset = this.items.get(versetId);
+    const typeKarma = verset.system.karma;
 
-    let karmaDisponible = this.karmaDisponible(typeKarma);
-    let coutPouvoir = this.coutPouvoir("grandLivre");
+    const karmaDisponible = this.karmaDisponible(typeKarma);
+    const coutPouvoir = this.coutPouvoir("grandLivre");
+    // Verset récité à voix basse
     if (options?.murmure) coutPouvoir += 1;
 
-    let activationOk = false;
+    let activable = false;
 
     // Pas assez de Karma
     if (karmaDisponible < coutPouvoir) {
@@ -476,21 +477,74 @@ export default class TrinitesTrinite extends TrinitesActor {
     // Juste ce qu'il faut de Karma
     else if (karmaDisponible == coutPouvoir) {
       this.viderKarma(typeKarma);
-      activationOk = true;
+      activable = true;
     }
     // Uniquement le Karma d'une source
     else if (this.sourceUnique(typeKarma)) {
       this.consommerSourceKarma(this.sourceUnique(typeKarma), coutPouvoir);
-      activationOk = true;
+      activable = true;
     } else {
       new DepenseKarmaFormApplication(this, this.system.trinite, typeKarma, "verset", coutPouvoir, versetId).render(true);
     }
 
-    if (activationOk) {
+    if (activable) {
       carteVersetActive({
         actor: this,
         versetId: versetId,
       });
     }
+  }
+
+  /**
+   * 
+   * @param {*} auraId 
+   * @param {Object} options 
+   */
+  async activerAura(auraId, options) {
+    const aura = this.items.get(auraId);
+
+    // Aura déjà déployée - test par sécurité
+    if (aura.system.deploiement != "") {
+      ui.notifications.warn("Cette aura est déjà déployée !");
+      return null;
+    }
+
+    const typeKarma = "neutre";
+
+    const karmaDisponible = this.karmaDisponible(typeKarma);
+    const coutPouvoir = this.coutPouvoir("zodiaque");
+    let activable = false;
+
+    // Pas assez de Karma
+    if (karmaDisponible < coutPouvoir) {
+      ui.notifications.warn("Vous n'avez pas assez de Karma disponible pour déployer cette aura !");
+      return;
+    }
+    // Juste ce qu'il faut de Karma
+    else if (karmaDisponible == coutPouvoir) {
+      this.viderKarma(typeKarma);
+      activable = true;
+    }
+    // Uniquement le Karma d'une source
+    else if (this.sourceUnique(typeKarma)) {
+      this.consommerSourceKarma(this.sourceUnique(typeKarma), coutPouvoir);
+      activable = true;
+    } 
+    else {
+      activable = await DepenseKarmaFormApplication.open(this, this.system.trinite, typeKarma, "aura", coutPouvoir, auraId);
+    }
+    
+    if (activable) {
+      aura.update({ "data.deploiement": "cosme" });
+
+      // MAJ de la carte
+      return {
+        "title": `Vous avez déployée l'aura '${aura.name}'`,
+        "classList": "deployee",
+        "zone": "Cosme"
+      }
+    }
+    return null;
+
   }
 }

@@ -1,7 +1,7 @@
 import * as Chat from "../common/chat.js";
 
 export default class DepenseKarmaFormApplication extends FormApplication {
-  constructor(actor, trinite, typeKarma, typePouvoir, coutPouvoir, idPouvoir) {
+  constructor(actor, trinite, typeKarma, typePouvoir, coutPouvoir, idPouvoir, options) {
     super();
     this.actor = actor;
     this.trinite = trinite;
@@ -11,19 +11,21 @@ export default class DepenseKarmaFormApplication extends FormApplication {
     this.idPouvoir = idPouvoir;
     this.karmaAttribue = 0;
     this.btnVisible = false;
+    this.pouvoirUtilise = false;
+  
+    this.resolve = options.resolve;
   }
 
   static get defaultOptions() {
-    return mergeObject(super.defaultOptions, {
-      classes: ["form"],
-      popOut: true,
-      template: "systems/trinites/templates/application/dep-karma-form-app.hbs",
-      id: "dep-karma-app",
-      classes: ["trinites", "dialog"],
+    return foundry.utils.mergeObject(super.defaultOptions, {
       title: game.i18n.localize("Source de Karma"),
+      id: "dep-karma-app",
+      template: "systems/trinites/templates/application/dep-karma-form-app.hbs",
+      classes: ["trinites", "dialog"],            
       height: 260,
       width: 400,
-      resizable: false,
+      popOut: true,         
+      resizable: false
     });
   }
 
@@ -35,7 +37,7 @@ export default class DepenseKarmaFormApplication extends FormApplication {
       typePouvoir: this.typePouvoir,
       karmaAttribue: this.karmaAttribue,
       btnVisible: this.btnVisible,
-      configData: game.trinites.config,
+      configData: game.trinites.config
     };
 
     let karmaDeva = {
@@ -137,7 +139,8 @@ export default class DepenseKarmaFormApplication extends FormApplication {
   }
 
   async _updateObject(event, formData) {
-    this.render();
+    //this.render();
+    this.pouvoirUtilise = true;
 
     if (this.karmaDeva.valeur != this.karmaDeva.valeurInit) {
       this.actor.majKarma("deva", this.karmaDeva.valeur);
@@ -191,6 +194,20 @@ export default class DepenseKarmaFormApplication extends FormApplication {
       this.actor.regeneration();
     }
   }
+
+  close(options) {
+		super.close(options);
+    if (this.pouvoirUtilise) this.resolve(true);
+    else this.resolve(false);
+	}
+
+  static open(actor, trinite, typeKarma, typePouvoir, coutPouvoir, idPouvoir, options) {
+    return new Promise(resolve => {
+      const dialog = new this(actor, trinite, typeKarma, typePouvoir, coutPouvoir, idPouvoir, { resolve });
+      dialog.render(true);
+    });
+  }
+
 }
 
-window.DepenseKarmaFormApplication = DepenseKarmaFormApplication;
+// window.DepenseKarmaFormApplication = DepenseKarmaFormApplication;

@@ -1,3 +1,4 @@
+{{log 'grand-livre' this}}
 <div class="grand-livre">
     <h3><i class="fas fa-book-open"></i> Grand livre</h3>
     <div class="grid-grand-livre">
@@ -9,8 +10,8 @@
                 {{#if (eq verset.system.karma "lumiere")}}
                     <div class="col-roll-verset"><a class="roll-verset" title="Jet de verset" data-item-id="{{verset._id}}"><i class="fas fa-dice"></i></a></div>
                     <div class="col-nom-verset">{{verset.name}}</div>
-                    <div class="col-edit-verset"><a class="edit-item" title="Editer" data-item-id="{{verset._id}}"> <i class="far fa-edit"></i></a></div>
-                    <div class="col-delete-verset"><a class="suppr-item" title="Supprimer" data-item-id="{{verset._id}}"><i class="fas fa-times-circle"></i></a></div>
+                    <div class="col-edit-verset"><a class="edit-item {{#unless @root.unlocked}}invisible{{/unless}}" title="Editer" data-item-id="{{verset._id}}"> <i class="far fa-edit"></i></a></div>
+                    <div class="col-delete-verset"><a class="suppr-item {{#unless @root.unlocked}}invisible{{/unless}}" title="Supprimer" data-item-id="{{verset._id}}"><i class="fas fa-times-circle"></i></a></div>
                 {{/if}}
             {{/each}}
         </div>
@@ -20,8 +21,8 @@
                 {{#if (eq verset.system.karma "tenebre")}}
                     <div class="col-roll-verset"><a class="roll-verset" title="Jet de verset" data-item-id="{{verset._id}}"><i class="fas fa-dice"></i></a></div>
                     <div class="col-nom-verset">{{verset.name}}</div>
-                    <div class="col-edit-verset"><a class="edit-item" title="Editer" data-item-id="{{verset._id}}"> <i class="far fa-edit"></i></a></div>
-                    <div class="col-delete-verset"><a class="suppr-item" title="Supprimer" data-item-id="{{verset._id}}"><i class="fas fa-times-circle"></i></a></div>
+                    <div class="col-edit-verset"><a class="edit-item {{#unless @root.unlocked}}invisible{{/unless}}" title="Editer" data-item-id="{{verset._id}}"> <i class="far fa-edit"></i></a></div>
+                    <div class="col-delete-verset"><a class="suppr-item {{#unless @root.unlocked}}invisible{{/unless}}" title="Supprimer" data-item-id="{{verset._id}}"><i class="fas fa-times-circle"></i></a></div>
                 {{/if}}
             {{/each}}
         </div>        

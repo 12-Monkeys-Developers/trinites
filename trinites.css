@@ -8,6 +8,9 @@
   color: var(--color-titre-trinite);
   font-weight: bold;
 }
+.trinites.sheet.actor .invisible {
+  visibility: hidden;
+}
 .trinites.sheet.actor .sheet-tabs.tabs {
   height: 50px;
 }

@@ -79,7 +79,7 @@ TRINITES.choeurs = {
   sepherims: "Les Sepherims",
   seneverims: "Les Seneverims",
   keroubims: "Les Keroubims",
-  berekhimes: "Les Berekhims"
+  berekhims: "Les Berekhims"
 };
 
 TRINITES.legions = {

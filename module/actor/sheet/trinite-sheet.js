@@ -32,6 +32,8 @@ export default class TrinitesTriniteSheet extends TrinitesActorSheet {
     data.unlocked = this.actor.isUnlocked;
     data.hasMetier = this.actor.hasMetier;
     data.hasVieAnterieure = this.actor.hasVieAnterieure;
+    data.metierId = this.actor.metierId;
+    data.vieAnterieureId = this.actor.vieAnterieureId;
 
     return data;
   }
@@ -373,7 +375,7 @@ export default class TrinitesTriniteSheet extends TrinitesActorSheet {
     const element = event.currentTarget;
 
     let itemId = element.dataset.itemId;
-    let item = this.actor.items.get(itemId);
+    let item = this.actor.items.get(itemId);  
 
     item.sheet.render(true);
   }

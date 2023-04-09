@@ -27,16 +27,10 @@ export default class TrinitesActorSheet extends ActorSheet {
     data.config = game.trinites.config;
 
     data.domaines = data.items.filter(item => item.type === "domaine");
-    data.versets = data.items.filter(item => item.type === "verset");
-    data.auras = data.items.filter(item => item.type === "aura");
     data.atouts = data.items.filter(item => item.type === "atout");
 
     data.descriptionHtml = TextEditor.enrichHTML(this.actor.system.description, {async:false});
     data.notesHtml = TextEditor.enrichHTML(this.actor.system.notes, {async:false});
-
-    data.unlocked = this.actor.isUnlocked;
-    data.hasMetier = this.actor.hasMetier;
-    data.hasVieAnterieure = this.actor.hasVieAnterieure;
 
     return data;
   }

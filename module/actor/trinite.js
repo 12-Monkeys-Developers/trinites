@@ -325,6 +325,14 @@ export default class TrinitesTrinite extends TrinitesActor {
     return false;
   }
 
+  get metierId() {
+    return this.hasMetier ? this.items.find((i) => i.type === "metier")._id : null
+  }
+
+  get vieAnterieureId() {
+    return this.hasVieAnterieure ? this.items.find((i) => i.type === "vieAnterieure")._id : null;
+  }
+
   /**
    * Ajoute le nom et les bonus d'une vie antérieure
    * @param {Object*} va itemData from Drag n Drop

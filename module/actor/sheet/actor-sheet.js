@@ -132,68 +132,6 @@ export default class TrinitesActorSheet extends ActorSheet {
 
   activateListeners(html) {
     super.activateListeners(html);
-
-    // Tout ce qui suit nécessite que la feuille soit éditable
-    if (!this.options.editable) return;
-
-    if (this.actor) {
-      if (this.actor.isOwner) {
-        // Supprimer un domaine
-        html.find(".suppr-domaine").click(this._onSupprimerDomaine.bind(this));
-
-        // Ajouter au domaine son statut épuisé
-        html.find(".check-domaine").click(this._onAjoutDomaineEtatEpuise.bind(this));
-
-        // Enlever au domaine son statut épuisé
-        html.find(".uncheck-domaine").click(this._onSupprDomaineEtatEpuise.bind(this));
-
-        // Ajouter à la richesse son statut épuisé
-        html.find(".check-richesse").click(this._onAjoutRichesseEtatEpuise.bind(this));
-
-        // Enlever à la richesse son statut épuisé
-        html.find(".uncheck-richesse").click(this._onSupprRichesseEtatEpuise.bind(this));
-
-        // Cocher une case de dommages
-        html.find(".case-vie").click(this._onCocherCaseDeVie.bind(this));
-
-        // Régénérer des cases de vie en dépensant du Karma
-        html.find(".regen").click(this._onRegenerationSante.bind(this));
-
-        // Changer la zone de déploiement d'une aura
-        html.find(".zone-deploiement").click(this._onZoneDeploimentAura.bind(this));
-
-        // Editer un item
-        html.find(".edit-item").click(this._onEditerItem.bind(this));
-
-        // Supprimer un item
-        html.find(".suppr-item").click(this._onSupprimerItem.bind(this));
-
-        // Jet de compétence
-        html.find(".roll-comp").click(this._onJetCompetence.bind(this));
-
-        // Jet de ressources
-        html.find(".roll-ress").click(this._onJetRessource.bind(this));
-
-        // Jet de Lame-soeur / Lame noire
-        html.find(".roll-lame").click(this._onJetLame.bind(this));
-
-        // Carte - Atout
-        html.find(".roll-atout").click(this._onCarteAtout.bind(this));
-
-        // Carte - Aura
-        html.find(".roll-aura").click(this._onCarteAura.bind(this));
-
-        // Lock/Unlock la fiche
-        html.find(".sheet-change-lock").click(this._onSheetChangelock.bind(this));
-        
-        // Finalise la dépense des points de création
-        html.find(".fa-user-lock").click(this._onEndCreation.bind(this));
-
-        // Permet la dépense des points de création
-        html.find(".fa-user-unlock").click(this._onAllowCreation.bind(this));
-
-      }
-    }
   }
 
   _onSupprimerDomaine(event) {

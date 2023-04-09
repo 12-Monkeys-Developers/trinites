@@ -8,35 +8,7 @@ export default class TrinitesActor extends Actor {
    * @param {*} typeKarma
    * @returns
    */
-  karmaDisponible(typeKarma) {
-    let data = this.system;
-    let karmaDisponible = 0;
-
-    if (this.type === "trinite") {
-      if (typeKarma === "neutre") {
-        karmaDisponible += data.trinite.deva.karma.value;
-        karmaDisponible += data.trinite.archonte.karma.value;
-        karmaDisponible += data.trinite.adam.karma.value;
-      } else {
-        if (typeKarma === "lumiere") {
-          karmaDisponible += data.trinite.deva.karma.value;
-        } else if (typeKarma === "tenebre") {
-          karmaDisponible += data.trinite.archonte.karma.value;
-        }
-
-        // Si le Karma de l'Adam' correspond au type de Karma
-        if (typeKarma === data.trinite.adam.karma.type) {
-          karmaDisponible += data.trinite.adam.karma.value;
-        }
-      }
-    } else if (this.type === "archonteRoi") {
-      if (typeKarma != "lumiere") {
-        karmaDisponible += data.archonteRoi.karma.value;
-      }
-    }
-
-    return karmaDisponible;
-  }
+  karmaDisponible(typeKarma) { }
 
   // Cout du pouvoir selon l'Affinité du personnage
   coutPouvoir(typePouvoir) {

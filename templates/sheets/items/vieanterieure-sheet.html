@@ -1,0 +1,63 @@
+<form class="{{cssClass}}" autocomplete="off">
+    <header class="sheet-header vie-anterieure">
+        <h1><input name="name" type="text" value="{{item.name}}" placeholder="Nom de la Vie antérieure"/></h1>        
+    </header>
+    <div class="sheet-content vie-anterieure" data-item-id="{{item.id}}">
+        <div class="grid-item-vie-anterieure">
+            <img src="{{item.img}}" data-edit="img" title="{{item.name}}" height="256" width="128"/>
+            
+            <div class="text-block">
+                <div class="titre-desc">Description</div>
+                {{editor data.system.description target="system.description" button=true owner=true editable=true}}
+            </div>
+            
+            <div class="form-container">
+                <label>Bonus 1</label>
+                <select name="system.bonus1.type">
+                    {{#select data.system.bonus1.type}}     
+                        <option value="aucun"></option>
+                        <option value="influence">Influence</option>
+                        <option value="reseau">Réseau</option>
+                        <option value="richesse">Richesse</option>
+                        <option value="karma-lumiere">Karma-Lumière</option>
+                        <option value="karma-tenebres">Karma-Ténèbres</option>           
+                        {{#each config.competencesTriees as |competence keyCompetence|}}
+                            <option value="{{keyCompetence}}">{{competence}}</option>
+                        {{/each}}
+                    {{/select}} 
+                </select>
+                <input name="system.bonus1.valeur" type="number" value="{{item.system.bonus1.valeur}}"/>
+                <label>Bonus 2</label>
+                <select name="system.bonus2.type">
+                    {{#select data.system.bonus2.type}}    
+                        <option value="aucun"></option>
+                        <option value="influence">Influence</option>
+                        <option value="reseau">Réseau</option>
+                        <option value="richesse">Richesse</option>
+                        <option value="karma-lumiere">Karma-Lumière</option>
+                        <option value="karma-tenebres">Karma-Ténèbres</option>         
+                        {{#each config.competencesTriees as |competence keyCompetence|}}
+                            <option value="{{keyCompetence}}">{{competence}}</option>
+                        {{/each}}
+                    {{/select}} 
+                </select>
+                <input name="system.bonus2.valeur" type="number" value="{{item.system.bonus2.valeur}}"/>
+                <label>Bonus 3</label>
+                <select name="system.bonus3.type">
+                    {{#select data.system.bonus3.type}}    
+                        <option value="aucun"></option>
+                        <option value="influence">Influence</option>
+                        <option value="reseau">Réseau</option>
+                        <option value="richesse">Richesse</option>
+                        <option value="karma-lumiere">Karma-Lumière</option>
+                        <option value="karma-tenebres">Karma-Ténèbres</option>      
+                        {{#each config.competencesTriees as |competence keyCompetence|}}
+                            <option value="{{keyCompetence}}">{{competence}}</option>
+                        {{/each}}   
+                    {{/select}} 
+                </select>
+                <input name="system.bonus3.valeur" type="number" value="{{item.system.bonus3.valeur}}"/>
+            </div>
+        </div>
+    </div>
+</form>

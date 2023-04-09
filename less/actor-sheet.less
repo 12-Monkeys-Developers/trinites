@@ -1,5 +1,5 @@
 .window-app .window-content {
-    background: url("../images/parchemin-grey.jpg") repeat;
+    background: url("./images/parchemin-grey.jpg") repeat;
 }
 
 .actor-infos-line {
@@ -13,11 +13,33 @@
 
 .trinites.sheet.actor {
 
+    .invisible {
+        visibility: hidden;
+    }
+
+    .sheet-tabs.tabs {
+        height: 50px;
+    }
+
     input[type="text"]:focus, input[type="number"]:focus, input[type="password"]:focus, input[type="date"]:focus, input[type="time"]:focus, select:focus, textarea:focus {
         box-shadow: 0 0 5px var(--color-shadow-trinite);
     }
 
-    .tab.occulte {
+    input[type="number"]:read-only {
+        background-color: floralwhite;
+        cursor: default;
+    }
+
+    input[type="text"]:read-only {        
+        cursor: default;
+        border: none;
+    }
+
+    select:disabled {
+        color: black;
+    }
+
+    .tab.tab-occulte, .tab.tab-grand-livre, .tab.tab-lame-soeur, .tab.tab-zodiaque {
 
         input[type="text"]:focus, input[type="number"]:focus, input[type="password"]:focus, input[type="date"]:focus, input[type="time"]:focus, select:focus, textarea:focus {
             box-shadow: 0 0 5px var(--color-shadow-occulte);
@@ -40,7 +62,7 @@
         text-shadow: 0 0 10px var(--color-shadow-trinite);
     }
 
-    .tabs .item.active.occulte {
+    .tabs .item.active.tab-occulte {
         text-shadow: 0 0 10px var(--color-shadow-occulte);
     }
 
@@ -61,7 +83,7 @@
             font-family: 'Cabaletta';
         }
 
-        background-image: url("../images/header-back.jpg");        
+        background-image: url("./images/header-back.jpg");        
         background-position: 0% 10%;
 
         color: var(--color-actor-header);
@@ -77,18 +99,19 @@
     }
     
     .window-content {
-        background: url("../images/parchemin-grey.jpg") repeat;
+        background: url("./images/parchemin-grey.jpg") repeat;
         
-        nav .profane {
+        nav .tab-profane, nav .tab-equipement, nav .tab-description, nav .tab-notes {
+            font-family: "Cabaletta";
             color: var(--color-titre-trinite);
         }
 
-        nav .occulte {
+        nav .tab-occulte, nav .tab-grand-livre, nav .tab-lame-soeur, nav .tab-zodiaque {
             font-family: "Cabaletta";
             color: var(--color-titre-occulte);
         }
 
-        .tab.profane h3 {
+        .tab.tab-profane h3, .tab.tab-equipement h3, .tab.tab-description h3, .tab.tab-notes h3 {
             //font-family: "AvenirLTStd-Heavy";
             color: var(--color-titre-trinite);
             font-weight: bold;
@@ -96,7 +119,7 @@
             border-bottom: none;
         }
 
-        .tab.occulte h3 {
+        .tab.tab-occulte h3,.tab.tab-grand-livre h3,.tab.tab-lame-soeur h3,.tab.tab-zodiaque h3 {
             font-family: "Cabaletta";
             color: var(--color-titre-occulte);;
             font-weight: bold;
@@ -459,6 +482,128 @@
 
         .colRess-duree {
             grid-column: 8 / 9;
+        }
+    }
+
+    .ress-grid-unlocked {
+        display: grid;
+        grid-template-columns: 2em 1fr 1.5em 3em 0.5em 3em 0.5em 3em 0.5em 3em 0.5em 3em 1em 1.5fr;
+        margin: 3px;
+        align-items: center;
+
+        div {
+            margin: 2px;    
+        }
+
+        .col-titre-vide {
+            grid-column: 1 / 5;
+        }
+
+        .col-titre {
+            font-size: 0.9em;
+            display: flex;
+            justify-content: center;
+            text-decoration: underline;
+        }
+
+        .col-titre.metier {
+            grid-column: 4 / 5;
+        }
+
+        .col-titre.pc {
+            grid-column: 6 / 7;
+        }
+        
+        .col-titre.va {
+            grid-column: 8 / 9;
+        }
+
+        .col-titre.pex {
+            grid-column: 10 / 11;
+        }
+
+        .col-titre.diminution {
+            grid-column: 11 / 14;
+        }
+
+        .col-titre.duree {
+            grid-column: 14 / 15;
+        }
+
+        .colRess-dice {
+            grid-column: 1 / 2;
+            display: flex;
+            justify-content: center;
+        }
+
+        .colRess-nom {
+            grid-column: 2 / 3;
+            font-size: 0.9em;
+        }
+
+        .colRess-epuisee {
+            grid-column: 3 / 4;
+            display: flex;
+            justify-content: center;
+        }
+
+        .colRess-metier {
+            grid-column: 4 / 5;
+            display: flex;
+            justify-content: center;
+
+            input {                
+                text-align: center;
+                font-size: 0.9em;
+            }
+        }
+
+        .colRess-crea {
+            grid-column: 6 / 7;
+            display: flex;
+            justify-content: center;
+
+            input {                
+                text-align: center;
+                font-size: 0.9em;
+            }
+        }
+
+        .colRess-va {
+            grid-column: 8 / 9;
+            display: flex;
+            justify-content: center;
+
+            input {                
+                text-align: center;
+                font-size: 0.9em;
+            }
+        }
+
+        .colRess-exp {
+            grid-column: 10 / 11;
+            display: flex;
+            justify-content: center;
+
+            input {                
+                text-align: center;
+                font-size: 0.9em;
+            }
+        }
+
+        .colRess-diminution {
+            grid-column: 12 / 13;
+            display: flex;
+            justify-content: center;
+
+            input {
+                text-align: center;
+                font-size: 0.9em;
+            }
+        }
+
+        .colRess-duree {
+            grid-column: 14 / 15;
         }
     }
 
@@ -839,5 +984,40 @@
                 margin: 2px;
             }
         }                
+    }
+
+    .editor {
+        .editor-edit {
+            background: var(--primary);
+            color: white;
+        }
+
+        // When the editor is open, fill more space so the user has something to work with
+        .tox.tox-tinymce {
+            // !important to work around tox's limitations and a foundry issue where initial height is overwritten
+            height: 200px!important;
+        }
+
+        .tox {
+            .tox-editor-container {
+                .tox-editor-header {
+                    .tox-toolbar-overlord {
+                        background-color: var(--secondary);
+                        .tox-toolbar {
+                            &__primary {
+                                background-color: var(--alt);
+                                box-shadow: inset 0 0 0 1px rgba(white, 0.3);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        .editor-content {
+            background: rgba(0, 0, 0, 5%);
+            min-height: 75px;
+            overflow-y: inherit;
+        }
     }
 }

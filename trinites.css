@@ -1,5 +1,5 @@
 .window-app .window-content {
-  background: url("../images/parchemin-grey.jpg") repeat;
+  background: url("./images/parchemin-grey.jpg") repeat;
 }
 .actor-infos-line {
   display: flex;
@@ -7,6 +7,12 @@
 .sheet-tabs.tabs a {
   color: var(--color-titre-trinite);
   font-weight: bold;
+}
+.trinites.sheet.actor .invisible {
+  visibility: hidden;
+}
+.trinites.sheet.actor .sheet-tabs.tabs {
+  height: 50px;
 }
 .trinites.sheet.actor input[type="text"]:focus,
 .trinites.sheet.actor input[type="number"]:focus,
@@ -17,16 +23,51 @@
 .trinites.sheet.actor textarea:focus {
   box-shadow: 0 0 5px var(--color-shadow-trinite);
 }
-.trinites.sheet.actor .tab.occulte input[type="text"]:focus,
-.trinites.sheet.actor .tab.occulte input[type="number"]:focus,
-.trinites.sheet.actor .tab.occulte input[type="password"]:focus,
-.trinites.sheet.actor .tab.occulte input[type="date"]:focus,
-.trinites.sheet.actor .tab.occulte input[type="time"]:focus,
-.trinites.sheet.actor .tab.occulte select:focus,
-.trinites.sheet.actor .tab.occulte textarea:focus {
+.trinites.sheet.actor input[type="number"]:read-only {
+  background-color: floralwhite;
+  cursor: default;
+}
+.trinites.sheet.actor input[type="text"]:read-only {
+  cursor: default;
+  border: none;
+}
+.trinites.sheet.actor select:disabled {
+  color: black;
+}
+.trinites.sheet.actor .tab.tab-occulte input[type="text"]:focus,
+.trinites.sheet.actor .tab.tab-grand-livre input[type="text"]:focus,
+.trinites.sheet.actor .tab.tab-lame-soeur input[type="text"]:focus,
+.trinites.sheet.actor .tab.tab-zodiaque input[type="text"]:focus,
+.trinites.sheet.actor .tab.tab-occulte input[type="number"]:focus,
+.trinites.sheet.actor .tab.tab-grand-livre input[type="number"]:focus,
+.trinites.sheet.actor .tab.tab-lame-soeur input[type="number"]:focus,
+.trinites.sheet.actor .tab.tab-zodiaque input[type="number"]:focus,
+.trinites.sheet.actor .tab.tab-occulte input[type="password"]:focus,
+.trinites.sheet.actor .tab.tab-grand-livre input[type="password"]:focus,
+.trinites.sheet.actor .tab.tab-lame-soeur input[type="password"]:focus,
+.trinites.sheet.actor .tab.tab-zodiaque input[type="password"]:focus,
+.trinites.sheet.actor .tab.tab-occulte input[type="date"]:focus,
+.trinites.sheet.actor .tab.tab-grand-livre input[type="date"]:focus,
+.trinites.sheet.actor .tab.tab-lame-soeur input[type="date"]:focus,
+.trinites.sheet.actor .tab.tab-zodiaque input[type="date"]:focus,
+.trinites.sheet.actor .tab.tab-occulte input[type="time"]:focus,
+.trinites.sheet.actor .tab.tab-grand-livre input[type="time"]:focus,
+.trinites.sheet.actor .tab.tab-lame-soeur input[type="time"]:focus,
+.trinites.sheet.actor .tab.tab-zodiaque input[type="time"]:focus,
+.trinites.sheet.actor .tab.tab-occulte select:focus,
+.trinites.sheet.actor .tab.tab-grand-livre select:focus,
+.trinites.sheet.actor .tab.tab-lame-soeur select:focus,
+.trinites.sheet.actor .tab.tab-zodiaque select:focus,
+.trinites.sheet.actor .tab.tab-occulte textarea:focus,
+.trinites.sheet.actor .tab.tab-grand-livre textarea:focus,
+.trinites.sheet.actor .tab.tab-lame-soeur textarea:focus,
+.trinites.sheet.actor .tab.tab-zodiaque textarea:focus {
   box-shadow: 0 0 5px var(--color-shadow-occulte);
 }
-.trinites.sheet.actor .tab.occulte a:hover {
+.trinites.sheet.actor .tab.tab-occulte a:hover,
+.trinites.sheet.actor .tab.tab-grand-livre a:hover,
+.trinites.sheet.actor .tab.tab-lame-soeur a:hover,
+.trinites.sheet.actor .tab.tab-zodiaque a:hover {
   text-shadow: 0 0 8px var(--color-shadow-occulte);
 }
 .trinites.sheet.actor a:hover {
@@ -38,11 +79,11 @@
 .trinites.sheet.actor .tabs .item.active {
   text-shadow: 0 0 10px var(--color-shadow-trinite);
 }
-.trinites.sheet.actor .tabs .item.active.occulte {
+.trinites.sheet.actor .tabs .item.active.tab-occulte {
   text-shadow: 0 0 10px var(--color-shadow-occulte);
 }
 .trinites.sheet.actor .sheet-header {
-  background-image: url("../images/header-back.jpg");
+  background-image: url("./images/header-back.jpg");
   background-position: 0% 10%;
   color: var(--color-actor-header);
 }
@@ -65,22 +106,35 @@
   color: lightgray;
 }
 .trinites.sheet.actor .window-content {
-  background: url("../images/parchemin-grey.jpg") repeat;
+  background: url("./images/parchemin-grey.jpg") repeat;
 }
-.trinites.sheet.actor .window-content nav .profane {
+.trinites.sheet.actor .window-content nav .tab-profane,
+.trinites.sheet.actor .window-content nav .tab-equipement,
+.trinites.sheet.actor .window-content nav .tab-description,
+.trinites.sheet.actor .window-content nav .tab-notes {
+  font-family: "Cabaletta";
   color: var(--color-titre-trinite);
 }
-.trinites.sheet.actor .window-content nav .occulte {
+.trinites.sheet.actor .window-content nav .tab-occulte,
+.trinites.sheet.actor .window-content nav .tab-grand-livre,
+.trinites.sheet.actor .window-content nav .tab-lame-soeur,
+.trinites.sheet.actor .window-content nav .tab-zodiaque {
   font-family: "Cabaletta";
   color: var(--color-titre-occulte);
 }
-.trinites.sheet.actor .window-content .tab.profane h3 {
+.trinites.sheet.actor .window-content .tab.tab-profane h3,
+.trinites.sheet.actor .window-content .tab.tab-equipement h3,
+.trinites.sheet.actor .window-content .tab.tab-description h3,
+.trinites.sheet.actor .window-content .tab.tab-notes h3 {
   color: var(--color-titre-trinite);
   font-weight: bold;
   margin-left: 3px;
   border-bottom: none;
 }
-.trinites.sheet.actor .window-content .tab.occulte h3 {
+.trinites.sheet.actor .window-content .tab.tab-occulte h3,
+.trinites.sheet.actor .window-content .tab.tab-grand-livre h3,
+.trinites.sheet.actor .window-content .tab.tab-lame-soeur h3,
+.trinites.sheet.actor .window-content .tab.tab-zodiaque h3 {
   font-family: "Cabaletta";
   color: var(--color-titre-occulte);
   font-weight: bold;
@@ -387,6 +441,104 @@
 }
 .trinites.sheet.actor .ress-grid .colRess-duree {
   grid-column: 8 / 9;
+}
+.trinites.sheet.actor .ress-grid-unlocked {
+  display: grid;
+  grid-template-columns: 2em 1fr 1.5em 3em 0.5em 3em 0.5em 3em 0.5em 3em 0.5em 3em 1em 1.5fr;
+  margin: 3px;
+  align-items: center;
+}
+.trinites.sheet.actor .ress-grid-unlocked div {
+  margin: 2px;
+}
+.trinites.sheet.actor .ress-grid-unlocked .col-titre-vide {
+  grid-column: 1 / 5;
+}
+.trinites.sheet.actor .ress-grid-unlocked .col-titre {
+  font-size: 0.9em;
+  display: flex;
+  justify-content: center;
+  text-decoration: underline;
+}
+.trinites.sheet.actor .ress-grid-unlocked .col-titre.metier {
+  grid-column: 4 / 5;
+}
+.trinites.sheet.actor .ress-grid-unlocked .col-titre.pc {
+  grid-column: 6 / 7;
+}
+.trinites.sheet.actor .ress-grid-unlocked .col-titre.va {
+  grid-column: 8 / 9;
+}
+.trinites.sheet.actor .ress-grid-unlocked .col-titre.pex {
+  grid-column: 10 / 11;
+}
+.trinites.sheet.actor .ress-grid-unlocked .col-titre.diminution {
+  grid-column: 11 / 14;
+}
+.trinites.sheet.actor .ress-grid-unlocked .col-titre.duree {
+  grid-column: 14 / 15;
+}
+.trinites.sheet.actor .ress-grid-unlocked .colRess-dice {
+  grid-column: 1 / 2;
+  display: flex;
+  justify-content: center;
+}
+.trinites.sheet.actor .ress-grid-unlocked .colRess-nom {
+  grid-column: 2 / 3;
+  font-size: 0.9em;
+}
+.trinites.sheet.actor .ress-grid-unlocked .colRess-epuisee {
+  grid-column: 3 / 4;
+  display: flex;
+  justify-content: center;
+}
+.trinites.sheet.actor .ress-grid-unlocked .colRess-metier {
+  grid-column: 4 / 5;
+  display: flex;
+  justify-content: center;
+}
+.trinites.sheet.actor .ress-grid-unlocked .colRess-metier input {
+  text-align: center;
+  font-size: 0.9em;
+}
+.trinites.sheet.actor .ress-grid-unlocked .colRess-crea {
+  grid-column: 6 / 7;
+  display: flex;
+  justify-content: center;
+}
+.trinites.sheet.actor .ress-grid-unlocked .colRess-crea input {
+  text-align: center;
+  font-size: 0.9em;
+}
+.trinites.sheet.actor .ress-grid-unlocked .colRess-va {
+  grid-column: 8 / 9;
+  display: flex;
+  justify-content: center;
+}
+.trinites.sheet.actor .ress-grid-unlocked .colRess-va input {
+  text-align: center;
+  font-size: 0.9em;
+}
+.trinites.sheet.actor .ress-grid-unlocked .colRess-exp {
+  grid-column: 10 / 11;
+  display: flex;
+  justify-content: center;
+}
+.trinites.sheet.actor .ress-grid-unlocked .colRess-exp input {
+  text-align: center;
+  font-size: 0.9em;
+}
+.trinites.sheet.actor .ress-grid-unlocked .colRess-diminution {
+  grid-column: 12 / 13;
+  display: flex;
+  justify-content: center;
+}
+.trinites.sheet.actor .ress-grid-unlocked .colRess-diminution input {
+  text-align: center;
+  font-size: 0.9em;
+}
+.trinites.sheet.actor .ress-grid-unlocked .colRess-duree {
+  grid-column: 14 / 15;
 }
 .trinites.sheet.actor .ligne-vie {
   display: flex;
@@ -702,6 +854,49 @@
 .trinites.sheet.actor .grid-karma-ten .karma-ten-valeur label {
   margin: 2px;
 }
+.trinites.sheet.actor .editor .editor-edit {
+  background: var(--primary);
+  color: white;
+}
+.trinites.sheet.actor .editor .tox.tox-tinymce {
+  height: 200px!important;
+}
+.trinites.sheet.actor .editor .tox .tox-editor-container .tox-editor-header .tox-toolbar-overlord {
+  background-color: var(--secondary);
+}
+.trinites.sheet.actor .editor .tox .tox-editor-container .tox-editor-header .tox-toolbar-overlord .tox-toolbar__primary {
+  background-color: var(--alt);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.3);
+}
+.trinites.sheet.actor .editor .editor-content {
+  background: rgba(0, 0, 0, 0.05);
+  min-height: 75px;
+  overflow-y: inherit;
+}
+.trinites.sheet.item {
+  /* .sheet-header.vie-anterieure {
+          flex: 0 0 auto;
+            font: "Cabaletta";
+            padding-top: 1em;
+            color: #aa502b;
+    }*/
+}
+.trinites.sheet.item .window-content {
+  background: url("./images/parchemin-grey.jpg") repeat;
+}
+.trinites.sheet.item .window-content form {
+  display: flex;
+  flex-direction: column;
+}
+.trinites.sheet.item .window-content form .sheet-header {
+  flex: 0 0 auto;
+}
+.trinites.sheet.item .window-content form .sheet-content {
+  flex: 1 0 auto;
+}
+.trinites.sheet.item .window-content form .sheet-footer {
+  flex: 0 0 auto;
+}
 .trinites.sheet.item input[type="text"]:focus,
 .trinites.sheet.item input[type="number"]:focus,
 .trinites.sheet.item input[type="password"]:focus,
@@ -737,9 +932,6 @@
   justify-content: center;
   margin: 3px;
 }
-.trinites.sheet.item .window-content {
-  background: url("../images/parchemin-grey.jpg") repeat;
-}
 .trinites.sheet.item .sheet-header img {
   border: none;
 }
@@ -769,6 +961,101 @@
 }
 .trinites.sheet.item .sheet-content.domaine .editor {
   height: 250px;
+}
+.trinites.sheet.item .sheet-content.metier .grid-item-metier {
+  display: grid;
+  grid-template-columns: 0.5fr repeat(2, minmax(50px, 0.8fr)) 0.5fr;
+  grid-gap: 5px;
+  margin: 20px 2px 20px 2px;
+  align-items: center;
+}
+.trinites.sheet.item .sheet-content.metier .grid-item-metier label,
+.trinites.sheet.item .sheet-content.metier .grid-item-metier input,
+.trinites.sheet.item .sheet-content.metier .grid-item-metier select {
+  margin: 2px;
+}
+.trinites.sheet.item .sheet-content.metier .grid-item-metier label {
+  font-family: "Cabaletta";
+}
+.trinites.sheet.item .sheet-content.metier .grid-item-metier input {
+  width: 40px;
+  text-align: center;
+}
+.trinites.sheet.item .sheet-content.metier .grid-item:nth-child(2) {
+  grid-column-end: span 2;
+}
+.trinites.sheet.item .sheet-content.metier .editor .tox.tox-tinymce {
+  height: 200px!important;
+}
+.trinites.sheet.item .sheet-content.metier .editor .editor-content {
+  background: rgba(0, 0, 0, 0.05);
+  min-height: 75px;
+  overflow-y: inherit;
+}
+.trinites.sheet.item .sheet-header.vie-anterieure input {
+  font-family: "Cabaletta";
+  color: #aa502b;
+  border: none;
+}
+.trinites.sheet.item .sheet-footer.vie-anterieure {
+  flex: 0 0 auto;
+}
+.trinites.sheet.item .sheet-content.vie-anterieure .grid-item-vie-anterieure {
+  display: grid;
+  grid-template-columns: 30% 70%;
+  grid-template-rows: 0.8fr 0.2fr;
+  height: 100%;
+  margin: 2px;
+  grid-gap: 10px;
+}
+.trinites.sheet.item .sheet-content.vie-anterieure .grid-item-vie-anterieure label {
+  font-family: "Cabaletta";
+}
+.trinites.sheet.item .sheet-content.vie-anterieure .grid-item-vie-anterieure img {
+  grid-row: 1 / span 2;
+  grid-column: 1;
+  height: 98%;
+  width: auto;
+  border: none;
+}
+.trinites.sheet.item .sheet-content.vie-anterieure .grid-item-vie-anterieure .text-block {
+  grid-row: 1;
+  grid-column: 2;
+  height: 100%;
+  overflow: auto;
+  padding: 10px;
+}
+.trinites.sheet.item .sheet-content.vie-anterieure .grid-item-vie-anterieure .text-block .editor {
+  min-height: 300px;
+}
+.trinites.sheet.item .sheet-content.vie-anterieure .grid-item-vie-anterieure .text-block .editor .tox.tox-tinymce {
+  height: 200px!important;
+}
+.trinites.sheet.item .sheet-content.vie-anterieure .grid-item-vie-anterieure .text-block .editor .editor-content {
+  min-height: 100px;
+  overflow-y: inherit;
+}
+.trinites.sheet.item .sheet-content.vie-anterieure .grid-item-vie-anterieure .form-container {
+  grid-row: 2;
+  grid-column: 2;
+  display: grid;
+  grid-template-columns: 0.5fr 0.5fr 0.5fr;
+  gap: 10px;
+  align-items: center;
+  /* Ajouté pour aligner les éléments verticalement au centre */
+}
+.trinites.sheet.item .sheet-content.vie-anterieure .grid-item-vie-anterieure .form-container label {
+  text-align: right;
+  height: 30px;
+  line-height: 30px;
+  /* Cette propriété aligne verticalement le texte au milieu du label */
+}
+.trinites.sheet.item .sheet-content.vie-anterieure .grid-item-vie-anterieure .form-container select {
+  height: 30px;
+}
+.trinites.sheet.item .sheet-content.vie-anterieure .grid-item-vie-anterieure .form-container input {
+  width: 40px;
+  text-align: center;
 }
 .trinites.sheet.item .sheet-content.atout .grid-item-atout {
   display: grid;
@@ -821,7 +1108,7 @@
 }
 .trinites.sheet.item .sheet-content.verset .grid-data-desc {
   display: grid;
-  grid-template-columns: 250px 1fr;
+  grid-template-columns: 280px 1fr;
   margin: 2px;
   align-items: center;
 }
@@ -834,9 +1121,6 @@
 .trinites.sheet.item .sheet-content.verset .grid-data-desc label,
 .trinites.sheet.item .sheet-content.verset .grid-data-desc input {
   margin: 3px;
-}
-.trinites.sheet.item .sheet-content.verset .grid-data-desc .check {
-  padding-left: 3px;
 }
 .trinites.sheet.item .sheet-content.verset .grid-data-desc .col-mono {
   grid-column: 1 / 5;
@@ -854,22 +1138,24 @@
   color: var(--color-titre-occulte);
 }
 .trinites.sheet.item .titre-desc {
+  font-family: "Cabaletta";
   color: var(--color-titre-trinite);
   font-weight: bold;
   margin: 2px;
-  font-size: 1.1em;
+  font-size: 1.4em;
+  padding-bottom: 10px;
 }
 .trinites.sheet.item .titre-desc.occulte {
   font-family: "Cabaletta";
   color: var(--color-titre-occulte);
 }
 #chat-form textarea {
-  background-image: url("../images/header-back.jpg");
+  background-image: url("./images/header-back.jpg");
   color: var(--color-text-chat);
 }
 .chat-message,
 .chat-message.whisper {
-  background-image: url("../images/header-back.jpg");
+  background-image: url("./images/header-back.jpg");
   background-position: 30% 9%;
 }
 .chat-message .message-header,
@@ -1014,7 +1300,7 @@
   border: 1px solid var(--color-border-light-2);
   border-radius: 3px;
   box-shadow: 0 0 2px #FFF inset;
-  background: url("../images/parchemin-grey.jpg") repeat;
+  background: url("./images/parchemin-grey.jpg") repeat;
 }
 .titre-cout-ress {
   margin: 3px;
@@ -1042,17 +1328,17 @@
   margin: 3px;
 }
 .dice-deva {
-  background: url("../images/d12deva.svg") no-repeat;
+  background: url("./images/d12deva.svg") no-repeat;
   color: black;
   background-size: 40px 40px;
 }
 .dice-archonte {
-  background: url("../images/d12archonte.svg") no-repeat;
+  background: url("./images/d12archonte.svg") no-repeat;
   color: white;
   background-size: 40px 40px;
 }
 .dice-ress {
-  background: url("../images/d12ressource.svg") no-repeat;
+  background: url("./images/d12ressource.svg") no-repeat;
   color: white;
   background-size: 40px 40px;
 }
@@ -1100,7 +1386,7 @@
   border: 1px solid var(--color-border-light-2);
   border-radius: 3px;
   box-shadow: 0 0 2px #FFF inset;
-  background: url("../images/parchemin-grey.jpg") repeat;
+  background: url("./images/parchemin-grey.jpg") repeat;
 }
 .carte .entete {
   display: flex;
@@ -1146,7 +1432,7 @@
 }
 .carte .grid-carte-atout {
   display: grid;
-  grid-template-columns: 3em 1fr 3em;
+  grid-template-columns: 1fr 1fr 3em;
   margin: 3px;
   align-items: center;
 }
@@ -1493,6 +1779,11 @@
 }
 .middle-size {
   flex: 0 1 5em;
+  padding: 3px;
+  text-align: center;
+}
+.big-size {
+  flex: 0 1 25em;
   padding: 3px;
   text-align: center;
 }

@@ -1,0 +1,7 @@
+<div class="col-dice-{{col}} lig-comp-{{row}}"><a class="roll-comp" title="{{localize 'TRINITES.jetCompetence'}}" data-signe="{{signe}}" data-competence="{{competence}}"><i class="fas fa-dice"></i></a></div>
+<div class="col-nom-{{col}} lig-comp-{{row}}">{{getCompetenceLabel signe competence}}{{#if (getCompetence actor signe competence 'domaine')}}*{{/if}}</div>
+<div class="col-base-{{col}} lig-comp-{{row}}">
+  {{#if (getCompetence actor signe competence 'ouverte')}}o&nbsp;&nbsp;{{else}}f&nbsp;&nbsp;{{/if}}
+  <input name="system.competences.{{signe}}.{{competence}}.base" type="number" value="{{getCompetence actor signe competence 'base'}}" readonly />
+</div>
+<div class="col-valeur-{{col}} lig-comp-{{row}}"><label>{{getCompetence actor signe competence "valeur"}}</label></div>

@@ -1,26 +1,39 @@
-<img src="{{actor.img}}" data-edit="img" title="{{actor.name}}" height="128" width="128">
+<img src="{{actor.img}}" data-edit="img" title="{{actor.name}}" height="128" width="128" />
 <div class="actor-info">
+  <div class="actor-infos-line">
+    <h1 class="charname"><input name="name" type="text" value="{{actor.name}}" {{#unless unlocked}}readonly{{/unless}}//></h1>
+  </div>
+
+  {{#if (eq data.type "trinite")}}
     <div class="actor-infos-line">
-        <h1 class="charname"><input name="name" type="text" value="{{actor.name}}" placeholder="Nom"></h1>
-    </div>
-    <div class="actor-infos-line">
-        <label>Sexe</label>
-        <div class="small-size"><input name="system.sexe" type="text" value="{{data.system.sexe}}" placeholder="Sexe"></div>
-        <label>Age</label>
-        <div class="small-size"><input name="system.age" type="number" value="{{data.system.age}}" placeholder="Age"></div>
-        <label>Taille</label>
-        <div class="middle-size"><input name="system.taille" type="text" value="{{data.system.taille}}" placeholder="Taille"></div>
-        {{#if (eq data.type "trinite")}}
-            <label>Métier</label>
-            <div class="auto-size"><input name="system.metier" type="text" value="{{data.system.metier}}" placeholder="Métier"></div>
+      <label>{{localize "TRINITES.label.metier"}}</label>
+      <div class="middle-size {{#if hasMetier}}edit-item{{/if}}" {{#if hasMetier}}data-item-id='{{metierId}}' data-tooltip="Afficher le métier" data-tooltip-direction="UP"{{/if}}><input name="system.metier" type="text" value="{{data.system.metier}}" readonly /></div>
+      {{#if hasMetier}}
+        {{#if unlocked}}
+          <div><a class="delete-metier" title="Supprimer le métier"><i class="fa fa-trash"></i></a></div>
         {{/if}}
-        {{#if (eq data.type "archonteRoi")}}
-            <label>Couverture</label>
-            <div class="auto-size"><input name="system.couverture" type="text" value="{{data.system.metier}}" placeholder="Couverture - activité apparente"></div>
-        {{/if}}
+      {{/if}}
+      <div class="middle-size"><a class="sheet-change-lock" title="{{localize 'TRINITES.label.unlockSheet'}}">
+          {{#if unlocked}}<i class="fas fa-lock-open"></i>{{else}}<i class="fas fa-lock" ></i>{{/if}}</a>
+      </div>
+  </div>
+  <div class="actor-infos-line">
+    <label>{{localize "TRINITES.label.vieAnterieure"}}</label>
+    <div class="big-size {{#if hasVieAnterieure}}edit-item{{/if}}" {{#if hasVieAnterieure}}data-item-id='{{vieAnterieureId}}' data-tooltip="Afficher la vie antérieure" data-tooltip-direction="UP"{{/if}} ><input name="system.vieAnterieure" type="text" value="{{data.system.vieAnterieure}}" readonly /></div>
+    {{#if hasVieAnterieure}}{{#if unlocked}}<div><a class="delete-vie-anterieure" title="Supprimer la vie antérieure"><i class="fa fa-trash"></i></a></div>{{/if}}{{/if}}
+  </div>
+  {{/if}}
+
+  {{#if (eq data.type "archonteRoi")}}
+    <div class="actor-infos-line">
+      <label>{{localize "TRINITES.label.couverture"}}</label>
+      <div class="auto-size">
+          <input name="system.couverture" type="text" value="{{data.system.metier}}" placeholder="Couverture - activité apparente" />
+      </div>
     </div>
     <div class="actor-infos-line">
-        <label>Description</label>
-        <div class="auto-size"><input name="system.description" type="text" value="{{data.system.description}}" placeholder="Description"></div>
+      <label>{{localize "TRINITES.label.description"}}</label>
+      <div class="auto-size"><input name="system.description" type="text" value="{{data.system.description}}" placeholder="Description" /></div>
     </div>
+  {{/if}}
 </div>

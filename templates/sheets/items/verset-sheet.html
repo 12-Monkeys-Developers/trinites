@@ -1,67 +1,55 @@
 <form class="{{cssClass}}" autocomplete="off">
-    <header class="sheet-header occulte">
-        <img src="{{item.img}}" data-edit="img" title="{{item.name}}" height="64" width="64"/>
-        <h1 class="occulte"><input name="name" type="text" value="{{item.name}}" placeholder="Nom du verset"/></h1>
-    </header>
-    <div class="sheet-content verset occulte" data-item-id="{{item.id}}">
-        <div class="grid-item-verset">
-            <label>Karma</label>
-            <select name="system.karma">
-                {{#select data.system.karma}}
-                {{#each config.karmas as |karma keyKarma|}}
-                    <option value="{{keyKarma}}">{{karma}}</option>
-                {{/each}}
-                {{/select}} 
-            </select>
-            {{#if (eq data.system.karma "lumiere")}}
-            <label>Choeur</label>
-            <select name="system.choeurLegion">
-                {{#select data.system.choeurLegion}}
-                {{#each config.choeurs as |choeur keyChoeur|}}
-                    <option value="{{keyChoeur}}">{{choeur}}</option>
-                {{/each}}
-                {{/select}}
-            </select>
-            {{/if}}
-            {{#if (eq data.system.karma "tenebre")}}
-            <label>Légion</label>
-            <select name="system.choeurLegion">
-                {{#select data.system.choeurLegion}}
-                {{#each config.legions as |legion keyLegion|}}
-                    <option value="{{keyLegion}}">{{legion}}</option>
-                {{/each}}
-                {{/select}}
-            </select>
-            {{/if}}
-            {{#if (eq data.system.karma "aucun")}}
-            <label>Groupe</label>
-            <label>Choix du Karma ?</label>
-            {{/if}}
-            <label>Favori</label>
-            <input name="system.favori" type="text" value="{{data.system.favori}}" placeholder="Nom du favori">
-            <div class="col-sentence"><textarea name="system.sentence" placeholder="Phrase de déclenchement du verset">{{data.system.sentence}}</textarea></div>
-        </div>
-        <div class="grid-data-desc">
-            <div class="verset-data">
-                <div class="grid-data-verset">
-                    <label>Durée</label>
-                    <input name="system.duree" type="text" value="{{data.system.duree}}" placeholder="Durée">
-                    <div class="check"><label>Cumul</label></div>
-                    <input name="system.cumul" type="checkbox" value="{{data.system.cumul}}">
-                    <div class="col-mono"><label>Portée</label></div>
-                    <div class="col-mono"><input name="system.portee" type="text" value="{{data.system.portee}}" placeholder="Portée"></div>
-                    <div class="col-mono"><label>Aire d'effet</label></div>
-                    <div class="col-mono"><input name="system.aireEffet" type="text" value="{{data.system.aireEffet}}" placeholder="Aire d'effet"></div>
-                    
-                </div>
-            </div>
-            <div class="verset-desc">
-                <div class="titre-desc occulte">Effet du verset</div> 
-                {{editor data.system.description target="system.description" button=true owner=true editable=true}}
-            </div>
-        </div>
+  <header class="sheet-header occulte">
+    <img src="{{item.img}}" data-edit="img" title="{{item.name}}" height="64" width="64" />
+    <h1 class="occulte"><input name="name" type="text" value="{{item.name}}" placeholder="Nom du verset" /></h1>
+  </header>
+  <div class="sheet-content verset occulte" data-item-id="{{item.id}}">
+    <div class="grid-item-verset">
+      <label>Karma</label>
+      <select name="system.karma">
+        {{#select data.system.karma}} {{#each config.karmas as |karma keyKarma|}}
+        <option value="{{keyKarma}}">{{karma}}</option>
+        {{/each}} {{/select}}
+      </select>
+      {{#if (eq data.system.karma "lumiere")}}
+      <label>Choeur</label>
+      <select name="system.choeurLegion">
+        {{#select data.system.choeurLegion}} {{#each config.choeurs as |choeur keyChoeur|}}
+        <option value="{{keyChoeur}}">{{choeur}}</option>
+        {{/each}} {{/select}}
+      </select>
+      {{/if}} {{#if (eq data.system.karma "tenebre")}}
+      <label>Légion</label>
+      <select name="system.choeurLegion">
+        {{#select data.system.choeurLegion}} {{#each config.legions as |legion keyLegion|}}
+        <option value="{{keyLegion}}">{{legion}}</option>
+        {{/each}} {{/select}}
+      </select>
+      {{/if}} {{#if (eq data.system.karma "aucun")}}
+      <label>Groupe</label>
+      <label>Choix du Karma ?</label>
+      {{/if}}
+      <label>Favori</label>
+      <input name="system.favori" type="text" value="{{data.system.favori}}" placeholder="Nom du favori" />
+      <div class="col-sentence"><textarea name="system.sentence" placeholder="Phrase de déclenchement du verset">{{data.system.sentence}}</textarea></div>
     </div>
-    <footer class="sheet-footer occulte">
-        <div><i class="fas fa-book-open"></i> Verset</span></div>
-    </footer>
+    <div class="grid-data-desc">
+      <div class="verset-data">
+        <div class="grid-data-verset">
+          <div class="check"><label>Cumul</label></div>
+          <input name="system.cumul" type="checkbox" value="{{data.system.cumul}}" />
+          <div class="col-mono"><label>Durée</label></div>
+          <div class="col-mono"><input name="system.duree" type="text" value="{{data.system.duree}}" placeholder="Durée" /></div>
+          <div class="col-mono"><label>Portée</label></div>
+          <div class="col-mono"><input name="system.portee" type="text" value="{{data.system.portee}}" placeholder="Portée" /></div>
+          <div class="col-mono"><label>Aire d'effet</label></div>
+          <div class="col-mono"><input name="system.aireEffet" type="text" value="{{data.system.aireEffet}}" placeholder="Aire d'effet" /></div>
+        </div>
+      </div>
+      <div class="verset-desc">
+        <div class="titre-desc occulte">Effet du verset</div>
+        {{editor data.system.description target="system.description" button=true owner=true editable=true}}
+      </div>
+    </div>
+  </div>
 </form>

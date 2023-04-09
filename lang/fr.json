@@ -1,1 +1,140 @@
-{}
+{
+    "ACTOR": {
+        "TypeTrinite": "Trinité",
+        "TypeArchonteroi": "ArchonteRoi",
+        "TypeLige": "Lige",
+        "TypeHumain": "Humain"
+    },
+    
+    "ITEM": {
+        "TypeObjet": "Objet",
+        "TypeMetier": "Métier",
+        "TypeDomaine": "Domaine",
+        "TypeAura": "Aura",
+        "TypeVerset": "Verset",
+        "TypeAtout": "Atout",
+        "TypeArme": "Arme",
+        "TypePouvoir": "Pouvoir",
+        "TypeVieanterieure": "Vie Antérieure" 
+    },
+
+    "TRINITES": {
+        "label": {
+            "science_occulte":{
+                "art": "Art",
+                "augure": "Augure",
+                "autre": "Autre",
+                "alchimie": "Alchimie",
+                "kaya": "Kâyas-Yoga",
+                "hades": "Hadès",
+                "hanahata": "Hânahata-Yoga",
+                "memoire": "Mémoire",
+                "piece": "Pouvoir de Pièce",
+                "rite": "Rite",
+                "science": "Science",
+                "tyrannie": "Tyrannie",
+                "vie_eternelle": "Vie éternelle"
+            },
+            "competences": {
+                "gemeaux": {
+                    "art": "Art",
+                    "empathie": "Empathie",
+                    "seduction": "Séduction"
+                },
+                "vierge": {
+                    "clairvoyance": "Clairvoyance",
+                    "emprise": "Emprise",
+                    "meditation": "Méditation"
+                },
+                "sagittaire": {
+                    "survie": "Survie",
+                    "tir": "Tir",
+                    "vigilance": "Vigilance"
+                },
+                "poisson": {
+                    "erudition": "Erudition",
+                    "langues": "Langues",
+                    "sciences": "Sciences"
+                },
+                "belier": {
+                    "corpsACorps": "Corps à corps",
+                    "melee": "Mélée",
+                    "tactique": "Tactique"
+                },
+                "taureau": {
+                    "athletisme": "Athlétisme",
+                    "endurance": "Endurance",
+                    "force": "Force"
+                },
+                "balance": {
+                    "documentation": "Documentation",
+                    "fouille": "Fouille",
+                    "intellect": "Intellect"
+                },
+                "scorpion": {
+                    "discretion": "Discrétion",
+                    "intrusion": "Intrusion",
+                    "subterfuge": "Subterfuge"
+                },
+                "lion": {
+                    "commandement": "Commandement",
+                    "strategie": "Stratégie",
+                    "volonte": "Volonté"
+                },
+                "capricorne": {
+                    "esquive": "Esquive",
+                    "pilotage": "Pilotage",
+                    "rapidite": "Rapidité"
+                },
+                "cancer": {
+                    "artisanat": "Artisanat",
+                    "technologies": "Technologies",
+                    "soins": "Soins"
+                },
+                "verseau": {
+                    "astrologie": "Astrologie",
+                    "histoireSecrete": "Histoire secrète",
+                    "les8": "Les 8"
+                }
+            },
+            "ressources": {
+                "richesse": "Richesse",
+                "reseau": "Réseau",
+                "influence": "Influence"
+            },
+            "signes": {
+                "gemeaux": "Gémeaux",
+                "vierge": "Vierge",
+                "sagittaire": "Sagittaire",
+                "poisson": "Poisson",
+                "belier": "Bélier",
+                "taureau": "Taureau",
+                "balance": "Balance",
+                "scorpion": "Scorpion",
+                "lion": "Lion",
+                "capricorne": "Capricorne",
+                "cancer": "Cancer",
+                "verseau": "Verseau"
+            },
+            "jetCompetence": "Jet de compétence",
+            "jetRessource": "Jet de ressource",
+            "metier": "Métier",
+            "vieAnterieure": "Vie antérieure",
+            "couverture": "Couverture",
+            "description": "Description",
+            "unlockSheet": "Verrouiller/Déverrouiller la feuille",
+            "competence": {
+                "enteteLocked": "Base",
+                "enteteUnlocked": "Métier / PC / VA / PEX",
+                "valeur": "Valeur",
+                "base": "Base"
+            }
+        },
+        "notification": {
+            "warning": {
+                "metierExistant": "Vous avez déjà un métier !",
+                "vieAnterieureExistant": "Vous avez déjà une vie antérieure !"
+            }            
+        }
+    }
+}

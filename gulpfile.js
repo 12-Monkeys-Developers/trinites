@@ -7,7 +7,7 @@ gulp.task('less', function(cb) {
     .src('less/trinites.less')
     .pipe(less())
     .pipe(
-      gulp.dest("./css/")
+      gulp.dest("./")
     );
   cb();
 });

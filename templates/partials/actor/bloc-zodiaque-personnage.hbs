@@ -9,7 +9,7 @@
         <div class="centrer titre"><label>Oeil</label></div>
         <div class="col-vide"></div>
         {{#each auras as |aura id|}}
-            <div class="centrer ligne"><a class="roll-aura" data-tooltip="Jet d'aura'" data-item-id="{{aura._id}}"><i class="fas fa-dice"></i></a></div>
+            <div class="centrer ligne"><a class="roll-aura" data-tooltip="Jet d'aura" data-item-id="{{aura._id}}"><i class="fas fa-dice"></i></a></div>
             <div class="nom-aura ligne">{{aura.name}}</div>
             <div class="centrer ligne"><a class="zone-deploiement" data-tooltip="Non déployée" data-tooltip-direction="UP" data-item-id="{{aura._id}}" data-zone="cosme">{{#if (eq aura.system.deploiement "cosme")}}<i class="fas fa-circle"></i>{{else}}<i class="far fa-circle"></i>{{/if}}</a></div>
             <div class="centrer ligne"><a class="zone-deploiement" data-tooltip="Personnel" data-tooltip-direction="UP" data-item-id="{{aura._id}}" data-zone="corps">{{#if (eq aura.system.deploiement "corps")}}<i class="fas fa-circle"></i>{{else}}<i class="far fa-circle"></i>{{/if}}</a></div>

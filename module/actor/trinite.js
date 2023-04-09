@@ -504,7 +504,7 @@ export default class TrinitesTrinite extends TrinitesActor {
     const aura = this.items.get(auraId);
 
     // Aura déjà déployée - test par sécurité
-    if (aura.system.deploiement != "") {
+    if (aura.system.deploiement != "cosme") {
       ui.notifications.warn("Cette aura est déjà déployée !");
       return null;
     }
@@ -535,13 +535,13 @@ export default class TrinitesTrinite extends TrinitesActor {
     }
     
     if (activable) {
-      aura.update({ "data.deploiement": "cosme" });
+      aura.update({ "data.deploiement": "corps" });
 
       // MAJ de la carte
       return {
-        "title": `Vous avez déployée l'aura '${aura.name}'`,
+        "title": `Vous avez déployé l'aura '${aura.name}'`,
         "classList": "deployee",
-        "zone": "Cosme"
+        "zone": "Corps"
       }
     }
     return null;

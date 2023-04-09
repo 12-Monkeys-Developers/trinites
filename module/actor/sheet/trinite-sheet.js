@@ -75,6 +75,8 @@ export default class TrinitesTriniteSheet extends TrinitesActorSheet {
           return this._onDropMetierItem(event, itemData);
         case "vieAnterieure":
           return this._onDropVieAnterieureItem(event, itemData);
+        case "aura":
+          return this._onDropAuraItem(event, itemData);
         default:
           return super._onDropItem(event, data);
       }
@@ -124,6 +126,23 @@ export default class TrinitesTriniteSheet extends TrinitesActorSheet {
 
     this.actor.ajouterVieAnterieure(itemData);
   }
+  
+    /**
+   * Handle the drop of a Aura item on the actor sheet
+   *
+   * @name _onDropAuraItem
+   * @param {*} event
+   * @param {*} itemData
+   */
+    async _onDropAuraItem(event, itemData) {
+      event.preventDefault();
+  
+      if (!this.actor.isUnlocked) return;
+
+      itemData.system.deploiement = "cosme";
+
+      await this.actor.createEmbeddedDocuments("Item", [itemData]);      
+    }
 
   activateListeners(html) {
     super.activateListeners(html);

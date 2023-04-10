@@ -1,4 +1,8 @@
+{{#if (ne actor.img "icons/svg/mystery-man.svg")}}
 <img src="{{actor.img}}" data-edit="img" title="{{actor.name}}" height="128" width="128" />
+{{else}}
+<div style="flex:initial; width:128px;"></div>
+{{/if}}
 <div class="actor-info">
   <div class="actor-infos-line">
     <h1 class="charname"><input name="name" type="text" value="{{actor.name}}" {{#unless unlocked}}readonly{{/unless}}//></h1>

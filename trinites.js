@@ -33,7 +33,7 @@ Hooks.once("init", function() {
 
     Actors.unregisterSheet("core", ActorSheet);
     Actors.registerSheet("trinites", TrinitesActorSheet, { types: ["lige", "humain"], makeDefault: true});  
-    Actors.registerSheet("trinites", TrinitesTriniteSheet, { types: ["trinite"], makeDefault: true});  
+    Actors.registerSheet("trinites", TrinitesTriniteSheet, { types: ["trinite"], makeDefault: true});
     Actors.registerSheet("trinites", TrinitesArchonteRoiSheet, { types: ["archonteRoi"], makeDefault: true});  
 
     Items.unregisterSheet("core", ItemSheet);

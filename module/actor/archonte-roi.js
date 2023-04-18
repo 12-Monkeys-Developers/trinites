@@ -5,11 +5,9 @@ export default class TrinitesArchonteRoi extends TrinitesActor {
     super.prepareData();
     let system = this.system;
 
-    let pointsCreDepenses = 0;
-
     /*
      *  Calcul des bonus de Signes
-     */
+     
 
     for (let [keySigne, signe] of Object.entries(system.signes)) {
       if (system.themeAstral.archetype == keySigne) {
@@ -22,10 +20,11 @@ export default class TrinitesArchonteRoi extends TrinitesActor {
         signe.valeur = 0;
       }
     }
+    */
 
     /*
      * Calcul de la base des compétences : base = baseMetier + points de Création du métier + bonus de la Vie Antérieure + niveau obtenu par l'expérience
-     */
+     
     for (let [keySigne, compsSigne] of Object.entries(system.competences)) {
       for (let [keyComp, competence] of Object.entries(compsSigne)) {
         system.competences[keySigne][keyComp].base +=
@@ -35,13 +34,14 @@ export default class TrinitesArchonteRoi extends TrinitesActor {
           system.competences[keySigne][keyComp].pointsExp;
       }
     }
+    */
 
     /*
      * Calcul de la valeur de la compétence : valeur = base + bonus zodiacal
      */
     for (let [keySigne, compsSigne] of Object.entries(system.competences)) {
       for (let [keyComp, competence] of Object.entries(compsSigne)) {
-        if (system.competences[keySigne][keyComp].ouverte) {
+        /*if (system.competences[keySigne][keyComp].ouverte) {
           system.competences[keySigne][keyComp].valeur = system.competences[keySigne][keyComp].base + system.signes[keySigne].valeur;
         } else {
           if (system.competences[keySigne][keyComp].base > 0) {
@@ -50,6 +50,8 @@ export default class TrinitesArchonteRoi extends TrinitesActor {
             system.competences[keySigne][keyComp].valeur = 0;
           }
         }
+        */
+        system.competences[keySigne][keyComp].valeur = system.competences[keySigne][keyComp].base + system.signes[keySigne].valeur;
       }
     }
 

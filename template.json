@@ -554,6 +554,8 @@
             "templates": [ "information", "signes", "competences", "ressources", "theme", "archRoi", "lameN" ],
             "couverture": "",
             "historique": "",
+            "domaines": "",
+            "tactique": "",
             "pointsLigneVie": 8,
             "etatSante" : "indemne",
             "nbBlessure": 0
@@ -572,22 +574,41 @@
         }
     },
     "Item": {
-        "types": ["ame","arme","atout","aura","domaine","jardin","majeste","metier","objet","pouvoir","verset","vieAnterieure"],
+        "types": ["ame","arme", "armure", "atout","aura","domaine","jardin","majeste","metier","objet","pouvoir","verset","vieAnterieure"],
         "ame":{
             "epreuve":"",
             "description":""
         },
         "arme": {
+            "description": "",
             "competence": "",
             "degats": 0,
-            "portee": "",
-            "particularites": "",
+            "portee": 0,
+            "listeParticularites": "",
+            "particularites": {
+              "retardement": false,
+              "allonge": false,
+              "multiples": false,
+              "charge": false,
+              "chargeur": false,
+              "balles": 0,
+              "desarmer": false,
+              "maitriser": false,
+              "rechargement": false,
+              "nonLetal": false,
+              "perforante": false,
+              "souffle": false,
+              "zone": false,
+              "rayon": 0
+            },
             "epee": false
         },
         "armure": {
-            "protectMeleeExplosif": 0,
-            "protectLancerTir": "",
-            "particularites": ""
+            "description": "",
+            "protectionMeleeExplosif": 0,
+            "protectionTirLancer": 0,
+            "listeParticularites": "",
+            "particularites": []
         },
         "atout": {
             "messager": "",

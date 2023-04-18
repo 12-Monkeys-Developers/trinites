@@ -145,6 +145,12 @@ TRINITES.competences = {
   "verseau.les8": "Les 8"
 };
 
+TRINITES.competencesCombat = {
+  corpsACorps: "Corps à corps",
+  melee: "Mêlée",
+  tir: "Tir"
+};
+
 TRINITES.affinites = {
   aucun: "",
   zodiaque: "Zodiaque",

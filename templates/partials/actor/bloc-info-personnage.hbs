@@ -1,7 +1,11 @@
-{{#if (ne actor.img "icons/svg/mystery-man.svg")}}
-<img src="{{actor.img}}" data-edit="img" title="{{actor.name}}" height="128" width="128" />
+{{#if unlocked}}
+  <img src="{{actor.img}}" data-edit="img" title="{{actor.name}}" height="128" width="128" />
 {{else}}
-<div style="flex:initial; width:128px;"></div>
+  {{#if (ne actor.img "icons/svg/mystery-man.svg")}}
+    <img src="{{actor.img}}" data-edit="img" title="{{actor.name}}" height="128" width="128" />
+  {{else}}
+    <div style="flex:initial; width:128px;"></div>
+  {{/if}}
 {{/if}}
 <div class="actor-info">
   <div class="actor-infos-line">
@@ -32,7 +36,7 @@
     <div class="actor-infos-line">
       <label>{{localize "TRINITES.label.couverture"}}</label>
       <div class="auto-size">
-          <input name="system.couverture" type="text" value="{{data.system.metier}}" placeholder="Couverture - activité apparente" />
+          <input name="system.couverture" type="text" value="{{data.system.couverture}}" placeholder="Couverture - activité apparente" />
       </div>
     </div>
     <div class="actor-infos-line">

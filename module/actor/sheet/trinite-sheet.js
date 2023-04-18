@@ -8,7 +8,7 @@ export default class TrinitesTriniteSheet extends TrinitesActorSheet {
     return mergeObject(super.defaultOptions, {
       width: 744,
       height: 958,
-      classes: ["trinites", "sheet", "actor"],
+      classes: ["trinites", "sheet", "actor", "trinite"],
       tabs: [{ navSelector: ".sheet-tabs", contentSelector: ".sheet-body", initial: "profane" }],
     });
   }

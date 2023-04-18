@@ -3,14 +3,14 @@
         {{> "systems/trinites/templates/partials/actor/bloc-info-personnage.hbs"}}
     </header>
     <nav class="sheet-tabs tabs" data-group="principal">
-        <a class="item profane" data-tab="profane">Profane</a>
-        <a class="item occulte" data-tab="occulte">Occulte</a>
+        <a class="item tab-profane" data-tab="profane">Profane</a>
+        <a class="item tab-occulte" data-tab="occulte">Occulte</a>
     </nav>
     <section class="sheet-body">
-        <div class="tab profane" data-group="principal" data-tab="profane">
-            {{> "systems/trinites/templates/partials/actor/bloc-profane-personnage.hbs"}}
+        <div class="tab tab-profane" data-group="principal" data-tab="profane">
+            {{> "systems/trinites/templates/partials/actor/bloc-profane-archonte-roi.hbs"}}
         </div>
-        <div class="tab occulte" data-group="principal" data-tab="occulte">
+        <div class="tab tab-occulte" data-group="principal" data-tab="occulte">
             <div class="deux-col-50-50">
                 <div class="col-A">
                     {{> "systems/trinites/templates/partials/actor/bloc-themeAstral-personnage.hbs"}}

@@ -9,7 +9,7 @@ export default class TrinitesArchonteRoiSheet extends TrinitesActorSheet {
     return mergeObject(super.defaultOptions, {
       width: 744,
       height: 958,
-      classes: ["trinites", "sheet", "actor"],
+      classes: ["trinites", "sheet", "actor", "archonte-roi"],
       tabs: [{ navSelector: ".sheet-tabs", contentSelector: ".sheet-body", initial: "profane" }]
     });
   }
@@ -26,14 +26,15 @@ export default class TrinitesArchonteRoiSheet extends TrinitesActorSheet {
     data.versets = data.items.filter(item => item.type === "verset");
     data.auras = data.items.filter(item => item.type === "aura");
     data.atouts = data.items.filter(item => item.type === "atout");
+    
+    data.pouvoirs = data.items.filter(item => item.type === "pouvoir");
+    data.armes = data.items.filter(item => item.type === "arme");
+    data.objets = data.items.filter(item => item.type === "objet");
 
     data.descriptionHtml = TextEditor.enrichHTML(this.actor.system.description, {async:false});
     data.notesHtml = TextEditor.enrichHTML(this.actor.system.notes, {async:false});
 
-    data.unlocked = this.actor.isUnlocked;
-    data.hasMetier = this.actor.hasMetier;
-    data.hasVieAnterieure = this.actor.hasVieAnterieure;
-
+    data.unlocked = true;
     return data;
   }
 

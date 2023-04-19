@@ -1,29 +1,44 @@
 <div class="grand-livre">
-    <h3><i class="fas fa-book-open"></i> Grand livre</h3>
+    <h3><i class="fas fa-book-open"></i> Versets de Lumière</h3>
     <div class="grid-grand-livre">
-        <div class="titre-grand-livre">Versets de Lumière</div>
-        <div></div>
-        <div class="titre-grand-livre">Versets de Tenèbres</div>
         <div class="grid-verset">
-            {{#each versets as |verset id|}}
-                {{#if (eq verset.system.karma "lumiere")}}
-                    <div class="col-roll-verset"><a class="roll-verset" title="Jet de verset" data-item-id="{{verset._id}}"><i class="fas fa-dice"></i></a></div>
-                    <div class="col-nom-verset">{{verset.name}}</div>
-                    <div class="col-edit-verset"><a class="edit-item {{#unless @root.unlocked}}invisible{{/unless}}" title="Editer" data-item-id="{{verset._id}}"> <i class="far fa-edit"></i></a></div>
-                    <div class="col-delete-verset"><a class="suppr-item {{#unless @root.unlocked}}invisible{{/unless}}" title="Supprimer" data-item-id="{{verset._id}}"><i class="fas fa-times-circle"></i></a></div>
-                {{/if}}
+            <div></div>
+            <div>Verset</div>
+            <div>Cumul</div>
+            <div>Durée</div>
+            <div>Portée</div>
+            <div>Aire d'effet</div>
+            {{#each versetsLumiere as |verset id|}}
+                    <div class="roll-verset"><a class="roll-verset" title="Jet de verset" data-item-id="{{verset._id}}"><i class="fas fa-dice"></i></a></div>
+                    <div class="nom-verset" data-item-id="{{verset._id}}">{{verset.name}}</div>
+                    <div class="cumul-verset"><input name="system.particularites.encombrant" type="checkbox" {{checked verset.system.cumul}} disabled/></div>
+                    <div class="duree-verset">{{verset.system.duree}}</div>
+                    <div class="portee-verset">{{verset.system.portee}}</div>
+                    <div class="aire-verset">{{verset.system.aireEffet}}</div>
+                    <div class="edit-verset"><a class="edit-item {{#unless @root.unlocked}}invisible{{/unless}}" title="Editer" data-item-id="{{verset._id}}"> <i class="far fa-edit"></i></a></div>
+                    <div class="delete-verset"><a class="suppr-item {{#unless @root.unlocked}}invisible{{/unless}}" title="Supprimer" data-item-id="{{verset._id}}"><i class="fas fa-times-circle"></i></a></div>
             {{/each}}
-        </div>
-        <div></div>
+        </div>       
+    </div>
+    <h3><i class="fas fa-book-open"></i> Versets de Tenèbres</h3>
+    <div class="grid-grand-livre">
         <div class="grid-verset">
-            {{#each versets as |verset id|}}
-                {{#if (eq verset.system.karma "tenebre")}}
-                    <div class="col-roll-verset"><a class="roll-verset" title="Jet de verset" data-item-id="{{verset._id}}"><i class="fas fa-dice"></i></a></div>
-                    <div class="col-nom-verset">{{verset.name}}</div>
-                    <div class="col-edit-verset"><a class="edit-item {{#unless @root.unlocked}}invisible{{/unless}}" title="Editer" data-item-id="{{verset._id}}"> <i class="far fa-edit"></i></a></div>
-                    <div class="col-delete-verset"><a class="suppr-item {{#unless @root.unlocked}}invisible{{/unless}}" title="Supprimer" data-item-id="{{verset._id}}"><i class="fas fa-times-circle"></i></a></div>
-                {{/if}}
+            <div></div>
+            <div>Verset</div>
+            <div>Cumul</div>
+            <div>Durée</div>
+            <div>Portée</div>
+            <div>Aire d'effet</div>
+            {{#each versetsTenebres as |verset id|}}
+                    <div class="roll-verset"><a class="roll-verset" title="Jet de verset" data-item-id="{{verset._id}}"><i class="fas fa-dice"></i></a></div>
+                    <div class="nom-verset" data-item-id="{{verset._id}}">{{verset.name}}</div>
+                    <div class="cumul-verset"><input name="system.particularites.encombrant" type="checkbox" {{checked verset.system.cumul}} disabled/></div>
+                    <div class="duree-verset">{{verset.system.duree}}</div>
+                    <div class="portee-verset">{{verset.system.portee}}</div>
+                    <div class="aire-verset">{{verset.system.aireEffet}}</div>
+                    <div class="edit-verset"><a class="edit-item {{#unless @root.unlocked}}invisible{{/unless}}" title="Editer" data-item-id="{{verset._id}}"> <i class="far fa-edit"></i></a></div>
+                    <div class="delete-verset"><a class="suppr-item {{#unless @root.unlocked}}invisible{{/unless}}" title="Supprimer" data-item-id="{{verset._id}}"><i class="fas fa-times-circle"></i></a></div>
             {{/each}}
-        </div>        
+        </div>    
     </div>
 </div>

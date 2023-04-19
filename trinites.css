@@ -703,7 +703,7 @@
 }
 .trinites.sheet.actor .grid-grand-livre {
   display: grid;
-  grid-template-columns: 1fr 1em 1fr;
+  grid-template-columns: 1fr;
   margin: 3px;
 }
 .trinites.sheet.actor .grid-grand-livre div {
@@ -717,24 +717,39 @@
 .trinites.sheet.actor .grid-verset {
   display: grid;
   font-size: 0.9em;
-  grid-template-columns: 2em 1fr 2em 2em;
+  grid-template-columns: 2em 1fr 0.5fr 1fr 0.5fr 2fr 2em 2em;
   align-items: center;
 }
-.trinites.sheet.actor .col-roll-verset {
+.trinites.sheet.actor .grid-verset .roll-verset {
   grid-column: 1 / 2;
   display: flex;
   justify-content: center;
 }
-.trinites.sheet.actor .col-nom-verset {
+.trinites.sheet.actor .grid-verset .nom-verset {
   grid-column: 2 / 3;
 }
-.trinites.sheet.actor .col-edit-verset {
+.trinites.sheet.actor .grid-verset .cumul-verset {
   grid-column: 3 / 4;
+}
+.trinites.sheet.actor .grid-verset .cumul-verset input:disabled {
+  background-color: black;
+}
+.trinites.sheet.actor .grid-verset .duree-verset {
+  grid-column: 4 / 5;
+}
+.trinites.sheet.actor .grid-verset .portee-verset {
+  grid-column: 5 / 6;
+}
+.trinites.sheet.actor .grid-verset .aire-verset {
+  grid-column: 6 / 7;
+}
+.trinites.sheet.actor .grid-verset .edit-verset {
+  grid-column: 7 / 8;
   display: flex;
   justify-content: center;
 }
-.trinites.sheet.actor .col-delete-verset {
-  grid-column: 4 / 5;
+.trinites.sheet.actor .grid-verset .delete-verset {
+  grid-column: 8 / 9;
   display: flex;
   justify-content: center;
 }
@@ -1051,7 +1066,7 @@
   grid-template-columns: repeat(5, 3.5em);
 }
 .trinites.sheet.item .sheet-content.aura .editor {
-  height: 100px;
+  min-height: 50px;
 }
 .trinites.sheet.item .sheet-content.domaine .editor {
   height: 250px;

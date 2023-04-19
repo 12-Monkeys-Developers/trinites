@@ -4,11 +4,15 @@
     </header>
     <nav class="sheet-tabs tabs" data-group="principal">
         <a class="item tab-profane" data-tab="profane">Profane</a>
+        <a class="item tab-equipement" data-tab="equipement">Equipement</a>
         <a class="item tab-occulte" data-tab="occulte">Occulte</a>
     </nav>
     <section class="sheet-body">
         <div class="tab tab-profane" data-group="principal" data-tab="profane">
             {{> "systems/trinites/templates/partials/actor/bloc-profane-archonte-roi.hbs"}}
+        </div>
+        <div class="tab tab-equipement" data-tab="equipement">
+            {{> "systems/trinites/templates/partials/actor/bloc-equipement.hbs"}}
         </div>
         <div class="tab tab-occulte" data-group="principal" data-tab="occulte">
             <div class="deux-col-50-50">

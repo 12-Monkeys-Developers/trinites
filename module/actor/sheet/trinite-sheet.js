@@ -21,15 +21,13 @@ export default class TrinitesTriniteSheet extends TrinitesActorSheet {
     const data = super.getData();
 
     data.domaines = data.items.filter((item) => item.type === "domaine");
-    data.versets = data.items.filter((item) => item.type === "verset");
+    data.versetsLumiere = data.items.filter((item) => item.type === "verset" && item.system.karma === "lumiere");
+    data.versetsTenebres = data.items.filter((item) => item.type === "verset" && item.system.karma === "tenebre");
     data.auras = data.items.filter((item) => item.type === "aura");
     data.atouts = data.items.filter((item) => item.type === "atout");
 
-    data.armes = data.items.filter(item => item.type === "arme");
-    data.armures = data.items.filter(item => item.type === "armure");
-    data.objets = data.items.filter(item => item.type === "objet");
-
     data.unlocked = this.actor.isUnlocked;
+
     data.hasMetier = this.actor.hasMetier;
     data.hasVieAnterieure = this.actor.hasVieAnterieure;
     data.metierId = this.actor.metierId;
@@ -216,9 +214,38 @@ export default class TrinitesTriniteSheet extends TrinitesActorSheet {
 
         // Permet la dépense des points de création
         html.find(".fa-user-unlock").click(this._onAllowCreation.bind(this));
+
+        // Permet d'afficher la description
+        html.find('.grid-atout .nom-atout').click(this._onItemSummary.bind(this));
+        html.find('.grid-zodiaque .nom-aura').click(this._onItemSummary.bind(this));
+        html.find('.grid-verset .nom-verset').click(this._onItemSummary.bind(this));
       }
     }
   }
+
+	/**
+   * Handle toggling of an item from the Actor sheet
+   * @private
+   */
+	_onItemSummary(event) {
+		event.preventDefault();
+		let li = $(event.currentTarget);
+		const item = this.actor.items.get(li.data('item-id'));
+
+		// Toggle summary
+		if (item?.system.description) {
+			if (li.hasClass('expanded')) {
+				let summary = li.children('.item-summary');
+				summary.slideUp(200, () => summary.remove());
+			} else {
+				let div = $(`<div class="item-summary">${item.system.description}</div>`);
+				li.append(div.hide());
+				div.slideDown(200);
+			}
+			li.toggleClass('expanded');
+		}
+	}
+
 
   _onSupprimerDomaine(event) {
     event.preventDefault();

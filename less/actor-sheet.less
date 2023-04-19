@@ -803,7 +803,7 @@
 
     .grid-grand-livre {
         display: grid;
-        grid-template-columns: 1fr 1em 1fr;
+        grid-template-columns: 1fr;
         margin: 3px;
 
         div {
@@ -820,32 +820,50 @@
     .grid-verset {
         display: grid;
         font-size: 0.9em;
-        grid-template-columns: 2em 1fr 2em 2em;
+        grid-template-columns: 2em 1fr 0.5fr 1fr 0.5fr 2fr 2em 2em;
         align-items: center;
+
+        .roll-verset {
+                grid-column: 1 / 2;
+                display: flex;
+                justify-content: center;
+            }
+
+            .nom-verset {
+                grid-column: 2 / 3;
+            }
+
+            .cumul-verset {
+                grid-column: 3 / 4;
+            }
+
+            .duree-verset {
+                grid-column: 4 / 5;
+            }
+
+            .portee-verset {
+                grid-column: 5 / 6;
+            }
+
+            .aire-verset {
+                grid-column: 6 / 7;
+            }
+
+            .edit-verset {
+                grid-column: 7 / 8;
+                display: flex;
+                justify-content: center;
+            }
+
+            .delete-verset {
+                grid-column: 8 / 9;
+                display: flex;
+                justify-content: center;
+            }
     }
 
-    .col-roll-verset {
-        grid-column: 1 / 2;
-        display: flex;
-        justify-content: center;
-    }
-
-    .col-nom-verset {
-        grid-column: 2 / 3;
-    }
-
-    .col-edit-verset {
-        grid-column: 3 / 4;
-        display: flex;
-        justify-content: center;
-    }
-
-    .col-delete-verset {
-        grid-column: 4 / 5;
-        display: flex;
-        justify-content: center;
-    }
-    ///
+    
+   
     .zodiaque {
         min-height: 80px;
     }

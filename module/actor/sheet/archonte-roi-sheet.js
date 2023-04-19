@@ -27,10 +27,7 @@ export default class TrinitesArchonteRoiSheet extends TrinitesActorSheet {
     data.atouts = data.items.filter(item => item.type === "atout");
     
     data.pouvoirs = data.items.filter(item => item.type === "pouvoir");
-    data.armes = data.items.filter(item => item.type === "arme");
-    data.armures = data.items.filter(item => item.type === "armure");
-    data.objets = data.items.filter(item => item.type === "objet");
-
+    
     data.unlocked = true;
     return data;
   }

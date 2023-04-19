@@ -20,7 +20,6 @@ export default class TrinitesArchonteRoiSheet extends TrinitesActorSheet {
 
   getData() {
     const data = super.getData();
-    data.config = game.trinites.config;
 
     data.domaines = data.items.filter(item => item.type === "domaine");
     data.versets = data.items.filter(item => item.type === "verset");
@@ -29,10 +28,8 @@ export default class TrinitesArchonteRoiSheet extends TrinitesActorSheet {
     
     data.pouvoirs = data.items.filter(item => item.type === "pouvoir");
     data.armes = data.items.filter(item => item.type === "arme");
+    data.armures = data.items.filter(item => item.type === "armure");
     data.objets = data.items.filter(item => item.type === "objet");
-
-    data.descriptionHtml = TextEditor.enrichHTML(this.actor.system.description, {async:false});
-    data.notesHtml = TextEditor.enrichHTML(this.actor.system.notes, {async:false});
 
     data.unlocked = true;
     return data;

@@ -810,7 +810,7 @@
             margin: 2px;
         } 
     }
-    ///
+    
     .titre-grand-livre {
         display: flex;
         justify-content: center;
@@ -929,6 +929,119 @@
 
         .nom-atout {
             margin: 3px;
+        }
+    }
+
+    .grid-equipements {
+        display: grid;
+        grid-template-columns: 1fr;
+        margin: 3px;
+
+        div {
+            margin: 2px;
+        }
+    }
+
+    .grid-armes {
+        display: grid;
+        font-size: 0.9em;
+        grid-template-columns: 2em 1fr 1fr 1fr 2fr 2em 2em;
+        align-items: center;
+
+        .col-roll-arme {
+            grid-column: 1 / 2;
+            display: flex;
+            justify-content: center;
+        }
+    
+        .col-nom-arme {
+            grid-column: 2 / 3;
+        }
+    
+        .col-degats-arme {
+            grid-column: 3 / 4;
+        }
+    
+        .col-portee-arme {
+            grid-column: 4 / 5;
+        }
+    
+        .col-particularites-arme {
+            grid-column: 5 / 6;
+        }
+    
+        .col-edit-arme {
+            grid-column: 6 / 7;
+            display: flex;
+            justify-content: center;
+        }
+    
+        .col-delete-arme {
+            grid-column: 7 / 8;
+            display: flex;
+            justify-content: center;
+        }
+    }
+
+    .grid-armures {
+        display: grid;
+        font-size: 0.9em;
+        grid-template-columns: 2em 1fr 1fr 1fr 2fr 2em 2em;
+        align-items: center;
+    
+        .col-nom-armure {
+            grid-column: 2 / 3;
+        }
+    
+        .col-protection-melee-armure {
+            grid-column: 3 / 4;
+        }
+    
+        .col-protection-tir-armure {
+            grid-column: 4 / 5;
+        }
+    
+        .col-particularites-armure {
+            grid-column: 5 / 6;
+        }
+    
+        .col-edit-armure {
+            grid-column: 6 / 7;
+            display: flex;
+            justify-content: center;
+        }
+    
+        .col-delete-armure {
+            grid-column: 7 / 8;
+            display: flex;
+            justify-content: center;
+        }
+    }
+
+    .grid-objets {
+        display: grid;
+        font-size: 0.9em;
+        grid-template-columns: 2em 1fr 3fr 2em 2em;
+        align-items: center;
+    
+        .col-nom-objet {
+            grid-column: 2 / 3;
+        }
+    
+        .col-description-objet {
+            grid-column: 3 / 4;
+        }
+        
+        .col-edit-objet {
+            grid-column: 4 / 5;
+            display: flex;
+            justify-content: center;
+        }
+    
+        .col-delete-objet {
+            grid-column: 5 / 6;
+            display: flex;
+            justify-content: center;
         }
     }
 

@@ -4,7 +4,23 @@
         <h1><input name="name" type="text" value="{{item.name}}" placeholder="Nom de l'armure"/></h1>
     </header>
     <div class="sheet-content armure" data-item-id="{{item.id}}">
+        <div class="grid-item">
+            <div><label>Protection contre Armes de Mêlée & Explosifs</label></div>
+            <div><input name="system.protectionMeleeExplosif" type="number" value="{{data.system.protectionMeleeExplosif}}" placeholder="0" /></div>
+            <div><label>Protection contre Armes de tir et de lancer</label></div>
+            <div><input name="system.protectionTirLancer" type="number" value="{{data.system.protectionTirLancer}}" placeholder="0" /></div>     
+        </div>
+        <div class="titre-desc">Particularités</div>
+        <div class="grid-particularites">
+            <div><label>Encombrant</label></div>
+            <div><input name="system.particularites.encombrant" type="checkbox" {{checked data.system.particularites.encombrant}}/></div>
+            <div><label>Force minimum</label></div>
+            <div><input name="system.particularites.force" type="number" value="{{data.system.particularites.force}}"/></div>
+            <div><label>Incompatible avec une arme à deux mains</label></div>
+            <div><input name="system.particularites.deuxMains" type="checkbox" {{checked data.system.particularites.deuxMains}}/></div>        
+        </div>
+        {{editor data.system.listeParticularites target="system.listeParticularites" button=true owner=true editable=true}}
         <div class="titre-desc">Description de l'armure</div> 
-        {{editor data.system.description target="system.description" button=true owner=true editable=true}}
+        {{editor data.system.description target="system.description" button=true owner=true editable=true}}        
     </div>
 </form>

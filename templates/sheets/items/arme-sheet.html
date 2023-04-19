@@ -4,7 +4,7 @@
         <h1><input name="name" type="text" value="{{item.name}}" placeholder="Nom de l'arme"/></h1>
     </header>
     <div class="sheet-content arme" data-item-id="{{item.id}}">
-        <div class="grid-item-arme">
+        <div class="grid-item">
             <div><label>Dégâts</label></div>
             <div><input name="system.degats" type="number" value="{{data.system.degats}}" placeholder="0" /></div>
             <div><label>Portée (m)</label></div>
@@ -35,7 +35,7 @@
             <div><label>Chargeur</label></div>
             <div><input name="system.particularites.chargeur" type="checkbox" {{checked data.system.particularites.chargeur}}/></div>
             <div><label>Balles</label></div>
-            <div><input name="system.balles" type="number" value="{{data.system.balles}}" placeholder="0" /></div>
+            <div><input name="system.particularites.balles" type="number" value="{{data.system.particularites.balles}}" placeholder="0" /></div>
             <div><label>Désarmer</label></div>
             <div><input name="system.particularites.desarmer" type="checkbox" {{checked data.system.particularites.desarmer}}/></div>
             <div><label>Maitriser</label></div>
@@ -51,7 +51,7 @@
             <div><label>Zone</label></div>
             <div><input name="system.particularites.zone" type="checkbox" {{checked data.system.particularites.zone}}/></div>
             <div><label>Rayon d'action (m)</label></div>
-            <div><input name="system.rayon" type="number" value="{{data.system.rayon}}" placeholder="0" /></div>
+            <div><input name="system.particularites.rayon" type="number" value="{{data.system.particularites.rayon}}" placeholder="0" /></div>
         </div>
         {{editor data.system.listeParticularites target="system.listeParticularites" button=true owner=true editable=true}}
         <div class="titre-desc">Description de l'arme</div> 

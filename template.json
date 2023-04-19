@@ -4,7 +4,8 @@
         "templates": {
             "information": {
                 "description": "",
-                "notes": ""
+                "notes": "",
+                "equipement": ""
             },
             "signes": {
                 "signes": {
@@ -562,12 +563,20 @@
         },
         "lige" : {
             "templates": [ "information", "signes", "competences", "ressources", "theme" ],
+            "domaines": "",
+            "tactique": "",
+            "karma": {
+                "value": 0,
+                "max": 0
+            },
             "pointsLigneVie": 4,
             "etatSante" : "indemne",
             "nbBlessure": 0
         },
         "humain": {
             "templates": [ "information", "signes", "competences", "ressources", "theme" ],
+            "domaines": "",
+            "tactique": "",
             "pointsLigneVie": 4,
             "etatSante" : "indemne",
             "nbBlessure": 0
@@ -608,7 +617,11 @@
             "protectionMeleeExplosif": 0,
             "protectionTirLancer": 0,
             "listeParticularites": "",
-            "particularites": []
+            "particularites": {
+                "encombrant": false,
+                "force": 0,
+                "deuxMains": false
+            }
         },
         "atout": {
             "messager": "",

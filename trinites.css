@@ -731,9 +731,6 @@
 .trinites.sheet.actor .grid-verset .cumul-verset {
   grid-column: 3 / 4;
 }
-.trinites.sheet.actor .grid-verset .cumul-verset input:disabled {
-  background-color: black;
-}
 .trinites.sheet.actor .grid-verset .duree-verset {
   grid-column: 4 / 5;
 }
@@ -962,21 +959,36 @@
 }
 .trinites.sheet.actor.trinite .dom-grid {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(6, 1fr);
 }
 .trinites.sheet.actor.trinite .dom-grid .domaine-item {
   display: grid;
-  grid-template-columns: 1fr 1.5em 1.5em;
+  grid-template-columns: 1fr 1.5em;
   align-items: center;
 }
 .trinites.sheet.actor.trinite .dom-grid .domaine-item .uncheck-domaine,
-.trinites.sheet.actor.trinite .dom-grid .domaine-item .check-domaine,
-.trinites.sheet.actor.trinite .dom-grid .domaine-item .suppr-domaine {
+.trinites.sheet.actor.trinite .dom-grid .domaine-item .check-domaine {
   display: flex;
   justify-content: center;
   margin: 3px;
 }
 .trinites.sheet.actor.trinite .dom-grid .domaine-item .nom-domaine {
+  padding-left: 5px;
+}
+.trinites.sheet.actor.trinite .dom-grid .domaine-item-unlocked {
+  display: grid;
+  grid-template-columns: 1fr 1.5em 1.5em 1.5em;
+  align-items: center;
+}
+.trinites.sheet.actor.trinite .dom-grid .domaine-item-unlocked .uncheck-domaine,
+.trinites.sheet.actor.trinite .dom-grid .domaine-item-unlocked .check-domaine,
+.trinites.sheet.actor.trinite .dom-grid .domaine-item-unlocked .suppr-domaine,
+.trinites.sheet.actor.trinite .dom-grid .domaine-item-unlocked .edit-item {
+  display: flex;
+  justify-content: center;
+  margin: 3px;
+}
+.trinites.sheet.actor.trinite .dom-grid .domaine-item-unlocked .nom-domaine {
   padding-left: 5px;
 }
 .trinites.sheet.actor.archonte-roi .domaines {
@@ -1073,7 +1085,7 @@
 }
 .trinites.sheet.item .sheet-content.metier .grid-item-metier {
   display: grid;
-  grid-template-columns: 0.5fr repeat(2, minmax(50px, 0.8fr)) 0.5fr;
+  grid-template-columns: 0.5fr repeat(2, minmax(50px, 0.6fr)) 1fr;
   grid-gap: 5px;
   margin: 20px 2px 20px 2px;
   align-items: center;
@@ -1085,6 +1097,10 @@
 }
 .trinites.sheet.item .sheet-content.metier .grid-item-metier label {
   font-family: "Cabaletta";
+}
+.trinites.sheet.item .sheet-content.metier .grid-item-metier input.domaines {
+  width: 300px;
+  text-align: left;
 }
 .trinites.sheet.item .sheet-content.metier .grid-item-metier input {
   width: 40px;

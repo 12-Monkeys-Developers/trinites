@@ -122,15 +122,14 @@
                 <h3><i class="fas fa-check"></i> DOMAINES</h3>
                 <div class="dom-grid">
                     {{#each domaines as |domaine id|}}
-                    <div class="domaine-item domaine" data-item-id="{{domaine._id}}">
-                        <div class="nom-domaine">{{domaine.name}}</div>
-                        {{#if domaine.system.epuise }}
-                            <div class="uncheck-domaine"><a title="Domaine épuisé"><i class="far fa-check-square"></i></a></div>
-                        {{else}}
-                            <div class="check-domaine"><a title="Domaine épuisé"><i class="far fa-square"></i></a></div>
-                        {{/if}}
-                        <div><a class="suppr-domaine" title="Supprimer"><i class="fas fa-times-circle"></i></a></div>
-                    </div>
+                        <div class="domaine-item domaine" data-item-id="{{domaine._id}}">
+                            <div class="nom-domaine">{{domaine.name}}</div>
+                            {{#if domaine.system.epuise }}
+                                <div class="uncheck-domaine"><a title="Domaine épuisé"><i class="far fa-check-square"></i></a></div>
+                            {{else}}
+                                <div class="check-domaine"><a title="Domaine épuisé"><i class="far fa-square"></i></a></div>
+                            {{/if}}
+                        </div>
                     {{/each}}
                 </div>
             </div>

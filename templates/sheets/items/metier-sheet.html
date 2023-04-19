@@ -14,7 +14,7 @@
                 {{/select}} 
             </select>
             <label>Points de création</label>
-            <input name="system.pc.max" type="number" value="{{item.system.pc.max}}"/>            
+            <input name="system.pc" type="number" value="{{item.system.pc}}"/>            
             <label>Compétence 1</label>
             <select name="system.competence1">
                 {{#select data.system.competence1}}           
@@ -24,7 +24,7 @@
                 {{/select}} 
             </select>
             <label>Richesse</label>
-            <input name="system.richesse.baseMetier" type="number" value="{{item.system.richesse.baseMetier}}"/>            
+            <input name="system.richesse" type="number" value="{{item.system.richesse}}"/>            
             <label>Compétence 2</label>
             <select name="system.competence2">
                 {{#select data.system.competence2}}
@@ -34,7 +34,7 @@
                 {{/select}} 
             </select>
             <label>Réseau</label>
-            <input name="system.reseau.baseMetier" type="number" value="{{item.system.reseau.baseMetier}}"/>            
+            <input name="system.reseau" type="number" value="{{item.system.reseau}}"/>            
             <label>Compétence 3</label>
             <select name="system.competence3">
                 {{#select data.system.competence3}}
@@ -44,7 +44,11 @@
                 {{/select}} 
             </select>
             <label>Influence</label>
-            <input name="system.influence.baseMetier" type="number" value="{{item.system.influence.baseMetier}}"/>
+            <input name="system.influence" type="number" value="{{item.system.influence}}"/>
+            <label>Nombre de domaines</label>
+            <input name="system.nbDomaines" type="number" value="{{item.system.nbDomaines}}"/>
+            <label>Domaines</label>
+            <input class="domaines" name="system.listeDomaines" type="text" value="{{item.system.listeDomaines}}" placeholder="Liste des domaines séparés par une virgule"/>
         </div>
         <div class="titre-desc">Description</div>
         {{editor data.system.description target="system.description" button=true owner=true editable=true}}

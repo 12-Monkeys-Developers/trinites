@@ -358,7 +358,6 @@ export async function carteAtout({ actor = null, atoutId = null, whisper = null 
 }
 
 export async function carteAtoutActive({ actor = null, atoutId = null } = {}) {
-  console.log(actor);
   let atout = actor.items.get(atoutId);
 
   // Récupération des données de l'item

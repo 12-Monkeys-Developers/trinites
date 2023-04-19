@@ -78,8 +78,6 @@ export async function jetCompetence({
 
   // Bonus de difficulte en cas de jet d'Emprise - Souffle
   if (type == "souffle") {
-    //console.log(aura);
-
     if (aura.system.signe == actorData.themeAstral.archetype) {
       difficulte = 6;
     } else if (aura.system.signe == actorData.themeAstral.ascendant1 || aura.system.signe == actorData.themeAstral.ascendant2) {

@@ -658,11 +658,9 @@
             "reseau": 0,
             "influence": 0,
             "nbDomaines": 0,
+            "listeDomaines": "",
             "domaines": [],
-            "pc": {
-                "max": 0,
-                "utilise": 0
-            }
+            "pc": 0
         },
         "objet": {
             "description": ""

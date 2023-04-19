@@ -407,16 +407,30 @@ export default class TrinitesTrinite extends TrinitesActor {
     updateObj[`system.competences.${metier.system.competence2}.baseMetier`] = 6;
     updateObj[`system.competences.${metier.system.competence3}.baseMetier`] = 6;
 
-    updateObj["system.ressources.richesse.baseMetier"] = metier.system.richesse.baseMetier;
-    updateObj["system.ressources.reseau.baseMetier"] = metier.system.reseau.baseMetier;
-    updateObj["system.ressources.influence.baseMetier"] = metier.system.influence.baseMetier;
+    updateObj["system.ressources.richesse.baseMetier"] = metier.system.richesse;
+    updateObj["system.ressources.reseau.baseMetier"] = metier.system.reseau;
+    updateObj["system.ressources.influence.baseMetier"] = metier.system.influence;
 
-    updateObj["system.creation.totale"] = metier.system.pc.max;
-    updateObj["system.creation.disponible"] = metier.system.pc.max;
+    updateObj["system.creation.totale"] = metier.system.pc;
+    updateObj["system.creation.disponible"] = metier.system.pc;
 
     this.update(updateObj);
 
-    return await this.createEmbeddedDocuments("Item", [metier]);
+    // Création des domaines
+    let domaines = metier.system.listeDomaines;
+    let liste = domaines.split(',');
+    for (const domaine of liste) {
+      await this.createEmbeddedDocuments("Item", [{type: "domaine", name: domaine}]);
+    }
+
+    const nbDomaines = metier.system.nbDomaines;
+    let domainesRestant = nbDomaines - liste.length;
+
+    for (let index = 0; index < domainesRestant; index++) {
+      await this.createEmbeddedDocuments("Item", [{type: "domaine", name: "?"}]);      
+    }
+
+    await this.createEmbeddedDocuments("Item", [metier]);
   }
 
   /**
@@ -444,7 +458,14 @@ export default class TrinitesTrinite extends TrinitesActor {
     updateObj["system.creation.disponible"] = 0;
     updateObj["system.creation.finie"] = false;
 
+    // Mise à jour des informations de l'acteur
     this.update(updateObj);
+
+    // Suppression des domaines
+    const domainesId = this.items.filter(i=>i.type === "domaine").map(i=>i._id);
+    await this.deleteEmbeddedDocuments("Item", domainesId);
+
+    // Suppression du métier
     await this.deleteEmbeddedDocuments("Item", [metier._id]);
   }
 

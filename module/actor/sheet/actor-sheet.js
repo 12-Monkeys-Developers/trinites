@@ -36,29 +36,6 @@ export default class TrinitesActorSheet extends ActorSheet {
     return data;
   }
 
-  /** @override */
-  _onDrop(event) {
-    event.preventDefault();
-    if (!this.options.editable) return false;
-    // Get dropped data
-    let data;
-    try {
-      data = JSON.parse(event.dataTransfer.getData("text/plain"));
-    } catch(err) {
-      return false;
-    }
-    if (!data) return false;
-
-    // Case 1 - Dropped Item
-    if (data.type === "Item") {
-      return this._onDropItem(event, data);
-    }
-    // Case 2 - Dropped Actor
-    if (data.type === "Actor") {
-      return false;
-    }
-  }
-
   /**
    * Handle dropping of an item reference or item data onto an Item Sheet
    *
@@ -67,83 +44,13 @@ export default class TrinitesActorSheet extends ActorSheet {
    * @param {Object} data         The data transfer extracted from the event
    * @private
    */
-  _onDropItem(event, data) {
-    Item.fromDropData(data).then(item => {
-      const itemData = duplicate(item);
-      switch (itemData.type) {
-        case "metier":
-          return this._onDropMetierItem(event, itemData);
-        case "vieAnterieure":
-          return this._onDropVieAnterieureItem(event, itemData);  
-        default:
-          return super._onDropItem(event, data);
-      }
-    });
+  async _onDropItem(event, data) {
+    return super._onDropItem(event, data);
   }
 
-  /**
-   * Handle the drop of a metier item on the actor sheet
-   *
-   * @name _onDropMetierItem
-   * @param {*} event
-   * @param {*} itemData
-   */
-  async _onDropMetierItem(event, itemData) {
-    event.preventDefault();
-
-    if (!this.actor.isUnlocked) return;
-
-    if (this.actor.hasMetier) {
-      ui.notifications.warn(game.i18n.localize("TRINITES.notification.warning.metierExistant"));
-      return;
-    }
-
-    Log.info("_onDropMetierItem", itemData);
-
-    this.actor.ajouterMetier(itemData);
-  }
-
-  /**
-   * Handle the drop of a Vie Anterieure item on the actor sheet
-   *
-   * @name _onDropVieAnterieureItem
-   * @param {*} event
-   * @param {*} itemData
-   */
-  _onDropVieAnterieureItem(event, itemData) {
-    event.preventDefault();
-
-    if (!this.actor.isUnlocked) return;
-
-    if (this.actor.hasVieAnterieure) {
-      ui.notifications.warn(game.i18n.localize("TRINITES.notification.warning.vieAnterieureExistant"));
-      return;
-    }
-
-    Log.info("_onDropVieAnterieureItem", itemData);
-
-    this.actor.ajouterVieAnterieure(itemData);
-  }
 
   activateListeners(html) {
     super.activateListeners(html);
-  }
-
-  _onSupprimerDomaine(event) {
-    event.preventDefault();
-    const element = event.currentTarget;
-
-    let domaineId = element.closest(".domaine").dataset.itemId;
-    const domaine = this.actor.items.get(domaineId);
-
-    let content = `<p>Domaine : ${domaine.name}<br>Etes-vous certain de vouloir supprimer cet objet ?<p>`;
-    let dlg = Dialog.confirm({
-      title: "Confirmation de suppression",
-      content: content,
-      yes: () => domaine.delete(),
-      // No: () =>, On ne fait rien sur le 'Non'
-      defaultYes: false
-    });
   }
 
   _onAjoutDomaineEtatEpuise(event) {

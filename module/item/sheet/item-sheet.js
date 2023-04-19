@@ -5,7 +5,6 @@ export default class TrinitesItemSheet extends ItemSheet {
       width: 650,
       height: 500,
       classes: ["trinites", "sheet", "item"],
-      //tabs: [{ navSelector: ".sheet-tabs", contentSelector: ".sheet-body", initial: "description" }]
     });
   }
 

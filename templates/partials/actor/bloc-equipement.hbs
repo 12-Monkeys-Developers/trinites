@@ -10,7 +10,6 @@
             <div></div>
             <div></div>
             {{#each armes as |arme id|}}
-                    {{log 'arme' arme}}
                     <div class="col-roll-arme"><a class="roll-arme" title="Jet d'attaque'" data-item-id="{{arme._id}}"><i class="fas fa-dice"></i></a></div>
                     <div class="col-nom-arme">{{arme.name}}</div>
                     <div class="col-degats-arme">{{arme.system.degats}}</div>
@@ -33,7 +32,6 @@
             <div></div>
 
             {{#each armures as |armure id|}}
-                    {{log 'armure' armure}}
                     <div></div>
                     <div class="col-nom-armure">{{armure.name}}</div>
                     <div class="col-protection-melee-armure">{{armure.system.protectionMeleeExplosif}}</div>
@@ -53,7 +51,6 @@
             <div></div>
             <div></div>
             {{#each objets as |objet id|}}
-                    {{log 'objet' objet}}
                     <div></div>
                     <div class="col-nom-objet">{{objet.name}}</div>
                     <div class="col-description-objet">{{{objet.system.description}}}</div>

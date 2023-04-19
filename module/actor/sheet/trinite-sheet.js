@@ -36,29 +36,6 @@ export default class TrinitesTriniteSheet extends TrinitesActorSheet {
     return data;
   }
 
-  /** @override */
-  _onDrop(event) {
-    event.preventDefault();
-    if (!this.options.editable) return false;
-    // Get dropped data
-    let data;
-    try {
-      data = JSON.parse(event.dataTransfer.getData("text/plain"));
-    } catch (err) {
-      return false;
-    }
-    if (!data) return false;
-
-    // Case 1 - Dropped Item
-    if (data.type === "Item") {
-      return this._onDropItem(event, data);
-    }
-    // Case 2 - Dropped Actor
-    if (data.type === "Actor") {
-      return false;
-    }
-  }
-
   /**
    * Handle dropping of an item reference or item data onto an Item Sheet
    *
@@ -67,7 +44,7 @@ export default class TrinitesTriniteSheet extends TrinitesActorSheet {
    * @param {Object} data         The data transfer extracted from the event
    * @private
    */
-  _onDropItem(event, data) {
+  async _onDropItem(event, data) {
     Item.fromDropData(data).then((item) => {
       const itemData = duplicate(item);
       switch (itemData.type) {

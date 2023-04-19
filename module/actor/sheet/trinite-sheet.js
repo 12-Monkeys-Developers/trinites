@@ -391,7 +391,7 @@ export default class TrinitesTriniteSheet extends TrinitesActorSheet {
     Roll.jetCompetence({
       actor: this.actor,
       signe: dataset.signe,
-      competence: dataset.competence,
+      competence: dataset.competence
     });
   }
 
@@ -401,7 +401,7 @@ export default class TrinitesTriniteSheet extends TrinitesActorSheet {
 
     Roll.jetRessource({
       actor: this.actor,
-      ressource: dataset.ressource,
+      ressource: dataset.ressource
     });
   }
 
@@ -414,7 +414,7 @@ export default class TrinitesTriniteSheet extends TrinitesActorSheet {
       degats: 4,
       portee: "",
       particularites: "",
-      epee: true,
+      epee: true
     };
 
     Roll.jetArme({
@@ -422,7 +422,7 @@ export default class TrinitesTriniteSheet extends TrinitesActorSheet {
       signe: "belier",
       competence: lame.competence,
       arme: lame,
-      type: this.actor.type === "trinite" ? "lameSoeur" : "lameNoire",
+      type: "lameSoeur"
     });
   }
 
@@ -433,7 +433,7 @@ export default class TrinitesTriniteSheet extends TrinitesActorSheet {
     Chat.carteAtout({
       actor: this.actor,
       atoutId: dataset.itemId,
-      whisper: !event.shiftKey,
+      whisper: !event.shiftKey
     });
   }
 
@@ -444,7 +444,7 @@ export default class TrinitesTriniteSheet extends TrinitesActorSheet {
     Chat.carteAura({
       actor: this.actor,
       auraId: dataset.itemId,
-      whisper: !event.shiftKey,
+      whisper: !event.shiftKey
     });
   }
 
@@ -455,7 +455,7 @@ export default class TrinitesTriniteSheet extends TrinitesActorSheet {
     Chat.carteVerset({
       actor: this.actor,
       versetId: dataset.itemId,
-      whisper: !event.shiftKey,
+      whisper: !event.shiftKey
     });
   }
 

@@ -65,7 +65,7 @@ export async function jetCompetence({
   // Définition de la formule de base du jet
   let modFormula = " + @valeur";
   // Données de base du jet
-  let label = actorData.competences[signe][competence].label;
+  let label = game.i18n.localize(`TRINITES.label.competences.${signe}.${competence}`);
   let karmaAdam = actorData.trinite.adam.karma.type;
 
   let rollData = {
@@ -105,8 +105,8 @@ export async function jetCompetence({
     modFormula += " + @malusActionLibre";
   }
 
-  let baseFormulaWhite = "1d12x[white]"+modFormula;
-  let baseFormulaBlack = "1d12x[black]"+modFormula;
+  let baseFormulaWhite = "1d12x[white]" + modFormula;
+  let baseFormulaBlack = "1d12x[black]" + modFormula;
   let rollFormula = `{${baseFormulaWhite}, ${baseFormulaBlack}}`;
 
   let rollResult = await new Roll(rollFormula, rollData).roll({ async: true });
@@ -445,7 +445,7 @@ export async function jetArme({ actor = null, signe = null, competence = null, a
 
   // Données de base du jet
   let valeur = actorData.competences[signe][competence].valeur;
-  let label = actorData.competences[signe][competence].label;
+  let label = game.i18n.localize(`TRINITES.label.competences.${signe}.${competence}`);
   let karmaAdam = actorData.trinite.adam.karma.type;
 
   let rollData = {

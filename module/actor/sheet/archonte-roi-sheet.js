@@ -329,7 +329,7 @@ export default class TrinitesArchonteRoiSheet extends TrinitesActorSheet {
       signe: "belier",
       competence: lame.competence,
       arme: lame,
-      type: this.actor.type === "trinite" ? "lameSoeur" : "lameNoire"
+      type: "lameNoire"
     });
   }
 

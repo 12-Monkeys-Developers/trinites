@@ -14,7 +14,17 @@
             <div class="logo"><img src="systems/trinites/images/lames/lame-noire.png"></div>
         {{/if}}
         <div class="infos-arme">
-            <div>{{stats.typeArme}}</div>
+            <div>
+                {{#if (eq stats.typeArme "lameSoeur")}}
+                    Lame-Soeur
+                {{else}}
+                    {{#if (eq stats.typeArme "lameNoire")}}
+                    Lame-Soeur
+                    {{else}}
+                        {{stats.typeArme}}
+                    {{/if}}
+                {{/if}}
+            </div>
             <div>Dégâts {{stats.arme.degats}}</div>
         </div>
     </div>

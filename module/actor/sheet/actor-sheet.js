@@ -221,27 +221,6 @@ export default class TrinitesActorSheet extends ActorSheet {
     });
   }
 
-  _onJetLame(event) {
-    event.preventDefault();
-    // Const dataset = event.currentTarget.dataset;
-
-    let lame = {
-      competence: "melee",
-      degats: 4,
-      portee: "",
-      particularites: "",
-      epee: true
-    };
-
-    Roll.jetArme({
-      actor: this.actor,
-      signe: "belier",
-      competence: lame.competence,
-      arme: lame,
-      type: this.actor.type === "trinite" ? "lameSoeur" : "lameNoire"
-    });
-  }
-
   _onCarteAtout(event) {
     event.preventDefault();
     const dataset = event.currentTarget.dataset;

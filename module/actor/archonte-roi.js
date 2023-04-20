@@ -4,53 +4,11 @@ export default class TrinitesArchonteRoi extends TrinitesActor {
   prepareData() {
     super.prepareData();
     let system = this.system;
-
-    /*
-     *  Calcul des bonus de Signes
-     
-
-    for (let [keySigne, signe] of Object.entries(system.signes)) {
-      if (system.themeAstral.archetype == keySigne) {
-        signe.valeur = 6;
-      } else if (system.themeAstral.ascendant1 == keySigne || system.themeAstral.ascendant2 == keySigne) {
-        signe.valeur = 4;
-      } else if (system.themeAstral.descendant1 == keySigne || system.themeAstral.descendant2 == keySigne || system.themeAstral.descendant3 == keySigne) {
-        signe.valeur = 2;
-      } else {
-        signe.valeur = 0;
-      }
-    }
-    */
-
-    /*
-     * Calcul de la base des compétences : base = baseMetier + points de Création du métier + bonus de la Vie Antérieure + niveau obtenu par l'expérience
-     
-    for (let [keySigne, compsSigne] of Object.entries(system.competences)) {
-      for (let [keyComp, competence] of Object.entries(compsSigne)) {
-        system.competences[keySigne][keyComp].base +=
-          system.competences[keySigne][keyComp].baseMetier +
-          system.competences[keySigne][keyComp].pointsCrea +
-          system.competences[keySigne][keyComp].bonusVA +
-          system.competences[keySigne][keyComp].pointsExp;
-      }
-    }
-    */
-
     /*
      * Calcul de la valeur de la compétence : valeur = base + bonus zodiacal
      */
     for (let [keySigne, compsSigne] of Object.entries(system.competences)) {
       for (let [keyComp, competence] of Object.entries(compsSigne)) {
-        /*if (system.competences[keySigne][keyComp].ouverte) {
-          system.competences[keySigne][keyComp].valeur = system.competences[keySigne][keyComp].base + system.signes[keySigne].valeur;
-        } else {
-          if (system.competences[keySigne][keyComp].base > 0) {
-            system.competences[keySigne][keyComp].valeur = system.competences[keySigne][keyComp].base + system.signes[keySigne].valeur;
-          } else {
-            system.competences[keySigne][keyComp].valeur = 0;
-          }
-        }
-        */
         system.competences[keySigne][keyComp].valeur = system.competences[keySigne][keyComp].base + system.signes[keySigne].valeur;
       }
     }
@@ -181,6 +139,14 @@ export default class TrinitesArchonteRoi extends TrinitesActor {
 
   get hasVieAnterieure() {
     return false;
+  }
+
+  get isTrinite() {
+    return false;
+  }
+
+  get isArchonteRoi() {
+    return true;
   }
 
   changeDomaineEtatEpuise(domaineId, statut) {

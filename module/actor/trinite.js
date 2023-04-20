@@ -3,6 +3,7 @@ import DepenseKarmaFormApplication from "../appli/DepenseKarmaFormApp.js";
 import { carteVersetActive } from "../common/chat.js";
 
 export default class TrinitesTrinite extends TrinitesActor {
+
   prepareData() {
     super.prepareData();
     let system = this.system;
@@ -331,6 +332,14 @@ export default class TrinitesTrinite extends TrinitesActor {
 
   get vieAnterieureId() {
     return this.hasVieAnterieure ? this.items.find((i) => i.type === "vieAnterieure")._id : null;
+  }
+
+  get isTrinite() {
+    return true;
+  }
+
+  get isArchonteRoi() {
+    return false;
   }
 
   /**

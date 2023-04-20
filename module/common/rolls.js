@@ -73,7 +73,7 @@ export async function jetCompetence({
     competence: label,
     valeur: valeur,
     karmaAdam: karmaAdam,
-    typeActor: actor.type,
+    typeActor: actor.type
   };
 
   // Bonus de difficulte en cas de jet d'Emprise - Souffle
@@ -105,23 +105,29 @@ export async function jetCompetence({
     modFormula += " + @malusActionLibre";
   }
 
-  let baseFormulaWhite = "1d12x[white]" + modFormula;
-  let baseFormulaBlack = "1d12x[black]" + modFormula;
-  let rollFormula = `{${baseFormulaWhite}, ${baseFormulaBlack}}`;
+  let rollFormula = null;
+  if (actor.isTrinite || actor.isArchonteRoi) {
+    let baseFormulaWhite = "1d12x[white]" + modFormula;
+    let baseFormulaBlack = "1d12x[black]" + modFormula;
+    rollFormula = `{${baseFormulaWhite}, ${baseFormulaBlack}}`;
+  }
+  else {
+    rollFormula = "1d12x" + modFormula;
+  }
 
   let rollResult = await new Roll(rollFormula, rollData).roll({ async: true });
 
   let resultDeva = {
     dieResult: rollResult.terms[0].rolls[0].dice[0].total,
     rollTotal: rollResult.terms[0].rolls[0].total,
-    reussite: rollResult.terms[0].rolls[0].total >= 12,
+    reussite: rollResult.terms[0].rolls[0].total >= 12
   };
   rollData.resultDeva = resultDeva;
 
   let resultArchonte = {
     dieResult: rollResult.terms[0].rolls[1].dice[0].total,
     rollTotal: rollResult.terms[0].rolls[1].total,
-    reussite: rollResult.terms[0].rolls[1].total >= 12,
+    reussite: rollResult.terms[0].rolls[1].total >= 12
   };
   rollData.resultArchonte = resultArchonte;
 
@@ -166,7 +172,7 @@ export async function jetCompetence({
     let templateContext = {
       actorId: actor.id,
       stats: rollStats,
-      roll: renderedRoll,
+      roll: renderedRoll
     };
 
     await new TrinitesChat(actor).withTemplate(messageTemplate).withData(templateContext).withRoll(rollResult).create();
@@ -194,7 +200,7 @@ async function getJetCompetenceOptions({ cfgData = null, compCombat = false, com
           // Bouton d'annulation
           label: "Annuler",
           callback: (html) => resolve({ annule: true }),
-        },
+        }
       },
       default: "jet",
       close: () => resolve({ annule: true }), // Annulation sur fermeture de la boite de dialogue
@@ -222,7 +228,7 @@ function _processJetCompetenceOptions(form) {
     sansDomaine: sansDomaine,
     actionLibre: actionLibre,
     prime: form.prime.value != "aucun" ? form.prime.value : null,
-    penalite: form.penalite.value != "aucun" ? form.penalite.value : null,
+    penalite: form.penalite.value != "aucun" ? form.penalite.value : null
   };
 }
 
@@ -440,8 +446,7 @@ export async function jetArme({ actor = null, signe = null, competence = null, a
     penalite = dialogOptions.penalite;
   }
 
-  // Définition de la formule de base du jet
-  let baseFormula = "1d12x + @valeur";
+  let modFormula = " + @valeur";
 
   // Données de base du jet
   let valeur = actorData.competences[signe][competence].valeur;
@@ -455,14 +460,14 @@ export async function jetArme({ actor = null, signe = null, competence = null, a
     karmaAdam: karmaAdam,
     typeActor: actor.type,
     typeArme: type,
-    arme: arme,
+    arme: arme
   };
 
   // Modificateur de difficulté du jet
   if (difficulte) {
     rollData.difficulte = difficulte;
     rollData.modifsJet = true;
-    baseFormula += " + @difficulte";
+    modFormula += " + @difficulte";
   }
 
   // Malus lié au nombre d'actions libres consécutives
@@ -472,24 +477,32 @@ export async function jetArme({ actor = null, signe = null, competence = null, a
     rollData.actionLibre = actionLibre;
     rollData.malusActionLibre = malusActionLibre;
     rollData.modifsJet = true;
-    baseFormula += " + @malusActionLibre";
+    modFormula += " + @malusActionLibre";
   }
 
-  let rollFormula = `{${baseFormula}, ${baseFormula}}`;
+  let rollFormula = null;
+  if (actor.isTrinite || actor.isArchonteRoi) {
+    let baseFormulaWhite = "1d12x[white]" + modFormula;
+    let baseFormulaBlack = "1d12x[black]" + modFormula;
+    rollFormula = `{${baseFormulaWhite}, ${baseFormulaBlack}}`;
+  }
+  else {
+    rollFormula = "1d12x" + modFormula;
+  }
 
   let rollResult = await new Roll(rollFormula, rollData).roll({ async: true });
 
   let resultDeva = {
     dieResult: rollResult.terms[0].rolls[0].dice[0].total,
     rollTotal: rollResult.terms[0].rolls[0].total,
-    reussite: rollResult.terms[0].rolls[0].total >= 12,
+    reussite: rollResult.terms[0].rolls[0].total >= 12
   };
   rollData.resultDeva = resultDeva;
 
   let resultArchonte = {
     dieResult: rollResult.terms[0].rolls[1].dice[0].total,
     rollTotal: rollResult.terms[0].rolls[1].total,
-    reussite: rollResult.terms[0].rolls[1].total >= 12,
+    reussite: rollResult.terms[0].rolls[1].total >= 12
   };
   rollData.resultArchonte = resultArchonte;
 

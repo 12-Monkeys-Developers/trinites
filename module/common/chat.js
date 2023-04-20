@@ -166,7 +166,10 @@ export class TrinitesChat {
     element.classList.add("used");
     element.innerHTML = "Dette de Karma payée";
 
-    let elemSouffle = element.closest(".jet-comp").getElementsByClassName("carte")[0];
+    let elt = element.closest(".jet-comp");
+    if (!elt) elt = element.closest(".jet-arme");
+
+    let elemSouffle = elt.getElementsByClassName("carte")[0];
     if (elemSouffle) {
       elemSouffle.classList.remove("hidden");
     }

@@ -165,7 +165,7 @@ export default class TrinitesTriniteSheet extends TrinitesActorSheet {
         // Jet de ressources
         html.find(".roll-ress").click(this._onJetRessource.bind(this));
 
-        // Jet de Lame-soeur / Lame noire
+        // Jet de Lame-soeur
         html.find(".roll-lame").click(this._onJetLame.bind(this));
 
         // Carte - Atout

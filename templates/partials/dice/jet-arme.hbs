@@ -9,9 +9,10 @@
     <div class="bloc-arme">
         {{#if (eq stats.typeArme "lameSoeur")}}
             <div class="logo"><img src="systems/trinites/images/lames/lame-soeur.png"></div>
-        {{/if}}
-        {{#if (eq stats.typeArme "lameNoire")}}
+        {{else if (eq stats.typeArme "lameNoire")}}
             <div class="logo"><img src="systems/trinites/images/lames/lame-noire.png"></div>
+        {{else}}
+            <div></div>
         {{/if}}
         <div class="infos-arme">
             <div>
@@ -19,7 +20,7 @@
                     Lame-Soeur
                 {{else}}
                     {{#if (eq stats.typeArme "lameNoire")}}
-                    Lame-Soeur
+                    Lame Noire
                     {{else}}
                         {{stats.typeArme}}
                     {{/if}}

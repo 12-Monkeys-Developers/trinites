@@ -2,6 +2,7 @@ import * as Roll from "../../common/rolls.js";
 import * as Chat from "../../common/chat.js";
 import { Log } from "../../common/log.js";
 
+
 export default class TrinitesActorSheet extends ActorSheet {
   static get defaultOptions() {
     return mergeObject(super.defaultOptions, {
@@ -51,6 +52,9 @@ export default class TrinitesActorSheet extends ActorSheet {
 
   activateListeners(html) {
     super.activateListeners(html);
+
+     // Jet de Lame-soeur
+     html.find(".roll-arme").click(this._onJetArme.bind(this));
   }
 
   _onAjoutDomaineEtatEpuise(event) {
@@ -289,4 +293,27 @@ export default class TrinitesActorSheet extends ActorSheet {
     await this.actor.update({ "system.creation.finie": false });
   }
 
+  _onJetArme(event) {
+    event.preventDefault();
+    const itemId = event.currentTarget.dataset.itemId;
+    const item = this.actor.items.get(itemId);
+
+    let arme = {
+      competence: item.system.competence,
+      degats: item.system.degats,
+      portee: item.system.portee,
+      particularites: item.system.particularites,
+      epee: item.system.epee
+    };
+
+    const signe = item.system.competence === "tir" ? "sagittaire" : "belier";
+
+    Roll.jetArme({
+      actor: this.actor,
+      signe: signe,
+      competence: arme.competence,
+      arme: arme,
+      type: item.name
+    });
+  }
 }

@@ -55,7 +55,7 @@
                         "bonusVA": 0,
                         "pointsExp": 0,
                         "diminution": 0,
-                        "dureeDiminution": "",
+                        "duree": "",
                         "epuisee": false
                       },
                     "reseau": {
@@ -64,7 +64,7 @@
                         "bonusVA": 0,
                         "pointsExp": 0,
                         "diminution": 0,
-                        "dureeDiminution": "",
+                        "duree": "",
                         "epuisee": false
                     },
                     "influence": {
@@ -73,7 +73,7 @@
                         "bonusVA": 0,
                         "pointsExp": 0,
                         "diminution": 0,
-                        "dureeDiminution": "",
+                        "duree": "",
                         "epuisee": false
                     }
                 }
@@ -574,7 +574,7 @@
             "nbBlessure": 0
         },
         "humain": {
-            "templates": [ "information", "signes", "competences", "ressources", "theme" ],
+            "templates": [ "information", "signes", "competences", "ressources"],
             "domaines": "",
             "tactique": "",
             "pointsLigneVie": 4,

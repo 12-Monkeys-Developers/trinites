@@ -5,9 +5,11 @@
  */
 export default async function preloadTemplates() {
   return loadTemplates([
-    "systems/trinites/templates/application/dep-karma-form-app.hbs",
+    "systems/trinites/templates/application/dep-karma-form-app.hbs",    
+    "systems/trinites/templates/sheets/actors/trinite-sheet.html",  
     "systems/trinites/templates/sheets/actors/archonteRoi-sheet.html",
-    "systems/trinites/templates/sheets/actors/personnage-sheet.html",    
+    "systems/trinites/templates/sheets/actors/lige-sheet.html",    
+    "systems/trinites/templates/sheets/actors/humain-sheet.html",
     "systems/trinites/templates/sheets/items/aura-sheet.html",
     "systems/trinites/templates/sheets/items/arme-sheet.html",
     "systems/trinites/templates/sheets/items/armure-sheet.html",

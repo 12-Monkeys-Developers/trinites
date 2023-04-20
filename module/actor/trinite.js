@@ -339,6 +339,10 @@ export default class TrinitesTrinite extends TrinitesActor {
     return false;
   }
 
+  get isLige() {
+    return false;
+  }
+
   /**
    * Ajoute le nom et les bonus d'une vie antérieure
    * @param {Object*} va itemData from Drag n Drop
@@ -473,16 +477,6 @@ export default class TrinitesTrinite extends TrinitesActor {
 
     // Suppression du métier
     await this.deleteEmbeddedDocuments("Item", [metier._id]);
-  }
-
-  /**
-   * 
-   * @param {*} domaineId 
-   * @param {*} statut 
-   */
-  changeDomaineEtatEpuise(domaineId, statut) {
-    const domaine = this.items.get(domaineId);
-    if (domaine) domaine.update({ "system.epuise": statut });
   }
 
   /**

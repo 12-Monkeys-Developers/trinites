@@ -1,30 +1,30 @@
 <div class="jet-comp">
-    <div class="titre-jet-comp">
-        <div class="whisper-logo"><span>message privé </span><i class="far fa-eye-slash"></i></div>
-        <div class="bloc-titre">
-            <div class="titre"><i class="fas fa-dice"></i> {{stats.competence}} {{stats.valeur}}</div> <!-- fa-check -->
-            {{#if stats.modifsJet}}<div class="diff">{{#if stats.malusActionLibre}}<i class="fas fa-bolt"></i> {{stats.malusActionLibre}} {{/if}}{{#if stats.difficulte}}<i class="fas fa-tachometer-alt"></i> {{#if (gt stats.difficulte 0)}}+{{/if}}{{stats.difficulte}}{{/if}}</div>{{/if}}
-        </div>   
-    </div>
-    {{#if (eq stats.typeActor "trinite")}}
-        <div class="grid-jet-comp">
-            <div class="titre-esprit deva">Deva</div>
-            <div class="titre-esprit archonte">Archonte</div>
-            {{#if (eq stats.resultDeva.dieResult 1)}}
-                <div class="dice-back"><div class="roll dice-deva echec-crit">{{stats.resultDeva.dieResult}}</div></div>
-            {{else}}
-                <div class="dice-back"><div class="roll dice-deva">{{stats.resultDeva.dieResult}}</div></div>
-            {{/if}}
-    {{/if}}
-    {{#if (eq stats.typeActor "archonteRoi")}}
-        <div class="grid-jet-comp archonte-roi">
-            <div class="titre-archonte-roi">Archonte-roi</div>
-            {{#if (eq stats.resultDeva.dieResult 1)}}
-                <div class="dice-back"><div class="roll dice-archonte echec-crit">{{stats.resultDeva.dieResult}}</div></div>
-            {{else}}
-                <div class="dice-back"><div class="roll dice-archonte">{{stats.resultDeva.dieResult}}</div></div>
-            {{/if}}
-    {{/if}}
+        <div class="titre-jet-comp">
+            <div class="whisper-logo"><span>message privé </span><i class="far fa-eye-slash"></i></div>
+            <div class="bloc-titre">
+                <div class="titre"><i class="fas fa-dice"></i> {{stats.competence}} {{stats.valeur}}</div> <!-- fa-check -->
+                {{#if stats.modifsJet}}<div class="diff">{{#if stats.malusActionLibre}}<i class="fas fa-bolt"></i> {{stats.malusActionLibre}} {{/if}}{{#if stats.difficulte}}<i class="fas fa-tachometer-alt"></i> {{#if (gt stats.difficulte 0)}}+{{/if}}{{stats.difficulte}}{{/if}}</div>{{/if}}
+            </div>   
+        </div>
+        {{#if (eq stats.typeActor "trinite")}}
+            <div class="grid-jet-comp">
+                <div class="titre-esprit deva">Deva</div>
+                <div class="titre-esprit archonte">Archonte</div>
+                {{#if (eq stats.resultDeva.dieResult 1)}}
+                    <div class="dice-back"><div class="roll dice-deva echec-crit">{{stats.resultDeva.dieResult}}</div></div>
+                {{else}}
+                    <div class="dice-back"><div class="roll dice-deva">{{stats.resultDeva.dieResult}}</div></div>
+                {{/if}}
+        {{/if}}
+        {{#if (or (eq stats.typeActor "archonteRoi") (eq stats.typeActor "lige"))}}
+            <div class="grid-jet-comp archonte-roi">
+                <div class="titre-archonte-roi">{{#if (eq stats.typeActor "archonteRoi")}}Archonte-roi{{else}}Lige{{/if}}</div>
+                {{#if (eq stats.resultDeva.dieResult 1)}}
+                    <div class="dice-back"><div class="roll dice-archonte echec-crit">{{stats.resultDeva.dieResult}}</div></div>
+                {{else}}
+                    <div class="dice-back"><div class="roll dice-archonte">{{stats.resultDeva.dieResult}}</div></div>
+                {{/if}}
+        {{/if}}
         {{#if (eq stats.resultArchonte.dieResult 1)}}
             <div class="dice-back"><div class="roll dice-archonte echec-crit">{{stats.resultArchonte.dieResult}}</div></div>
         {{else}}
@@ -49,10 +49,12 @@
             {{/if}}
         {{/if}}
     </div>
-    {{#if (eq stats.resultatJet "detteArchonte")}}
-        <div class="btn-dette"><button class="dette archonte" data-actor-id="{{actorId}}" data-esprit="archonte">Dette envers l'Archonte</button></div>
-    {{/if}}
-    {{#if (eq stats.resultatJet "detteDeva")}}
-        <div class="btn-dette"><button class="dette deva" data-actor-id="{{actorId}}" data-esprit="deva">Dette envers le Deva</button></div>
+    {{#if (eq stats.typeActor "trinite")}}
+        {{#if (eq stats.resultatJet "detteArchonte")}}
+            <div class="btn-dette"><button class="dette archonte" data-actor-id="{{actorId}}" data-esprit="archonte">Dette envers l'Archonte</button></div>
+        {{/if}}
+        {{#if (eq stats.resultatJet "detteDeva")}}
+            <div class="btn-dette"><button class="dette deva" data-actor-id="{{actorId}}" data-esprit="deva">Dette envers le Deva</button></div>
+        {{/if}}
     {{/if}}
 </div>

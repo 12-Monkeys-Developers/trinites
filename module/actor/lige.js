@@ -1,6 +1,6 @@
 import TrinitesActor from "./actor.js";
 
-export default class TrinitesArchonteRoi extends TrinitesActor {
+export default class TrinitesLige extends TrinitesActor {
   prepareData() {
     super.prepareData();
     let system = this.system;
@@ -16,8 +16,8 @@ export default class TrinitesArchonteRoi extends TrinitesActor {
     /* Calcul de la valeur de Karma */
 
     //recalcul des valeurs de karma afin qu'elles ne dépasent pas le max
-    if (system.archonteRoi.karma.value > system.archonteRoi.karma.max) {
-      system.archonteRoi.karma.value = system.archonteRoi.karma.max;
+    if (system.karma.value > system.karma.max) {
+      system.karma.value = system.karma.max;
     }
 
     // Les diminutions ne peuvent dépasser le score de ressource
@@ -75,27 +75,27 @@ export default class TrinitesArchonteRoi extends TrinitesActor {
 
   // renvoi le code de la source de Karma si elle est la seule à contenir des points, sinon null
   sourceUnique(typeKarma) {
-    return "archonteRoi";
+    return "lige";
   }
 
   // Vide toutes les sources de Karma (Esprit et Adam) du type donné
   viderKarma(typeKarma) {
-    this.update({ "system.archonteRoi.karma.value": 0 });
+    this.update({ "system.karma.value": 0 });
   }
 
   consommerSourceKarma(typeSource, coutPouvoir) {
     let data = this.system;
 
     switch (typeSource) {
-      case "archonteRoi":
-        this.update({ "system.archonteRoi.karma.value": data.archonteRoi.karma.value - coutPouvoir });
+      case "lige":
+        this.update({ "system.karma.value": data.karma.value - coutPouvoir });
         break;
     }
   }
 
   // Mise à jour de la réserve de karma du type donné à la valeur cible
   majKarma(reserve, valeur) {
-    this.update({ "system.archonteRoi.karma.value": valeur });
+    this.update({ "system.karma.value": valeur });
   }
 
   regeneration() {
@@ -118,11 +118,17 @@ export default class TrinitesArchonteRoi extends TrinitesActor {
   }
 
   get isArchonteRoi() {
-    return true;
+    return false;
   }
 
   get isLige() {
-    return false;
+    return true;
+  }
+
+
+  changeDomaineEtatEpuise(domaineId, statut) {
+    const domaine = this.items.get(domaineId);
+    if (domaine) domaine.update({ "system.epuise": statut });
   }
 
   /**

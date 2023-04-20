@@ -1,6 +1,8 @@
 import TrinitesActor from "./actor.js";
 import TrinitesTrinite from "./trinite.js";
 import TrinitesArchonteRoi from "./archonte-roi.js";
+import TrinitesLige from "./lige.js";
+import TrinitesHumain from "./humain.js";
 
 const handler = {    
     construct(_, args) {
@@ -9,6 +11,10 @@ const handler = {
                     return new TrinitesTrinite(...args);
             case "archonteRoi":
                     return new TrinitesArchonteRoi(...args);
+            case "lige":
+                    return new TrinitesLige(...args);
+            case "humain":
+                    return new TrinitesHumain(...args);
             default:
                     return new TrinitesActor(...args);
         }

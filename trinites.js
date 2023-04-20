@@ -6,6 +6,9 @@ import registerSystemSettings from './module/common/settings.js';
 import TrinitesActorSheet from "./module/actor/sheet/actor-sheet.js";
 import TrinitesTriniteSheet from "./module/actor/sheet/trinite-sheet.js";
 import TrinitesArchonteRoiSheet from "./module/actor/sheet/archonte-roi-sheet.js";
+import TrinitesLigeSheet from "./module/actor/sheet/lige-sheet.js";
+import TrinitesHumainSheet from "./module/actor/sheet/humain-sheet.js";
+
 import TrinitesItemSheet from "./module/item/sheet/item-sheet.js";
 import TrinitesVieAnterieureSheet from "./module/item/sheet/vie-anterieure-sheet.js";
 import TrinitesAuraSheet from "./module/item/sheet/aura-sheet.js";
@@ -33,9 +36,11 @@ Hooks.once("init", function() {
     Log.info(CONFIG);
 
     Actors.unregisterSheet("core", ActorSheet);
-    Actors.registerSheet("trinites", TrinitesActorSheet, { types: ["lige", "humain"], makeDefault: true});  
+    //Actors.registerSheet("trinites", TrinitesActorSheet, { types: ["humain"], makeDefault: true});  
+    Actors.registerSheet("trinites", TrinitesHumainSheet, { types: ["humain"], makeDefault: true});
     Actors.registerSheet("trinites", TrinitesTriniteSheet, { types: ["trinite"], makeDefault: true});
     Actors.registerSheet("trinites", TrinitesArchonteRoiSheet, { types: ["archonteRoi"], makeDefault: true});  
+    Actors.registerSheet("trinites", TrinitesLigeSheet, { types: ["lige"], makeDefault: true});  
 
     Items.unregisterSheet("core", ItemSheet);
     Items.registerSheet("trinites", TrinitesItemSheet, {types: ["atout", "ame","arme", "armure", "domaine","jardin","majeste","objet","pouvoir","verset"], makeDefault: true});

@@ -12,16 +12,6 @@ export default class TrinitesActorSheet extends ActorSheet {
     });
   }
 
-  get template() {
-    if (this.actor.type === "trinite") {
-      Log.debug(`type : ${this.actor.type} | Chargement du template systems/trinites/templates/sheets/actors/personnage-sheet.html`);
-      return "systems/trinites/templates/sheets/actors/personnage-sheet.html";
-    } else if (this.actor.type === "archonteRoi") {
-      Log.debug(`type : ${this.actor.type} | Chargement du template systems/trinites/templates/sheets/actors/archonteRoi-sheet.html`);
-      return "systems/trinites/templates/sheets/actors/archonteRoi-sheet.html";
-    }
-  }
-
   getData() {
     const data = super.getData();
     data.config = game.trinites.config;
@@ -51,8 +41,38 @@ export default class TrinitesActorSheet extends ActorSheet {
   activateListeners(html) {
     super.activateListeners(html);
 
+    // Supprimer un domaine
+    html.find(".suppr-domaine").click(this._onSupprimerDomaine.bind(this));
+
+    // Ajouter au domaine son statut épuisé
+    html.find(".check-domaine").click(this._onAjoutDomaineEtatEpuise.bind(this));
+
+    // Enlever au domaine son statut épuisé
+    html.find(".uncheck-domaine").click(this._onSupprDomaineEtatEpuise.bind(this));
+
+    // Ajouter à la richesse son statut épuisé
+    html.find(".check-richesse").click(this._onAjoutRichesseEtatEpuise.bind(this));
+
+    // Enlever à la richesse son statut épuisé
+    html.find(".uncheck-richesse").click(this._onSupprRichesseEtatEpuise.bind(this));
+
+    // Cocher une case de dommages
+    html.find(".case-vie").click(this._onCocherCaseDeVie.bind(this));
+
+    // Editer un item
+    html.find(".edit-item").click(this._onEditerItem.bind(this));
+
+    // Supprimer un item
+    html.find(".suppr-item").click(this._onSupprimerItem.bind(this));
+  
     // Jet de Lame-soeur
     html.find(".roll-arme").click(this._onJetArme.bind(this));
+
+    // Jet de compétence
+    html.find(".roll-comp").click(this._onJetCompetence.bind(this));
+
+    // Jet de ressources
+    html.find(".roll-ress").click(this._onJetRessource.bind(this));    
   }
 
   _onAjoutDomaineEtatEpuise(event) {

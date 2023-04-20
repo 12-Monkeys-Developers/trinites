@@ -262,7 +262,7 @@ export class TrinitesChat {
 
     // Pas assez de Karma
     if (karmaDisponible < coutPouvoir) {
-      ui.notifications.warn("Vous n'avez pas assez de Karma disponible utiliser cet atout !");
+      ui.notifications.warn("Vous n'avez pas assez de Karma disponible pour utiliser cet atout !");
       return;
     }
     // Juste ce qu'il faut de Karma

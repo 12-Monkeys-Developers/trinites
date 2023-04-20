@@ -6,6 +6,8 @@
         <a class="item tab-profane" data-tab="profane">Profane</a>
         <a class="item tab-equipement" data-tab="equipement">Equipement</a>
         <a class="item tab-occulte" data-tab="occulte">Occulte</a>
+        <a class="item tab-description" data-tab="description">Description</a>
+        <a class="item tab-notes" data-tab="notes">Notes</a>
     </nav>
     <section class="sheet-body">
         <div class="tab tab-profane" data-group="principal" data-tab="profane">
@@ -56,6 +58,12 @@
                     {{> "systems/trinites/templates/partials/actor/bloc-grandLivre-archonte.hbs"}}
                     {{> "systems/trinites/templates/partials/actor/bloc-zodiaque-personnage.hbs"}}
             </div>
+        </div>
+        <div class="tab tab-description" data-group="principal" data-tab="description">
+            {{editor descriptionHtml target="system.description" button=true owner=owner editable=editable}}
+        </div>
+        <div class="tab tab-notes" data-group="principal" data-tab="notes">
+            {{editor notesHtml target="system.notes" button=true owner=owner editable=editable}}
         </div>
     </section>
 </form>

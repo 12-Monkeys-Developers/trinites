@@ -255,8 +255,7 @@ export default class TrinitesTriniteSheet extends TrinitesActorSheet {
 
   _onRegenerationSante(event) {
     event.preventDefault();
-    // Const element = event.currentTarget;
-
+    
     let typeKarma = "";
     switch (this.actor.system.etatSante) {
       case "endolori":
@@ -275,7 +274,7 @@ export default class TrinitesTriniteSheet extends TrinitesActorSheet {
 
     // Pas assez de Karma
     if (karmaDisponible == 0) {
-      ui.notifications.warn("Vous n'avez pas assez de Karma disponible utiliser la régénération !");
+      ui.notifications.warn("Vous n'avez pas assez de Karma disponible pour utiliser la régénération !");
       return;
     }
     // Juste ce qu'il faut de Karma

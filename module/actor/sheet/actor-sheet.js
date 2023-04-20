@@ -117,7 +117,7 @@ export default class TrinitesActorSheet extends ActorSheet {
 
     // Pas assez de Karma
     if (karmaDisponible == 0) {
-      ui.notifications.warn("Vous n'avez pas assez de Karma disponible utiliser la régénération !");
+      ui.notifications.warn("Vous n'avez pas assez de Karma disponible pour utiliser la régénération !");
       return;
     }
     // Juste ce qu'il faut de Karma

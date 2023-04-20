@@ -188,7 +188,6 @@ export default class TrinitesArchonteRoiSheet extends TrinitesActorSheet {
 
   _onRegenerationSante(event) {
     event.preventDefault();
-    // Const element = event.currentTarget;
 
     const typeKarma = "tenebre";
 
@@ -197,7 +196,7 @@ export default class TrinitesArchonteRoiSheet extends TrinitesActorSheet {
 
     // Pas assez de Karma
     if (karmaDisponible == 0) {
-      ui.notifications.warn("Vous n'avez pas assez de Karma disponible utiliser la régénération !");
+      ui.notifications.warn("Vous n'avez pas assez de Karma disponible pour utiliser la régénération !");
       return;
     }
     // Juste ce qu'il faut de Karma

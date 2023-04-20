@@ -1,6 +1,6 @@
 import TrinitesActor from "./actor.js";
 import DepenseKarmaFormApplication from "../appli/DepenseKarmaFormApp.js";
-import { carteVersetActive } from "../common/chat.js";
+
 
 export default class TrinitesTrinite extends TrinitesActor {
 
@@ -297,9 +297,6 @@ export default class TrinitesTrinite extends TrinitesActor {
       case "archonte":
         this.update({ "system.trinite.archonte.karma.value": data.trinite.archonte.karma.value - coutPouvoir });
         break;
-      case "archonteRoi":
-        this.update({ "system.archonteRoi.karma.value": data.archonteRoi.karma.value - coutPouvoir });
-        break;
     }
   }
 
@@ -486,51 +483,6 @@ export default class TrinitesTrinite extends TrinitesActor {
   changeDomaineEtatEpuise(domaineId, statut) {
     const domaine = this.items.get(domaineId);
     if (domaine) domaine.update({ "system.epuise": statut });
-  }
-
-  /**
-   * 
-   * @param {*} versetId 
-   * @param {Object} options 
-   * murmure = true si le verset a été murmuré : le coût augmente de 1
-   * @returns 
-   */
-  reciterVerset(versetId, options) {
-    const verset = this.items.get(versetId);
-    const typeKarma = verset.system.karma;
-
-    const karmaDisponible = this.karmaDisponible(typeKarma);
-    const coutPouvoir = this.coutPouvoir("grandLivre");
-    // Verset récité à voix basse
-    if (options?.murmure) coutPouvoir += 1;
-
-    let activable = false;
-
-    // Pas assez de Karma
-    if (karmaDisponible < coutPouvoir) {
-      if (options?.murmure) ui.notifications.warn("Vous n'avez pas assez de Karma disponible pour réciter ce verset à voix basse !");
-      else ui.notifications.warn("Vous n'avez pas assez de Karma disponible pour réciter ce verset !");
-      return;
-    }
-    // Juste ce qu'il faut de Karma
-    else if (karmaDisponible == coutPouvoir) {
-      this.viderKarma(typeKarma);
-      activable = true;
-    }
-    // Uniquement le Karma d'une source
-    else if (this.sourceUnique(typeKarma)) {
-      this.consommerSourceKarma(this.sourceUnique(typeKarma), coutPouvoir);
-      activable = true;
-    } else {
-      new DepenseKarmaFormApplication(this, this.system.trinite, typeKarma, "verset", coutPouvoir, versetId).render(true);
-    }
-
-    if (activable) {
-      carteVersetActive({
-        actor: this,
-        versetId: versetId,
-      });
-    }
   }
 
   /**

@@ -200,30 +200,6 @@ export default class TrinitesTriniteSheet extends TrinitesActorSheet {
     }
   }
 
-	/**
-   * Handle toggling of an item from the Actor sheet
-   * @private
-   */
-	_onItemSummary(event) {
-		event.preventDefault();
-		let li = $(event.currentTarget);
-		const item = this.actor.items.get(li.data('item-id'));
-
-		// Toggle summary
-		if (item?.system.description) {
-			if (li.hasClass('expanded')) {
-				let summary = li.children('.item-summary');
-				summary.slideUp(200, () => summary.remove());
-			} else {
-				let div = $(`<div class="item-summary">${item.system.description}</div>`);
-				li.append(div.hide());
-				div.slideDown(200);
-			}
-			li.toggleClass('expanded');
-		}
-	}
-
-
   _onSupprimerDomaine(event) {
     event.preventDefault();
     const element = event.currentTarget;
@@ -320,43 +296,6 @@ export default class TrinitesTriniteSheet extends TrinitesActorSheet {
     }
   }
 
-  _onZoneDeploimentAura(event) {
-    event.preventDefault();
-    const element = event.currentTarget;
-
-    let auraId = element.dataset.itemId;
-    const aura = this.actor.items.get(auraId);
-    let zone = element.dataset.zone;
-
-    if (aura.system.deploiement == "") {
-      ui.notifications.warn("Vous devez déployer l'aura avant de changer sa zone d'effet !");
-      return;
-    }
-
-    let auraActive = false;
-    if (zone != "cosme") {
-      let auras = this.actor.items.filter(function (item) {
-        return item.type == "aura" && item.id != auraId;
-      });
-      auraActive = auras.some((autreAura) => {
-        if (autreAura.system.deploiement != "" && autreAura.system.deploiement != "cosme") {
-          return true;
-        }
-      });
-    }
-
-    if (auraActive) {
-      ui.notifications.warn("Vous avez une autre aura déployée au delà du Cosme !");
-      return;
-    }
-
-    if (aura.system.deploiement == "cosme" && zone == "cosme") {
-      aura.update({ "system.deploiement": "" });
-    } else {
-      aura.update({ "system.deploiement": zone });
-    }
-  }
-
   _onSupprimerItem(event) {
     event.preventDefault();
     const element = event.currentTarget;
@@ -447,18 +386,7 @@ export default class TrinitesTriniteSheet extends TrinitesActorSheet {
       whisper: !event.shiftKey
     });
   }
-
-  _onCarteVerset(event) {
-    event.preventDefault();
-    const dataset = event.currentTarget.dataset;
-
-    Chat.carteVerset({
-      actor: this.actor,
-      versetId: dataset.itemId,
-      whisper: !event.shiftKey
-    });
-  }
-
+  
   async _onSupprimerMetier(event) {
     event.preventDefault();
     this.actor.supprimerMetier();

@@ -153,10 +153,10 @@
 .trinites.sheet.actor .histo-bloc,
 .trinites.sheet.actor .expe-bloc,
 .trinites.sheet.actor .karma-ten,
-.trinites.sheet.actor .pouvoirs-gen,
 .trinites.sheet.actor .grand-livre,
 .trinites.sheet.actor .zodiaque,
-.trinites.sheet.actor .lame-soeur {
+.trinites.sheet.actor .lame-soeur,
+.trinites.sheet.actor .lame-noire {
   padding: 2px;
   margin: 3px;
 }
@@ -377,7 +377,6 @@
   grid-column: 1 / 5;
 }
 .trinites.sheet.actor .ress-grid .col-titre {
-  font-size: 0.9em;
   display: flex;
   justify-content: center;
   text-decoration: underline;
@@ -715,18 +714,15 @@
 .trinites.sheet.actor .grid-grand-livre div {
   margin: 2px;
 }
-.trinites.sheet.actor .titre-grand-livre {
-  display: flex;
-  justify-content: center;
+.trinites.sheet.actor .grid-grand-livre .titre {
   font-family: "Cabaletta";
 }
 .trinites.sheet.actor .grid-verset {
   display: grid;
-  font-size: 0.9em;
-  grid-template-columns: 2em 1fr 0.5fr 1fr 0.5fr 2fr 2em 2em;
+  grid-template-columns: 2em 1.3fr 0.3fr 0.8fr 0.5fr 1.3fr 2em 2em;
   align-items: center;
 }
-.trinites.sheet.actor .grid-verset .roll-verset {
+.trinites.sheet.actor .grid-verset .jet-verset {
   grid-column: 1 / 2;
   display: flex;
   justify-content: center;
@@ -736,6 +732,8 @@
 }
 .trinites.sheet.actor .grid-verset .cumul-verset {
   grid-column: 3 / 4;
+  display: flex;
+  justify-content: center;
 }
 .trinites.sheet.actor .grid-verset .duree-verset {
   grid-column: 4 / 5;
@@ -756,6 +754,9 @@
   display: flex;
   justify-content: center;
 }
+.trinites.sheet.actor .grid-verset .titre {
+  font-family: "Cabaletta";
+}
 .trinites.sheet.actor .zodiaque {
   min-height: 80px;
 }
@@ -765,7 +766,7 @@
   margin: 3px;
 }
 .trinites.sheet.actor .grid-zodiaque .col-titre {
-  grid-column: 1 / 3;
+  grid-column: 2 / 3;
 }
 .trinites.sheet.actor .grid-zodiaque .col-vide {
   grid-column: 8 / 10;
@@ -779,29 +780,52 @@
 .trinites.sheet.actor .grid-zodiaque .ligne {
   font-size: 0.9em;
 }
-.trinites.sheet.actor .lame-soeur,
-.trinites.sheet.actor .lame-noire {
+.trinites.sheet.actor .lame-soeur {
   display: flex;
   flex-direction: column;
 }
-.trinites.sheet.actor .grid-lame {
+.trinites.sheet.actor .lame-soeur .grid-lame {
   display: grid;
   grid-template-columns: 1fr 2fr 2em 4.5em;
   margin: 3px;
   align-items: center;
 }
-.trinites.sheet.actor .grid-lame select {
+.trinites.sheet.actor .lame-soeur .grid-lame select {
   font-family: "Cabaletta";
 }
-.trinites.sheet.actor .grid-lame label {
+.trinites.sheet.actor .lame-soeur .grid-lame label {
   font-family: "Cabaletta";
   margin: 2px;
 }
-.trinites.sheet.actor .grid-lame i {
+.trinites.sheet.actor .lame-soeur .grid-lame i {
   font-size: 0.9em;
 }
-.trinites.sheet.actor .grid-lame select,
-.trinites.sheet.actor .grid-lame a {
+.trinites.sheet.actor .lame-soeur .grid-lame select,
+.trinites.sheet.actor .lame-soeur .grid-lame a {
+  margin: 2px;
+}
+.trinites.sheet.actor .lame-noire {
+  display: flex;
+  flex-direction: column;
+}
+.trinites.sheet.actor .lame-noire .grid-lame {
+  display: grid;
+  grid-template-columns: 1fr 1fr 2em 4.5em 3fr;
+  margin: 3px;
+  align-items: center;
+}
+.trinites.sheet.actor .lame-noire .grid-lame select {
+  font-family: "Cabaletta";
+}
+.trinites.sheet.actor .lame-noire .grid-lame label {
+  font-family: "Cabaletta";
+  margin: 2px;
+}
+.trinites.sheet.actor .lame-noire .grid-lame i {
+  font-size: 0.9em;
+}
+.trinites.sheet.actor .lame-noire .grid-lame select,
+.trinites.sheet.actor .lame-noire .grid-lame a {
   margin: 2px;
 }
 .trinites.sheet.actor .desc-lame {
@@ -820,7 +844,6 @@
 .trinites.sheet.actor .grid-atout {
   display: grid;
   grid-template-columns: 2em 1fr 2em 2em;
-  font-size: 0.9em;
   margin: 3px;
 }
 .trinites.sheet.actor .grid-atout .nom-atout {
@@ -836,7 +859,6 @@
 }
 .trinites.sheet.actor .grid-armes {
   display: grid;
-  font-size: 0.9em;
   grid-template-columns: 2em 1fr 1fr 1fr 2fr 2em 2em;
   align-items: center;
 }
@@ -869,7 +891,6 @@
 }
 .trinites.sheet.actor .grid-armures {
   display: grid;
-  font-size: 0.9em;
   grid-template-columns: 2em 1fr 1fr 1fr 2fr 2em 2em;
   align-items: center;
 }
@@ -897,7 +918,6 @@
 }
 .trinites.sheet.actor .grid-objets {
   display: grid;
-  font-size: 0.9em;
   grid-template-columns: 2em 1fr 3fr 2em 2em;
   align-items: center;
 }
@@ -1550,6 +1570,7 @@
 }
 .echec {
   color: black;
+  /*text-shadow: -1px 0 red, 0 1px red, 1px 0 red, 0 -1px red;*/
 }
 .echec-crit {
   color: red;
@@ -1990,6 +2011,10 @@
   display: flex;
   justify-content: center;
   margin: 3px;
+}
+.une-col {
+  display: grid;
+  grid-template-columns: 1fr;
 }
 .deux-col-50-50 {
   display: grid;

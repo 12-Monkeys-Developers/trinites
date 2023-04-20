@@ -32,29 +32,6 @@ export default class TrinitesArchonteRoiSheet extends TrinitesActorSheet {
     return data;
   }
 
-  /** @override */
-  _onDrop(event) {
-    event.preventDefault();
-    if (!this.options.editable) return false;
-    // Get dropped data
-    let data;
-    try {
-      data = JSON.parse(event.dataTransfer.getData("text/plain"));
-    } catch(err) {
-      return false;
-    }
-    if (!data) return false;
-
-    // Case 1 - Dropped Item
-    if (data.type === "Item") {
-      return this._onDropItem(event, data);
-    }
-    // Case 2 - Dropped Actor
-    if (data.type === "Actor") {
-      return false;
-    }
-  }
-
   /**
    * Handle dropping of an item reference or item data onto an Item Sheet
    *
@@ -67,6 +44,8 @@ export default class TrinitesArchonteRoiSheet extends TrinitesActorSheet {
     Item.fromDropData(data).then(item => {
       const itemData = duplicate(item);
       switch (itemData.type) {
+        case "aura":
+          return this._onDropAuraItem(event, itemData);
         default:
           return super._onDropItem(event, data);
       }
@@ -132,15 +111,27 @@ export default class TrinitesArchonteRoiSheet extends TrinitesActorSheet {
         // Lock/Unlock la fiche
         html.find(".sheet-change-lock").click(this._onSheetChangelock.bind(this));
        
-        // Finalise la dépense des points de création
-        html.find(".fa-user-lock").click(this._onEndCreation.bind(this));
-
-        // Permet la dépense des points de création
-        html.find(".fa-user-unlock").click(this._onAllowCreation.bind(this));
+        // Permet d'afficher la description
+        html.find('.grid-atout .nom-atout').click(this._onItemSummary.bind(this));
+        html.find('.grid-zodiaque .nom-aura').click(this._onItemSummary.bind(this));
+        html.find('.grid-verset .nom-verset').click(this._onItemSummary.bind(this));
 
       }
     }
   }
+
+   /**
+   * Handle the drop of a Aura item on the actor sheet
+   *
+   * @name _onDropAuraItem
+   * @param {*} event
+   * @param {*} itemData
+   */
+    async _onDropAuraItem(event, itemData) {
+      event.preventDefault();
+      itemData.system.deploiement = "cosme";
+      await this.actor.createEmbeddedDocuments("Item", [itemData]);      
+    }
 
   _onSupprimerDomaine(event) {
     event.preventDefault();
@@ -224,43 +215,6 @@ export default class TrinitesArchonteRoiSheet extends TrinitesActorSheet {
 
     if (activationOk) {
       this.actor.regeneration();
-    }
-  }
-
-  _onZoneDeploimentAura(event) {
-    event.preventDefault();
-    const element = event.currentTarget;
-
-    let auraId = element.dataset.itemId;
-    const aura = this.actor.items.get(auraId);
-    let zone = element.dataset.zone;
-
-    if (aura.system.deploiement == "") {
-      ui.notifications.warn("Vous devez déployer l'aura avant de changer sa zone d'effet !");
-      return;
-    }
-
-    let auraActive = false;
-    if (zone != "cosme") {
-      let auras = this.actor.items.filter(function (item) {
-        return item.type == "aura" && item.id != auraId;
-      });
-      auraActive = auras.some((autreAura) => {
-        if (autreAura.system.deploiement != "" && autreAura.system.deploiement != "cosme") {
-          return true;
-        }
-      });
-    }
-
-    if (auraActive) {
-      ui.notifications.warn("Vous avez une autre aura déployée au delà du Cosme !");
-      return;
-    }
-
-    if (aura.system.deploiement == "cosme" && zone == "cosme") {
-      aura.update({ "system.deploiement": "" });
-    } else {
-      aura.update({ "system.deploiement": zone });
     }
   }
 
@@ -351,17 +305,6 @@ export default class TrinitesArchonteRoiSheet extends TrinitesActorSheet {
     Chat.carteAura({
       actor: this.actor,
       auraId: dataset.itemId,
-      whisper: !event.shiftKey
-    });
-  }
-
-  _onCarteVerset(event) {
-    event.preventDefault();
-    const dataset = event.currentTarget.dataset;
-
-    Chat.carteVerset({
-      actor: this.actor,
-      versetId: dataset.itemId,
       whisper: !event.shiftKey
     });
   }

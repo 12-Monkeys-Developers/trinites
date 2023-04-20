@@ -36,6 +36,7 @@
                     </div>
                 </div>
             </div>
+            
             <div class="deux-col-50-50">
                 <div class = "karma-ten">
                     <h3><i class="fas fa-moon"></i> Karma-Ténèbres</h3>
@@ -45,23 +46,15 @@
                             <input name="system.archonteRoi.karma.value" type="number" value="{{data.system.archonteRoi.karma.value}}" placeholder="0" min="0" max="{{data.system.archonteRoi.karma.max}}">
                             <label> / </label>
                             <input name="system.archonteRoi.karma.max" type="number" value="{{data.system.archonteRoi.karma.max}}" placeholder="0" min="0">
-                            <!-- <div class="logo-karma"><i class="fas fa-moon"></i></div> -->
                         </div>
                     </div>
                 </div>
-                <div class="pouvoirs-gen">
-                    <h3>Pouvoirs</h3>
-                </div>
+                <div></div>
             </div>
-            
-            <div class="deux-col-66-33">
-                <div class="col-66">
+            <div class="une-col">
+                    {{> "systems/trinites/templates/partials/actor/bloc-lameNoire-archonte.hbs"}}
                     {{> "systems/trinites/templates/partials/actor/bloc-grandLivre-archonte.hbs"}}
                     {{> "systems/trinites/templates/partials/actor/bloc-zodiaque-personnage.hbs"}}
-                </div>
-                <div class="col-33">
-                    {{> "systems/trinites/templates/partials/actor/bloc-lameNoire-archonte.hbs"}}
-                </div>
             </div>
         </div>
     </section>

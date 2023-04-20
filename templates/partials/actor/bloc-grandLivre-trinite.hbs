@@ -3,13 +3,13 @@
     <div class="grid-grand-livre">
         <div class="grid-verset">
             <div></div>
-            <div>Verset</div>
-            <div>Cumul</div>
-            <div>Durée</div>
-            <div>Portée</div>
-            <div>Aire d'effet</div>
+            <div class="titre">Verset</div>
+            <div class="titre centrer">Cumul</div>
+            <div class="titre">Durée</div>
+            <div class="titre">Portée</div>
+            <div class="titre">Aire d'effet</div>
             {{#each versetsLumiere as |verset id|}}
-                    <div class="roll-verset"><a class="roll-verset" title="Jet de verset" data-item-id="{{verset._id}}"><i class="fas fa-dice"></i></a></div>
+                    <div class="jet-verset"><a class="roll-verset" title="Jet de verset" data-item-id="{{verset._id}}"><i class="fas fa-dice"></i></a></div>
                     <div class="nom-verset" data-item-id="{{verset._id}}">{{verset.name}}</div>
                     <div class="cumul-verset"><input name="system.particularites.encombrant" type="checkbox" {{checked verset.system.cumul}} disabled/></div>
                     <div class="duree-verset">{{verset.system.duree}}</div>
@@ -24,13 +24,13 @@
     <div class="grid-grand-livre">
         <div class="grid-verset">
             <div></div>
-            <div>Verset</div>
-            <div>Cumul</div>
-            <div>Durée</div>
-            <div>Portée</div>
-            <div>Aire d'effet</div>
+            <div class="titre">Verset</div>
+            <div class="titre centrer">Cumul</div>
+            <div class="titre">Durée</div>
+            <div class="titre">Portée</div>
+            <div class="titre">Aire d'effet</div>
             {{#each versetsTenebres as |verset id|}}
-                    <div class="roll-verset"><a class="roll-verset" title="Jet de verset" data-item-id="{{verset._id}}"><i class="fas fa-dice"></i></a></div>
+                    <div class="jet-verset"><a class="roll-verset" title="Jet de verset" data-item-id="{{verset._id}}"><i class="fas fa-dice"></i></a></div>
                     <div class="nom-verset" data-item-id="{{verset._id}}">{{verset.name}}</div>
                     <div class="cumul-verset"><input name="system.particularites.encombrant" type="checkbox" {{checked verset.system.cumul}} disabled/></div>
                     <div class="duree-verset">{{verset.system.duree}}</div>

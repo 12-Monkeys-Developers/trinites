@@ -133,7 +133,7 @@
     }
 
     .competences, .domaines, .ressources, .lignes-de-vie, .theme-astral, .vie-ante-bloc, .histo-bloc, 
-    .expe-bloc, .karma-ten, .pouvoirs-gen, .grand-livre, .zodiaque, .lame-soeur {        
+    .expe-bloc, .karma-ten, .grand-livre, .zodiaque, .lame-soeur, .lame-noire {        
         padding: 2px;
         margin: 3px;
     }
@@ -406,7 +406,6 @@
         }
 
         .col-titre {
-            font-size: 0.9em;
             display: flex;
             justify-content: center;
             text-decoration: underline;
@@ -816,58 +815,61 @@
 
         div {
             margin: 2px;
-        } 
+        }
+        
+        .titre {
+            font-family: "Cabaletta";
+        }
     }
-    
-    .titre-grand-livre {
-        display: flex;
-        justify-content: center;
-        font-family: "Cabaletta";
-    }
-    
+        
     .grid-verset {
         display: grid;
-        font-size: 0.9em;
-        grid-template-columns: 2em 1fr 0.5fr 1fr 0.5fr 2fr 2em 2em;
+        grid-template-columns: 2em 1.3fr 0.3fr 0.8fr 0.5fr 1.3fr 2em 2em;
         align-items: center;
 
-        .roll-verset {
-                grid-column: 1 / 2;
-                display: flex;
-                justify-content: center;
-            }
+        .jet-verset {
+            grid-column: 1 / 2;
+            display: flex;
+            justify-content: center;
+        }
 
-            .nom-verset {
-                grid-column: 2 / 3;
-            }
+        .nom-verset {
+            grid-column: 2 / 3;
+        }
 
-            .cumul-verset {
-                grid-column: 3 / 4;
-            }
+        .cumul-verset {
+            grid-column: 3 / 4;
+            display: flex;
+            justify-content: center;
+        }
 
-            .duree-verset {
-                grid-column: 4 / 5;
-            }
+        .duree-verset {
+            grid-column: 4 / 5;
+        }
 
-            .portee-verset {
-                grid-column: 5 / 6;
-            }
+        .portee-verset {
+            grid-column: 5 / 6;
+        }
 
-            .aire-verset {
-                grid-column: 6 / 7;
-            }
+        .aire-verset {
+            grid-column: 6 / 7;
+        }
 
-            .edit-verset {
-                grid-column: 7 / 8;
-                display: flex;
-                justify-content: center;
-            }
+        .edit-verset {
+            grid-column: 7 / 8;
+            display: flex;
+            justify-content: center;
+        }
 
-            .delete-verset {
-                grid-column: 8 / 9;
-                display: flex;
-                justify-content: center;
-            }
+        .delete-verset {
+            grid-column: 8 / 9;
+            display: flex;
+            justify-content: center;
+        }
+
+        .titre {
+            font-family: "Cabaletta";
+        }
     }
 
     
@@ -882,7 +884,7 @@
         margin: 3px;
 
         .col-titre {
-            grid-column: 1 / 3;
+            grid-column: 2 / 3;
         }
 
         .col-vide {
@@ -902,34 +904,63 @@
         }
     }
 
-    .lame-soeur, .lame-noire {
+    .lame-soeur {
         display: flex;
         flex-direction: column;
+
+        .grid-lame {
+            display: grid;
+            grid-template-columns: 1fr 2fr 2em 4.5em;
+            margin: 3px;
+            align-items: center;
+    
+            select {
+                font-family: "Cabaletta";
+            }
+    
+            label {
+                font-family: "Cabaletta";
+                margin: 2px;
+            }
+    
+            i {
+                font-size: 0.9em;
+            }
+    
+            select, a {
+                margin: 2px;
+            }
+        }
     }
 
-    .grid-lame {
-        display: grid;
-        grid-template-columns: 1fr 2fr 2em 4.5em;
-        margin: 3px;
-        align-items: center;
+    .lame-noire {
+        display: flex;
+        flex-direction: column;
 
-        select {
-            font-family: "Cabaletta";
+        .grid-lame {
+            display: grid;
+            grid-template-columns: 1fr 1fr 2em 4.5em 3fr;
+            margin: 3px;
+            align-items: center;
+    
+            select {
+                font-family: "Cabaletta";
+            }
+    
+            label {
+                font-family: "Cabaletta";
+                margin: 2px;
+            }
+    
+            i {
+                font-size: 0.9em;
+            }
+    
+            select, a {
+                margin: 2px;
+            }
         }
-
-        label {
-            font-family: "Cabaletta";
-            margin: 2px;
-        }
-
-        i {
-            font-size: 0.9em;
-        }
-
-        select, a {
-            margin: 2px;
-        }
-    }
+    }    
 
     .desc-lame {
         margin: 2px;
@@ -950,7 +981,6 @@
     .grid-atout {
         display: grid;
         grid-template-columns:2em 1fr 2em 2em;
-        font-size: 0.9em;
         margin: 3px;
 
         .nom-atout {
@@ -970,7 +1000,6 @@
 
     .grid-armes {
         display: grid;
-        font-size: 0.9em;
         grid-template-columns: 2em 1fr 1fr 1fr 2fr 2em 2em;
         align-items: center;
 
@@ -1011,7 +1040,6 @@
 
     .grid-armures {
         display: grid;
-        font-size: 0.9em;
         grid-template-columns: 2em 1fr 1fr 1fr 2fr 2em 2em;
         align-items: center;
     
@@ -1046,7 +1074,6 @@
 
     .grid-objets {
         display: grid;
-        font-size: 0.9em;
         grid-template-columns: 2em 1fr 3fr 2em 2em;
         align-items: center;
     

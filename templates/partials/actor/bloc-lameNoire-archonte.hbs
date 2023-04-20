@@ -11,9 +11,10 @@
         </select>
         <div class="centrer"><a class="roll-lame" title="Jet de lame-noire"><i class="fas fa-dice"></i></a></div>
         <label>Dégâts 4</label>
+        <div></div>
     </div>
     <div class="desc-lame"><textarea name="system.lameNoire.description" placeholder="Description de la lame noire">{{data.system.lameNoire.description}}</textarea></div>
-    <div class="centrer titre-atout">Atouts</div>
+    <h3><i class="fas fa-khanda"></i> Atouts</h3>
     <div class="grid-atout">
         {{#each atouts as |atout id|}}
             {{#if (eq atout.system.karma "tenebre")}}

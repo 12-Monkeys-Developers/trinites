@@ -66,7 +66,7 @@ export async function jetCompetence({
   let modFormula = " + @valeur";
   // Données de base du jet
   let label = game.i18n.localize(`TRINITES.label.competences.${signe}.${competence}`);
-  let karmaAdam = actorData.trinite.adam.karma.type;
+  let karmaAdam =  actor.isTrinite ? actorData.trinite.adam.karma.type : "tenebre";
 
   let rollData = {
     nomPersonnage: actor.name,
@@ -107,9 +107,9 @@ export async function jetCompetence({
 
   let rollFormula = null;
   if (actor.isTrinite || actor.isArchonteRoi) {
-    let baseFormulaWhite = "1d12x[white]" + modFormula;
-    let baseFormulaBlack = "1d12x[black]" + modFormula;
-    rollFormula = `{${baseFormulaWhite}, ${baseFormulaBlack}}`;
+    let basePremierDe = ( actor.isTrinite ? "1d12x[white]" : "1d12x[black]") + modFormula;
+    let baseDeuxiemeDe = "1d12x[black]" + modFormula;
+    rollFormula = `{${basePremierDe}, ${baseDeuxiemeDe}}`;
   }
   else {
     rollFormula = "1d12x" + modFormula;
@@ -133,23 +133,33 @@ export async function jetCompetence({
 
   // Gestion de la réussite selon le Karma
   let resultatJet = "echec";
-  if (karmaAdam == "lumiere") {
-    if (resultDeva.reussite) {
-      resultatJet = "reussite";
-    } else if (resultArchonte.reussite) {
-      resultatJet = "detteArchonte";
+
+  if (actor.isTrinite) {
+    if (karmaAdam == "lumiere") {
+      if (resultDeva.reussite) {
+        resultatJet = "reussite";
+      } else if (resultArchonte.reussite) {
+        resultatJet = "detteArchonte";
+      }
+    } else if (karmaAdam == "tenebre") {
+      if (resultArchonte.reussite) {
+        resultatJet = "reussite";
+      } else if (resultDeva.reussite) {
+        resultatJet = "detteDeva";
+      }
+    } else {
+      if (resultDeva.reussite || resultArchonte.reussite) {
+        resultatJet = "reussite";
+      }
     }
-  } else if (karmaAdam == "tenebre") {
-    if (resultArchonte.reussite) {
-      resultatJet = "reussite";
-    } else if (resultDeva.reussite) {
-      resultatJet = "detteDeva";
-    }
-  } else {
+  }
+
+  if (actor.isArchonteRoi) {
     if (resultDeva.reussite || resultArchonte.reussite) {
       resultatJet = "reussite";
     }
   }
+  
   rollData.resultatJet = resultatJet;
 
   if (envoiMessage) {
@@ -451,7 +461,7 @@ export async function jetArme({ actor = null, signe = null, competence = null, a
   // Données de base du jet
   let valeur = actorData.competences[signe][competence].valeur;
   let label = game.i18n.localize(`TRINITES.label.competences.${signe}.${competence}`);
-  let karmaAdam = actorData.trinite.adam.karma.type;
+  let karmaAdam = actor.isTrinite ? actorData.trinite.adam.karma.type : "tenebre";
 
   let rollData = {
     nomPersonnage: actor.name,
@@ -482,9 +492,9 @@ export async function jetArme({ actor = null, signe = null, competence = null, a
 
   let rollFormula = null;
   if (actor.isTrinite || actor.isArchonteRoi) {
-    let baseFormulaWhite = "1d12x[white]" + modFormula;
-    let baseFormulaBlack = "1d12x[black]" + modFormula;
-    rollFormula = `{${baseFormulaWhite}, ${baseFormulaBlack}}`;
+    let basePremierDe = ( actor.isTrinite ? "1d12x[white]" : "1d12x[black]") + modFormula;
+    let baseDeuxiemeDe = "1d12x[black]" + modFormula;
+    rollFormula = `{${basePremierDe}, ${baseDeuxiemeDe}}`;
   }
   else {
     rollFormula = "1d12x" + modFormula;
@@ -508,23 +518,33 @@ export async function jetArme({ actor = null, signe = null, competence = null, a
 
   // Gestion de la réussite selon le Karma
   let resultatJet = "echec";
-  if (karmaAdam == "lumiere") {
-    if (resultDeva.reussite) {
-      resultatJet = "reussite";
-    } else if (resultArchonte.reussite) {
-      resultatJet = "detteArchonte";
-    }
-  } else if (karmaAdam == "tenebre") {
-    if (resultArchonte.reussite) {
-      resultatJet = "reussite";
-    } else if (resultDeva.reussite) {
-      resultatJet = "detteDeva";
-    }
-  } else {
+
+  if (actor.isTrinite) {
+    if (karmaAdam == "lumiere") {
+        if (resultDeva.reussite) {
+          resultatJet = "reussite";
+        } else if (resultArchonte.reussite) {
+          resultatJet = "detteArchonte";
+        }
+      } else if (karmaAdam == "tenebre") {
+        if (resultArchonte.reussite) {
+          resultatJet = "reussite";
+        } else if (resultDeva.reussite) {
+          resultatJet = "detteDeva";
+        }
+      } else {
+        if (resultDeva.reussite || resultArchonte.reussite) {
+          resultatJet = "reussite";
+        }
+      }
+  }
+
+  if (actor.isArchonteRoi) {
     if (resultDeva.reussite || resultArchonte.reussite) {
       resultatJet = "reussite";
     }
   }
+  
   rollData.resultatJet = resultatJet;
 
   if (envoiMessage) {

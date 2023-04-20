@@ -2,14 +2,13 @@ import * as Roll from "../../common/rolls.js";
 import * as Chat from "../../common/chat.js";
 import { Log } from "../../common/log.js";
 
-
 export default class TrinitesActorSheet extends ActorSheet {
   static get defaultOptions() {
     return mergeObject(super.defaultOptions, {
       width: 744,
       height: 958,
       classes: ["trinites", "sheet", "actor"],
-      tabs: [{ navSelector: ".sheet-tabs", contentSelector: ".sheet-body", initial: "profane" }]
+      tabs: [{ navSelector: ".sheet-tabs", contentSelector: ".sheet-body", initial: "profane" }],
     });
   }
 
@@ -27,12 +26,12 @@ export default class TrinitesActorSheet extends ActorSheet {
     const data = super.getData();
     data.config = game.trinites.config;
 
-    data.armes = data.items.filter(item => item.type === "arme");
-    data.armures = data.items.filter(item => item.type === "armure");
-    data.objets = data.items.filter(item => item.type === "objet");
-    
-    data.descriptionHtml = TextEditor.enrichHTML(this.actor.system.description, {async:false});
-    data.notesHtml = TextEditor.enrichHTML(this.actor.system.notes, {async:false});
+    data.armes = data.items.filter((item) => item.type === "arme");
+    data.armures = data.items.filter((item) => item.type === "armure");
+    data.objets = data.items.filter((item) => item.type === "objet");
+
+    data.descriptionHtml = TextEditor.enrichHTML(this.actor.system.description, { async: false });
+    data.notesHtml = TextEditor.enrichHTML(this.actor.system.notes, { async: false });
 
     return data;
   }
@@ -49,18 +48,17 @@ export default class TrinitesActorSheet extends ActorSheet {
     return super._onDropItem(event, data);
   }
 
-
   activateListeners(html) {
     super.activateListeners(html);
 
-     // Jet de Lame-soeur
-     html.find(".roll-arme").click(this._onJetArme.bind(this));
+    // Jet de Lame-soeur
+    html.find(".roll-arme").click(this._onJetArme.bind(this));
   }
 
   _onAjoutDomaineEtatEpuise(event) {
     event.preventDefault();
     const element = event.currentTarget;
-    
+
     let domaineId = element.closest(".domaine").dataset.itemId;
     this.actor.changeDomaineEtatEpuise(domaineId, true);
   }
@@ -148,18 +146,17 @@ export default class TrinitesActorSheet extends ActorSheet {
     const aura = this.actor.items.get(auraId);
     let zone = element.dataset.zone;
 
-    if (aura.system.deploiement == "") {
-      ui.notifications.warn("Vous devez déployer l'aura avant de changer sa zone d'effet !");
+    if (aura.system.deploiement === "cosme" && zone === "cosme") {
       return;
     }
 
     let auraActive = false;
     if (zone != "cosme") {
       let auras = this.actor.items.filter(function (item) {
-        return item.type == "aura" && item.id != auraId;
+        return item.type === "aura" && item.id !== auraId;
       });
       auraActive = auras.some((autreAura) => {
-        if (autreAura.system.deploiement != "" && autreAura.system.deploiement != "cosme") {
+        if (autreAura.system.deploiement != "cosme") {
           return true;
         }
       });
@@ -170,11 +167,12 @@ export default class TrinitesActorSheet extends ActorSheet {
       return;
     }
 
-    if (aura.system.deploiement == "cosme" && zone == "cosme") {
-      aura.update({ "system.deploiement": "" });
-    } else {
-      aura.update({ "system.deploiement": zone });
+    if (aura.system.deploiement === "cosme") {
+      ui.notifications.warn("Vous devez déployer l'aura avant de changer sa zone d'effet !");
+      return;
     }
+ 
+    aura.update({ "system.deploiement": zone });
   }
 
   _onSupprimerItem(event) {
@@ -190,7 +188,7 @@ export default class TrinitesActorSheet extends ActorSheet {
       content: content,
       yes: () => item.delete(),
       // No: () =>, On ne fait rien sur le 'Non'
-      defaultYes: false
+      defaultYes: false,
     });
   }
 
@@ -211,7 +209,7 @@ export default class TrinitesActorSheet extends ActorSheet {
     Roll.jetCompetence({
       actor: this.actor,
       signe: dataset.signe,
-      competence: dataset.competence
+      competence: dataset.competence,
     });
   }
 
@@ -221,7 +219,7 @@ export default class TrinitesActorSheet extends ActorSheet {
 
     Roll.jetRessource({
       actor: this.actor,
-      ressource: dataset.ressource
+      ressource: dataset.ressource,
     });
   }
 
@@ -232,7 +230,7 @@ export default class TrinitesActorSheet extends ActorSheet {
     Chat.carteAtout({
       actor: this.actor,
       atoutId: dataset.itemId,
-      whisper: !event.shiftKey
+      whisper: !event.shiftKey,
     });
   }
 
@@ -243,7 +241,7 @@ export default class TrinitesActorSheet extends ActorSheet {
     Chat.carteAura({
       actor: this.actor,
       auraId: dataset.itemId,
-      whisper: !event.shiftKey
+      whisper: !event.shiftKey,
     });
   }
 
@@ -254,7 +252,7 @@ export default class TrinitesActorSheet extends ActorSheet {
     Chat.carteVerset({
       actor: this.actor,
       versetId: dataset.itemId,
-      whisper: !event.shiftKey
+      whisper: !event.shiftKey,
     });
   }
 
@@ -303,7 +301,7 @@ export default class TrinitesActorSheet extends ActorSheet {
       degats: item.system.degats,
       portee: item.system.portee,
       particularites: item.system.particularites,
-      epee: item.system.epee
+      epee: item.system.epee,
     };
 
     const signe = item.system.competence === "tir" ? "sagittaire" : "belier";
@@ -313,7 +311,30 @@ export default class TrinitesActorSheet extends ActorSheet {
       signe: signe,
       competence: arme.competence,
       arme: arme,
-      type: item.name
+      type: item.name,
     });
   }
+
+  	/**
+   * Handle toggling of an item from the Actor sheet
+   * @private
+   */
+	_onItemSummary(event) {
+		event.preventDefault();
+		let li = $(event.currentTarget);
+		const item = this.actor.items.get(li.data('item-id'));
+
+		// Toggle summary
+		if (item?.system.description) {
+			if (li.hasClass('expanded')) {
+				let summary = li.children('.item-summary');
+				summary.slideUp(200, () => summary.remove());
+			} else {
+				let div = $(`<div class="item-summary">${item.system.description}</div>`);
+				li.append(div.hide());
+				div.slideDown(200);
+			}
+			li.toggleClass('expanded');
+		}
+	}
 }

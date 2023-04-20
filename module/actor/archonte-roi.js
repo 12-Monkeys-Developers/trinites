@@ -106,15 +106,6 @@ export default class TrinitesArchonteRoi extends TrinitesActor {
     let data = this.system;
 
     switch (typeSource) {
-      case "adam":
-        this.update({ "system.trinite.adam.karma.value": data.trinite.adam.karma.value - coutPouvoir });
-        break;
-      case "deva":
-        this.update({ "system.trinite.deva.karma.value": data.trinite.deva.karma.value - coutPouvoir });
-        break;
-      case "archonte":
-        this.update({ "system.trinite.archonte.karma.value": data.trinite.archonte.karma.value - coutPouvoir });
-        break;
       case "archonteRoi":
         this.update({ "system.archonteRoi.karma.value": data.archonteRoi.karma.value - coutPouvoir });
         break;
@@ -152,5 +143,58 @@ export default class TrinitesArchonteRoi extends TrinitesActor {
   changeDomaineEtatEpuise(domaineId, statut) {
     const domaine = this.items.get(domaineId);
     if (domaine) domaine.update({ "system.epuise": statut });
+  }
+
+  /**
+   * 
+   * @param {*} auraId 
+   * @param {Object} options 
+   */
+  async activerAura(auraId, options) {
+    const aura = this.items.get(auraId);
+
+    // Aura déjà déployée - test par sécurité
+    if (aura.system.deploiement != "cosme") {
+      ui.notifications.warn("Cette aura est déjà déployée !");
+      return null;
+    }
+
+    const typeKarma = "neutre";
+
+    const karmaDisponible = this.karmaDisponible(typeKarma);
+    const coutPouvoir = this.coutPouvoir("zodiaque");
+    let activable = false;
+
+    // Pas assez de Karma
+    if (karmaDisponible < coutPouvoir) {
+      ui.notifications.warn("Vous n'avez pas assez de Karma disponible pour déployer cette aura !");
+      return;
+    }
+    // Juste ce qu'il faut de Karma
+    else if (karmaDisponible == coutPouvoir) {
+      this.viderKarma(typeKarma);
+      activable = true;
+    }
+    // Uniquement le Karma d'une source
+    else if (this.sourceUnique(typeKarma)) {
+      this.consommerSourceKarma(this.sourceUnique(typeKarma), coutPouvoir);
+      activable = true;
+    } 
+    else {
+      activable = await DepenseKarmaFormApplication.open(this, this.system.trinite, typeKarma, "aura", coutPouvoir, auraId);
+    }
+    
+    if (activable) {
+      aura.update({ "data.deploiement": "corps" });
+
+      // MAJ de la carte
+      return {
+        "title": `Vous avez déployé l'aura '${aura.name}'`,
+        "classList": "deployee",
+        "zone": "Corps"
+      }
+    }
+    return null;
+
   }
 }

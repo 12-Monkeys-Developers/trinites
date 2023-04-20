@@ -23,8 +23,11 @@
 .trinites.sheet.actor textarea:focus {
   box-shadow: 0 0 5px var(--color-shadow-trinite);
 }
-.trinites.sheet.actor input[type="number"]:read-only {
+.trinites.sheet.actor input[type="number"] {
   background-color: floralwhite;
+}
+.trinites.sheet.actor input[type="number"]:read-only {
+  background-color: rgba(0, 0, 0, 0.05);
   cursor: default;
 }
 .trinites.sheet.actor input[type="text"]:read-only {
@@ -419,6 +422,9 @@
 }
 .trinites.sheet.actor .ress-grid .colRess-duree {
   grid-column: 8 / 9;
+}
+.trinites.sheet.actor .ress-grid .colRess-duree input {
+  background-color: floralwhite;
 }
 .trinites.sheet.actor .ress-grid-unlocked {
   display: grid;
@@ -962,9 +968,8 @@
   grid-template-columns: repeat(6, 1fr);
 }
 .trinites.sheet.actor.trinite .dom-grid .domaine-item {
-  display: grid;
-  grid-template-columns: 1fr 1.5em;
-  align-items: center;
+  display: flex;
+  gap: 5px;
 }
 .trinites.sheet.actor.trinite .dom-grid .domaine-item .uncheck-domaine,
 .trinites.sheet.actor.trinite .dom-grid .domaine-item .check-domaine {
@@ -976,9 +981,8 @@
   padding-left: 5px;
 }
 .trinites.sheet.actor.trinite .dom-grid .domaine-item-unlocked {
-  display: grid;
-  grid-template-columns: 1fr 1.5em 1.5em 1.5em;
-  align-items: center;
+  display: flex;
+  gap: 2px;
 }
 .trinites.sheet.actor.trinite .dom-grid .domaine-item-unlocked .uncheck-domaine,
 .trinites.sheet.actor.trinite .dom-grid .domaine-item-unlocked .check-domaine,

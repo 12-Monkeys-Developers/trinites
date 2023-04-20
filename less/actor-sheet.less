@@ -25,8 +25,12 @@
         box-shadow: 0 0 5px var(--color-shadow-trinite);
     }
 
-    input[type="number"]:read-only {
+    input[type="number"] {
         background-color: floralwhite;
+    }
+
+    input[type="number"]:read-only {
+        background-color: rgba(0, 0, 0, 0.05);
         cursor: default;
     }
 
@@ -457,6 +461,10 @@
 
         .colRess-duree {
             grid-column: 8 / 9;
+
+            input {
+                background-color: floralwhite;
+            }
         }
     }
 
@@ -1138,9 +1146,8 @@
             grid-template-columns: repeat(6, 1fr);
     
             .domaine-item {
-                display: grid;
-                grid-template-columns: 1fr 1.5em;
-                align-items: center;
+                display: flex;
+                gap: 5px;
     
                 .uncheck-domaine, .check-domaine{
                     display: flex;
@@ -1154,9 +1161,8 @@
             }
 
             .domaine-item-unlocked {
-                display: grid;
-                grid-template-columns: 1fr 1.5em 1.5em 1.5em;
-                align-items: center;
+                display: flex;
+                gap: 2px;
     
                 .uncheck-domaine, .check-domaine, .suppr-domaine, .edit-item {
                     display: flex;

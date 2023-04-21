@@ -47,13 +47,17 @@ export default class TrinitesHumain extends TrinitesActor {
     }
   }
 
+  get isHumain() {
+    return true;
+  }
+
   /**
    * Nombre de points de Karma disponible du type donné (Lumière ou Ténèbre)
    * @param {*} typeKarma
    * @returns
    */
   karmaDisponible(typeKarma) {
-    return null;
+    return 0;
   }
 
   // Cout du pouvoir selon l'Affinité du personnage
@@ -78,37 +82,6 @@ export default class TrinitesHumain extends TrinitesActor {
   // Mise à jour de la réserve de karma du type donné à la valeur cible
   majKarma(reserve, valeur) {
     return null;
-  }
-
-  regeneration() {
-    let data = this.system;
-
-    let blessureVal = Math.max(data.nbBlessure - 4, 0);
-    this.update({ "system.nbBlessure": blessureVal });
-  }
-
-  get hasMetier() {
-    return false;
-  }
-
-  get hasVieAnterieure() {
-    return false;
-  }
-
-  get isTrinite() {
-    return false;
-  }
-
-  get isArchonteRoi() {
-    return false;
-  }
-
-  get isLige() {
-    return false;
-  }
-
-  get isHumain() {
-    return true;
   }
 
 }

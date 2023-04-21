@@ -1,4 +1,5 @@
 import TrinitesActor from "./actor.js";
+import DepenseKarmaFormApplication from "../appli/DepenseKarmaFormApp.js";
 
 export default class TrinitesArchonteRoi extends TrinitesActor {
   prepareData() {
@@ -54,16 +55,23 @@ export default class TrinitesArchonteRoi extends TrinitesActor {
     }
   }
 
+  get isArchonteRoi() {
+    return true;
+  }
+
+  get canRegenerate() {
+    return true;
+  }
+  
   /**
    * Nombre de points de Karma disponible du type donné (Lumière ou Ténèbre)
    * @param {*} typeKarma
    * @returns
    */
   karmaDisponible(typeKarma) {
-    let data = this.system;
     let karmaDisponible = 0;
     if (typeKarma != "lumiere") {
-      karmaDisponible += data.archonteRoi.karma.value;
+      karmaDisponible += this.system.archonteRoi.karma.value;
     }
     return karmaDisponible;
   }
@@ -96,33 +104,6 @@ export default class TrinitesArchonteRoi extends TrinitesActor {
   // Mise à jour de la réserve de karma du type donné à la valeur cible
   majKarma(reserve, valeur) {
     this.update({ "system.archonteRoi.karma.value": valeur });
-  }
-
-  regeneration() {
-    let data = this.system;
-
-    let blessureVal = Math.max(data.nbBlessure - 4, 0);
-    this.update({ "system.nbBlessure": blessureVal });
-  }
-
-  get hasMetier() {
-    return false;
-  }
-
-  get hasVieAnterieure() {
-    return false;
-  }
-
-  get isTrinite() {
-    return false;
-  }
-
-  get isArchonteRoi() {
-    return true;
-  }
-
-  get isLige() {
-    return false;
   }
 
   /**

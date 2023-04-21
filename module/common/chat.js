@@ -246,7 +246,7 @@ export class TrinitesChat {
   }
 
 
-  static onActiverAtout(event) {
+  static async onActiverAtout(event) {
     event.preventDefault();
     const element = event.currentTarget;
 
@@ -275,7 +275,7 @@ export class TrinitesChat {
       actor.consommerSourceKarma(actor.sourceUnique(typeKarma), coutPouvoir);
       activationOk = true;
     } else {
-      new DepenseKarmaFormApplication(actor, actor.system.trinite, typeKarma, "atout", coutPouvoir, atoutId).render(true);
+      await new DepenseKarmaFormApplication.open(actor, actor.system.trinite, typeKarma, "atout", coutPouvoir, atoutId);
     }
 
     if (activationOk) {

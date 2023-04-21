@@ -189,6 +189,33 @@ export default class TrinitesTrinite extends TrinitesActor {
     }
   }
 
+  get hasMetier() {
+    if (this.items.find((i) => i.type === "metier")) return true;
+    return false;
+  }
+
+  get hasVieAnterieure() {
+    if (this.items.find((i) => i.type === "vieAnterieure")) return true;
+    return false;
+  }
+
+  get metierId() {
+    return this.hasMetier ? this.items.find((i) => i.type === "metier")._id : null
+  }
+
+  get vieAnterieureId() {
+    return this.hasVieAnterieure ? this.items.find((i) => i.type === "vieAnterieure")._id : null;
+  }
+
+  get isTrinite() {
+    return true;
+  }
+
+  get canRegenerate() {
+    return true;
+  }
+
+  
   /**
    * Nombre de points de Karma disponible du type donné (Lumière ou Ténèbre)
    * @param {*} typeKarma
@@ -304,43 +331,6 @@ export default class TrinitesTrinite extends TrinitesActor {
   majKarma(reserve, valeur) {
     let reserveData = `system.trinite.${reserve}.karma.value`;
     this.update({ [reserveData]: valeur });
-  }
-
-  regeneration() {
-    let data = this.system;
-
-    let blessureVal = Math.max(data.nbBlessure - 4, 0);
-    this.update({ "system.nbBlessure": blessureVal });
-  }
-
-  get hasMetier() {
-    if (this.items.find((i) => i.type === "metier")) return true;
-    return false;
-  }
-
-  get hasVieAnterieure() {
-    if (this.items.find((i) => i.type === "vieAnterieure")) return true;
-    return false;
-  }
-
-  get metierId() {
-    return this.hasMetier ? this.items.find((i) => i.type === "metier")._id : null
-  }
-
-  get vieAnterieureId() {
-    return this.hasVieAnterieure ? this.items.find((i) => i.type === "vieAnterieure")._id : null;
-  }
-
-  get isTrinite() {
-    return true;
-  }
-
-  get isArchonteRoi() {
-    return false;
-  }
-
-  get isLige() {
-    return false;
   }
 
   /**
@@ -531,4 +521,5 @@ export default class TrinitesTrinite extends TrinitesActor {
     return null;
 
   }
+  
 }

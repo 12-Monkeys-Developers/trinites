@@ -1,6 +1,7 @@
 import * as Roll from "../../common/rolls.js";
 import * as Chat from "../../common/chat.js";
 import { Log } from "../../common/log.js";
+import DepenseKarmaFormApplication from "../../appli/DepenseKarmaFormApp.js";
 
 export default class TrinitesActorSheet extends ActorSheet {
   static get defaultOptions() {
@@ -22,6 +23,8 @@ export default class TrinitesActorSheet extends ActorSheet {
 
     data.descriptionHtml = TextEditor.enrichHTML(this.actor.system.description, { async: false });
     data.notesHtml = TextEditor.enrichHTML(this.actor.system.notes, { async: false });
+
+    data.peutRegenerer = this.actor.system.etatSante !== "indemne" && this.actor.canRegenerate;
 
     return data;
   }
@@ -111,7 +114,7 @@ export default class TrinitesActorSheet extends ActorSheet {
     this.actor.update({ "system.nbBlessure": blessureVal });
   }
 
-  _onRegenerationSante(event) {
+  async _onRegenerationSante(event) {
     event.preventDefault();
     // Const element = event.currentTarget;
 
@@ -128,7 +131,7 @@ export default class TrinitesActorSheet extends ActorSheet {
           typeKarma = "tenebre";
           break;
       }
-    } else if (this.actor.type === "archonteRoi") {
+    } else if (this.actor.type === "archonteRoi" || this.actor.type === "lige") {
       typeKarma = "tenebre";
     }
 
@@ -150,7 +153,7 @@ export default class TrinitesActorSheet extends ActorSheet {
       this.actor.consommerSourceKarma(this.actor.sourceUnique(typeKarma), 1);
       activationOk = true;
     } else {
-      new DepenseKarmaFormApplication(this.actor, this.actor.data.data.trinite, typeKarma, "regen", 1, null).render(true);
+      await new DepenseKarmaFormApplication.open(this.actor, this.actor.data.data.trinite, typeKarma, "regen", 1, null);
     }
 
     if (activationOk) {

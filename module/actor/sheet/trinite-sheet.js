@@ -223,48 +223,6 @@ export default class TrinitesTriniteSheet extends TrinitesActorSheet {
     this.actor.update({ "system.nbBlessure": blessureVal });
   }
 
-  _onRegenerationSante(event) {
-    event.preventDefault();
-    
-    let typeKarma = "";
-    switch (this.actor.system.etatSante) {
-      case "endolori":
-        typeKarma = "neutre";
-        break;
-      case "blesse":
-        typeKarma = "lumiere";
-        break;
-      case "inconscient":
-        typeKarma = "tenebre";
-        break;
-    }
-
-    let karmaDisponible = this.actor.karmaDisponible(typeKarma);
-    let activationOk = false;
-
-    // Pas assez de Karma
-    if (karmaDisponible == 0) {
-      ui.notifications.warn("Vous n'avez pas assez de Karma disponible pour utiliser la régénération !");
-      return;
-    }
-    // Juste ce qu'il faut de Karma
-    else if (karmaDisponible == 1) {
-      this.actor.viderKarma(typeKarma);
-      activationOk = true;
-    }
-    // Uniquement le Karma d'une source'
-    else if (this.actor.sourceUnique(typeKarma)) {
-      this.actor.consommerSourceKarma(this.actor.sourceUnique(typeKarma), 1);
-      activationOk = true;
-    } else {
-      new DepenseKarmaFormApplication(this.actor, this.actor.data.data.trinite, typeKarma, "regen", 1, null).render(true);
-    }
-
-    if (activationOk) {
-      this.actor.regeneration();
-    }
-  }
-
   _onJetLame(event) {
     event.preventDefault();
     // Const dataset = event.currentTarget.dataset;
@@ -342,4 +300,5 @@ export default class TrinitesTriniteSheet extends TrinitesActorSheet {
     event.preventDefault();
     await this.actor.update({ "system.creation.finie": false });
   }
+
 }

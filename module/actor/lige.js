@@ -60,10 +60,9 @@ export default class TrinitesLige extends TrinitesActor {
    * @returns
    */
   karmaDisponible(typeKarma) {
-    let data = this.system;
     let karmaDisponible = 0;
     if (typeKarma != "lumiere") {
-      karmaDisponible += data.archonteRoi.karma.value;
+      karmaDisponible += this.system.karma.value;
     }
     return karmaDisponible;
   }
@@ -98,33 +97,14 @@ export default class TrinitesLige extends TrinitesActor {
     this.update({ "system.karma.value": valeur });
   }
 
-  regeneration() {
-    let data = this.system;
-
-    let blessureVal = Math.max(data.nbBlessure - 4, 0);
-    this.update({ "system.nbBlessure": blessureVal });
-  }
-
-  get hasMetier() {
-    return false;
-  }
-
-  get hasVieAnterieure() {
-    return false;
-  }
-
-  get isTrinite() {
-    return false;
-  }
-
-  get isArchonteRoi() {
-    return false;
-  }
-
   get isLige() {
     return true;
   }
 
+  get canRegenerate() {
+    if (this.system.etatSante === "endolori" || this.system.etatSante === "inconscient") return true;
+    return false;
+  }
 
   changeDomaineEtatEpuise(domaineId, statut) {
     const domaine = this.items.get(domaineId);

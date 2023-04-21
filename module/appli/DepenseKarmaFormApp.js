@@ -210,4 +210,3 @@ export default class DepenseKarmaFormApplication extends FormApplication {
 
 }
 
-// window.DepenseKarmaFormApplication = DepenseKarmaFormApplication;

@@ -1,7 +1,41 @@
 import { carteVersetActive } from "../common/chat.js";
+import DepenseKarmaFormApplication from "../appli/DepenseKarmaFormApp.js";
 export default class TrinitesActor extends Actor {
   prepareData() {
     super.prepareData();
+  }
+
+  get hasMetier() {
+    return false;
+  }
+
+  get hasVieAnterieure() {
+    return false;
+  }
+
+  get isTrinite() {
+    return false;
+  }
+
+  get isArchonteRoi() {
+    return false;
+  }
+
+  get isLige() {
+    return false;
+  }
+
+  get isHumain() {
+    return false;
+  }
+
+  get canRegenerate() {
+    return false;
+  }
+
+  get isUnlocked() {
+    if (this.getFlag(game.system.id, "SheetUnlocked")) return true;
+    return false;
   }
 
   /**
@@ -27,11 +61,9 @@ export default class TrinitesActor extends Actor {
   // Mise à jour de la réserve de karma du type donné à la valeur cible
   majKarma(reserve, valeur) {}
 
-  regeneration() {}
-
-  get isUnlocked() {
-    if (this.getFlag(game.system.id, "SheetUnlocked")) return true;
-    return false;
+  regeneration() {
+    let blessureVal = Math.max(this.system.nbBlessure - 4, 0);
+    this.update({ "system.nbBlessure": blessureVal });
   }
 
   changeDomaineEtatEpuise(domaineId, statut) {
@@ -46,7 +78,7 @@ export default class TrinitesActor extends Actor {
    * murmure = true si le verset a été murmuré : le coût augmente de 1
    * @returns 
    */
-    reciterVerset(versetId, options) {
+    async reciterVerset(versetId, options) {
       const verset = this.items.get(versetId);
       const typeKarma = verset.system.karma;
   
@@ -73,7 +105,7 @@ export default class TrinitesActor extends Actor {
         this.consommerSourceKarma(this.sourceUnique(typeKarma), coutPouvoir);
         activable = true;
       } else {
-        new DepenseKarmaFormApplication(this, this.system.trinite, typeKarma, "verset", coutPouvoir, versetId).render(true);
+        await new DepenseKarmaFormApplication.open(this, this.system.trinite, typeKarma, "verset", coutPouvoir, versetId);
       }
   
       if (activable) {

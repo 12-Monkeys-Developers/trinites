@@ -2,7 +2,7 @@ import { TrinitesChat } from "./chat.js";
 
 /** Jet de Compétence */
 export async function jetCompetence({
-  nbDes = 2,
+  nbDes = null,
   actor = null,
   signe = null,
   competence = null,
@@ -108,13 +108,15 @@ export async function jetCompetence({
   }
 
   let rollFormula = null;
-  if (actor.isTrinite || actor.isArchonteRoi || actor.isLige) {
+
+  nbDes = actor.nbDes ?? nbDes;
+
+  if (nbDes == 2) {
     let basePremierDe = (actor.isTrinite ? "1d12x[white]" : "1d12x[black]") + modFormula;
     let baseDeuxiemeDe = "1d12x[black]" + modFormula;
     rollFormula = `{${basePremierDe}, ${baseDeuxiemeDe}}`;
   } else {
     rollFormula = "1d12x" + modFormula;
-    nbDes = 1;
   }
 
   let rollResult = await new Roll(rollFormula, rollData).roll({ async: true });
@@ -148,33 +150,34 @@ export async function jetCompetence({
   // Gestion de la réussite selon le Karma
   let resultatJet = "echec";
 
-  if (actor.isTrinite) {
-    if (karmaAdam == "lumiere") {
-      if (resultDeva.reussite) {
-        resultatJet = "reussite";
-      } else if (resultArchonte.reussite) {
-        resultatJet = "detteArchonte";
+  if (nbDes == 2) {
+    if (actor.isTrinite) {
+      if (karmaAdam == "lumiere") {
+        if (resultDeva.reussite) {
+          resultatJet = "reussite";
+        } else if (resultArchonte.reussite) {
+          resultatJet = "detteArchonte";
+        }
+      } else if (karmaAdam == "tenebre") {
+        if (resultArchonte.reussite) {
+          resultatJet = "reussite";
+        } else if (resultDeva.reussite) {
+          resultatJet = "detteDeva";
+        }
+      } else {
+        if (resultDeva.reussite || resultArchonte.reussite) {
+          resultatJet = "reussite";
+        }
       }
-    } else if (karmaAdam == "tenebre") {
-      if (resultArchonte.reussite) {
-        resultatJet = "reussite";
-      } else if (resultDeva.reussite) {
-        resultatJet = "detteDeva";
-      }
-    } else {
+    }
+  
+    if (actor.isArchonteRoi || actor.isLige) {
       if (resultDeva.reussite || resultArchonte.reussite) {
         resultatJet = "reussite";
       }
     }
   }
-
-  if (actor.isArchonteRoi || actor.isLige) {
-    if (resultDeva.reussite || resultArchonte.reussite) {
-      resultatJet = "reussite";
-    }
-  }
-
-  if (actor.isHumain) {
+  else {
     if (resultDeva.reussite) {
       resultatJet = "reussite";
     }
@@ -474,7 +477,7 @@ function typeTestRessource(valRessource, coutAcquisition, endettementCampagne) {
 
 /** Jet d'Arme' */
 export async function jetArme({
-  nbDes = 2,
+  nbDes = null,
   actor = null,
   signe = null,
   competence = null,
@@ -547,13 +550,15 @@ export async function jetArme({
   }
 
   let rollFormula = null;
-  if (actor.isTrinite || actor.isArchonteRoi || actor.isLige) {
+
+  nbDes = actor.nbDes ?? nbDes;
+
+  if (nbDes == 2) {
     let basePremierDe = (actor.isTrinite ? "1d12x[white]" : "1d12x[black]") + modFormula;
     let baseDeuxiemeDe = "1d12x[black]" + modFormula;
     rollFormula = `{${basePremierDe}, ${baseDeuxiemeDe}}`;
   } else {
     rollFormula = "1d12x" + modFormula;
-    nbDes = 1;
   }
 
   let rollResult = await new Roll(rollFormula, rollData).roll({ async: true });
@@ -586,33 +591,34 @@ export async function jetArme({
   // Gestion de la réussite selon le Karma
   let resultatJet = "echec";
 
-  if (actor.isTrinite) {
-    if (karmaAdam == "lumiere") {
-      if (resultDeva.reussite) {
-        resultatJet = "reussite";
-      } else if (resultArchonte.reussite) {
-        resultatJet = "detteArchonte";
+  if (nbDes == 2) {
+    if (actor.isTrinite) {
+      if (karmaAdam == "lumiere") {
+        if (resultDeva.reussite) {
+          resultatJet = "reussite";
+        } else if (resultArchonte.reussite) {
+          resultatJet = "detteArchonte";
+        }
+      } else if (karmaAdam == "tenebre") {
+        if (resultArchonte.reussite) {
+          resultatJet = "reussite";
+        } else if (resultDeva.reussite) {
+          resultatJet = "detteDeva";
+        }
+      } else {
+        if (resultDeva.reussite || resultArchonte.reussite) {
+          resultatJet = "reussite";
+        }
       }
-    } else if (karmaAdam == "tenebre") {
-      if (resultArchonte.reussite) {
-        resultatJet = "reussite";
-      } else if (resultDeva.reussite) {
-        resultatJet = "detteDeva";
-      }
-    } else {
+    }
+  
+    if (actor.isArchonteRoi || actor.isLige) {
       if (resultDeva.reussite || resultArchonte.reussite) {
         resultatJet = "reussite";
       }
     }
   }
-
-  if (actor.isArchonteRoi || actor.isLige) {
-    if (resultDeva.reussite || resultArchonte.reussite) {
-      resultatJet = "reussite";
-    }
-  }
-
-  if (actor.isHumain) {
+  else {
     if (resultDeva.reussite) {
       resultatJet = "reussite";
     }

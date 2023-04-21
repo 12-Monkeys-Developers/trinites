@@ -464,7 +464,8 @@
                             "pointsExp": 0
                         }
                     }
-                }    
+                },
+                "nbDes": null  
             },
             "theme":{
                 "themeAstral":{

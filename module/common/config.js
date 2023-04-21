@@ -327,4 +327,8 @@ TRINITES.savoirsOccultes = {
     label :"Hadès",
     origine:"Vivants"
   },
+  miracle: {
+    label :"Miracle",
+    origine:"La Loge / La Ligue"
+  },
 }

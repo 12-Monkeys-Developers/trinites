@@ -3,6 +3,29 @@ import DepenseKarmaFormApplication from "../appli/DepenseKarmaFormApp.js";
 export default class TrinitesActor extends Actor {
   prepareData() {
     super.prepareData();
+
+    let system = this.system;
+     /*--- Calcul des valeurs de sante ---*/
+
+    // Points de vie max
+    system.ligneVie1 = system.pointsLigneVie;   
+    if (this.system.nbLigneVie === 1) system.nbPointsVieMax = system.ligneVie1;
+    
+    if (this.system.nbLigneVie > 1) system.ligneVie2 = system.pointsLigneVie * 2;
+    if (this.system.nbLigneVie === 2) system.nbPointsVieMax = system.ligneVie2;
+
+    if (this.system.nbLigneVie > 2) system.nbPointsVieMax = system.pointsLigneVie * 3;
+
+    // Etat de santé
+    if (system.nbBlessure === 0) {
+      system.etatSante = "indemne";
+    } else if (system.nbBlessure <= system.ligneVie1) {
+      system.etatSante = "endolori";
+    } else if (system.nbBlessure <= system.ligneVie2) {
+      system.etatSante = "blesse";
+    } else {
+      system.etatSante = "inconscient";
+    }
   }
 
   get hasMetier() {

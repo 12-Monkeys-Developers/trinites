@@ -25,6 +25,8 @@ export default class TrinitesActorSheet extends ActorSheet {
     data.notesHtml = TextEditor.enrichHTML(this.actor.system.notes, { async: false });
 
     data.peutRegenerer = this.actor.system.etatSante !== "indemne" && this.actor.canRegenerate;
+    data.isArchonteRoi = this.actor.isArchonteRoi;
+    data.isLige = this.actor.isLige;
 
     return data;
   }

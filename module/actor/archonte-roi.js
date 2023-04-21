@@ -34,25 +34,6 @@ export default class TrinitesArchonteRoi extends TrinitesActor {
       system.ressources.reseau.diminution = system.ressources.reseau.valeur;
     }
 
-    /*-----------------------------------
-            ---- Calcul des valeurs de sante ----
-            -----------------------------------*/
-
-    // Points de vie maxi
-    system.ligneVie1 = system.pointsLigneVie;
-    system.ligneVie2 = system.pointsLigneVie * 2;
-    system.nbPointsVieMax = system.pointsLigneVie * 3;
-
-    //Etat de santé
-    if (system.nbBlessure == 0) {
-      system.etatSante = "indemne";
-    } else if (system.nbBlessure <= system.ligneVie1) {
-      system.etatSante = "endolori";
-    } else if (system.nbBlessure <= system.ligneVie2) {
-      system.etatSante = "blesse";
-    } else {
-      system.etatSante = "inconscient";
-    }
   }
 
   get isArchonteRoi() {

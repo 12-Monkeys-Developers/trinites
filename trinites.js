@@ -13,6 +13,7 @@ import TrinitesItemSheet from "./module/item/sheet/item-sheet.js";
 import TrinitesVieAnterieureSheet from "./module/item/sheet/vie-anterieure-sheet.js";
 import TrinitesAuraSheet from "./module/item/sheet/aura-sheet.js";
 import TrinitesMetierSheet from "./module/item/sheet/metier-sheet.js";
+import TrinitesPouvoirSheet from "./module/item/sheet/pouvoir-sheet.js";
 import { TrinitesItemProxy } from "./module/item/proxy.js";
 import { TrinitesActorProxy } from "./module/actor/proxy.js";
 
@@ -47,6 +48,7 @@ Hooks.once("init", function() {
     Items.registerSheet("trinites", TrinitesVieAnterieureSheet, { types: ["vieAnterieure"], makeDefault: true});  
     Items.registerSheet("trinites", TrinitesAuraSheet, { types: ["aura"], makeDefault: true});
     Items.registerSheet("trinites", TrinitesMetierSheet, { types: ["metier"], makeDefault: true});
+    Items.registerSheet("trinites", TrinitesPouvoirSheet, { types: ["pouvoir"], makeDefault: true});
 
 	// Preload Handlebars Templates
 	preloadTemplates();

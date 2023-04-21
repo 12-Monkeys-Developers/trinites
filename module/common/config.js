@@ -281,3 +281,50 @@ TRINITES.penalites = {
     combat: false,
   },
 };
+
+TRINITES.savoirsOccultes = {
+  autre: {
+    label :"Autre",
+    origine:"Autre"
+  },
+  art: {
+    label :"Art",
+    origine:"Béliers"
+  },
+  science: {
+    label :"Science",
+    origine:"Béliers"
+  },
+  ars: {
+    label :"Art hermétique",
+    origine:"Hermès Trois-Mages"
+  },
+  savoir: {
+    label :"Savoir",
+    origine:"Ekklêsia"
+  },
+  yoga: {
+    label :"Yoga",
+    origine:"Charites"
+  },
+  rite: {
+    label :"Rite",
+    origine:"Dévorés"
+  },
+  tyrannie: {
+    label :"Tyrannie",
+    origine:"Lions"
+  },
+  piece: {
+    label :"Pouvoir de Pièce",
+    origine:"Lions"
+  },
+  augure: {
+    label :"Augure",
+    origine:"Sybils Nostradamus"
+  },
+  hades: {
+    label :"Hadès",
+    origine:"Vivants"
+  },
+}

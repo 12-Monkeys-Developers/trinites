@@ -1462,14 +1462,18 @@
   border: 1px solid var(--color-border-light-2);
   border-radius: 3px;
   box-shadow: 0 0 2px #FFF inset;
-  background: linear-gradient(to right, #ebf8e1ee, #1f546fee, #07131aee);
+  background: linear-gradient(to right, #ebf8e1ee, #1f546fee, #102c3bee);
 }
 .grid-jet-comp div {
   display: flex;
   justify-content: center;
 }
 .grid-jet-comp.archonte-roi {
-  background: linear-gradient(to right, #1f546fee, #07131aee);
+  background: linear-gradient(to right, #1f546fee, #102c3bee);
+}
+.grid-jet-comp.humain {
+  grid-template-columns: 1fr;
+  background: #1f546fee;
 }
 .titre-esprit {
   margin: 3px;

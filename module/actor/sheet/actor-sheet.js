@@ -68,7 +68,7 @@ export default class TrinitesActorSheet extends ActorSheet {
     // Supprimer un item
     html.find(".suppr-item").click(this._onSupprimerItem.bind(this));
   
-    // Jet de Lame-soeur
+    // Jet d'attaque avec une arme
     html.find(".roll-arme").click(this._onJetArme.bind(this));
 
     // Jet de compétence
@@ -303,17 +303,7 @@ export default class TrinitesActorSheet extends ActorSheet {
     else await this.actor.setFlag(game.system.id, "SheetUnlocked", "SheetUnlocked");
     this.actor.sheet.render(true);
   }
-
-  async _onEndCreation(event) {
-    event.preventDefault();
-    await this.actor.update({ "system.creation.finie": true });
-  }
-
-  async _onAllowCreation(event) {
-    event.preventDefault();
-    await this.actor.update({ "system.creation.finie": false });
-  }
-
+  
   _onJetArme(event) {
     event.preventDefault();
     const itemId = event.currentTarget.dataset.itemId;
@@ -334,7 +324,7 @@ export default class TrinitesActorSheet extends ActorSheet {
       signe: signe,
       competence: arme.competence,
       arme: arme,
-      type: item.name,
+      type: item.name
     });
   }
 

@@ -450,10 +450,10 @@ function typeTestRessource(valRessource, coutAcquisition, endettementCampagne) {
 }
 
 /** Jet d'Arme' */
-export async function jetArme({ actor = null, signe = null, competence = null, arme = null, type = null, difficulte = null, afficherDialog = true, envoiMessage = true } = {}) {
+export async function jetArme({ nbDes = 2, actor = null, signe = null, competence = null, arme = null, type = null, difficulte = null, afficherDialog = true, envoiMessage = true } = {}) {
   // Récupération des données de l'acteur
   let actorData = actor.system;
-
+  
   // Informations nécessaires à la fenêtre de dialogue
   // ID du journal de description des primes et pénalités
   let infoPrimesID = game.settings.get("trinites", "lienJournalPrimesPenalites");
@@ -493,7 +493,7 @@ export async function jetArme({ actor = null, signe = null, competence = null, a
     karmaAdam: karmaAdam,
     typeActor: actor.type,
     typeArme: type,
-    arme: arme,
+    arme: arme
   };
 
   // Modificateur de difficulté du jet
@@ -520,23 +520,36 @@ export async function jetArme({ actor = null, signe = null, competence = null, a
     rollFormula = `{${basePremierDe}, ${baseDeuxiemeDe}}`;
   } else {
     rollFormula = "1d12x" + modFormula;
+    nbDes = 1;
   }
 
   let rollResult = await new Roll(rollFormula, rollData).roll({ async: true });
+  let resultDeva;
+  let resultArchonte;
 
-  let resultDeva = {
-    dieResult: rollResult.terms[0].rolls[0].dice[0].total,
-    rollTotal: rollResult.terms[0].rolls[0].total,
-    reussite: rollResult.terms[0].rolls[0].total >= 12,
-  };
-  rollData.resultDeva = resultDeva;
-
-  let resultArchonte = {
-    dieResult: rollResult.terms[0].rolls[1].dice[0].total,
-    rollTotal: rollResult.terms[0].rolls[1].total,
-    reussite: rollResult.terms[0].rolls[1].total >= 12,
-  };
-  rollData.resultArchonte = resultArchonte;
+  if (nbDes === 2) {
+    resultDeva = {
+      dieResult: rollResult.terms[0].rolls[0].dice[0].total,
+      rollTotal: rollResult.terms[0].rolls[0].total,
+      reussite: rollResult.terms[0].rolls[0].total >= 12
+    };
+    rollData.resultDeva = resultDeva;
+  
+    resultArchonte = {
+      dieResult: rollResult.terms[0].rolls[1].dice[0].total,
+      rollTotal: rollResult.terms[0].rolls[1].total,
+      reussite: rollResult.terms[0].rolls[1].total >= 12
+    };
+    rollData.resultArchonte = resultArchonte;
+  }
+  else {
+    resultDeva = {
+      dieResult: rollResult.terms[0].total,
+      rollTotal: rollResult.total,
+      reussite: rollResult.total >= 12
+    };
+    rollData.resultDeva = resultDeva;
+  }
 
   // Gestion de la réussite selon le Karma
   let resultatJet = "echec";
@@ -561,13 +574,20 @@ export async function jetArme({ actor = null, signe = null, competence = null, a
     }
   }
 
-  if (actor.isArchonteRoi) {
+  if (actor.isArchonteRoi || actor.isLige) {
     if (resultDeva.reussite || resultArchonte.reussite) {
       resultatJet = "reussite";
     }
   }
 
+  if (actor.isHumain) {
+    if (resultDeva.reussite) {
+      resultatJet = "reussite";
+    }
+  }
+
   rollData.resultatJet = resultatJet;
+  rollData.nbDes = nbDes;
 
   if (envoiMessage) {
     // Construction du jeu de données pour alimenter le template
@@ -583,7 +603,7 @@ export async function jetArme({ actor = null, signe = null, competence = null, a
     let templateContext = {
       actorId: actor.id,
       stats: rollStats,
-      roll: renderedRoll,
+      roll: renderedRoll
     };
 
     await new TrinitesChat(actor).withTemplate(messageTemplate).withData(templateContext).withRoll(rollResult).create();

@@ -276,21 +276,6 @@ export default class TrinitesTriniteSheet extends TrinitesActorSheet {
     this.actor.supprimerVieAnterieure();
   }
 
-  /**
-   * Manage the lock/unlock button on the sheet
-   *
-   * @name _onSheetChangelock
-   * @param {*} event
-   */
-  async _onSheetChangelock(event) {
-    event.preventDefault();
-
-    let flagData = await this.actor.getFlag(game.system.id, "SheetUnlocked");
-    if (flagData) await this.actor.unsetFlag(game.system.id, "SheetUnlocked");
-    else await this.actor.setFlag(game.system.id, "SheetUnlocked", "SheetUnlocked");
-    this.actor.sheet.render(true);
-  }
-
   async _onEndCreation(event) {
     event.preventDefault();
     await this.actor.update({ "system.creation.finie": true });

@@ -35,7 +35,7 @@
     ],
     "gridDistance": 1.5,
     "gridUnits": "m",
-    "initiative": "round((1d12 + @competences.capricorne.rapidite.base) / 2)",
+    "initiative": "min(round((1d12 + @competences.capricorne.rapidite.valeur) / 2),12)",
     "primaryTokenAttribute": "",
     "compatibility": {
       "minimum": "10.278",

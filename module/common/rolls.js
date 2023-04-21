@@ -275,12 +275,12 @@ export async function jetRessource({ actor = null, ressource = null, coutAcquisi
     return item.type === "domaine" && !item.system.epuise;
   });
 
-  // Pas de jet si Richesse est épuisée ou tous les dommaines épuisés
+  // Pas de jet si Richesse est épuisée ou tous les dommaines épuisés pour une Trinité
   if (ressource === "richesse" && ressEpuisee) {
     ui.notifications.warn("Votre Richesse est épuisée. Le jet de dés n'est pas autorisé.");
     return;
   } else {
-    if (domaines.length === 0) {
+    if (actor.isTrinite && domaines.length === 0) {
       ui.notifications.warn("Tous vos Domaines sont épuisés. Le jet de dés n'est pas autorisé.");
       return;
     }
@@ -288,7 +288,7 @@ export async function jetRessource({ actor = null, ressource = null, coutAcquisi
 
   // Affichage de la fenêtre de dialogue (vrai par défaut)
   if (afficherDialog) {
-    let dialogOptions = await getJetRessourceOptions({ cfgData: game.trinites.config, useDomaine: ressource != "richesse", domaines: domaines });
+    let dialogOptions = await getJetRessourceOptions({ cfgData: game.trinites.config, useDomaine: ressource != "richesse", domaines: domaines, isTrinite: actor.isTrinite });
 
     // On annule le jet sur les boutons 'Annuler' ou 'Fermeture'
     if (dialogOptions.annule) {
@@ -320,7 +320,7 @@ export async function jetRessource({ actor = null, ressource = null, coutAcquisi
   // Données de base du jet
   let rollData = {
     ressource: label,
-    valeur: valeur,
+    valeur: valeur
   };
 
   // Modificateur de difficulté du jet
@@ -349,7 +349,7 @@ export async function jetRessource({ actor = null, ressource = null, coutAcquisi
   if (envoiMessage) {
     // Construction du jeu de données pour alimenter le template
     let rollStats = {
-      ...rollData,
+      ...rollData
     };
 
     // Recupération du template
@@ -359,8 +359,9 @@ export async function jetRessource({ actor = null, ressource = null, coutAcquisi
     // Assignation des données au template
     let templateContext = {
       actorId: actor.id,
+      isTrinite: actor.isTrinite,
       stats: rollStats,
-      roll: renderedRoll,
+      roll: renderedRoll
     };
 
     await new TrinitesChat(actor).withTemplate(messageTemplate).withData(templateContext).withRoll(rollResult).create();
@@ -370,6 +371,7 @@ export async function jetRessource({ actor = null, ressource = null, coutAcquisi
     if (rollData.reussite) {
       // Gestion endettement : rollData.dette {diminution, duree}
       if (typeTest.type === "dette") {
+        //TODO Ne pas modifier l'acteur s'il y a déjà une diminution en cours
         const updateObj = {};
         updateObj[`system.ressources.${ressource}.diminution`] = rollData.dette.diminution;
         updateObj[`system.ressources.${ressource}.duree`] = rollData.dette.duree;
@@ -386,10 +388,10 @@ export async function jetRessource({ actor = null, ressource = null, coutAcquisi
 }
 
 // Fonction de construction de la boite de dialogue de jet de ressource
-async function getJetRessourceOptions({ cfgData = null, useDomaine = false, domaines = null }) {
+async function getJetRessourceOptions({ cfgData = null, useDomaine = false, domaines = null, isTrinite = null }) {
   // Recupération du template
   const template = "systems/trinites/templates/partials/dice/dialog-jet-ressource.hbs";
-  const html = await renderTemplate(template, { cfgData: cfgData, useDomaine: useDomaine, domaines: domaines });
+  const html = await renderTemplate(template, { cfgData: cfgData, useDomaine: useDomaine, domaines: domaines, isTrinite: isTrinite });
 
   return new Promise((resolve) => {
     const data = {
@@ -400,12 +402,12 @@ async function getJetRessourceOptions({ cfgData = null, useDomaine = false, doma
           // Bouton qui lance le jet de dé
           icon: '<i class="fas fa-dice"></i>',
           label: "Jeter les dés",
-          callback: (html) => resolve(_processJetRessourceOptions(html[0].querySelector("form"))),
+          callback: (html) => resolve(_processJetRessourceOptions(html[0].querySelector("form")))
         },
         annuler: {
           // Bouton d'annulation
           label: "Annuler",
-          callback: (html) => resolve({ annule: true }),
+          callback: (html) => resolve({ annule: true })
         },
       },
       default: "jet",

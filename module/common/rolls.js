@@ -29,7 +29,7 @@ export async function jetCompetence({
   // ID du journal de description des primes et pénalités
   let infoPrimesID = game.settings.get("trinites", "lienJournalPrimesPenalites");
   // Competence de combat
-  let compCombat = competence == "tir" || competence == "melee" || competence == "corpsACorps";
+  let compCombat = competence === "tir" || competence === "melee" || competence === "corpsACorps";
   // Compétence qui autorise les actions libres
   let compLibre = actorData.competences[signe][competence].libre;
 
@@ -529,7 +529,7 @@ export async function jetArme({
     karmaAdam: karmaAdam,
     typeActor: actor.type,
     typeArme: type,
-    arme: arme,
+    arme: arme
   };
 
   // Modificateur de difficulté du jet
@@ -652,7 +652,7 @@ export async function jetArme({
 async function getJetArmeOptions({ cfgData = null, infoPrimesID = null }) {
   // Recupération du template
   const template = "systems/trinites/templates/partials/dice/dialog-jet-arme.hbs";
-  const html = await renderTemplate(template, { cfgData: cfgData, infoPrimesID: infoPrimesID });
+  const html = await renderTemplate(template, { cfgData: cfgData, compCombat:true, infoPrimesID: infoPrimesID });
 
   return new Promise((resolve) => {
     const data = {
@@ -663,12 +663,12 @@ async function getJetArmeOptions({ cfgData = null, infoPrimesID = null }) {
           // Bouton qui lance le jet de dé
           icon: '<i class="fas fa-dice"></i>',
           label: "Jeter les dés",
-          callback: (html) => resolve(_processJetArmeOptions(html[0].querySelector("form"))),
+          callback: (html) => resolve(_processJetArmeOptions(html[0].querySelector("form")))
         },
         annuler: {
           // Bouton d'annulation
           label: "Annuler",
-          callback: (html) => resolve({ annule: true }),
+          callback: (html) => resolve({ annule: true })
         },
       },
       default: "jet",

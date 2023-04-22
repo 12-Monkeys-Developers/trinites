@@ -2,9 +2,8 @@
     "name": "trinites",
     "title": "Trinités",
     "description": "Le système Trinités pour FoundryVTT",
-    "version": "This is auto generated",
+    "version": "#{VERSION}#",
     "templateVersion": 2,
-    "author": "Dellatosa",
     "authors": [
       {
         "name": "Khaali"
@@ -42,8 +41,8 @@
       "verified": "10.291",
       "maximum": 10
     },
-    "url": "This is auto generated",
-    "manifest": "This is auto generated", 
-    "download": "This is auto generated" 
+    "url": "#{URL}#",
+    "manifest": "#{MANIFEST}#",
+    "download": "#{DOWNLOAD}#"
   }
   

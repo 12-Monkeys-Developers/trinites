@@ -455,58 +455,5 @@ export default class TrinitesTrinite extends TrinitesActor {
     // Suppression du métier
     await this.deleteEmbeddedDocuments("Item", [metier._id]);
   }
-
-  /**
-   * 
-   * @param {*} auraId 
-   * @param {Object} options 
-   */
-  async activerAura(auraId, options) {
-    const aura = this.items.get(auraId);
-
-    // Aura déjà déployée - test par sécurité
-    if (aura.system.deploiement != "cosme") {
-      ui.notifications.warn("Cette aura est déjà déployée !");
-      return null;
-    }
-
-    const typeKarma = "neutre";
-
-    const karmaDisponible = this.karmaDisponible(typeKarma);
-    const coutPouvoir = this.coutPouvoir("zodiaque");
-    let activable = false;
-
-    // Pas assez de Karma
-    if (karmaDisponible < coutPouvoir) {
-      ui.notifications.warn("Vous n'avez pas assez de Karma disponible pour déployer cette aura !");
-      return;
-    }
-    // Juste ce qu'il faut de Karma
-    else if (karmaDisponible == coutPouvoir) {
-      this.viderKarma(typeKarma);
-      activable = true;
-    }
-    // Uniquement le Karma d'une source
-    else if (this.sourceUnique(typeKarma)) {
-      this.consommerSourceKarma(this.sourceUnique(typeKarma), coutPouvoir);
-      activable = true;
-    } 
-    else {
-      activable = await DepenseKarmaFormApplication.open(this, this.system.trinite, typeKarma, "aura", coutPouvoir, auraId);
-    }
-    
-    if (activable) {
-      aura.update({ "data.deploiement": "corps" });
-
-      // MAJ de la carte
-      return {
-        "title": `Vous avez déployé l'aura '${aura.name}'`,
-        "classList": "deployee",
-        "zone": "Corps"
-      }
-    }
-    return null;
-
-  }
   
 }

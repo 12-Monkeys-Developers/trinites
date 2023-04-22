@@ -145,7 +145,7 @@ export default class DepenseKarmaFormApplication extends FormApplication {
   }
 
   async _updateObject(event, formData) {
-    //this.render();
+
     this.pouvoirUtilise = true;
 
     if (this.karmaDeva.valeur != this.karmaDeva.valeurInit) {
@@ -159,23 +159,6 @@ export default class DepenseKarmaFormApplication extends FormApplication {
     if (this.karmaArchonte.valeur != this.karmaArchonte.valeurInit) {
       this.actor.majKarma("archonte", this.karmaArchonte.valeur);
     }
-
-    /*console.log("Update Object form Karma", event, formData, this);
-
-        for (const [key, value] of Object.entries(formData)) {
-          
-          console.log(key, value);
-
-          if(key.startsWith("karmaDeva")) {
-            this.actor.majKarma("deva", value);
-          }
-          if(key.startsWith("karmaAdam")) {
-            this.actor.majKarma("adam", value);
-          }
-          if(key.startsWith("karmaArchonte")) {
-            this.actor.majKarma("archonte", value);
-          }
-        }*/
 
     if (this.typePouvoir == "aura") {
       let aura = this.actor.items.get(this.idPouvoir);

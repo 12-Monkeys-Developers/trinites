@@ -12,7 +12,6 @@
     <h1 class="charname"><input name="name" type="text" value="{{actor.name}}" {{#unless unlocked}}readonly{{/unless}}/></h1>
     <div class="sous-type">
       <label>Type</label>
-      <!--<input name="system.sousType" type="text" value="{{data.system.sousType}}" {{#unless unlocked}}readonly{{/unless}}/>-->
       <select name="system.sousType" {{#unless unlocked}}disabled {{/unless}}>
         {{#select data.system.sousType}}
           {{#each config.typePnj as |pnj keyPnj|}}

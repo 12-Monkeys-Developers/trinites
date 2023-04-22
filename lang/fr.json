@@ -1,6 +1,7 @@
 {
     "ACTOR": {
         "TypeTrinite": "Trinité",
+        "TypePnj": "PNJ",
         "TypeArchonteroi": "ArchonteRoi",
         "TypeLige": "Lige",
         "TypeHumain": "Humain"

@@ -1,0 +1,53 @@
+<div class="deux-col-50-50">
+    <div class = "karma-ten">
+        <h3><i class="fas fa-moon"></i> Karma-Lumière</h3>
+        <div class="grid-karma-ten">
+            <div class="karma-ten-titre"><label>Réserve</label></div>
+            <div class="karma-ten-valeur">
+                <input name="system.karmaLumiere.value" type="number" value="{{data.system.karmaLumiere.value}}" placeholder="0" min="0" max="{{data.system.karmaLumiere.max}}">
+                <label> / </label>
+                <input name="system.karmaLumiere.max" type="number" value="{{data.system.karmaLumiere.max}}" placeholder="0" min="0" {{#unless unlocked}}disabled {{/unless}}>
+            </div>
+        </div>
+    </div>
+    <div class = "karma-ten">
+        <h3><i class="fas fa-moon"></i> Karma-Ténèbres</h3>
+        <div class="grid-karma-ten">
+            <div class="karma-ten-titre"><label>Réserve</label></div>
+            <div class="karma-ten-valeur">
+                <input name="system.karmaTenebres.value" type="number" value="{{data.system.karmaTenebres.value}}" placeholder="0" min="0" max="{{data.system.karmaLumiere.max}}">
+                <label> / </label>
+                <input name="system.karmaTenebres.max" type="number" value="{{data.system.karmaTenebres.max}}" placeholder="0" min="0" {{#unless unlocked}}disabled {{/unless}}>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="une-col">
+    {{#if isArchonteRoi}}
+        <div class="deux-col-50-50">
+            <div class="col-A">
+                {{> "systems/trinites/templates/partials/actor/bloc-themeAstral-personnage.hbs"}}
+            </div>
+            <div class="col-B">
+                <div class="histo-bloc">                        
+                    <h3><i class="fab fa-pied-piper-alt"></i> Historique</h3>
+                    <div class="ligne-histo">
+                        <label>Légion</label>                            
+                        <select name="system.trinite.archonte.legion">
+                            {{#select data.system.trinite.archonte.legion}}
+                            {{#each config.legions as |legion keyLegion|}}
+                                <option value="{{keyLegion}}">{{legion}}</option>
+                            {{/each}}
+                            {{/select}} 
+                        </select>
+                    </div>
+                    <div class="histo"><textarea name="system.historique" placeholder="Histoire de l'Archonte-Roi">{{data.system.historique}}</textarea></div>
+                </div>
+            </div>
+        </div>
+        {{> "systems/trinites/templates/partials/actor/bloc-lameNoire-archonte.hbs"}}
+    {{/if}}
+    {{> "systems/trinites/templates/partials/actor/pnj-bloc-versets.hbs"}}
+    {{> "systems/trinites/templates/partials/actor/bloc-zodiaque-personnage.hbs"}}
+    {{> "systems/trinites/templates/partials/actor/pnj-bloc-pouvoirs.hbs"}}
+</div>

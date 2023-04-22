@@ -65,6 +65,10 @@ export default class TrinitesActor extends Actor {
     return this.system.nbDes ?? 2;
   }
 
+  get canUseSouffle() {
+    return false;
+  }
+
   /**
    * Nombre de points de Karma disponible du type donné (Lumière ou Ténèbre)
    * @param {*} typeKarma

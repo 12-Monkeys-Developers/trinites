@@ -129,6 +129,9 @@ export default class TrinitesTriniteSheet extends TrinitesActorSheet {
 
     if (this.actor) {
       if (this.actor.isOwner) {
+            // Supprimer un domaine
+        html.find(".suppr-domaine").click(this._onSupprimerDomaine.bind(this));
+
         // Régénérer des cases de vie en dépensant du Karma
         html.find(".regen").click(this._onRegenerationSante.bind(this));
 

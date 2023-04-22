@@ -75,7 +75,7 @@ export async function jetCompetence({
     competence: label,
     valeur: valeur,
     karmaAdam: karmaAdam,
-    typeActor: actor.type,
+    typeActor: actor.sousType
   };
 
   // Bonus de difficulte en cas de jet d'Emprise - Souffle
@@ -527,7 +527,7 @@ export async function jetArme({
     competence: label,
     valeur: valeur,
     karmaAdam: karmaAdam,
-    typeActor: actor.type,
+    typeActor: actor.sousType,
     typeArme: type,
     arme: arme
   };

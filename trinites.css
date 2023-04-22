@@ -1,12 +1,26 @@
 .window-app .window-content {
   background: url("./images/parchemin-grey.jpg") repeat;
 }
-.actor-infos-line {
-  display: flex;
-}
 .sheet-tabs.tabs a {
   color: var(--color-titre-trinite);
   font-weight: bold;
+}
+.trinites.sheet.actor .actor-infos-line {
+  display: flex;
+}
+.trinites.sheet.actor .actor-infos-line .sous-type {
+  display: flex;
+  margin: 2px;
+  align-items: center;
+}
+.trinites.sheet.actor .actor-infos-line .sous-type label {
+  width: 60px;
+}
+.trinites.sheet.actor .actor-infos-line .sous-type select {
+  color: white;
+}
+.trinites.sheet.actor .actor-infos-line .sous-type select:disabled {
+  color: white;
 }
 .trinites.sheet.actor .invisible {
   visibility: hidden;
@@ -114,6 +128,7 @@
 .trinites.sheet.actor .window-content nav .tab-profane,
 .trinites.sheet.actor .window-content nav .tab-equipement,
 .trinites.sheet.actor .window-content nav .tab-description,
+.trinites.sheet.actor .window-content nav .tab-details,
 .trinites.sheet.actor .window-content nav .tab-notes {
   font-family: "Cabaletta";
   color: var(--color-titre-trinite);
@@ -128,6 +143,7 @@
 .trinites.sheet.actor .window-content .tab.tab-profane h3,
 .trinites.sheet.actor .window-content .tab.tab-equipement h3,
 .trinites.sheet.actor .window-content .tab.tab-description h3,
+.trinites.sheet.actor .window-content .tab.tab-details h3,
 .trinites.sheet.actor .window-content .tab.tab-notes h3 {
   color: var(--color-titre-trinite);
   font-weight: bold;
@@ -144,8 +160,8 @@
   margin-left: 3px;
   border-bottom: none;
 }
-.trinites.sheet.actor .competences,
 .trinites.sheet.actor .domaines,
+.trinites.sheet.actor .competences,
 .trinites.sheet.actor .ressources,
 .trinites.sheet.actor .lignes-de-vie,
 .trinites.sheet.actor .theme-astral,
@@ -156,13 +172,37 @@
 .trinites.sheet.actor .grand-livre,
 .trinites.sheet.actor .zodiaque,
 .trinites.sheet.actor .lame-soeur,
-.trinites.sheet.actor .lame-noire {
+.trinites.sheet.actor .lame-noire,
+.trinites.sheet.actor .pouvoirs {
   padding: 2px;
   margin: 3px;
 }
 .trinites.sheet.actor .domaines,
-.trinites.sheet.actor .zodiaque {
+.trinites.sheet.actor .zodiaque,
+.trinites.sheet.actor .pouvoirs {
   margin-top: 5px;
+}
+.trinites.sheet.actor .lignes-de-vie .param {
+  display: flex;
+  margin: 2px;
+  align-items: center;
+}
+.trinites.sheet.actor .lignes-de-vie .param label {
+  width: 150px;
+}
+.trinites.sheet.actor .lignes-de-vie .param input {
+  width: 40px;
+}
+.trinites.sheet.actor .competences .param {
+  display: flex;
+  margin: 2px;
+  align-items: center;
+}
+.trinites.sheet.actor .competences .param label {
+  width: 80px;
+}
+.trinites.sheet.actor .competences .param input {
+  width: 40px;
 }
 .trinites.sheet.actor .comp-grid {
   display: grid;
@@ -716,6 +756,25 @@
 }
 .trinites.sheet.actor .grid-grand-livre .titre {
   font-family: "Cabaletta";
+}
+.trinites.sheet.actor .pouvoirs {
+  min-height: 80px;
+}
+.trinites.sheet.actor .grid-pouvoirs {
+  display: grid;
+  grid-template-columns: 1fr;
+  margin: 3px;
+}
+.trinites.sheet.actor .grid-pouvoirs div {
+  margin: 2px;
+}
+.trinites.sheet.actor .grid-pouvoirs .titre {
+  font-family: "Cabaletta";
+}
+.trinites.sheet.actor .grid-pouvoir {
+  display: grid;
+  grid-template-columns: 1.3fr 2em 2em;
+  align-items: center;
 }
 .trinites.sheet.actor .grid-verset {
   display: grid;
@@ -2003,6 +2062,10 @@
   text-align: center;
 }
 .big-size {
+  flex: 0 1 25em;
+  padding: 3px;
+}
+.big-size-center {
   flex: 0 1 25em;
   padding: 3px;
   text-align: center;

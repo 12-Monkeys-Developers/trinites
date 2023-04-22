@@ -61,4 +61,9 @@ export default function registerHandlebarsHelpers() {
     if (particularites.deuxMains) text += 'Incompatible avec une arme à deux mains. '  
     return text;
   }); 
+
+  Handlebars.registerHelper("getIconeVerset", function (karma) {
+    if (karma === "tenebre") return "fa-moon";
+    if (karma === "lumiere") return "fa-sun";
+  });
 }

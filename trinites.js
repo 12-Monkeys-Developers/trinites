@@ -8,6 +8,7 @@ import TrinitesTriniteSheet from "./module/actor/sheet/trinite-sheet.js";
 import TrinitesArchonteRoiSheet from "./module/actor/sheet/archonte-roi-sheet.js";
 import TrinitesLigeSheet from "./module/actor/sheet/lige-sheet.js";
 import TrinitesHumainSheet from "./module/actor/sheet/humain-sheet.js";
+import TrinitesPnjSheet from "./module/actor/sheet/pnj-sheet.js";
 
 import TrinitesItemSheet from "./module/item/sheet/item-sheet.js";
 import TrinitesVieAnterieureSheet from "./module/item/sheet/vie-anterieure-sheet.js";
@@ -42,6 +43,8 @@ Hooks.once("init", function() {
     Actors.registerSheet("trinites", TrinitesTriniteSheet, { types: ["trinite"], makeDefault: true});
     Actors.registerSheet("trinites", TrinitesArchonteRoiSheet, { types: ["archonteRoi"], makeDefault: true});  
     Actors.registerSheet("trinites", TrinitesLigeSheet, { types: ["lige"], makeDefault: true});  
+    Actors.registerSheet("trinites", TrinitesPnjSheet, { types: ["pnj"], makeDefault: true});  
+    
 
     Items.unregisterSheet("core", ItemSheet);
     Items.registerSheet("trinites", TrinitesItemSheet, {types: ["atout", "ame","arme", "armure", "domaine","jardin","majeste","objet","pouvoir","verset"], makeDefault: true});

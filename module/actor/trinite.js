@@ -195,7 +195,14 @@ export default class TrinitesTrinite extends TrinitesActor {
     return true;
   }
 
+  get sousType() {
+    return "trinite";
+  }
   
+  get canUseSouffle() {
+    return actor.system.themeAstral.affinite === "zodiaque";
+  }
+
   /**
    * Nombre de points de Karma disponible du type donné (Lumière ou Ténèbre)
    * @param {*} typeKarma

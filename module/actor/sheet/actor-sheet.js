@@ -46,9 +46,6 @@ export default class TrinitesActorSheet extends ActorSheet {
   activateListeners(html) {
     super.activateListeners(html);
 
-    // Supprimer un domaine
-    html.find(".suppr-domaine").click(this._onSupprimerDomaine.bind(this));
-
     // Ajouter au domaine son statut épuisé
     html.find(".check-domaine").click(this._onAjoutDomaineEtatEpuise.bind(this));
 

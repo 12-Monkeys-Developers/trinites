@@ -332,3 +332,13 @@ TRINITES.savoirsOccultes = {
     origine:"La Loge / La Ligue"
   },
 }
+  }
+};
+  
+TRINITES.typePnj = {
+    archonteRoi: "Archonte-Roi",
+    lige: "Lige",
+    humain: "Humain",
+    autre: "Autre"
+  };
+

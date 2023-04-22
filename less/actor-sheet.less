@@ -2,16 +2,34 @@
     background: url("./images/parchemin-grey.jpg") repeat;
 }
 
-.actor-infos-line {
-    display: flex;
-}
-
 .sheet-tabs.tabs a {
     color: var(--color-titre-trinite);
     font-weight: bold;
 }
 
 .trinites.sheet.actor {
+
+    .actor-infos-line {
+        display: flex;    
+    
+        .sous-type {
+            display: flex;
+            margin: 2px;
+            align-items: center;
+    
+            label {
+                width: 60px;
+            }
+    
+            select {
+                color: white;
+            }
+            
+            select:disabled {
+                color: white;
+            }
+        }
+    }
 
     .invisible {
         visibility: hidden;
@@ -105,7 +123,7 @@
     .window-content {
         background: url("./images/parchemin-grey.jpg") repeat;
         
-        nav .tab-profane, nav .tab-equipement, nav .tab-description, nav .tab-notes {
+        nav .tab-profane, nav .tab-equipement, nav .tab-description, nav .tab-details, nav .tab-notes {
             font-family: "Cabaletta";
             color: var(--color-titre-trinite);
         }
@@ -115,7 +133,7 @@
             color: var(--color-titre-occulte);
         }
 
-        .tab.tab-profane h3, .tab.tab-equipement h3, .tab.tab-description h3, .tab.tab-notes h3 {
+        .tab.tab-profane h3, .tab.tab-equipement h3, .tab.tab-description h3, .tab.tab-details h3, .tab.tab-notes h3 {
             //font-family: "AvenirLTStd-Heavy";
             color: var(--color-titre-trinite);
             font-weight: bold;
@@ -132,14 +150,46 @@
         }
     }
 
-    .competences, .domaines, .ressources, .lignes-de-vie, .theme-astral, .vie-ante-bloc, .histo-bloc, 
-    .expe-bloc, .karma-ten, .grand-livre, .zodiaque, .lame-soeur, .lame-noire {        
+    .domaines, .competences, .ressources, .lignes-de-vie, .theme-astral, .vie-ante-bloc, .histo-bloc, 
+    .expe-bloc, .karma-ten, .grand-livre, .zodiaque, .lame-soeur, .lame-noire, .pouvoirs {        
         padding: 2px;
         margin: 3px;
     }
 
-    .domaines, .zodiaque {
+    .domaines, .zodiaque, .pouvoirs {
         margin-top: 5px;
+    }
+
+    .lignes-de-vie {
+        .param {
+            display: flex;
+            margin: 2px;
+            align-items: center;
+
+            label {
+                width: 150px;
+            }
+
+            input {
+                width: 40px;
+            }
+        }
+    }
+
+    .competences  {
+        .param {
+            display: flex;
+            margin: 2px;
+            align-items: center;
+
+            label {
+                width: 80px;
+            }
+
+            input {
+                width: 40px;
+            }
+        }
     }
 
     .comp-grid {
@@ -820,6 +870,30 @@
         .titre {
             font-family: "Cabaletta";
         }
+    }
+
+    .pouvoirs {
+        min-height: 80px;
+    }
+
+    .grid-pouvoirs {
+        display: grid;
+        grid-template-columns: 1fr;
+        margin: 3px;
+
+        div {
+            margin: 2px;
+        }
+        
+        .titre {
+            font-family: "Cabaletta";
+        }
+    }
+    
+    .grid-pouvoir {
+        display: grid;
+        grid-template-columns: 1.3fr 2em 2em;
+        align-items: center;
     }
         
     .grid-verset {

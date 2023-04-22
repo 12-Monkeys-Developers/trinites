@@ -9,7 +9,7 @@
 {{/if}}
 <div class="actor-info">
   <div class="actor-infos-line">
-    <h1 class="charname"><input name="name" type="text" value="{{actor.name}}" {{#unless unlocked}}readonly{{/unless}}//></h1>
+    <h1 class="charname"><input name="name" type="text" value="{{actor.name}}" {{#unless unlocked}}readonly{{/unless}}/></h1>
   </div>
 
   {{#if (eq data.type "trinite")}}
@@ -24,12 +24,12 @@
       <div class="middle-size"><a class="sheet-change-lock" title="{{localize 'TRINITES.label.unlockSheet'}}">
           {{#if unlocked}}<i class="fas fa-lock-open"></i>{{else}}<i class="fas fa-lock" ></i>{{/if}}</a>
       </div>
-  </div>
-  <div class="actor-infos-line">
-    <label>{{localize "TRINITES.label.vieAnterieure"}}</label>
-    <div class="big-size {{#if hasVieAnterieure}}edit-item{{/if}}" {{#if hasVieAnterieure}}data-item-id='{{vieAnterieureId}}' data-tooltip="Afficher la vie antérieure" data-tooltip-direction="UP"{{/if}} ><input name="system.vieAnterieure" type="text" value="{{data.system.vieAnterieure}}" readonly /></div>
-    {{#if hasVieAnterieure}}{{#if unlocked}}<div><a class="delete-vie-anterieure" title="Supprimer la vie antérieure"><i class="fa fa-trash"></i></a></div>{{/if}}{{/if}}
-  </div>
+    </div>
+    <div class="actor-infos-line">
+      <label>{{localize "TRINITES.label.vieAnterieure"}}</label>
+      <div class="big-size {{#if hasVieAnterieure}}edit-item{{/if}}" {{#if hasVieAnterieure}}data-item-id='{{vieAnterieureId}}' data-tooltip="Afficher la vie antérieure" data-tooltip-direction="UP"{{/if}} ><input name="system.vieAnterieure" type="text" value="{{data.system.vieAnterieure}}" readonly /></div>
+      {{#if hasVieAnterieure}}{{#if unlocked}}<div><a class="delete-vie-anterieure" title="Supprimer la vie antérieure"><i class="fa fa-trash"></i></a></div>{{/if}}{{/if}}
+    </div>
   {{/if}}
 
   {{#if (eq data.type "archonteRoi")}}

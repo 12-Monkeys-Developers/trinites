@@ -366,7 +366,7 @@ export async function carteAtoutActive({ actor = null, atoutId = null } = {}) {
   // Récupération des données de l'item
   let cardData = {
     atout: atout,
-    nomPersonnage: actor.name,
+    nomPersonnage: actor.name
   };
 
   // Recupération du template
@@ -378,14 +378,14 @@ export async function carteAtoutActive({ actor = null, atoutId = null } = {}) {
 export async function carteAura({ actor = null, auraId = null, whisper = null } = {}) {
   let aura = actor.items.get(auraId);
 
-  let souffleDispo = actor.type == "archonteRoi" || actor.system.themeAstral.affinite == "zodiaque";
+  let souffleDispo = actor.canUseSouffle;
 
   // Récupération des données de l'item
   let cardData = {
     aura: aura,
     actorId: actor.id,
     souffleDispo: souffleDispo,
-    isWhisper: whisper,
+    isWhisper: whisper
   };
 
   // Recupération du template
@@ -401,7 +401,7 @@ export async function carteVerset({ actor = null, versetId = null, whisper = nul
   let cardData = {
     verset: verset,
     actorId: actor.id,
-    isWhisper: whisper,
+    isWhisper: whisper
   };
 
   // Recupération du template
@@ -416,7 +416,7 @@ export async function carteVersetActive({ actor = null, versetId = null } = {}) 
   // Récupération des données de l'item
   let cardData = {
     verset: verset,
-    nomPersonnage: actor.name,
+    nomPersonnage: actor.name
   };
 
   // Recupération du template

@@ -41,36 +41,42 @@ export default class DepenseKarmaFormApplication extends FormApplication {
     };
 
     let karmaDeva = {
-      valeurInit: this.trinite.deva.karma.value,
-      valeur: this.trinite.deva.karma.value,
+      valeurInit: this.actor.isTrinite ? this.trinite.deva.karma.value : this.actor.system.karmaLumiere.value,
+      valeur: this.actor.isTrinite ? this.trinite.deva.karma.value : this.actor.system.karmaLumiere.value
     };
     if (!this.karmaDeva) {
       this.karmaDeva = karmaDeva;
     }
 
     let karmaArchonte = {
-      valeurInit: this.trinite.archonte.karma.value,
-      valeur: this.trinite.archonte.karma.value,
+      valeurInit: this.actor.isTrinite ? this.trinite.archonte.karma.value : this.actor.system.karmaTenebres.value,
+      valeur: this.actor.isTrinite ? this.trinite.archonte.karma.value : this.actor.system.karmaTenebres.value
     };
+
     if (!this.karmaArchonte) {
       this.karmaArchonte = karmaArchonte;
     }
 
-    let karmaAdam = {
-      type: this.trinite.adam.karma.type,
-      valeurInit: this.trinite.adam.karma.value,
-      valeur: this.trinite.adam.karma.value,
-    };
+    let karmaAdam = {};
+
+    if (this.actor.isTrinite) {
+      karmaAdam = {
+            type: this.trinite.adam.karma.type,
+            valeurInit: this.trinite.adam.karma.value,
+            valeur: this.trinite.adam.karma.value
+          };
+    }
+    
     if (!this.karmaAdam) {
       this.karmaAdam = karmaAdam;
     }
 
     if (this.typeKarma == "lumiere") {
       templateData.karmaDeva = this.karmaDeva;
-      templateData.karmaAdam = this.typeKarma == this.karmaAdam.type ? this.karmaAdam : "";
+      templateData.karmaAdam = this.typeKarma === this.karmaAdam.type ? this.karmaAdam : "";
     } else if (this.typeKarma == "tenebre") {
       templateData.karmaArchonte = this.karmaArchonte;
-      templateData.karmaAdam = this.typeKarma == this.karmaAdam.type ? this.karmaAdam : "";
+      templateData.karmaAdam = this.typeKarma === this.karmaAdam.type ? this.karmaAdam : "";
     } else {
       templateData.typeKarma = "neutre";
       templateData.karmaDeva = this.karmaDeva;

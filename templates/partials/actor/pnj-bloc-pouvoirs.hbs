@@ -2,8 +2,11 @@
     <h3><i class="fas fa-book-open"></i> Pouvoirs</h3>
     <div class="grid-pouvoirs">
         <div class="grid-pouvoir">
+            <div class="titre">Pouvoir</div>
+            <div class="titre">Savoir occulte</div>
             {{#each pouvoirs as |pouvoir id|}}
                     <div class="nom-pouvoir" data-item-id="{{pouvoir._id}}">{{pouvoir.name}}</div>
+                    <div class="savoir-pouvoir">{{pouvoir.system.savoirOcculte}}</div>
                     <div class="edit-pouvoir"><a class="edit-item {{#unless @root.unlocked}}invisible{{/unless}}" title="Editer" data-item-id="{{pouvoir._id}}"> <i class="far fa-edit"></i></a></div>
                     <div class="delete-pouvoir"><a class="suppr-item {{#unless @root.unlocked}}invisible{{/unless}}" title="Supprimer" data-item-id="{{pouvoir._id}}"><i class="fas fa-times-circle"></i></a></div>
             {{/each}}

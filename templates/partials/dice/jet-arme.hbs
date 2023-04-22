@@ -29,6 +29,7 @@
             <div>Dégâts {{stats.arme.degats}}</div>
         </div>
     </div>
+
     {{#if (eq stats.typeActor "trinite")}}
         <div class="grid-jet-comp">
             <div class="titre-esprit deva">Deva</div>
@@ -39,15 +40,16 @@
                 <div class="dice-back"><div class="roll dice-deva">{{stats.resultDeva.dieResult}}</div></div>
             {{/if}}
     {{/if}}
+
     {{#if (or (eq stats.typeActor "archonteRoi")(eq stats.typeActor "lige"))}}
         <div class="grid-jet-comp archonte-roi">
-            <div class="titre-archonte-roi">Archonte-roi</div>
             {{#if (eq stats.resultDeva.dieResult 1)}}
                 <div class="dice-back"><div class="roll dice-archonte echec-crit">{{stats.resultDeva.dieResult}}</div></div>
             {{else}}
                 <div class="dice-back"><div class="roll dice-archonte">{{stats.resultDeva.dieResult}}</div></div>
             {{/if}}
     {{/if}}
+
     {{#if (eq stats.typeActor "humain")}}
         <div class="grid-jet-comp humain">
             {{#if (eq stats.resultDeva.dieResult 1)}}
@@ -55,6 +57,24 @@
             {{else}}
                 <div class="dice-back"><div class="roll dice-deva">{{stats.resultDeva.dieResult}}</div></div>
             {{/if}}
+    {{/if}}
+
+    {{#if (eq stats.typeActor "autre")}}
+         {{#if (eq stats.nbDes 2)}}
+            <div class="grid-jet-comp archonte-roi">
+                {{#if (eq stats.resultDeva.dieResult 1)}}
+                    <div class="dice-back"><div class="roll dice-archonte echec-crit">{{stats.resultDeva.dieResult}}</div></div>
+                {{else}}
+                    <div class="dice-back"><div class="roll dice-archonte">{{stats.resultDeva.dieResult}}</div></div>
+                {{/if}}
+         {{else}}
+            <div class="grid-jet-comp humain">
+                {{#if (eq stats.resultDeva.dieResult 1)}}
+                    <div class="dice-back"><div class="roll dice-deva echec-crit">{{stats.resultDeva.dieResult}}</div></div>
+                {{else}}
+                    <div class="dice-back"><div class="roll dice-deva">{{stats.resultDeva.dieResult}}</div></div>
+                {{/if}}
+         {{/if}}
     {{/if}}
 
     {{#if (eq stats.nbDes 2)}}

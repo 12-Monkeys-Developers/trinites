@@ -894,8 +894,28 @@
     
     .grid-pouvoir {
         display: grid;
-        grid-template-columns: 1.3fr 2em 2em;
+        grid-template-columns: 1fr 1fr 2em 2em;
         align-items: center;
+
+        .nom-pouvoir {
+            grid-column: 1 / 2;
+        }
+
+        .savoir-pouvoir {
+            grid-column: 2 / 3;
+        }
+
+        .edit-pouvoir {
+            grid-column: 3 / 4;
+            display: flex;
+            justify-content: center;
+        }
+
+        .delete-pouvoir {
+            grid-column: 4 / 5;
+            display: flex;
+            justify-content: center;
+        }
     }
         
     .grid-verset {

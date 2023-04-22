@@ -200,7 +200,7 @@ export default class TrinitesTrinite extends TrinitesActor {
   }
   
   get canUseSouffle() {
-    return actor.system.themeAstral.affinite === "zodiaque";
+    return this.system.themeAstral.affinite === "zodiaque";
   }
 
   /**

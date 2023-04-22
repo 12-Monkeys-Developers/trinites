@@ -63,6 +63,33 @@ export default class TrinitesPnjSheet extends TrinitesActorSheet {
     html.find('.grid-pouvoir .nom-pouvoir').click(this._onItemSummary.bind(this));
   }
 
+  /**
+   * Handle dropping of an item reference or item data onto an Item Sheet
+   *
+   * @name _onDropItem
+   * @param {DragEvent} event     The concluding DragEvent which contains drop data
+   * @param {Object} data         The data transfer extracted from the event
+   * @private
+   */
+  async _onDropItem(event, data) {
+    Item.fromDropData(data).then((item) => {
+      const itemData = duplicate(item);
+      switch (itemData.type) {
+        case "metier":
+          return ;
+        case "vieAnterieure":
+          return ;
+        case "aura":
+          return this._onDropAuraItem(event, itemData);
+        case "atout":
+            if (this.actor.isArchonteRoi) super._onDropItem(event, data);
+            else return;
+        default:
+          return super._onDropItem(event, data);
+      }
+    });
+  }
+
    /**
    * Handle the drop of a Aura item on the actor sheet
    *

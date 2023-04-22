@@ -775,8 +775,24 @@
 }
 .trinites.sheet.actor .grid-pouvoir {
   display: grid;
-  grid-template-columns: 1.3fr 2em 2em;
+  grid-template-columns: 1fr 1fr 2em 2em;
   align-items: center;
+}
+.trinites.sheet.actor .grid-pouvoir .nom-pouvoir {
+  grid-column: 1 / 2;
+}
+.trinites.sheet.actor .grid-pouvoir .savoir-pouvoir {
+  grid-column: 2 / 3;
+}
+.trinites.sheet.actor .grid-pouvoir .edit-pouvoir {
+  grid-column: 3 / 4;
+  display: flex;
+  justify-content: center;
+}
+.trinites.sheet.actor .grid-pouvoir .delete-pouvoir {
+  grid-column: 4 / 5;
+  display: flex;
+  justify-content: center;
 }
 .trinites.sheet.actor .grid-verset {
   display: grid;
@@ -1283,6 +1299,9 @@
 }
 .trinites.sheet.item .sheet-content.atout .editor {
   height: 220px;
+}
+.trinites.sheet.item .sheet-content.pouvoir .editor {
+  height: 200px;
 }
 .trinites.sheet.item .sheet-content.verset .editor {
   height: 140px;

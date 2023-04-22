@@ -192,6 +192,7 @@
 }
 .trinites.sheet.actor .lignes-de-vie .param input {
   width: 40px;
+  text-align: center;
 }
 .trinites.sheet.actor .competences .param {
   display: flex;
@@ -203,6 +204,7 @@
 }
 .trinites.sheet.actor .competences .param input {
   width: 40px;
+  text-align: center;
 }
 .trinites.sheet.actor .comp-grid {
   display: grid;

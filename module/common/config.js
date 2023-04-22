@@ -331,8 +331,6 @@ TRINITES.savoirsOccultes = {
     label :"Miracle",
     origine:"La Loge / La Ligue"
   },
-}
-  }
 };
   
 TRINITES.typePnj = {

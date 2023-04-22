@@ -1,6 +1,8 @@
 import { TrinitesChat } from "./chat.js";
 
+/** Jet de Compétence */
 export async function jetCompetence({
+  nbDes = null,
   actor = null,
   signe = null,
   competence = null,
@@ -27,7 +29,7 @@ export async function jetCompetence({
   // ID du journal de description des primes et pénalités
   let infoPrimesID = game.settings.get("trinites", "lienJournalPrimesPenalites");
   // Competence de combat
-  let compCombat = competence == "tir" || competence == "melee" || competence == "corpsACorps";
+  let compCombat = competence === "tir" || competence === "melee" || competence === "corpsACorps";
   // Compétence qui autorise les actions libres
   let compLibre = actorData.competences[signe][competence].libre;
 
@@ -65,21 +67,19 @@ export async function jetCompetence({
   // Définition de la formule de base du jet
   let modFormula = " + @valeur";
   // Données de base du jet
-  let label = actorData.competences[signe][competence].label;
-  let karmaAdam = actorData.trinite.adam.karma.type;
+  let label = game.i18n.localize(`TRINITES.label.competences.${signe}.${competence}`);
+  let karmaAdam = actor.isTrinite ? actorData.trinite.adam.karma.type : "tenebre";
 
   let rollData = {
     nomPersonnage: actor.name,
     competence: label,
     valeur: valeur,
     karmaAdam: karmaAdam,
-    typeActor: actor.type,
+    typeActor: actor.sousType
   };
 
   // Bonus de difficulte en cas de jet d'Emprise - Souffle
   if (type == "souffle") {
-    //console.log(aura);
-
     if (aura.system.signe == actorData.themeAstral.archetype) {
       difficulte = 6;
     } else if (aura.system.signe == actorData.themeAstral.ascendant1 || aura.system.signe == actorData.themeAstral.ascendant2) {
@@ -107,51 +107,89 @@ export async function jetCompetence({
     modFormula += " + @malusActionLibre";
   }
 
-  let baseFormulaWhite = "1d12x[white]"+modFormula;
-  let baseFormulaBlack = "1d12x[black]"+modFormula;
-  let rollFormula = `{${baseFormulaWhite}, ${baseFormulaBlack}}`;
+  let rollFormula = null;
+
+  nbDes = actor.nbDes ?? nbDes;
+
+  if (nbDes == 2) {
+    let basePremierDe = (actor.isTrinite ? "1d12x[white]" : "1d12x[black]") + modFormula;
+    let baseDeuxiemeDe = "1d12x[black]" + modFormula;
+    rollFormula = `{${basePremierDe}, ${baseDeuxiemeDe}}`;
+  } else {
+    rollFormula = "1d12x" + modFormula;
+  }
 
   let rollResult = await new Roll(rollFormula, rollData).roll({ async: true });
 
-  let resultDeva = {
-    dieResult: rollResult.terms[0].rolls[0].dice[0].total,
-    rollTotal: rollResult.terms[0].rolls[0].total,
-    reussite: rollResult.terms[0].rolls[0].total >= 12,
-  };
-  rollData.resultDeva = resultDeva;
+  let resultDeva;
+  let resultArchonte;
 
-  let resultArchonte = {
-    dieResult: rollResult.terms[0].rolls[1].dice[0].total,
-    rollTotal: rollResult.terms[0].rolls[1].total,
-    reussite: rollResult.terms[0].rolls[1].total >= 12,
-  };
-  rollData.resultArchonte = resultArchonte;
+  if (nbDes === 2) {
+    resultDeva = {
+      dieResult: rollResult.terms[0].rolls[0].dice[0].total,
+      rollTotal: rollResult.terms[0].rolls[0].total,
+      reussite: rollResult.terms[0].rolls[0].total >= 12,
+    };
+    rollData.resultDeva = resultDeva;
+
+    resultArchonte = {
+      dieResult: rollResult.terms[0].rolls[1].dice[0].total,
+      rollTotal: rollResult.terms[0].rolls[1].total,
+      reussite: rollResult.terms[0].rolls[1].total >= 12,
+    };
+    rollData.resultArchonte = resultArchonte;
+  } else {
+    resultDeva = {
+      dieResult: rollResult.terms[0].total,
+      rollTotal: rollResult.total,
+      reussite: rollResult.total >= 12,
+    };
+    rollData.resultDeva = resultDeva;
+  }
 
   // Gestion de la réussite selon le Karma
   let resultatJet = "echec";
-  if (karmaAdam == "lumiere") {
+
+  if (nbDes == 2) {
+    if (actor.isTrinite) {
+      if (karmaAdam == "lumiere") {
+        if (resultDeva.reussite) {
+          resultatJet = "reussite";
+        } else if (resultArchonte.reussite) {
+          resultatJet = "detteArchonte";
+        }
+      } else if (karmaAdam == "tenebre") {
+        if (resultArchonte.reussite) {
+          resultatJet = "reussite";
+        } else if (resultDeva.reussite) {
+          resultatJet = "detteDeva";
+        }
+      } else {
+        if (resultDeva.reussite || resultArchonte.reussite) {
+          resultatJet = "reussite";
+        }
+      }
+    }
+  
+    if (actor.isArchonteRoi || actor.isLige) {
+      if (resultDeva.reussite || resultArchonte.reussite) {
+        resultatJet = "reussite";
+      }
+    }
+  }
+  else {
     if (resultDeva.reussite) {
-      resultatJet = "reussite";
-    } else if (resultArchonte.reussite) {
-      resultatJet = "detteArchonte";
-    }
-  } else if (karmaAdam == "tenebre") {
-    if (resultArchonte.reussite) {
-      resultatJet = "reussite";
-    } else if (resultDeva.reussite) {
-      resultatJet = "detteDeva";
-    }
-  } else {
-    if (resultDeva.reussite || resultArchonte.reussite) {
       resultatJet = "reussite";
     }
   }
+
   rollData.resultatJet = resultatJet;
+  rollData.nbDes = nbDes;
 
   if (envoiMessage) {
     // Construction du jeu de données pour alimenter le template
     let rollStats = {
-      ...rollData,
+      ...rollData
     };
 
     let messageTemplate;
@@ -168,7 +206,7 @@ export async function jetCompetence({
     let templateContext = {
       actorId: actor.id,
       stats: rollStats,
-      roll: renderedRoll,
+      roll: renderedRoll
     };
 
     await new TrinitesChat(actor).withTemplate(messageTemplate).withData(templateContext).withRoll(rollResult).create();
@@ -228,23 +266,24 @@ function _processJetCompetenceOptions(form) {
   };
 }
 
+/** Jet de Ressource */
 export async function jetRessource({ actor = null, ressource = null, coutAcquisition = null, domaineId = null, afficherDialog = true, envoiMessage = true } = {}) {
   // Récupération des données de l'acteur
   let actorData = actor.system;
 
   let valeur = actorData.ressources[ressource].valeur - actorData.ressources[ressource].diminution;
   let ressEpuisee = actorData.ressources[ressource].epuisee;
-  let label = actorData.ressources[ressource].label;
+  let label = game.i18n.localize(`TRINITES.label.ressources.${ressource}`);
   let domaines = actor.items.filter(function (item) {
-    return item.type == "domaine" && !item.system.epuise;
+    return item.type === "domaine" && !item.system.epuise;
   });
 
-  // Pas de jet si Richesse est épuisée ou tous les dommaines épuisés
-  if (ressource == "richesse" && ressEpuisee) {
+  // Pas de jet si Richesse est épuisée ou tous les dommaines épuisés pour une Trinité
+  if (ressource === "richesse" && ressEpuisee) {
     ui.notifications.warn("Votre Richesse est épuisée. Le jet de dés n'est pas autorisé.");
     return;
   } else {
-    if (domaines.length == 0) {
+    if (actor.isTrinite && domaines.length === 0) {
       ui.notifications.warn("Tous vos Domaines sont épuisés. Le jet de dés n'est pas autorisé.");
       return;
     }
@@ -252,7 +291,7 @@ export async function jetRessource({ actor = null, ressource = null, coutAcquisi
 
   // Affichage de la fenêtre de dialogue (vrai par défaut)
   if (afficherDialog) {
-    let dialogOptions = await getJetRessourceOptions({ cfgData: game.trinites.config, useDomaine: ressource != "richesse", domaines: domaines });
+    let dialogOptions = await getJetRessourceOptions({ cfgData: game.trinites.config, useDomaine: ressource != "richesse", domaines: domaines, isTrinite: actor.isTrinite });
 
     // On annule le jet sur les boutons 'Annuler' ou 'Fermeture'
     if (dialogOptions.annule) {
@@ -284,7 +323,7 @@ export async function jetRessource({ actor = null, ressource = null, coutAcquisi
   // Données de base du jet
   let rollData = {
     ressource: label,
-    valeur: valeur,
+    valeur: valeur
   };
 
   // Modificateur de difficulté du jet
@@ -300,7 +339,7 @@ export async function jetRessource({ actor = null, ressource = null, coutAcquisi
   }
 
   // Dette
-  if (typeTest.type == "dette") {
+  if (typeTest.type === "dette") {
     rollData.dette = game.trinites.config.dettes[typeTest.dette];
   }
 
@@ -313,7 +352,7 @@ export async function jetRessource({ actor = null, ressource = null, coutAcquisi
   if (envoiMessage) {
     // Construction du jeu de données pour alimenter le template
     let rollStats = {
-      ...rollData,
+      ...rollData
     };
 
     // Recupération du template
@@ -323,29 +362,39 @@ export async function jetRessource({ actor = null, ressource = null, coutAcquisi
     // Assignation des données au template
     let templateContext = {
       actorId: actor.id,
+      isTrinite: actor.isTrinite,
       stats: rollStats,
-      roll: renderedRoll,
+      roll: renderedRoll
     };
 
     await new TrinitesChat(actor).withTemplate(messageTemplate).withData(templateContext).withRoll(rollResult).create();
   }
 
-  if (rollData.reussite) {
-    // Gestion endettement
-  } else {
-    if (ressource == "richesse") {
-      actor.update({ "data.ressources.richesse.epuisee": true });
-    } else if (rollData.domaine) {
-      rollData.domaine.update({ "data.epuise": true });
+  if (actor.isTrinite) {
+    if (rollData.reussite) {
+      // Gestion endettement : rollData.dette {diminution, duree}
+      if (typeTest.type === "dette") {
+        //TODO Ne pas modifier l'acteur s'il y a déjà une diminution en cours
+        const updateObj = {};
+        updateObj[`system.ressources.${ressource}.diminution`] = rollData.dette.diminution;
+        updateObj[`system.ressources.${ressource}.duree`] = rollData.dette.duree;
+        actor.update(updateObj);
+      }
+    } else {
+      if (ressource === "richesse") {
+        actor.update({ "system.ressources.richesse.epuisee": true });
+      } else if (rollData.domaine) {
+        rollData.domaine.update({ "system.epuise": true });
+      }
     }
   }
 }
 
 // Fonction de construction de la boite de dialogue de jet de ressource
-async function getJetRessourceOptions({ cfgData = null, useDomaine = false, domaines = null }) {
+async function getJetRessourceOptions({ cfgData = null, useDomaine = false, domaines = null, isTrinite = null }) {
   // Recupération du template
   const template = "systems/trinites/templates/partials/dice/dialog-jet-ressource.hbs";
-  const html = await renderTemplate(template, { cfgData: cfgData, useDomaine: useDomaine, domaines: domaines });
+  const html = await renderTemplate(template, { cfgData: cfgData, useDomaine: useDomaine, domaines: domaines, isTrinite: isTrinite });
 
   return new Promise((resolve) => {
     const data = {
@@ -356,12 +405,12 @@ async function getJetRessourceOptions({ cfgData = null, useDomaine = false, doma
           // Bouton qui lance le jet de dé
           icon: '<i class="fas fa-dice"></i>',
           label: "Jeter les dés",
-          callback: (html) => resolve(_processJetRessourceOptions(html[0].querySelector("form"))),
+          callback: (html) => resolve(_processJetRessourceOptions(html[0].querySelector("form")))
         },
         annuler: {
           // Bouton d'annulation
           label: "Annuler",
-          callback: (html) => resolve({ annule: true }),
+          callback: (html) => resolve({ annule: true })
         },
       },
       default: "jet",
@@ -381,19 +430,32 @@ function _processJetRessourceOptions(form) {
   };
 }
 
-function typeTestRessource(valRessource, coutAcquisition, endetteCampagne) {
-  if (coutAcquisition <= valRessource - 3) {
+/**
+ *
+ * @param {*} valRessource
+ * @param {*} coutAcquisition
+ * @param {*} endettementCampagne
+ * @returns {Object} {type, dette} type : anodin, normal, dette impossibl, dette, impossible ; dette : null ou la valeur du dépassement
+ */
+function typeTestRessource(valRessource, coutAcquisition, endettementCampagne) {
+  const anodin = valRessource - 3;
+  const limiteAcquisition = valRessource;
+  const limiteEndettement = valRessource + (endettementCampagne ? 6 : 3);
+
+  if (coutAcquisition <= anodin) {
     return {
       type: "anodin",
       dette: null,
     };
-  } else if (coutAcquisition <= valRessource) {
+  } else if (coutAcquisition <= limiteAcquisition) {
     return {
       type: "normal",
       dette: null,
     };
-  } else if (coutAcquisition <= valRessource + endetteCampagne ? 6 : 3) {
+  } else if (coutAcquisition <= limiteEndettement) {
     let depassement = coutAcquisition - valRessource;
+
+    // Valeur minimum requis dans la ressource du même montant que le dépassement
     if (depassement > valRessource) {
       return {
         type: "dette impossible",
@@ -413,7 +475,18 @@ function typeTestRessource(valRessource, coutAcquisition, endetteCampagne) {
   }
 }
 
-export async function jetArme({ actor = null, signe = null, competence = null, arme = null, type = null, difficulte = null, afficherDialog = true, envoiMessage = true } = {}) {
+/** Jet d'Arme' */
+export async function jetArme({
+  nbDes = null,
+  actor = null,
+  signe = null,
+  competence = null,
+  arme = null,
+  type = null,
+  difficulte = null,
+  afficherDialog = true,
+  envoiMessage = true,
+} = {}) {
   // Récupération des données de l'acteur
   let actorData = actor.system;
 
@@ -442,29 +515,28 @@ export async function jetArme({ actor = null, signe = null, competence = null, a
     penalite = dialogOptions.penalite;
   }
 
-  // Définition de la formule de base du jet
-  let baseFormula = "1d12x + @valeur";
+  let modFormula = " + @valeur";
 
   // Données de base du jet
   let valeur = actorData.competences[signe][competence].valeur;
-  let label = actorData.competences[signe][competence].label;
-  let karmaAdam = actorData.trinite.adam.karma.type;
+  let label = game.i18n.localize(`TRINITES.label.competences.${signe}.${competence}`);
+  let karmaAdam = actor.isTrinite ? actorData.trinite.adam.karma.type : "tenebre";
 
   let rollData = {
     nomPersonnage: actor.name,
     competence: label,
     valeur: valeur,
     karmaAdam: karmaAdam,
-    typeActor: actor.type,
+    typeActor: actor.sousType,
     typeArme: type,
-    arme: arme,
+    arme: arme
   };
 
   // Modificateur de difficulté du jet
   if (difficulte) {
     rollData.difficulte = difficulte;
     rollData.modifsJet = true;
-    baseFormula += " + @difficulte";
+    modFormula += " + @difficulte";
   }
 
   // Malus lié au nombre d'actions libres consécutives
@@ -474,52 +546,91 @@ export async function jetArme({ actor = null, signe = null, competence = null, a
     rollData.actionLibre = actionLibre;
     rollData.malusActionLibre = malusActionLibre;
     rollData.modifsJet = true;
-    baseFormula += " + @malusActionLibre";
+    modFormula += " + @malusActionLibre";
   }
 
-  let rollFormula = `{${baseFormula}, ${baseFormula}}`;
+  let rollFormula = null;
+
+  nbDes = actor.nbDes ?? nbDes;
+
+  if (nbDes == 2) {
+    let basePremierDe = (actor.isTrinite ? "1d12x[white]" : "1d12x[black]") + modFormula;
+    let baseDeuxiemeDe = "1d12x[black]" + modFormula;
+    rollFormula = `{${basePremierDe}, ${baseDeuxiemeDe}}`;
+  } else {
+    rollFormula = "1d12x" + modFormula;
+  }
 
   let rollResult = await new Roll(rollFormula, rollData).roll({ async: true });
+  let resultDeva;
+  let resultArchonte;
 
-  let resultDeva = {
-    dieResult: rollResult.terms[0].rolls[0].dice[0].total,
-    rollTotal: rollResult.terms[0].rolls[0].total,
-    reussite: rollResult.terms[0].rolls[0].total >= 12,
-  };
-  rollData.resultDeva = resultDeva;
+  if (nbDes === 2) {
+    resultDeva = {
+      dieResult: rollResult.terms[0].rolls[0].dice[0].total,
+      rollTotal: rollResult.terms[0].rolls[0].total,
+      reussite: rollResult.terms[0].rolls[0].total >= 12,
+    };
+    rollData.resultDeva = resultDeva;
 
-  let resultArchonte = {
-    dieResult: rollResult.terms[0].rolls[1].dice[0].total,
-    rollTotal: rollResult.terms[0].rolls[1].total,
-    reussite: rollResult.terms[0].rolls[1].total >= 12,
-  };
-  rollData.resultArchonte = resultArchonte;
+    resultArchonte = {
+      dieResult: rollResult.terms[0].rolls[1].dice[0].total,
+      rollTotal: rollResult.terms[0].rolls[1].total,
+      reussite: rollResult.terms[0].rolls[1].total >= 12,
+    };
+    rollData.resultArchonte = resultArchonte;
+  } else {
+    resultDeva = {
+      dieResult: rollResult.terms[0].total,
+      rollTotal: rollResult.total,
+      reussite: rollResult.total >= 12,
+    };
+    rollData.resultDeva = resultDeva;
+  }
 
   // Gestion de la réussite selon le Karma
   let resultatJet = "echec";
-  if (karmaAdam == "lumiere") {
+
+  if (nbDes == 2) {
+    if (actor.isTrinite) {
+      if (karmaAdam == "lumiere") {
+        if (resultDeva.reussite) {
+          resultatJet = "reussite";
+        } else if (resultArchonte.reussite) {
+          resultatJet = "detteArchonte";
+        }
+      } else if (karmaAdam == "tenebre") {
+        if (resultArchonte.reussite) {
+          resultatJet = "reussite";
+        } else if (resultDeva.reussite) {
+          resultatJet = "detteDeva";
+        }
+      } else {
+        if (resultDeva.reussite || resultArchonte.reussite) {
+          resultatJet = "reussite";
+        }
+      }
+    }
+  
+    if (actor.isArchonteRoi || actor.isLige) {
+      if (resultDeva.reussite || resultArchonte.reussite) {
+        resultatJet = "reussite";
+      }
+    }
+  }
+  else {
     if (resultDeva.reussite) {
-      resultatJet = "reussite";
-    } else if (resultArchonte.reussite) {
-      resultatJet = "detteArchonte";
-    }
-  } else if (karmaAdam == "tenebre") {
-    if (resultArchonte.reussite) {
-      resultatJet = "reussite";
-    } else if (resultDeva.reussite) {
-      resultatJet = "detteDeva";
-    }
-  } else {
-    if (resultDeva.reussite || resultArchonte.reussite) {
       resultatJet = "reussite";
     }
   }
+
   rollData.resultatJet = resultatJet;
+  rollData.nbDes = nbDes;
 
   if (envoiMessage) {
     // Construction du jeu de données pour alimenter le template
     let rollStats = {
-      ...rollData,
+      ...rollData
     };
 
     // Recupération du template
@@ -530,7 +641,7 @@ export async function jetArme({ actor = null, signe = null, competence = null, a
     let templateContext = {
       actorId: actor.id,
       stats: rollStats,
-      roll: renderedRoll,
+      roll: renderedRoll
     };
 
     await new TrinitesChat(actor).withTemplate(messageTemplate).withData(templateContext).withRoll(rollResult).create();
@@ -541,7 +652,7 @@ export async function jetArme({ actor = null, signe = null, competence = null, a
 async function getJetArmeOptions({ cfgData = null, infoPrimesID = null }) {
   // Recupération du template
   const template = "systems/trinites/templates/partials/dice/dialog-jet-arme.hbs";
-  const html = await renderTemplate(template, { cfgData: cfgData, infoPrimesID: infoPrimesID });
+  const html = await renderTemplate(template, { cfgData: cfgData, compCombat:true, infoPrimesID: infoPrimesID });
 
   return new Promise((resolve) => {
     const data = {
@@ -552,12 +663,12 @@ async function getJetArmeOptions({ cfgData = null, infoPrimesID = null }) {
           // Bouton qui lance le jet de dé
           icon: '<i class="fas fa-dice"></i>',
           label: "Jeter les dés",
-          callback: (html) => resolve(_processJetArmeOptions(html[0].querySelector("form"))),
+          callback: (html) => resolve(_processJetArmeOptions(html[0].querySelector("form")))
         },
         annuler: {
           // Bouton d'annulation
           label: "Annuler",
-          callback: (html) => resolve({ annule: true }),
+          callback: (html) => resolve({ annule: true })
         },
       },
       default: "jet",

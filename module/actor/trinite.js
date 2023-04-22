@@ -1,8 +1,9 @@
 import TrinitesActor from "./actor.js";
 import DepenseKarmaFormApplication from "../appli/DepenseKarmaFormApp.js";
-import { carteVersetActive } from "../common/chat.js";
+
 
 export default class TrinitesTrinite extends TrinitesActor {
+
   prepareData() {
     super.prepareData();
     let system = this.system;
@@ -166,26 +167,40 @@ export default class TrinitesTrinite extends TrinitesActor {
     if (system.ressources.reseau.diminution > system.ressources.reseau.valeur) {
       system.ressources.reseau.diminution = system.ressources.reseau.valeur;
     }
+  }
 
-    /*-----------------------------------
-            ---- Calcul des valeurs de sante ----
-            -----------------------------------*/
+  get hasMetier() {
+    if (this.items.find((i) => i.type === "metier")) return true;
+    return false;
+  }
 
-    // Points de vie maxi
-    system.ligneVie1 = system.pointsLigneVie;
-    system.ligneVie2 = system.pointsLigneVie * 2;
-    system.nbPointsVieMax = system.pointsLigneVie * 3;
+  get hasVieAnterieure() {
+    if (this.items.find((i) => i.type === "vieAnterieure")) return true;
+    return false;
+  }
 
-    //Etat de santé
-    if (system.nbBlessure == 0) {
-      system.etatSante = "indemne";
-    } else if (system.nbBlessure <= system.ligneVie1) {
-      system.etatSante = "endolori";
-    } else if (system.nbBlessure <= system.ligneVie2) {
-      system.etatSante = "blesse";
-    } else {
-      system.etatSante = "inconscient";
-    }
+  get metierId() {
+    return this.hasMetier ? this.items.find((i) => i.type === "metier")._id : null
+  }
+
+  get vieAnterieureId() {
+    return this.hasVieAnterieure ? this.items.find((i) => i.type === "vieAnterieure")._id : null;
+  }
+
+  get isTrinite() {
+    return true;
+  }
+
+  get canRegenerate() {
+    return true;
+  }
+
+  get sousType() {
+    return "trinite";
+  }
+  
+  get canUseSouffle() {
+    return actor.system.themeAstral.affinite === "zodiaque";
   }
 
   /**
@@ -296,9 +311,6 @@ export default class TrinitesTrinite extends TrinitesActor {
       case "archonte":
         this.update({ "system.trinite.archonte.karma.value": data.trinite.archonte.karma.value - coutPouvoir });
         break;
-      case "archonteRoi":
-        this.update({ "system.archonteRoi.karma.value": data.archonteRoi.karma.value - coutPouvoir });
-        break;
     }
   }
 
@@ -306,31 +318,6 @@ export default class TrinitesTrinite extends TrinitesActor {
   majKarma(reserve, valeur) {
     let reserveData = `system.trinite.${reserve}.karma.value`;
     this.update({ [reserveData]: valeur });
-  }
-
-  regeneration() {
-    let data = this.system;
-
-    let blessureVal = Math.max(data.nbBlessure - 4, 0);
-    this.update({ "system.nbBlessure": blessureVal });
-  }
-
-  get hasMetier() {
-    if (this.items.find((i) => i.type === "metier")) return true;
-    return false;
-  }
-
-  get hasVieAnterieure() {
-    if (this.items.find((i) => i.type === "vieAnterieure")) return true;
-    return false;
-  }
-
-  get metierId() {
-    return this.hasMetier ? this.items.find((i) => i.type === "metier")._id : null
-  }
-
-  get vieAnterieureId() {
-    return this.hasVieAnterieure ? this.items.find((i) => i.type === "vieAnterieure")._id : null;
   }
 
   /**
@@ -407,16 +394,30 @@ export default class TrinitesTrinite extends TrinitesActor {
     updateObj[`system.competences.${metier.system.competence2}.baseMetier`] = 6;
     updateObj[`system.competences.${metier.system.competence3}.baseMetier`] = 6;
 
-    updateObj["system.ressources.richesse.baseMetier"] = metier.system.richesse.baseMetier;
-    updateObj["system.ressources.reseau.baseMetier"] = metier.system.reseau.baseMetier;
-    updateObj["system.ressources.influence.baseMetier"] = metier.system.influence.baseMetier;
+    updateObj["system.ressources.richesse.baseMetier"] = metier.system.richesse;
+    updateObj["system.ressources.reseau.baseMetier"] = metier.system.reseau;
+    updateObj["system.ressources.influence.baseMetier"] = metier.system.influence;
 
-    updateObj["system.creation.totale"] = metier.system.pc.max;
-    updateObj["system.creation.disponible"] = metier.system.pc.max;
+    updateObj["system.creation.totale"] = metier.system.pc;
+    updateObj["system.creation.disponible"] = metier.system.pc;
 
     this.update(updateObj);
 
-    return await this.createEmbeddedDocuments("Item", [metier]);
+    // Création des domaines
+    let domaines = metier.system.listeDomaines;
+    let liste = domaines.split(',');
+    for (const domaine of liste) {
+      await this.createEmbeddedDocuments("Item", [{type: "domaine", name: domaine}]);
+    }
+
+    const nbDomaines = metier.system.nbDomaines;
+    let domainesRestant = nbDomaines - liste.length;
+
+    for (let index = 0; index < domainesRestant; index++) {
+      await this.createEmbeddedDocuments("Item", [{type: "domaine", name: "?"}]);      
+    }
+
+    await this.createEmbeddedDocuments("Item", [metier]);
   }
 
   /**
@@ -444,63 +445,15 @@ export default class TrinitesTrinite extends TrinitesActor {
     updateObj["system.creation.disponible"] = 0;
     updateObj["system.creation.finie"] = false;
 
+    // Mise à jour des informations de l'acteur
     this.update(updateObj);
+
+    // Suppression des domaines
+    const domainesId = this.items.filter(i=>i.type === "domaine").map(i=>i._id);
+    await this.deleteEmbeddedDocuments("Item", domainesId);
+
+    // Suppression du métier
     await this.deleteEmbeddedDocuments("Item", [metier._id]);
-  }
-
-  /**
-   * 
-   * @param {*} domaineId 
-   * @param {*} statut 
-   */
-  changeDomaineEtatEpuise(domaineId, statut) {
-    const domaine = this.items.get(domaineId);
-    if (domaine) domaine.update({ "system.epuise": statut });
-  }
-
-  /**
-   * 
-   * @param {*} versetId 
-   * @param {Object} options 
-   * murmure = true si le verset a été murmuré : le coût augmente de 1
-   * @returns 
-   */
-  reciterVerset(versetId, options) {
-    const verset = this.items.get(versetId);
-    const typeKarma = verset.system.karma;
-
-    const karmaDisponible = this.karmaDisponible(typeKarma);
-    const coutPouvoir = this.coutPouvoir("grandLivre");
-    // Verset récité à voix basse
-    if (options?.murmure) coutPouvoir += 1;
-
-    let activable = false;
-
-    // Pas assez de Karma
-    if (karmaDisponible < coutPouvoir) {
-      if (options?.murmure) ui.notifications.warn("Vous n'avez pas assez de Karma disponible pour réciter ce verset à voix basse !");
-      else ui.notifications.warn("Vous n'avez pas assez de Karma disponible pour réciter ce verset !");
-      return;
-    }
-    // Juste ce qu'il faut de Karma
-    else if (karmaDisponible == coutPouvoir) {
-      this.viderKarma(typeKarma);
-      activable = true;
-    }
-    // Uniquement le Karma d'une source
-    else if (this.sourceUnique(typeKarma)) {
-      this.consommerSourceKarma(this.sourceUnique(typeKarma), coutPouvoir);
-      activable = true;
-    } else {
-      new DepenseKarmaFormApplication(this, this.system.trinite, typeKarma, "verset", coutPouvoir, versetId).render(true);
-    }
-
-    if (activable) {
-      carteVersetActive({
-        actor: this,
-        versetId: versetId,
-      });
-    }
   }
 
   /**
@@ -555,4 +508,5 @@ export default class TrinitesTrinite extends TrinitesActor {
     return null;
 
   }
+  
 }

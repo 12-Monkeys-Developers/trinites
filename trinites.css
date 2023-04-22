@@ -1,12 +1,26 @@
 .window-app .window-content {
   background: url("./images/parchemin-grey.jpg") repeat;
 }
-.actor-infos-line {
-  display: flex;
-}
 .sheet-tabs.tabs a {
   color: var(--color-titre-trinite);
   font-weight: bold;
+}
+.trinites.sheet.actor .actor-infos-line {
+  display: flex;
+}
+.trinites.sheet.actor .actor-infos-line .sous-type {
+  display: flex;
+  margin: 2px;
+  align-items: center;
+}
+.trinites.sheet.actor .actor-infos-line .sous-type label {
+  width: 60px;
+}
+.trinites.sheet.actor .actor-infos-line .sous-type select {
+  color: white;
+}
+.trinites.sheet.actor .actor-infos-line .sous-type select:disabled {
+  color: white;
 }
 .trinites.sheet.actor .invisible {
   visibility: hidden;
@@ -23,8 +37,11 @@
 .trinites.sheet.actor textarea:focus {
   box-shadow: 0 0 5px var(--color-shadow-trinite);
 }
-.trinites.sheet.actor input[type="number"]:read-only {
+.trinites.sheet.actor input[type="number"] {
   background-color: floralwhite;
+}
+.trinites.sheet.actor input[type="number"]:read-only {
+  background-color: rgba(0, 0, 0, 0.05);
   cursor: default;
 }
 .trinites.sheet.actor input[type="text"]:read-only {
@@ -111,6 +128,7 @@
 .trinites.sheet.actor .window-content nav .tab-profane,
 .trinites.sheet.actor .window-content nav .tab-equipement,
 .trinites.sheet.actor .window-content nav .tab-description,
+.trinites.sheet.actor .window-content nav .tab-details,
 .trinites.sheet.actor .window-content nav .tab-notes {
   font-family: "Cabaletta";
   color: var(--color-titre-trinite);
@@ -125,6 +143,7 @@
 .trinites.sheet.actor .window-content .tab.tab-profane h3,
 .trinites.sheet.actor .window-content .tab.tab-equipement h3,
 .trinites.sheet.actor .window-content .tab.tab-description h3,
+.trinites.sheet.actor .window-content .tab.tab-details h3,
 .trinites.sheet.actor .window-content .tab.tab-notes h3 {
   color: var(--color-titre-trinite);
   font-weight: bold;
@@ -141,8 +160,8 @@
   margin-left: 3px;
   border-bottom: none;
 }
-.trinites.sheet.actor .competences,
 .trinites.sheet.actor .domaines,
+.trinites.sheet.actor .competences,
 .trinites.sheet.actor .ressources,
 .trinites.sheet.actor .lignes-de-vie,
 .trinites.sheet.actor .theme-astral,
@@ -150,16 +169,42 @@
 .trinites.sheet.actor .histo-bloc,
 .trinites.sheet.actor .expe-bloc,
 .trinites.sheet.actor .karma-ten,
-.trinites.sheet.actor .pouvoirs-gen,
 .trinites.sheet.actor .grand-livre,
 .trinites.sheet.actor .zodiaque,
-.trinites.sheet.actor .lame-soeur {
+.trinites.sheet.actor .lame-soeur,
+.trinites.sheet.actor .lame-noire,
+.trinites.sheet.actor .pouvoirs {
   padding: 2px;
   margin: 3px;
 }
 .trinites.sheet.actor .domaines,
-.trinites.sheet.actor .zodiaque {
+.trinites.sheet.actor .zodiaque,
+.trinites.sheet.actor .pouvoirs {
   margin-top: 5px;
+}
+.trinites.sheet.actor .lignes-de-vie .param {
+  display: flex;
+  margin: 2px;
+  align-items: center;
+}
+.trinites.sheet.actor .lignes-de-vie .param label {
+  width: 150px;
+}
+.trinites.sheet.actor .lignes-de-vie .param input {
+  width: 40px;
+  text-align: center;
+}
+.trinites.sheet.actor .competences .param {
+  display: flex;
+  margin: 2px;
+  align-items: center;
+}
+.trinites.sheet.actor .competences .param label {
+  width: 80px;
+}
+.trinites.sheet.actor .competences .param input {
+  width: 40px;
+  text-align: center;
 }
 .trinites.sheet.actor .comp-grid {
   display: grid;
@@ -361,28 +406,6 @@
 .trinites.sheet.actor .comp-grid .lig-comp-18 {
   grid-row: 24 / 25;
 }
-.trinites.sheet.actor .domaines {
-  min-height: 50px;
-}
-.trinites.sheet.actor .dom-grid {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-}
-.trinites.sheet.actor .dom-grid .domaine-item {
-  display: grid;
-  grid-template-columns: 1fr 1.5em 1.5em;
-  align-items: center;
-}
-.trinites.sheet.actor .dom-grid .domaine-item .uncheck-domaine,
-.trinites.sheet.actor .dom-grid .domaine-item .check-domaine,
-.trinites.sheet.actor .dom-grid .domaine-item .suppr-domaine {
-  display: flex;
-  justify-content: center;
-  margin: 3px;
-}
-.trinites.sheet.actor .dom-grid .domaine-item .nom-domaine {
-  padding-left: 5px;
-}
 .trinites.sheet.actor .ress-grid {
   display: grid;
   grid-template-columns: 2em 1fr 1.5em 3em 1em 3em 1em 1.5fr;
@@ -396,7 +419,6 @@
   grid-column: 1 / 5;
 }
 .trinites.sheet.actor .ress-grid .col-titre {
-  font-size: 0.9em;
   display: flex;
   justify-content: center;
   text-decoration: underline;
@@ -441,6 +463,9 @@
 }
 .trinites.sheet.actor .ress-grid .colRess-duree {
   grid-column: 8 / 9;
+}
+.trinites.sheet.actor .ress-grid .colRess-duree input {
+  background-color: floralwhite;
 }
 .trinites.sheet.actor .ress-grid-unlocked {
   display: grid;
@@ -725,40 +750,73 @@
 }
 .trinites.sheet.actor .grid-grand-livre {
   display: grid;
-  grid-template-columns: 1fr 1em 1fr;
+  grid-template-columns: 1fr;
   margin: 3px;
 }
 .trinites.sheet.actor .grid-grand-livre div {
   margin: 2px;
 }
-.trinites.sheet.actor .titre-grand-livre {
-  display: flex;
-  justify-content: center;
+.trinites.sheet.actor .grid-grand-livre .titre {
   font-family: "Cabaletta";
+}
+.trinites.sheet.actor .pouvoirs {
+  min-height: 80px;
+}
+.trinites.sheet.actor .grid-pouvoirs {
+  display: grid;
+  grid-template-columns: 1fr;
+  margin: 3px;
+}
+.trinites.sheet.actor .grid-pouvoirs div {
+  margin: 2px;
+}
+.trinites.sheet.actor .grid-pouvoirs .titre {
+  font-family: "Cabaletta";
+}
+.trinites.sheet.actor .grid-pouvoir {
+  display: grid;
+  grid-template-columns: 1.3fr 2em 2em;
+  align-items: center;
 }
 .trinites.sheet.actor .grid-verset {
   display: grid;
-  font-size: 0.9em;
-  grid-template-columns: 2em 1fr 2em 2em;
+  grid-template-columns: 2em 1.3fr 0.3fr 0.8fr 0.5fr 1.3fr 2em 2em;
   align-items: center;
 }
-.trinites.sheet.actor .col-roll-verset {
+.trinites.sheet.actor .grid-verset .jet-verset {
   grid-column: 1 / 2;
   display: flex;
   justify-content: center;
 }
-.trinites.sheet.actor .col-nom-verset {
+.trinites.sheet.actor .grid-verset .nom-verset {
   grid-column: 2 / 3;
 }
-.trinites.sheet.actor .col-edit-verset {
+.trinites.sheet.actor .grid-verset .cumul-verset {
   grid-column: 3 / 4;
   display: flex;
   justify-content: center;
 }
-.trinites.sheet.actor .col-delete-verset {
+.trinites.sheet.actor .grid-verset .duree-verset {
   grid-column: 4 / 5;
+}
+.trinites.sheet.actor .grid-verset .portee-verset {
+  grid-column: 5 / 6;
+}
+.trinites.sheet.actor .grid-verset .aire-verset {
+  grid-column: 6 / 7;
+}
+.trinites.sheet.actor .grid-verset .edit-verset {
+  grid-column: 7 / 8;
   display: flex;
   justify-content: center;
+}
+.trinites.sheet.actor .grid-verset .delete-verset {
+  grid-column: 8 / 9;
+  display: flex;
+  justify-content: center;
+}
+.trinites.sheet.actor .grid-verset .titre {
+  font-family: "Cabaletta";
 }
 .trinites.sheet.actor .zodiaque {
   min-height: 80px;
@@ -769,7 +827,7 @@
   margin: 3px;
 }
 .trinites.sheet.actor .grid-zodiaque .col-titre {
-  grid-column: 1 / 3;
+  grid-column: 2 / 3;
 }
 .trinites.sheet.actor .grid-zodiaque .col-vide {
   grid-column: 8 / 10;
@@ -783,29 +841,52 @@
 .trinites.sheet.actor .grid-zodiaque .ligne {
   font-size: 0.9em;
 }
-.trinites.sheet.actor .lame-soeur,
-.trinites.sheet.actor .lame-noire {
+.trinites.sheet.actor .lame-soeur {
   display: flex;
   flex-direction: column;
 }
-.trinites.sheet.actor .grid-lame {
+.trinites.sheet.actor .lame-soeur .grid-lame {
   display: grid;
   grid-template-columns: 1fr 2fr 2em 4.5em;
   margin: 3px;
   align-items: center;
 }
-.trinites.sheet.actor .grid-lame select {
+.trinites.sheet.actor .lame-soeur .grid-lame select {
   font-family: "Cabaletta";
 }
-.trinites.sheet.actor .grid-lame label {
+.trinites.sheet.actor .lame-soeur .grid-lame label {
   font-family: "Cabaletta";
   margin: 2px;
 }
-.trinites.sheet.actor .grid-lame i {
+.trinites.sheet.actor .lame-soeur .grid-lame i {
   font-size: 0.9em;
 }
-.trinites.sheet.actor .grid-lame select,
-.trinites.sheet.actor .grid-lame a {
+.trinites.sheet.actor .lame-soeur .grid-lame select,
+.trinites.sheet.actor .lame-soeur .grid-lame a {
+  margin: 2px;
+}
+.trinites.sheet.actor .lame-noire {
+  display: flex;
+  flex-direction: column;
+}
+.trinites.sheet.actor .lame-noire .grid-lame {
+  display: grid;
+  grid-template-columns: 1fr 1fr 2em 4.5em 3fr;
+  margin: 3px;
+  align-items: center;
+}
+.trinites.sheet.actor .lame-noire .grid-lame select {
+  font-family: "Cabaletta";
+}
+.trinites.sheet.actor .lame-noire .grid-lame label {
+  font-family: "Cabaletta";
+  margin: 2px;
+}
+.trinites.sheet.actor .lame-noire .grid-lame i {
+  font-size: 0.9em;
+}
+.trinites.sheet.actor .lame-noire .grid-lame select,
+.trinites.sheet.actor .lame-noire .grid-lame a {
   margin: 2px;
 }
 .trinites.sheet.actor .desc-lame {
@@ -824,11 +905,98 @@
 .trinites.sheet.actor .grid-atout {
   display: grid;
   grid-template-columns: 2em 1fr 2em 2em;
-  font-size: 0.9em;
   margin: 3px;
 }
 .trinites.sheet.actor .grid-atout .nom-atout {
   margin: 3px;
+}
+.trinites.sheet.actor .grid-equipements {
+  display: grid;
+  grid-template-columns: 1fr;
+  margin: 3px;
+}
+.trinites.sheet.actor .grid-equipements div {
+  margin: 2px;
+}
+.trinites.sheet.actor .grid-armes {
+  display: grid;
+  grid-template-columns: 2em 1fr 1fr 1fr 2fr 2em 2em;
+  align-items: center;
+}
+.trinites.sheet.actor .grid-armes .col-roll-arme {
+  grid-column: 1 / 2;
+  display: flex;
+  justify-content: center;
+}
+.trinites.sheet.actor .grid-armes .col-nom-arme {
+  grid-column: 2 / 3;
+}
+.trinites.sheet.actor .grid-armes .col-degats-arme {
+  grid-column: 3 / 4;
+}
+.trinites.sheet.actor .grid-armes .col-portee-arme {
+  grid-column: 4 / 5;
+}
+.trinites.sheet.actor .grid-armes .col-particularites-arme {
+  grid-column: 5 / 6;
+}
+.trinites.sheet.actor .grid-armes .col-edit-arme {
+  grid-column: 6 / 7;
+  display: flex;
+  justify-content: center;
+}
+.trinites.sheet.actor .grid-armes .col-delete-arme {
+  grid-column: 7 / 8;
+  display: flex;
+  justify-content: center;
+}
+.trinites.sheet.actor .grid-armures {
+  display: grid;
+  grid-template-columns: 2em 1fr 1fr 1fr 2fr 2em 2em;
+  align-items: center;
+}
+.trinites.sheet.actor .grid-armures .col-nom-armure {
+  grid-column: 2 / 3;
+}
+.trinites.sheet.actor .grid-armures .col-protection-melee-armure {
+  grid-column: 3 / 4;
+}
+.trinites.sheet.actor .grid-armures .col-protection-tir-armure {
+  grid-column: 4 / 5;
+}
+.trinites.sheet.actor .grid-armures .col-particularites-armure {
+  grid-column: 5 / 6;
+}
+.trinites.sheet.actor .grid-armures .col-edit-armure {
+  grid-column: 6 / 7;
+  display: flex;
+  justify-content: center;
+}
+.trinites.sheet.actor .grid-armures .col-delete-armure {
+  grid-column: 7 / 8;
+  display: flex;
+  justify-content: center;
+}
+.trinites.sheet.actor .grid-objets {
+  display: grid;
+  grid-template-columns: 2em 1fr 3fr 2em 2em;
+  align-items: center;
+}
+.trinites.sheet.actor .grid-objets .col-nom-objet {
+  grid-column: 2 / 3;
+}
+.trinites.sheet.actor .grid-objets .col-description-objet {
+  grid-column: 3 / 4;
+}
+.trinites.sheet.actor .grid-objets .col-edit-objet {
+  grid-column: 4 / 5;
+  display: flex;
+  justify-content: center;
+}
+.trinites.sheet.actor .grid-objets .col-delete-objet {
+  grid-column: 5 / 6;
+  display: flex;
+  justify-content: center;
 }
 .trinites.sheet.actor .grid-karma-ten {
   display: grid;
@@ -872,6 +1040,44 @@
   background: rgba(0, 0, 0, 0.05);
   min-height: 75px;
   overflow-y: inherit;
+}
+.trinites.sheet.actor.trinite .domaines {
+  min-height: 50px;
+}
+.trinites.sheet.actor.trinite .dom-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+}
+.trinites.sheet.actor.trinite .dom-grid .domaine-item {
+  display: flex;
+  gap: 5px;
+}
+.trinites.sheet.actor.trinite .dom-grid .domaine-item .uncheck-domaine,
+.trinites.sheet.actor.trinite .dom-grid .domaine-item .check-domaine {
+  display: flex;
+  justify-content: center;
+  margin: 3px;
+}
+.trinites.sheet.actor.trinite .dom-grid .domaine-item .nom-domaine {
+  padding-left: 5px;
+}
+.trinites.sheet.actor.trinite .dom-grid .domaine-item-unlocked {
+  display: flex;
+  gap: 2px;
+}
+.trinites.sheet.actor.trinite .dom-grid .domaine-item-unlocked .uncheck-domaine,
+.trinites.sheet.actor.trinite .dom-grid .domaine-item-unlocked .check-domaine,
+.trinites.sheet.actor.trinite .dom-grid .domaine-item-unlocked .suppr-domaine,
+.trinites.sheet.actor.trinite .dom-grid .domaine-item-unlocked .edit-item {
+  display: flex;
+  justify-content: center;
+  margin: 3px;
+}
+.trinites.sheet.actor.trinite .dom-grid .domaine-item-unlocked .nom-domaine {
+  padding-left: 5px;
+}
+.trinites.sheet.actor.archonte-roi .domaines {
+  min-height: 50px;
 }
 .trinites.sheet.item {
   /* .sheet-header.vie-anterieure {
@@ -957,14 +1163,14 @@
   grid-template-columns: repeat(5, 3.5em);
 }
 .trinites.sheet.item .sheet-content.aura .editor {
-  height: 100px;
+  min-height: 50px;
 }
 .trinites.sheet.item .sheet-content.domaine .editor {
   height: 250px;
 }
 .trinites.sheet.item .sheet-content.metier .grid-item-metier {
   display: grid;
-  grid-template-columns: 0.5fr repeat(2, minmax(50px, 0.8fr)) 0.5fr;
+  grid-template-columns: 0.5fr repeat(2, minmax(50px, 0.6fr)) 1fr;
   grid-gap: 5px;
   margin: 20px 2px 20px 2px;
   align-items: center;
@@ -976,6 +1182,10 @@
 }
 .trinites.sheet.item .sheet-content.metier .grid-item-metier label {
   font-family: "Cabaletta";
+}
+.trinites.sheet.item .sheet-content.metier .grid-item-metier input.domaines {
+  width: 300px;
+  text-align: left;
 }
 .trinites.sheet.item .sheet-content.metier .grid-item-metier input {
   width: 40px;
@@ -1125,6 +1335,72 @@
 .trinites.sheet.item .sheet-content.verset .grid-data-desc .col-mono {
   grid-column: 1 / 5;
 }
+.trinites.sheet.item .sheet-content.arme label {
+  font-family: "Cabaletta";
+}
+.trinites.sheet.item .sheet-content.arme .editor {
+  min-height: 50px;
+}
+.trinites.sheet.item .sheet-content.arme .editor .tox.tox-tinymce {
+  height: 200px!important;
+}
+.trinites.sheet.item .sheet-content.arme .editor .editor-content {
+  min-height: 50px;
+  overflow-y: inherit;
+}
+.trinites.sheet.item .sheet-content.arme .grid-item {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin: 2px;
+  align-items: center;
+}
+.trinites.sheet.item .sheet-content.arme .grid-item input {
+  width: 40px;
+  text-align: center;
+}
+.trinites.sheet.item .sheet-content.arme .grid-particularites {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+  margin: 2px;
+  align-items: center;
+}
+.trinites.sheet.item .sheet-content.arme .grid-particularites input {
+  width: 40px;
+  text-align: center;
+}
+.trinites.sheet.item .sheet-content.armure label {
+  font-family: "Cabaletta";
+}
+.trinites.sheet.item .sheet-content.armure .editor {
+  min-height: 50px;
+}
+.trinites.sheet.item .sheet-content.armure .editor .tox.tox-tinymce {
+  height: 200px!important;
+}
+.trinites.sheet.item .sheet-content.armure .editor .editor-content {
+  min-height: 50px;
+  overflow-y: inherit;
+}
+.trinites.sheet.item .sheet-content.armure .grid-item {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  margin: 2px;
+  align-items: center;
+}
+.trinites.sheet.item .sheet-content.armure .grid-item input {
+  width: 40px;
+  text-align: center;
+}
+.trinites.sheet.item .sheet-content.armure .grid-particularites {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin: 2px;
+  align-items: center;
+}
+.trinites.sheet.item .sheet-content.armure .grid-particularites input {
+  width: 40px;
+  text-align: center;
+}
 .trinites.sheet.item .sheet-footer {
   border-top: solid thin #42637e;
   padding: 3px;
@@ -1247,14 +1523,18 @@
   border: 1px solid var(--color-border-light-2);
   border-radius: 3px;
   box-shadow: 0 0 2px #FFF inset;
-  background: linear-gradient(to right, #ebf8e1ee, #1f546fee, #07131aee);
+  background: linear-gradient(to right, #ebf8e1ee, #1f546fee, #102c3bee);
 }
 .grid-jet-comp div {
   display: flex;
   justify-content: center;
 }
 .grid-jet-comp.archonte-roi {
-  background: linear-gradient(to right, #1f546fee, #07131aee);
+  background: linear-gradient(to right, #1f546fee, #102c3bee);
+}
+.grid-jet-comp.humain {
+  grid-template-columns: 1fr;
+  background: #1f546fee;
 }
 .titre-esprit {
   margin: 3px;
@@ -1355,6 +1635,7 @@
 }
 .echec {
   color: black;
+  /*text-shadow: -1px 0 red, 0 1px red, 1px 0 red, 0 -1px red;*/
 }
 .echec-crit {
   color: red;
@@ -1785,6 +2066,10 @@
 .big-size {
   flex: 0 1 25em;
   padding: 3px;
+}
+.big-size-center {
+  flex: 0 1 25em;
+  padding: 3px;
   text-align: center;
 }
 .auto-size {
@@ -1795,6 +2080,10 @@
   display: flex;
   justify-content: center;
   margin: 3px;
+}
+.une-col {
+  display: grid;
+  grid-template-columns: 1fr;
 }
 .deux-col-50-50 {
   display: grid;

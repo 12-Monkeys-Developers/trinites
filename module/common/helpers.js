@@ -32,4 +32,38 @@ export default function registerHandlebarsHelpers() {
     const key = `TRINITES.label.competences.${signe}.${competence}`;
     return game.i18n.localize(key);
   });  
+
+  Handlebars.registerHelper("getArmeParticularites", function (particularites) {
+    let text = "";
+    if (particularites.rechargement) text += 'Se recharge avec une action libre. ';
+    if (particularites.multiples) text += 'Attaques multiples. ';
+    if (particularites.chargeur) {
+      text += `Chargeur de ${particularites.balles} balles. `;
+    }
+    if (particularites.retardement) text += 'A retardement';
+    if (particularites.zone) {
+      text += `Zone (${particularites.rayon} m). `;
+    }
+    if (particularites.allonge) text += 'Allonge. ';
+    if (particularites.desarmer) text += 'Désarmer. ';
+    if (particularites.maitriser) text += 'Maîtriser. ';
+    if (particularites.charge) text += 'Charge. ';
+    if (particularites.nonLetal) text += 'Non létale. ';
+    if (particularites.perforante) text += 'Perforante. ';
+    return text;
+  }); 
+
+  Handlebars.registerHelper("getArmureParticularites", function (particularites) {
+    let text = "";
+    if (particularites.encombrant) {
+      text += `Encombrant (Force ${particularites.force}). `;
+    }
+    if (particularites.deuxMains) text += 'Incompatible avec une arme à deux mains. '  
+    return text;
+  }); 
+
+  Handlebars.registerHelper("getIconeVerset", function (karma) {
+    if (karma === "tenebre") return "fa-moon";
+    if (karma === "lumiere") return "fa-sun";
+  });
 }

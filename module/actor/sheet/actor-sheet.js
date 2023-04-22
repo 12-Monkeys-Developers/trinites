@@ -1,6 +1,7 @@
 import * as Roll from "../../common/rolls.js";
 import * as Chat from "../../common/chat.js";
 import { Log } from "../../common/log.js";
+import DepenseKarmaFormApplication from "../../appli/DepenseKarmaFormApp.js";
 
 export default class TrinitesActorSheet extends ActorSheet {
   static get defaultOptions() {
@@ -8,54 +9,26 @@ export default class TrinitesActorSheet extends ActorSheet {
       width: 744,
       height: 958,
       classes: ["trinites", "sheet", "actor"],
-      tabs: [{ navSelector: ".sheet-tabs", contentSelector: ".sheet-body", initial: "profane" }]
+      tabs: [{ navSelector: ".sheet-tabs", contentSelector: ".sheet-body", initial: "profane" }],
     });
-  }
-
-  get template() {
-    if (this.actor.type === "trinite") {
-      Log.debug(`type : ${this.actor.type} | Chargement du template systems/trinites/templates/sheets/actors/personnage-sheet.html`);
-      return "systems/trinites/templates/sheets/actors/personnage-sheet.html";
-    } else if (this.actor.type === "archonteRoi") {
-      Log.debug(`type : ${this.actor.type} | Chargement du template systems/trinites/templates/sheets/actors/archonteRoi-sheet.html`);
-      return "systems/trinites/templates/sheets/actors/archonteRoi-sheet.html";
-    }
   }
 
   getData() {
     const data = super.getData();
     data.config = game.trinites.config;
 
-    data.domaines = data.items.filter(item => item.type === "domaine");
-    data.atouts = data.items.filter(item => item.type === "atout");
+    data.armes = data.items.filter((item) => item.type === "arme");
+    data.armures = data.items.filter((item) => item.type === "armure");
+    data.objets = data.items.filter((item) => item.type === "objet");
 
-    data.descriptionHtml = TextEditor.enrichHTML(this.actor.system.description, {async:false});
-    data.notesHtml = TextEditor.enrichHTML(this.actor.system.notes, {async:false});
+    data.descriptionHtml = TextEditor.enrichHTML(this.actor.system.description, { async: false });
+    data.notesHtml = TextEditor.enrichHTML(this.actor.system.notes, { async: false });
+
+    data.peutRegenerer = this.actor.system.etatSante !== "indemne" && this.actor.canRegenerate;
+    data.isArchonteRoi = this.actor.isArchonteRoi;
+    data.isLige = this.actor.isLige;
 
     return data;
-  }
-
-  /** @override */
-  _onDrop(event) {
-    event.preventDefault();
-    if (!this.options.editable) return false;
-    // Get dropped data
-    let data;
-    try {
-      data = JSON.parse(event.dataTransfer.getData("text/plain"));
-    } catch(err) {
-      return false;
-    }
-    if (!data) return false;
-
-    // Case 1 - Dropped Item
-    if (data.type === "Item") {
-      return this._onDropItem(event, data);
-    }
-    // Case 2 - Dropped Actor
-    if (data.type === "Actor") {
-      return false;
-    }
   }
 
   /**
@@ -66,89 +39,48 @@ export default class TrinitesActorSheet extends ActorSheet {
    * @param {Object} data         The data transfer extracted from the event
    * @private
    */
-  _onDropItem(event, data) {
-    Item.fromDropData(data).then(item => {
-      const itemData = duplicate(item);
-      switch (itemData.type) {
-        case "metier":
-          return this._onDropMetierItem(event, itemData);
-        case "vieAnterieure":
-          return this._onDropVieAnterieureItem(event, itemData);  
-        default:
-          return super._onDropItem(event, data);
-      }
-    });
-  }
-
-  /**
-   * Handle the drop of a metier item on the actor sheet
-   *
-   * @name _onDropMetierItem
-   * @param {*} event
-   * @param {*} itemData
-   */
-  async _onDropMetierItem(event, itemData) {
-    event.preventDefault();
-
-    if (!this.actor.isUnlocked) return;
-
-    if (this.actor.hasMetier) {
-      ui.notifications.warn(game.i18n.localize("TRINITES.notification.warning.metierExistant"));
-      return;
-    }
-
-    Log.info("_onDropMetierItem", itemData);
-
-    this.actor.ajouterMetier(itemData);
-  }
-
-  /**
-   * Handle the drop of a Vie Anterieure item on the actor sheet
-   *
-   * @name _onDropVieAnterieureItem
-   * @param {*} event
-   * @param {*} itemData
-   */
-  _onDropVieAnterieureItem(event, itemData) {
-    event.preventDefault();
-
-    if (!this.actor.isUnlocked) return;
-
-    if (this.actor.hasVieAnterieure) {
-      ui.notifications.warn(game.i18n.localize("TRINITES.notification.warning.vieAnterieureExistant"));
-      return;
-    }
-
-    Log.info("_onDropVieAnterieureItem", itemData);
-
-    this.actor.ajouterVieAnterieure(itemData);
+  async _onDropItem(event, data) {
+    return super._onDropItem(event, data);
   }
 
   activateListeners(html) {
     super.activateListeners(html);
-  }
 
-  _onSupprimerDomaine(event) {
-    event.preventDefault();
-    const element = event.currentTarget;
+    // Ajouter au domaine son statut épuisé
+    html.find(".check-domaine").click(this._onAjoutDomaineEtatEpuise.bind(this));
 
-    let domaineId = element.closest(".domaine").dataset.itemId;
-    const domaine = this.actor.items.get(domaineId);
+    // Enlever au domaine son statut épuisé
+    html.find(".uncheck-domaine").click(this._onSupprDomaineEtatEpuise.bind(this));
 
-    let content = `<p>Domaine : ${domaine.name}<br>Etes-vous certain de vouloir supprimer cet objet ?<p>`;
-    let dlg = Dialog.confirm({
-      title: "Confirmation de suppression",
-      content: content,
-      yes: () => domaine.delete(),
-      // No: () =>, On ne fait rien sur le 'Non'
-      defaultYes: false
-    });
+    // Ajouter à la richesse son statut épuisé
+    html.find(".check-richesse").click(this._onAjoutRichesseEtatEpuise.bind(this));
+
+    // Enlever à la richesse son statut épuisé
+    html.find(".uncheck-richesse").click(this._onSupprRichesseEtatEpuise.bind(this));
+
+    // Cocher une case de dommages
+    html.find(".case-vie").click(this._onCocherCaseDeVie.bind(this));
+
+    // Editer un item
+    html.find(".edit-item").click(this._onEditerItem.bind(this));
+
+    // Supprimer un item
+    html.find(".suppr-item").click(this._onSupprimerItem.bind(this));
+  
+    // Jet d'attaque avec une arme
+    html.find(".roll-arme").click(this._onJetArme.bind(this));
+
+    // Jet de compétence
+    html.find(".roll-comp").click(this._onJetCompetence.bind(this));
+
+    // Jet de ressources
+    html.find(".roll-ress").click(this._onJetRessource.bind(this));    
   }
 
   _onAjoutDomaineEtatEpuise(event) {
     event.preventDefault();
     const element = event.currentTarget;
-    
+
     let domaineId = element.closest(".domaine").dataset.itemId;
     this.actor.changeDomaineEtatEpuise(domaineId, true);
   }
@@ -181,7 +113,7 @@ export default class TrinitesActorSheet extends ActorSheet {
     this.actor.update({ "system.nbBlessure": blessureVal });
   }
 
-  _onRegenerationSante(event) {
+  async _onRegenerationSante(event) {
     event.preventDefault();
     // Const element = event.currentTarget;
 
@@ -198,7 +130,7 @@ export default class TrinitesActorSheet extends ActorSheet {
           typeKarma = "tenebre";
           break;
       }
-    } else if (this.actor.type === "archonteRoi") {
+    } else if (this.actor.type === "archonteRoi" || this.actor.type === "lige") {
       typeKarma = "tenebre";
     }
 
@@ -207,7 +139,7 @@ export default class TrinitesActorSheet extends ActorSheet {
 
     // Pas assez de Karma
     if (karmaDisponible == 0) {
-      ui.notifications.warn("Vous n'avez pas assez de Karma disponible utiliser la régénération !");
+      ui.notifications.warn("Vous n'avez pas assez de Karma disponible pour utiliser la régénération !");
       return;
     }
     // Juste ce qu'il faut de Karma
@@ -220,7 +152,7 @@ export default class TrinitesActorSheet extends ActorSheet {
       this.actor.consommerSourceKarma(this.actor.sourceUnique(typeKarma), 1);
       activationOk = true;
     } else {
-      new DepenseKarmaFormApplication(this.actor, this.actor.data.data.trinite, typeKarma, "regen", 1, null).render(true);
+      await new DepenseKarmaFormApplication.open(this.actor, this.actor.data.data.trinite, typeKarma, "regen", 1, null);
     }
 
     if (activationOk) {
@@ -236,18 +168,17 @@ export default class TrinitesActorSheet extends ActorSheet {
     const aura = this.actor.items.get(auraId);
     let zone = element.dataset.zone;
 
-    if (aura.system.deploiement == "") {
-      ui.notifications.warn("Vous devez déployer l'aura avant de changer sa zone d'effet !");
+    if (aura.system.deploiement === "cosme" && zone === "cosme") {
       return;
     }
 
     let auraActive = false;
     if (zone != "cosme") {
       let auras = this.actor.items.filter(function (item) {
-        return item.type == "aura" && item.id != auraId;
+        return item.type === "aura" && item.id !== auraId;
       });
       auraActive = auras.some((autreAura) => {
-        if (autreAura.system.deploiement != "" && autreAura.system.deploiement != "cosme") {
+        if (autreAura.system.deploiement != "cosme") {
           return true;
         }
       });
@@ -258,11 +189,12 @@ export default class TrinitesActorSheet extends ActorSheet {
       return;
     }
 
-    if (aura.system.deploiement == "cosme" && zone == "cosme") {
-      aura.update({ "system.deploiement": "" });
-    } else {
-      aura.update({ "system.deploiement": zone });
+    if (aura.system.deploiement === "cosme") {
+      ui.notifications.warn("Vous devez déployer l'aura avant de changer sa zone d'effet !");
+      return;
     }
+ 
+    aura.update({ "system.deploiement": zone });
   }
 
   _onSupprimerItem(event) {
@@ -278,7 +210,7 @@ export default class TrinitesActorSheet extends ActorSheet {
       content: content,
       yes: () => item.delete(),
       // No: () =>, On ne fait rien sur le 'Non'
-      defaultYes: false
+      defaultYes: false,
     });
   }
 
@@ -310,27 +242,6 @@ export default class TrinitesActorSheet extends ActorSheet {
     Roll.jetRessource({
       actor: this.actor,
       ressource: dataset.ressource
-    });
-  }
-
-  _onJetLame(event) {
-    event.preventDefault();
-    // Const dataset = event.currentTarget.dataset;
-
-    let lame = {
-      competence: "melee",
-      degats: 4,
-      portee: "",
-      particularites: "",
-      epee: true
-    };
-
-    Roll.jetArme({
-      actor: this.actor,
-      signe: "belier",
-      competence: lame.competence,
-      arme: lame,
-      type: this.actor.type === "trinite" ? "lameSoeur" : "lameNoire"
     });
   }
 
@@ -391,15 +302,51 @@ export default class TrinitesActorSheet extends ActorSheet {
     else await this.actor.setFlag(game.system.id, "SheetUnlocked", "SheetUnlocked");
     this.actor.sheet.render(true);
   }
-
-  async _onEndCreation(event) {
+  
+  _onJetArme(event) {
     event.preventDefault();
-    await this.actor.update({ "system.creation.finie": true });
+    const itemId = event.currentTarget.dataset.itemId;
+    const item = this.actor.items.get(itemId);
+
+    let arme = {
+      competence: item.system.competence,
+      degats: item.system.degats,
+      portee: item.system.portee,
+      particularites: item.system.particularites,
+      epee: item.system.epee,
+    };
+
+    const signe = item.system.competence === "tir" ? "sagittaire" : "belier";
+
+    Roll.jetArme({
+      actor: this.actor,
+      signe: signe,
+      competence: arme.competence,
+      arme: arme,
+      type: item.name
+    });
   }
 
-  async _onAllowCreation(event) {
-    event.preventDefault();
-    await this.actor.update({ "system.creation.finie": false });
-  }
+  	/**
+   * Handle toggling of an item from the Actor sheet
+   * @private
+   */
+	_onItemSummary(event) {
+		event.preventDefault();
+		let li = $(event.currentTarget);
+		const item = this.actor.items.get(li.data('item-id'));
 
+		// Toggle summary
+		if (item?.system.description) {
+			if (li.hasClass('expanded')) {
+				let summary = li.children('.item-summary');
+				summary.slideUp(200, () => summary.remove());
+			} else {
+				let div = $(`<div class="item-summary">${item.system.description}</div>`);
+				li.append(div.hide());
+				div.slideDown(200);
+			}
+			li.toggleClass('expanded');
+		}
+	}
 }

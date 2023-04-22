@@ -4,7 +4,7 @@
         <label>Coût d'acquisition</label>
         <div class="data"><input type="number" name="coutAcquisition" value="1" min="1"/></div>
     </div>
-    {{#if useDomaine}}
+    {{#if (and useDomaine isTrinite)}}
         <div class="titre"><label>Domaine</label></div>
         <div class="grid-data">
             <label>Domaine appliqué au jet</label>

@@ -2,18 +2,18 @@
     "name": "trinites",
     "title": "Trinités",
     "description": "Le système Trinités pour FoundryVTT",
-    "version": "1.0.0",
+    "version": "This is auto generated",
     "templateVersion": 2,
     "author": "Dellatosa",
     "authors": [
-      {
-        "name": "Dellatosa"
-      },
       {
         "name": "Khaali"
       },
       {
         "name": "Kristov"
+      },
+      {
+        "name": "Dellatosa"
       }
     ],
     "esmodules": [ "trinites.js" ],
@@ -35,15 +35,15 @@
     ],
     "gridDistance": 1.5,
     "gridUnits": "m",
-    "initiative": "round((1d12 + @competences.capricorne.rapidite.base) / 2)",
+    "initiative": "min(round((1d12 + @competences.capricorne.rapidite.valeur) / 2),12)",
     "primaryTokenAttribute": "",
     "compatibility": {
       "minimum": "10.278",
       "verified": "10.291",
       "maximum": 10
     },
-    "url": "https://github.com/Dellatosa/trinites",
-    "manifest": "https://github.com/12-Monkeys-Developers/trinites/releases/latest/download/system.json", 
-    "download": "https://github.com/12-Monkeys-Developers/trinites/releases/download/1.0.0/system.zip" 
+    "url": "This is auto generated",
+    "manifest": "This is auto generated", 
+    "download": "This is auto generated" 
   }
   

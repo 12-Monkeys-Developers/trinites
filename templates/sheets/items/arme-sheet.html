@@ -1,0 +1,60 @@
+<form class="{{cssClass}}" autocomplete="off">
+    <header class="sheet-header">
+        <img src="{{item.img}}" data-edit="img" title="{{item.name}}" height="64" width="64"/>
+        <h1><input name="name" type="text" value="{{item.name}}" placeholder="Nom de l'arme"/></h1>
+    </header>
+    <div class="sheet-content arme" data-item-id="{{item.id}}">
+        <div class="grid-item">
+            <div><label>Dégâts</label></div>
+            <div><input name="system.degats" type="number" value="{{data.system.degats}}" placeholder="0" /></div>
+            <div><label>Portée (m)</label></div>
+            <div><input name="system.portee" type="number" value="{{data.system.portee}}" placeholder="0" /></div>
+            <div><label>De type épée</label></div>
+            <div><input name="system.epee" type="checkbox" {{checked data.system.epee}}/></div>
+            <div><label>Compétence</label></div>
+            <div>
+                <select name="system.competence">
+                    {{#select data.system.competence}}           
+                        {{#each config.competencesCombat as |competence keyCompetence|}}
+                            <option value="{{keyCompetence}}">{{competence}}</option>
+                        {{/each}}
+                    {{/select}} 
+                </select>
+            </div>
+        </div>
+        <div class="titre-desc">Particularités</div>
+        <div class="grid-particularites">
+            <div><label>A retardement</label></div>
+            <div><input name="system.particularites.retardement" type="checkbox" {{checked data.system.particularites.retardement}}/></div>
+            <div><label>Allonge</label></div>
+            <div><input name="system.particularites.allonge" type="checkbox" {{checked data.system.particularites.allonge}}/></div>
+            <div><label>Attaques multiples</label></div>
+            <div><input name="system.particularites.multiples" type="checkbox" {{checked data.system.particularites.multiples}}/></div>
+            <div><label>Charge</label></div>
+            <div><input name="system.particularites.charge" type="checkbox" {{checked data.system.particularites.charge}}/></div>
+            <div><label>Chargeur</label></div>
+            <div><input name="system.particularites.chargeur" type="checkbox" {{checked data.system.particularites.chargeur}}/></div>
+            <div><label>Balles</label></div>
+            <div><input name="system.particularites.balles" type="number" value="{{data.system.particularites.balles}}" placeholder="0" /></div>
+            <div><label>Désarmer</label></div>
+            <div><input name="system.particularites.desarmer" type="checkbox" {{checked data.system.particularites.desarmer}}/></div>
+            <div><label>Maitriser</label></div>
+            <div><input name="system.particularites.maitriser" type="checkbox" {{checked data.system.particularites.maitriser}}/></div>
+            <div><label>Se recharge avec une action libre</label></div>
+            <div><input name="system.particularites.rechargement" type="checkbox" {{checked data.system.particularites.rechargement}}/></div>
+            <div><label>Non létal</label></div>
+            <div><input name="system.particularites.nonLetal" type="checkbox" {{checked data.system.particularites.nonLetal}}/></div>
+            <div><label>Perforante</label></div>
+            <div><input name="system.particularites.perforante" type="checkbox" {{checked data.system.particularites.perforante}}/></div>
+            <div><label>Souffle</label></div>
+            <div><input name="system.particularites.souffle" type="checkbox" {{checked data.system.particularites.souffle}}/></div>
+            <div><label>Zone</label></div>
+            <div><input name="system.particularites.zone" type="checkbox" {{checked data.system.particularites.zone}}/></div>
+            <div><label>Rayon d'action (m)</label></div>
+            <div><input name="system.particularites.rayon" type="number" value="{{data.system.particularites.rayon}}" placeholder="0" /></div>
+        </div>
+        {{editor data.system.listeParticularites target="system.listeParticularites" button=true owner=true editable=true}}
+        <div class="titre-desc">Description de l'arme</div> 
+        {{editor data.system.description target="system.description" button=true owner=true editable=true}}        
+    </div>
+</form>

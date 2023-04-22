@@ -1,0 +1,25 @@
+<form class="{{cssClass}}" autocomplete="off">
+    <header class="sheet-header">
+        {{> "systems/trinites/templates/partials/actor/bloc-info-personnage.hbs"}}
+    </header>
+    <nav class="sheet-tabs tabs" data-group="principal">
+        <a class="item tab-profane" data-tab="profane">Profane</a>
+        <a class="item tab-description" data-tab="description">Détails</a>
+    </nav>
+    <section class="sheet-body">
+        <div class="tab tab-profane" data-group="principal" data-tab="profane">
+            {{> "systems/trinites/templates/partials/actor/bloc-profane-archonte-roi.hbs"}}
+        </div>
+        <div class="tab tab-description" data-group="principal" data-tab="description">
+            {{> "systems/trinites/templates/partials/actor/bloc-equipement.hbs"}}
+            <div class="tactique">
+                <h3><i class="fa-solid fa-swords"></i> TACTIQUE</h3>
+                {{editor data.system.tactique target="system.tactique" button=true owner=true editable=true}}               
+            </div>
+            <h3><i class="fa-regular fa-head-side"></i> DESCRIPTION</h3>
+            {{editor descriptionHtml target="system.description" button=true owner=owner editable=editable}}  
+            <h3><i class="fa-solid fa-pencil"></i> NOTES</h3>
+            {{editor notesHtml target="system.notes" button=true owner=owner editable=editable}}
+        </div>
+    </section>
+</form>

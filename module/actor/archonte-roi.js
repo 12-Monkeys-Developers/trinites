@@ -1,55 +1,16 @@
 import TrinitesActor from "./actor.js";
+import DepenseKarmaFormApplication from "../appli/DepenseKarmaFormApp.js";
 
 export default class TrinitesArchonteRoi extends TrinitesActor {
   prepareData() {
     super.prepareData();
     let system = this.system;
-
-    let pointsCreDepenses = 0;
-
-    /*
-     *  Calcul des bonus de Signes
-     */
-
-    for (let [keySigne, signe] of Object.entries(system.signes)) {
-      if (system.themeAstral.archetype == keySigne) {
-        signe.valeur = 6;
-      } else if (system.themeAstral.ascendant1 == keySigne || system.themeAstral.ascendant2 == keySigne) {
-        signe.valeur = 4;
-      } else if (system.themeAstral.descendant1 == keySigne || system.themeAstral.descendant2 == keySigne || system.themeAstral.descendant3 == keySigne) {
-        signe.valeur = 2;
-      } else {
-        signe.valeur = 0;
-      }
-    }
-
-    /*
-     * Calcul de la base des compétences : base = baseMetier + points de Création du métier + bonus de la Vie Antérieure + niveau obtenu par l'expérience
-     */
-    for (let [keySigne, compsSigne] of Object.entries(system.competences)) {
-      for (let [keyComp, competence] of Object.entries(compsSigne)) {
-        system.competences[keySigne][keyComp].base +=
-          system.competences[keySigne][keyComp].baseMetier +
-          system.competences[keySigne][keyComp].pointsCrea +
-          system.competences[keySigne][keyComp].bonusVA +
-          system.competences[keySigne][keyComp].pointsExp;
-      }
-    }
-
     /*
      * Calcul de la valeur de la compétence : valeur = base + bonus zodiacal
      */
     for (let [keySigne, compsSigne] of Object.entries(system.competences)) {
       for (let [keyComp, competence] of Object.entries(compsSigne)) {
-        if (system.competences[keySigne][keyComp].ouverte) {
-          system.competences[keySigne][keyComp].valeur = system.competences[keySigne][keyComp].base + system.signes[keySigne].valeur;
-        } else {
-          if (system.competences[keySigne][keyComp].base > 0) {
-            system.competences[keySigne][keyComp].valeur = system.competences[keySigne][keyComp].base + system.signes[keySigne].valeur;
-          } else {
-            system.competences[keySigne][keyComp].valeur = 0;
-          }
-        }
+        system.competences[keySigne][keyComp].valeur = system.competences[keySigne][keyComp].base + system.signes[keySigne].valeur;
       }
     }
 
@@ -58,25 +19,6 @@ export default class TrinitesArchonteRoi extends TrinitesActor {
     //recalcul des valeurs de karma afin qu'elles ne dépasent pas le max
     if (system.archonteRoi.karma.value > system.archonteRoi.karma.max) {
       system.archonteRoi.karma.value = system.archonteRoi.karma.max;
-    }
-
-    /*
-     * Calcul des valeurs de ressources : valeur = baseMetier + points de Création du métier + points obtenus par l'expérience
-     */
-    if (system.ressources.richesse.pointsCrea < 0) system.ressources.richesse.pointsCrea = 0;
-    if (system.ressources.reseau.pointsCrea < 0) system.ressources.reseau.pointsCrea = 0;
-    if (system.ressources.influence.pointsCrea < 0) system.ressources.influence.pointsCrea = 0;
-
-    system.ressources.richesse.valeur =
-      parseInt(system.ressources.richesse.baseMetier) + system.ressources.richesse.pointsCrea + system.ressources.richesse.bonusVA + system.ressources.richesse.pointsExp;
-    system.ressources.reseau.valeur =
-      parseInt(system.ressources.reseau.baseMetier) + system.ressources.reseau.pointsCrea + system.ressources.reseau.bonusVA + system.ressources.reseau.pointsExp;
-    system.ressources.influence.valeur =
-      parseInt(system.ressources.influence.baseMetier) + system.ressources.influence.pointsCrea + system.ressources.influence.bonusVA + system.ressources.influence.pointsExp;
-
-    // L'influence ne peut dépasser la valeur de réseau
-    if (system.ressources.influence.valeur > system.ressources.reseau.valeur) {
-      system.ressources.influence.valeur = system.ressources.reseau.valeur;
     }
 
     // Les diminutions ne peuvent dépasser le score de ressource
@@ -92,37 +34,25 @@ export default class TrinitesArchonteRoi extends TrinitesActor {
       system.ressources.reseau.diminution = system.ressources.reseau.valeur;
     }
 
-    /*-----------------------------------
-            ---- Calcul des valeurs de sante ----
-            -----------------------------------*/
-
-    // Points de vie maxi
-    system.ligneVie1 = system.pointsLigneVie;
-    system.ligneVie2 = system.pointsLigneVie * 2;
-    system.nbPointsVieMax = system.pointsLigneVie * 3;
-
-    //Etat de santé
-    if (system.nbBlessure == 0) {
-      system.etatSante = "indemne";
-    } else if (system.nbBlessure <= system.ligneVie1) {
-      system.etatSante = "endolori";
-    } else if (system.nbBlessure <= system.ligneVie2) {
-      system.etatSante = "blesse";
-    } else {
-      system.etatSante = "inconscient";
-    }
   }
 
+  get isArchonteRoi() {
+    return true;
+  }
+
+  get canRegenerate() {
+    return true;
+  }
+  
   /**
    * Nombre de points de Karma disponible du type donné (Lumière ou Ténèbre)
    * @param {*} typeKarma
    * @returns
    */
   karmaDisponible(typeKarma) {
-    let data = this.system;
     let karmaDisponible = 0;
     if (typeKarma != "lumiere") {
-      karmaDisponible += data.archonteRoi.karma.value;
+      karmaDisponible += this.system.archonteRoi.karma.value;
     }
     return karmaDisponible;
   }
@@ -146,15 +76,6 @@ export default class TrinitesArchonteRoi extends TrinitesActor {
     let data = this.system;
 
     switch (typeSource) {
-      case "adam":
-        this.update({ "system.trinite.adam.karma.value": data.trinite.adam.karma.value - coutPouvoir });
-        break;
-      case "deva":
-        this.update({ "system.trinite.deva.karma.value": data.trinite.deva.karma.value - coutPouvoir });
-        break;
-      case "archonte":
-        this.update({ "system.trinite.archonte.karma.value": data.trinite.archonte.karma.value - coutPouvoir });
-        break;
       case "archonteRoi":
         this.update({ "system.archonteRoi.karma.value": data.archonteRoi.karma.value - coutPouvoir });
         break;
@@ -166,23 +87,56 @@ export default class TrinitesArchonteRoi extends TrinitesActor {
     this.update({ "system.archonteRoi.karma.value": valeur });
   }
 
-  regeneration() {
-    let data = this.system;
+  /**
+   * 
+   * @param {*} auraId 
+   * @param {Object} options 
+   */
+  async activerAura(auraId, options) {
+    const aura = this.items.get(auraId);
 
-    let blessureVal = Math.max(data.nbBlessure - 4, 0);
-    this.update({ "system.nbBlessure": blessureVal });
-  }
+    // Aura déjà déployée - test par sécurité
+    if (aura.system.deploiement != "cosme") {
+      ui.notifications.warn("Cette aura est déjà déployée !");
+      return null;
+    }
 
-  get hasMetier() {
-    return false;
-  }
+    const typeKarma = "neutre";
 
-  get hasVieAnterieure() {
-    return false;
-  }
+    const karmaDisponible = this.karmaDisponible(typeKarma);
+    const coutPouvoir = this.coutPouvoir("zodiaque");
+    let activable = false;
 
-  changeDomaineEtatEpuise(domaineId, statut) {
-    const domaine = this.items.get(domaineId);
-    if (domaine) domaine.update({ "system.epuise": statut });
+    // Pas assez de Karma
+    if (karmaDisponible < coutPouvoir) {
+      ui.notifications.warn("Vous n'avez pas assez de Karma disponible pour déployer cette aura !");
+      return;
+    }
+    // Juste ce qu'il faut de Karma
+    else if (karmaDisponible == coutPouvoir) {
+      this.viderKarma(typeKarma);
+      activable = true;
+    }
+    // Uniquement le Karma d'une source
+    else if (this.sourceUnique(typeKarma)) {
+      this.consommerSourceKarma(this.sourceUnique(typeKarma), coutPouvoir);
+      activable = true;
+    } 
+    else {
+      activable = await DepenseKarmaFormApplication.open(this, this.system.trinite, typeKarma, "aura", coutPouvoir, auraId);
+    }
+    
+    if (activable) {
+      aura.update({ "data.deploiement": "corps" });
+
+      // MAJ de la carte
+      return {
+        "title": `Vous avez déployé l'aura '${aura.name}'`,
+        "classList": "deployee",
+        "zone": "Corps"
+      }
+    }
+    return null;
+
   }
 }

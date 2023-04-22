@@ -3,14 +3,20 @@
         {{> "systems/trinites/templates/partials/actor/bloc-info-personnage.hbs"}}
     </header>
     <nav class="sheet-tabs tabs" data-group="principal">
-        <a class="item profane" data-tab="profane">Profane</a>
-        <a class="item occulte" data-tab="occulte">Occulte</a>
+        <a class="item tab-profane" data-tab="profane">Profane</a>
+        <a class="item tab-equipement" data-tab="equipement">Equipement</a>
+        <a class="item tab-occulte" data-tab="occulte">Occulte</a>
+        <a class="item tab-description" data-tab="description">Description</a>
+        <a class="item tab-notes" data-tab="notes">Notes</a>
     </nav>
     <section class="sheet-body">
-        <div class="tab profane" data-group="principal" data-tab="profane">
-            {{> "systems/trinites/templates/partials/actor/bloc-profane-personnage.hbs"}}
+        <div class="tab tab-profane" data-group="principal" data-tab="profane">
+            {{> "systems/trinites/templates/partials/actor/bloc-profane-archonte-roi.hbs"}}
         </div>
-        <div class="tab occulte" data-group="principal" data-tab="occulte">
+        <div class="tab tab-equipement" data-tab="equipement">
+            {{> "systems/trinites/templates/partials/actor/bloc-equipement.hbs"}}
+        </div>
+        <div class="tab tab-occulte" data-group="principal" data-tab="occulte">
             <div class="deux-col-50-50">
                 <div class="col-A">
                     {{> "systems/trinites/templates/partials/actor/bloc-themeAstral-personnage.hbs"}}
@@ -32,6 +38,7 @@
                     </div>
                 </div>
             </div>
+            
             <div class="deux-col-50-50">
                 <div class = "karma-ten">
                     <h3><i class="fas fa-moon"></i> Karma-Ténèbres</h3>
@@ -41,24 +48,22 @@
                             <input name="system.archonteRoi.karma.value" type="number" value="{{data.system.archonteRoi.karma.value}}" placeholder="0" min="0" max="{{data.system.archonteRoi.karma.max}}">
                             <label> / </label>
                             <input name="system.archonteRoi.karma.max" type="number" value="{{data.system.archonteRoi.karma.max}}" placeholder="0" min="0">
-                            <!-- <div class="logo-karma"><i class="fas fa-moon"></i></div> -->
                         </div>
                     </div>
                 </div>
-                <div class="pouvoirs-gen">
-                    <h3>Pouvoirs</h3>
-                </div>
+                <div></div>
             </div>
-            
-            <div class="deux-col-66-33">
-                <div class="col-66">
+            <div class="une-col">
+                    {{> "systems/trinites/templates/partials/actor/bloc-lameNoire-archonte.hbs"}}
                     {{> "systems/trinites/templates/partials/actor/bloc-grandLivre-archonte.hbs"}}
                     {{> "systems/trinites/templates/partials/actor/bloc-zodiaque-personnage.hbs"}}
-                </div>
-                <div class="col-33">
-                    {{> "systems/trinites/templates/partials/actor/bloc-lameNoire-archonte.hbs"}}
-                </div>
             </div>
+        </div>
+        <div class="tab tab-description" data-group="principal" data-tab="description">
+            {{editor descriptionHtml target="system.description" button=true owner=owner editable=editable}}
+        </div>
+        <div class="tab tab-notes" data-group="principal" data-tab="notes">
+            {{editor notesHtml target="system.notes" button=true owner=owner editable=editable}}
         </div>
     </section>
 </form>

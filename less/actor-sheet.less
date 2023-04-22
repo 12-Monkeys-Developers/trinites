@@ -2,16 +2,34 @@
     background: url("./images/parchemin-grey.jpg") repeat;
 }
 
-.actor-infos-line {
-    display: flex;
-}
-
 .sheet-tabs.tabs a {
     color: var(--color-titre-trinite);
     font-weight: bold;
 }
 
 .trinites.sheet.actor {
+
+    .actor-infos-line {
+        display: flex;    
+    
+        .sous-type {
+            display: flex;
+            margin: 2px;
+            align-items: center;
+    
+            label {
+                width: 60px;
+            }
+    
+            select {
+                color: white;
+            }
+            
+            select:disabled {
+                color: white;
+            }
+        }
+    }
 
     .invisible {
         visibility: hidden;
@@ -25,8 +43,12 @@
         box-shadow: 0 0 5px var(--color-shadow-trinite);
     }
 
-    input[type="number"]:read-only {
+    input[type="number"] {
         background-color: floralwhite;
+    }
+
+    input[type="number"]:read-only {
+        background-color: rgba(0, 0, 0, 0.05);
         cursor: default;
     }
 
@@ -101,7 +123,7 @@
     .window-content {
         background: url("./images/parchemin-grey.jpg") repeat;
         
-        nav .tab-profane, nav .tab-equipement, nav .tab-description, nav .tab-notes {
+        nav .tab-profane, nav .tab-equipement, nav .tab-description, nav .tab-details, nav .tab-notes {
             font-family: "Cabaletta";
             color: var(--color-titre-trinite);
         }
@@ -111,7 +133,7 @@
             color: var(--color-titre-occulte);
         }
 
-        .tab.tab-profane h3, .tab.tab-equipement h3, .tab.tab-description h3, .tab.tab-notes h3 {
+        .tab.tab-profane h3, .tab.tab-equipement h3, .tab.tab-description h3, .tab.tab-details h3, .tab.tab-notes h3 {
             //font-family: "AvenirLTStd-Heavy";
             color: var(--color-titre-trinite);
             font-weight: bold;
@@ -128,14 +150,48 @@
         }
     }
 
-    .competences, .domaines, .ressources, .lignes-de-vie, .theme-astral, .vie-ante-bloc, .histo-bloc, 
-    .expe-bloc, .karma-ten, .pouvoirs-gen, .grand-livre, .zodiaque, .lame-soeur {        
+    .domaines, .competences, .ressources, .lignes-de-vie, .theme-astral, .vie-ante-bloc, .histo-bloc, 
+    .expe-bloc, .karma-ten, .grand-livre, .zodiaque, .lame-soeur, .lame-noire, .pouvoirs {        
         padding: 2px;
         margin: 3px;
     }
 
-    .domaines, .zodiaque {
+    .domaines, .zodiaque, .pouvoirs {
         margin-top: 5px;
+    }
+
+    .lignes-de-vie {
+        .param {
+            display: flex;
+            margin: 2px;
+            align-items: center;
+
+            label {
+                width: 150px;
+            }
+
+            input {
+                width: 40px;
+                text-align: center;
+            }
+        }
+    }
+
+    .competences  {
+        .param {
+            display: flex;
+            margin: 2px;
+            align-items: center;
+
+            label {
+                width: 80px;
+            }
+
+            input {
+                width: 40px;
+                text-align: center;
+            }
+        }
     }
 
     .comp-grid {
@@ -387,31 +443,6 @@
         }
     }
 
-    .domaines {
-        min-height: 50px;
-    }
-
-    .dom-grid {
-        display: grid;
-        grid-template-columns: repeat(5, 1fr);
-
-        .domaine-item {
-            display: grid;
-            grid-template-columns: 1fr 1.5em 1.5em;
-            align-items: center;
-
-            .uncheck-domaine, .check-domaine, .suppr-domaine {
-                display: flex;
-                justify-content: center;
-                margin: 3px;
-            }
-
-            .nom-domaine {
-                padding-left: 5px;
-            }
-        }
-    }
-
     .ress-grid {
         display: grid;
         grid-template-columns: 2em 1fr 1.5em 3em 1em 3em 1em 1.5fr;
@@ -427,7 +458,6 @@
         }
 
         .col-titre {
-            font-size: 0.9em;
             display: flex;
             justify-content: center;
             text-decoration: underline;
@@ -482,6 +512,10 @@
 
         .colRess-duree {
             grid-column: 8 / 9;
+
+            input {
+                background-color: floralwhite;
+            }
         }
     }
 
@@ -828,49 +862,94 @@
 
     .grid-grand-livre {
         display: grid;
-        grid-template-columns: 1fr 1em 1fr;
+        grid-template-columns: 1fr;
         margin: 3px;
 
         div {
             margin: 2px;
-        } 
+        }
+        
+        .titre {
+            font-family: "Cabaletta";
+        }
     }
-    ///
-    .titre-grand-livre {
-        display: flex;
-        justify-content: center;
-        font-family: "Cabaletta";
+
+    .pouvoirs {
+        min-height: 80px;
+    }
+
+    .grid-pouvoirs {
+        display: grid;
+        grid-template-columns: 1fr;
+        margin: 3px;
+
+        div {
+            margin: 2px;
+        }
+        
+        .titre {
+            font-family: "Cabaletta";
+        }
     }
     
-    .grid-verset {
+    .grid-pouvoir {
         display: grid;
-        font-size: 0.9em;
-        grid-template-columns: 2em 1fr 2em 2em;
+        grid-template-columns: 1.3fr 2em 2em;
         align-items: center;
     }
+        
+    .grid-verset {
+        display: grid;
+        grid-template-columns: 2em 1.3fr 0.3fr 0.8fr 0.5fr 1.3fr 2em 2em;
+        align-items: center;
 
-    .col-roll-verset {
-        grid-column: 1 / 2;
-        display: flex;
-        justify-content: center;
+        .jet-verset {
+            grid-column: 1 / 2;
+            display: flex;
+            justify-content: center;
+        }
+
+        .nom-verset {
+            grid-column: 2 / 3;
+        }
+
+        .cumul-verset {
+            grid-column: 3 / 4;
+            display: flex;
+            justify-content: center;
+        }
+
+        .duree-verset {
+            grid-column: 4 / 5;
+        }
+
+        .portee-verset {
+            grid-column: 5 / 6;
+        }
+
+        .aire-verset {
+            grid-column: 6 / 7;
+        }
+
+        .edit-verset {
+            grid-column: 7 / 8;
+            display: flex;
+            justify-content: center;
+        }
+
+        .delete-verset {
+            grid-column: 8 / 9;
+            display: flex;
+            justify-content: center;
+        }
+
+        .titre {
+            font-family: "Cabaletta";
+        }
     }
 
-    .col-nom-verset {
-        grid-column: 2 / 3;
-    }
-
-    .col-edit-verset {
-        grid-column: 3 / 4;
-        display: flex;
-        justify-content: center;
-    }
-
-    .col-delete-verset {
-        grid-column: 4 / 5;
-        display: flex;
-        justify-content: center;
-    }
-    ///
+    
+   
     .zodiaque {
         min-height: 80px;
     }
@@ -881,7 +960,7 @@
         margin: 3px;
 
         .col-titre {
-            grid-column: 1 / 3;
+            grid-column: 2 / 3;
         }
 
         .col-vide {
@@ -901,34 +980,63 @@
         }
     }
 
-    .lame-soeur, .lame-noire {
+    .lame-soeur {
         display: flex;
         flex-direction: column;
+
+        .grid-lame {
+            display: grid;
+            grid-template-columns: 1fr 2fr 2em 4.5em;
+            margin: 3px;
+            align-items: center;
+    
+            select {
+                font-family: "Cabaletta";
+            }
+    
+            label {
+                font-family: "Cabaletta";
+                margin: 2px;
+            }
+    
+            i {
+                font-size: 0.9em;
+            }
+    
+            select, a {
+                margin: 2px;
+            }
+        }
     }
 
-    .grid-lame {
-        display: grid;
-        grid-template-columns: 1fr 2fr 2em 4.5em;
-        margin: 3px;
-        align-items: center;
+    .lame-noire {
+        display: flex;
+        flex-direction: column;
 
-        select {
-            font-family: "Cabaletta";
+        .grid-lame {
+            display: grid;
+            grid-template-columns: 1fr 1fr 2em 4.5em 3fr;
+            margin: 3px;
+            align-items: center;
+    
+            select {
+                font-family: "Cabaletta";
+            }
+    
+            label {
+                font-family: "Cabaletta";
+                margin: 2px;
+            }
+    
+            i {
+                font-size: 0.9em;
+            }
+    
+            select, a {
+                margin: 2px;
+            }
         }
-
-        label {
-            font-family: "Cabaletta";
-            margin: 2px;
-        }
-
-        i {
-            font-size: 0.9em;
-        }
-
-        select, a {
-            margin: 2px;
-        }
-    }
+    }    
 
     .desc-lame {
         margin: 2px;
@@ -949,11 +1057,120 @@
     .grid-atout {
         display: grid;
         grid-template-columns:2em 1fr 2em 2em;
-        font-size: 0.9em;
         margin: 3px;
 
         .nom-atout {
             margin: 3px;
+        }
+    }
+
+    .grid-equipements {
+        display: grid;
+        grid-template-columns: 1fr;
+        margin: 3px;
+
+        div {
+            margin: 2px;
+        }
+    }
+
+    .grid-armes {
+        display: grid;
+        grid-template-columns: 2em 1fr 1fr 1fr 2fr 2em 2em;
+        align-items: center;
+
+        .col-roll-arme {
+            grid-column: 1 / 2;
+            display: flex;
+            justify-content: center;
+        }
+    
+        .col-nom-arme {
+            grid-column: 2 / 3;
+        }
+    
+        .col-degats-arme {
+            grid-column: 3 / 4;
+        }
+    
+        .col-portee-arme {
+            grid-column: 4 / 5;
+        }
+    
+        .col-particularites-arme {
+            grid-column: 5 / 6;
+        }
+    
+        .col-edit-arme {
+            grid-column: 6 / 7;
+            display: flex;
+            justify-content: center;
+        }
+    
+        .col-delete-arme {
+            grid-column: 7 / 8;
+            display: flex;
+            justify-content: center;
+        }
+    }
+
+    .grid-armures {
+        display: grid;
+        grid-template-columns: 2em 1fr 1fr 1fr 2fr 2em 2em;
+        align-items: center;
+    
+        .col-nom-armure {
+            grid-column: 2 / 3;
+        }
+    
+        .col-protection-melee-armure {
+            grid-column: 3 / 4;
+        }
+    
+        .col-protection-tir-armure {
+            grid-column: 4 / 5;
+        }
+    
+        .col-particularites-armure {
+            grid-column: 5 / 6;
+        }
+    
+        .col-edit-armure {
+            grid-column: 6 / 7;
+            display: flex;
+            justify-content: center;
+        }
+    
+        .col-delete-armure {
+            grid-column: 7 / 8;
+            display: flex;
+            justify-content: center;
+        }
+    }
+
+    .grid-objets {
+        display: grid;
+        grid-template-columns: 2em 1fr 3fr 2em 2em;
+        align-items: center;
+    
+        .col-nom-objet {
+            grid-column: 2 / 3;
+        }
+    
+        .col-description-objet {
+            grid-column: 3 / 4;
+        }
+        
+        .col-edit-objet {
+            grid-column: 4 / 5;
+            display: flex;
+            justify-content: center;
+        }
+    
+        .col-delete-objet {
+            grid-column: 5 / 6;
+            display: flex;
+            justify-content: center;
         }
     }
 
@@ -1018,6 +1235,54 @@
             background: rgba(0, 0, 0, 5%);
             min-height: 75px;
             overflow-y: inherit;
+        }
+    }
+
+    &.trinite {
+
+        .domaines {
+            min-height: 50px;
+        }
+    
+        .dom-grid {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+    
+            .domaine-item {
+                display: flex;
+                gap: 5px;
+    
+                .uncheck-domaine, .check-domaine{
+                    display: flex;
+                    justify-content: center;
+                    margin: 3px;
+                }
+    
+                .nom-domaine {
+                    padding-left: 5px;
+                }
+            }
+
+            .domaine-item-unlocked {
+                display: flex;
+                gap: 2px;
+    
+                .uncheck-domaine, .check-domaine, .suppr-domaine, .edit-item {
+                    display: flex;
+                    justify-content: center;
+                    margin: 3px;
+                }
+    
+                .nom-domaine {
+                    padding-left: 5px;
+                }
+            }
+        }
+    }
+
+    &.archonte-roi {
+        .domaines {
+            min-height: 50px;
         }
     }
 }

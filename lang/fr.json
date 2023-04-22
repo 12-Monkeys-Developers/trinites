@@ -14,6 +14,7 @@
         "TypeVerset": "Verset",
         "TypeAtout": "Atout",
         "TypeArme": "Arme",
+        "TypeArmure": "Armure",
         "TypePouvoir": "Pouvoir",
         "TypeVieanterieure": "Vie Antérieure" 
     },
@@ -58,7 +59,7 @@
                 },
                 "belier": {
                     "corpsACorps": "Corps à corps",
-                    "melee": "Mélée",
+                    "melee": "Mêlée",
                     "tactique": "Tactique"
                 },
                 "taureau": {

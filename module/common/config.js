@@ -116,7 +116,7 @@ TRINITES.competences = {
   "sagittaire.survie": "Survie",
   "sagittaire.tir": "Tir",
   "sagittaire.vigilance": "Vigilance",
-  "poisson.erudition": "Erudition",
+  "poisson.erudition": "Érudition",
   "poisson.langues": "Langues",
   "poisson.sciences": "Sciences",
   "belier.corpsACorps": "Corps à corps",

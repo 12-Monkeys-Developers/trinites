@@ -50,8 +50,12 @@ export default class TrinitesPnj extends TrinitesActor {
     return this.system.sousType === "humain";
   }
 
+  get isAutre() {
+    return this.system.sousType === "autre";
+  }
+
   get nbDes() {
-    return this.system.nbDes ?? 1;
+    return parseInt(this.system.nbDes) ?? 1;
   }
 
   get canRegenerate() {
@@ -96,7 +100,10 @@ export default class TrinitesPnj extends TrinitesActor {
       if (this.isArchonteRoi || this.isLige) {
         return 1;
       }
-      return 2
+      if (this.isAutre) {
+        return parseInt(this.system.cout.aura);
+      }
+      return 2;
     }
 
     // Verset
@@ -104,7 +111,10 @@ export default class TrinitesPnj extends TrinitesActor {
       if (this.isArchonteRoi || this.isLige) {
         return 1;
       }
-      return 2
+      if (this.isAutre) {
+        return parseInt(this.system.cout.verset);
+      }
+      return 2;
     }
     
     return 2;

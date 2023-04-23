@@ -33,7 +33,7 @@ export default class TrinitesHumain extends TrinitesActor {
   }
 
   get nbDes() {
-    return this.system.nbDes ?? 1;
+    return parseInt(this.system.nbDes) ?? 1;
   }
 
   /**

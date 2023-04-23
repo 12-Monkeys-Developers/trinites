@@ -1,7 +1,7 @@
 <div class="competences">
                 <h3><i class="fas fa-check"></i> COMPETENCES</h3>
                 {{#if unlocked}}
-                    <div class="param"><label>Nb de dés : </label><input name="system.nbDes" type="number" value="{{data.system.nbDes}}"></div>
+                    <div class="param"><label>Nb de dés : </label><select name="system.nbDes">{{#select data.system.nbDes}}<option value="1">1</option><option value="2">2</option>{{/select}}</select></div>
                 {{/if}}
                 <div class="comp-grid">
                     <!-- COLONNE 1 -->
@@ -166,7 +166,7 @@
                     <div class="lignes-de-vie">
                         <h3><i class="fas fa-heart"></i> LIGNES DE VIE</h3>
                         {{#if unlocked}}
-                            <div class="param"><label>Nb lignes de vie : </label><input name="system.nbLigneVie" type="number" value="{{data.system.nbLigneVie}}"></div>
+                            <div class="param"><label>Nb lignes de vie : </label><select name="system.nbLigneVie">{{#select data.system.nbLigneVie}}<option value="1">1</option><option value="2">2</option><option value="3">3</option>{{/select}}</select></div>
                             <div class="param"><label>Points de vie par ligne :</label><input name="system.pointsLigneVie" type="number" value="{{data.system.pointsLigneVie}}"></div>
                         {{/if}}
                         <div class="ligne-vie">

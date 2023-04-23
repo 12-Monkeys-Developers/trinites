@@ -9,12 +9,12 @@ export default class TrinitesActor extends Actor {
 
     // Points de vie max
     system.ligneVie1 = system.pointsLigneVie;   
-    if (this.system.nbLigneVie === 1) system.nbPointsVieMax = system.ligneVie1;
+    if (parseInt(this.system.nbLigneVie) === 1) system.nbPointsVieMax = system.ligneVie1;
     
-    if (this.system.nbLigneVie > 1) system.ligneVie2 = system.pointsLigneVie * 2;
-    if (this.system.nbLigneVie === 2) system.nbPointsVieMax = system.ligneVie2;
+    if (parseInt(this.system.nbLigneVie) > 1) system.ligneVie2 = system.pointsLigneVie * 2;
+    if (parseInt(this.system.nbLigneVie) === 2) system.nbPointsVieMax = system.ligneVie2;
 
-    if (this.system.nbLigneVie > 2) system.nbPointsVieMax = system.pointsLigneVie * 3;
+    if (parseInt(this.system.nbLigneVie) > 2) system.nbPointsVieMax = system.pointsLigneVie * 3;
 
     // Etat de santé
     if (system.nbBlessure === 0) {
@@ -62,7 +62,7 @@ export default class TrinitesActor extends Actor {
   }
 
   get nbDes() {
-    return this.system.nbDes ?? 2;
+    return parseInt(this.system.nbDes) ?? 2;
   }
 
   get canUseSouffle() {
@@ -120,8 +120,12 @@ export default class TrinitesActor extends Actor {
   
       let activable = false;
   
+      // Coût nul
+      if (coutPouvoir === 0) {
+        activable = true;
+      }
       // Pas assez de Karma
-      if (karmaDisponible < coutPouvoir) {
+      else if (karmaDisponible < coutPouvoir) {
         if (options?.murmure) ui.notifications.warn("Vous n'avez pas assez de Karma disponible pour réciter ce verset à voix basse !");
         else ui.notifications.warn("Vous n'avez pas assez de Karma disponible pour réciter ce verset !");
         return;
@@ -167,8 +171,12 @@ export default class TrinitesActor extends Actor {
     const coutPouvoir = this.coutPouvoir("zodiaque");
     let activable = false;
 
+    // Coût nul
+    if (coutPouvoir === 0) {
+      activable = true;
+    }
     // Pas assez de Karma
-    if (karmaDisponible < coutPouvoir) {
+    else if (karmaDisponible < coutPouvoir) {
       ui.notifications.warn("Vous n'avez pas assez de Karma disponible pour déployer cette aura !");
       return;
     }

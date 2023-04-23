@@ -603,7 +603,11 @@
                 "value": 0,
                 "max": 0
             },
-            "sousType": "autre"
+            "sousType": "autre",
+            "cout": {
+                "verset": 1,
+                "aura": 1
+            }
         }
     },
     "Item": {

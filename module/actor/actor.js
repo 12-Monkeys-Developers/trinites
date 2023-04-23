@@ -62,7 +62,10 @@ export default class TrinitesActor extends Actor {
   }
 
   get nbDes() {
-    return parseInt(this.system.nbDes) ?? 2;
+    if (this.system.nbDes !== null) {
+      return parseInt(this.system.nbDes);
+    }
+    return 2;
   }
 
   get canUseSouffle() {

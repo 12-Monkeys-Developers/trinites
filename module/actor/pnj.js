@@ -55,7 +55,14 @@ export default class TrinitesPnj extends TrinitesActor {
   }
 
   get nbDes() {
-    return parseInt(this.system.nbDes) ?? 1;
+    if (this.system.nbDes !== null) {
+      return parseInt(this.system.nbDes);
+    }
+    else {
+      if (this.isArchonteRoi || this.isLige) return 2;
+      if (this.isHumain) return 1;
+      if (this.isAutre) return 1;
+    }    
   }
 
   get canRegenerate() {

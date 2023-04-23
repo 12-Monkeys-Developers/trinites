@@ -6,8 +6,8 @@ import { Log } from "../../common/log.js";
 export default class TrinitesTriniteSheet extends TrinitesActorSheet {
   static get defaultOptions() {
     return mergeObject(super.defaultOptions, {
-      width: 744,
-      height: 958,
+      width: 745,
+      height: 960,
       classes: ["trinites", "sheet", "actor", "trinite"],
       tabs: [{ navSelector: ".sheet-tabs", contentSelector: ".sheet-body", initial: "profane" }],
     });

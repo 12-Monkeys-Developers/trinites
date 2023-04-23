@@ -10,7 +10,6 @@
         <a class="item tab-grand-livre" data-tab="grand-livre">Grand livre</a>
         <a class="item tab-lame-soeur" data-tab="lame-soeur">Lame-soeur</a>        
         <a class="item tab-description" data-tab="description">Description</a>
-        <a class="item tab-notes" data-tab="notes">Notes</a>
     </nav>
     <section class="sheet-body">
         <div class="tab tab-profane" data-group="principal" data-tab="profane">
@@ -57,10 +56,10 @@
             {{> "systems/trinites/templates/partials/actor/bloc-lameSoeur-trinite.hbs"}}
         </div>
         <div class="tab tab-description" data-group="principal" data-tab="description">
-            {{editor descriptionHtml target="system.description" button=true owner=owner editable=editable}}
-        </div>
-        <div class="tab tab-notes" data-group="principal" data-tab="notes">
-            {{editor notesHtml target="system.notes" button=true owner=owner editable=editable}}
+            <h3> DESCRIPTION</h3> 
+            <div class="description">{{editor descriptionHtml target="system.description" button=true owner=owner editable=editable}}</div>            
+            <h3> NOTES</h3>
+            <div class="notes">{{editor notesHtml target="system.notes" button=true owner=owner editable=editable}}</div>            
         </div>
     </section>
 </form>

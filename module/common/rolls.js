@@ -35,8 +35,19 @@ export async function jetCompetence({
 
   // Valeurs récupérées par la fenêtre de dialogue
   let actionLibre = null;
-  let prime = null;
-  let penalite = null;
+  let modificateurs = {
+    acceleration: 0,
+    circonspection: 0,
+    efficacite: 0,
+    debordement: 0,
+    prudence: 0,
+    consommation: 0,
+    danger: 0,
+    penaliteDifficulte: 0,
+    facilite: 0,
+    ralentissement: 0,
+    risque: 0
+  };
 
   // Affichage de la fenêtre de dialogue (vrai par défaut)
   if (afficherDialog) {
@@ -51,8 +62,8 @@ export async function jetCompetence({
     difficulte = dialogOptions.difficulte;
     sansDomaine = dialogOptions.sansDomaine;
     actionLibre = dialogOptions.actionLibre;
-    prime = dialogOptions.prime;
-    penalite = dialogOptions.penalite;
+
+    updateModificateurs(dialogOptions, modificateurs);
   }
 
   if (sansDomaine) {
@@ -81,9 +92,9 @@ export async function jetCompetence({
   // Bonus de difficulte en cas de jet d'Emprise - Souffle
   if (type == "souffle") {
     if (aura.system.signe == actorData.themeAstral.archetype) {
-      difficulte = 6;
+      difficulte += 6;
     } else if (aura.system.signe == actorData.themeAstral.ascendant1 || aura.system.signe == actorData.themeAstral.ascendant2) {
-      difficulte = 3;
+      difficulte += 3;
     }
 
     rollData.deploieInit = aura.system.deploiement;
@@ -120,6 +131,9 @@ export async function jetCompetence({
   }
 
   let rollResult = await new Roll(rollFormula, rollData).roll({ async: true });
+
+  // Primes et pénalités
+  rollData.modificateurs = modificateurs;
 
   let resultDeva;
   let resultArchonte;
@@ -170,14 +184,13 @@ export async function jetCompetence({
         }
       }
     }
-  
+
     if (actor.isArchonteRoi || actor.isLige) {
       if (resultDeva.reussite || resultArchonte.reussite) {
         resultatJet = "reussite";
       }
     }
-  }
-  else {
+  } else {
     if (resultDeva.reussite) {
       resultatJet = "reussite";
     }
@@ -189,7 +202,7 @@ export async function jetCompetence({
   if (envoiMessage) {
     // Construction du jeu de données pour alimenter le template
     let rollStats = {
-      ...rollData
+      ...rollData,
     };
 
     let messageTemplate;
@@ -257,12 +270,32 @@ function _processJetCompetenceOptions(form) {
     actionLibre = parseInt(form.actionLibre.value);
   }
 
+  // Primes et pénalités
+  const modificateurKeys = [
+    "acceleration",
+    "circonspection",
+    "efficacite",
+    "debordement",
+    "prudence",
+    "consommation",
+    "danger",
+    "penaliteDifficulte",
+    "facilite",
+    "ralentissement",
+    "risque"
+  ];
+
+  let modificateurs = {};
+
+  for (const key of modificateurKeys) {
+    modificateurs[key] = form[key].value !== "0" ? parseInt(form[key].value) : 0;
+  }
+
   return {
     difficulte: form.difficulte.value != 0 ? parseInt(form.difficulte.value) : null,
     sansDomaine: sansDomaine,
     actionLibre: actionLibre,
-    prime: form.prime.value != "aucun" ? form.prime.value : null,
-    penalite: form.penalite.value != "aucun" ? form.penalite.value : null,
+    modificateurs: modificateurs
   };
 }
 
@@ -323,7 +356,7 @@ export async function jetRessource({ actor = null, ressource = null, coutAcquisi
   // Données de base du jet
   let rollData = {
     ressource: label,
-    valeur: valeur
+    valeur: valeur,
   };
 
   // Modificateur de difficulté du jet
@@ -352,7 +385,7 @@ export async function jetRessource({ actor = null, ressource = null, coutAcquisi
   if (envoiMessage) {
     // Construction du jeu de données pour alimenter le template
     let rollStats = {
-      ...rollData
+      ...rollData,
     };
 
     // Recupération du template
@@ -364,7 +397,7 @@ export async function jetRessource({ actor = null, ressource = null, coutAcquisi
       actorId: actor.id,
       isTrinite: actor.isTrinite,
       stats: rollStats,
-      roll: renderedRoll
+      roll: renderedRoll,
     };
 
     await new TrinitesChat(actor).withTemplate(messageTemplate).withData(templateContext).withRoll(rollResult).create();
@@ -405,12 +438,12 @@ async function getJetRessourceOptions({ cfgData = null, useDomaine = false, doma
           // Bouton qui lance le jet de dé
           icon: '<i class="fas fa-dice"></i>',
           label: "Jeter les dés",
-          callback: (html) => resolve(_processJetRessourceOptions(html[0].querySelector("form")))
+          callback: (html) => resolve(_processJetRessourceOptions(html[0].querySelector("form"))),
         },
         annuler: {
           // Bouton d'annulation
           label: "Annuler",
-          callback: (html) => resolve({ annule: true })
+          callback: (html) => resolve({ annule: true }),
         },
       },
       default: "jet",
@@ -496,8 +529,25 @@ export async function jetArme({
 
   // Valeurs récupérées par la fenêtre de dialogue
   let actionLibre = null;
-  let prime = null;
-  let penalite = null;
+  let modificateurs = {
+    acceleration: 0,
+    circonspection: 0,
+    efficacite: 0,
+    debordement: 0,
+    prudence: 0,
+    consommation: 0,
+    danger: 0,
+    penaliteDifficulte: 0,
+    facilite: 0,
+    ralentissement: 0,
+    risque: 0,
+    attaquesMultiples: 0,
+    blessureGrave: 0,
+    blessureGrave: 0,
+    blessureNonLetale: 0,
+    blessurePrecise: 0,
+    blessureLegere: 0
+  };
 
   // Affichage de la fenêtre de dialogue (vrai par défaut)
   if (afficherDialog) {
@@ -511,8 +561,8 @@ export async function jetArme({
     // Récupération des données de la fenêtre de dialogue pour ce jet
     difficulte = dialogOptions.difficulte;
     actionLibre = dialogOptions.actionLibre;
-    prime = dialogOptions.prime;
-    penalite = dialogOptions.penalite;
+
+    updateModificateurs(dialogOptions, modificateurs);
   }
 
   let modFormula = " + @valeur";
@@ -611,18 +661,20 @@ export async function jetArme({
         }
       }
     }
-  
+
     if (actor.isArchonteRoi || actor.isLige) {
       if (resultDeva.reussite || resultArchonte.reussite) {
         resultatJet = "reussite";
       }
     }
-  }
-  else {
+  } else {
     if (resultDeva.reussite) {
       resultatJet = "reussite";
     }
   }
+
+  // Primes et pénalités
+  rollData.modificateurs = modificateurs;
 
   rollData.resultatJet = resultatJet;
   rollData.nbDes = nbDes;
@@ -652,7 +704,7 @@ export async function jetArme({
 async function getJetArmeOptions({ cfgData = null, infoPrimesID = null }) {
   // Recupération du template
   const template = "systems/trinites/templates/partials/dice/dialog-jet-arme.hbs";
-  const html = await renderTemplate(template, { cfgData: cfgData, compCombat:true, infoPrimesID: infoPrimesID });
+  const html = await renderTemplate(template, { cfgData: cfgData, compCombat: true, infoPrimesID: infoPrimesID });
 
   return new Promise((resolve) => {
     const data = {
@@ -663,16 +715,16 @@ async function getJetArmeOptions({ cfgData = null, infoPrimesID = null }) {
           // Bouton qui lance le jet de dé
           icon: '<i class="fas fa-dice"></i>',
           label: "Jeter les dés",
-          callback: (html) => resolve(_processJetArmeOptions(html[0].querySelector("form")))
+          callback: (html) => resolve(_processJetArmeOptions(html[0].querySelector("form"))),
         },
         annuler: {
           // Bouton d'annulation
           label: "Annuler",
-          callback: (html) => resolve({ annule: true })
+          callback: (html) => resolve({ annule: true }),
         },
       },
       default: "jet",
-      close: () => resolve({ annule: true }), // Annulation sur fermeture de la boite de dialogue
+      close: () => resolve({ annule: true }) // Annulation sur fermeture de la boite de dialogue
     };
 
     // Affichage de la boite de dialogue
@@ -687,10 +739,43 @@ function _processJetArmeOptions(form) {
     actionLibre = parseInt(form.actionLibre.value);
   }
 
+  // Primes et pénalités
+  const modificateurKeys = [
+    "acceleration",
+    "circonspection",
+    "efficacite",
+    "debordement",
+    "prudence",
+    "consommation",
+    "danger",
+    "penaliteDifficulte",
+    "facilite",
+    "ralentissement",
+    "risque",
+    "attaquesMultiples",
+    "blessureGrave",
+    "blessureNonLetale",
+    "blessurePrecise",
+    "blessureLegere"
+  ];
+
+  let modificateurs = {};
+
+  for (const key of modificateurKeys) {
+    modificateurs[key] = form[key].value !== "0" ? parseInt(form[key].value) : 0;
+  }
+
   return {
     difficulte: form.difficulte.value != 0 ? parseInt(form.difficulte.value) : null,
     actionLibre: actionLibre,
-    prime: form.prime.value != "aucun" ? form.prime.value : null,
-    penalite: form.penalite.value != "aucun" ? form.penalite.value : null,
+    modificateurs: modificateurs
   };
+}
+
+function updateModificateurs(dialogOptions, modificateurs) {
+  for (const key in modificateurs) {
+    if (modificateurs.hasOwnProperty(key) && dialogOptions.modificateurs.hasOwnProperty(key)) {
+      modificateurs[key] = dialogOptions.modificateurs[key];
+    }
+  }
 }

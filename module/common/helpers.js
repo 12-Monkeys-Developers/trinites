@@ -66,4 +66,16 @@ export default function registerHandlebarsHelpers() {
     if (karma === "tenebre") return "fa-moon";
     if (karma === "lumiere") return "fa-sun";
   });
+
+  Handlebars.registerHelper('afficheModificateur', function(type, modifier, name) {
+    if (modifier > 0) {
+      let output = (type === 'prime' ? '<div><i class="fa-solid fa-plus"></i> ' : '<div><i class="fa-solid fa-minus"></i> ') + name ;
+      if (modifier > 1) {
+        output += ' ' + modifier;
+      }
+      output += '</div>';
+      return new Handlebars.SafeString(output);
+    }
+  });
+  
 }

@@ -1,16 +1,29 @@
+{{log 'jet-comp' this}}
 <div class="jet-comp">
         <div class="titre-jet-comp">
             <div class="whisper-logo"><span>message privé </span><i class="far fa-eye-slash"></i></div>
             <div class="bloc-titre">
                 <div class="titre"><i class="fas fa-dice"></i> {{stats.competence}} {{stats.valeur}}</div>
-                {{#if stats.modifsJet}}<div class="diff">{{#if stats.malusActionLibre}}<i class="fas fa-bolt"></i> {{stats.malusActionLibre}} {{/if}}{{#if stats.difficulte}}<i class="fas fa-tachometer-alt"></i> {{#if (gt stats.difficulte 0)}}+{{/if}}{{stats.difficulte}}{{/if}}</div>{{/if}}
+                {{#if stats.modifsJet}}<div class="diff">{{#if stats.malusActionLibre}}<i class="fas fa-bolt"></i> {{stats.malusActionLibre}} {{/if}}{{#if stats.difficulte}}<i class="fas fa-tachometer-alt"></i> {{#if (gt stats.difficulte 0)}}+{{/if}}{{stats.difficulte}}{{/if}}</div>{{/if}}                
             </div>   
+            <div class="bloc-modificateurs">
+                {{afficheModificateur 'prime' stats.modificateurs.acceleration 'Accélération'}}
+                {{afficheModificateur 'prime' stats.modificateurs.circonspection 'Circonspection'}}
+                {{afficheModificateur 'prime' stats.modificateurs.efficacite 'Efficacité'}}
+                {{afficheModificateur 'prime' stats.modificateurs.debordement 'Débordement'}}
+                {{afficheModificateur 'prime' stats.modificateurs.prudence 'Prudence'}}
+
+                {{afficheModificateur 'penalite' stats.modificateurs.consommation 'Consommation'}}
+                {{afficheModificateur 'penalite' stats.modificateurs.danger 'Danger'}}
+                {{afficheModificateur 'penalite' stats.modificateurs.penaliteDifficulte 'Difficulté'}}
+                {{afficheModificateur 'penalite' stats.modificateurs.facilite 'Facilité'}}
+                {{afficheModificateur 'penalite' stats.modificateurs.ralentissement 'Ralentissement'}}
+                {{afficheModificateur 'penalite' stats.modificateurs.risque 'Risque'}}
+            </div>
         </div>
 
         {{#if (eq stats.typeActor "trinite")}}
             <div class="grid-jet-comp">
-                <div class="titre-esprit deva">Deva</div>
-                <div class="titre-esprit archonte">Archonte</div>
                 {{#if (eq stats.resultDeva.dieResult 1)}}
                     <div class="dice-back"><div class="roll dice-deva echec-crit">{{stats.resultDeva.dieResult}}</div></div>
                 {{else}}
@@ -20,7 +33,6 @@
 
         {{#if (or (eq stats.typeActor "archonteRoi") (eq stats.typeActor "lige"))}}
             <div class="grid-jet-comp archonte-roi">
-                <div class="titre-archonte-roi">{{#if (eq stats.typeActor "archonteRoi")}}Archonte-roi{{else}}Lige{{/if}}</div>
                 {{#if (eq stats.resultDeva.dieResult 1)}}
                     <div class="dice-back"><div class="roll dice-archonte echec-crit">{{stats.resultDeva.dieResult}}</div></div>
                 {{else}}

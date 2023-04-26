@@ -1590,6 +1590,12 @@
   display: grid;
   grid-template-columns: 2.5fr 1fr;
 }
+.titre-jet-comp .bloc-modificateurs,
+.titre-jet-ress .bloc-modificateurs,
+.titre-jet-arme .bloc-modificateurs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
 .titre-jet-comp i,
 .titre-jet-ress i,
 .titre-jet-arme i {
@@ -2005,6 +2011,33 @@
 .dialog-content .grid-data input[type="number"] {
   width: 3em;
   text-align: center;
+}
+.dialog-content .grid-data-modificateurs {
+  display: grid;
+  grid-template-columns: 3fr 1fr 3fr 1fr;
+  align-items: center;
+  margin: 5px 3px;
+  /* Chrome, Safari, Edge */
+  /* Firefox */
+}
+.dialog-content .grid-data-modificateurs .data {
+  display: flex;
+  justify-content: center;
+  margin: 2px;
+}
+.dialog-content .grid-data-modificateurs input[type="number"] {
+  width: 3em;
+  text-align: center;
+}
+.dialog-content .grid-data-modificateurs input[type=number]::-webkit-inner-spin-button {
+  -webkit-appearance: inner-spin-button;
+  background-color: #f0f0f0;
+  cursor: pointer;
+}
+.dialog-content .grid-data-modificateurs input[type=number]::-moz-outer-spin-button,
+.dialog-content .grid-data-modificateurs input[type=number]::-moz-inner-spin-button {
+  background-color: #f0f0f0;
+  cursor: pointer;
 }
 .trinites.dialog .karma {
   color: var(--color-titre-occulte);

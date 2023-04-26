@@ -68,6 +68,39 @@
             text-align: center;
         }
     }
+
+    .grid-data-modificateurs {
+        display: grid; 
+        grid-template-columns:  3fr 1fr 3fr 1fr;
+        align-items: center;
+        margin: 5px 3px;
+
+        .data {
+            display: flex;
+            justify-content: center;
+            margin: 2px;
+        }
+
+        input[type="number"] {
+            width: 3em;
+            text-align: center;
+        }
+
+        /* Chrome, Safari, Edge */
+        input[type=number]::-webkit-inner-spin-button {
+            -webkit-appearance: inner-spin-button;
+            background-color: #f0f0f0;
+            cursor: pointer;
+        }
+        
+        /* Firefox */
+        input[type=number]::-moz-outer-spin-button,
+        input[type=number]::-moz-inner-spin-button {
+            background-color: #f0f0f0;
+            cursor: pointer;
+        }
+  
+    }
 }
 
 .trinites.dialog .karma {

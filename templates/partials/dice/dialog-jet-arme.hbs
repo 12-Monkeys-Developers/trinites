@@ -21,50 +21,63 @@
         <label>Nombre d'actions libres simultanées</label>
         <div class="data"><input type="number" name="actionLibre" value="1" min="1"/></div>
     </div>
-    <div class="titre">
-        <label>Primes / Pénalités </label>
-        {{#if infoPrimesID}}
+    <div class="grid-data-modificateurs">
+        <div class="titre">Primes{{#if infoPrimesID}}
             <a class="content-link" data-type="JournalEntry" data-id="{{infoPrimesID}}" data-uuid="JournalEntry.{{infoPrimesID}}" title="Consultez l'entrée de journal dédiée pour une description des primes et pénalités"><i class="fas fa-info-circle"></i></a>
-        {{/if}}
-    </div>
-    <div class="grid-data">
-        <label>Prime</label>
-        <div class="data">
-            <select name="prime">
-            {{#select prime}}
-            {{#if compCombat}}
-                {{#each cfgData.primes as |prime keyPrime|}}
-                    <option value="{{keyPrime}}">{{prime.label}}</option>
-                {{/each}}
-            {{else}}
-                {{#each cfgData.primes as |prime keyPrime|}}
-                    {{#unless prime.combat}}
-                        <option value="{{keyPrime}}">{{prime.label}}</option>
-                    {{/unless}}
-                {{/each}}
-            {{/if}}
-            {{/select}}
-            </select> 
-        </div>
-    </div>
-    <div class="grid-data">
-        <label>Pénalité</label>
-        <div class="data">
-            <select name="penalite">
-            {{#select penalite}}
-            {{#if compCombat}}
-                {{#each cfgData.penalites as |penalite keyPenalite|}}
-                    <option value="{{keyPenalite}}">{{penalite.label}}</option>
-                {{/each}}
-            {{else}}
-                {{#each cfgData.penalites as |penalite keyPenalite|}}
-                    {{#unless penalite.combat}}
-                        <option value="{{keyPenalite}}">{{penalite.label}}</option>
-                    {{/unless}}
-                {{/each}}
-            {{/if}}
-            {{/select}}
-            </select> 
-        </div>
+        {{/if}}</div>
+        <div></div>
+        <div class="titre">Pénalités</div>
+        <div></div>
+        <label data-tooltip="Durée -50% / Initiative +3" data-tooltop-direction="UP">{{cfgData.primes.acceleration.label}}</label>
+        <input type="number" id="acceleration" name="acceleration" min="0"  max="10" value="0" />
+
+        <label data-tooltip="Spécial" data-tooltop-direction="UP">{{cfgData.penalites.consommation.label}}</label>
+        <input type="number" id="consommation" name="consommation" min="0"  max="10" value="0" />
+
+        <label data-tooltip="Annule le -3 d'un échec" data-tooltop-direction="UP"l>{{cfgData.primes.circonspection.label}}</label>
+        <input type="number" id="circonspection" name="circonspection" min="0"  max="10" value="0" />
+
+        <label data-tooltip="Résultat final de la prochaine action -3" data-tooltop-direction="UP">{{cfgData.penalites.danger.label}}</label>
+        <input type="number" id="danger" name="danger" min="0"  max="10" value="0" />
+
+        <label data-tooltip="Résultat final +3" data-tooltop-direction="UP">{{cfgData.primes.efficacite.label}}</label>
+        <input type="number" id="efficacite" name="efficacite" min="0"  max="10" value="0" />
+
+        <label data-tooltip="Résultat final -3" data-tooltop-direction="UP">{{cfgData.penalites.difficulte.label}}</label>
+        <input type="number" id="penaliteDifficulte" name="penaliteDifficulte" min="0"  max="10" value="0" />
+
+        <label data-tooltip="Test de réaction adverse -3" data-tooltop-direction="UP">{{cfgData.primes.debordement.label}}</label>
+        <input type="number" id="debordement" name="debordement" min="0"  max="10" value="0" />
+
+        <label data-tooltip="Test de réaction adverse +3" data-tooltop-direction="UP">{{cfgData.penalites.facilite.label}}</label>
+        <input type="number" id="facilite" name="facilite" min="0"  max="10" value="0" />
+
+        <label data-tooltip="Résultat final de la prochaine action +3" data-tooltop-direction="UP">{{cfgData.primes.prudence.label}}</label>
+        <input type="number" id="prudence" name="prudence" min="0"  max="10" value="0" />
+
+        <label data-tooltip="Durée +50% / Initiative -3" data-tooltop-direction="UP">{{cfgData.penalites.ralentissement.label}}</label>
+        <input type="number" id="ralentissement" name="ralentissement" min="0"  max="10" value="0" />
+
+        <label data-tooltip="Dégâts -50%" data-tooltop-direction="UP">{{cfgData.primes.attaquesMultiples.label}}</label>
+        <input type="number" id="attaquesMultiples" name="attaquesMultiples" min="0"  max="10" value="0" />
+
+        <label data-tooltip="Spécial" data-tooltop-direction="UP">{{cfgData.penalites.risque.label}}</label>
+        <input type="number" id="risque" name="risque" min="0"  max="10" value="0" />
+
+        <label data-tooltip="Dégâts +50%" data-tooltop-direction="UP">{{cfgData.primes.blessureGrave.label}}</label>
+        <input type="number" id="blessureGrave" name="blessureGrave" min="0"  max="10" value="0" />
+
+        <label data-tooltip="Dégâts -50%" data-tooltop-direction="UP">{{cfgData.penalites.blessureLegere.label}}</label>
+        <input type="number" id="blessureLegere" name="blessureLegere" min="0"  max="10" value="0" />
+
+        <label data-tooltip="Provoque l'inconscience" data-tooltop-direction="UP">{{cfgData.primes.blessureNonLetale.label}}</label>
+        <input type="number" id="blessureNonLetale" name="blessureNonLetale" min="0"  max="10" value="0" />
+
+        <div></div>
+        <div></div>
+        
+        <label data-tooltip="Protection divisée par 2" data-tooltop-direction="UP">{{cfgData.primes.blessurePrecise.label}}</label>
+        <input type="number" id="blessurePrecise" name="blessurePrecise" min="0"  max="10" value="0" />
+
     </div>
 </form>    

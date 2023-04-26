@@ -220,7 +220,7 @@ export class TrinitesChat {
       aura: aura,
       signe: "vierge",
       competence: "emprise",
-      afficherDialog: false,
+      afficherDialog: false
     });
 
     aura.update({ "system.deploiement": "cosme" });

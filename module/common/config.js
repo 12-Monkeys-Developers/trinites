@@ -186,27 +186,27 @@ TRINITES.couleurs = {
 TRINITES.dettes = {
   1: {
     diminution: 1,
-    duree: "1 mois",
+    duree: "1 mois"
   },
   2: {
     diminution: 1,
-    duree: "3 mois",
+    duree: "3 mois"
   },
   3: {
     diminution: 2,
-    duree: "6 mois",
+    duree: "6 mois"
   },
   4: {
     diminution: 2,
-    duree: "1 an",
+    duree: "1 an"
   },
   5: {
     diminution: 3,
-    duree: "10 ans",
+    duree: "10 ans"
   },
   6: {
     diminution: 3,
-    duree: "20 ans",
+    duree: "20 ans"
   },
 };
 
@@ -215,44 +215,46 @@ TRINITES.primes = {
   acceleration: {
     label: "Accélération",
     combat: false,
+    effet: "Initiative +3"
   },
   attaquesMultiples: {
     label: "Attaques multiples",
     combat: true,
+    effet: "Dégâts -50%"
   },
   blessureGrave: {
     label: "Blessure grave",
-    combat: true,
+    combat: true
   },
   blessureNonLetale: {
     label: "Blessure non létale",
-    combat: true,
+    combat: true
   },
   blessurePrecise: {
     label: "Blessure précise",
-    combat: true,
+    combat: true
   },
   circonspection: {
     label: "Circonspection",
-    combat: false,
+    combat: false
   },
   efficacite: {
     label: "Efficacité",
-    combat: false,
+    combat: false
   },
   debordement: {
     label: "Débordement",
-    combat: false,
+    combat: false
   },
   prudence: {
     label: "Prudence",
-    combat: false,
+    combat: false
   },
 };
 
 TRINITES.penalites = {
   aucun: "",
-  consommationRessource: {
+  consommation: {
     label: "Consommation d’une ressource",
     combat: false,
   },

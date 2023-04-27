@@ -1250,7 +1250,7 @@
   grid-column-end: span 2;
 }
 .trinites.sheet.item .sheet-content.metier .editor .tox.tox-tinymce {
-  height: 200px!important;
+  height: 200px !important;
 }
 .trinites.sheet.item .sheet-content.metier .editor .editor-content {
   background: rgba(0, 0, 0, 0.05);
@@ -1294,7 +1294,7 @@
   min-height: 300px;
 }
 .trinites.sheet.item .sheet-content.vie-anterieure .grid-item-vie-anterieure .text-block .editor .tox.tox-tinymce {
-  height: 200px!important;
+  height: 200px !important;
 }
 .trinites.sheet.item .sheet-content.vie-anterieure .grid-item-vie-anterieure .text-block .editor .editor-content {
   min-height: 100px;
@@ -1400,7 +1400,7 @@
   min-height: 50px;
 }
 .trinites.sheet.item .sheet-content.arme .editor .tox.tox-tinymce {
-  height: 200px!important;
+  height: 200px !important;
 }
 .trinites.sheet.item .sheet-content.arme .editor .editor-content {
   min-height: 50px;
@@ -1433,7 +1433,7 @@
   min-height: 50px;
 }
 .trinites.sheet.item .sheet-content.armure .editor .tox.tox-tinymce {
-  height: 200px!important;
+  height: 200px !important;
 }
 .trinites.sheet.item .sheet-content.armure .editor .editor-content {
   min-height: 50px;
@@ -1482,6 +1482,40 @@
 .trinites.sheet.item .titre-desc.occulte {
   font-family: "Cabaletta";
   color: var(--color-titre-occulte);
+}
+.trinites.sheet.item .grid-item-jardin {
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  grid-gap: 5px;
+  margin: 20px 2px 20px 2px;
+  align-items: center;
+}
+.trinites.sheet.item .grid-item-jardin label,
+.trinites.sheet.item .grid-item-jardin input,
+.trinites.sheet.item .grid-item-jardin select {
+  margin: 2px;
+}
+.trinites.sheet.item .grid-item-jardin label {
+  font-family: "Cabaletta";
+}
+.trinites.sheet.item .grid-item-jardin input {
+  width: 380px;
+  text-align: left;
+}
+.trinites.sheet.item .grid-item-jardin select {
+  width: 200px;
+  text-align: left;
+}
+.trinites.sheet.item .grid-item:nth-child(2) {
+  grid-column-end: span 2;
+}
+.trinites.sheet.item .editor .tox.tox-tinymce {
+  height: 200px !important;
+}
+.trinites.sheet.item .editor .editor-content {
+  background: rgba(0, 0, 0, 0.05);
+  min-height: 75px;
+  overflow-y: inherit;
 }
 #chat-form textarea {
   background-image: url("./images/header-back.jpg");

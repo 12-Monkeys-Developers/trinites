@@ -1,733 +1,743 @@
 {
-    "Actor": {
-        "types": ["trinite", "archonteRoi", "lige", "humain", "pnj"],
-        "templates": {
-            "information": {
-                "description": "",
-                "notes": "",
-                "equipement": ""
-            },
-            "signes": {
-                "signes": {
-                    "gemeaux": {
-                        "valeur": 0
-                    },
-                    "vierge": {
-                        "valeur": 0
-                    },
-                    "sagittaire": {
-                        "valeur": 0
-                    },
-                    "poisson": {
-                        "valeur": 0
-                    },
-                    "belier": {
-                        "valeur": 0
-                    },
-                    "taureau": {
-                        "valeur": 0
-                    },
-                    "balance": {
-                        "valeur": 0
-                    },
-                    "scorpion": {
-                        "valeur": 0
-                    },
-                    "lion": {
-                        "valeur": 0
-                    },
-                    "capricorne": {
-                        "valeur": 0
-                    },
-                    "cancer": {
-                        "valeur": 0
-                    },
-                    "verseau": {
-                        "valeur": 0
-                    }
-                }
-            },
-            "ressources": {
-                "ressources": {
-                    "richesse": {
-                        "baseMetier": 0,
-                        "pointsCrea": 0,
-                        "bonusVA": 0,
-                        "pointsExp": 0,
-                        "diminution": 0,
-                        "duree": "",
-                        "epuisee": false
-                      },
-                    "reseau": {
-                        "baseMetier": 0,
-                        "pointsCrea": 0,
-                        "bonusVA": 0,
-                        "pointsExp": 0,
-                        "diminution": 0,
-                        "duree": "",
-                        "epuisee": false
-                    },
-                    "influence": {
-                        "baseMetier": 0,
-                        "pointsCrea": 0,
-                        "bonusVA": 0,
-                        "pointsExp": 0,
-                        "diminution": 0,
-                        "duree": "",
-                        "epuisee": false
-                    }
-                }
-            },
-            "competences": {
-                "competences": {
-                    "gemeaux": {
-                        "art":{
-                            "ouverte": true,
-                            "domaine": true,
-                            "libre": false,
-                            "base": 0,
-                            "baseMetier": 0,
-                            "pointsCrea": 0,
-                            "bonusVA": 0,
-                            "pointsExp": 0
-                        },
-                        "empathie":{
-                            "ouverte": true,
-                            "domaine": false,
-                            "libre": false,
-                            "base": 0,
-                            "baseMetier": 0,
-                            "pointsCrea": 0,
-                            "bonusVA": 0,
-                            "pointsExp": 0
-                        },
-                        "seduction":{
-                            "ouverte": true,
-                            "domaine": false,
-                            "libre": false,
-                            "base": 0,
-                            "baseMetier": 0,
-                            "pointsCrea": 0,
-                            "bonusVA": 0,
-                            "pointsExp": 0
-                        }
-                    },
-                    "vierge": {
-                        "clairvoyance":{
-                            "ouverte": false,
-                            "domaine": false,
-                            "libre": true,
-                            "base": 0,
-                            "baseMetier": 0,
-                            "pointsCrea": 0,
-                            "bonusVA": 0,
-                            "pointsExp": 0
-                        },
-                        "emprise":{
-                            "ouverte": false,
-                            "domaine": false,
-                            "libre": true,
-                            "base": 0,
-                            "baseMetier": 0,
-                            "pointsCrea": 0,
-                            "bonusVA": 0,
-                            "pointsExp": 0
-                        },
-                        "meditation":{
-                            "ouverte": false,
-                            "domaine": false,
-                            "libre": false,
-                            "base": 0,
-                            "baseMetier": 0,
-                            "pointsCrea": 0,
-                            "bonusVA": 0,
-                            "pointsExp": 0
-                        }
-                    },
-                    "sagittaire": {
-                        "survie":{
-                            "ouverte": true,
-                            "domaine": false,
-                            "libre": false,
-                            "base": 0,
-                            "baseMetier": 0,
-                            "pointsCrea": 0,
-                            "bonusVA": 0,
-                            "pointsExp": 0
-                        },
-                        "tir":{
-                            "ouverte": true,
-                            "domaine": false,
-                            "libre": true,
-                            "base": 0,
-                            "baseMetier": 0,
-                            "pointsCrea": 0,
-                            "bonusVA": 0,
-                            "pointsExp": 0
-                        },
-                        "vigilance":{
-                            "ouverte": true,
-                            "domaine": false,
-                            "libre": true,
-                            "base": 0,
-                            "baseMetier": 0,
-                            "pointsCrea": 0,
-                            "bonusVA": 0,
-                            "pointsExp": 0
-                        }
-                    },
-                    "poisson": {
-                        "erudition":{
-                            "ouverte": false,
-                            "domaine": true,
-                            "libre": false,
-                            "base": 0,
-                            "baseMetier": 0,
-                            "pointsCrea": 0,
-                            "bonusVA": 0,
-                            "pointsExp": 0
-                        },
-                        "langues":{
-                            "ouverte": false,
-                            "domaine": true,
-                            "libre": false,
-                            "base": 0,
-                            "baseMetier": 0,
-                            "pointsCrea": 0,
-                            "bonusVA": 0,
-                            "pointsExp": 0
-                        },
-                        "sciences":{
-                            "ouverte": false,
-                            "domaine": true,
-                            "libre": false,
-                            "base": 0,
-                            "baseMetier": 0,
-                            "pointsCrea": 0,
-                            "bonusVA": 0,
-                            "pointsExp": 0
-                        }
-                    },
-                    "belier": {
-                        "corpsACorps":{
-                            "ouverte": true,
-                            "domaine": false,
-                            "libre": true,
-                            "base": 0,
-                            "baseMetier": 0,
-                            "pointsCrea": 0,
-                            "bonusVA": 0,
-                            "pointsExp": 0
-                        },
-                        "melee":{
-                            "ouverte": true,
-                            "domaine": false,
-                            "libre": true,
-                            "base": 0,
-                            "baseMetier": 0,
-                            "pointsCrea": 0,
-                            "bonusVA": 0,
-                            "pointsExp": 0
-                        },
-                        "tactique":{
-                            "ouverte": true,
-                            "domaine": false,
-                            "libre": true,
-                            "base": 0,
-                            "baseMetier": 0,
-                            "pointsCrea": 0,
-                            "bonusVA": 0,
-                            "pointsExp": 0
-                        }
-                    },
-                    "taureau": {
-                        "athletisme":{
-                            "ouverte": true,
-                            "domaine": false,
-                            "libre": true,
-                            "base": 0,
-                            "baseMetier": 0,
-                            "pointsCrea": 0,
-                            "bonusVA": 0,
-                            "pointsExp": 0
-                        },
-                        "endurance":{
-                            "ouverte": true,
-                            "domaine": false,
-                            "libre": false,
-                            "base": 0,
-                            "baseMetier": 0,
-                            "pointsCrea": 0,
-                            "bonusVA": 0,
-                            "pointsExp": 0
-                        },
-                        "force":{
-                            "ouverte": true,
-                            "domaine": false,
-                            "libre": true,
-                            "base": 0,
-                            "baseMetier": 0,
-                            "pointsCrea": 0,
-                            "bonusVA": 0,
-                            "pointsExp": 0
-                        }
-                    },
-                    "balance": {
-                        "documentation":{
-                            "ouverte": true,
-                            "domaine": false,
-                            "libre": false,
-                            "base": 0,
-                            "baseMetier": 0,
-                            "pointsCrea": 0,
-                            "bonusVA": 0,
-                            "pointsExp": 0
-                        },
-                        "fouille":{
-                            "ouverte": true,
-                            "domaine": false,
-                            "libre": false,
-                            "base": 0,
-                            "baseMetier": 0,
-                            "pointsCrea": 0,
-                            "bonusVA": 0,
-                            "pointsExp": 0
-                        },
-                        "intellect":{
-                            "ouverte": true,
-                            "domaine": false,
-                            "libre": false,
-                            "base": 0,
-                            "baseMetier": 0,
-                            "pointsCrea": 0,
-                            "bonusVA": 0,
-                            "pointsExp": 0
-                        }
-                    },
-                    "scorpion": {
-                        "discretion":{
-                            "ouverte": true,
-                            "domaine": false,
-                            "libre": true,
-                            "base": 0,
-                            "baseMetier": 0,
-                            "pointsCrea": 0,
-                            "bonusVA": 0,
-                            "pointsExp": 0
-                        },
-                        "intrusion":{
-                            "ouverte": true,
-                            "domaine": false,
-                            "libre": false,
-                            "base": 0,
-                            "baseMetier": 0,
-                            "pointsCrea": 0,
-                            "bonusVA": 0,
-                            "pointsExp": 0
-                        },
-                        "subterfuge":{
-                            "ouverte": true,
-                            "domaine": false,
-                            "libre": true,
-                            "base": 0,
-                            "baseMetier": 0,
-                            "pointsCrea": 0,
-                            "bonusVA": 0,
-                            "pointsExp": 0
-                        }
-                    },
-                    "lion": {
-                        "commandement":{
-                            "ouverte": true,
-                            "domaine": false,
-                            "libre": true,
-                            "base": 0,
-                            "baseMetier": 0,
-                            "pointsCrea": 0,
-                            "bonusVA": 0,
-                            "pointsExp": 0
-                        },
-                        "strategie":{
-                            "ouverte": true,
-                            "domaine": false,
-                            "libre": false,
-                            "base": 0,
-                            "baseMetier": 0,
-                            "pointsCrea": 0,
-                            "bonusVA": 0,
-                            "pointsExp": 0
-                        },
-                        "volonte":{
-                            "ouverte": true,
-                            "domaine": false,
-                            "libre": true,
-                            "base": 0,
-                            "baseMetier": 0,
-                            "pointsCrea": 0,
-                            "bonusVA": 0,
-                            "pointsExp": 0
-                        }
-                    },
-                    "capricorne": {
-                        "esquive":{
-                            "ouverte": true,
-                            "domaine": false,
-                            "libre": true,
-                            "base": 0,
-                            "baseMetier": 0,
-                            "pointsCrea": 0,
-                            "bonusVA": 0,
-                            "pointsExp": 0
-                        },
-                        "pilotage":{
-                            "ouverte": true,
-                            "domaine": true,
-                            "libre": true,
-                            "base": 0,
-                            "baseMetier": 0,
-                            "pointsCrea": 0,
-                            "bonusVA": 0,
-                            "pointsExp": 0
-                        },
-                        "rapidite":{
-                            "ouverte": true,
-                            "domaine": false,
-                            "libre": true,
-                            "base": 0,
-                            "baseMetier": 0,
-                            "pointsCrea": 0,
-                            "bonusVA": 0,
-                            "pointsExp": 0
-                        }
-                    },
-                    "cancer": {
-                        "artisanat":{
-                            "ouverte": true,
-                            "domaine": true,
-                            "libre": false,
-                            "base": 0,
-                            "baseMetier": 0,
-                            "pointsCrea": 0,
-                            "bonusVA": 0,
-                            "pointsExp": 0
-                        },
-                        "technologies":{
-                            "ouverte": false,
-                            "domaine": true,
-                            "libre": false,
-                            "base": 0,
-                            "baseMetier": 0,
-                            "pointsCrea": 0,
-                            "bonusVA": 0,
-                            "pointsExp": 0
-                        },
-                        "soins":{
-                            "ouverte": true,
-                            "domaine": false,
-                            "libre": false,
-                            "base": 0,
-                            "baseMetier": 0,
-                            "pointsCrea": 0,
-                            "bonusVA": 0,
-                            "pointsExp": 0
-                        }
-                    },
-                    "verseau": {
-                        "astrologie":{
-                            "ouverte": false,
-                            "domaine": false,
-                            "libre": false,
-                            "base": 0,
-                            "baseMetier": 0,
-                            "pointsCrea": 0,
-                            "bonusVA": 0,
-                            "pointsExp": 0
-                        },
-                        "histoireSecrete":{
-                            "ouverte": false,
-                            "domaine": false,
-                            "libre": false,
-                            "base": 0,
-                            "baseMetier": 0,
-                            "pointsCrea": 0,
-                            "bonusVA": 0,
-                            "pointsExp": 0
-                        },
-                        "les8":{
-                            "ouverte": false,
-                            "domaine": false,
-                            "libre": false,
-                            "base": 0,
-                            "baseMetier": 0,
-                            "pointsCrea": 0,
-                            "bonusVA": 0,
-                            "pointsExp": 0
-                        }
-                    }
-                },
-                "nbDes": null  
-            },
-            "theme":{
-                "themeAstral":{
-                    "archetype": "",
-                    "affinite": "",
-                    "affinite_decan":1,
-                    "affinite2": "",
-                    "affinite2_decan":1,
-                    "affinite3": "",
-                    "affinite3_decan":1,
-                    "ascendant1": "",
-                    "ascendant2": "",
-                    "descendant1": "",
-                    "descendant2": "",
-                    "descendant3": ""
-                }
-            },
-            "trini":{
-                "trinite": {
-                    "deva": {
-                        "choeur": "",
-                        "karma": {
-                            "value": 0,
-                            "max": 0,
-                            "base": 0,
-	                        "bonusVA": 0
-                          },
-                        "dettes": 0,
-                        "credits": 0
-                    },
-                    "archonte": {
-                        "legion": "",
-                        "karma": {
-                            "value": 0,
-                            "max": 0,
-                            "base": 0,
-	                        "bonusVA": 0
-                          },
-                        "dettes": 0,
-                        "credits": 0
-                    },
-                    "adam": {
-                        "karma": {
-                            "value": 0,
-                            "max": 0,
-                            "type" : ""
-                          }
-                    }
-                }
-            },
-            "archRoi": {
-                "archonteRoi": {
-                    "legion": "",
-                    "karma": {
-                        "value": 0,
-                        "max": 0
-                    }
-                }
-            },
-            "lame": {
-                "lameSoeur": {
-                    "messager": "",
-                    "description": ""
-                }
-            },
-            "lameN": {
-                "lameNoire": {
-                    "vagabond": "",
-                    "description": ""
-                }
-            }
-        },
-        "trinite": {
-            "templates": [ "information", "signes", "competences", "ressources", "theme", "trini", "lame" ],
-            "metier": "",
-            "vieAnterieure": "",            
-            "experience": {
-                "totale": 0,
-                "disponible": 0
-            },
-            "creation": {
-                "totale": 0,
-                "disponible": 0,
-                "finie": false
-            },
-            "nbLigneVie": 3,
-            "pointsLigneVie": 8,
-            "etatSante" : "indemne",
-            "nbBlessure": 0,
-            "oratoire":"",
-            "experienceApprentissages":0
-        },
-        "archonteRoi": {
-            "templates": [ "information", "signes", "competences", "ressources", "theme", "archRoi", "lameN" ],
-            "couverture": "",
-            "historique": "",
-            "domaines": "",
-            "tactique": "",
-            "nbLigneVie": 3,
-            "pointsLigneVie": 8,
-            "etatSante" : "indemne",
-            "nbBlessure": 0
-        },
-        "lige" : {
-            "templates": [ "information", "signes", "competences", "ressources", "theme" ],
-            "domaines": "",
-            "tactique": "",
-            "karma": {
-                "value": 0,
-                "max": 0
-            },
-            "nbLigneVie": 3,
-            "pointsLigneVie": 4,
-            "etatSante" : "indemne",
-            "nbBlessure": 0
-        },
-        "humain": {
-            "templates": [ "information", "signes", "competences", "ressources"],
-            "domaines": "",
-            "tactique": "",
-            "nbLigneVie": 3,
-            "pointsLigneVie": 4,
-            "etatSante" : "indemne",
-            "nbBlessure": 0
-        },
-        "pnj": {
-            "templates": [ "information", "signes", "competences", "ressources"],
-            "activite": "",
-            "domaines": "",
-            "tactique": "",
-            "nbLigneVie": 3,
-            "pointsLigneVie": 4,
-            "etatSante" : "indemne",
-            "nbBlessure": 0,
-            "karmaLumiere": {
-                "value": 0,
-                "max": 0
-            },
-            "karmaTenebres": {
-                "value": 0,
-                "max": 0
-            },
-            "sousType": "autre",
-            "cout": {
-                "verset": 1,
-                "aura": 1
-            }
+  "Actor": {
+    "types": ["trinite", "archonteRoi", "lige", "humain", "pnj"],
+    "templates": {
+      "information": {
+        "description": "",
+        "notes": "",
+        "equipement": ""
+      },
+      "signes": {
+        "signes": {
+          "gemeaux": {
+            "valeur": 0
+          },
+          "vierge": {
+            "valeur": 0
+          },
+          "sagittaire": {
+            "valeur": 0
+          },
+          "poisson": {
+            "valeur": 0
+          },
+          "belier": {
+            "valeur": 0
+          },
+          "taureau": {
+            "valeur": 0
+          },
+          "balance": {
+            "valeur": 0
+          },
+          "scorpion": {
+            "valeur": 0
+          },
+          "lion": {
+            "valeur": 0
+          },
+          "capricorne": {
+            "valeur": 0
+          },
+          "cancer": {
+            "valeur": 0
+          },
+          "verseau": {
+            "valeur": 0
+          }
         }
-    },
-    "Item": {
-        "types": ["ame","arme", "armure", "atout","aura","domaine","jardin","majeste","metier","objet","pouvoir","verset","vieAnterieure"],
-        "ame":{
-            "epreuve":"",
-            "description":""
-        },
-        "arme": {
-            "description": "",
-            "competence": "",
-            "degats": 0,
-            "portee": 0,
-            "listeParticularites": "",
-            "particularites": {
-              "retardement": false,
-              "allonge": false,
-              "multiples": false,
-              "charge": false,
-              "chargeur": false,
-              "balles": 0,
-              "desarmer": false,
-              "maitriser": false,
-              "rechargement": false,
-              "nonLetal": false,
-              "perforante": false,
-              "souffle": false,
-              "zone": false,
-              "rayon": 0
-            },
-            "epee": false
-        },
-        "armure": {
-            "description": "",
-            "protectionMeleeExplosif": 0,
-            "protectionTirLancer": 0,
-            "listeParticularites": "",
-            "particularites": {
-                "encombrant": false,
-                "force": 0,
-                "deuxMains": false
-            }
-        },
-        "atout": {
-            "messager": "",
-            "karma": "",
-            "couleur": "",
-            "description": ""
-        },
-        "aura": {
-            "signe": "",
-            "description": "",
-            "souffle": "",
-            "deploiement": "cosme"
-        },
-        "domaine" :{
-            "description": "",
-            "epuise": false
-        },
-        "jardin":{
-            "lieu":"",
-            "signe":""
-        },
-        "majeste": {
-            "signe": "",
-            "manifestation": "",
-            "effet": ""
-        },
-        "metier": {
-            "signe": "",
-            "description": "",
-            "competence1": "",
-            "competence2": "",
-            "competence3": "",
-            "richesse": 0,
-            "reseau": 0,
-            "influence": 0,
-            "nbDomaines": 0,
-            "listeDomaines": "",
-            "domaines": [],
-            "pc": 0
-        },
-        "objet": {
-            "description": ""
-        },
-        "pouvoir": {
-            "savoirOcculte": "autre",
-            "description": ""
-        },
-        "verset": {
-            "choeurLegion": "",
-            "favori": "",            
-            "sentence": "",
-            "karma": "aucun",
+      },
+      "ressources": {
+        "ressources": {
+          "richesse": {
+            "baseMetier": 0,
+            "pointsCrea": 0,
+            "bonusVA": 0,
+            "pointsExp": 0,
+            "diminution": 0,
             "duree": "",
-            "portee": "",
-            "aireEffet": "",
-            "cumul": 0,
-            "description": ""
-        },
-        "vieAnterieure": {
-            "nom": "",
-            "description": "",
-            "bonus1": {
-                "type": "",
-                "valeur": 0
-            },
-            "bonus2": {
-                "type": "",
-                "valeur": 0
-            },
-            "bonus3": {
-                "type": "",
-                "valeur": 0
-            }           
+            "epuisee": false
+          },
+          "reseau": {
+            "baseMetier": 0,
+            "pointsCrea": 0,
+            "bonusVA": 0,
+            "pointsExp": 0,
+            "diminution": 0,
+            "duree": "",
+            "epuisee": false
+          },
+          "influence": {
+            "baseMetier": 0,
+            "pointsCrea": 0,
+            "bonusVA": 0,
+            "pointsExp": 0,
+            "diminution": 0,
+            "duree": "",
+            "epuisee": false
+          }
         }
+      },
+      "competences": {
+        "competences": {
+          "gemeaux": {
+            "art": {
+              "ouverte": true,
+              "domaine": true,
+              "libre": false,
+              "base": 0,
+              "baseMetier": 0,
+              "pointsCrea": 0,
+              "bonusVA": 0,
+              "pointsExp": 0
+            },
+            "empathie": {
+              "ouverte": true,
+              "domaine": false,
+              "libre": false,
+              "base": 0,
+              "baseMetier": 0,
+              "pointsCrea": 0,
+              "bonusVA": 0,
+              "pointsExp": 0
+            },
+            "seduction": {
+              "ouverte": true,
+              "domaine": false,
+              "libre": false,
+              "base": 0,
+              "baseMetier": 0,
+              "pointsCrea": 0,
+              "bonusVA": 0,
+              "pointsExp": 0
+            }
+          },
+          "vierge": {
+            "clairvoyance": {
+              "ouverte": false,
+              "domaine": false,
+              "libre": true,
+              "base": 0,
+              "baseMetier": 0,
+              "pointsCrea": 0,
+              "bonusVA": 0,
+              "pointsExp": 0
+            },
+            "emprise": {
+              "ouverte": false,
+              "domaine": false,
+              "libre": true,
+              "base": 0,
+              "baseMetier": 0,
+              "pointsCrea": 0,
+              "bonusVA": 0,
+              "pointsExp": 0
+            },
+            "meditation": {
+              "ouverte": false,
+              "domaine": false,
+              "libre": false,
+              "base": 0,
+              "baseMetier": 0,
+              "pointsCrea": 0,
+              "bonusVA": 0,
+              "pointsExp": 0
+            }
+          },
+          "sagittaire": {
+            "survie": {
+              "ouverte": true,
+              "domaine": false,
+              "libre": false,
+              "base": 0,
+              "baseMetier": 0,
+              "pointsCrea": 0,
+              "bonusVA": 0,
+              "pointsExp": 0
+            },
+            "tir": {
+              "ouverte": true,
+              "domaine": false,
+              "libre": true,
+              "base": 0,
+              "baseMetier": 0,
+              "pointsCrea": 0,
+              "bonusVA": 0,
+              "pointsExp": 0
+            },
+            "vigilance": {
+              "ouverte": true,
+              "domaine": false,
+              "libre": true,
+              "base": 0,
+              "baseMetier": 0,
+              "pointsCrea": 0,
+              "bonusVA": 0,
+              "pointsExp": 0
+            }
+          },
+          "poisson": {
+            "erudition": {
+              "ouverte": false,
+              "domaine": true,
+              "libre": false,
+              "base": 0,
+              "baseMetier": 0,
+              "pointsCrea": 0,
+              "bonusVA": 0,
+              "pointsExp": 0
+            },
+            "langues": {
+              "ouverte": false,
+              "domaine": true,
+              "libre": false,
+              "base": 0,
+              "baseMetier": 0,
+              "pointsCrea": 0,
+              "bonusVA": 0,
+              "pointsExp": 0
+            },
+            "sciences": {
+              "ouverte": false,
+              "domaine": true,
+              "libre": false,
+              "base": 0,
+              "baseMetier": 0,
+              "pointsCrea": 0,
+              "bonusVA": 0,
+              "pointsExp": 0
+            }
+          },
+          "belier": {
+            "corpsACorps": {
+              "ouverte": true,
+              "domaine": false,
+              "libre": true,
+              "base": 0,
+              "baseMetier": 0,
+              "pointsCrea": 0,
+              "bonusVA": 0,
+              "pointsExp": 0
+            },
+            "melee": {
+              "ouverte": true,
+              "domaine": false,
+              "libre": true,
+              "base": 0,
+              "baseMetier": 0,
+              "pointsCrea": 0,
+              "bonusVA": 0,
+              "pointsExp": 0
+            },
+            "tactique": {
+              "ouverte": true,
+              "domaine": false,
+              "libre": true,
+              "base": 0,
+              "baseMetier": 0,
+              "pointsCrea": 0,
+              "bonusVA": 0,
+              "pointsExp": 0
+            }
+          },
+          "taureau": {
+            "athletisme": {
+              "ouverte": true,
+              "domaine": false,
+              "libre": true,
+              "base": 0,
+              "baseMetier": 0,
+              "pointsCrea": 0,
+              "bonusVA": 0,
+              "pointsExp": 0
+            },
+            "endurance": {
+              "ouverte": true,
+              "domaine": false,
+              "libre": false,
+              "base": 0,
+              "baseMetier": 0,
+              "pointsCrea": 0,
+              "bonusVA": 0,
+              "pointsExp": 0
+            },
+            "force": {
+              "ouverte": true,
+              "domaine": false,
+              "libre": true,
+              "base": 0,
+              "baseMetier": 0,
+              "pointsCrea": 0,
+              "bonusVA": 0,
+              "pointsExp": 0
+            }
+          },
+          "balance": {
+            "documentation": {
+              "ouverte": true,
+              "domaine": false,
+              "libre": false,
+              "base": 0,
+              "baseMetier": 0,
+              "pointsCrea": 0,
+              "bonusVA": 0,
+              "pointsExp": 0
+            },
+            "fouille": {
+              "ouverte": true,
+              "domaine": false,
+              "libre": false,
+              "base": 0,
+              "baseMetier": 0,
+              "pointsCrea": 0,
+              "bonusVA": 0,
+              "pointsExp": 0
+            },
+            "intellect": {
+              "ouverte": true,
+              "domaine": false,
+              "libre": false,
+              "base": 0,
+              "baseMetier": 0,
+              "pointsCrea": 0,
+              "bonusVA": 0,
+              "pointsExp": 0
+            }
+          },
+          "scorpion": {
+            "discretion": {
+              "ouverte": true,
+              "domaine": false,
+              "libre": true,
+              "base": 0,
+              "baseMetier": 0,
+              "pointsCrea": 0,
+              "bonusVA": 0,
+              "pointsExp": 0
+            },
+            "intrusion": {
+              "ouverte": true,
+              "domaine": false,
+              "libre": false,
+              "base": 0,
+              "baseMetier": 0,
+              "pointsCrea": 0,
+              "bonusVA": 0,
+              "pointsExp": 0
+            },
+            "subterfuge": {
+              "ouverte": true,
+              "domaine": false,
+              "libre": true,
+              "base": 0,
+              "baseMetier": 0,
+              "pointsCrea": 0,
+              "bonusVA": 0,
+              "pointsExp": 0
+            }
+          },
+          "lion": {
+            "commandement": {
+              "ouverte": true,
+              "domaine": false,
+              "libre": true,
+              "base": 0,
+              "baseMetier": 0,
+              "pointsCrea": 0,
+              "bonusVA": 0,
+              "pointsExp": 0
+            },
+            "strategie": {
+              "ouverte": true,
+              "domaine": false,
+              "libre": false,
+              "base": 0,
+              "baseMetier": 0,
+              "pointsCrea": 0,
+              "bonusVA": 0,
+              "pointsExp": 0
+            },
+            "volonte": {
+              "ouverte": true,
+              "domaine": false,
+              "libre": true,
+              "base": 0,
+              "baseMetier": 0,
+              "pointsCrea": 0,
+              "bonusVA": 0,
+              "pointsExp": 0
+            }
+          },
+          "capricorne": {
+            "esquive": {
+              "ouverte": true,
+              "domaine": false,
+              "libre": true,
+              "base": 0,
+              "baseMetier": 0,
+              "pointsCrea": 0,
+              "bonusVA": 0,
+              "pointsExp": 0
+            },
+            "pilotage": {
+              "ouverte": true,
+              "domaine": true,
+              "libre": true,
+              "base": 0,
+              "baseMetier": 0,
+              "pointsCrea": 0,
+              "bonusVA": 0,
+              "pointsExp": 0
+            },
+            "rapidite": {
+              "ouverte": true,
+              "domaine": false,
+              "libre": true,
+              "base": 0,
+              "baseMetier": 0,
+              "pointsCrea": 0,
+              "bonusVA": 0,
+              "pointsExp": 0
+            }
+          },
+          "cancer": {
+            "artisanat": {
+              "ouverte": true,
+              "domaine": true,
+              "libre": false,
+              "base": 0,
+              "baseMetier": 0,
+              "pointsCrea": 0,
+              "bonusVA": 0,
+              "pointsExp": 0
+            },
+            "technologies": {
+              "ouverte": false,
+              "domaine": true,
+              "libre": false,
+              "base": 0,
+              "baseMetier": 0,
+              "pointsCrea": 0,
+              "bonusVA": 0,
+              "pointsExp": 0
+            },
+            "soins": {
+              "ouverte": true,
+              "domaine": false,
+              "libre": false,
+              "base": 0,
+              "baseMetier": 0,
+              "pointsCrea": 0,
+              "bonusVA": 0,
+              "pointsExp": 0
+            }
+          },
+          "verseau": {
+            "astrologie": {
+              "ouverte": false,
+              "domaine": false,
+              "libre": false,
+              "base": 0,
+              "baseMetier": 0,
+              "pointsCrea": 0,
+              "bonusVA": 0,
+              "pointsExp": 0
+            },
+            "histoireSecrete": {
+              "ouverte": false,
+              "domaine": false,
+              "libre": false,
+              "base": 0,
+              "baseMetier": 0,
+              "pointsCrea": 0,
+              "bonusVA": 0,
+              "pointsExp": 0
+            },
+            "les8": {
+              "ouverte": false,
+              "domaine": false,
+              "libre": false,
+              "base": 0,
+              "baseMetier": 0,
+              "pointsCrea": 0,
+              "bonusVA": 0,
+              "pointsExp": 0
+            }
+          }
+        },
+        "nbDes": null
+      },
+      "theme": {
+        "themeAstral": {
+          "archetype": "",
+          "affinite": "",
+          "affinite_decan": 1,
+          "affinite2": "",
+          "affinite2_decan": 1,
+          "affinite3": "",
+          "affinite3_decan": 1,
+          "ascendant1": "",
+          "ascendant2": "",
+          "descendant1": "",
+          "descendant2": "",
+          "descendant3": ""
+        }
+      },
+      "trini": {
+        "trinite": {
+          "deva": {
+            "choeur": "",
+            "karma": {
+              "value": 0,
+              "max": 0,
+              "base": 0,
+              "bonusVA": 0
+            },
+            "dettes": 0,
+            "credits": 0
+          },
+          "archonte": {
+            "legion": "",
+            "karma": {
+              "value": 0,
+              "max": 0,
+              "base": 0,
+              "bonusVA": 0
+            },
+            "dettes": 0,
+            "credits": 0
+          },
+          "adam": {
+            "karma": {
+              "value": 0,
+              "max": 0,
+              "type": ""
+            }
+          }
+        }
+      },
+      "archRoi": {
+        "archonteRoi": {
+          "legion": "",
+          "karma": {
+            "value": 0,
+            "max": 0
+          }
+        }
+      },
+      "lame": {
+        "lameSoeur": {
+          "messager": "",
+          "description": ""
+        }
+      },
+      "lameN": {
+        "lameNoire": {
+          "vagabond": "",
+          "description": ""
+        }
+      }
+    },
+    "trinite": {
+      "templates": ["information", "signes", "competences", "ressources", "theme", "trini", "lame"],
+      "metier": "",
+      "vieAnterieure": "",
+      "experience": {
+        "totale": 0,
+        "disponible": 0
+      },
+      "creation": {
+        "totale": 0,
+        "disponible": 0,
+        "finie": false
+      },
+      "nbLigneVie": 3,
+      "pointsLigneVie": 8,
+      "etatSante": "indemne",
+      "nbBlessure": 0,
+      "oratoire": "",
+      "experienceApprentissages": 0
+    },
+    "archonteRoi": {
+      "templates": ["information", "signes", "competences", "ressources", "theme", "archRoi", "lameN"],
+      "couverture": "",
+      "historique": "",
+      "domaines": "",
+      "tactique": "",
+      "nbLigneVie": 3,
+      "pointsLigneVie": 8,
+      "etatSante": "indemne",
+      "nbBlessure": 0
+    },
+    "lige": {
+      "templates": ["information", "signes", "competences", "ressources", "theme"],
+      "domaines": "",
+      "tactique": "",
+      "karma": {
+        "value": 0,
+        "max": 0
+      },
+      "nbLigneVie": 3,
+      "pointsLigneVie": 4,
+      "etatSante": "indemne",
+      "nbBlessure": 0
+    },
+    "humain": {
+      "templates": ["information", "signes", "competences", "ressources"],
+      "domaines": "",
+      "tactique": "",
+      "nbLigneVie": 3,
+      "pointsLigneVie": 4,
+      "etatSante": "indemne",
+      "nbBlessure": 0
+    },
+    "pnj": {
+      "templates": ["information", "signes", "competences", "ressources"],
+      "activite": "",
+      "domaines": "",
+      "tactique": "",
+      "nbLigneVie": 3,
+      "pointsLigneVie": 4,
+      "etatSante": "indemne",
+      "nbBlessure": 0,
+      "karmaLumiere": {
+        "value": 0,
+        "max": 0
+      },
+      "karmaTenebres": {
+        "value": 0,
+        "max": 0
+      },
+      "ferveur": {
+        "value": 0,
+        "max": 0
+      },
+      "sousType": "autre",
+      "cout": {
+        "verset": 1,
+        "aura": 1
+      }
     }
+  },
+  "Item": {
+    "types": ["ame", "arme", "armure", "atout", "aura", "domaine", "jardin", "majeste", "metier", "objet", "pouvoir", "verset", "vieAnterieure"],
+    "ame": {
+      "epreuve": "",
+      "description": ""
+    },
+    "arme": {
+      "description": "",
+      "competence": "",
+      "degats": 0,
+      "portee": 0,
+      "listeParticularites": "",
+      "particularites": {
+        "retardement": false,
+        "allonge": false,
+        "multiples": false,
+        "charge": false,
+        "chargeur": false,
+        "balles": 0,
+        "desarmer": false,
+        "maitriser": false,
+        "rechargement": false,
+        "nonLetal": false,
+        "perforante": false,
+        "souffle": false,
+        "zone": false,
+        "rayon": 0
+      },
+      "epee": false
+    },
+    "armure": {
+      "description": "",
+      "protectionMeleeExplosif": 0,
+      "protectionTirLancer": 0,
+      "listeParticularites": "",
+      "particularites": {
+        "encombrant": false,
+        "force": 0,
+        "deuxMains": false
+      }
+    },
+    "atout": {
+      "messager": "",
+      "karma": "",
+      "couleur": "",
+      "description": ""
+    },
+    "aura": {
+      "signe": "",
+      "description": "",
+      "souffle": "",
+      "deploiement": "cosme"
+    },
+    "domaine": {
+      "description": "",
+      "epuise": false
+    },
+    "jardin": {
+      "localisation": "",
+      "seuil": "",
+      "condition": "",
+      "archetype": "",
+      "periodicite": "standard",
+      "duree": "standard",
+      "manifestation": "",
+      "description": ""
+    },
+    "majeste": {
+      "signe": "",
+      "manifestation": "",
+      "effet": ""
+    },
+    "metier": {
+      "signe": "",
+      "description": "",
+      "competence1": "",
+      "competence2": "",
+      "competence3": "",
+      "richesse": 0,
+      "reseau": 0,
+      "influence": 0,
+      "nbDomaines": 0,
+      "listeDomaines": "",
+      "domaines": [],
+      "pc": 0
+    },
+    "objet": {
+      "description": ""
+    },
+    "pouvoir": {
+      "savoirOcculte": "autre",
+      "description": ""
+    },
+    "verset": {
+      "choeurLegion": "",
+      "favori": "",
+      "sentence": "",
+      "karma": "aucun",
+      "duree": "",
+      "portee": "",
+      "aireEffet": "",
+      "cumul": 0,
+      "description": ""
+    },
+    "vieAnterieure": {
+      "nom": "",
+      "description": "",
+      "bonus1": {
+        "type": "",
+        "valeur": 0
+      },
+      "bonus2": {
+        "type": "",
+        "valeur": 0
+      },
+      "bonus3": {
+        "type": "",
+        "valeur": 0
+      }
+    }
+  }
 }

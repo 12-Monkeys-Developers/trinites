@@ -1,0 +1,19 @@
+<form class="{{cssClass}}" autocomplete="off">
+    <header class="sheet-header">
+        <img src="{{item.img}}" data-edit="img" title="{{item.name}}" height="64" width="64"/>
+        <h1><input name="name" type="text" value="{{item.name}}" placeholder="Nom"/></h1>
+    </header>
+    <div class="sheet-content arme" data-item-id="{{item.id}}">
+        <label class="marge-edit">Signe</label>
+        <select class="marge-edit" name="system.signe">
+            {{#select data.system.signe}}
+            {{#each config.signes as |signe keySigne|}}
+                <option value="{{keySigne}}">{{signe}}</option>
+            {{/each}}
+            {{/select}}</select>
+            <div class="titre-desc">Manifestation</div> 
+            {{editor data.system.manifestation target="system.manifestation" button=true owner=true editable=true}}
+            <div class="titre-desc">Description</div> 
+            {{editor data.system.description target="system.description" button=true owner=true editable=true}}
+    </div>
+</form>

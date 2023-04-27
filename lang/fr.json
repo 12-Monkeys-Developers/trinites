@@ -8,16 +8,18 @@
     },
     
     "ITEM": {
-        "TypeObjet": "Objet",
-        "TypeMetier": "Métier",
-        "TypeDomaine": "Domaine",
-        "TypeAura": "Aura",
-        "TypeVerset": "Verset",
-        "TypeAtout": "Atout",
         "TypeArme": "Arme",
         "TypeArmure": "Armure",
+        "TypeAtout": "Atout",
+        "TypeAura": "Aura",
+        "TypeDomaine": "Domaine",
+        "TypeJardin": "Jardin",
+        "TypeMajeste": "Majesté",
+        "TypeMetier": "Métier",
+        "TypeObjet": "Objet",
         "TypePouvoir": "Pouvoir",
-        "TypeVieanterieure": "Vie Antérieure" 
+        "TypeVieanterieure": "Vie Antérieure",
+        "TypeVerset": "Verset"
     },
 
     "TRINITES": {

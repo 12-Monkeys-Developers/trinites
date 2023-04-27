@@ -20,6 +20,8 @@ export default async function preloadTemplates() {
     "systems/trinites/templates/sheets/items/objet-sheet.html",
     "systems/trinites/templates/sheets/items/pouvoir-sheet.html",
     "systems/trinites/templates/sheets/items/verset-sheet.html",
+    "systems/trinites/templates/sheets/items/jardin-sheet.html",
+    "systems/trinites/templates/sheets/items/majeste-sheet.html",
     "systems/trinites/templates/partials/actor/bloc-grandLivre-archonte.hbs",
     "systems/trinites/templates/partials/actor/bloc-grandLivre-trinite.hbs",
     "systems/trinites/templates/partials/actor/pnj-bloc-occulte.hbs",

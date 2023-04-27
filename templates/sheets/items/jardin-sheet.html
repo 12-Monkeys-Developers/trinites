@@ -1,0 +1,26 @@
+<form class="{{cssClass}}" autocomplete="off">
+  <header class="sheet-header">
+    <img src="{{item.img}}" data-edit="img" title="{{item.name}}" height="64" width="64" />
+    <h1><input name="name" type="text" value="{{item.name}}" placeholder="Nom du Jardin" /></h1>
+  </header>
+  <div class="grid-item-jardin">
+    <label class="marge-edit">Signe</label>
+    <select class="marge-edit" name="system.archetype">
+      {{#select data.system.archetype}} {{#each config.signes as |signe keySigne|}}
+      <option value="{{keySigne}}">{{signe}}</option>
+      {{/each}} {{/select}}</select
+    ><label>Localisation</label>
+    <input name="system.localisation" type="text" value="{{data.system.localisation}}" placeholder="Localisation" />
+    <label>Seuil</label>
+    <input name="system.seuil" type="text" value="{{data.system.seuil}}" placeholder="seuil" /><label>Condition d'ouverture</label
+    ><input name="system.condition" type="text" value="{{data.system.condition}}" /><label>Périodicité du Souffle</label
+    ><input name="system.periodicite" type="text" value="{{data.system.periodicite}}" /><label>Durée du Souffle</label
+    ><input name="system.duree" type="text" value="{{data.system.duree}}" />
+  </div>
+  <div class="sheet-content arme" data-item-id="{{item.id}}">
+    <div class="titre-desc">Manifestation du Souffle</div>
+    {{editor data.system.manifestation target="system.manifestation" button=true owner=true editable=true}}
+    <div class="titre-desc">Description</div>
+    {{editor data.system.description target="system.description" button=true owner=true editable=true}}
+  </div>
+</form>

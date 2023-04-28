@@ -811,7 +811,7 @@
 }
 .trinites.sheet.actor .grid-pouvoir {
   display: grid;
-  grid-template-columns: 1fr 1fr 2em 2em;
+  grid-template-columns: 2fr 1fr 2em 2em;
   align-items: center;
 }
 .trinites.sheet.actor .grid-pouvoir .nom-pouvoir {

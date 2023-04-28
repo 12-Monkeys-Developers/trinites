@@ -25,6 +25,7 @@ export default class TrinitesPnjSheet extends TrinitesActorSheet {
     data.auras = data.items.filter(item => item.type === "aura");  
     data.atouts = data.items.filter((item) => item.type === "atout");
     data.pouvoirs = data.items.filter(item => item.type === "pouvoir");
+    data.majestes = data.items.filter(item => item.type === "majeste");
 
     data.unlocked = this.actor.isUnlocked;
     data.isArchonteRoi = this.actor.isArchonteRoi;

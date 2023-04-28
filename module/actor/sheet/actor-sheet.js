@@ -69,7 +69,7 @@ export default class TrinitesActorSheet extends ActorSheet {
 
     // Supprimer un item
     html.find(".suppr-item").click(this._onSupprimerItem.bind(this));
-  
+
     // Jet d'attaque avec une arme
     html.find(".roll-arme").click(this._onJetArme.bind(this));
 
@@ -77,7 +77,7 @@ export default class TrinitesActorSheet extends ActorSheet {
     html.find(".roll-comp").click(this._onJetCompetence.bind(this));
 
     // Jet de ressources
-    html.find(".roll-ress").click(this._onJetRessource.bind(this));    
+    html.find(".roll-ress").click(this._onJetRessource.bind(this));
   }
 
   _onAjoutDomaineEtatEpuise(event) {
@@ -196,7 +196,7 @@ export default class TrinitesActorSheet extends ActorSheet {
       ui.notifications.warn("Vous devez déployer l'aura avant de changer sa zone d'effet !");
       return;
     }
- 
+
     aura.update({ "system.deploiement": zone });
   }
 
@@ -234,7 +234,7 @@ export default class TrinitesActorSheet extends ActorSheet {
     Roll.jetCompetence({
       actor: this.actor,
       signe: dataset.signe,
-      competence: dataset.competence
+      competence: dataset.competence,
     });
   }
 
@@ -244,7 +244,7 @@ export default class TrinitesActorSheet extends ActorSheet {
 
     Roll.jetRessource({
       actor: this.actor,
-      ressource: dataset.ressource
+      ressource: dataset.ressource,
     });
   }
 
@@ -255,7 +255,7 @@ export default class TrinitesActorSheet extends ActorSheet {
     Chat.carteAtout({
       actor: this.actor,
       atoutId: dataset.itemId,
-      whisper: !event.shiftKey
+      whisper: !event.shiftKey,
     });
   }
 
@@ -266,7 +266,7 @@ export default class TrinitesActorSheet extends ActorSheet {
     Chat.carteAura({
       actor: this.actor,
       auraId: dataset.itemId,
-      whisper: !event.shiftKey
+      whisper: !event.shiftKey,
     });
   }
 
@@ -277,7 +277,7 @@ export default class TrinitesActorSheet extends ActorSheet {
     Chat.carteVerset({
       actor: this.actor,
       versetId: dataset.itemId,
-      whisper: !event.shiftKey
+      whisper: !event.shiftKey,
     });
   }
 
@@ -305,7 +305,7 @@ export default class TrinitesActorSheet extends ActorSheet {
     else await this.actor.setFlag(game.system.id, "SheetUnlocked", "SheetUnlocked");
     this.actor.sheet.render(true);
   }
-  
+
   _onJetArme(event) {
     event.preventDefault();
     const itemId = event.currentTarget.dataset.itemId;
@@ -326,30 +326,43 @@ export default class TrinitesActorSheet extends ActorSheet {
       signe: signe,
       competence: arme.competence,
       arme: arme,
-      type: item.name
+      type: item.name,
     });
   }
 
-  	/**
+  /**
    * Handle toggling of an item from the Actor sheet
    * @private
    */
-	_onItemSummary(event) {
-		event.preventDefault();
-		let li = $(event.currentTarget);
-		const item = this.actor.items.get(li.data('item-id'));
-
-		// Toggle summary
-		if (item?.system.description) {
-			if (li.hasClass('expanded')) {
-				let summary = li.children('.item-summary');
-				summary.slideUp(200, () => summary.remove());
-			} else {
-				let div = $(`<div class="item-summary">${item.system.description}</div>`);
-				li.append(div.hide());
-				div.slideDown(200);
-			}
-			li.toggleClass('expanded');
-		}
-	}
+  _onItemSummary(event) {
+    event.preventDefault();
+    let li = $(event.currentTarget);
+    const item = this.actor.items.get(li.data("item-id"));
+    // Toggle summary
+    if (item?.system.description) {
+      if (li.hasClass("expanded")) {
+        let summary = li.children(".item-summary");
+        summary.slideUp(200, () => summary.remove());
+      } else {
+        if (item.type === "majeste") {
+          let div = $(`<div class="item-summary">${item.system.manifestation}<br />${item.system.effet}</div>`);
+        } else {
+          let div = $(`<div class="item-summary">${item.system.description}</div>`);
+        }
+        li.append(div.hide());
+        div.slideDown(200);
+      }
+      li.toggleClass("expanded");
+    } else if (item.type === "majeste") {
+      if (li.hasClass("expanded")) {
+        let summary = li.children(".item-summary");
+        summary.slideUp(200, () => summary.remove());
+      } else {
+        let div = $(`<div class="item-summary">${item.system.manifestation}<br />${item.system.effet}</div>`);
+        li.append(div.hide());
+        div.slideDown(200);
+      }
+      li.toggleClass("expanded");
+    }
+  }
 }

@@ -326,7 +326,7 @@ export default class TrinitesActorSheet extends ActorSheet {
       signe: signe,
       competence: arme.competence,
       arme: arme,
-      type: item.name,
+      type: item.name
     });
   }
 

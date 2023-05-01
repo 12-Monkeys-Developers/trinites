@@ -279,6 +279,10 @@ export default class TrinitesTrinite extends TrinitesActor {
   }
 
   // Vide toutes les sources de Karma (Esprit et Adam) du type donné
+  /**
+   * 
+   * @param {*} typeKarma 
+   */
   viderKarma(typeKarma) {
     let data = this.system;
 
@@ -340,7 +344,7 @@ export default class TrinitesTrinite extends TrinitesActor {
   }
 
   /**
-   * Supprime le nom et les bonus d'une vie antérieure
+   * Supprime le nom et les bonus de la vie antérieure
    */
   async supprimerVieAnterieure() {
     const va = this.items.find((i) => i.type === "vieAnterieure");
@@ -367,7 +371,7 @@ export default class TrinitesTrinite extends TrinitesActor {
     let bonus = null;
     const bonusType = bonusInfo.type;
     if (bonusType !== "aucun") {
-      if (["ressource", "influence", "richesse", "reseau"].includes(bonusType)) {
+      if (["influence", "richesse", "reseau"].includes(bonusType)) {
         bonus = `system.ressources.${bonusType}.bonusVA`;
       } else if (bonusType === "karma-lumiere") {
         bonus = "system.trinite.deva.karma.bonusVA";
@@ -422,7 +426,7 @@ export default class TrinitesTrinite extends TrinitesActor {
   }
 
   /**
-   * 
+   * Supprime le nom et les bonus du métier
    */
   async supprimerMetier() {
     const metier = this.items.find((i) => i.type === "metier");

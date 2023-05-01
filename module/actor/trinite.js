@@ -57,6 +57,7 @@ export default class TrinitesTrinite extends TrinitesActor {
     /*
      * Calcul de la base des compétences : base = baseMetier + points de Création du métier + bonus de la Vie Antérieure + niveau obtenu par l'expérience
      */
+    console.log("system.competences", system.competences);
     for (let [keySigne, compsSigne] of Object.entries(system.competences)) {
       for (let [keyComp, competence] of Object.entries(compsSigne)) {
         system.competences[keySigne][keyComp].base +=
@@ -366,7 +367,7 @@ export default class TrinitesTrinite extends TrinitesActor {
     let bonus = null;
     const bonusType = bonusInfo.type;
     if (bonusType !== "aucun") {
-      if (["ressource", "influence", "richesse"].includes(bonusType)) {
+      if (["ressource", "influence", "richesse", "reseau"].includes(bonusType)) {
         bonus = `system.ressources.${bonusType}.bonusVA`;
       } else if (bonusType === "karma-lumiere") {
         bonus = "system.trinite.deva.karma.bonusVA";

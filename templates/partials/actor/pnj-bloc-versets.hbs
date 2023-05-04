@@ -1,6 +1,6 @@
 <div class="grand-livre">
     <h3><i class="fas fa-book-open"></i> Versets</h3>
-    {{#if (and unlocked isAutre)}}
+    {{#if unlocked}}
         <div class="param">
             <label>Coût pour réciter un verset : </label>
             <select name="system.cout.verset">
@@ -22,7 +22,7 @@
             <div class="titre">Aire d'effet</div>
             {{#each versets as |verset id|}}
                     <div class="jet-verset"><a class="roll-verset" title="Jet de verset" data-item-id="{{verset._id}}"><i class="fas fa-dice"></i></a></div>
-                    <div class="nom-verset" data-item-id="{{verset._id}}"><i class="fas {{getIconeVerset verset.system.karma}}"></i>{{verset.name}}</div>
+                    <div class="nom-verset" data-item-id="{{verset._id}}"><i class="fas {{getIconeVerset verset.system.karma}}"></i> {{verset.name}}</div>
                     <div class="cumul-verset"><input name="system.particularites.encombrant" type="checkbox" {{checked verset.system.cumul}} disabled/></div>
                     <div class="duree-verset">{{verset.system.duree}}</div>
                     <div class="portee-verset">{{verset.system.portee}}</div>

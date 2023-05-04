@@ -338,7 +338,6 @@ TRINITES.savoirsOccultes = {
 TRINITES.typePnj = {
     archonteRoi: "Archonte-Roi",
     lige: "Lige",
-    humain: "Humain",
-    autre: "Autre"
+    humain: "Humain"
   };
 

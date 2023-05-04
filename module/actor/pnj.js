@@ -1,5 +1,4 @@
 import TrinitesActor from "./actor.js";
-import DepenseKarmaFormApplication from "../appli/DepenseKarmaFormApp.js";
 
 export default class TrinitesPnj extends TrinitesActor {
   prepareData() {
@@ -35,7 +34,6 @@ export default class TrinitesPnj extends TrinitesActor {
     if (system.ressources.reseau.diminution > system.ressources.reseau.valeur) {
       system.ressources.reseau.diminution = system.ressources.reseau.valeur;
     }
-
   }
 
   get isArchonteRoi() {
@@ -50,26 +48,20 @@ export default class TrinitesPnj extends TrinitesActor {
     return this.system.sousType === "humain";
   }
 
-  get isAutre() {
-    return this.system.sousType === "autre";
-  }
-
   get nbDes() {
     if (this.system.nbDes !== null) {
       return parseInt(this.system.nbDes);
-    }
-    else {
+    } else {
       if (this.isArchonteRoi || this.isLige) return 2;
       if (this.isHumain) return 1;
-      if (this.isAutre) return 1;
-    }    
+    }
   }
 
   get canRegenerate() {
     if (this.isArchonteRoi) return true;
     if (this.isLige) {
       if (this.system.etatSante === "endolori" || this.system.etatSante === "inconscient") return true;
-    }    
+    }
     return false;
   }
 
@@ -104,26 +96,36 @@ export default class TrinitesPnj extends TrinitesActor {
   coutPouvoir(typePouvoir) {
     // Aura
     if (typePouvoir === "zodiaque") {
+      if (this.system.cout.aura !== "0") {
+        return parseInt(this.system.cout.aura);
+      }
       if (this.isArchonteRoi || this.isLige) {
         return 1;
-      }
-      if (this.isAutre) {
-        return parseInt(this.system.cout.aura);
       }
       return 2;
     }
 
     // Verset
     if (typePouvoir === "grandLivre") {
+      if (this.system.cout.verset !== "0") {
+        return parseInt(this.system.cout.verset);
+      }
       if (this.isArchonteRoi || this.isLige) {
         return 1;
       }
-      if (this.isAutre) {
-        return parseInt(this.system.cout.verset);
+      return 2;
+    }
+
+    // Atout
+    if (typePouvoir === "lameSoeur") {
+      if (this.system.cout.atout !== "0") {
+        return parseInt(this.system.cout.atout);
+      }
+      if (this.isArchonteRoi || this.isLige) {
+        return 1;
       }
       return 2;
     }
-    
     return 2;
   }
 
@@ -133,7 +135,7 @@ export default class TrinitesPnj extends TrinitesActor {
 
     if (typeKarma === "lumiere") source = "deva";
     if (typeKarma === "tenebre") source = "archonte";
-    
+
     return source;
   }
 
@@ -145,7 +147,7 @@ export default class TrinitesPnj extends TrinitesActor {
 
   consommerSourceKarma(typeSource, coutPouvoir) {
     if (typeSource === "deva") this.update({ "system.karmaLumiere.value": this.system.karmaLumiere.value - coutPouvoir });
-    if (typeSource === "archonte") this.update({ "system.karmaTenebres.value": this.system.karmaTenebres.value - coutPouvoir });    
+    if (typeSource === "archonte") this.update({ "system.karmaTenebres.value": this.system.karmaTenebres.value - coutPouvoir });
   }
 
   // Mise à jour de la réserve de karma du type donné à la valeur cible
@@ -155,5 +157,4 @@ export default class TrinitesPnj extends TrinitesActor {
     if (reserve === "archonte") reserveData = `system.karmaTenebres.value`;
     if (reserveData !== null) this.update({ [reserveData]: valeur });
   }
-  
 }

@@ -195,12 +195,12 @@
 .trinites.sheet.actor .vie-ante-bloc,
 .trinites.sheet.actor .histo-bloc,
 .trinites.sheet.actor .expe-bloc,
-.trinites.sheet.actor .karma-ten,
+.trinites.sheet.actor .karma-tenebres,
 .trinites.sheet.actor .grand-livre,
 .trinites.sheet.actor .zodiaque,
 .trinites.sheet.actor .lame-soeur,
-.trinites.sheet.actor .lame-noire,
-.trinites.sheet.actor .pouvoirs {
+.trinites.sheet.actor .pouvoirs,
+.trinites.sheet.actor .atouts {
   padding: 2px;
   margin: 3px;
 }
@@ -795,8 +795,13 @@
 .trinites.sheet.actor .grid-grand-livre .titre {
   font-family: "Cabaletta";
 }
-.trinites.sheet.actor .pouvoirs {
+.trinites.sheet.actor .pouvoirs,
+.trinites.sheet.actor .atouts {
   min-height: 80px;
+}
+.trinites.sheet.actor .pouvoirs .param select,
+.trinites.sheet.actor .atouts .param select {
+  background-color: floralwhite;
 }
 .trinites.sheet.actor .grid-pouvoirs {
   display: grid;
@@ -920,30 +925,6 @@
 .trinites.sheet.actor .lame-soeur .grid-lame a {
   margin: 2px;
 }
-.trinites.sheet.actor .lame-noire {
-  display: flex;
-  flex-direction: column;
-}
-.trinites.sheet.actor .lame-noire .grid-lame {
-  display: grid;
-  grid-template-columns: 1fr 1fr 2em 4.5em 3fr;
-  margin: 3px;
-  align-items: center;
-}
-.trinites.sheet.actor .lame-noire .grid-lame select {
-  font-family: "Cabaletta";
-}
-.trinites.sheet.actor .lame-noire .grid-lame label {
-  font-family: "Cabaletta";
-  margin: 2px;
-}
-.trinites.sheet.actor .lame-noire .grid-lame i {
-  font-size: 0.9em;
-}
-.trinites.sheet.actor .lame-noire .grid-lame select,
-.trinites.sheet.actor .lame-noire .grid-lame a {
-  margin: 2px;
-}
 .trinites.sheet.actor .desc-lame {
   margin: 2px;
   font-size: 0.9em;
@@ -1053,28 +1034,28 @@
   display: flex;
   justify-content: center;
 }
-.trinites.sheet.actor .grid-karma-ten {
+.trinites.sheet.actor .grid-karma-tenebres {
   display: grid;
   grid-template-columns: 1fr 1fr;
   align-items: center;
   font-family: "Cabaletta";
   margin: 3px;
 }
-.trinites.sheet.actor .grid-karma-ten .karma-ten-titre {
+.trinites.sheet.actor .grid-karma-tenebres .karma-tenebres-titre {
   margin: 2px;
 }
-.trinites.sheet.actor .grid-karma-ten .karma-ten-valeur {
+.trinites.sheet.actor .grid-karma-tenebres .karma-tenebres-valeur {
   margin: 2px;
   display: flex;
   align-items: center;
   justify-content: center;
 }
-.trinites.sheet.actor .grid-karma-ten .karma-ten-valeur input {
+.trinites.sheet.actor .grid-karma-tenebres .karma-tenebres-valeur input {
   width: 3em;
   text-align: center;
   margin: 2px;
 }
-.trinites.sheet.actor .grid-karma-ten .karma-ten-valeur label {
+.trinites.sheet.actor .grid-karma-tenebres .karma-tenebres-valeur label {
   margin: 2px;
 }
 .trinites.sheet.actor .editor .editor-edit {
@@ -1830,6 +1811,9 @@
   font-family: "Cabaletta";
   font-size: 2em;
   margin: 3px;
+}
+.carte .grid-carte-atout .action {
+  grid-column: 3/4;
 }
 .carte .grid-carte-atout .titre {
   grid-column: 1 / 4;

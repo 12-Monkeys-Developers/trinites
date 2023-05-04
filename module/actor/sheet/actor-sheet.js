@@ -20,7 +20,17 @@ export default class TrinitesActorSheet extends ActorSheet {
     data.armes = data.items.filter((item) => item.type === "arme");
     data.armures = data.items.filter((item) => item.type === "armure");
     data.objets = data.items.filter((item) => item.type === "objet");
+    data.domaines = data.items.filter((item) => item.type === "domaine");
+    
+    data.versets = data.items.filter((item) => item.type === "verset");
+    data.versetsLumiere = data.items.filter((item) => item.type === "verset" && item.system.karma === "lumiere");
+    data.versetsTenebres = data.items.filter((item) => item.type === "verset" && item.system.karma === "tenebre");
+    
+    data.auras = data.items.filter((item) => item.type === "aura");
+    data.majestes = data.items.filter(item => item.type === "majeste");
 
+    data.atouts = data.items.filter((item) => item.type === "atout");
+    
     data.descriptionHtml = TextEditor.enrichHTML(this.actor.system.description, { async: false });
     data.notesHtml = TextEditor.enrichHTML(this.actor.system.notes, { async: false });
 
@@ -29,7 +39,8 @@ export default class TrinitesActorSheet extends ActorSheet {
     data.isArchonteRoi = this.actor.isArchonteRoi;
     data.isLige = this.actor.isLige;
     data.isHumain = this.actor.isHumain;
-    data.isAutre = this.actor.isAutre;
+
+    data.unlocked = this.actor.isUnlocked;
 
     return data;
   }
@@ -48,6 +59,12 @@ export default class TrinitesActorSheet extends ActorSheet {
 
   activateListeners(html) {
     super.activateListeners(html);
+
+    // Lock/Unlock la fiche
+    html.find(".sheet-change-lock").click(this._onSheetChangelock.bind(this));    
+
+    // Régénérer des cases de vie en dépensant du Karma
+    html.find(".regen").click(this._onRegenerationSante.bind(this));
 
     // Ajouter au domaine son statut épuisé
     html.find(".check-domaine").click(this._onAjoutDomaineEtatEpuise.bind(this));
@@ -78,6 +95,24 @@ export default class TrinitesActorSheet extends ActorSheet {
 
     // Jet de ressources
     html.find(".roll-ress").click(this._onJetRessource.bind(this));
+
+    // Carte - Atout
+    html.find(".roll-atout").click(this._onCarteAtout.bind(this));
+
+    // Carte - Aura
+    html.find(".roll-aura").click(this._onCarteAura.bind(this));
+
+    // Carte - Verset
+    html.find(".roll-verset").click(this._onCarteVerset.bind(this));
+
+     // Changer la zone de déploiement d'une aura
+     html.find(".zone-deploiement").click(this._onZoneDeploimentAura.bind(this));
+
+    // Permet d'afficher la description
+    html.find('.grid-atout .nom-atout').click(this._onItemSummary.bind(this));
+    html.find('.grid-zodiaque .nom-aura').click(this._onItemSummary.bind(this));
+    html.find('.grid-verset .nom-verset').click(this._onItemSummary.bind(this));
+    html.find('.grid-pouvoir .nom-pouvoir').click(this._onItemSummary.bind(this));
   }
 
   _onAjoutDomaineEtatEpuise(event) {
@@ -344,10 +379,11 @@ export default class TrinitesActorSheet extends ActorSheet {
         let summary = li.children(".item-summary");
         summary.slideUp(200, () => summary.remove());
       } else {
+        let div;
         if (item.type === "majeste") {
-          let div = $(`<div class="item-summary">${item.system.manifestation}<br />${item.system.effet}</div>`);
+          div = $(`<div class="item-summary">${item.system.manifestation}<br />${item.system.effet}</div>`);
         } else {
-          let div = $(`<div class="item-summary">${item.system.description}</div>`);
+          div = $(`<div class="item-summary">${item.system.description}</div>`);
         }
         li.append(div.hide());
         div.slideDown(200);

@@ -5,12 +5,11 @@ export default class TrinitesActor extends Actor {
     super.prepareData();
 
     let system = this.system;
-     /*--- Calcul des valeurs de sante ---*/
 
     // Points de vie max
-    system.ligneVie1 = system.pointsLigneVie;   
+    system.ligneVie1 = system.pointsLigneVie;
     if (parseInt(this.system.nbLigneVie) === 1) system.nbPointsVieMax = system.ligneVie1;
-    
+
     if (parseInt(this.system.nbLigneVie) > 1) system.ligneVie2 = system.pointsLigneVie * 2;
     if (parseInt(this.system.nbLigneVie) === 2) system.nbPointsVieMax = system.ligneVie2;
 
@@ -77,7 +76,7 @@ export default class TrinitesActor extends Actor {
    * @param {*} typeKarma
    * @returns
    */
-  karmaDisponible(typeKarma) { }
+  karmaDisponible(typeKarma) {}
 
   // Cout du pouvoir selon l'Affinité du personnage
   coutPouvoir(typePouvoir) {
@@ -105,59 +104,59 @@ export default class TrinitesActor extends Actor {
     if (domaine) domaine.update({ "system.epuise": statut });
   }
 
-    /**
-   * 
-   * @param {*} versetId 
-   * @param {Object} options 
+  /**
+   *
+   * @param {*} versetId
+   * @param {Object} options
    * murmure = true si le verset a été murmuré : le coût augmente de 1
-   * @returns 
+   * @returns
    */
-    async reciterVerset(versetId, options) {
-      const verset = this.items.get(versetId);
-      const typeKarma = verset.system.karma;
-  
-      const karmaDisponible = this.karmaDisponible(typeKarma);
-      const coutPouvoir = this.coutPouvoir("grandLivre");
-      // Verset récité à voix basse
-      if (options?.murmure) coutPouvoir += 1;
-  
-      let activable = false;
-  
-      // Coût nul
-      if (coutPouvoir === 0) {
-        activable = true;
-      }
-      // Pas assez de Karma
-      else if (karmaDisponible < coutPouvoir) {
-        if (options?.murmure) ui.notifications.warn("Vous n'avez pas assez de Karma disponible pour réciter ce verset à voix basse !");
-        else ui.notifications.warn("Vous n'avez pas assez de Karma disponible pour réciter ce verset !");
-        return;
-      }
-      // Juste ce qu'il faut de Karma
-      else if (karmaDisponible == coutPouvoir) {
-        this.viderKarma(typeKarma);
-        activable = true;
-      }
-      // Uniquement le Karma d'une source
-      else if (this.sourceUnique(typeKarma)) {
-        this.consommerSourceKarma(this.sourceUnique(typeKarma), coutPouvoir);
-        activable = true;
-      } else {
-        await new DepenseKarmaFormApplication.open(this, this.system.trinite, typeKarma, "verset", coutPouvoir, versetId);
-      }
-  
-      if (activable) {
-        carteVersetActive({
-          actor: this,
-          versetId: versetId,
-        });
-      }
+  async reciterVerset(versetId, options) {
+    const verset = this.items.get(versetId);
+    const typeKarma = verset.system.karma;
+
+    const karmaDisponible = this.karmaDisponible(typeKarma);
+    let coutPouvoir = this.coutPouvoir("grandLivre");
+    // Verset récité à voix basse
+    if (options?.murmure) coutPouvoir += 1;
+
+    let activable = false;
+
+    // Coût nul
+    if (coutPouvoir === 0) {
+      activable = true;
+    }
+    // Pas assez de Karma
+    else if (karmaDisponible < coutPouvoir) {
+      if (options?.murmure) ui.notifications.warn("Vous n'avez pas assez de Karma disponible pour réciter ce verset à voix basse !");
+      else ui.notifications.warn("Vous n'avez pas assez de Karma disponible pour réciter ce verset !");
+      return;
+    }
+    // Juste ce qu'il faut de Karma
+    else if (karmaDisponible == coutPouvoir) {
+      this.viderKarma(typeKarma);
+      activable = true;
+    }
+    // Uniquement le Karma d'une source
+    else if (this.sourceUnique(typeKarma)) {
+      this.consommerSourceKarma(this.sourceUnique(typeKarma), coutPouvoir);
+      activable = true;
+    } else {
+      activable = await DepenseKarmaFormApplication.open(this, this.system.trinite, typeKarma, "verset", coutPouvoir, versetId);
     }
 
-      /**
-   * 
-   * @param {*} auraId 
-   * @param {Object} options 
+    if (activable) {
+      carteVersetActive({
+        actor: this,
+        versetId: versetId,
+      });
+    }
+  }
+
+  /**
+   *
+   * @param {*} auraId
+   * @param {Object} options
    */
   async activerAura(auraId, options) {
     const aura = this.items.get(auraId);
@@ -192,22 +191,20 @@ export default class TrinitesActor extends Actor {
     else if (this.sourceUnique(typeKarma)) {
       this.consommerSourceKarma(this.sourceUnique(typeKarma), coutPouvoir);
       activable = true;
-    } 
-    else {
+    } else {
       activable = await DepenseKarmaFormApplication.open(this, this.system.trinite, typeKarma, "aura", coutPouvoir, auraId);
     }
-    
+
     if (activable) {
       aura.update({ "data.deploiement": "corps" });
 
       // MAJ de la carte
       return {
-        "title": `Vous avez déployé l'aura '${aura.name}'`,
-        "classList": "deployee",
-        "zone": "Corps"
-      }
+        title: `Vous avez déployé l'aura '${aura.name}'`,
+        classList: "deployee",
+        zone: "Corps",
+      };
     }
     return null;
-
   }
 }

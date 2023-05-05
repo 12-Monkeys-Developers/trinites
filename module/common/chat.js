@@ -12,6 +12,7 @@ export class TrinitesChat {
     this.content = null;
     this.template = null;
     this.data = null;
+    this.chatData = null;
     this.flags = null;
     this.roll = null;
   }
@@ -88,9 +89,9 @@ export class TrinitesChat {
         actor: this.actor.id,
         alias: this.actor.name,
         scene: null,
-        token: null,
+        token: null
       },
-      content: this.content,
+      content: this.content
     };
 
     // Set the roll parameter if necessary
@@ -124,7 +125,7 @@ export class TrinitesChat {
     }
 
     // Create the chat
-    this.chat = await ChatMessage.create(data);
+    this.chatData = data;
     return this;
   }
 
@@ -139,6 +140,16 @@ export class TrinitesChat {
 
     // Call the template renderer.
     return await renderTemplate(this.template, data);
+  }
+
+  /**
+   * @description Displays the chat message
+   * @returns this instance
+   */
+  async display() {
+    // Create the chat
+    this.chat = await ChatMessage.create(this.chatData);
+    return this;
   }
 
   /*------------------------
@@ -175,9 +186,19 @@ export class TrinitesChat {
     }
   }
 
-  static async onActiverAura(event) {
+  static async onActiverAura(event, mess) {
     event.preventDefault();
     const element = event.currentTarget;
+    // Get the actor who has sent the chat message
+    //const actorId = $(event.currentTarget).parents(".chatroll").data("actorId");
+    let actor = game.actors.get(element.closest(".carte.aura").dataset.actorId);
+    //const actor = game.actors.get(actorId);
+
+    // Get the message
+    const messageId = mess._id;
+    const message = game.messages.get(messageId);
+
+    //event.preventDefault();
 
     // Aura déjà déployée
     if (element.classList.contains("deployee")) {
@@ -185,15 +206,33 @@ export class TrinitesChat {
       return;
     }
 
-    let actor = game.actors.get(element.closest(".carte.aura").dataset.actorId);
     const auraId = element.closest(".carte.aura").dataset.itemId;
 
     let activation = await actor.activerAura(auraId, null);
 
-    if (typeof activation === 'object' && activation !== null) {
+    if (typeof activation === "object" && activation !== null) {
+      /*
       element.title = activation.title;
       element.classList.add(activation.classList);
       element.closest(".carte.aura").getElementsByClassName("zone")[0].innerHTML = activation.zone;
+      */
+      // Create the chat message
+      // Récupération des données de l'item
+      let aura = actor.items.get(auraId);
+      let souffleDispo = actor.canUseSouffle;
+
+      // Récupération des données de l'item
+      let cardData = {
+        aura: aura,
+        actorId: actor.id,
+        souffleDispo: souffleDispo,
+        isWhisper: message.isWhisper,
+      };
+
+      let newChatMessage = await new TrinitesChat(actor).withTemplate("systems/trinites/templates/partials/chat/carte-aura.hbs").withData(cardData).create();
+      console.log("newMessage : ", newChatMessage);
+
+      await message.update({ content: newChatMessage.content });
     }
   }
 
@@ -220,7 +259,7 @@ export class TrinitesChat {
       aura: aura,
       signe: "vierge",
       competence: "emprise",
-      afficherDialog: false
+      afficherDialog: false,
     });
 
     aura.update({ "system.deploiement": "cosme" });
@@ -237,14 +276,13 @@ export class TrinitesChat {
     // Shift + Click si le verset a été murmuré
     const murmure = event.shiftKey;
     const options = {};
-    options['murmure'] = murmure;
+    options["murmure"] = murmure;
 
     let actor = game.actors.get(element.closest(".carte.verset").dataset.actorId);
     const versetId = element.closest(".carte.verset").dataset.itemId;
 
     actor.reciterVerset(versetId, options);
   }
-
 
   static async onActiverAtout(event) {
     event.preventDefault();
@@ -339,7 +377,6 @@ export class TrinitesChat {
   }
 }
 
-
 /*------------------------------------
 ---- Affichage des cartes de chat ----
 ------------------------------------*/
@@ -357,7 +394,8 @@ export async function carteAtout({ actor = null, atoutId = null, whisper = null 
   // Recupération du template
   const messageTemplate = "systems/trinites/templates/partials/chat/carte-atout.hbs";
 
-  await new TrinitesChat(actor).withTemplate(messageTemplate).withData(cardData).create();
+  let chat = await new TrinitesChat(actor).withTemplate(messageTemplate).withData(cardData).create();
+  await chat.display();
 }
 
 export async function carteAtoutActive({ actor = null, atoutId = null } = {}) {
@@ -366,13 +404,14 @@ export async function carteAtoutActive({ actor = null, atoutId = null } = {}) {
   // Récupération des données de l'item
   let cardData = {
     atout: atout,
-    nomPersonnage: actor.name
+    nomPersonnage: actor.name,
   };
 
   // Recupération du template
   const messageTemplate = "systems/trinites/templates/partials/chat/carte-atout-active.hbs";
 
-  await new TrinitesChat(actor).withTemplate(messageTemplate).withData(cardData).create();
+  let chat = await new TrinitesChat(actor).withTemplate(messageTemplate).withData(cardData).create();
+  await chat.display();
 }
 
 export async function carteAura({ actor = null, auraId = null, whisper = null } = {}) {
@@ -385,13 +424,14 @@ export async function carteAura({ actor = null, auraId = null, whisper = null } 
     aura: aura,
     actorId: actor.id,
     souffleDispo: souffleDispo,
-    isWhisper: whisper
+    isWhisper: whisper,
   };
 
   // Recupération du template
   const messageTemplate = "systems/trinites/templates/partials/chat/carte-aura.hbs";
 
-  await new TrinitesChat(actor).withTemplate(messageTemplate).withData(cardData).create();
+  let chat = await new TrinitesChat(actor).withTemplate(messageTemplate).withData(cardData).create();
+  await chat.display();
 }
 
 export async function carteVerset({ actor = null, versetId = null, whisper = null } = {}) {
@@ -401,13 +441,14 @@ export async function carteVerset({ actor = null, versetId = null, whisper = nul
   let cardData = {
     verset: verset,
     actorId: actor.id,
-    isWhisper: whisper
+    isWhisper: whisper,
   };
 
   // Recupération du template
   const messageTemplate = "systems/trinites/templates/partials/chat/carte-verset.hbs";
 
-  await new TrinitesChat(actor).withTemplate(messageTemplate).withData(cardData).create();
+  let chat = await new TrinitesChat(actor).withTemplate(messageTemplate).withData(cardData).create();
+  await chat.display();
 }
 
 export async function carteVersetActive({ actor = null, versetId = null } = {}) {
@@ -416,11 +457,12 @@ export async function carteVersetActive({ actor = null, versetId = null } = {}) 
   // Récupération des données de l'item
   let cardData = {
     verset: verset,
-    nomPersonnage: actor.name
+    nomPersonnage: actor.name,
   };
 
   // Recupération du template
   const messageTemplate = "systems/trinites/templates/partials/chat/carte-verset-active.hbs";
 
-  await new TrinitesChat(actor).withTemplate(messageTemplate).withData(cardData).create();
+  let chat = await new TrinitesChat(actor).withTemplate(messageTemplate).withData(cardData).create();
+  await chat.display();
 }

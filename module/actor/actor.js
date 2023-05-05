@@ -196,7 +196,7 @@ export default class TrinitesActor extends Actor {
     }
 
     if (activable) {
-      aura.update({ "data.deploiement": "corps" });
+      await aura.update({ "data.deploiement": "corps" });
 
       // MAJ de la carte
       return {

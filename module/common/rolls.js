@@ -222,7 +222,8 @@ export async function jetCompetence({
       roll: renderedRoll
     };
 
-    await new TrinitesChat(actor).withTemplate(messageTemplate).withData(templateContext).withRoll(rollResult).create();
+    let chat = await new TrinitesChat(actor).withTemplate(messageTemplate).withData(templateContext).withRoll(rollResult).create();
+    await chat.display();
   }
 }
 
@@ -400,7 +401,8 @@ export async function jetRessource({ actor = null, ressource = null, coutAcquisi
       roll: renderedRoll,
     };
 
-    await new TrinitesChat(actor).withTemplate(messageTemplate).withData(templateContext).withRoll(rollResult).create();
+    let chat = await new TrinitesChat(actor).withTemplate(messageTemplate).withData(templateContext).withRoll(rollResult).create();
+    await chat.display();
   }
 
   if (actor.isTrinite) {
@@ -696,7 +698,8 @@ export async function jetArme({
       roll: renderedRoll
     };
 
-    await new TrinitesChat(actor).withTemplate(messageTemplate).withData(templateContext).withRoll(rollResult).create();
+    let chat = await new TrinitesChat(actor).withTemplate(messageTemplate).withData(templateContext).withRoll(rollResult).create();
+    await chat.display();
   }
 }
 

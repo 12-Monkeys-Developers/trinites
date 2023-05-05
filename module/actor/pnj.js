@@ -71,6 +71,7 @@ export default class TrinitesPnj extends TrinitesActor {
 
   get canUseSouffle() {
     if (this.isArchonteRoi) return true;
+    return false;
   }
 
   /**
@@ -96,7 +97,7 @@ export default class TrinitesPnj extends TrinitesActor {
   coutPouvoir(typePouvoir) {
     // Aura
     if (typePouvoir === "zodiaque") {
-      if (this.system.cout.aura !== "0") {
+      if (this.system.cout.aura !== null) {
         return parseInt(this.system.cout.aura);
       }
       if (this.isArchonteRoi || this.isLige) {
@@ -107,7 +108,7 @@ export default class TrinitesPnj extends TrinitesActor {
 
     // Verset
     if (typePouvoir === "grandLivre") {
-      if (this.system.cout.verset !== "0") {
+      if (this.system.cout.verset !== null) {
         return parseInt(this.system.cout.verset);
       }
       if (this.isArchonteRoi || this.isLige) {
@@ -118,7 +119,7 @@ export default class TrinitesPnj extends TrinitesActor {
 
     // Atout
     if (typePouvoir === "lameSoeur") {
-      if (this.system.cout.atout !== "0") {
+      if (this.system.cout.atout !== null) {
         return parseInt(this.system.cout.atout);
       }
       if (this.isArchonteRoi || this.isLige) {
@@ -136,11 +137,20 @@ export default class TrinitesPnj extends TrinitesActor {
     if (typeKarma === "lumiere") source = "deva";
     if (typeKarma === "tenebre") source = "archonte";
 
+    if (typeKarma === "neutre") {
+      if (this.system.karmaLumiere.value !== 0 && this.system.karmaTenebres.value === 0) {
+        source = "deva";
+      } else if (this.system.karmaLumiere.value === 0 && this.system.karmaTenebres.value !== 0) {
+        source = "archonte";
+      }
+    }
+
     return source;
   }
 
-  // Vide toutes les sources de Karma (Esprit et Adam) du type donné
+  // Vide toutes les sources de Karma du type donné
   viderKarma(typeKarma) {
+    if (typeKarma === "neutre") this.update({ "system.karmaLumiere.value": 0, "system.karmaTenebres.value": 0 });
     if (typeKarma === "lumiere") this.update({ "system.karmaLumiere.value": 0 });
     if (typeKarma === "tenebre") this.update({ "system.karmaTenebres.value": 0 });
   }

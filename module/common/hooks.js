@@ -12,4 +12,18 @@ export default function registerHooks() {
     html.on("click", "a.details.atout", TrinitesChat.onDetailsAtout);
     html.on("click", "a.details.verset", TrinitesChat.onDetailsVerset);
   });
+
+  Hooks.on('preCreateActor', (doc, createData, options, userid) => {
+    let createChanges = {};
+    mergeObject(createChanges, {
+      'prototypeToken.displayName': CONST.TOKEN_DISPLAY_MODES.OWNER_HOVER,
+      'prototypeToken.disposition': CONST.TOKEN_DISPOSITIONS.NEUTRAL
+    });
+  
+    if (doc.type === 'trinite') {
+      createChanges.prototypeToken.sight= {enabled: true,range:1};
+      createChanges.prototypeToken.actorLink = true;
+    } 
+    doc.updateSource(createChanges);
+  });
 }

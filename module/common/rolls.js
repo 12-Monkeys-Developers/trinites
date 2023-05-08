@@ -199,6 +199,11 @@ export async function jetCompetence({
   rollData.resultatJet = resultatJet;
   rollData.nbDes = nbDes;
 
+  // Gestion des primes en cas de succès
+  if (resultatJet === "reussite") {
+    await handleModificateurs(actor, modificateurs);
+  }
+
   if (envoiMessage) {
     // Construction du jeu de données pour alimenter le template
     let rollStats = {
@@ -675,6 +680,11 @@ export async function jetArme({
     }
   }
 
+  // Gestion des primes en cas de succès
+  if (resultatJet === "reussite") {
+    await handleModificateurs(actor, modificateurs);
+  }
+  
   // Primes et pénalités
   rollData.modificateurs = modificateurs;
 
@@ -779,6 +789,21 @@ function updateModificateurs(dialogOptions, modificateurs) {
   for (const key in modificateurs) {
     if (modificateurs.hasOwnProperty(key) && dialogOptions.modificateurs.hasOwnProperty(key)) {
       modificateurs[key] = dialogOptions.modificateurs[key];
+    }
+  }
+}
+
+// Gestion des primes en cas de succès
+async function handleModificateurs(actor, modificateurs) {
+  const effects = [
+    { key: "acceleration", multiplier: 3 },
+    { key: "ralentissement", multiplier: 3 },
+  ];
+
+  for (const effect of effects) {
+    if (modificateurs[effect.key] > 0) {
+      const mod = effect.multiplier * modificateurs[effect.key];
+      await actor.setFlag("world", effect.key, mod);
     }
   }
 }

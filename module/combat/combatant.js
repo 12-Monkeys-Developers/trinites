@@ -2,20 +2,40 @@ export default class TrinitesCombatant extends Combatant {
 
     _onCreate(data, options, userID) {
         super._onCreate(data, options, userID);
-        if(game.user.isGM) console.log('Combatant created', data);
-        if(game.user.isGM) this.setFlag("world", "position", "garde");
+        if (game.user.isGM) {
+            console.log('Combatant created', data);
+            this.setFlag("world", "position", "garde");
+            this.setFlag("world", "acceleration", 0);
+            this.setFlag("world", "ralentissement", 0);
+            this.setFlag("world", "played", false);
+            this.setFlag("world", "nbPlayed", 0);
+        }
     }
 
     get isAction() {
-        return this.flags.world.position === "action";
+        return this.getFlag("world", "position") === "action";
     }
 
     get isGarde() {
-        return this.flags.world.position === "garde";
+        return this.getFlag("world", "position") === "garde";
     }
 
     get isRetrait() {
-        return this.flags.world.position === "retrait";
+        return this.getFlag("world", "position") === "retrait";
+    }
+
+    get hasPlayed() {
+        return this.getFlag("world", "played") === true;
+    }
+
+    get canPlay() {
+        if (!this.hasPlayed) {
+            return true;
+        }
+        else {
+            if (this.getFlag("world","nbPlayed") < 2) return true;
+        }
+        return false;
     }
 
     async setAction() {
@@ -29,4 +49,17 @@ export default class TrinitesCombatant extends Combatant {
     async setRetrait() {
         await this.setFlag("world", "position", "retrait");
     }
+
+    async resetFlags() {
+        await this.unsetFlag("world", "acceleration");
+        await this.unsetFlag("world", "ralentissement");
+    }
+
+    async setPlayed() {
+        await this.setFlag("world", "played", true);
+        let nbPlay = this.getFlag("world", "nbPlayed");
+        await this.setFlag("world", "nbPlayed", nbPlay++);
+    }
+
+    
 }

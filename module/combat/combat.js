@@ -40,13 +40,14 @@ export default class TrinitesCombat extends Combat {
     for (const combatant of this.turns) {
       if (combatant.isGarde) await combatant.setAction();
       if (combatant.isRetrait) await combatant.setGarde();
+      combatant.resetFlags();
     }
 
     // Détermination du premier joueur
     let turn = 0;
     let next = null;
     for (let [i, t] of this.turns.entries()) {
-      if (t.isGarde || t.isRetrait) continue;
+      if (t.isGarde || t.isRetrait || !t.canPlay) continue;
       next = i;
       break;
     }
@@ -62,34 +63,71 @@ export default class TrinitesCombat extends Combat {
    */
   async nextTurn() {
     let currentTurn = this.turn ?? -1;
-    let turn = this.turn ?? -1;
     let skip = this.settings.skipDefeated;
 
+    // Update the combatant
+    if (currentTurn !== -1) {
+      let combatant = this.turns[currentTurn];
+
+      let actor = game.actors.get(combatant.actorId);
+      let newInitiative = combatant.initiative;
+      if (actor.flags?.world?.acceleration && actor.flags.world.acceleration > 0) {
+        newInitiative += actor.flags.world.acceleration;        
+        await actor.update({'flags.world.acceleration': 0});
+      }
+      if (actor.flags?.world?.ralentissement && actor.flags.world.ralentissement > 0) {
+        newInitiative -= actor.flags.world.ralentissement;        
+        await actor.update({'flags.world.ralentissement': 0});
+      }      
+
+      // Initiative < 1
+      if (newInitiative < 1) {
+        newInitiative += 12;
+        if (combatant.isAction) await combatant.setGarde();
+        if (combatant.isGarde) await combatant.setRetrait();
+      }      
+      // Initiative > 12
+      else if (newInitiative > 12) {
+        newInitiative -= 12;
+        if (combatant.isRetrait) await combatant.setGarde();
+        if (combatant.isGarde) await combatant.setAction();
+      }
+      else {
+        await combatant.setGarde();
+      }
+      
+      //await this.updateEmbeddedDocuments("Combatant", [{_id: combatant.id, initiative: newInitiative}]);
+      await combatant.setPlayed();
+      await combatant.update({initiative: newInitiative});
+    }
+
     // Determine the next turn number
+    /*
     let next = null;
     if (skip) {
       for (let [i, t] of this.turns.entries()) {
-        if (i <= turn) continue;
+        //if (i <= turn) continue;
         if (t.isDefeated) continue;
-        if (t.isGarde || t.isRetrait) continue;
+        if (t.isGarde || t.isRetrait || t.hasPlayed) continue;
         next = i;
         break;
       }
     } else {
       // Ignore En garde or En retrait
       for (let [i, t] of this.turns.entries()) {
-        if (i <= turn) continue;
-        if (t.isGarde || t.isRetrait) continue;
+        //if (i <= turn) continue;
+        if (t.isGarde || t.isRetrait || t.hasPlayed) continue;
         next = i;
         break;
       }
-    }
-
-    // Update the combatant
-    if (currentTurn !== -1) {
-      let combatant = this.turns[currentTurn];
-      await combatant.setGarde();
-    }
+    }*/
+    let next = null;
+    for (let [i, t] of this.turns.entries()) {
+      if (skip && t.isDefeated) continue;
+      if (t.isGarde || t.isRetrait || !t.canPlay) continue;
+      next = i;
+      break;
+    } 
 
     // Maybe advance to the next round
     let round = this.round;
@@ -133,4 +171,8 @@ export default class TrinitesCombat extends Combat {
     Hooks.callAll("combatRound", this, updateData, updateOptions);
     return this.update(updateData, updateOptions);
   }
+
+/*  get hasAcceleration() {
+    return this.flags.world.acceleration > 0;
+  }*/
 }

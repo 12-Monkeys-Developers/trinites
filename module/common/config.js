@@ -335,7 +335,7 @@ TRINITES.savoirsOccultes = {
   },
   oblat: {
     label :"Technique de l'Oblat",
-    origine:"L'Oblat'"
+    origine:"L'Oblat"
   },
 };
   

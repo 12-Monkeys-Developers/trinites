@@ -363,7 +363,7 @@ export default class TrinitesActorSheet extends ActorSheet {
       degats: item.system.degats,
       portee: item.system.portee,
       particularites: item.system.particularites,
-      epee: item.system.epee,
+      epee: item.system.epee
     };
 
     const signe = item.system.competence === "tir" ? "sagittaire" : "belier";

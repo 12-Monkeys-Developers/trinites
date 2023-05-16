@@ -586,7 +586,8 @@ export async function jetArme({
     karmaAdam: karmaAdam,
     typeActor: actor.sousType,
     typeArme: type,
-    arme: arme
+    arme: arme,
+    degats: arme.degats
   };
 
   // Modificateur de difficulté du jet
@@ -688,6 +689,21 @@ export async function jetArme({
   // Primes et pénalités
   rollData.modificateurs = modificateurs;
 
+  // Prime Attaques multiples : dégâts divisés par 2
+  if (modificateurs.attaquesMultiples > 0) {
+    rollData.degats = Math.round(rollData.degats/2);
+  }
+
+  // Prime Blessure grave : dégâts multipliés par 1,5
+  if (modificateurs.blessureGrave > 0) {
+    rollData.degats = Math.round(rollData.degats*1.5);
+  }
+
+  // Pénalité Blessure légère : dégâts divisés par 2
+  if (modificateurs.blessureLegere > 0) {
+    rollData.degats = Math.round(rollData.degats/2);
+  }
+
   rollData.resultatJet = resultatJet;
   rollData.nbDes = nbDes;
 
@@ -785,6 +801,11 @@ function _processJetArmeOptions(form) {
   };
 }
 
+/**
+ * Met à jour l'objet modificateur avec toutes les valeurs de dialogOptions
+ * @param {*} dialogOptions 
+ * @param {*} modificateurs 
+ */
 function updateModificateurs(dialogOptions, modificateurs) {
   for (const key in modificateurs) {
     if (modificateurs.hasOwnProperty(key) && dialogOptions.modificateurs.hasOwnProperty(key)) {
@@ -793,11 +814,17 @@ function updateModificateurs(dialogOptions, modificateurs) {
   }
 }
 
-// Gestion des primes en cas de succès
+/**
+ * Gestion des primes et pénalités en cas de succès
+ * Ajoute un flag dans l'acteur avec le modificateur final
+ * @param {Object} actor - L'objet acteur à modifier.
+ * @param {Object} modificateurs - Un objet contenant les clés des modificateurs à appliquer et leurs valeurs correspondantes.
+ */
 async function handleModificateurs(actor, modificateurs) {
   const effects = [
     { key: "acceleration", multiplier: 3 },
     { key: "ralentissement", multiplier: 3 },
+    { key: "attaquesMultiples", multiplier: 0.5}
   ];
 
   for (const effect of effects) {

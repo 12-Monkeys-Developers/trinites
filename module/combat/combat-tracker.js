@@ -42,7 +42,7 @@ export default class TrinitesCombatTracker extends CombatTracker {
     const combat = this.viewed;
     const combatant = combat.combatants.get(li.dataset.combatantId);
 
-    if (!combatant.flags.world.position) await combatant.setFlag("world", "position", "action");
+    if (!combatant.getFlag("world","position")) await combatant.setFlag("world", "position", "action");
     else await combatant.setFlag("world", "position", "action");
   }
 
@@ -58,7 +58,7 @@ export default class TrinitesCombatTracker extends CombatTracker {
     const combat = this.viewed;
     const combatant = combat.combatants.get(li.dataset.combatantId);
 
-    if (!combatant.flags.world.position) await combatant.setFlag("world", "position", "garde");
+    if (!combatant.getFlag("world","position")) await combatant.setFlag("world", "position", "garde");
     else await combatant.setFlag("world", "position", "garde");
   }
 
@@ -74,7 +74,7 @@ export default class TrinitesCombatTracker extends CombatTracker {
     const combat = this.viewed;
     const combatant = combat.combatants.get(li.dataset.combatantId);
 
-    if (!combatant.flags.world.position) await combatant.setFlag("world", "position", "retrait");
+    if (!combatant.getFlag("world","position")) await combatant.setFlag("world", "position", "retrait");
     else await combatant.setFlag("world", "position", "retrait");
   }
 }

@@ -80,13 +80,11 @@ export default class TrinitesCombat extends Combat {
         await actor.update({'flags.world.ralentissement': 0});
       }      
 
-      // Initiative < 1
       if (newInitiative < 1) {
         newInitiative += 12;
         if (combatant.isAction) await combatant.setGarde();
         if (combatant.isGarde) await combatant.setRetrait();
       }      
-      // Initiative > 12
       else if (newInitiative > 12) {
         newInitiative -= 12;
         if (combatant.isRetrait) await combatant.setGarde();
@@ -96,31 +94,11 @@ export default class TrinitesCombat extends Combat {
         await combatant.setGarde();
       }
       
-      //await this.updateEmbeddedDocuments("Combatant", [{_id: combatant.id, initiative: newInitiative}]);
       await combatant.setPlayed();
       await combatant.update({initiative: newInitiative});
     }
 
     // Determine the next turn number
-    /*
-    let next = null;
-    if (skip) {
-      for (let [i, t] of this.turns.entries()) {
-        //if (i <= turn) continue;
-        if (t.isDefeated) continue;
-        if (t.isGarde || t.isRetrait || t.hasPlayed) continue;
-        next = i;
-        break;
-      }
-    } else {
-      // Ignore En garde or En retrait
-      for (let [i, t] of this.turns.entries()) {
-        //if (i <= turn) continue;
-        if (t.isGarde || t.isRetrait || t.hasPlayed) continue;
-        next = i;
-        break;
-      }
-    }*/
     let next = null;
     for (let [i, t] of this.turns.entries()) {
       if (skip && t.isDefeated) continue;
@@ -171,8 +149,4 @@ export default class TrinitesCombat extends Combat {
     Hooks.callAll("combatRound", this, updateData, updateOptions);
     return this.update(updateData, updateOptions);
   }
-
-/*  get hasAcceleration() {
-    return this.flags.world.acceleration > 0;
-  }*/
 }

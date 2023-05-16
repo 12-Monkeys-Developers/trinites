@@ -141,19 +141,31 @@ export default class TrinitesActorSheet extends ActorSheet {
     this.actor.update({ "system.ressources.richesse.epuisee": false });
   }
 
-  _onCocherCaseDeVie(event) {
+  async _onCocherCaseDeVie(event) {
     event.preventDefault();
     const element = event.currentTarget;
 
     let indexVie = element.dataset.index;
-    let blessureVal = this.actor.system.nbBlessure !== indexVie ? indexVie : indexVie - 1;
+    const blessureValInitial = parseInt(this.actor.system.nbBlessure);
+    let blessureVal = parseInt(this.actor.system.nbBlessure !== indexVie ? indexVie : indexVie - 1);
 
-    this.actor.update({ "system.nbBlessure": blessureVal });
+    await this.actor.update({ "system.nbBlessure": blessureVal });
+
+    // Gestion de la douleur pour une nouvelle blessure 
+    if (blessureVal > blessureValInitial && this.actor.system.etatSante === "blesse") {
+      // Recherche des combats éventuels
+      for (const combat of game.combats) {
+        let combatant = combat.turns.find(c => c.actorId === this.actor.id && c.initiative !== null);
+        if (combatant !== undefined) {
+          const newInitiative = Math.max(combatant.initiative -= 3, 0);
+          combatant.update({initiative: newInitiative});
+        }        
+      }
+    }    
   }
 
   async _onRegenerationSante(event) {
     event.preventDefault();
-    // Const element = event.currentTarget;
 
     let typeKarma = "";
     if (this.actor.type === "trinite") {

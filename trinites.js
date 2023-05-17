@@ -2,6 +2,7 @@ import { TRINITES } from "./module/common/config.js";
 import preloadTemplates from "./module/common/templates.js";
 import registerHandlebarsHelpers from "./module/common/helpers.js"
 import registerSystemSettings from './module/common/settings.js';
+import registerHooks from "./module/common/hooks.js";
 
 import TrinitesTriniteSheet from "./module/actor/sheet/trinite-sheet.js";
 import TrinitesPnjSheet from "./module/actor/sheet/pnj-sheet.js";
@@ -16,7 +17,10 @@ import { TrinitesActorProxy } from "./module/actor/proxy.js";
 
 import { Log } from "./module/common/log.js";
 import { LOG_HEAD } from "./module/common/constants.js";
-import registerHooks from "./module/common/hooks.js";
+
+import TrinitesCombatTracker from "./module/combat/combat-tracker.js";
+import TrinitesCombatant from "./module/combat/combatant.js";
+import TrinitesCombat from "./module/combat/combat.js";
 
 
 Hooks.once("init", function() {
@@ -30,6 +34,9 @@ Hooks.once("init", function() {
 
     CONFIG.Actor.documentClass = TrinitesActorProxy;
     CONFIG.Item.documentClass = TrinitesItemProxy;
+    CONFIG.ui.combat = TrinitesCombatTracker;
+    CONFIG.Combat.documentClass = TrinitesCombat;
+    CONFIG.Combatant.documentClass = TrinitesCombatant;
 
     Log.info(CONFIG);
 

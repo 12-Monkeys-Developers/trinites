@@ -575,7 +575,7 @@
     }
   },
   "Item": {
-    "types": ["ame", "arme", "armure", "atout", "aura", "domaine", "jardin", "majeste", "metier", "objet", "pouvoir", "verset", "vieAnterieure"],
+    "types": ["ame", "arme", "armure", "atout", "aura", "domaine", "jardin", "majeste", "metier", "objet", "pouvoir", "pouvoirDragonnet", "verset", "vieAnterieure"],
     "ame": {
       "epreuve": "",
       "description": ""
@@ -665,6 +665,10 @@
     },
     "pouvoir": {
       "savoirOcculte": "autre",
+      "description": ""
+    },
+    "pouvoirDragonnet": {
+      "messager": "autre",
       "description": ""
     },
     "verset": {

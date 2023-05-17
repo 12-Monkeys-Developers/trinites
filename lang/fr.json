@@ -15,6 +15,7 @@
         "TypeMetier": "Métier",
         "TypeObjet": "Objet",
         "TypePouvoir": "Pouvoir",
+        "pouvoirDragonnet":"Pouvoir de Dragonnet",
         "TypeVieanterieure": "Vie Antérieure",
         "TypeVerset": "Verset"
     },

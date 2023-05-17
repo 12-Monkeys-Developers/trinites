@@ -16,6 +16,7 @@ export default async function preloadTemplates() {
     "systems/trinites/templates/sheets/items/metier-sheet.html",
     "systems/trinites/templates/sheets/items/objet-sheet.html",
     "systems/trinites/templates/sheets/items/pouvoir-sheet.html",
+    "systems/trinites/templates/sheets/items/pouvoirDragonnet-sheet.html",
     "systems/trinites/templates/sheets/items/verset-sheet.html",
     "systems/trinites/templates/sheets/items/jardin-sheet.html",
     "systems/trinites/templates/sheets/items/majeste-sheet.html",

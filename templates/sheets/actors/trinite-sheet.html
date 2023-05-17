@@ -1,6 +1,6 @@
 <form class="{{cssClass}}" autocomplete="off">
     <header class="sheet-header">
-        {{> "systems/trinites/templates/partials/actor/bloc-info-personnage.hbs"}}
+        {{> "systems/trinites/templates/partials/actor/trinite-bloc-info.hbs"}}
     </header>
     <nav class="sheet-tabs tabs" data-group="principal">
         <a class="item tab-profane" data-tab="profane">Profane</a>
@@ -14,9 +14,9 @@
     <section class="sheet-body">
         <div class="tab tab-profane" data-group="principal" data-tab="profane">
             {{#if unlocked}}
-                {{> "systems/trinites/templates/partials/actor/bloc-profane-personnage-unlocked.hbs"}}
+                {{> "systems/trinites/templates/partials/actor/trinite-bloc-profane-unlocked.hbs"}}
             {{else}}
-                {{> "systems/trinites/templates/partials/actor/bloc-profane-personnage.hbs"}}
+                {{> "systems/trinites/templates/partials/actor/trinite-bloc-profane.hbs"}}
             {{/if}}            
         </div>
         <div class="tab tab-equipement" data-tab="equipement">
@@ -25,7 +25,7 @@
         <div class="tab tab-occulte" data-group="principal" data-tab="occulte">
             <div class="deux-col-50-50">
                 <div class="col-A">
-                    {{> "systems/trinites/templates/partials/actor/bloc-themeAstral-personnage.hbs"}}
+                    {{> "systems/trinites/templates/partials/actor/bloc-theme-astral.hbs"}}
                 </div>
                 <div class="col-B">
                     <div class="expe-bloc">
@@ -41,19 +41,19 @@
                 </div>
             </div>
             {{#if unlocked}}
-                {{> "systems/trinites/templates/partials/actor/bloc-karma-trinite-unlocked.hbs"}}
+                {{> "systems/trinites/templates/partials/actor/trinite-bloc-karma-unlocked.hbs"}}
             {{else}}
-                {{> "systems/trinites/templates/partials/actor/bloc-karma-trinite.hbs"}}
+                {{> "systems/trinites/templates/partials/actor/trinite-bloc-karma.hbs"}}
             {{/if}}            
         </div>
         <div class="tab tab-zodiaque" data-group="principal" data-tab="zodiaque">
-            {{> "systems/trinites/templates/partials/actor/bloc-zodiaque-personnage.hbs"}}
+            {{> "systems/trinites/templates/partials/actor/trinite-bloc-zodiaque.hbs"}}
         </div>
         <div class="tab tab-grand-livre" data-group="principal" data-tab="grand-livre">
-            {{> "systems/trinites/templates/partials/actor/bloc-grandLivre-trinite.hbs"}}
+            {{> "systems/trinites/templates/partials/actor/trinite-bloc-grand-livre.hbs"}}
         </div>
         <div class="tab tab-lame-soeur" data-group="principal" data-tab="lame-soeur">
-            {{> "systems/trinites/templates/partials/actor/bloc-lameSoeur-trinite.hbs"}}
+            {{> "systems/trinites/templates/partials/actor/trinite-bloc-lame-soeur.hbs"}}
         </div>
         <div class="tab tab-description" data-group="principal" data-tab="description">
             <h3> DESCRIPTION</h3> 

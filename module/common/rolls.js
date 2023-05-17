@@ -77,6 +77,15 @@ export async function jetCompetence({
 
   // Définition de la formule de base du jet
   let modFormula = " + @valeur";
+
+  if (modificateurs.efficacite > 0) {
+    modFormula += " + 3"
+  }
+
+  if (modificateurs.penaliteDifficulte > 0) {
+    modFormula += " - 3"
+  }
+
   // Données de base du jet
   let label = game.i18n.localize(`TRINITES.label.competences.${signe}.${competence}`);
   let karmaAdam = actor.isTrinite ? actorData.trinite.adam.karma.type : "tenebre";
@@ -118,83 +127,26 @@ export async function jetCompetence({
     modFormula += " + @malusActionLibre";
   }
 
-  let rollFormula = null;
-
   nbDes = actor.nbDes ?? nbDes;
-
-  if (nbDes == 2) {
-    let basePremierDe = (actor.isTrinite ? "1d12x[white]" : "1d12x[black]") + modFormula;
-    let baseDeuxiemeDe = "1d12x[black]" + modFormula;
-    rollFormula = `{${basePremierDe}, ${baseDeuxiemeDe}}`;
-  } else {
-    rollFormula = "1d12x" + modFormula;
-  }
+  let rollFormula = _getFormula(nbDes, actor, modFormula);
 
   let rollResult = await new Roll(rollFormula, rollData).roll({ async: true });
 
-  // Primes et pénalités
-  rollData.modificateurs = modificateurs;
-
-  let resultDeva;
-  let resultArchonte;
-
-  if (nbDes === 2) {
-    resultDeva = {
-      dieResult: rollResult.terms[0].rolls[0].dice[0].total,
-      rollTotal: rollResult.terms[0].rolls[0].total,
-      reussite: rollResult.terms[0].rolls[0].total >= 12,
-    };
-    rollData.resultDeva = resultDeva;
-
-    resultArchonte = {
-      dieResult: rollResult.terms[0].rolls[1].dice[0].total,
-      rollTotal: rollResult.terms[0].rolls[1].total,
-      reussite: rollResult.terms[0].rolls[1].total >= 12,
-    };
-    rollData.resultArchonte = resultArchonte;
-  } else {
-    resultDeva = {
-      dieResult: rollResult.terms[0].total,
-      rollTotal: rollResult.total,
-      reussite: rollResult.total >= 12,
-    };
-    rollData.resultDeva = resultDeva;
-  }
+  let { resultDeva, resultArchonte } = _getDicesResult(nbDes, rollResult);
+  rollData.resultDeva = resultDeva;
+  rollData.resultArchonte = resultArchonte;
 
   // Gestion de la réussite selon le Karma
-  let resultatJet = "echec";
+  let resultatJet = _getResult(nbDes, actor, karmaAdam, resultDeva, resultArchonte);
 
-  if (nbDes == 2) {
-    if (actor.isTrinite) {
-      if (karmaAdam == "lumiere") {
-        if (resultDeva.reussite) {
-          resultatJet = "reussite";
-        } else if (resultArchonte.reussite) {
-          resultatJet = "detteArchonte";
-        }
-      } else if (karmaAdam == "tenebre") {
-        if (resultArchonte.reussite) {
-          resultatJet = "reussite";
-        } else if (resultDeva.reussite) {
-          resultatJet = "detteDeva";
-        }
-      } else {
-        if (resultDeva.reussite || resultArchonte.reussite) {
-          resultatJet = "reussite";
-        }
-      }
-    }
+  // Gestion des primes en cas de succès
+  //TODO A conserver ?
+  /*if (resultatJet === "reussite") {
+    await handleModificateurs(actor, modificateurs);
+  }*/
 
-    if (actor.isArchonteRoi || actor.isLige) {
-      if (resultDeva.reussite || resultArchonte.reussite) {
-        resultatJet = "reussite";
-      }
-    }
-  } else {
-    if (resultDeva.reussite) {
-      resultatJet = "reussite";
-    }
-  }
+  // Primes et pénalités
+  rollData.modificateurs = modificateurs;
 
   rollData.resultatJet = resultatJet;
   rollData.nbDes = nbDes;
@@ -202,7 +154,7 @@ export async function jetCompetence({
   if (envoiMessage) {
     // Construction du jeu de données pour alimenter le template
     let rollStats = {
-      ...rollData,
+      ...rollData
     };
 
     let messageTemplate;
@@ -222,7 +174,8 @@ export async function jetCompetence({
       roll: renderedRoll
     };
 
-    await new TrinitesChat(actor).withTemplate(messageTemplate).withData(templateContext).withRoll(rollResult).create();
+    let chat = await new TrinitesChat(actor).withTemplate(messageTemplate).withData(templateContext).withRoll(rollResult).create();
+    await chat.display();
   }
 }
 
@@ -400,7 +353,8 @@ export async function jetRessource({ actor = null, ressource = null, coutAcquisi
       roll: renderedRoll,
     };
 
-    await new TrinitesChat(actor).withTemplate(messageTemplate).withData(templateContext).withRoll(rollResult).create();
+    let chat = await new TrinitesChat(actor).withTemplate(messageTemplate).withData(templateContext).withRoll(rollResult).create();
+    await chat.display();
   }
 
   if (actor.isTrinite) {
@@ -567,6 +521,14 @@ export async function jetArme({
 
   let modFormula = " + @valeur";
 
+  if (modificateurs.efficacite > 0) {
+    modFormula += " + 3"
+  }
+
+  if (modificateurs.penaliteDifficulte > 0) {
+    modFormula += " - 3"
+  }
+
   // Données de base du jet
   let valeur = actorData.competences[signe][competence].valeur;
   let label = game.i18n.localize(`TRINITES.label.competences.${signe}.${competence}`);
@@ -579,7 +541,8 @@ export async function jetArme({
     karmaAdam: karmaAdam,
     typeActor: actor.sousType,
     typeArme: type,
-    arme: arme
+    arme: arme,
+    degats: arme.degats
   };
 
   // Modificateur de difficulté du jet
@@ -599,82 +562,40 @@ export async function jetArme({
     modFormula += " + @malusActionLibre";
   }
 
-  let rollFormula = null;
-
   nbDes = actor.nbDes ?? nbDes;
-
-  if (nbDes == 2) {
-    let basePremierDe = (actor.isTrinite ? "1d12x[white]" : "1d12x[black]") + modFormula;
-    let baseDeuxiemeDe = "1d12x[black]" + modFormula;
-    rollFormula = `{${basePremierDe}, ${baseDeuxiemeDe}}`;
-  } else {
-    rollFormula = "1d12x" + modFormula;
-  }
+  let rollFormula = _getFormula(nbDes, actor, modFormula);
 
   let rollResult = await new Roll(rollFormula, rollData).roll({ async: true });
-  let resultDeva;
-  let resultArchonte;
 
-  if (nbDes === 2) {
-    resultDeva = {
-      dieResult: rollResult.terms[0].rolls[0].dice[0].total,
-      rollTotal: rollResult.terms[0].rolls[0].total,
-      reussite: rollResult.terms[0].rolls[0].total >= 12,
-    };
-    rollData.resultDeva = resultDeva;
-
-    resultArchonte = {
-      dieResult: rollResult.terms[0].rolls[1].dice[0].total,
-      rollTotal: rollResult.terms[0].rolls[1].total,
-      reussite: rollResult.terms[0].rolls[1].total >= 12,
-    };
-    rollData.resultArchonte = resultArchonte;
-  } else {
-    resultDeva = {
-      dieResult: rollResult.terms[0].total,
-      rollTotal: rollResult.total,
-      reussite: rollResult.total >= 12,
-    };
-    rollData.resultDeva = resultDeva;
-  }
+  let { resultDeva, resultArchonte } = _getDicesResult(nbDes, rollResult);
+  rollData.resultDeva = resultDeva;
+  rollData.resultArchonte = resultArchonte;
 
   // Gestion de la réussite selon le Karma
-  let resultatJet = "echec";
+  let resultatJet = _getResult(nbDes, actor, karmaAdam, resultDeva, resultArchonte);
 
-  if (nbDes == 2) {
-    if (actor.isTrinite) {
-      if (karmaAdam == "lumiere") {
-        if (resultDeva.reussite) {
-          resultatJet = "reussite";
-        } else if (resultArchonte.reussite) {
-          resultatJet = "detteArchonte";
-        }
-      } else if (karmaAdam == "tenebre") {
-        if (resultArchonte.reussite) {
-          resultatJet = "reussite";
-        } else if (resultDeva.reussite) {
-          resultatJet = "detteDeva";
-        }
-      } else {
-        if (resultDeva.reussite || resultArchonte.reussite) {
-          resultatJet = "reussite";
-        }
-      }
-    }
-
-    if (actor.isArchonteRoi || actor.isLige) {
-      if (resultDeva.reussite || resultArchonte.reussite) {
-        resultatJet = "reussite";
-      }
-    }
-  } else {
-    if (resultDeva.reussite) {
-      resultatJet = "reussite";
-    }
+  // Gestion des primes en cas de succès
+  if (resultatJet === "reussite") {
+    await handleModificateurs(actor, modificateurs);
   }
-
+  
   // Primes et pénalités
   rollData.modificateurs = modificateurs;
+
+  // Prime Attaques multiples : dégâts divisés par 2
+  if (modificateurs.attaquesMultiples > 0) {
+    rollData.degats = Math.round(rollData.degats/2);
+  }
+
+  // Prime Blessure grave : dégâts multipliés par 1,5
+  if (modificateurs.blessureGrave > 0) {
+    rollData.degats = Math.round(rollData.degats*1.5);
+  }
+
+  // Pénalité Blessure légère : dégâts divisés par 2
+  if (modificateurs.blessureLegere > 0) {
+    rollData.degats = Math.round(rollData.degats/2);
+  }
 
   rollData.resultatJet = resultatJet;
   rollData.nbDes = nbDes;
@@ -696,8 +617,99 @@ export async function jetArme({
       roll: renderedRoll
     };
 
-    await new TrinitesChat(actor).withTemplate(messageTemplate).withData(templateContext).withRoll(rollResult).create();
+    let chat = await new TrinitesChat(actor).withTemplate(messageTemplate).withData(templateContext).withRoll(rollResult).create();
+    await chat.display();
   }
+
+
+}
+
+/**
+ * Retourne la formule en fonction du nombre de dés
+ * @param {*} nbDes 
+ * @param {*} actor 
+ * @param {*} modFormula 
+ * @returns 
+ */
+function _getFormula(nbDes, actor, modFormula) {
+  let rollFormula = null;
+  if (nbDes == 2) {
+    let basePremierDe = (actor.isTrinite ? "1d12x[white]" : "1d12x[black]") + modFormula;
+    let baseDeuxiemeDe = "1d12x[black]" + modFormula;
+    rollFormula = `{${basePremierDe}, ${baseDeuxiemeDe}}`;
+  } else {
+    rollFormula = "1d12x" + modFormula;
+  }
+ return rollFormula;
+}
+
+/**
+ * Retourne les résultats pour les dés Deva et Archonte
+ * @param {*} nbDes 
+ * @param {*} rollResult 
+ */
+function _getDicesResult(nbDes, rollResult) {
+  if (nbDes === 2) {
+    const resultDeva = {
+      dieResult: rollResult.terms[0].rolls[0].dice[0].total,
+      rollTotal: rollResult.terms[0].rolls[0].total,
+      reussite: rollResult.terms[0].rolls[0].total >= 12
+    };
+
+    const resultArchonte = {
+      dieResult: rollResult.terms[0].rolls[1].dice[0].total,
+      rollTotal: rollResult.terms[0].rolls[1].total,
+      reussite: rollResult.terms[0].rolls[1].total >= 12
+    };
+
+    return {resultDeva, resultArchonte};
+  } else {
+    const resultDeva = {
+      dieResult: rollResult.terms[0].total,
+      rollTotal: rollResult.total,
+      reussite: rollResult.total >= 12,
+    };
+    return {resultDeva};
+  }
+}
+
+
+function _getResult(nbDes, actor, karmaAdam, resultDeva, resultArchonte) {
+
+    let resultatJet = "echec";
+
+    if (nbDes == 2) {
+      if (actor.isTrinite) {
+        if (karmaAdam == "lumiere") {
+          if (resultDeva.reussite) {
+            resultatJet = "reussite";
+          } else if (resultArchonte.reussite) {
+            resultatJet = "detteArchonte";
+          }
+        } else if (karmaAdam == "tenebre") {
+          if (resultArchonte.reussite) {
+            resultatJet = "reussite";
+          } else if (resultDeva.reussite) {
+            resultatJet = "detteDeva";
+          }
+        } else {
+          if (resultDeva.reussite || resultArchonte.reussite) {
+            resultatJet = "reussite";
+          }
+        }
+      }
+  
+      if (actor.isArchonteRoi || actor.isLige) {
+        if (resultDeva.reussite || resultArchonte.reussite) {
+          resultatJet = "reussite";
+        }
+      }
+    } else {
+      if (resultDeva.reussite) {
+        resultatJet = "reussite";
+      }
+    }
+    return resultatJet;
 }
 
 // Fonction de construction de la boite de dialogue de jet de compétence
@@ -772,10 +784,36 @@ function _processJetArmeOptions(form) {
   };
 }
 
+/**
+ * Met à jour l'objet modificateur avec toutes les valeurs de dialogOptions
+ * @param {*} dialogOptions 
+ * @param {*} modificateurs 
+ */
 function updateModificateurs(dialogOptions, modificateurs) {
   for (const key in modificateurs) {
     if (modificateurs.hasOwnProperty(key) && dialogOptions.modificateurs.hasOwnProperty(key)) {
       modificateurs[key] = dialogOptions.modificateurs[key];
+    }
+  }
+}
+
+/**
+ * Gestion des primes et pénalités en cas de succès
+ * Ajoute un flag dans l'acteur avec le modificateur final
+ * @param {Object} actor - L'objet acteur à modifier.
+ * @param {Object} modificateurs - Un objet contenant les clés des modificateurs à appliquer et leurs valeurs correspondantes.
+ */
+async function handleModificateurs(actor, modificateurs) {
+  const effects = [
+    { key: "acceleration", multiplier: 3 },
+    { key: "ralentissement", multiplier: 3 },
+    { key: "attaquesMultiples", multiplier: 0.5}
+  ];
+
+  for (const effect of effects) {
+    if (modificateurs[effect.key] > 0) {
+      const mod = effect.multiplier * modificateurs[effect.key];
+      await actor.setFlag("world", effect.key, mod);
     }
   }
 }

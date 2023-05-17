@@ -333,12 +333,15 @@ TRINITES.savoirsOccultes = {
     label :"Miracle",
     origine:"La Loge / La Ligue"
   },
+  oblat: {
+    label :"Technique de l'Oblat",
+    origine:"L'Oblat"
+  },
 };
   
 TRINITES.typePnj = {
     archonteRoi: "Archonte-Roi",
     lige: "Lige",
-    humain: "Humain",
-    autre: "Autre"
+    humain: "Humain"
   };
 

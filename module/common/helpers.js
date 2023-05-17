@@ -5,10 +5,6 @@ export default function registerHandlebarsHelpers() {
     return TRINITES[liste][val];
   });
 
-  Handlebars.registerHelper("configLabel", function (liste, val) {
-    return TRINITES[liste][val].label;
-  });
-
   Handlebars.registerHelper("times", function (n, block) {
     var accum = "";
     for (var i = 1; i <= n; ++i) {

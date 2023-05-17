@@ -20,14 +20,6 @@ export default class TrinitesTriniteSheet extends TrinitesActorSheet {
   getData() {
     const data = super.getData();
 
-    data.domaines = data.items.filter((item) => item.type === "domaine");
-    data.versetsLumiere = data.items.filter((item) => item.type === "verset" && item.system.karma === "lumiere");
-    data.versetsTenebres = data.items.filter((item) => item.type === "verset" && item.system.karma === "tenebre");
-    data.auras = data.items.filter((item) => item.type === "aura");
-    data.atouts = data.items.filter((item) => item.type === "atout");
-
-    data.unlocked = this.actor.isUnlocked;
-
     data.hasMetier = this.actor.hasMetier;
     data.hasVieAnterieure = this.actor.hasVieAnterieure;
     data.metierId = this.actor.metierId;
@@ -43,6 +35,7 @@ export default class TrinitesTriniteSheet extends TrinitesActorSheet {
    * @param {DragEvent} event     The concluding DragEvent which contains drop data
    * @param {Object} data         The data transfer extracted from the event
    * @private
+   * @override
    */
   async _onDropItem(event, data) {
     Item.fromDropData(data).then((item) => {
@@ -132,26 +125,8 @@ export default class TrinitesTriniteSheet extends TrinitesActorSheet {
             // Supprimer un domaine
         html.find(".suppr-domaine").click(this._onSupprimerDomaine.bind(this));
 
-        // Régénérer des cases de vie en dépensant du Karma
-        html.find(".regen").click(this._onRegenerationSante.bind(this));
-
-        // Changer la zone de déploiement d'une aura
-        html.find(".zone-deploiement").click(this._onZoneDeploimentAura.bind(this));
-
         // Jet de Lame-soeur
         html.find(".roll-lame").click(this._onJetLame.bind(this));
-
-        // Carte - Atout
-        html.find(".roll-atout").click(this._onCarteAtout.bind(this));
-
-        // Carte - Aura
-        html.find(".roll-aura").click(this._onCarteAura.bind(this));
-
-        // Carte - Verset
-        html.find(".roll-verset").click(this._onCarteVerset.bind(this));
-
-        // Lock/Unlock la fiche
-        html.find(".sheet-change-lock").click(this._onSheetChangelock.bind(this));
 
         // Supprime le métier
         html.find(".delete-metier").click(this._onSupprimerMetier.bind(this));
@@ -165,10 +140,6 @@ export default class TrinitesTriniteSheet extends TrinitesActorSheet {
         // Permet la dépense des points de création
         html.find(".fa-user-unlock").click(this._onAllowCreation.bind(this));
 
-        // Permet d'afficher la description
-        html.find('.grid-atout .nom-atout').click(this._onItemSummary.bind(this));
-        html.find('.grid-zodiaque .nom-aura').click(this._onItemSummary.bind(this));
-        html.find('.grid-verset .nom-verset').click(this._onItemSummary.bind(this));
       }
     }
   }
@@ -206,26 +177,6 @@ export default class TrinitesTriniteSheet extends TrinitesActorSheet {
     this.actor.changeDomaineEtatEpuise(domaineId, false);
   }
 
-  _onAjoutRichesseEtatEpuise(event) {
-    event.preventDefault();
-    this.actor.update({ "system.ressources.richesse.epuisee": true });
-  }
-
-  _onSupprRichesseEtatEpuise(event) {
-    event.preventDefault();
-    this.actor.update({ "system.ressources.richesse.epuisee": false });
-  }
-
-  _onCocherCaseDeVie(event) {
-    event.preventDefault();
-    const element = event.currentTarget;
-
-    let indexVie = element.dataset.index;
-    let blessureVal = this.actor.system.nbBlessure !== indexVie ? indexVie : indexVie - 1;
-
-    this.actor.update({ "system.nbBlessure": blessureVal });
-  }
-
   _onJetLame(event) {
     event.preventDefault();
     // Const dataset = event.currentTarget.dataset;
@@ -246,29 +197,7 @@ export default class TrinitesTriniteSheet extends TrinitesActorSheet {
       type: "lameSoeur"
     });
   }
-
-  _onCarteAtout(event) {
-    event.preventDefault();
-    const dataset = event.currentTarget.dataset;
-
-    Chat.carteAtout({
-      actor: this.actor,
-      atoutId: dataset.itemId,
-      whisper: !event.shiftKey
-    });
-  }
-
-  _onCarteAura(event) {
-    event.preventDefault();
-    const dataset = event.currentTarget.dataset;
-
-    Chat.carteAura({
-      actor: this.actor,
-      auraId: dataset.itemId,
-      whisper: !event.shiftKey
-    });
-  }
-  
+ 
   async _onSupprimerMetier(event) {
     event.preventDefault();
     this.actor.supprimerMetier();

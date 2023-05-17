@@ -1,4 +1,3 @@
-{{log 'jet-comp' this}}
 <div class="jet-comp">
         <div class="titre-jet-comp">
             <div class="whisper-logo"><span>message privé </span><i class="far fa-eye-slash"></i></div>
@@ -41,15 +40,6 @@
         {{/if}}
 
         {{#if (eq stats.typeActor "humain")}}
-            <div class="grid-jet-comp humain">
-                {{#if (eq stats.resultDeva.dieResult 1)}}
-                    <div class="dice-back"><div class="roll dice-deva echec-crit">{{stats.resultDeva.dieResult}}</div></div>
-                {{else}}
-                    <div class="dice-back"><div class="roll dice-deva">{{stats.resultDeva.dieResult}}</div></div>
-                {{/if}}
-        {{/if}}
-
-        {{#if (eq stats.typeActor "autre")}}
             {{#if (eq stats.nbDes 2)}}
                 <div class="grid-jet-comp archonte-roi">
                 {{#if (eq stats.resultDeva.dieResult 1)}}

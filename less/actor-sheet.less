@@ -200,7 +200,7 @@
     }
 
     .domaines, .competences, .ressources, .lignes-de-vie, .theme-astral, .vie-ante-bloc, .histo-bloc, 
-    .expe-bloc, .karma-ten, .grand-livre, .zodiaque, .lame-soeur, .lame-noire, .pouvoirs {        
+    .expe-bloc, .karma-tenebres, .grand-livre, .zodiaque, .lame-soeur, .pouvoirs, .atouts {        
         padding: 2px;
         margin: 3px;
     }
@@ -937,8 +937,14 @@
         }
     }
 
-    .pouvoirs {
+    .pouvoirs, .atouts {
         min-height: 80px;
+
+        .param {
+            select {
+                background-color: floralwhite;
+            }
+        }
     }
 
     .grid-pouvoirs {
@@ -1098,35 +1104,6 @@
         }
     }
 
-    .lame-noire {
-        display: flex;
-        flex-direction: column;
-
-        .grid-lame {
-            display: grid;
-            grid-template-columns: 1fr 1fr 2em 4.5em 3fr;
-            margin: 3px;
-            align-items: center;
-    
-            select {
-                font-family: "Cabaletta";
-            }
-    
-            label {
-                font-family: "Cabaletta";
-                margin: 2px;
-            }
-    
-            i {
-                font-size: 0.9em;
-            }
-    
-            select, a {
-                margin: 2px;
-            }
-        }
-    }    
-
     .desc-lame {
         margin: 2px;
         font-size: 0.9em;
@@ -1263,18 +1240,18 @@
         }
     }
 
-    .grid-karma-ten {
+    .grid-karma-tenebres {
         display: grid;
         grid-template-columns: 1fr 1fr;
         align-items: center;
         font-family: "Cabaletta";
         margin: 3px;
 
-        .karma-ten-titre {
+        .karma-tenebres-titre {
             margin: 2px;
         }
 
-        .karma-ten-valeur {
+        .karma-tenebres-valeur {
             margin: 2px;
             display: flex;
             align-items: center;

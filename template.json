@@ -1,6 +1,6 @@
 {
   "Actor": {
-    "types": ["trinite", "archonteRoi", "lige", "humain", "pnj"],
+    "types": ["trinite", "pnj"],
     "templates": {
       "information": {
         "description": "",
@@ -483,65 +483,52 @@
           "descendant3": ""
         }
       },
-      "trini": {
-        "trinite": {
-          "deva": {
-            "choeur": "",
-            "karma": {
-              "value": 0,
-              "max": 0,
-              "base": 0,
-              "bonusVA": 0
-            },
-            "dettes": 0,
-            "credits": 0
-          },
-          "archonte": {
-            "legion": "",
-            "karma": {
-              "value": 0,
-              "max": 0,
-              "base": 0,
-              "bonusVA": 0
-            },
-            "dettes": 0,
-            "credits": 0
-          },
-          "adam": {
-            "karma": {
-              "value": 0,
-              "max": 0,
-              "type": ""
-            }
-          }
-        }
-      },
-      "archRoi": {
-        "archonteRoi": {
-          "legion": "",
-          "karma": {
-            "value": 0,
-            "max": 0
-          }
-        }
-      },
-      "lame": {
-        "lameSoeur": {
-          "messager": "",
-          "description": ""
-        }
-      },
-      "lameN": {
-        "lameNoire": {
-          "vagabond": "",
-          "description": ""
-        }
+      "sante": {
+        "nbLigneVie": 3,
+        "pointsLigneVie": 8,
+        "etatSante": "indemne",
+        "nbBlessure": 0
       }
     },
     "trinite": {
-      "templates": ["information", "signes", "competences", "ressources", "theme", "trini", "lame"],
+      "templates": ["information", "signes", "competences", "ressources", "theme", "sante"],
       "metier": "",
       "vieAnterieure": "",
+      "trinite": {
+        "deva": {
+          "choeur": "",
+          "karma": {
+            "value": 0,
+            "max": 0,
+            "base": 0,
+            "bonusVA": 0
+          },
+          "dettes": 0,
+          "credits": 0
+        },
+        "archonte": {
+          "legion": "",
+          "karma": {
+            "value": 0,
+            "max": 0,
+            "base": 0,
+            "bonusVA": 0
+          },
+          "dettes": 0,
+          "credits": 0
+        },
+        "adam": {
+          "karma": {
+            "value": 0,
+            "max": 0,
+            "type": ""
+          }
+        }
+      },
+      "lameSoeur": {
+        "messager": "",
+        "description": ""
+      },
       "experience": {
         "totale": 0,
         "disponible": 0
@@ -551,48 +538,11 @@
         "disponible": 0,
         "finie": false
       },
-      "nbLigneVie": 3,
-      "pointsLigneVie": 8,
-      "etatSante": "indemne",
-      "nbBlessure": 0,
       "oratoire": "",
       "experienceApprentissages": 0
     },
-    "archonteRoi": {
-      "templates": ["information", "signes", "competences", "ressources", "theme", "archRoi", "lameN"],
-      "couverture": "",
-      "historique": "",
-      "domaines": "",
-      "tactique": "",
-      "nbLigneVie": 3,
-      "pointsLigneVie": 8,
-      "etatSante": "indemne",
-      "nbBlessure": 0
-    },
-    "lige": {
-      "templates": ["information", "signes", "competences", "ressources", "theme"],
-      "domaines": "",
-      "tactique": "",
-      "karma": {
-        "value": 0,
-        "max": 0
-      },
-      "nbLigneVie": 3,
-      "pointsLigneVie": 4,
-      "etatSante": "indemne",
-      "nbBlessure": 0
-    },
-    "humain": {
-      "templates": ["information", "signes", "competences", "ressources"],
-      "domaines": "",
-      "tactique": "",
-      "nbLigneVie": 3,
-      "pointsLigneVie": 4,
-      "etatSante": "indemne",
-      "nbBlessure": 0
-    },
     "pnj": {
-      "templates": ["information", "signes", "competences", "ressources"],
+      "templates": ["information", "signes", "competences", "ressources", "sante"],
       "activite": "",
       "domaines": "",
       "tactique": "",
@@ -614,13 +564,18 @@
       },
       "sousType": "autre",
       "cout": {
-        "verset": 1,
-        "aura": 1
+        "verset": null,
+        "aura": null,
+        "atout": null
+      },
+      "legion": "",
+      "lameNoire": {
+        "description": ""
       }
     }
   },
   "Item": {
-    "types": ["ame", "arme", "armure", "atout", "aura", "domaine", "jardin", "majeste", "metier", "objet", "pouvoir", "verset", "vieAnterieure"],
+    "types": ["ame", "arme", "armure", "atout", "aura", "domaine", "jardin", "majeste", "metier", "objet", "pouvoir", "pouvoirDragonnet", "verset", "vieAnterieure"],
     "ame": {
       "epreuve": "",
       "description": ""
@@ -710,6 +665,10 @@
     },
     "pouvoir": {
       "savoirOcculte": "autre",
+      "description": ""
+    },
+    "pouvoirDragonnet": {
+      "messager": "autre",
       "description": ""
     },
     "verset": {

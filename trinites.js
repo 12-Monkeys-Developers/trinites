@@ -2,12 +2,9 @@ import { TRINITES } from "./module/common/config.js";
 import preloadTemplates from "./module/common/templates.js";
 import registerHandlebarsHelpers from "./module/common/helpers.js"
 import registerSystemSettings from './module/common/settings.js';
+import registerHooks from "./module/common/hooks.js";
 
-import TrinitesActorSheet from "./module/actor/sheet/actor-sheet.js";
 import TrinitesTriniteSheet from "./module/actor/sheet/trinite-sheet.js";
-import TrinitesArchonteRoiSheet from "./module/actor/sheet/archonte-roi-sheet.js";
-import TrinitesLigeSheet from "./module/actor/sheet/lige-sheet.js";
-import TrinitesHumainSheet from "./module/actor/sheet/humain-sheet.js";
 import TrinitesPnjSheet from "./module/actor/sheet/pnj-sheet.js";
 
 import TrinitesItemSheet from "./module/item/sheet/item-sheet.js";
@@ -20,7 +17,10 @@ import { TrinitesActorProxy } from "./module/actor/proxy.js";
 
 import { Log } from "./module/common/log.js";
 import { LOG_HEAD } from "./module/common/constants.js";
-import registerHooks from "./module/common/hooks.js";
+
+import TrinitesCombatTracker from "./module/combat/combat-tracker.js";
+import TrinitesCombatant from "./module/combat/combatant.js";
+import TrinitesCombat from "./module/combat/combat.js";
 
 
 Hooks.once("init", function() {
@@ -34,20 +34,19 @@ Hooks.once("init", function() {
 
     CONFIG.Actor.documentClass = TrinitesActorProxy;
     CONFIG.Item.documentClass = TrinitesItemProxy;
+    CONFIG.ui.combat = TrinitesCombatTracker;
+    CONFIG.Combat.documentClass = TrinitesCombat;
+    CONFIG.Combatant.documentClass = TrinitesCombatant;
 
     Log.info(CONFIG);
 
     Actors.unregisterSheet("core", ActorSheet);
-    //Actors.registerSheet("trinites", TrinitesActorSheet, { types: ["humain"], makeDefault: true});  
-    Actors.registerSheet("trinites", TrinitesHumainSheet, { types: ["humain"], makeDefault: true});
     Actors.registerSheet("trinites", TrinitesTriniteSheet, { types: ["trinite"], makeDefault: true});
-    Actors.registerSheet("trinites", TrinitesArchonteRoiSheet, { types: ["archonteRoi"], makeDefault: true});  
-    Actors.registerSheet("trinites", TrinitesLigeSheet, { types: ["lige"], makeDefault: true});  
     Actors.registerSheet("trinites", TrinitesPnjSheet, { types: ["pnj"], makeDefault: true});  
     
 
     Items.unregisterSheet("core", ItemSheet);
-    Items.registerSheet("trinites", TrinitesItemSheet, {types: ["atout", "ame","arme", "armure", "domaine","jardin","majeste","objet","pouvoir","verset"], makeDefault: true});
+    Items.registerSheet("trinites", TrinitesItemSheet, {types: ["atout", "ame","arme", "armure", "domaine","jardin","majeste","objet","pouvoir","pouvoirDragonnet","verset"], makeDefault: true});
     Items.registerSheet("trinites", TrinitesVieAnterieureSheet, { types: ["vieAnterieure"], makeDefault: true});  
     Items.registerSheet("trinites", TrinitesAuraSheet, { types: ["aura"], makeDefault: true});
     Items.registerSheet("trinites", TrinitesMetierSheet, { types: ["metier"], makeDefault: true});

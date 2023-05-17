@@ -20,48 +20,8 @@ export default class TrinitesPnjSheet extends TrinitesActorSheet {
 
   getData() {
     const data = super.getData();
-
-    data.versets = data.items.filter((item) => item.type === "verset");    
-    data.auras = data.items.filter(item => item.type === "aura");  
-    data.atouts = data.items.filter((item) => item.type === "atout");
-    data.pouvoirs = data.items.filter(item => item.type === "pouvoir");
-    data.majestes = data.items.filter(item => item.type === "majeste");
-
-    data.unlocked = this.actor.isUnlocked;
-    data.isArchonteRoi = this.actor.isArchonteRoi;
-
+    data.pouvoirs = data.items.filter((item) => item.type === "pouvoir");
     return data;
-  }
-
-  activateListeners(html) {
-    super.activateListeners(html);
-
-    // Lock/Unlock la fiche
-    html.find(".sheet-change-lock").click(this._onSheetChangelock.bind(this));
-
-    // Régénérer des cases de vie en dépensant du Karma
-    html.find(".regen").click(this._onRegenerationSante.bind(this));
-
-    // Changer la zone de déploiement d'une aura
-    html.find(".zone-deploiement").click(this._onZoneDeploimentAura.bind(this));
-
-    // Jet de Lame noire
-    if (this.actor.isArchonteRoi) html.find(".roll-lame").click(this._onJetLame.bind(this));
-
-    // Carte - Atout
-    html.find(".roll-atout").click(this._onCarteAtout.bind(this));
-
-    // Carte - Aura
-    html.find(".roll-aura").click(this._onCarteAura.bind(this));
-
-    // Carte - Verset
-    html.find(".roll-verset").click(this._onCarteVerset.bind(this));
-
-    // Permet d'afficher la description
-    html.find('.grid-atout .nom-atout').click(this._onItemSummary.bind(this));
-    html.find('.grid-zodiaque .nom-aura').click(this._onItemSummary.bind(this));
-    html.find('.grid-verset .nom-verset').click(this._onItemSummary.bind(this));
-    html.find('.grid-pouvoir .nom-pouvoir').click(this._onItemSummary.bind(this));
   }
 
   /**
@@ -71,6 +31,7 @@ export default class TrinitesPnjSheet extends TrinitesActorSheet {
    * @param {DragEvent} event     The concluding DragEvent which contains drop data
    * @param {Object} data         The data transfer extracted from the event
    * @private
+   * @override
    */
   async _onDropItem(event, data) {
     Item.fromDropData(data).then((item) => {
@@ -82,9 +43,6 @@ export default class TrinitesPnjSheet extends TrinitesActorSheet {
           return ;
         case "aura":
           return this._onDropAuraItem(event, itemData);
-        case "atout":
-            if (this.actor.isArchonteRoi) super._onDropItem(event, data);
-            else return;
         default:
           return super._onDropItem(event, data);
       }
@@ -103,68 +61,5 @@ export default class TrinitesPnjSheet extends TrinitesActorSheet {
       itemData.system.deploiement = "cosme";
       await this.actor.createEmbeddedDocuments("Item", [itemData]);      
     }
-
-  _onAjoutRichesseEtatEpuise(event) {
-    event.preventDefault();
-    this.actor.update({ "system.ressources.richesse.epuisee": true });
-  }
-
-  _onSupprRichesseEtatEpuise(event) {
-    event.preventDefault();
-    this.actor.update({ "system.ressources.richesse.epuisee": false });
-  }
-
-  _onCocherCaseDeVie(event) {
-    event.preventDefault();
-    const element = event.currentTarget;
-
-    let indexVie = element.dataset.index;
-    let blessureVal = this.actor.system.nbBlessure !== indexVie ? indexVie : indexVie - 1;
-
-    this.actor.update({ "system.nbBlessure": blessureVal });
-  }
-
-  _onCarteAtout(event) {
-    event.preventDefault();
-    const dataset = event.currentTarget.dataset;
-
-    Chat.carteAtout({
-      actor: this.actor,
-      atoutId: dataset.itemId,
-      whisper: !event.shiftKey
-    });
-  }
-
-  _onCarteAura(event) {
-    event.preventDefault();
-    const dataset = event.currentTarget.dataset;
-
-    Chat.carteAura({
-      actor: this.actor,
-      auraId: dataset.itemId,
-      whisper: !event.shiftKey
-    });
-  }
-
-  _onJetLame(event) {
-    event.preventDefault();
-    // Const dataset = event.currentTarget.dataset;
-
-    let lame = {
-      competence: "melee",
-      degats: 4,
-      portee: "",
-      particularites: "",
-      epee: true
-    };
-
-    Roll.jetArme({
-      actor: this.actor,
-      signe: "belier",
-      competence: lame.competence,
-      arme: lame,
-      type: "lameSoeur"
-    });
-  }
-
+    
 }

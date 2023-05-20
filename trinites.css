@@ -1935,6 +1935,21 @@
 .carte .ligne-verset .zone {
   margin-left: 5px;
 }
+.dice-selected {
+  border: solid 2px;
+  border-color: floralwhite;
+}
+#combat-tracker h3 {
+  padding: 2px;
+  margin: 5px;
+  border: 1px solid var(--color-border-light-2);
+  border-radius: 3px;
+  box-shadow: 0 0 2px #FFF inset;
+  color: var(--color-text-chat);
+  background: linear-gradient(to left, #ebf8e1ee, #1f546fee, #102c3bee);
+  font-family: "Cabaletta";
+  letter-spacing: 2px;
+}
 .dialog-buttons button:hover,
 .dialog-buttons button:focus {
   box-shadow: 0 0 5px var(--color-shadow-trinite);
@@ -2201,4 +2216,10 @@
 .deux-col-66-33 {
   display: grid;
   grid-template-columns: 2fr 1fr;
+}
+.not-displayed {
+  display: none;
+}
+.hidden {
+  visibility: hidden;
 }

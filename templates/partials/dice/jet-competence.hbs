@@ -1,4 +1,5 @@
-<div class="jet-comp">
+{{log 'comp' this}}
+<div class="jet-comp" data-actor-id="{{actorId}}>
         <div class="titre-jet-comp">
             <div class="whisper-logo"><span>message privé </span><i class="far fa-eye-slash"></i></div>
             <div class="bloc-titre">
@@ -83,11 +84,11 @@
                 {{/if}}
             </div>
             {{#if (eq stats.typeActor "trinite")}}
-                {{#if (eq stats.resultatJet "detteArchonte")}}
-                    <div class="btn-dette"><button class="dette archonte" data-actor-id="{{actorId}}" data-esprit="archonte">Dette envers l'Archonte</button></div>
+                {{#if (eq stats.resultatJet.resultatArchonte "detteArchonte")}}
+                    <div class="btn-dette"><button class="dette archonte not-displayed" data-actor-id="{{actorId}}" data-esprit="archonte">Dette envers l'Archonte</button></div>
                 {{/if}}
-                {{#if (eq stats.resultatJet "detteDeva")}}
-                    <div class="btn-dette"><button class="dette deva" data-actor-id="{{actorId}}" data-esprit="deva">Dette envers le Deva</button></div>
+                {{#if (eq stats.resultatJet.resultatDeva "detteDeva")}}
+                    <div class="btn-dette"><button class="dette deva not-displayed" data-actor-id="{{actorId}}" data-esprit="deva">Dette envers le Deva</button></div>
                 {{/if}}
             {{/if}}
         {{else}}

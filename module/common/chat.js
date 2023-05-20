@@ -375,6 +375,58 @@ export class TrinitesChat {
       element.innerHTML = '<i class="fas fa-angle-right"></i>';
     }
   }
+
+  static async onSelectDice(event, mess) {
+    event.preventDefault();
+    
+    const messageId = mess._id;
+    const message = game.messages.get(messageId);
+
+    const element = event.currentTarget;
+
+    const actorId = $(event.currentTarget).parents(".jet-arme").data("actorId");
+    const actor = game.actors.get(actorId);
+    console.log('Click actor', actor);
+
+    const type = element.classList.contains("dice-deva") ? "deva" : "archonte";
+    element.classList.toggle("dice-selected");
+
+    if (type === "deva") {
+      let elem = $(event.currentTarget).parents(".jet-comp").find(".dette.deva");
+      if (elem.length == 0) elem = $(event.currentTarget).parents(".jet-arme").find(".dette.deva");
+      if (elem.length > 0) elem[0].classList.toggle("not-displayed");
+
+      // Gestion accélération/ralentissement si c'est un succès
+      let resultatDeva = message.getFlag("world", "resultatDeva");
+      if (resultatDeva === "reussite" || resultatDeva === "detteDeva") {
+        const hasModificateurs = message.getFlag("world", "modificateurs");
+        if (hasModificateurs) {
+          const acceleration = message.getFlag("world", "acceleration");
+          const ralentissement = message.getFlag("world", "ralentissement");
+          if (acceleration) await actor.setFlag("world", "acceleration", acceleration);
+          if (ralentissement) await actor.setFlag("world", "ralentissement", ralentissement);
+        }
+      }
+    }
+    else {
+      let elem = $(event.currentTarget).parents(".jet-comp").find(".dette.archonte");
+      if (elem.length == 0) elem = $(event.currentTarget).parents(".jet-arme").find(".dette.archonte");
+      if (elem.length > 0) elem[0].classList.toggle("not-displayed"); 
+
+      // Gestion accélération/ralentissement si c'est un succès
+      let resultatArchonte = message.getFlag("world", "resultatArchonte");
+      if (resultatArchonte === "reussite" || resultatArchonte === "detteArchonte") {
+        const hasModificateurs = message.getFlag("world", "modificateurs");
+        if (hasModificateurs) {
+          const acceleration = message.getFlag("world", "acceleration");
+          const ralentissement = message.getFlag("world", "ralentissement");
+          if (acceleration) await actor.setFlag("world", "acceleration", acceleration);
+          if (ralentissement) await actor.setFlag("world", "ralentissement", ralentissement);
+        }
+      }
+    }
+
+  }
 }
 
 /*------------------------------------
@@ -466,3 +518,4 @@ export async function carteVersetActive({ actor = null, versetId = null } = {}) 
   let chat = await new TrinitesChat(actor).withTemplate(messageTemplate).withData(cardData).create();
   await chat.display();
 }
+

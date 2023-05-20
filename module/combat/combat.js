@@ -149,4 +149,6 @@ export default class TrinitesCombat extends Combat {
     Hooks.callAll("combatRound", this, updateData, updateOptions);
     return this.update(updateData, updateOptions);
   }
+
+  //TODO End Combat ? Reset des flags
 }

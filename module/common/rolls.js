@@ -95,7 +95,8 @@ export async function jetCompetence({
     competence: label,
     valeur: valeur,
     karmaAdam: karmaAdam,
-    typeActor: actor.sousType
+    typeActor: actor.sousType,
+    actorId: actor.id
   };
 
   // Bonus de difficulte en cas de jet d'Emprise - Souffle
@@ -139,11 +140,8 @@ export async function jetCompetence({
   // Gestion de la réussite selon le Karma
   let resultatJet = _getResult(nbDes, actor, karmaAdam, resultDeva, resultArchonte);
 
-  // Gestion des primes en cas de succès
-  //TODO A conserver ?
-  /*if (resultatJet === "reussite") {
-    await handleModificateurs(actor, modificateurs);
-  }*/
+  let resultModificateurs = await handleModificateurs(actor, modificateurs);
+  let flags = {"world": Object.assign({},resultModificateurs !== {} ? {modificateurs: true} : {modificateurs: false}, resultModificateurs, resultatJet)};
 
   // Primes et pénalités
   rollData.modificateurs = modificateurs;
@@ -174,7 +172,7 @@ export async function jetCompetence({
       roll: renderedRoll
     };
 
-    let chat = await new TrinitesChat(actor).withTemplate(messageTemplate).withData(templateContext).withRoll(rollResult).create();
+    let chat = await new TrinitesChat(actor).withTemplate(messageTemplate).withData(templateContext).withRoll(rollResult).withFlags(flags).create();
     await chat.display();
   }
 }
@@ -542,7 +540,8 @@ export async function jetArme({
     typeActor: actor.sousType,
     typeArme: type,
     arme: arme,
-    degats: arme.degats
+    degats: arme.degats,
+    actorId: actor.id
   };
 
   // Modificateur de difficulté du jet
@@ -574,11 +573,9 @@ export async function jetArme({
   // Gestion de la réussite selon le Karma
   let resultatJet = _getResult(nbDes, actor, karmaAdam, resultDeva, resultArchonte);
 
-  // Gestion des primes en cas de succès
-  if (resultatJet === "reussite") {
-    await handleModificateurs(actor, modificateurs);
-  }
-  
+  let resultModificateurs = await handleModificateurs(actor, modificateurs);
+  let flags = {"world": Object.assign({},resultModificateurs !== {} ? {modificateurs: true} : {modificateurs: false}, resultModificateurs, resultatJet)};
+
   // Primes et pénalités
   rollData.modificateurs = modificateurs;
 
@@ -595,7 +592,7 @@ export async function jetArme({
   // Pénalité Blessure légère : dégâts divisés par 2
   if (modificateurs.blessureLegere > 0) {
     rollData.degats = Math.round(rollData.degats/2);
-  }
+  }  
 
   rollData.resultatJet = resultatJet;
   rollData.nbDes = nbDes;
@@ -617,11 +614,9 @@ export async function jetArme({
       roll: renderedRoll
     };
 
-    let chat = await new TrinitesChat(actor).withTemplate(messageTemplate).withData(templateContext).withRoll(rollResult).create();
+    let chat = await new TrinitesChat(actor).withTemplate(messageTemplate).withData(templateContext).withRoll(rollResult).withFlags(flags).create();
     await chat.display();
   }
-
-
 }
 
 /**
@@ -673,43 +668,64 @@ function _getDicesResult(nbDes, rollResult) {
   }
 }
 
-
+/**
+ * 
+ * @param {*} nbDes 
+ * @param {*} actor 
+ * @param {"lumiere","tenebre"} karmaAdam 
+ * @param {Object{dieResult, rollTotal, reussite}} resultDeva 
+ * @param {Object{dieResult, rollTotal, reussite}} resultArchonte 
+ * @returns {Object{deva, archonte}} "echec", "reussite", "detteDeva", "detteArchonte"
+ */
 function _getResult(nbDes, actor, karmaAdam, resultDeva, resultArchonte) {
 
-    let resultatJet = "echec";
+  let resultatDeva = "echec";
+  let resultatArchonte = "echec";
 
-    if (nbDes == 2) {
-      if (actor.isTrinite) {
-        if (karmaAdam == "lumiere") {
-          if (resultDeva.reussite) {
-            resultatJet = "reussite";
-          } else if (resultArchonte.reussite) {
-            resultatJet = "detteArchonte";
-          }
-        } else if (karmaAdam == "tenebre") {
-          if (resultArchonte.reussite) {
-            resultatJet = "reussite";
-          } else if (resultDeva.reussite) {
-            resultatJet = "detteDeva";
-          }
-        } else {
-          if (resultDeva.reussite || resultArchonte.reussite) {
-            resultatJet = "reussite";
-          }
+  if (nbDes == 2) {
+    if (actor.isTrinite) {
+      if (karmaAdam == "lumiere") {
+        if (resultDeva.reussite) {
+          resultatDeva = "reussite";
+        } 
+        if (resultArchonte.reussite) {
+          resultatArchonte = "detteArchonte";
         }
-      }
-  
-      if (actor.isArchonteRoi || actor.isLige) {
-        if (resultDeva.reussite || resultArchonte.reussite) {
-          resultatJet = "reussite";
+      } else if (karmaAdam == "tenebre") {
+        if (resultArchonte.reussite) {
+          resultatArchonte = "reussite";
+        } 
+        if (resultDeva.reussite) {
+          resultatDeva = "detteDeva";
         }
-      }
-    } else {
-      if (resultDeva.reussite) {
-        resultatJet = "reussite";
+      } else {
+        if (resultDeva.reussite) {
+          resultatDeva = "reussite";
+        }
+        if (resultArchonte.reussite) {
+          resultatArchonte = "reussite";
+        }
       }
     }
-    return resultatJet;
+
+    if (actor.isArchonteRoi || actor.isLige) {
+      if (resultDeva.reussite) {
+        resultatDeva = "reussite";
+      }
+      if (resultArchonte.reussite) {
+        resultatArchonte = "reussite";
+      }
+    }
+  } 
+  
+  if (nbDes == 1) {
+    if (resultDeva.reussite) {
+      resultatDeva = "reussite";
+      resultArchonte = null;
+    }
+  }
+
+  return {resultatDeva, resultatArchonte};
 }
 
 // Fonction de construction de la boite de dialogue de jet de compétence
@@ -798,22 +814,25 @@ function updateModificateurs(dialogOptions, modificateurs) {
 }
 
 /**
- * Gestion des primes et pénalités en cas de succès
- * Ajoute un flag dans l'acteur avec le modificateur final
- * @param {Object} actor - L'objet acteur à modifier.
- * @param {Object} modificateurs - Un objet contenant les clés des modificateurs à appliquer et leurs valeurs correspondantes.
+ * 
+ * @param {*} actor 
+ * @param {*} modificateurs acceleration et ralentissement
+ * @returns 
  */
 async function handleModificateurs(actor, modificateurs) {
   const effects = [
     { key: "acceleration", multiplier: 3 },
-    { key: "ralentissement", multiplier: 3 },
-    { key: "attaquesMultiples", multiplier: 0.5}
+    { key: "ralentissement", multiplier: 3 }
   ];
+
+  let result = {};
 
   for (const effect of effects) {
     if (modificateurs[effect.key] > 0) {
       const mod = effect.multiplier * modificateurs[effect.key];
-      await actor.setFlag("world", effect.key, mod);
+      result[effect.key] = mod;
     }
   }
+
+  return result;
 }

@@ -210,6 +210,8 @@ export async function jetCompetence({
       jetArme: type === "arme" || type === "lameSoeur"
     };
 
+    if (actor.type === "pnj" && game.user.isGM) templateContext.rollMode = "gmroll";
+
     let chat = await new TrinitesChat(actor).withTemplate(messageTemplate).withData(templateContext).withRoll(rollResult).withFlags(flags).create();
     await chat.display();
   }

@@ -96,7 +96,9 @@ export class TrinitesChat {
 
     // Set the roll parameter if necessary
     if (this.roll) {
-      (data.type = CONST.CHAT_MESSAGE_TYPES.ROLL), (data.roll = this.roll);
+      data.rollMode = this.data.rollMode;
+      data.type = CONST.CHAT_MESSAGE_TYPES.ROLL; 
+      data.roll = this.roll;
     }
 
     // Set the flags parameter if necessary
@@ -104,26 +106,19 @@ export class TrinitesChat {
       data.flags = this.flags;
     }
 
-    // If it's a whisper
-    if (this.data.isWhisper) {
-      data.whisper = ChatMessage.getWhisperRecipients("GM").map((u) => u.id);
+    switch (this.data.rollMode) {
+      case "gmroll":
+        data.whisper = ChatMessage.getWhisperRecipients("GM").map((u) => u.id);
+        break;
+      case "blindroll":
+        data.whisper = ChatMessage.getWhisperRecipients("GM").map((u) => u.id);
+        data.blind = true;
+        break;
+      case "selfroll":
+        data.whisper = [game.user.id];
+        break;
     }
-    // Set the whisper and blind parameters according to the player roll mode settings
-    else {
-      switch (game.settings.get("core", "rollMode")) {
-        case "gmroll":
-          data.whisper = ChatMessage.getWhisperRecipients("GM").map((u) => u.id);
-          break;
-        case "blindroll":
-          data.whisper = ChatMessage.getWhisperRecipients("GM").map((u) => u.id);
-          data.blind = true;
-          break;
-        case "selfroll":
-          data.whisper = [game.user.id];
-          break;
-      }
-    }
-
+  
     // Create the chat
     this.chatData = data;
     return this;

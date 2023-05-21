@@ -1,4 +1,4 @@
-import * as Dice from "./rolls.js";
+import * as Roll from "./rolls.js";
 import DepenseKarmaFormApplication from "../appli/DepenseKarmaFormApp.js";
 
 export class TrinitesChat {
@@ -253,13 +253,13 @@ export class TrinitesChat {
       return;
     }
 
-    Dice.jetCompetence({
+    Roll.jetCompetence({
       actor: actor,
       type: "souffle",
       aura: aura,
       signe: "vierge",
       competence: "emprise",
-      afficherDialog: false,
+      afficherDialog: false
     });
 
     aura.update({ "system.deploiement": "cosme" });

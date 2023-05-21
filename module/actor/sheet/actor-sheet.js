@@ -282,6 +282,7 @@ export default class TrinitesActorSheet extends ActorSheet {
       actor: this.actor,
       signe: dataset.signe,
       competence: dataset.competence,
+      type: "competence"
     });
   }
 
@@ -291,7 +292,7 @@ export default class TrinitesActorSheet extends ActorSheet {
 
     Roll.jetRessource({
       actor: this.actor,
-      ressource: dataset.ressource,
+      ressource: dataset.ressource
     });
   }
 
@@ -302,7 +303,7 @@ export default class TrinitesActorSheet extends ActorSheet {
     Chat.carteAtout({
       actor: this.actor,
       atoutId: dataset.itemId,
-      whisper: !event.shiftKey,
+      whisper: !event.shiftKey
     });
   }
 
@@ -313,7 +314,7 @@ export default class TrinitesActorSheet extends ActorSheet {
     Chat.carteAura({
       actor: this.actor,
       auraId: dataset.itemId,
-      whisper: !event.shiftKey,
+      whisper: !event.shiftKey
     });
   }
 
@@ -324,7 +325,7 @@ export default class TrinitesActorSheet extends ActorSheet {
     Chat.carteVerset({
       actor: this.actor,
       versetId: dataset.itemId,
-      whisper: !event.shiftKey,
+      whisper: !event.shiftKey
     });
   }
 
@@ -359,6 +360,7 @@ export default class TrinitesActorSheet extends ActorSheet {
     const item = this.actor.items.get(itemId);
 
     let arme = {
+      name: item.name,
       competence: item.system.competence,
       degats: item.system.degats,
       portee: item.system.portee,
@@ -368,12 +370,12 @@ export default class TrinitesActorSheet extends ActorSheet {
 
     const signe = item.system.competence === "tir" ? "sagittaire" : "belier";
 
-    Roll.jetArme({
+    Roll.jetCompetence({
       actor: this.actor,
       signe: signe,
       competence: arme.competence,
       arme: arme,
-      type: item.name
+      type: "arme"
     });
   }
 

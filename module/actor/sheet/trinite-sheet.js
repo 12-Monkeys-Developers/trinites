@@ -179,9 +179,9 @@ export default class TrinitesTriniteSheet extends TrinitesActorSheet {
 
   _onJetLame(event) {
     event.preventDefault();
-    // Const dataset = event.currentTarget.dataset;
 
     let lame = {
+      name: "Lame-Soeur",
       competence: "melee",
       degats: 4,
       portee: "",
@@ -189,7 +189,7 @@ export default class TrinitesTriniteSheet extends TrinitesActorSheet {
       epee: true
     };
 
-    Roll.jetArme({
+    Roll.jetCompetence({
       actor: this.actor,
       signe: "belier",
       competence: lame.competence,

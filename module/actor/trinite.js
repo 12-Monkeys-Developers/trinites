@@ -57,7 +57,6 @@ export default class TrinitesTrinite extends TrinitesActor {
     /*
      * Calcul de la base des compétences : base = baseMetier + points de Création du métier + bonus de la Vie Antérieure + niveau obtenu par l'expérience
      */
-    console.log("system.competences", system.competences);
     for (let [keySigne, compsSigne] of Object.entries(system.competences)) {
       for (let [keyComp, competence] of Object.entries(compsSigne)) {
         system.competences[keySigne][keyComp].base +=

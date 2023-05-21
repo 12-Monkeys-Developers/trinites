@@ -147,7 +147,8 @@ export default class TrinitesActorSheet extends ActorSheet {
 
     let indexVie = element.dataset.index;
     const blessureValInitial = parseInt(this.actor.system.nbBlessure);
-    let blessureVal = parseInt(this.actor.system.nbBlessure !== indexVie ? indexVie : indexVie - 1);
+    let blessureVal ;
+    blessureVal = parseInt(this.actor.system.nbBlessure != indexVie ? indexVie : indexVie - 1);
 
     await this.actor.update({ "system.nbBlessure": blessureVal });
 

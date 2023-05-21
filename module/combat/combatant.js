@@ -3,7 +3,6 @@ export default class TrinitesCombatant extends Combatant {
     _onCreate(data, options, userID) {
         super._onCreate(data, options, userID);
         if (game.user.isGM) {
-            console.log('Combatant created', data);
             this.setFlag("world", "position", "garde");
             this.setFlag("world", "acceleration", 0);
             this.setFlag("world", "ralentissement", 0);

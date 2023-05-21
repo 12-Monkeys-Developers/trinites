@@ -10,8 +10,9 @@ export async function jetCompetence({
   sansDomaine = null,
   type = null,
   aura = null,
+  arme = null,
   afficherDialog = true,
-  envoiMessage = true,
+  envoiMessage = true
 } = {}) {
   // Récupération des données de l'acteur
   let actorData = actor.system;
@@ -46,12 +47,19 @@ export async function jetCompetence({
     penaliteDifficulte: 0,
     facilite: 0,
     ralentissement: 0,
-    risque: 0
+    risque: 0,
+    attaquesMultiples: 0,
+    blessureGrave: 0,
+    blessureGrave: 0,
+    blessureNonLetale: 0,
+    blessurePrecise: 0,
+    blessureLegere: 0
   };
 
   // Affichage de la fenêtre de dialogue (vrai par défaut)
   if (afficherDialog) {
-    let dialogOptions = await getJetCompetenceOptions({ cfgData: game.trinites.config, compCombat: compCombat, compLibre: compLibre, infoPrimesID: infoPrimesID });
+    const jetArme = type === "arme" || type === "lameSoeur" ? true : false;
+    let dialogOptions = await getJetCompetenceOptions({ cfgData: game.trinites.config, compCombat: compCombat, compLibre: compLibre, infoPrimesID: infoPrimesID, jetArme });
 
     // On annule le jet sur les boutons 'Annuler' ou 'Fermeture'
     if (dialogOptions.annule) {
@@ -91,6 +99,7 @@ export async function jetCompetence({
   let karmaAdam = actor.isTrinite ? actorData.trinite.adam.karma.type : "tenebre";
 
   let rollData = {
+    type: type,
     nomPersonnage: actor.name,
     competence: label,
     valeur: valeur,
@@ -98,6 +107,11 @@ export async function jetCompetence({
     typeActor: actor.sousType,
     actorId: actor.id
   };
+
+  if (type === "arme" || type === "lameSoeur") {
+    rollData.arme = arme,
+    rollData.degats = arme.degats
+  }
 
   // Bonus de difficulte en cas de jet d'Emprise - Souffle
   if (type == "souffle") {
@@ -146,6 +160,23 @@ export async function jetCompetence({
   // Primes et pénalités
   rollData.modificateurs = modificateurs;
 
+  if (type === "arme" || type === "lameSoeur") {
+    // Prime Attaques multiples : dégâts divisés par 2
+    if (modificateurs.attaquesMultiples > 0) {
+      rollData.degats = Math.round(rollData.degats/2);
+    }
+
+    // Prime Blessure grave : dégâts multipliés par 1,5
+    if (modificateurs.blessureGrave > 0) {
+      rollData.degats = Math.round(rollData.degats*1.5);
+    }
+
+    // Pénalité Blessure légère : dégâts divisés par 2
+    if (modificateurs.blessureLegere > 0) {
+      rollData.degats = Math.round(rollData.degats/2);
+    } 
+  }
+
   rollData.resultatJet = resultatJet;
   rollData.nbDes = nbDes;
 
@@ -157,10 +188,16 @@ export async function jetCompetence({
 
     let messageTemplate;
     // Recupération du template
-    if (type == "souffle") {
-      messageTemplate = "systems/trinites/templates/partials/dice/jet-souffle.hbs";
-    } else {
-      messageTemplate = "systems/trinites/templates/partials/dice/jet-competence.hbs";
+    switch (type) {
+      case "competence":
+      case "arme":
+      case "lameSoeur":      
+        if (nbDes == 1 ) messageTemplate = "systems/trinites/templates/partials/dice/jet-competence-unde.hbs";
+        else  messageTemplate = "systems/trinites/templates/partials/dice/jet-competence-deuxdes.hbs";
+        break;
+      case "souffle":
+        messageTemplate = "systems/trinites/templates/partials/dice/jet-souffle.hbs";
+        break;        
     }
 
     let renderedRoll = await rollResult.render();
@@ -169,8 +206,11 @@ export async function jetCompetence({
     let templateContext = {
       actorId: actor.id,
       stats: rollStats,
-      roll: renderedRoll
+      roll: renderedRoll,
+      jetArme: type === "arme" || type === "lameSoeur"
     };
+
+    if (actor.type === "pnj" && game.user.isGM) templateContext.rollMode = "gmroll";
 
     let chat = await new TrinitesChat(actor).withTemplate(messageTemplate).withData(templateContext).withRoll(rollResult).withFlags(flags).create();
     await chat.display();
@@ -178,10 +218,18 @@ export async function jetCompetence({
 }
 
 // Fonction de construction de la boite de dialogue de jet de compétence
-async function getJetCompetenceOptions({ cfgData = null, compCombat = false, compLibre = false, infoPrimesID = null }) {
+async function getJetCompetenceOptions({ cfgData = null, compCombat = false, compLibre = false, infoPrimesID = null, jetArme = null }) {
   // Recupération du template
-  const template = "systems/trinites/templates/partials/dice/dialog-jet-competence.hbs";
-  const html = await renderTemplate(template, { cfgData: cfgData, compCombat: compCombat, compLibre: compLibre, infoPrimesID: infoPrimesID });
+  
+  let html;
+  if (compCombat) {
+    const template = "systems/trinites/templates/partials/dice/dialog-jet-arme.hbs";
+    html = await renderTemplate(template, { cfgData: cfgData, compCombat: true, infoPrimesID: infoPrimesID });
+  }
+  else {
+    const template = "systems/trinites/templates/partials/dice/dialog-jet-competence.hbs";
+    html = await renderTemplate(template, { cfgData: cfgData, compCombat: compCombat, compLibre: compLibre, infoPrimesID: infoPrimesID });
+  }
 
   return new Promise((resolve) => {
     const data = {
@@ -189,13 +237,11 @@ async function getJetCompetenceOptions({ cfgData = null, compCombat = false, com
       content: html,
       buttons: {
         jet: {
-          // Bouton qui lance le jet de dé
           icon: '<i class="fas fa-dice"></i>',
           label: "Jeter les dés",
-          callback: (html) => resolve(_processJetCompetenceOptions(html[0].querySelector("form"))),
+          callback: (html) => resolve(_processJetCompetenceOptions(html[0].querySelector("form"), jetArme)),
         },
         annuler: {
-          // Bouton d'annulation
           label: "Annuler",
           callback: (html) => resolve({ annule: true }),
         },
@@ -207,47 +253,6 @@ async function getJetCompetenceOptions({ cfgData = null, compCombat = false, com
     // Affichage de la boite de dialogue
     new Dialog(data, null).render(true);
   });
-}
-
-// Gestion des données renseignées dans la boite de dialogue de jet de compétence
-function _processJetCompetenceOptions(form) {
-  let sansDomaine = false;
-  if (form.sansDomaine) {
-    sansDomaine = form.sansDomaine.checked;
-  }
-
-  let actionLibre = null;
-  if (form.actionLibre) {
-    actionLibre = parseInt(form.actionLibre.value);
-  }
-
-  // Primes et pénalités
-  const modificateurKeys = [
-    "acceleration",
-    "circonspection",
-    "efficacite",
-    "debordement",
-    "prudence",
-    "consommation",
-    "danger",
-    "penaliteDifficulte",
-    "facilite",
-    "ralentissement",
-    "risque"
-  ];
-
-  let modificateurs = {};
-
-  for (const key of modificateurKeys) {
-    modificateurs[key] = form[key].value !== "0" ? parseInt(form[key].value) : 0;
-  }
-
-  return {
-    difficulte: form.difficulte.value != 0 ? parseInt(form.difficulte.value) : null,
-    sansDomaine: sansDomaine,
-    actionLibre: actionLibre,
-    modificateurs: modificateurs
-  };
 }
 
 /** Jet de Ressource */
@@ -460,165 +465,6 @@ function typeTestRessource(valRessource, coutAcquisition, endettementCampagne) {
   }
 }
 
-/** Jet d'Arme' */
-export async function jetArme({
-  nbDes = null,
-  actor = null,
-  signe = null,
-  competence = null,
-  arme = null,
-  type = null,
-  difficulte = null,
-  afficherDialog = true,
-  envoiMessage = true,
-} = {}) {
-  // Récupération des données de l'acteur
-  let actorData = actor.system;
-
-  // Informations nécessaires à la fenêtre de dialogue
-  // ID du journal de description des primes et pénalités
-  let infoPrimesID = game.settings.get("trinites", "lienJournalPrimesPenalites");
-
-  // Valeurs récupérées par la fenêtre de dialogue
-  let actionLibre = null;
-  let modificateurs = {
-    acceleration: 0,
-    circonspection: 0,
-    efficacite: 0,
-    debordement: 0,
-    prudence: 0,
-    consommation: 0,
-    danger: 0,
-    penaliteDifficulte: 0,
-    facilite: 0,
-    ralentissement: 0,
-    risque: 0,
-    attaquesMultiples: 0,
-    blessureGrave: 0,
-    blessureGrave: 0,
-    blessureNonLetale: 0,
-    blessurePrecise: 0,
-    blessureLegere: 0
-  };
-
-  // Affichage de la fenêtre de dialogue (vrai par défaut)
-  if (afficherDialog) {
-    let dialogOptions = await getJetArmeOptions({ cfgData: game.trinites.config, infoPrimesID: infoPrimesID });
-
-    // On annule le jet sur les boutons 'Annuler' ou 'Fermeture'
-    if (dialogOptions.annule) {
-      return null;
-    }
-
-    // Récupération des données de la fenêtre de dialogue pour ce jet
-    difficulte = dialogOptions.difficulte;
-    actionLibre = dialogOptions.actionLibre;
-
-    updateModificateurs(dialogOptions, modificateurs);
-  }
-
-  let modFormula = " + @valeur";
-
-  if (modificateurs.efficacite > 0) {
-    modFormula += " + 3"
-  }
-
-  if (modificateurs.penaliteDifficulte > 0) {
-    modFormula += " - 3"
-  }
-
-  // Données de base du jet
-  let valeur = actorData.competences[signe][competence].valeur;
-  let label = game.i18n.localize(`TRINITES.label.competences.${signe}.${competence}`);
-  let karmaAdam = actor.isTrinite ? actorData.trinite.adam.karma.type : "tenebre";
-
-  let rollData = {
-    nomPersonnage: actor.name,
-    competence: label,
-    valeur: valeur,
-    karmaAdam: karmaAdam,
-    typeActor: actor.sousType,
-    typeArme: type,
-    arme: arme,
-    degats: arme.degats,
-    actorId: actor.id
-  };
-
-  // Modificateur de difficulté du jet
-  if (difficulte) {
-    rollData.difficulte = difficulte;
-    rollData.modifsJet = true;
-    modFormula += " + @difficulte";
-  }
-
-  // Malus lié au nombre d'actions libres consécutives
-  if (actionLibre > 1) {
-    let malusActionLibre = (actionLibre - 1) * -3;
-
-    rollData.actionLibre = actionLibre;
-    rollData.malusActionLibre = malusActionLibre;
-    rollData.modifsJet = true;
-    modFormula += " + @malusActionLibre";
-  }
-
-  nbDes = actor.nbDes ?? nbDes;
-  let rollFormula = _getFormula(nbDes, actor, modFormula);
-
-  let rollResult = await new Roll(rollFormula, rollData).roll({ async: true });
-
-  let { resultDeva, resultArchonte } = _getDicesResult(nbDes, rollResult);
-  rollData.resultDeva = resultDeva;
-  rollData.resultArchonte = resultArchonte;
-
-  // Gestion de la réussite selon le Karma
-  let resultatJet = _getResult(nbDes, actor, karmaAdam, resultDeva, resultArchonte);
-
-  let resultModificateurs = await handleModificateurs(actor, modificateurs);
-  let flags = {"world": Object.assign({},resultModificateurs !== {} ? {modificateurs: true} : {modificateurs: false}, resultModificateurs, resultatJet)};
-
-  // Primes et pénalités
-  rollData.modificateurs = modificateurs;
-
-  // Prime Attaques multiples : dégâts divisés par 2
-  if (modificateurs.attaquesMultiples > 0) {
-    rollData.degats = Math.round(rollData.degats/2);
-  }
-
-  // Prime Blessure grave : dégâts multipliés par 1,5
-  if (modificateurs.blessureGrave > 0) {
-    rollData.degats = Math.round(rollData.degats*1.5);
-  }
-
-  // Pénalité Blessure légère : dégâts divisés par 2
-  if (modificateurs.blessureLegere > 0) {
-    rollData.degats = Math.round(rollData.degats/2);
-  }  
-
-  rollData.resultatJet = resultatJet;
-  rollData.nbDes = nbDes;
-
-  if (envoiMessage) {
-    // Construction du jeu de données pour alimenter le template
-    let rollStats = {
-      ...rollData
-    };
-
-    // Recupération du template
-    let messageTemplate = "systems/trinites/templates/partials/dice/jet-arme.hbs";
-    let renderedRoll = await rollResult.render();
-
-    // Assignation des données au template
-    let templateContext = {
-      actorId: actor.id,
-      stats: rollStats,
-      roll: renderedRoll
-    };
-
-    let chat = await new TrinitesChat(actor).withTemplate(messageTemplate).withData(templateContext).withRoll(rollResult).withFlags(flags).create();
-    await chat.display();
-  }
-}
-
 /**
  * Retourne la formule en fonction du nombre de dés
  * @param {*} nbDes 
@@ -728,78 +574,6 @@ function _getResult(nbDes, actor, karmaAdam, resultDeva, resultArchonte) {
   return {resultatDeva, resultatArchonte};
 }
 
-// Fonction de construction de la boite de dialogue de jet de compétence
-async function getJetArmeOptions({ cfgData = null, infoPrimesID = null }) {
-  // Recupération du template
-  const template = "systems/trinites/templates/partials/dice/dialog-jet-arme.hbs";
-  const html = await renderTemplate(template, { cfgData: cfgData, compCombat: true, infoPrimesID: infoPrimesID });
-
-  return new Promise((resolve) => {
-    const data = {
-      title: "Jet de combat",
-      content: html,
-      buttons: {
-        jet: {
-          // Bouton qui lance le jet de dé
-          icon: '<i class="fas fa-dice"></i>',
-          label: "Jeter les dés",
-          callback: (html) => resolve(_processJetArmeOptions(html[0].querySelector("form"))),
-        },
-        annuler: {
-          // Bouton d'annulation
-          label: "Annuler",
-          callback: (html) => resolve({ annule: true }),
-        },
-      },
-      default: "jet",
-      close: () => resolve({ annule: true }) // Annulation sur fermeture de la boite de dialogue
-    };
-
-    // Affichage de la boite de dialogue
-    new Dialog(data, null).render(true);
-  });
-}
-
-// Gestion des données renseignées dans la boite de dialogue de jet de compétence
-function _processJetArmeOptions(form) {
-  let actionLibre = null;
-  if (form.actionLibre) {
-    actionLibre = parseInt(form.actionLibre.value);
-  }
-
-  // Primes et pénalités
-  const modificateurKeys = [
-    "acceleration",
-    "circonspection",
-    "efficacite",
-    "debordement",
-    "prudence",
-    "consommation",
-    "danger",
-    "penaliteDifficulte",
-    "facilite",
-    "ralentissement",
-    "risque",
-    "attaquesMultiples",
-    "blessureGrave",
-    "blessureNonLetale",
-    "blessurePrecise",
-    "blessureLegere"
-  ];
-
-  let modificateurs = {};
-
-  for (const key of modificateurKeys) {
-    modificateurs[key] = form[key].value !== "0" ? parseInt(form[key].value) : 0;
-  }
-
-  return {
-    difficulte: form.difficulte.value != 0 ? parseInt(form.difficulte.value) : null,
-    actionLibre: actionLibre,
-    modificateurs: modificateurs
-  };
-}
-
 /**
  * Met à jour l'objet modificateur avec toutes les valeurs de dialogOptions
  * @param {*} dialogOptions 
@@ -835,4 +609,57 @@ async function handleModificateurs(actor, modificateurs) {
   }
 
   return result;
+}
+
+
+// Gestion des données renseignées dans la boite de dialogue de jet de compétence ou d'arme
+function _processJetCompetenceOptions(form, jetArme) {
+  let sansDomaine = false;
+  if (form.sansDomaine) {
+    sansDomaine = form.sansDomaine.checked;
+  }
+
+  let actionLibre = null;
+  if (form.actionLibre) {
+    actionLibre = parseInt(form.actionLibre.value);
+  }
+
+  // Primes et pénalités
+  let modificateurKeys = [
+      "acceleration",
+      "circonspection",
+      "efficacite",
+      "debordement",
+      "prudence",
+      "consommation",
+      "danger",
+      "penaliteDifficulte",
+      "facilite",
+      "ralentissement",
+      "risque"
+    ];
+
+  if (jetArme) {
+    let modificateursArme = [
+        "attaquesMultiples",
+        "blessureGrave",
+        "blessureNonLetale",
+        "blessurePrecise",
+        "blessureLegere"
+      ];
+    modificateurKeys.push(...modificateursArme)
+  }
+
+  let modificateurs = {};
+
+  for (const key of modificateurKeys) {
+    modificateurs[key] = form[key].value !== "0" ? parseInt(form[key].value) : 0;
+  }
+
+  return {
+    difficulte: form.difficulte.value != 0 ? parseInt(form.difficulte.value) : null,
+    sansDomaine: sansDomaine,
+    actionLibre: actionLibre,
+    modificateurs: modificateurs
+  };
 }

@@ -1,5 +1,4 @@
-{{log 'comp' this}}
-<div class="jet-comp" data-actor-id="{{actorId}}>
+<div class="jet-comp" data-actor-id="{{actorId}}">
         <div class="titre-jet-comp">
             <div class="whisper-logo"><span>message privé </span><i class="far fa-eye-slash"></i></div>
             <div class="bloc-titre">
@@ -12,6 +11,10 @@
                 {{afficheModificateur 'prime' stats.modificateurs.efficacite 'Efficacité'}}
                 {{afficheModificateur 'prime' stats.modificateurs.debordement 'Débordement'}}
                 {{afficheModificateur 'prime' stats.modificateurs.prudence 'Prudence'}}
+                {{afficheModificateur 'prime' stats.modificateurs.attaquesMultiples 'Attaques multiples'}}
+                {{afficheModificateur 'prime' stats.modificateurs.blessureGrave 'Blessure grave'}}
+                {{afficheModificateur 'prime' stats.modificateurs.blessureNonLetale 'Blessure non létale'}}
+                {{afficheModificateur 'prime' stats.modificateurs.blessurePrecise 'Blessure précise'}}
 
                 {{afficheModificateur 'penalite' stats.modificateurs.consommation 'Consommation'}}
                 {{afficheModificateur 'penalite' stats.modificateurs.danger 'Danger'}}
@@ -19,10 +22,28 @@
                 {{afficheModificateur 'penalite' stats.modificateurs.facilite 'Facilité'}}
                 {{afficheModificateur 'penalite' stats.modificateurs.ralentissement 'Ralentissement'}}
                 {{afficheModificateur 'penalite' stats.modificateurs.risque 'Risque'}}
+                {{afficheModificateur 'penalite' stats.modificateurs.blessureLegere 'Blessure Légère'}}
             </div>
         </div>
 
-        {{#if (eq stats.typeActor "trinite")}}
+        {{#if jetArme}}
+            <div class="bloc-arme">
+                {{#if (eq stats.typeArme "lameSoeur")}}
+                    <div class="logo"><img src="systems/trinites/images/lames/lame-soeur.png"></div>
+                {{else if (eq stats.typeArme "lameNoire")}}
+                    <div class="logo"><img src="systems/trinites/images/lames/lame-noire.png"></div>
+                {{else}}
+                    <div></div>
+                {{/if}}
+                <div class="infos-arme">
+                    <div>{{stats.arme.name}}</div>
+                    <div>Dégâts : {{stats.degats}}</div>
+                </div>
+            </div>
+        {{/if}}
+        
+        <!-- Affichage du dé -->
+        {{#if (eq stats.typeActor "trinite")}} 
             <div class="grid-jet-comp">
                 {{#if (eq stats.resultDeva.dieResult 1)}}
                     <div class="dice-back"><div class="roll dice-deva echec-crit">{{stats.resultDeva.dieResult}}</div></div>
@@ -41,58 +62,16 @@
         {{/if}}
 
         {{#if (eq stats.typeActor "humain")}}
-            {{#if (eq stats.nbDes 2)}}
-                <div class="grid-jet-comp archonte-roi">
-                {{#if (eq stats.resultDeva.dieResult 1)}}
-                    <div class="dice-back"><div class="roll dice-archonte echec-crit">{{stats.resultDeva.dieResult}}</div></div>
-                {{else}}
-                    <div class="dice-back"><div class="roll dice-archonte">{{stats.resultDeva.dieResult}}</div></div>
-                {{/if}}
-            {{else}}
                 <div class="grid-jet-comp humain">
                 {{#if (eq stats.resultDeva.dieResult 1)}}
                     <div class="dice-back"><div class="roll dice-deva echec-crit">{{stats.resultDeva.dieResult}}</div></div>
                 {{else}}
                     <div class="dice-back"><div class="roll dice-deva">{{stats.resultDeva.dieResult}}</div></div>
                 {{/if}}
-            {{/if}}
-        {{/if}}
+        {{/if}}        
 
-        {{#if (eq stats.nbDes 2)}}
-            {{#if (eq stats.resultArchonte.dieResult 1)}}
-                    <div class="dice-back"><div class="roll dice-archonte echec-crit">{{stats.resultArchonte.dieResult}}</div></div>
-                {{else}}
-                    <div class="dice-back"><div class="roll dice-archonte">{{stats.resultArchonte.dieResult}}</div></div>
-                {{/if}}
-                {{#if (eq stats.resultDeva.dieResult 1)}}
-                    <div class="dice-total echec-crit">{{stats.resultDeva.rollTotal}}</div>
-                {{else}}
-                    {{#if stats.resultDeva.reussite}}
-                        <div class="dice-total succes">{{stats.resultDeva.rollTotal}}</div>
-                    {{else}}
-                        <div class="dice-total echec">{{stats.resultDeva.rollTotal}}</div>
-                    {{/if}}
-                {{/if}}
-                {{#if (eq stats.resultArchonte.dieResult 1)}}
-                    <div class="dice-total echec-crit">{{stats.resultArchonte.rollTotal}}</div>
-                {{else}}    
-                    {{#if stats.resultArchonte.reussite}}
-                        <div class="dice-total succes">{{stats.resultArchonte.rollTotal}}</div>
-                    {{else}}
-                        <div class="dice-total echec">{{stats.resultArchonte.rollTotal}}</div>
-                    {{/if}}
-                {{/if}}
-            </div>
-            {{#if (eq stats.typeActor "trinite")}}
-                {{#if (eq stats.resultatJet.resultatArchonte "detteArchonte")}}
-                    <div class="btn-dette"><button class="dette archonte not-displayed" data-actor-id="{{actorId}}" data-esprit="archonte">Dette envers l'Archonte</button></div>
-                {{/if}}
-                {{#if (eq stats.resultatJet.resultatDeva "detteDeva")}}
-                    <div class="btn-dette"><button class="dette deva not-displayed" data-actor-id="{{actorId}}" data-esprit="deva">Dette envers le Deva</button></div>
-                {{/if}}
-            {{/if}}
-        {{else}}
-            {{#if (eq stats.resultDeva.dieResult 1)}}
+        <!-- Affichage du résultat -->
+        {{#if (eq stats.resultDeva.dieResult 1)}}
                 <div class="dice-total echec-crit">{{stats.resultDeva.rollTotal}}</div>
             {{else}}
                 {{#if stats.resultDeva.reussite}}
@@ -100,8 +79,6 @@
                 {{else}}
                     <div class="dice-total echec">{{stats.resultDeva.rollTotal}}</div>
                 {{/if}}
-            {{/if}}
         {{/if}}
-
  
 </div>

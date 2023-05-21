@@ -1,0 +1,104 @@
+<div class="jet-comp" data-actor-id="{{actorId}}">
+        <div class="titre-jet-comp">
+            <div class="whisper-logo"><span>message privé </span><i class="far fa-eye-slash"></i></div>
+            <div class="bloc-titre">
+                <div class="titre"><i class="fas fa-dice"></i> {{stats.competence}} {{stats.valeur}}</div>
+                {{#if stats.modifsJet}}<div class="diff">{{#if stats.malusActionLibre}}<i class="fas fa-bolt"></i> {{stats.malusActionLibre}} {{/if}}{{#if stats.difficulte}}<i class="fas fa-tachometer-alt"></i> {{#if (gt stats.difficulte 0)}}+{{/if}}{{stats.difficulte}}{{/if}}</div>{{/if}}                
+            </div>   
+            <div class="bloc-modificateurs">
+                {{afficheModificateur 'prime' stats.modificateurs.acceleration 'Accélération'}}
+                {{afficheModificateur 'prime' stats.modificateurs.circonspection 'Circonspection'}}
+                {{afficheModificateur 'prime' stats.modificateurs.efficacite 'Efficacité'}}
+                {{afficheModificateur 'prime' stats.modificateurs.debordement 'Débordement'}}
+                {{afficheModificateur 'prime' stats.modificateurs.prudence 'Prudence'}}
+                {{afficheModificateur 'prime' stats.modificateurs.attaquesMultiples 'Attaques multiples'}}
+                {{afficheModificateur 'prime' stats.modificateurs.blessureGrave 'Blessure grave'}}
+                {{afficheModificateur 'prime' stats.modificateurs.blessureNonLetale 'Blessure non létale'}}
+                {{afficheModificateur 'prime' stats.modificateurs.blessurePrecise 'Blessure précise'}}
+
+                {{afficheModificateur 'penalite' stats.modificateurs.consommation 'Consommation'}}
+                {{afficheModificateur 'penalite' stats.modificateurs.danger 'Danger'}}
+                {{afficheModificateur 'penalite' stats.modificateurs.penaliteDifficulte 'Difficulté'}}
+                {{afficheModificateur 'penalite' stats.modificateurs.facilite 'Facilité'}}
+                {{afficheModificateur 'penalite' stats.modificateurs.ralentissement 'Ralentissement'}}
+                {{afficheModificateur 'penalite' stats.modificateurs.risque 'Risque'}}
+                {{afficheModificateur 'penalite' stats.modificateurs.blessureLegere 'Blessure Légère'}}
+            </div>
+        </div>
+
+        {{#if jetArme}}
+            <div class="bloc-arme">
+                {{#if (eq stats.type "lameSoeur")}}
+                    <div class="logo"><img src="systems/trinites/images/lames/lame-soeur.png"></div>
+                {{else}}
+                    <div></div>
+                {{/if}}
+                <div class="infos-arme">
+                    <div>{{stats.arme.name}}</div>
+                    <div>Dégâts : {{stats.degats}}</div>
+                </div>
+            </div>
+        {{/if}}
+        
+        {{#if (eq stats.typeActor "trinite")}}
+            <div class="grid-jet-comp">
+                {{#if (eq stats.resultDeva.dieResult 1)}}
+                    <div class="dice-back"><div class="roll dice-deva deux-des echec-crit">{{stats.resultDeva.dieResult}}</div></div>
+                {{else}}
+                    <div class="dice-back"><div class="roll dice-deva deux-des">{{stats.resultDeva.dieResult}}</div></div>
+                {{/if}}
+        {{/if}}
+
+        {{#if (or (eq stats.typeActor "archonteRoi") (eq stats.typeActor "lige"))}}
+            <div class="grid-jet-comp archonte-roi">
+                {{#if (eq stats.resultDeva.dieResult 1)}}
+                    <div class="dice-back"><div class="roll dice-archonte deux-des echec-crit">{{stats.resultDeva.dieResult}}</div></div>
+                {{else}}
+                    <div class="dice-back"><div class="roll dice-archonte deux-des">{{stats.resultDeva.dieResult}}</div></div>
+                {{/if}}
+        {{/if}}
+
+        {{#if (eq stats.typeActor "humain")}}
+                <div class="grid-jet-comp archonte-roi">
+                {{#if (eq stats.resultDeva.dieResult 1)}}
+                    <div class="dice-back"><div class="roll dice-archonte deux-des echec-crit">{{stats.resultDeva.dieResult}}</div></div>
+                {{else}}
+                    <div class="dice-back"><div class="roll dice-archonte deux-des">{{stats.resultDeva.dieResult}}</div></div>
+                {{/if}}
+        {{/if}}
+
+
+        {{#if (eq stats.resultArchonte.dieResult 1)}}
+                <div class="dice-back"><div class="roll dice-archonte deux-des echec-crit">{{stats.resultArchonte.dieResult}}</div></div>
+            {{else}}
+                <div class="dice-back"><div class="roll dice-archonte deux-des">{{stats.resultArchonte.dieResult}}</div></div>
+            {{/if}}
+            {{#if (eq stats.resultDeva.dieResult 1)}}
+                <div class="dice-total echec-crit">{{stats.resultDeva.rollTotal}}</div>
+            {{else}}
+                {{#if stats.resultDeva.reussite}}
+                    <div class="dice-total succes">{{stats.resultDeva.rollTotal}}</div>
+                {{else}}
+                    <div class="dice-total echec">{{stats.resultDeva.rollTotal}}</div>
+                {{/if}}
+            {{/if}}
+            {{#if (eq stats.resultArchonte.dieResult 1)}}
+                <div class="dice-total echec-crit">{{stats.resultArchonte.rollTotal}}</div>
+            {{else}}    
+                {{#if stats.resultArchonte.reussite}}
+                    <div class="dice-total succes">{{stats.resultArchonte.rollTotal}}</div>
+                {{else}}
+                    <div class="dice-total echec">{{stats.resultArchonte.rollTotal}}</div>
+                {{/if}}
+            {{/if}}
+        </div>
+        {{#if (eq stats.typeActor "trinite")}}
+            {{#if (eq stats.resultatJet.resultatArchonte "detteArchonte")}}
+                <div class="btn-dette"><button class="dette archonte not-displayed" data-actor-id="{{actorId}}" data-esprit="archonte">Dette envers l'Archonte</button></div>
+            {{/if}}
+            {{#if (eq stats.resultatJet.resultatDeva "detteDeva")}}
+                <div class="btn-dette"><button class="dette deva not-displayed" data-actor-id="{{actorId}}" data-esprit="deva">Dette envers le Deva</button></div>
+            {{/if}}
+        {{/if}}
+ 
+</div>

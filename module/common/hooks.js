@@ -16,8 +16,8 @@ export default function registerHooks() {
 
   Hooks.on("renderChatMessage", (message, html, data) => {
     html.find("a.activer.aura").click(ev => TrinitesChat.onActiverAura(ev, data.message));   
-    html.find(".dice-deva").click(ev => TrinitesChat.onSelectDice(ev, data.message));   
-    html.find(".dice-archonte").click(ev => TrinitesChat.onSelectDice(ev, data.message));
+    html.find(".dice-deva.deux-des").click(ev => TrinitesChat.onSelectDice(ev, data.message));   
+    html.find(".dice-archonte.deux-des").click(ev => TrinitesChat.onSelectDice(ev, data.message));
 });
 
 

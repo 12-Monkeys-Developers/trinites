@@ -1,4 +1,4 @@
-import * as Dice from "./rolls.js";
+import * as Roll from "./rolls.js";
 import DepenseKarmaFormApplication from "../appli/DepenseKarmaFormApp.js";
 
 export class TrinitesChat {
@@ -96,7 +96,9 @@ export class TrinitesChat {
 
     // Set the roll parameter if necessary
     if (this.roll) {
-      (data.type = CONST.CHAT_MESSAGE_TYPES.ROLL), (data.roll = this.roll);
+      data.rollMode = this.data.rollMode;
+      data.type = CONST.CHAT_MESSAGE_TYPES.ROLL; 
+      data.roll = this.roll;
     }
 
     // Set the flags parameter if necessary
@@ -104,26 +106,19 @@ export class TrinitesChat {
       data.flags = this.flags;
     }
 
-    // If it's a whisper
-    if (this.data.isWhisper) {
-      data.whisper = ChatMessage.getWhisperRecipients("GM").map((u) => u.id);
+    switch (this.data.rollMode) {
+      case "gmroll":
+        data.whisper = ChatMessage.getWhisperRecipients("GM").map((u) => u.id);
+        break;
+      case "blindroll":
+        data.whisper = ChatMessage.getWhisperRecipients("GM").map((u) => u.id);
+        data.blind = true;
+        break;
+      case "selfroll":
+        data.whisper = [game.user.id];
+        break;
     }
-    // Set the whisper and blind parameters according to the player roll mode settings
-    else {
-      switch (game.settings.get("core", "rollMode")) {
-        case "gmroll":
-          data.whisper = ChatMessage.getWhisperRecipients("GM").map((u) => u.id);
-          break;
-        case "blindroll":
-          data.whisper = ChatMessage.getWhisperRecipients("GM").map((u) => u.id);
-          data.blind = true;
-          break;
-        case "selfroll":
-          data.whisper = [game.user.id];
-          break;
-      }
-    }
-
+  
     // Create the chat
     this.chatData = data;
     return this;
@@ -190,15 +185,11 @@ export class TrinitesChat {
     event.preventDefault();
     const element = event.currentTarget;
     // Get the actor who has sent the chat message
-    //const actorId = $(event.currentTarget).parents(".chatroll").data("actorId");
     let actor = game.actors.get(element.closest(".carte.aura").dataset.actorId);
-    //const actor = game.actors.get(actorId);
 
     // Get the message
     const messageId = mess._id;
     const message = game.messages.get(messageId);
-
-    //event.preventDefault();
 
     // Aura déjà déployée
     if (element.classList.contains("deployee")) {
@@ -211,12 +202,6 @@ export class TrinitesChat {
     let activation = await actor.activerAura(auraId, null);
 
     if (typeof activation === "object" && activation !== null) {
-      /*
-      element.title = activation.title;
-      element.classList.add(activation.classList);
-      element.closest(".carte.aura").getElementsByClassName("zone")[0].innerHTML = activation.zone;
-      */
-      // Create the chat message
       // Récupération des données de l'item
       let aura = actor.items.get(auraId);
       let souffleDispo = actor.canUseSouffle;
@@ -226,11 +211,10 @@ export class TrinitesChat {
         aura: aura,
         actorId: actor.id,
         souffleDispo: souffleDispo,
-        isWhisper: message.isWhisper,
+        isWhisper: message.isWhisper
       };
 
       let newChatMessage = await new TrinitesChat(actor).withTemplate("systems/trinites/templates/partials/chat/carte-aura.hbs").withData(cardData).create();
-      console.log("newMessage : ", newChatMessage);
 
       await message.update({ content: newChatMessage.content });
     }
@@ -253,13 +237,13 @@ export class TrinitesChat {
       return;
     }
 
-    Dice.jetCompetence({
+    Roll.jetCompetence({
       actor: actor,
       type: "souffle",
       aura: aura,
       signe: "vierge",
       competence: "emprise",
-      afficherDialog: false,
+      afficherDialog: false
     });
 
     aura.update({ "system.deploiement": "cosme" });
@@ -384,7 +368,7 @@ export class TrinitesChat {
 
     const element = event.currentTarget;
 
-    const actorId = $(event.currentTarget).parents(".jet-arme").data("actorId");
+    const actorId = $(event.currentTarget).parents(".jet-comp").data("actorId");
     const actor = game.actors.get(actorId);
     console.log('Click actor', actor);
 
@@ -393,7 +377,6 @@ export class TrinitesChat {
 
     if (type === "deva") {
       let elem = $(event.currentTarget).parents(".jet-comp").find(".dette.deva");
-      if (elem.length == 0) elem = $(event.currentTarget).parents(".jet-arme").find(".dette.deva");
       if (elem.length > 0) elem[0].classList.toggle("not-displayed");
 
       // Gestion accélération/ralentissement si c'est un succès
@@ -410,7 +393,6 @@ export class TrinitesChat {
     }
     else {
       let elem = $(event.currentTarget).parents(".jet-comp").find(".dette.archonte");
-      if (elem.length == 0) elem = $(event.currentTarget).parents(".jet-arme").find(".dette.archonte");
       if (elem.length > 0) elem[0].classList.toggle("not-displayed"); 
 
       // Gestion accélération/ralentissement si c'est un succès

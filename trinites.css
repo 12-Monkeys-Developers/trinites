@@ -1673,7 +1673,8 @@
 .titre-cout-ress i {
   font-size: 0.9em;
 }
-.roll {
+.roll.dice-deva,
+.roll.dice-archonte {
   width: 40px;
   line-height: 34px;
   font-size: var(--font-size-16);

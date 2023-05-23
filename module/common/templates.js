@@ -46,6 +46,7 @@ export default async function preloadTemplates() {
     "systems/trinites/templates/partials/chat/carte-aura.hbs",
     "systems/trinites/templates/partials/chat/carte-verset.hbs",
     "systems/trinites/templates/partials/chat/carte-verset-active.hbs",
+    "systems/trinites/templates/partials/chat/carte-initiative.hbs",
     "systems/trinites/templates/partials/dice/dialog-jet-arme.hbs",
     "systems/trinites/templates/partials/dice/dialog-jet-competence.hbs",    
     "systems/trinites/templates/partials/dice/dialog-jet-ressource.hbs",

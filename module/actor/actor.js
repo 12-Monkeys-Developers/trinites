@@ -1,5 +1,6 @@
 import { carteVersetActive } from "../common/chat.js";
 import DepenseKarmaFormApplication from "../appli/DepenseKarmaFormApp.js";
+
 export default class TrinitesActor extends Actor {
   prepareData() {
     super.prepareData();
@@ -207,4 +208,5 @@ export default class TrinitesActor extends Actor {
     }
     return null;
   }
+
 }

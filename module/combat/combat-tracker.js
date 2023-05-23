@@ -77,4 +77,27 @@ export default class TrinitesCombatTracker extends CombatTracker {
     if (!combatant.getFlag("world","position")) await combatant.setFlag("world", "position", "retrait");
     else await combatant.setFlag("world", "position", "retrait");
   }
+
+  /**
+   * Handle toggling the defeated status effect on a combatant Token
+   * @param {Combatant} combatant     The combatant data being modified
+   * @returns {Promise}                A Promise that resolves after all operations are complete
+   * @private
+   */
+  async _onToggleDefeatedStatus(combatant) {
+    const isDefeated = !combatant.isDefeated;
+    await combatant.update({defeated: isDefeated});
+    const token = combatant.token;
+    if ( !token ) return;
+
+    // Push the defeated status to the token
+    const status = CONFIG.statusEffects.find(e => e.id === CONFIG.specialStatusEffects.DEFEATED);
+    if ( !status && !token.object ) return;
+    const effect = token.actor && status ? status : CONFIG.controlIcons.defeated;
+    if ( token.object ) await token.object.toggleEffect(effect, {overlay: true, active: isDefeated});
+    else await token.toggleActiveEffect(effect, {overlay: true, active: isDefeated});
+
+    await combatant.setFlag("world", "position", "retrait");
+  }
+
 }

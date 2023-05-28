@@ -1,6 +1,6 @@
 <h2>Trinites System for Foundry Virtual Tabletop</h2>
 
-<p style="margin-left: 10%;"> <img src="/assets/image/logo_cem.webp" alt="" width="700" height="405" /></p>
+<p style="margin-left: 10%;"> <img src="/assets/images/trinite_occulte.png" alt="" width="700" height="405" /></p>
 
 <div align="center">
 
@@ -10,9 +10,9 @@
 
 </div>
 
-<p>This is a community created game system to run games based upon the "<em>Trinités</em>" RPG system on the game platform Foundry Virtual Tabletop.</p>
-
 <p>Ceci est un programme qui permet de jouer à des jeux de rôle basés sur le système "<em>Trinités</em>" sur la plateforme de jeu Foundry Virtual Tabletop.</p>
+
+<p>This is a community created game system to run games based upon the "<em>Trinités</em>" RPG system on the game platform Foundry Virtual Tabletop.</p>
 
 <h2>Disclaimer</h2>
 <p><em>Trinités</em> est un jeu de rôle édité par Les XII Singes. Trinités est un univers original de Franck Plasse et Claude Guéant.</p>
@@ -24,7 +24,7 @@
 
 <p>The name Trinités, the Trinités logo, the Les XII Singes name, the Les XII Singes logo are trademarks of ReSpell SARL.L.</p>
 
-<h2>Contributors</h2>
+<h2>Contributeurs</h2>
 
 <p>Ce système est développé par Dellatosa, Kristov et Khaali, et publié avec l'accord des auteurs et ayants droits.</p>
 

@@ -1,0 +1,24 @@
+<div class="jet-comp" data-actor-id="{{actorId}}">
+
+  <div class="titre-jet-comp">
+    <div class="whisper-logo"><span>message privé </span><i class="far fa-eye-slash"></i></div>
+    <div class="bloc-titre">
+      <div class="titre"><i class="fas fa-dice"></i> Initiative ({{stats.competence}} {{stats.valeur}})</div>
+    </div>
+  </div>
+
+</div>
+
+<div class="grid-jet-comp {{#if (eq stats.typeActor 'archonteRoi')}}archonte-roi{{/if}} {{#if (or (eq stats.typeActor "lige") (eq stats.typeActor "humain"))}}humain{{/if}}">
+
+  {{#if (eq stats.nbDes 2)}}
+    <div class="dice-back"><div class="roll {{#if (eq stats.typeActor 'trinite')}}dice-deva{{else}}dice-archonte{{/if}}">{{stats.resultDeva.dieResult}}</div></div>
+    <div class="dice-back"><div class="roll dice-archonte">{{stats.resultArchonte.dieResult}}</div></div>
+    <div class="dice-total">{{stats.initiativeDeva}}</div>    
+    <div class="dice-total">{{stats.initiativeArchonte}}</div>    
+  {{else}}
+    <div class="dice-back"><div class="roll {{#if (eq stats.typeActor 'lige')}}dice-archonte{{else}}dice-deva{{/if}}">{{stats.resultDeva.dieResult}}</div></div>
+    <div class="dice-total">{{stats.initiativeDeva}}</div>  
+  {{/if}}
+
+</div>

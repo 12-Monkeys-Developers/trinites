@@ -695,7 +695,7 @@ export async function jetInitiative({ actor = null } = {}) {
     ...rollData
   };
 
-  let messageTemplate = "systems/trinites/templates/partials/chat/carte-initiative.hbs";
+  let messageTemplate = "systems/trinites/templates/partials/dice/jet-initiative.hbs";
 
   let renderedRoll = await rollResult.render();
 

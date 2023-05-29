@@ -45,14 +45,14 @@ export default async function preloadTemplates() {
     "systems/trinites/templates/partials/chat/carte-atout-active.hbs",
     "systems/trinites/templates/partials/chat/carte-aura.hbs",
     "systems/trinites/templates/partials/chat/carte-verset.hbs",
-    "systems/trinites/templates/partials/chat/carte-verset-active.hbs",
-    "systems/trinites/templates/partials/chat/carte-initiative.hbs",
+    "systems/trinites/templates/partials/chat/carte-verset-active.hbs",    
     "systems/trinites/templates/partials/dice/dialog-jet-arme.hbs",
     "systems/trinites/templates/partials/dice/dialog-jet-competence.hbs",    
     "systems/trinites/templates/partials/dice/dialog-jet-ressource.hbs",
     "systems/trinites/templates/partials/dice/jet-competence-unde.hbs",
     "systems/trinites/templates/partials/dice/jet-competence-deuxdes.hbs",
     "systems/trinites/templates/partials/dice/jet-ressource.hbs",
-    "systems/trinites/templates/partials/dice/jet-souffle.hbs"
+    "systems/trinites/templates/partials/dice/jet-souffle.hbs",
+    "systems/trinites/templates/partials/dice/jet-initiative.hbs"
   ]);
 }

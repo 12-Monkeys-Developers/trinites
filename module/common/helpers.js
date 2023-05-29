@@ -21,7 +21,7 @@ export default function registerHandlebarsHelpers() {
   });
 
   Handlebars.registerHelper("getCompetence", function (actor, signe, competence, champ) {
-    return eval(`actor.system.competences.${signe}.${competence}.${champ}`);
+    return foundry.utils.getProperty(actor.system.competences,`${signe}.${competence}.${champ}`);
   });
 
   Handlebars.registerHelper("getCompetenceLabel", function (signe, competence) {

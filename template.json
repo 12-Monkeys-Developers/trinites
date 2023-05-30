@@ -564,9 +564,9 @@
       },
       "sousType": "autre",
       "cout": {
-        "verset": null,
-        "aura": null,
-        "atout": null
+        "verset": "1",
+        "aura": "1",
+        "atout": "1"
       },
       "legion": "",
       "lameNoire": {

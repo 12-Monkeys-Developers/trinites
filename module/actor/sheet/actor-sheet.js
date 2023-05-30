@@ -21,16 +21,16 @@ export default class TrinitesActorSheet extends ActorSheet {
     data.armures = data.items.filter((item) => item.type === "armure");
     data.objets = data.items.filter((item) => item.type === "objet");
     data.domaines = data.items.filter((item) => item.type === "domaine");
-    
+
     data.versets = data.items.filter((item) => item.type === "verset");
     data.versetsLumiere = data.items.filter((item) => item.type === "verset" && item.system.karma === "lumiere");
     data.versetsTenebres = data.items.filter((item) => item.type === "verset" && item.system.karma === "tenebre");
-    
+
     data.auras = data.items.filter((item) => item.type === "aura");
-    data.majestes = data.items.filter(item => item.type === "majeste");
+    data.majestes = data.items.filter((item) => item.type === "majeste");
 
     data.atouts = data.items.filter((item) => item.type === "atout");
-    
+
     data.descriptionHtml = TextEditor.enrichHTML(this.actor.system.description, { async: false });
     data.notesHtml = TextEditor.enrichHTML(this.actor.system.notes, { async: false });
 
@@ -61,7 +61,7 @@ export default class TrinitesActorSheet extends ActorSheet {
     super.activateListeners(html);
 
     // Lock/Unlock la fiche
-    html.find(".sheet-change-lock").click(this._onSheetChangelock.bind(this));    
+    html.find(".sheet-change-lock").click(this._onSheetChangelock.bind(this));
 
     // Régénérer des cases de vie en dépensant du Karma
     html.find(".regen").click(this._onRegenerationSante.bind(this));
@@ -105,14 +105,14 @@ export default class TrinitesActorSheet extends ActorSheet {
     // Carte - Verset
     html.find(".roll-verset").click(this._onCarteVerset.bind(this));
 
-     // Changer la zone de déploiement d'une aura
-     html.find(".zone-deploiement").click(this._onZoneDeploimentAura.bind(this));
+    // Changer la zone de déploiement d'une aura
+    html.find(".zone-deploiement").click(this._onZoneDeploimentAura.bind(this));
 
     // Permet d'afficher la description
-    html.find('.grid-atout .nom-atout').click(this._onItemSummary.bind(this));
-    html.find('.grid-zodiaque .nom-aura').click(this._onItemSummary.bind(this));
-    html.find('.grid-verset .nom-verset').click(this._onItemSummary.bind(this));
-    html.find('.grid-pouvoir .nom-pouvoir').click(this._onItemSummary.bind(this));
+    html.find(".grid-atout .nom-atout").click(this._onItemSummary.bind(this));
+    html.find(".grid-zodiaque .nom-aura").click(this._onItemSummary.bind(this));
+    html.find(".grid-verset .nom-verset").click(this._onItemSummary.bind(this));
+    html.find(".grid-pouvoir .nom-pouvoir").click(this._onItemSummary.bind(this));
   }
 
   _onAjoutDomaineEtatEpuise(event) {
@@ -147,22 +147,22 @@ export default class TrinitesActorSheet extends ActorSheet {
 
     let indexVie = element.dataset.index;
     const blessureValInitial = parseInt(this.actor.system.nbBlessure);
-    let blessureVal ;
+    let blessureVal;
     blessureVal = parseInt(this.actor.system.nbBlessure != indexVie ? indexVie : indexVie - 1);
 
     await this.actor.update({ "system.nbBlessure": blessureVal });
 
-    // Gestion de la douleur pour une nouvelle blessure 
+    // Gestion de la douleur pour une nouvelle blessure
     if (blessureVal > blessureValInitial && this.actor.system.etatSante === "blesse") {
       // Recherche des combats éventuels
       for (const combat of game.combats) {
-        let combatant = combat.turns.find(c => c.actorId === this.actor.id && c.initiative !== null);
+        let combatant = combat.turns.find((c) => c.actorId === this.actor.id && c.initiative !== null);
         if (combatant !== undefined) {
-          const newInitiative = Math.max(combatant.initiative -= 3, 0);
-          combatant.update({initiative: newInitiative});
-        }        
+          const newInitiative = Math.max((combatant.initiative -= 3), 0);
+          combatant.update({ initiative: newInitiative });
+        }
       }
-    }    
+    }
   }
 
   async _onRegenerationSante(event) {
@@ -223,21 +223,26 @@ export default class TrinitesActorSheet extends ActorSheet {
       return;
     }
 
-    let auraActive = false;
-    if (zone != "cosme") {
-      let auras = this.actor.items.filter(function (item) {
-        return item.type === "aura" && item.id !== auraId;
-      });
-      auraActive = auras.some((autreAura) => {
-        if (autreAura.system.deploiement != "cosme") {
-          return true;
-        }
-      });
-    }
+    // Pour une trinité, contrôle du nombre d'aura, sauf pour une affinité du Zodiaque de décan 2 ou 3
+    if (this.actor.isTrinite && this.actor.system.themeAstral.affinite === "zodiaque" && this.actor.system.themeAstral.affiniteDecan > 1) {
+      // Ne rien faire
+    } else {
+      let auraActive = false;
+      if (zone != "cosme") {
+        let auras = this.actor.items.filter(function (item) {
+          return item.type === "aura" && item.id !== auraId;
+        });
+        auraActive = auras.some((autreAura) => {
+          if (autreAura.system.deploiement != "cosme") {
+            return true;
+          }
+        });
+      }
 
-    if (auraActive) {
-      ui.notifications.warn("Vous avez une autre aura déployée au delà du Cosme !");
-      return;
+      if (auraActive) {
+        ui.notifications.warn("Vous avez une autre aura déployée au delà du Cosme !");
+        return;
+      }
     }
 
     if (aura.system.deploiement === "cosme") {
@@ -283,7 +288,7 @@ export default class TrinitesActorSheet extends ActorSheet {
       actor: this.actor,
       signe: dataset.signe,
       competence: dataset.competence,
-      type: "competence"
+      type: "competence",
     });
   }
 
@@ -293,7 +298,7 @@ export default class TrinitesActorSheet extends ActorSheet {
 
     Roll.jetRessource({
       actor: this.actor,
-      ressource: dataset.ressource
+      ressource: dataset.ressource,
     });
   }
 
@@ -304,7 +309,7 @@ export default class TrinitesActorSheet extends ActorSheet {
     Chat.carteAtout({
       actor: this.actor,
       atoutId: dataset.itemId,
-      whisper: !event.shiftKey
+      whisper: !event.shiftKey,
     });
   }
 
@@ -315,7 +320,7 @@ export default class TrinitesActorSheet extends ActorSheet {
     Chat.carteAura({
       actor: this.actor,
       auraId: dataset.itemId,
-      whisper: !event.shiftKey
+      whisper: !event.shiftKey,
     });
   }
 
@@ -326,7 +331,7 @@ export default class TrinitesActorSheet extends ActorSheet {
     Chat.carteVerset({
       actor: this.actor,
       versetId: dataset.itemId,
-      whisper: !event.shiftKey
+      whisper: !event.shiftKey,
     });
   }
 
@@ -366,7 +371,7 @@ export default class TrinitesActorSheet extends ActorSheet {
       degats: item.system.degats,
       portee: item.system.portee,
       particularites: item.system.particularites,
-      epee: item.system.epee
+      epee: item.system.epee,
     };
 
     const signe = item.system.competence === "tir" ? "sagittaire" : "belier";
@@ -376,7 +381,7 @@ export default class TrinitesActorSheet extends ActorSheet {
       signe: signe,
       competence: arme.competence,
       arme: arme,
-      type: "arme"
+      type: "arme",
     });
   }
 

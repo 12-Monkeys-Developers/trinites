@@ -38,6 +38,28 @@ export default class TrinitesAuraSheet extends TrinitesItemSheet {
       return;
     }
 
+    // Pour une trinité, contrôle du nombre d'aura, sauf pour une affinité du Zodiaque de décan 2 ou 3
+    if (this.actor.isTrinite && this.actor.system.themeAstral.affinite === "zodiaque" && this.actor.system.themeAstral.affiniteDecan > 1) {
+      // Ne rien faire
+    } else {
+      let auraActive = false;
+      if (zone != "cosme") {
+        let auras = this.actor.items.filter(function (item) {
+          return item.type === "aura" && item.id !== auraId;
+        });
+        auraActive = auras.some((autreAura) => {
+          if (autreAura.system.deploiement != "cosme") {
+            return true;
+          }
+        });
+      }
+  
+      if (auraActive) {
+        ui.notifications.warn("Vous avez une autre aura déployée au delà du Cosme !");
+        return;
+      }
+    }
+
     let auraActive = false;
     if (zone != "cosme") {
       let auras = this.actor.items.filter(function (item) {

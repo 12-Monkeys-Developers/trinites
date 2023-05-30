@@ -5,19 +5,20 @@
     },
     
     "ITEM": {
+        "TypeVieanterieure": "Vie Antérieure",
+        "TypeMetier": "Métier",
         "TypeArme": "Arme",
         "TypeArmure": "Armure",
+        "TypeObjet": "Objet",
+        "TypeDomaine": "Domaine",
         "TypeAtout": "Atout",
         "TypeAura": "Aura",
-        "TypeDomaine": "Domaine",
-        "TypeJardin": "Jardin",
-        "TypeMajeste": "Majesté",
-        "TypeMetier": "Métier",
-        "TypeObjet": "Objet",
+        "TypeVerset": "Verset",      
         "TypePouvoir": "Pouvoir",
-        "pouvoirDragonnet":"Pouvoir de Dragonnet",
-        "TypeVieanterieure": "Vie Antérieure",
-        "TypeVerset": "Verset"
+        "TypeAme": "Ame",
+        "TypeJardin": "Jardin",    
+        "TypeMajeste": "Majesté",
+        "TypeDragon":"Dragon"        
     },
 
     "TRINITES": {

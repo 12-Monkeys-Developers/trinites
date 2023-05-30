@@ -121,8 +121,7 @@ jobs:
             trinites.js                          \
             templates/                           \
             module/                              \
-            fonts/                               \
-            images/                              \
+            assets/                              \
             lang/
           # Don't forget to add a backslash at the end of the line for any
           # additional files or directories!

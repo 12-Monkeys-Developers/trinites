@@ -4,6 +4,7 @@
         <div class="grid-equipements">        
             <div class="grid-armes">
                 <div></div>
+                <div></div>
                 <div class="titre-armes">Nom</div>
                 <div class="titre-armes">Dégâts</div>
                 <div class="titre-armes">Portée (m)</div>
@@ -11,6 +12,7 @@
                 <div></div>
                 <div></div>
                 {{#each armes as |arme id|}}
+                        {{#if (ne arme.img "icons/svg/item-bag.svg")}}<div class="col-image" style="background-image: url('{{arme.img}}')"></div>{{/if}}
                         <div class="col-roll-arme"><a class="roll-arme" title="Jet d'attaque'" data-item-id="{{arme._id}}"><i class="fas fa-dice"></i></a></div>
                         <div class="col-nom-arme">{{arme.name}}</div>
                         <div class="col-degats-arme">{{arme.system.degats}}</div>
@@ -28,6 +30,7 @@
         <div class="grid-equipements">        
             <div class="grid-armures">
                 <div></div>
+                <div></div>
                 <div class="titre-armure">Nom</div>
                 <div class="titre-armure">Mêlée et Explosifs</div>
                 <div class="titre-armure">Tir et Lancer</div>
@@ -36,6 +39,7 @@
                 <div></div>
 
                 {{#each armures as |armure id|}}
+                        {{#if (ne armure.img "icons/svg/item-bag.svg")}}<div class="col-image" style="background-image: url('{{armure.img}}')"></div>{{/if}}
                         <div></div>
                         <div class="col-nom-armure">{{armure.name}}</div>
                         <div class="col-protection-melee-armure">{{armure.system.protectionMeleeExplosif}}</div>
@@ -52,11 +56,13 @@
         <div class="grid-equipements">        
             <div class="grid-objets">
                 <div></div>
+                <div></div>
                 <div class="titre-objet">Nom</div>
                 <div class="titre-objet">Description</div>
                 <div></div>
                 <div></div>
                 {{#each objets as |objet id|}}
+                        {{#if (ne objet.img "icons/svg/item-bag.svg")}}<div class="col-image" style="background-image: url('{{objet.img}}')"></div>{{/if}}
                         <div></div>
                         <div class="col-nom-objet">{{objet.name}}</div>
                         <div class="col-description-objet">{{{objet.system.description}}}</div>

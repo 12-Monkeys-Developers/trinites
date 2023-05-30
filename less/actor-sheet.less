@@ -1142,39 +1142,45 @@
 
     .grid-armes {
         display: grid;
-        grid-template-columns: 2em 1fr 1fr 1fr 2fr 2em 2em;
+        grid-template-columns: 44px 2em 1fr 1fr 1fr 2fr 2em 2em;
         align-items: center;
 
+        .col-image {
+            grid-column: 1;
+            background-size: 40px 40px;
+            height: 40px;
+          }
+
         .col-roll-arme {
-            grid-column: 1 / 2;
+            grid-column: 2;
             display: flex;
             justify-content: center;
         }
     
         .col-nom-arme {
-            grid-column: 2 / 3;
+            grid-column: 3;
         }
     
         .col-degats-arme {
-            grid-column: 3 / 4;
+            grid-column: 4;
         }
     
         .col-portee-arme {
-            grid-column: 4 / 5;
+            grid-column: 5;
         }
     
         .col-particularites-arme {
-            grid-column: 5 / 6;
+            grid-column: 6;
         }
     
         .col-edit-arme {
-            grid-column: 6 / 7;
+            grid-column: 7;
             display: flex;
             justify-content: center;
         }
     
         .col-delete-arme {
-            grid-column: 7 / 8;
+            grid-column: 8;
             display: flex;
             justify-content: center;
         }
@@ -1182,33 +1188,39 @@
 
     .grid-armures {
         display: grid;
-        grid-template-columns: 2em 1fr 1fr 1fr 2fr 2em 2em;
+        grid-template-columns: 44px 2em 1fr 1fr 1fr 2fr 2em 2em;
         align-items: center;
     
+        .col-image {
+            grid-column: 1;
+            background-size: 40px 40px;
+            height: 40px;
+        }
+
         .col-nom-armure {
-            grid-column: 2 / 3;
+            grid-column: 3;
         }
     
         .col-protection-melee-armure {
-            grid-column: 3 / 4;
+            grid-column: 4;
         }
     
         .col-protection-tir-armure {
-            grid-column: 4 / 5;
+            grid-column: 5;
         }
     
         .col-particularites-armure {
-            grid-column: 5 / 6;
+            grid-column: 6;
         }
     
         .col-edit-armure {
-            grid-column: 6 / 7;
+            grid-column: 7;
             display: flex;
             justify-content: center;
         }
     
         .col-delete-armure {
-            grid-column: 7 / 8;
+            grid-column: 8;
             display: flex;
             justify-content: center;
         }
@@ -1216,25 +1228,31 @@
 
     .grid-objets {
         display: grid;
-        grid-template-columns: 2em 1fr 3fr 2em 2em;
+        grid-template-columns: 44px 2em 1fr 3fr 2em 2em;
         align-items: center;
     
+        .col-image {
+            grid-column: 1;
+            background-size: 40px 40px;
+            height: 40px;
+        }
+
         .col-nom-objet {
-            grid-column: 2 / 3;
+            grid-column: 3;
         }
     
         .col-description-objet {
-            grid-column: 3 / 4;
+            grid-column: 4;
         }
         
         .col-edit-objet {
-            grid-column: 4 / 5;
+            grid-column: 5;
             display: flex;
             justify-content: center;
         }
     
         .col-delete-objet {
-            grid-column: 5 / 6;
+            grid-column: 6;
             display: flex;
             justify-content: center;
         }

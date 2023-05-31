@@ -496,7 +496,7 @@
       "vieAnterieure": "",
       "trinite": {
         "deva": {
-          "choeur": "",
+          "choeur": "aucun",
           "karma": {
             "value": 0,
             "max": 0,
@@ -507,7 +507,7 @@
           "credits": 0
         },
         "archonte": {
-          "legion": "",
+          "legion": "aucun",
           "karma": {
             "value": 0,
             "max": 0,

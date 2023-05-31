@@ -105,7 +105,6 @@
   color: var(--color-actor-header);
 }
 .trinites.sheet.actor .sheet-header img {
-  flex: 0 0 128px;
   height: 128px;
   margin-right: 6px;
   border: none;

@@ -1,8 +1,8 @@
 {{#if unlocked}}
-  <img src="{{actor.img}}" data-edit="img" title="{{actor.name}}" height="128" width="128" />
+  <img src="{{actor.img}}" data-edit="img" title="{{actor.name}}" />
 {{else}}
   {{#if (ne actor.img "icons/svg/mystery-man.svg")}}
-    <img src="{{actor.img}}" data-edit="img" title="{{actor.name}}" height="128" width="128" />
+    <img src="{{actor.img}}" data-edit="img" title="{{actor.name}}" />
   {{else}}
     <div style="flex:initial; width:128px;"></div>
   {{/if}}

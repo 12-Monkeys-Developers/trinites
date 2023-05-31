@@ -469,18 +469,18 @@
       },
       "theme": {
         "themeAstral": {
-          "archetype": "",
+          "archetype": "aucun",
           "affinite": "",
           "affiniteDecan": 1,
           "affinite2": "",
           "affinite2Decan": 1,
           "affinite3": "",
           "affinite3Decan": 1,
-          "ascendant1": "",
-          "ascendant2": "",
-          "descendant1": "",
-          "descendant2": "",
-          "descendant3": ""
+          "ascendant1": "aucun",
+          "ascendant2": "aucun",
+          "descendant1": "aucun",
+          "descendant2": "aucun",
+          "descendant3": "aucun"
         }
       },
       "sante": {

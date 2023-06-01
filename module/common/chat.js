@@ -383,12 +383,12 @@ export class TrinitesChat {
     
     if (actor.isTrinite) {
       // Clic sur dé Deva
-      if (type === "deva") {
+      if (type === "de-un") {
         let elem = $(event.currentTarget).parents(".jet-comp").find(".dette.deva");
         if (elem.length > 0) elem[0].classList.toggle("not-displayed");
 
         let otherDette = $(event.currentTarget).parents(".jet-comp").find(".dette.archonte");
-        if (otherDette.length > 0) otherDette[0].classList.toggle("not-displayed");
+        if (otherDette.length > 0) otherDette[0].classList.add("not-displayed");
 
         // Gestion accélération/ralentissement si c'est un succès
         let resultatDeva = message.getFlag("world", "resultatDeva");
@@ -408,7 +408,7 @@ export class TrinitesChat {
         if (elem.length > 0) elem[0].classList.toggle("not-displayed"); 
 
         let otherDette = $(event.currentTarget).parents(".jet-comp").find(".dette.deva");
-        if (otherDette.length > 0) otherDette[0].classList.toggle("not-displayed");
+        if (otherDette.length > 0) otherDette[0].classList.add("not-displayed");
 
         // Gestion accélération/ralentissement si c'est un succès
         let resultatArchonte = message.getFlag("world", "resultatArchonte");

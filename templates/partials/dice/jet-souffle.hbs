@@ -39,7 +39,7 @@
         {{/if}}
     </div>
     {{#if (eq stats.resultatJet "detteArchonte")}}
-        <div class="btn-dette"><button class="dette archonte" data-actor-id="{{actorId}}" data-esprit="archonte">Dette envers l'Archonte</button></div>
+        <div class="btn-dette"><button class="dette archonte" data-actor-id="{{actorId}}" data-esprit="archonte" data-tooltip='Cliquer pour payer la dette'>Dette envers l'Archonte</button></div>
         <div class="carte hidden">
             <div class="entete">{{stats.nomPersonnage}} déclenche le Souffle</div>
             <div class="ligne-souffle">{{stats.aura.name}}</div>
@@ -50,7 +50,7 @@
         </div>
     {{/if}}
     {{#if (eq stats.resultatJet "detteDeva")}}
-        <div class="btn-dette"><button class="dette deva" data-actor-id="{{actorId}}" data-esprit="deva">Dette envers le Deva</button></div>
+        <div class="btn-dette"><button class="dette deva" data-actor-id="{{actorId}}" data-esprit="deva" data-tooltip='Cliquer pour payer la dette'>Dette envers le Deva</button></div>
         <div class="carte hidden">
             <div class="entete">{{stats.nomPersonnage}} déclenche le Souffle</div>
             <div class="ligne-souffle">{{stats.aura.name}}</div>

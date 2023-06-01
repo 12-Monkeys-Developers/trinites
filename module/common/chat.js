@@ -366,18 +366,28 @@ export class TrinitesChat {
     const messageId = mess._id;
     const message = game.messages.get(messageId);
 
-    const element = event.currentTarget;
+    const selectedDice = event.currentTarget;
 
     const actorId = $(event.currentTarget).parents(".jet-comp").data("actorId");
     const actor = game.actors.get(actorId);
-    console.log('Click actor', actor);
 
-    const type = element.classList.contains("dice-deva") ? "deva" : "archonte";
-    element.classList.toggle("dice-selected");
+    const type = selectedDice.classList.contains("dice-deva") ? "deva" : "archonte";
+    selectedDice.classList.toggle("dice-selected");
 
+    let otherDice = type === "deva" ? $(event.currentTarget).parents(".jet-comp").find(".dice-archonte") : $(event.currentTarget).parents(".jet-comp").find(".dice-deva");
+    if (otherDice.length > 0) {
+      if (otherDice[0].classList.contains("dice-selected")) {
+        otherDice[0].classList.toggle("dice-selected");
+      }
+    }
+    
+    // Clic sur dé Deva
     if (type === "deva") {
       let elem = $(event.currentTarget).parents(".jet-comp").find(".dette.deva");
       if (elem.length > 0) elem[0].classList.toggle("not-displayed");
+
+      let otherDette = $(event.currentTarget).parents(".jet-comp").find(".dette.archonte");
+      if (otherDette.length > 0) otherDette[0].classList.toggle("not-displayed");
 
       // Gestion accélération/ralentissement si c'est un succès
       let resultatDeva = message.getFlag("world", "resultatDeva");
@@ -391,9 +401,13 @@ export class TrinitesChat {
         }
       }
     }
+    // Clic sur dé Archonte
     else {
       let elem = $(event.currentTarget).parents(".jet-comp").find(".dette.archonte");
       if (elem.length > 0) elem[0].classList.toggle("not-displayed"); 
+
+      let otherDette = $(event.currentTarget).parents(".jet-comp").find(".dette.deva");
+      if (otherDette.length > 0) otherDette[0].classList.toggle("not-displayed");
 
       // Gestion accélération/ralentissement si c'est un succès
       let resultatArchonte = message.getFlag("world", "resultatArchonte");

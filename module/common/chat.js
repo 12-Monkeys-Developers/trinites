@@ -371,57 +371,58 @@ export class TrinitesChat {
     const actorId = $(event.currentTarget).parents(".jet-comp").data("actorId");
     const actor = game.actors.get(actorId);
 
-    const type = selectedDice.classList.contains("dice-deva") ? "deva" : "archonte";
+    const type = selectedDice.classList.contains("de-un") ? "de-un" : "de-deux";
     selectedDice.classList.toggle("dice-selected");
 
-    let otherDice = type === "deva" ? $(event.currentTarget).parents(".jet-comp").find(".dice-archonte") : $(event.currentTarget).parents(".jet-comp").find(".dice-deva");
+    let otherDice = type === "de-un" ? $(event.currentTarget).parents(".jet-comp").find(".de-deux") : $(event.currentTarget).parents(".jet-comp").find(".de-un");
     if (otherDice.length > 0) {
       if (otherDice[0].classList.contains("dice-selected")) {
         otherDice[0].classList.toggle("dice-selected");
       }
     }
     
-    // Clic sur dé Deva
-    if (type === "deva") {
-      let elem = $(event.currentTarget).parents(".jet-comp").find(".dette.deva");
-      if (elem.length > 0) elem[0].classList.toggle("not-displayed");
+    if (actor.isTrinite) {
+      // Clic sur dé Deva
+      if (type === "deva") {
+        let elem = $(event.currentTarget).parents(".jet-comp").find(".dette.deva");
+        if (elem.length > 0) elem[0].classList.toggle("not-displayed");
 
-      let otherDette = $(event.currentTarget).parents(".jet-comp").find(".dette.archonte");
-      if (otherDette.length > 0) otherDette[0].classList.toggle("not-displayed");
+        let otherDette = $(event.currentTarget).parents(".jet-comp").find(".dette.archonte");
+        if (otherDette.length > 0) otherDette[0].classList.toggle("not-displayed");
 
-      // Gestion accélération/ralentissement si c'est un succès
-      let resultatDeva = message.getFlag("world", "resultatDeva");
-      if (resultatDeva === "reussite" || resultatDeva === "detteDeva") {
-        const hasModificateurs = message.getFlag("world", "modificateurs");
-        if (hasModificateurs) {
-          const acceleration = message.getFlag("world", "acceleration");
-          const ralentissement = message.getFlag("world", "ralentissement");
-          if (acceleration) await actor.setFlag("world", "acceleration", acceleration);
-          if (ralentissement) await actor.setFlag("world", "ralentissement", ralentissement);
+        // Gestion accélération/ralentissement si c'est un succès
+        let resultatDeva = message.getFlag("world", "resultatDeva");
+        if (resultatDeva === "reussite" || resultatDeva === "detteDeva") {
+          const hasModificateurs = message.getFlag("world", "modificateurs");
+          if (hasModificateurs) {
+            const acceleration = message.getFlag("world", "acceleration");
+            const ralentissement = message.getFlag("world", "ralentissement");
+            if (acceleration) await actor.setFlag("world", "acceleration", acceleration);
+            if (ralentissement) await actor.setFlag("world", "ralentissement", ralentissement);
+          }
+        }
+      }
+      // Clic sur dé Archonte
+      else {
+        let elem = $(event.currentTarget).parents(".jet-comp").find(".dette.archonte");
+        if (elem.length > 0) elem[0].classList.toggle("not-displayed"); 
+
+        let otherDette = $(event.currentTarget).parents(".jet-comp").find(".dette.deva");
+        if (otherDette.length > 0) otherDette[0].classList.toggle("not-displayed");
+
+        // Gestion accélération/ralentissement si c'est un succès
+        let resultatArchonte = message.getFlag("world", "resultatArchonte");
+        if (resultatArchonte === "reussite" || resultatArchonte === "detteArchonte") {
+          const hasModificateurs = message.getFlag("world", "modificateurs");
+          if (hasModificateurs) {
+            const acceleration = message.getFlag("world", "acceleration");
+            const ralentissement = message.getFlag("world", "ralentissement");
+            if (acceleration) await actor.setFlag("world", "acceleration", acceleration);
+            if (ralentissement) await actor.setFlag("world", "ralentissement", ralentissement);
+          }
         }
       }
     }
-    // Clic sur dé Archonte
-    else {
-      let elem = $(event.currentTarget).parents(".jet-comp").find(".dette.archonte");
-      if (elem.length > 0) elem[0].classList.toggle("not-displayed"); 
-
-      let otherDette = $(event.currentTarget).parents(".jet-comp").find(".dette.deva");
-      if (otherDette.length > 0) otherDette[0].classList.toggle("not-displayed");
-
-      // Gestion accélération/ralentissement si c'est un succès
-      let resultatArchonte = message.getFlag("world", "resultatArchonte");
-      if (resultatArchonte === "reussite" || resultatArchonte === "detteArchonte") {
-        const hasModificateurs = message.getFlag("world", "modificateurs");
-        if (hasModificateurs) {
-          const acceleration = message.getFlag("world", "acceleration");
-          const ralentissement = message.getFlag("world", "ralentissement");
-          if (acceleration) await actor.setFlag("world", "acceleration", acceleration);
-          if (ralentissement) await actor.setFlag("world", "ralentissement", ralentissement);
-        }
-      }
-    }
-
   }
 }
 

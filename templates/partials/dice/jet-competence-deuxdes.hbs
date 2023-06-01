@@ -43,35 +43,35 @@
         {{#if (eq stats.typeActor "trinite")}}
             <div class="grid-jet-comp">
                 {{#if (eq stats.resultDeva.dieResult 1)}}
-                    <div class="dice-back"><div class="roll dice-deva deux-des echec-crit">{{stats.resultDeva.dieResult}}</div></div>
+                    <div class="dice-back"><div class="roll dice-deva deux-des de-un echec-crit">{{stats.resultDeva.dieResult}}</div></div>
                 {{else}}
-                    <div class="dice-back"><div class="roll dice-deva deux-des">{{stats.resultDeva.dieResult}}</div></div>
+                    <div class="dice-back"><div class="roll dice-deva deux-des de-un">{{stats.resultDeva.dieResult}}</div></div>
                 {{/if}}
         {{/if}}
 
         {{#if (or (eq stats.typeActor "archonteRoi") (eq stats.typeActor "lige"))}}
             <div class="grid-jet-comp archonte-roi">
                 {{#if (eq stats.resultDeva.dieResult 1)}}
-                    <div class="dice-back"><div class="roll dice-archonte deux-des echec-crit">{{stats.resultDeva.dieResult}}</div></div>
+                    <div class="dice-back"><div class="roll dice-archonte deux-des de-un echec-crit">{{stats.resultDeva.dieResult}}</div></div>
                 {{else}}
-                    <div class="dice-back"><div class="roll dice-archonte deux-des">{{stats.resultDeva.dieResult}}</div></div>
+                    <div class="dice-back"><div class="roll dice-archonte deux-des de-un">{{stats.resultDeva.dieResult}}</div></div>
                 {{/if}}
         {{/if}}
 
         {{#if (eq stats.typeActor "humain")}}
                 <div class="grid-jet-comp archonte-roi">
                 {{#if (eq stats.resultDeva.dieResult 1)}}
-                    <div class="dice-back"><div class="roll dice-archonte deux-des echec-crit">{{stats.resultDeva.dieResult}}</div></div>
+                    <div class="dice-back"><div class="roll dice-archonte deux-des de-un echec-crit">{{stats.resultDeva.dieResult}}</div></div>
                 {{else}}
-                    <div class="dice-back"><div class="roll dice-archonte deux-des">{{stats.resultDeva.dieResult}}</div></div>
+                    <div class="dice-back"><div class="roll dice-archonte deux-des de-un">{{stats.resultDeva.dieResult}}</div></div>
                 {{/if}}
         {{/if}}
 
 
         {{#if (eq stats.resultArchonte.dieResult 1)}}
-                <div class="dice-back"><div class="roll dice-archonte deux-des echec-crit">{{stats.resultArchonte.dieResult}}</div></div>
+                <div class="dice-back"><div class="roll dice-archonte deux-des de-deux echec-crit">{{stats.resultArchonte.dieResult}}</div></div>
             {{else}}
-                <div class="dice-back"><div class="roll dice-archonte deux-des">{{stats.resultArchonte.dieResult}}</div></div>
+                <div class="dice-back"><div class="roll dice-archonte deux-des de-deux">{{stats.resultArchonte.dieResult}}</div></div>
             {{/if}}
             {{#if (eq stats.resultDeva.dieResult 1)}}
                 <div class="dice-total echec-crit">{{stats.resultDeva.rollTotal}}</div>

@@ -23,7 +23,7 @@ TRINITES.messagers = {
   israfil: {
     label: "Israf'il",
     karma: "lumiere"
-  },
+  }
 };
 
 TRINITES.vagabonds = {
@@ -39,7 +39,7 @@ TRINITES.vagabonds = {
   malakan: {
     label: "Malak'an",
     karma: "tenebre"
-  },
+  }
 };
 
 TRINITES.epeesFeu = {
@@ -71,7 +71,7 @@ TRINITES.epeesFeu = {
   malakan: {
     label: "Malak'an",
     karma: "tenebre"
-  },
+  }
 };
 
 TRINITES.choeurs = {
@@ -336,7 +336,7 @@ TRINITES.savoirsOccultes = {
   oblat: {
     label :"Technique de l'Oblat",
     origine:"L'Oblat"
-  },
+  }
 };
   
 TRINITES.typePnj = {

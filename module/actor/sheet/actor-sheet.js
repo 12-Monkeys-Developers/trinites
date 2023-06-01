@@ -288,7 +288,7 @@ export default class TrinitesActorSheet extends ActorSheet {
       actor: this.actor,
       signe: dataset.signe,
       competence: dataset.competence,
-      type: "competence",
+      type: "competence"
     });
   }
 
@@ -298,7 +298,7 @@ export default class TrinitesActorSheet extends ActorSheet {
 
     Roll.jetRessource({
       actor: this.actor,
-      ressource: dataset.ressource,
+      ressource: dataset.ressource
     });
   }
 
@@ -309,7 +309,7 @@ export default class TrinitesActorSheet extends ActorSheet {
     Chat.carteAtout({
       actor: this.actor,
       atoutId: dataset.itemId,
-      whisper: !event.shiftKey,
+      whisper: !event.shiftKey
     });
   }
 
@@ -320,7 +320,7 @@ export default class TrinitesActorSheet extends ActorSheet {
     Chat.carteAura({
       actor: this.actor,
       auraId: dataset.itemId,
-      whisper: !event.shiftKey,
+      whisper: !event.shiftKey
     });
   }
 
@@ -331,7 +331,7 @@ export default class TrinitesActorSheet extends ActorSheet {
     Chat.carteVerset({
       actor: this.actor,
       versetId: dataset.itemId,
-      whisper: !event.shiftKey,
+      whisper: !event.shiftKey
     });
   }
 

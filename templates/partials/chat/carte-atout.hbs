@@ -1,3 +1,4 @@
+{{log 'atout' this}}
 <div class="whisper-logo"><span>message privé </span><i class="far fa-eye-slash"></i></div>
 <div class="carte atout" data-item-id="{{atout._id}}" data-actor-id="{{actorId}}">
     <div class="entete">{{atout.name}}</div>
@@ -12,7 +13,7 @@
             <i class="fas fa-moon"></i>
         </div>
         {{/if}}
-        <div class="messager">{{configVal 'epeesFeu' atout.system.messager}}</div>
+        <div class="messager">{{configLabel 'epeesFeu' atout.system.messager}}</div>
         <div class="action"><a class="activer atout" title="Utiliser l'atout '{{atout.name}}'"><i class="fas fa-bolt"></i></a></div>
         <div class="titre"><a class="details atout"><i class="fas fa-angle-right"></i></a><label>Effet de l'Atout</label></div>
     </div>

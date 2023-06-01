@@ -422,7 +422,7 @@ export async function carteAtout({ actor = null, atoutId = null, whisper = null 
   let cardData = {
     atout: atout,
     actorId: actor.id,
-    isWhisper: whisper,
+    isWhisper: whisper
   };
 
   // Recupération du template
@@ -438,7 +438,7 @@ export async function carteAtoutActive({ actor = null, atoutId = null } = {}) {
   // Récupération des données de l'item
   let cardData = {
     atout: atout,
-    nomPersonnage: actor.name,
+    nomPersonnage: actor.name
   };
 
   // Recupération du template
@@ -458,7 +458,7 @@ export async function carteAura({ actor = null, auraId = null, whisper = null } 
     aura: aura,
     actorId: actor.id,
     souffleDispo: souffleDispo,
-    isWhisper: whisper,
+    isWhisper: whisper
   };
 
   // Recupération du template
@@ -475,7 +475,7 @@ export async function carteVerset({ actor = null, versetId = null, whisper = nul
   let cardData = {
     verset: verset,
     actorId: actor.id,
-    isWhisper: whisper,
+    isWhisper: whisper
   };
 
   // Recupération du template

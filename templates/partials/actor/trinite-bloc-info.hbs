@@ -15,7 +15,7 @@
   {{#if (eq data.type "trinite")}}
     <div class="actor-infos-line">
       <label>{{localize "TRINITES.label.metier"}}</label>
-      <div class="middle-size {{#if hasMetier}}edit-item{{/if}}" {{#if hasMetier}}data-item-id='{{metierId}}' data-tooltip="Afficher le métier" data-tooltip-direction="UP"{{/if}}><input name="system.metier" type="text" value="{{data.system.metier}}" readonly /></div>
+      <div class="big-size {{#if hasMetier}}edit-item{{/if}}" {{#if hasMetier}}data-item-id='{{metierId}}' data-tooltip="Afficher le métier" data-tooltip-direction="UP"{{/if}}><input name="system.metier" type="text" value="{{data.system.metier}}" readonly /></div>
       {{#if hasMetier}}
         {{#if unlocked}}
           <div><a class="delete-metier" title="Supprimer le métier"><i class="fa fa-trash"></i></a></div>

@@ -70,7 +70,7 @@ export default class TrinitesTriniteSheet extends TrinitesActorSheet {
       return;
     }
 
-    Log.info("_onDropMetierItem", itemData);
+    Log.debug("_onDropMetierItem", itemData);
 
     this.actor.ajouterMetier(itemData);
   }

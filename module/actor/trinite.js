@@ -408,17 +408,20 @@ export default class TrinitesTrinite extends TrinitesActor {
     this.update(updateObj);
 
     // Création des domaines
-    let domaines = metier.system.listeDomaines;
-    let liste = domaines.split(',');
-    for (const domaine of liste) {
-      await this.createEmbeddedDocuments("Item", [{type: "domaine", name: domaine}]);
-    }
+    const domaines = metier.system.listeDomaines;
 
-    const nbDomaines = metier.system.nbDomaines;
-    let domainesRestant = nbDomaines - liste.length;
-
-    for (let index = 0; index < domainesRestant; index++) {
-      await this.createEmbeddedDocuments("Item", [{type: "domaine", name: "?"}]);      
+    if (domaines !== "") {
+      let liste = domaines.split(',');
+      for (const domaine of liste) {
+        await this.createEmbeddedDocuments("Item", [{type: "domaine", name: domaine}]);
+      }
+  
+      const nbDomaines = metier.system.nbDomaines;
+      const domainesRestant = nbDomaines - liste.length;
+  
+      for (let index = 0; index < domainesRestant; index++) {
+        await this.createEmbeddedDocuments("Item", [{type: "domaine", name: "?"}]);      
+      }
     }
 
     await this.createEmbeddedDocuments("Item", [metier]);

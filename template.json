@@ -669,7 +669,12 @@
     },
     "dragon": {
       "messager": "autre",
-      "description": ""
+      "description": "",
+      "experienceApprentissages": 0,
+      "karmaLumiere": {
+        "value": 0,
+        "max": 0
+      }
     },
     "verset": {
       "choeurLegion": "",

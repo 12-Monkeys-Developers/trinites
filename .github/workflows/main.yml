@@ -119,6 +119,8 @@ jobs:
             template.json                        \
             trinites.css                         \
             trinites.js                          \
+            README.md                            \
+            CHANGELOG.md                         \
             templates/                           \
             module/                              \
             assets/                              \

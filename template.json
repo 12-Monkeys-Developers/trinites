@@ -539,14 +539,15 @@
         "finie": false
       },
       "oratoire": "",
+      "experienceApprentissages": 0,
       "dragon": {
         "karmaLumiere": {
-        "value": 0,
-        "max": 0
-        },
-        "experienceApprentissages": 0,
-      }      
-    },
+          "value": 0,
+          "max": 0
+          },
+          "experienceApprentissages": 0
+      }
+      },
     "pnj": {
       "templates": ["information", "signes", "competences", "ressources", "sante"],
       "activite": "",

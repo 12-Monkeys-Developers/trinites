@@ -123,12 +123,12 @@
                 <div class="dom-grid">
                     {{#each domaines as |domaine id|}}
                         <div class="domaine-item domaine" data-item-id="{{domaine._id}}">
-                            <div class="nom-domaine">{{domaine.name}}</div>
                             {{#if domaine.system.epuise }}
                                 <div class="uncheck-domaine"><a title="Domaine épuisé"><i class="far fa-check-square"></i></a></div>
                             {{else}}
                                 <div class="check-domaine"><a title="Domaine épuisé"><i class="far fa-square"></i></a></div>
                             {{/if}}
+                            <div class="nom-domaine">{{domaine.name}}</div>                            
                         </div>
                     {{/each}}
                 </div>

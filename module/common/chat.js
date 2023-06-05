@@ -297,7 +297,7 @@ export class TrinitesChat {
       actor.consommerSourceKarma(actor.sourceUnique(typeKarma), coutPouvoir);
       activationOk = true;
     } else {
-      await new DepenseKarmaFormApplication.open(actor, actor.system.trinite, typeKarma, "atout", coutPouvoir, atoutId);
+      await DepenseKarmaFormApplication.open(actor, actor.system.trinite, typeKarma, "atout", coutPouvoir, atoutId);
     }
 
     if (activationOk) {

@@ -1,3 +1,8 @@
+0.6.1
+Corrections
+- Activation d'un atout dans le chat
+- Régénération de vie par le karma
+
 0.6.0
 Corrections
 - Drop d'un métier avec une liste de domaines vide

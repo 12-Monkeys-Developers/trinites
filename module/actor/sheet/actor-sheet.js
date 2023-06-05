@@ -203,7 +203,7 @@ export default class TrinitesActorSheet extends ActorSheet {
       this.actor.consommerSourceKarma(this.actor.sourceUnique(typeKarma), 1);
       activationOk = true;
     } else {
-      await new DepenseKarmaFormApplication.open(this.actor, this.actor.data.data.trinite, typeKarma, "regen", 1, null);
+      await DepenseKarmaFormApplication.open(this.actor, this.actor.system.trinite, typeKarma, "regen", 1, null);
     }
 
     if (activationOk) {

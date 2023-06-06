@@ -5,8 +5,7 @@ export default class TrinitesVieAnterieureSheet extends TrinitesItemSheet {
   static get defaultOptions() {
     return mergeObject(super.defaultOptions, {
       width: 720,
-      height: 1020,
-      classes: ["trinites", "sheet", "item"]
+      height: 1020
     });
   }
 

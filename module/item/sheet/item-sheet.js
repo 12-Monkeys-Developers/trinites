@@ -4,7 +4,7 @@ export default class TrinitesItemSheet extends ItemSheet {
     return mergeObject(super.defaultOptions, {
       width: 650,
       height: 500,
-      classes: ["trinites", "sheet", "item"],
+      classes: ["trinites", "sheet", "item"]
     });
   }
 

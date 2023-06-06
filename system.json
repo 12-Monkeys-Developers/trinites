@@ -37,9 +37,8 @@
     "initiative": "min(round((1d12 + @competences.capricorne.rapidite.valeur) / 2),12)",
     "primaryTokenAttribute": "",
     "compatibility": {
-      "minimum": "10.278",
-      "verified": "10.291",
-      "maximum": 10
+      "minimum": "10",
+      "verified": "11.300"
     },
     "url": "#{URL}#",
     "manifest": "#{MANIFEST}#",

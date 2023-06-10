@@ -27,6 +27,7 @@ export default class TrinitesActorSheet extends ActorSheet {
     data.versetsTenebres = data.items.filter((item) => item.type === "verset" && item.system.karma === "tenebre");
 
     data.auras = data.items.filter((item) => item.type === "aura");
+    data.jardins = data.items.filter((item) => item.type === "jardin");
     data.majestes = data.items.filter((item) => item.type === "majeste");
 
     data.atouts = data.items.filter((item) => item.type === "atout");
@@ -41,6 +42,11 @@ export default class TrinitesActorSheet extends ActorSheet {
     data.isHumain = this.actor.isHumain;
 
     data.unlocked = this.actor.isUnlocked;
+
+    data.affZodiaque = this.actor.affLvl("zodiaque");
+    data.affGrandLivre = this.actor.affLvl("grandLivre");
+    data.affLamesoeur = this.actor.affLvl("lamesoeur");
+console.log(data);
 
     return data;
   }

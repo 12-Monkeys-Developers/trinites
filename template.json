@@ -525,10 +525,6 @@
           }
         }
       },
-      "lameSoeur": {
-        "messager": "",
-        "description": ""
-      },
       "experience": {
         "totale": 0,
         "disponible": 0
@@ -538,16 +534,23 @@
         "disponible": 0,
         "finie": false
       },
-      "oratoire": "",
-      "experienceApprentissages": 0,
-      "dragon": {
-        "karmaLumiere": {
-          "value": 0,
-          "max": 0
+      "lameSoeur": {
+        "messager": "",
+        "description": "",
+        "oratoire": "",
+        "experienceApprentissages": 0,
+        "dragon": {
+          "karmaLumiere": {
+            "value": 0,
+            "max": 0
           },
           "experienceApprentissages": 0
-      }
+        }
       },
+      "batonPelerin": {
+        "description": ""
+      }
+    },
     "pnj": {
       "templates": ["information", "signes", "competences", "ressources", "sante"],
       "activite": "",

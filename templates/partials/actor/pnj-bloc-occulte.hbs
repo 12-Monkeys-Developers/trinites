@@ -22,6 +22,43 @@
         </div>
     </div>
 </div>
+
+{{#if unlocked}}
+    <div class="deux-col-50-50">
+        <div class = "ferveur">
+            <h3> Ferveur</h3>
+            <div class="grid-karma-tenebres">
+                <div class="karma-tenebres-titre"><label>Réserve</label></div>
+                <div class="karma-tenebres-valeur">
+                    <input name="system.ferveur.value" type="number" value="{{data.system.ferveur.value}}" placeholder="0" min="0" max="{{data.system.ferveur.max}}">
+                    <label> / </label>
+                    <input name="system.ferveur.max" type="number" value="{{data.system.ferveur.max}}" placeholder="0" min="0">
+                </div>
+            </div>
+        </div>
+        <div></div>
+    </div>
+{{else}}
+    {{#if (gt data.system.ferveur.max 0)}}
+        <div class="deux-col-50-50">
+            <div class = "ferveur">
+                <h3> Ferveur</h3>
+                <div class="grid-karma-tenebres">
+                    <div class="karma-tenebres-titre"><label>Réserve</label></div>
+                    <div class="karma-tenebres-valeur">
+                        <input name="system.ferveur.value" type="number" value="{{data.system.ferveur.value}}" placeholder="0" min="0" max="{{data.system.ferveur.max}}">
+                        <label> / </label>
+                        <input name="system.ferveur.max" type="number" value="{{data.system.ferveur.max}}" placeholder="0" min="0" {{#unless unlocked}}disabled {{/unless}}>
+                    </div>
+                </div>
+            </div>
+            <div></div>
+        </div>
+    {{/if}}
+{{/if}}
+
+
+
 <div class="une-col">    
     {{> "systems/trinites/templates/partials/actor/pnj-bloc-atouts.hbs"}}    
     {{> "systems/trinites/templates/partials/actor/pnj-bloc-versets.hbs"}}

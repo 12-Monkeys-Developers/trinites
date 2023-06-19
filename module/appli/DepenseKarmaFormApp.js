@@ -172,6 +172,13 @@ export default class DepenseKarmaFormApplication extends FormApplication {
       });
     }
 
+    if (this.typePouvoir == "majeste") {
+      Chat.carteMajesteActive({
+        actor: this.actor,
+        majesteId: this.idPouvoir,
+      });
+    }
+
     if (this.typePouvoir == "verset") {
       Chat.carteVersetActive({
         actor: this.actor,

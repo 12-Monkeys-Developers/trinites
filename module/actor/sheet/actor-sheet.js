@@ -46,7 +46,6 @@ export default class TrinitesActorSheet extends ActorSheet {
     data.affZodiaque = this.actor.affLvl("zodiaque");
     data.affGrandLivre = this.actor.affLvl("grandLivre");
     data.affLamesoeur = this.actor.affLvl("lamesoeur");
-console.log(data);
 
     return data;
   }
@@ -107,6 +106,9 @@ console.log(data);
 
     // Carte - Aura
     html.find(".roll-aura").click(this._onCarteAura.bind(this));
+
+    // Carte - Majesté
+    html.find(".roll-majeste").click(this._onCarteMajeste.bind(this));
 
     // Carte - Verset
     html.find(".roll-verset").click(this._onCarteVerset.bind(this));
@@ -326,6 +328,17 @@ console.log(data);
     Chat.carteAura({
       actor: this.actor,
       auraId: dataset.itemId,
+      whisper: !event.shiftKey
+    });
+  }
+
+  _onCarteMajeste(event) {
+    event.preventDefault();
+    const dataset = event.currentTarget.dataset;
+
+    Chat.carteMajeste({
+      actor: this.actor,
+      majesteId: dataset.itemId,
       whisper: !event.shiftKey
     });
   }

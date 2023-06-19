@@ -253,6 +253,32 @@ export class TrinitesChat {
     element.closest(".carte.aura").getElementsByClassName("zone")[0].innerHTML = "Cosme";
   }
 
+  static onActiverMajeste(event) {
+    event.preventDefault();
+    const element = event.currentTarget;
+
+    // Aura déjà déployée
+    if (element.classList.contains("cosme")) {
+      return;
+    }
+
+    let actor = game.actors.get(element.closest(".carte.majeste").dataset.actorId);
+    let majeste = actor.items.get(element.closest(".carte.majeste").dataset.itemId);
+    
+    let auras = actor.items.filter((item) => item.type === "aura");
+    for(let aura of auras){
+        aura.update({ "system.deploiement": "cosme" });
+    }
+    
+    actor.viderKarma("neutre");
+
+    carteMajesteActive({
+      actor: actor,
+      majesteId: majeste.id,
+    });
+    
+  }
+
   // Activer un verset dans le la fenêtre de chat
   static onActiverVerset(event) {
     event.preventDefault();
@@ -343,6 +369,32 @@ export class TrinitesChat {
       element.innerHTML = '<i class="fas fa-angle-down"></i>';
     } else {
       element.closest(".carte.aura").getElementsByClassName("desc")[0].classList.remove("visible");
+      element.innerHTML = '<i class="fas fa-angle-right"></i>';
+    }
+  }
+
+  static onDetailsMajeste(event) {
+    event.preventDefault();
+    const element = event.currentTarget;
+
+    if (element.innerHTML.includes("angle-right")) {
+      element.closest(".carte.majeste").getElementsByClassName("desc")[0].classList.add("visible");
+      element.innerHTML = '<i class="fas fa-angle-down"></i>';
+    } else {
+      element.closest(".carte.majeste").getElementsByClassName("desc")[0].classList.remove("visible");
+      element.innerHTML = '<i class="fas fa-angle-right"></i>';
+    }
+  }
+
+  static onDetailsEffetsMajeste(event) {
+    event.preventDefault();
+    const element = event.currentTarget;
+
+    if (element.innerHTML.includes("angle-right")) {
+      element.closest(".carte.majeste").getElementsByClassName("descEffet")[0].classList.add("visible");
+      element.innerHTML = '<i class="fas fa-angle-down"></i>';
+    } else {
+      element.closest(".carte.majeste").getElementsByClassName("descEffet")[0].classList.remove("visible");
       element.innerHTML = '<i class="fas fa-angle-right"></i>';
     }
   }
@@ -478,6 +530,39 @@ export async function carteAura({ actor = null, auraId = null, whisper = null } 
 
   // Recupération du template
   const messageTemplate = "systems/trinites/templates/partials/chat/carte-aura.hbs";
+
+  let chat = await new TrinitesChat(actor).withTemplate(messageTemplate).withData(cardData).create();
+  await chat.display();
+}
+
+export async function carteMajeste({ actor = null, majesteId = null, whisper = null } = {}) {
+  let majeste = actor.items.get(majesteId);
+
+  // Récupération des données de l'item
+  let cardData = {
+    majeste: majeste,
+    actorId: actor.id,
+    isWhisper: whisper
+  };
+
+  // Recupération du template
+  const messageTemplate = "systems/trinites/templates/partials/chat/carte-majeste.hbs";
+
+  let chat = await new TrinitesChat(actor).withTemplate(messageTemplate).withData(cardData).create();
+  await chat.display();
+}
+
+export async function carteMajesteActive({ actor = null, majesteId = null } = {}) {
+  let majeste = actor.items.get(majesteId);
+
+  // Récupération des données de l'item
+  let cardData = {
+    majeste: majeste,
+    nomPersonnage: actor.name
+  };
+
+  // Recupération du template
+  const messageTemplate = "systems/trinites/templates/partials/chat/carte-majeste-active.hbs";
 
   let chat = await new TrinitesChat(actor).withTemplate(messageTemplate).withData(cardData).create();
   await chat.display();

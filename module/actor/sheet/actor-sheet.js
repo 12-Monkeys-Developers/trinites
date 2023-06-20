@@ -45,7 +45,7 @@ export default class TrinitesActorSheet extends ActorSheet {
 
     data.affZodiaque = this.actor.affLvl("zodiaque");
     data.affGrandLivre = this.actor.affLvl("grandLivre");
-    data.affLamesoeur = this.actor.affLvl("lamesoeur");
+    data.affLamesoeur = this.actor.affLvl("lameSoeur");
 
     return data;
   }
@@ -232,7 +232,7 @@ export default class TrinitesActorSheet extends ActorSheet {
     }
 
     // Pour une trinité, contrôle du nombre d'aura, sauf pour une affinité du Zodiaque de décan 2 ou 3
-    if (this.actor.isTrinite && this.actor.system.themeAstral.affinite === "zodiaque" && this.actor.system.themeAstral.affiniteDecan > 1) {
+    if (this.actor.isTrinite && this.actor.affLvl("zodiaque") > 1) {
       // Ne rien faire
     } else {
       let auraActive = false;

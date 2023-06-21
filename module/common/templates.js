@@ -40,6 +40,8 @@ export default async function preloadTemplates() {
     "systems/trinites/templates/partials/actor/pnj-bloc-profane.hbs",
     "systems/trinites/templates/partials/actor/pnj-part-competence.hbs",
     "systems/trinites/templates/partials/actor/bloc-atouts.hbs",
+    "systems/trinites/templates/partials/chat/carte-dragon.hbs",
+    "systems/trinites/templates/partials/chat/carte-dragon-active.hbs",
     "systems/trinites/templates/partials/actor/part-competence-locked.hbs",    
     "systems/trinites/templates/partials/actor/part-competence-unlocked.hbs",
     "systems/trinites/templates/partials/chat/carte-atout.hbs",

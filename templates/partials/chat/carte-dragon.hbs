@@ -1,0 +1,15 @@
+<div class="whisper-logo"><span>message privé </span><i class="far fa-eye-slash"></i></div>
+<div class="carte dragon" data-item-id="{{dragon._id}}" data-actor-id="{{actorId}}">
+    <div class="entete">{{dragon.name}}</div>
+    <div class="grid-carte-verset">
+        <div class="karma">
+            <i class="fa-regular fa-dragon"></i>
+        </div>
+        <div class="favori"></div>
+        <div class="action"><a class="activer dragon" title="Activer '{{dragon.name}}' du Dragon"><i class="fas fa-bolt"></i></a></div>
+    </div>
+    <div class="grid-carte-verset">
+        <div class="titre"><a class="details dragon"><i class="fas fa-angle-right"></i></a><label>Description</label></div>
+    </div>
+    <div class="desc">{{editor dragon.system.description target="dragon.system.description" owner=true}}</div>
+</div>

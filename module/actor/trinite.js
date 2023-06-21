@@ -212,7 +212,10 @@ export default class TrinitesTrinite extends TrinitesActor {
     let data = this.system;
     let karmaDisponible = 0;
 
-    if (typeKarma === "neutre") {
+    if (typeKarma === "dragon") {
+      karmaDisponible += data.lameSoeur.dragon.karmaLumiere.value;
+    } 
+    else if (typeKarma === "neutre") {
       karmaDisponible += data.trinite.deva.karma.value + data.trinite.archonte.karma.value + data.trinite.adam.karma.value;
     } 
     else {
@@ -292,10 +295,14 @@ export default class TrinitesTrinite extends TrinitesActor {
     }
     else if (typeKarma === "lumiere") {
       this.update({ "system.trinite.deva.karma.value": 0 });
-    } 
+    }
     else if (typeKarma === "tenebre") {
       this.update({ "system.trinite.archonte.karma.value": 0 });
     }
+    else if (typeKarma === "dragon") {
+      this.update({ "system.lameSoeur.dragon.karmaLumiere.value": 0 });
+    }
+
 
     if (typeKarma === data.trinite.adam.karma.type) {
       this.update({ "system.trinite.adam.karma.value": 0 });
@@ -314,6 +321,9 @@ export default class TrinitesTrinite extends TrinitesActor {
         break;
       case "archonte":
         this.update({ "system.trinite.archonte.karma.value": data.trinite.archonte.karma.value - coutPouvoir });
+        break;
+      case "dragon":
+        this.update({ "system.lameSoeur.dragon.karmaLumiere.value": data.lameSoeur.dragon.karmaLumiere.value - coutPouvoir });
         break;
     }
   }

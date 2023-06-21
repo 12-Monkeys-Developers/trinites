@@ -31,6 +31,7 @@ export default class TrinitesActorSheet extends ActorSheet {
     data.majestes = data.items.filter((item) => item.type === "majeste");
 
     data.atouts = data.items.filter((item) => item.type === "atout");
+    data.dragons = data.items.filter((item) => item.type === "dragon");
 
     data.descriptionHtml = TextEditor.enrichHTML(this.actor.system.description, { async: false });
     data.notesHtml = TextEditor.enrichHTML(this.actor.system.notes, { async: false });
@@ -103,6 +104,8 @@ export default class TrinitesActorSheet extends ActorSheet {
 
     // Carte - Atout
     html.find(".roll-atout").click(this._onCarteAtout.bind(this));
+    // Carte - Dragon
+    html.find(".roll-dragon").click(this._onCarteDragon.bind(this));
 
     // Carte - Aura
     html.find(".roll-aura").click(this._onCarteAura.bind(this));
@@ -317,6 +320,17 @@ export default class TrinitesActorSheet extends ActorSheet {
     Chat.carteAtout({
       actor: this.actor,
       atoutId: dataset.itemId,
+      whisper: !event.shiftKey
+    });
+  }
+
+  _onCarteDragon(event) {
+    event.preventDefault();
+    const dataset = event.currentTarget.dataset;
+
+    Chat.carteDragon({
+      actor: this.actor,
+      dragonId: dataset.itemId,
       whisper: !event.shiftKey
     });
   }

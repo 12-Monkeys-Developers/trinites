@@ -946,6 +946,19 @@
 .trinites.sheet.actor .lame-soeur .grid-lame a {
   margin: 2px;
 }
+.trinites.sheet.actor .lame-soeur .intro-dragon {
+  display: flex;
+  flex-direction: row;
+}
+.trinites.sheet.actor .lame-soeur .intro-dragon input {
+  width: 3em;
+  text-align: center;
+  margin: 2px;
+}
+.trinites.sheet.actor .lame-soeur .intro-dragon label {
+  font-family: "Cabaletta";
+  margin: 2px;
+}
 .trinites.sheet.actor .desc-lame {
   margin: 2px;
   font-size: 0.9em;

@@ -16,7 +16,6 @@
         "aura": "Aura",
         "verset": "Verset",      
         "pouvoir": "Pouvoir",
-        "ame": "Ame",
         "jardin": "Jardin",    
         "majeste": "Majesté",
         "dragon":"Dragon"  
@@ -39,7 +38,6 @@
         "TypeAura": "Aura",
         "TypeVerset": "Verset",      
         "TypePouvoir": "Pouvoir",
-        "TypeAme": "Ame",
         "TypeJardin": "Jardin",    
         "TypeMajeste": "Majesté",
         "TypeDragon":"Dragon"        

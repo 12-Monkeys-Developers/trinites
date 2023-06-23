@@ -1,3 +1,8 @@
+0.7.0
+- Ajout des Majestés et des Jardins
+- Ajout des pouvoirs du dragon
+- Afficchage de la ferveur pour les PnJs
+
 0.6.1
 Corrections
 - Activation d'un atout dans le chat

@@ -900,6 +900,28 @@
 .trinites.sheet.actor .grid-zodiaque .ligne {
   font-size: 0.9em;
 }
+.trinites.sheet.actor .grid-majestes {
+  display: grid;
+  grid-template-columns: 2em 1fr 2em 2em;
+  margin: 3px;
+}
+.trinites.sheet.actor .grid-majestes .nom-majeste {
+  margin: 3px;
+}
+.trinites.sheet.actor .grid-majestes .ligne {
+  font-size: 0.9em;
+}
+.trinites.sheet.actor .grid-jardins {
+  display: grid;
+  grid-template-columns: 2em 1fr 2em 2em;
+  margin: 3px;
+}
+.trinites.sheet.actor .grid-jardins .nom-jardin {
+  margin: 3px;
+}
+.trinites.sheet.actor .grid-jardins .ligne {
+  font-size: 0.9em;
+}
 .trinites.sheet.actor .lame-soeur {
   display: flex;
   flex-direction: column;
@@ -922,6 +944,19 @@
 }
 .trinites.sheet.actor .lame-soeur .grid-lame select,
 .trinites.sheet.actor .lame-soeur .grid-lame a {
+  margin: 2px;
+}
+.trinites.sheet.actor .lame-soeur .intro-dragon {
+  display: flex;
+  flex-direction: row;
+}
+.trinites.sheet.actor .lame-soeur .intro-dragon input {
+  width: 3em;
+  text-align: center;
+  margin: 2px;
+}
+.trinites.sheet.actor .lame-soeur .intro-dragon label {
+  font-family: "Cabaletta";
   margin: 2px;
 }
 .trinites.sheet.actor .desc-lame {
@@ -1776,11 +1811,13 @@
   padding: 3px;
 }
 .carte .desc,
-.carte .descSouffle {
+.carte .descSouffle,
+.carte .descEffet {
   display: none;
 }
 .carte .desc.visible,
-.carte .descSouffle.visible {
+.carte .descSouffle.visible,
+.carte .descEffet.visible {
   display: block;
   margin: 5px;
   color: black;

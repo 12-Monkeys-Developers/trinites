@@ -253,6 +253,32 @@ export class TrinitesChat {
     element.closest(".carte.aura").getElementsByClassName("zone")[0].innerHTML = "Cosme";
   }
 
+  static onActiverMajeste(event) {
+    event.preventDefault();
+    const element = event.currentTarget;
+
+    // Aura déjà déployée
+    if (element.classList.contains("cosme")) {
+      return;
+    }
+
+    let actor = game.actors.get(element.closest(".carte.majeste").dataset.actorId);
+    let majeste = actor.items.get(element.closest(".carte.majeste").dataset.itemId);
+    
+    let auras = actor.items.filter((item) => item.type === "aura");
+    for(let aura of auras){
+        aura.update({ "system.deploiement": "cosme" });
+    }
+    
+    actor.viderKarma("neutre");
+
+    carteMajesteActive({
+      actor: actor,
+      majesteId: majeste.id,
+    });
+    
+  }
+
   // Activer un verset dans le la fenêtre de chat
   static onActiverVerset(event) {
     event.preventDefault();
@@ -308,6 +334,47 @@ export class TrinitesChat {
     }
   }
 
+  static onActiverDragon(event) {
+    event.preventDefault();
+    const element = event.currentTarget;
+
+    // Aura déjà déployée
+    if (element.classList.contains("cosme")) {
+      return;
+    }
+
+    let actor = game.actors.get(element.closest(".carte.dragon").dataset.actorId);
+    let dragon = actor.items.get(element.closest(".carte.dragon").dataset.itemId);
+    let typeKarma = "dragon";
+
+    let karmaDisponible = actor.karmaDisponible(typeKarma);
+    let coutPouvoir = 1;
+    let activationOk = false;
+
+    // Pas assez de Karma
+    if (karmaDisponible < coutPouvoir) {
+      ui.notifications.warn("Le Dragon n'a pas assez de Karma disponible pour utiliser ce pouvoir !");
+      return;
+    }
+    // Juste ce qu'il faut de Karma
+    else if (karmaDisponible == coutPouvoir) {
+      actor.viderKarma(typeKarma);
+      activationOk = true;
+    }
+    // Uniquement le Karma d'une source
+    else {
+      actor.consommerSourceKarma("dragon", coutPouvoir);
+      activationOk = true;
+    }
+
+    if (activationOk) {
+      carteDragonActive({
+        actor: actor,
+        dragonId:  dragon.id,
+    });
+  }
+  }
+
   static onDetailsAtout(event) {
     event.preventDefault();
     const element = event.currentTarget;
@@ -343,6 +410,45 @@ export class TrinitesChat {
       element.innerHTML = '<i class="fas fa-angle-down"></i>';
     } else {
       element.closest(".carte.aura").getElementsByClassName("desc")[0].classList.remove("visible");
+      element.innerHTML = '<i class="fas fa-angle-right"></i>';
+    }
+  }
+
+  static onDetailsMajeste(event) {
+    event.preventDefault();
+    const element = event.currentTarget;
+
+    if (element.innerHTML.includes("angle-right")) {
+      element.closest(".carte.majeste").getElementsByClassName("desc")[0].classList.add("visible");
+      element.innerHTML = '<i class="fas fa-angle-down"></i>';
+    } else {
+      element.closest(".carte.majeste").getElementsByClassName("desc")[0].classList.remove("visible");
+      element.innerHTML = '<i class="fas fa-angle-right"></i>';
+    }
+  }
+
+  static onDetailsDragon(event) {
+    event.preventDefault();
+    const element = event.currentTarget;
+
+    if (element.innerHTML.includes("angle-right")) {
+      element.closest(".carte.dragon").getElementsByClassName("desc")[0].classList.add("visible");
+      element.innerHTML = '<i class="fas fa-angle-down"></i>';
+    } else {
+      element.closest(".carte.dragon").getElementsByClassName("desc")[0].classList.remove("visible");
+      element.innerHTML = '<i class="fas fa-angle-right"></i>';
+    }
+  }
+
+  static onDetailsEffetsMajeste(event) {
+    event.preventDefault();
+    const element = event.currentTarget;
+
+    if (element.innerHTML.includes("angle-right")) {
+      element.closest(".carte.majeste").getElementsByClassName("descEffet")[0].classList.add("visible");
+      element.innerHTML = '<i class="fas fa-angle-down"></i>';
+    } else {
+      element.closest(".carte.majeste").getElementsByClassName("descEffet")[0].classList.remove("visible");
       element.innerHTML = '<i class="fas fa-angle-right"></i>';
     }
   }
@@ -463,6 +569,39 @@ export async function carteAtoutActive({ actor = null, atoutId = null } = {}) {
   await chat.display();
 }
 
+export async function carteDragon({ actor = null, dragonId = null, whisper = null } = {}) {
+  let dragon = actor.items.get(dragonId);
+
+  // Récupération des données de l'item
+  let cardData = {
+    dragon: dragon,
+    actorId: actor.id,
+    isWhisper: whisper
+  };
+
+  // Recupération du template
+  const messageTemplate = "systems/trinites/templates/partials/chat/carte-dragon.hbs";
+
+  let chat = await new TrinitesChat(actor).withTemplate(messageTemplate).withData(cardData).create();
+  await chat.display();
+}
+
+export async function carteDragonActive({ actor = null, dragonId = null } = {}) {
+  let dragon = actor.items.get(dragonId);
+
+  // Récupération des données de l'item
+  let cardData = {
+    dragon: dragon,
+    nomPersonnage: actor.name
+  };
+
+  // Recupération du template
+  const messageTemplate = "systems/trinites/templates/partials/chat/carte-dragon-active.hbs";
+
+  let chat = await new TrinitesChat(actor).withTemplate(messageTemplate).withData(cardData).create();
+  await chat.display();
+}
+
 export async function carteAura({ actor = null, auraId = null, whisper = null } = {}) {
   let aura = actor.items.get(auraId);
 
@@ -478,6 +617,39 @@ export async function carteAura({ actor = null, auraId = null, whisper = null } 
 
   // Recupération du template
   const messageTemplate = "systems/trinites/templates/partials/chat/carte-aura.hbs";
+
+  let chat = await new TrinitesChat(actor).withTemplate(messageTemplate).withData(cardData).create();
+  await chat.display();
+}
+
+export async function carteMajeste({ actor = null, majesteId = null, whisper = null } = {}) {
+  let majeste = actor.items.get(majesteId);
+
+  // Récupération des données de l'item
+  let cardData = {
+    majeste: majeste,
+    actorId: actor.id,
+    isWhisper: whisper
+  };
+
+  // Recupération du template
+  const messageTemplate = "systems/trinites/templates/partials/chat/carte-majeste.hbs";
+
+  let chat = await new TrinitesChat(actor).withTemplate(messageTemplate).withData(cardData).create();
+  await chat.display();
+}
+
+export async function carteMajesteActive({ actor = null, majesteId = null } = {}) {
+  let majeste = actor.items.get(majesteId);
+
+  // Récupération des données de l'item
+  let cardData = {
+    majeste: majeste,
+    nomPersonnage: actor.name
+  };
+
+  // Recupération du template
+  const messageTemplate = "systems/trinites/templates/partials/chat/carte-majeste-active.hbs";
 
   let chat = await new TrinitesChat(actor).withTemplate(messageTemplate).withData(cardData).create();
   await chat.display();

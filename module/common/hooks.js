@@ -5,11 +5,16 @@ export default function registerHooks() {
     html.on("click", "button.dette", TrinitesChat.onDetteEsprit);
     html.on("click", "a.activer.souffle", TrinitesChat.onActiverSouffle);
     html.on("click", "a.activer.verset", TrinitesChat.onActiverVerset);
+    html.on("click", "a.activer.majeste", TrinitesChat.onActiverMajeste);
+    html.on("click", "a.activer.dragon", TrinitesChat.onActiverDragon);
     html.on("click", "a.activer.atout", TrinitesChat.onActiverAtout);
     html.on("click", "a.details.aura", TrinitesChat.onDetailsAura);
     html.on("click", "a.details.souffle", TrinitesChat.onDetailsSouffle);
     html.on("click", "a.details.atout", TrinitesChat.onDetailsAtout);
+    html.on("click", "a.details.dragon", TrinitesChat.onDetailsDragon);
     html.on("click", "a.details.verset", TrinitesChat.onDetailsVerset);
+    html.on("click", "a.details.majeste", TrinitesChat.onDetailsMajeste);
+    html.on("click", "a.details.effetsMajeste", TrinitesChat.onDetailsEffetsMajeste);
 
     
   });

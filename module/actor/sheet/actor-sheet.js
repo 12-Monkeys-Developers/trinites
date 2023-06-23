@@ -27,9 +27,11 @@ export default class TrinitesActorSheet extends ActorSheet {
     data.versetsTenebres = data.items.filter((item) => item.type === "verset" && item.system.karma === "tenebre");
 
     data.auras = data.items.filter((item) => item.type === "aura");
+    data.jardins = data.items.filter((item) => item.type === "jardin");
     data.majestes = data.items.filter((item) => item.type === "majeste");
 
     data.atouts = data.items.filter((item) => item.type === "atout");
+    data.dragons = data.items.filter((item) => item.type === "dragon");
 
     data.descriptionHtml = TextEditor.enrichHTML(this.actor.system.description, { async: false });
     data.notesHtml = TextEditor.enrichHTML(this.actor.system.notes, { async: false });
@@ -41,6 +43,10 @@ export default class TrinitesActorSheet extends ActorSheet {
     data.isHumain = this.actor.isHumain;
 
     data.unlocked = this.actor.isUnlocked;
+
+    data.affZodiaque = this.actor.affLvl("zodiaque");
+    data.affGrandLivre = this.actor.affLvl("grandLivre");
+    data.affLamesoeur = this.actor.affLvl("lameSoeur");
 
     return data;
   }
@@ -98,9 +104,14 @@ export default class TrinitesActorSheet extends ActorSheet {
 
     // Carte - Atout
     html.find(".roll-atout").click(this._onCarteAtout.bind(this));
+    // Carte - Dragon
+    html.find(".roll-dragon").click(this._onCarteDragon.bind(this));
 
     // Carte - Aura
     html.find(".roll-aura").click(this._onCarteAura.bind(this));
+
+    // Carte - Majesté
+    html.find(".roll-majeste").click(this._onCarteMajeste.bind(this));
 
     // Carte - Verset
     html.find(".roll-verset").click(this._onCarteVerset.bind(this));
@@ -224,7 +235,7 @@ export default class TrinitesActorSheet extends ActorSheet {
     }
 
     // Pour une trinité, contrôle du nombre d'aura, sauf pour une affinité du Zodiaque de décan 2 ou 3
-    if (this.actor.isTrinite && this.actor.system.themeAstral.affinite === "zodiaque" && this.actor.system.themeAstral.affiniteDecan > 1) {
+    if (this.actor.isTrinite && this.actor.affLvl("zodiaque") > 1) {
       // Ne rien faire
     } else {
       let auraActive = false;
@@ -313,6 +324,17 @@ export default class TrinitesActorSheet extends ActorSheet {
     });
   }
 
+  _onCarteDragon(event) {
+    event.preventDefault();
+    const dataset = event.currentTarget.dataset;
+
+    Chat.carteDragon({
+      actor: this.actor,
+      dragonId: dataset.itemId,
+      whisper: !event.shiftKey
+    });
+  }
+
   _onCarteAura(event) {
     event.preventDefault();
     const dataset = event.currentTarget.dataset;
@@ -320,6 +342,17 @@ export default class TrinitesActorSheet extends ActorSheet {
     Chat.carteAura({
       actor: this.actor,
       auraId: dataset.itemId,
+      whisper: !event.shiftKey
+    });
+  }
+
+  _onCarteMajeste(event) {
+    event.preventDefault();
+    const dataset = event.currentTarget.dataset;
+
+    Chat.carteMajeste({
+      actor: this.actor,
+      majesteId: dataset.itemId,
       whisper: !event.shiftKey
     });
   }

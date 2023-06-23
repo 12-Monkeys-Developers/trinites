@@ -1,4 +1,27 @@
 {
+    "TYPES": {
+      "Actor": {
+        "trinite": "Trinité",
+        "pnj": "PNJ"
+      },
+  
+      "Item": {
+        "vieanterieure": "Vie Antérieure",
+        "metier": "Métier",
+        "arme": "Arme",
+        "armure": "Armure",
+        "objet": "Objet",
+        "domaine": "Domaine",
+        "atout": "Atout",
+        "aura": "Aura",
+        "verset": "Verset",      
+        "pouvoir": "Pouvoir",
+        "jardin": "Jardin",    
+        "majeste": "Majesté",
+        "dragon":"Dragon"  
+      }
+    },
+
     "ACTOR": {
         "TypeTrinite": "Trinité",
         "TypePnj": "PNJ"
@@ -15,7 +38,6 @@
         "TypeAura": "Aura",
         "TypeVerset": "Verset",      
         "TypePouvoir": "Pouvoir",
-        "TypeAme": "Ame",
         "TypeJardin": "Jardin",    
         "TypeMajeste": "Majesté",
         "TypeDragon":"Dragon"        

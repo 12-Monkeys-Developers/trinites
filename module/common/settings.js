@@ -16,4 +16,13 @@ export default function registerSystemSettings() {
     type: String,
     default: ""
   });
+
+  game.settings.register("trinites", "voiesMultiples", {
+    config: true,
+    scope: "world",
+    name: "Voies multiples pour les Trinités",
+    hint: "Cochez pour permettre aux Trinités de suivre plusieurs voies de progression dans les Décans.",
+    type: Boolean,
+    default: false
+  });
 }

@@ -39,7 +39,7 @@ export default class TrinitesAuraSheet extends TrinitesItemSheet {
     }
 
     // Pour une trinité, contrôle du nombre d'aura, sauf pour une affinité du Zodiaque de décan 2 ou 3
-    if (this.actor.isTrinite && this.actor.affLvl("zodiaque") > 1) {
+    if (this.actor.isTrinite && this.actor.voieLvl("zodiaque") > 1) {
       // Ne rien faire
     } else {
       let auraActive = false;

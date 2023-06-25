@@ -200,7 +200,7 @@ export default class TrinitesTrinite extends TrinitesActor {
   }
   
   get canUseSouffle() {
-    return this.system.themeAstral.affinite === "zodiaque";
+    return this.voieLvl("zodiaque");
   }
 
   /**
@@ -236,7 +236,7 @@ export default class TrinitesTrinite extends TrinitesActor {
 
   // Cout du pouvoir selon l'Affinité du personnage
   coutPouvoir(typePouvoir) {
-    if (this.system.themeAstral.affinite === typePouvoir) return 1;
+    if (this.affLvl(typePouvoir)) return 1;
     return 2;
   }
 

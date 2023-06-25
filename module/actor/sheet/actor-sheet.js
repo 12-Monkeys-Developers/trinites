@@ -44,9 +44,12 @@ export default class TrinitesActorSheet extends ActorSheet {
 
     data.unlocked = this.actor.isUnlocked;
 
-    data.affZodiaque = this.actor.affLvl("zodiaque");
-    data.affGrandLivre = this.actor.affLvl("grandLivre");
-    data.affLamesoeur = this.actor.affLvl("lameSoeur");
+    
+    data.voiesMult = game.settings.get("trinites", "voiesMultiples");
+
+    data.affZodiaque = this.actor.voieLvl("zodiaque");
+    data.affGrandLivre = this.actor.voieLvl("grandLivre");
+    data.affLamesoeur = this.actor.voieLvl("lameSoeur");
 
     return data;
   }
@@ -235,7 +238,7 @@ export default class TrinitesActorSheet extends ActorSheet {
     }
 
     // Pour une trinité, contrôle du nombre d'aura, sauf pour une affinité du Zodiaque de décan 2 ou 3
-    if (this.actor.isTrinite && this.actor.affLvl("zodiaque") > 1) {
+    if (this.actor.isTrinite && this.actor.voieLvl("zodiaque") > 1) {
       // Ne rien faire
     } else {
       let auraActive = false;

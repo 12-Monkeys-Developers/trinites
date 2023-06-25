@@ -72,7 +72,22 @@ export default class TrinitesActor extends Actor {
     return false;
   }
   
+  
+  /**
+   * Retourne le niveau dans l'affinité demandée. Seule la première voie/affinité est prise en compte
+   * @param {string} affinite
+   * @returns
+   */
   affLvl(affinite) {
+    if(this.system.themeAstral.affinite === affinite) return parseInt(this.system.themeAstral.affiniteDecan);
+    return 0;
+  }
+  /**
+   * Retourne le niveau dans la voie demandée. Toutes les voie/affinité sont prises en compte
+   * @param {string} affinite
+   * @returns
+   */
+  voieLvl(affinite) {
     if(this.system.themeAstral.affinite === affinite) return parseInt(this.system.themeAstral.affiniteDecan);
     else if(this.system.themeAstral.affinite2 === affinite) return parseInt(this.system.themeAstral.affinite2Decan);
     else if(this.system.themeAstral.affinite3 === affinite) return parseInt(this.system.themeAstral.affinite3Decan);

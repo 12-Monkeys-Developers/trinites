@@ -26,6 +26,40 @@
             <option value="3">3</option>
         {{/select}}
       </select>
+      {{#if data.voiesMult}}
+      <label>Affinité</label>
+      <select name="system.themeAstral.affinite2" {{#unless unlocked}}disabled {{/unless}}>
+        {{#select data.system.themeAstral.affinite2}}
+          {{#each config.affinites as |affinite keyAffinite|}}
+            <option value="{{keyAffinite}}">{{affinite}}</option>
+          {{/each}}
+        {{/select}}
+      </select>
+      <label>Décan</label>
+      <select name="system.themeAstral.affinite2Decan" {{#unless unlocked}}disabled {{/unless}}>
+        {{#select data.system.themeAstral.affinite2Decan}}
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+        {{/select}}
+      </select>
+      <label>Affinité</label>
+      <select name="system.themeAstral.affinite3" {{#unless unlocked}}disabled {{/unless}}>
+        {{#select data.system.themeAstral.affinite3}}
+          {{#each config.affinites as |affinite keyAffinite|}}
+            <option value="{{keyAffinite}}">{{affinite}}</option>
+          {{/each}}
+        {{/select}}
+      </select>
+      <label>Décan</label>
+      <select name="system.themeAstral.affinite3Decan" {{#unless unlocked}}disabled {{/unless}}>
+        {{#select data.system.themeAstral.affinite3Decan}}
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+        {{/select}}
+      </select>
+      {{/if}}
     {{/if}}
   </div>
   <div class="grid-theme">

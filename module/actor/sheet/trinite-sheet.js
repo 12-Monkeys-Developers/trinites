@@ -48,13 +48,13 @@ export default class TrinitesTriniteSheet extends TrinitesActorSheet {
         case "aura":
           return this._onDropAuraItem(event, itemData);
         case "majeste":
-          if(this.actor.affLvl("zodiaque")) return super._onDropItem(event, data);
+          if(this.actor.voieLvl("zodiaque")) return super._onDropItem(event, data);
           else return;
         case "jardin":
-          if(this.actor.affLvl("zodiaque")) return super._onDropItem(event, data);
+          if(this.actor.voieLvl("zodiaque")) return super._onDropItem(event, data);
           else return;
         case "dragon":
-          if(this.actor.affLvl("lameSoeur")) return super._onDropItem(event, data);
+          if(this.actor.voieLvl("lameSoeur")) return super._onDropItem(event, data);
           else return;
         default:
           return super._onDropItem(event, data);

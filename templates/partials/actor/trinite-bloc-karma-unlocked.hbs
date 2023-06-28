@@ -18,7 +18,7 @@
                 <label> / </label>
                 <input name="system.trinite.deva.karma.base" type="number" value="{{data.system.trinite.deva.karma.base}}" placeholder="0" min="0" data-tooltip="Base" data-tooltip-direction="UP">
                 <input name="system.trinite.deva.karma.bonusVA" type="number" value="{{data.system.trinite.deva.karma.bonusVA}}" readonly data-tooltip="Bonus Vie antérieure" data-tooltip-direction="UP">
-                <div class="logo-karma"><i class="fas fa-sun"></i></div>
+                <div class="logo-karma"><i class="fas fa-sun" data-tooltip="Régénérer le karma Lumière"></i></div>
             </div>
             <div class="colStats-titre"><label>Dettes</label></div>
             <div class="colStats-valeur"><input name="system.trinite.deva.dettes" type="number" value="{{data.system.trinite.deva.dettes}}" placeholder="0" min="0"></div>
@@ -34,8 +34,8 @@
             <input name="system.trinite.adam.karma.value" type="number" value="{{data.system.trinite.adam.karma.value}}" placeholder="0" min="0" max="{{data.system.trinite.adam.karma.max}}">
             <label> / </label>
             <input name="system.trinite.adam.karma.max" type="number" value="{{data.system.trinite.adam.karma.max}}" placeholder="0" min="0">            
-            {{#if (eq data.system.trinite.adam.karma.type "lumiere")}}<div class="logo-karma"><i class="fas fa-sun"></i></div>{{/if}} 
-            {{#if (eq data.system.trinite.adam.karma.type "tenebre")}}<div class="logo-karma"><i class="fas fa-moon"></i></div>{{/if}}            
+            {{#if (eq data.system.trinite.adam.karma.type "lumiere")}}<div class="logo-karma"><i class="fas fa-sun" data-tooltip="Régénérer le karma Lumière"></i></div>{{/if}} 
+            {{#if (eq data.system.trinite.adam.karma.type "tenebre")}}<div class="logo-karma"><i class="fas fa-moon" data-tooltip="Régénérer le karma Ténèbres"></i></div>{{/if}}            
         </div>
     </div>
     <div class="archonte">
@@ -57,7 +57,7 @@
                 <label> / </label>
                 <input name="system.trinite.archonte.karma.base" type="number" value="{{data.system.trinite.archonte.karma.base}}" placeholder="0" min="0" data-tooltip="Base" data-tooltip-direction="UP">
                 <input name="system.trinite.archonte.karma.bonusVA" type="number" value="{{data.system.trinite.archonte.karma.bonusVA}}" readonly data-tooltip="Bonus Vie antérieure" data-tooltip-direction="UP">                
-                <div class="logo-karma"><i class="fas fa-moon"></i></div>
+                <div class="logo-karma"><i class="fas fa-moon" data-tooltip="Régénérer le karma Ténèbres"></i></div>
             </div>
             <div class="colStats-titre"><label>Dettes</label></div>
             <div class="colStats-valeur"><input name="system.trinite.archonte.dettes" type="number" value="{{data.system.trinite.archonte.dettes}}" placeholder="0" min="0"></div>

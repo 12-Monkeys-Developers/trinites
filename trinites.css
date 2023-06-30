@@ -716,8 +716,38 @@
 .trinites.sheet.actor .stats-trinite .logo-karma {
   display: flex;
   justify-content: center;
-  margin: 2px;
   font-size: 1.8em;
+}
+.trinites.sheet.actor .stats-trinite button {
+  transition: all 0.5s;
+  width: 60px;
+}
+.trinites.sheet.actor .stats-trinite button span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+.trinites.sheet.actor .stats-trinite button span:after {
+  content: "\00bb";
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+.trinites.sheet.actor .stats-trinite .button-dark:hover {
+  background-color: #793535d0;
+}
+.trinites.sheet.actor .stats-trinite .button-light:hover {
+  background-color: #f1cc7cd0;
+}
+.trinites.sheet.actor .stats-trinite button:hover span {
+  padding-right: 25px;
+}
+.trinites.sheet.actor .stats-trinite button:hover span:after {
+  opacity: 1;
+  right: 0;
 }
 .trinites.sheet.actor .stats-trinite .deva h3,
 .trinites.sheet.actor .stats-trinite .archonte h3 {

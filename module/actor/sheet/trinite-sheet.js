@@ -131,7 +131,7 @@ export default class TrinitesTriniteSheet extends TrinitesActorSheet {
 
     if (this.actor) {
       if (this.actor.isOwner) {
-            // Supprimer un domaine
+        // Supprimer un domaine
         html.find(".suppr-domaine").click(this._onSupprimerDomaine.bind(this));
 
         // Jet de Lame-soeur
@@ -149,6 +149,11 @@ export default class TrinitesTriniteSheet extends TrinitesActorSheet {
         // Permet la dépense des points de création
         html.find(".fa-user-unlock").click(this._onAllowCreation.bind(this));
 
+        // Régéneration du karma Lumière à l'aube
+        html.find(".fa-sun").click(this._onAube.bind(this));
+
+        // Régénération du karma Ténèbre au crépuscule 
+        html.find(".fa-moon").click(this._onCrepuscule.bind(this));
       }
     }
   }
@@ -227,4 +232,13 @@ export default class TrinitesTriniteSheet extends TrinitesActorSheet {
     await this.actor.update({ "system.creation.finie": false });
   }
 
+  _onAube(event) {
+    event.preventDefault();
+    this.actor.regenereKarmaLumiere();
+  }
+
+  _onCrepuscule(event) {
+    event.preventDefault();
+    this.actor.regenereKarmaTenebre();
+  }
 }

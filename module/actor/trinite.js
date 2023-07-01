@@ -203,6 +203,10 @@ export default class TrinitesTrinite extends TrinitesActor {
     return this.system.themeAstral.affinite === "zodiaque";
   }
 
+  get adamTypeKarma() {
+    return this.system.trinite.adam.karma.type;
+  }
+
   /**
    * Nombre de points de Karma disponible du type donné (Lumière ou Ténèbre)
    * @param {*} typeKarma
@@ -473,4 +477,13 @@ export default class TrinitesTrinite extends TrinitesActor {
     await this.deleteEmbeddedDocuments("Item", [metier._id]);
   }
   
+  regenereKarmaLumiere() {
+    this.majKarma("deva", this.system.trinite.deva.karma.max);
+    if (this.adamTypeKarma === "lumiere") this.majKarma("adam", this.system.trinite.adam.karma.max);
+  }
+
+  regenereKarmaTenebre() {
+    this.majKarma("archonte", this.system.trinite.archonte.karma.max);
+    if (this.adamTypeKarma === "tenebre") this.majKarma("adam", this.system.trinite.adam.karma.max);
+  }
 }

@@ -1,3 +1,6 @@
+1.0.0
+- Ajout d'un bouton pour reinitialiser le Karma des Trinités à l'aube / crépuscule.
+- correction d'un bug dans l'ouverture des feuilles de PNJs
 0.7.0
 - Ajout des Majestés et des Jardins
 - Ajout des pouvoirs du dragon

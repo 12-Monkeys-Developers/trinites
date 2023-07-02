@@ -206,6 +206,13 @@ export default class TrinitesTrinite extends TrinitesActor {
   get adamTypeKarma() {
     return this.system.trinite.adam.karma.type;
   }
+  
+  affLvl(affinite) {
+      if(this.system.themeAstral.affinite === affinite) return parseInt(this.system.themeAstral.affiniteDecan);
+      else if(this.system.themeAstral.affinite2 === affinite) return parseInt(this.system.themeAstral.affinite2Decan);
+      else if(this.system.themeAstral.affinite3 === affinite) return parseInt(this.system.themeAstral.affinite3Decan);
+    return 0;
+  }
 
   /**
    * Nombre de points de Karma disponible du type donné (Lumière ou Ténèbre)

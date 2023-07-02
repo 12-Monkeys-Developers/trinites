@@ -44,10 +44,6 @@ export default class TrinitesActorSheet extends ActorSheet {
 
     data.unlocked = this.actor.isUnlocked;
 
-    data.affZodiaque = this.actor.affLvl("zodiaque");
-    data.affGrandLivre = this.actor.affLvl("grandLivre");
-    data.affLamesoeur = this.actor.affLvl("lameSoeur");
-
     return data;
   }
 

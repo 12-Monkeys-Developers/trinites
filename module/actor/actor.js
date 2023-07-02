@@ -73,9 +73,11 @@ export default class TrinitesActor extends Actor {
   }
   
   affLvl(affinite) {
-    if(this.system.themeAstral.affinite === affinite) return parseInt(this.system.themeAstral.affiniteDecan);
-    else if(this.system.themeAstral.affinite2 === affinite) return parseInt(this.system.themeAstral.affinite2Decan);
-    else if(this.system.themeAstral.affinite3 === affinite) return parseInt(this.system.themeAstral.affinite3Decan);
+    if(this.isTrinite()){
+      if(this.system.themeAstral.affinite === affinite) return parseInt(this.system.themeAstral.affiniteDecan);
+      else if(this.system.themeAstral.affinite2 === affinite) return parseInt(this.system.themeAstral.affinite2Decan);
+      else if(this.system.themeAstral.affinite3 === affinite) return parseInt(this.system.themeAstral.affinite3Decan);
+    }
     return 0;
   }
 

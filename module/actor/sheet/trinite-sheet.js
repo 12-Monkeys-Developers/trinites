@@ -25,6 +25,10 @@ export default class TrinitesTriniteSheet extends TrinitesActorSheet {
     data.metierId = this.actor.metierId;
     data.vieAnterieureId = this.actor.vieAnterieureId;
 
+    data.affZodiaque = this.actor.affLvl("zodiaque");
+    data.affGrandLivre = this.actor.affLvl("grandLivre");
+    data.affLamesoeur = this.actor.affLvl("lameSoeur");
+
     return data;
   }
 

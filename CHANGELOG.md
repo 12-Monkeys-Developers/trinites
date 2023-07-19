@@ -1,3 +1,5 @@
+1.0.1
+- bug : max points de création dans la comp. Langues
 1.0.0
 - Ajout d'un bouton pour reinitialiser le Karma des Trinités à l'aube / crépuscule.
 - correction d'un bug dans l'ouverture des feuilles de PNJs

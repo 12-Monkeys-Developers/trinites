@@ -47,7 +47,7 @@ export default class TrinitesTrinite extends TrinitesActor {
         // Les autres
         else {
           // Competence par défaut
-          const max = ["clairvoyance", "emprise", "meditation", "base"].includes(keyComp) ? 4 : 5;
+          const max = ["clairvoyance", "emprise", "meditation", "langues", "base"].includes(keyComp) ? 4 : 5;
           if (system.competences[keySigne][keyComp].pointsCrea > max) system.competences[keySigne][keyComp].pointsCrea = max;
         }
         if (system.competences[keySigne][keyComp].pointsCrea < 0) system.competences[keySigne][keyComp].pointsCrea = 0;

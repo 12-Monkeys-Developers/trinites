@@ -1,3 +1,5 @@
+1.0.2
+- bug : FAWS dans les journaux
 1.0.1
 - bug : max points de création dans la comp. Langues
 1.0.0

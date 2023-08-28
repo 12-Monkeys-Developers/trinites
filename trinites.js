@@ -1,6 +1,7 @@
 import { TRINITES } from "./module/common/config.js";
 import preloadTemplates from "./module/common/templates.js";
 import registerHandlebarsHelpers from "./module/common/helpers.js"
+import setupTextEnrichers from "./module/common/enrichers.js"
 import registerSystemSettings from './module/common/settings.js';
 import registerHooks from "./module/common/hooks.js";
 
@@ -57,6 +58,9 @@ Hooks.once("init", function() {
 
     // Register Handlebars Helpers
 	registerHandlebarsHelpers();
+
+    // Register Text Enrichers
+    setupTextEnrichers();
 
     // Register System Settings
 	registerSystemSettings();

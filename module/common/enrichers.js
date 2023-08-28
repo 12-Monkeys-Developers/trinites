@@ -18,8 +18,9 @@ export default function setupTextEnrichers() {
                 let bulle = `<i class="far fa-circle"></i>`;
                 viedoc.className = "no-indent";
                 for(let i = 0; i < nblignes;i++){
-                    for(let i = 0; i < nbcases;i++){
+                    for(let j = 0; j < nbcases;j++){
                         viedoc.innerHTML += bulle;
+                        if((j%4===3)&&(j+1<nbcases)){viedoc.innerHTML += "&nbsp;"};
                     }
                     if(i+1<nblignes){viedoc.innerHTML += "<br />"};
                 }

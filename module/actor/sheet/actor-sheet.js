@@ -188,8 +188,11 @@ export default class TrinitesActorSheet extends ActorSheet {
           typeKarma = "tenebre";
           break;
       }
-    } else if (this.actor.type === "archonteRoi" || this.actor.type === "lige") {
-      typeKarma = "tenebre";
+    } else if (this.actor.type === "pnj") {
+        if (this.actor.system.sousType === "archonteRoi" || this.actor.system.sousType === "lige") {
+              typeKarma = "tenebre";
+        }
+        else return;
     }
 
     let karmaDisponible = this.actor.karmaDisponible(typeKarma);

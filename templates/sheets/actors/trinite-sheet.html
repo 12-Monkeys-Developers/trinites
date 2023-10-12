@@ -56,10 +56,7 @@
             {{> "systems/trinites/templates/partials/actor/trinite-bloc-lame-soeur.hbs"}}
         </div>
         <div class="tab tab-description" data-group="principal" data-tab="description">
-            <h3> DESCRIPTION</h3> 
-            <div class="description">{{editor descriptionHtml target="system.description" button=true owner=owner editable=editable}}</div>            
-            <h3> NOTES</h3>
-            <div class="notes">{{editor notesHtml target="system.notes" button=true owner=owner editable=editable}}</div>            
+            {{> "systems/trinites/templates/partials/actor/trinite-bloc-description.hbs"}}          
         </div>
     </section>
 </form>

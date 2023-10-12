@@ -32,6 +32,7 @@ export default class TrinitesActorSheet extends ActorSheet {
 
     data.atouts = data.items.filter((item) => item.type === "atout");
     data.dragons = data.items.filter((item) => item.type === "dragon");
+    data.pouvoirs = data.items.filter((item) => item.type === "pouvoir");
 
     data.descriptionHtml = TextEditor.enrichHTML(this.actor.system.description, { async: false });
     data.notesHtml = TextEditor.enrichHTML(this.actor.system.notes, { async: false });

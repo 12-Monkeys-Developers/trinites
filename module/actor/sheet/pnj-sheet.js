@@ -18,12 +18,6 @@ export default class TrinitesPnjSheet extends TrinitesActorSheet {
          return "systems/trinites/templates/sheets/actors/pnj-sheet.html";
   }
 
-  getData() {
-    const data = super.getData();
-    data.pouvoirs = data.items.filter((item) => item.type === "pouvoir");
-    return data;
-  }
-
   /**
    * Handle dropping of an item reference or item data onto an Item Sheet
    *

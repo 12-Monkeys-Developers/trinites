@@ -31,6 +31,7 @@ export default async function preloadTemplates() {
     "systems/trinites/templates/partials/actor/trinite-bloc-lame-soeur.hbs",
     "systems/trinites/templates/partials/actor/trinite-bloc-profane.hbs",
     "systems/trinites/templates/partials/actor/trinite-bloc-profane-unlocked.hbs",    
+    "systems/trinites/templates/partials/actor/trinite-bloc-description.hbs", 
     "systems/trinites/templates/partials/actor/pnj-bloc-occulte.hbs",
     "systems/trinites/templates/partials/actor/pnj-bloc-versets.hbs",
     "systems/trinites/templates/partials/actor/pnj-bloc-auras.hbs",

@@ -1,6 +1,7 @@
 1.0.3
 - Ajout du Karma Elohim pour le 3ieme décan du Zodiaque
 - Correction de la régénération non fonctionnelle pour les PNJs de type Archonte-roi et Lige
+- Ajout d'une liste des pouvoirs dans l'onglet description d'une trinité
 
 1.0.2
 - Correction : FAWS dans les journaux

@@ -1,10 +1,17 @@
+1.0.3
+- Ajout du Karma Elohim pour le 3ieme décan du Zodiaque
+- Correction de la régénération non fonctionnelle pour les PNJs de type Archonte-roi et Lige
+
 1.0.2
-- bug : FAWS dans les journaux
+- Correction : FAWS dans les journaux
+
 1.0.1
-- bug : max points de création dans la comp. Langues
+- Correction : max points de création dans la compétence Langues
+
 1.0.0
 - Ajout d'un bouton pour reinitialiser le Karma des Trinités à l'aube / crépuscule.
-- correction d'un bug dans l'ouverture des feuilles de PNJs
+- Correction d'un bug dans l'ouverture des feuilles de PNJs
+
 0.7.0
 - Ajout des Majestés et des Jardins
 - Ajout des pouvoirs du dragon

@@ -203,6 +203,13 @@ export default class TrinitesActorSheet extends ActorSheet {
       ui.notifications.warn("Vous n'avez pas assez de Karma disponible pour utiliser la régénération !");
       return;
     }
+
+    // Elohim du 3ieme décan du zodiaque
+    if (this.actor.isTrinite && this.actor.affLvl("zodiaque") >= 3) {
+      await DepenseKarmaFormApplication.open(this.actor, this.actor.system.trinite, typeKarma, "regen", 1, null);
+      activationOk = true;
+      return;
+    }    
     // Juste ce qu'il faut de Karma
     else if (karmaDisponible == 1) {
       this.actor.viderKarma(typeKarma);
@@ -212,8 +219,10 @@ export default class TrinitesActorSheet extends ActorSheet {
     else if (this.actor.sourceUnique(typeKarma)) {
       this.actor.consommerSourceKarma(this.actor.sourceUnique(typeKarma), 1);
       activationOk = true;
-    } else {
+    } 
+    else {
       await DepenseKarmaFormApplication.open(this.actor, this.actor.system.trinite, typeKarma, "regen", 1, null);
+      activationOk = true;
     }
 
     if (activationOk) {

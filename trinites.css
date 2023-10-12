@@ -910,6 +910,19 @@
 .trinites.sheet.actor .zodiaque .param select {
   background-color: floralwhite;
 }
+.trinites.sheet.actor .zodiaque .elohim {
+  display: flex;
+  flex-direction: row;
+}
+.trinites.sheet.actor .zodiaque .elohim input {
+  width: 3em;
+  text-align: center;
+  margin: 2px;
+}
+.trinites.sheet.actor .zodiaque .elohim label {
+  font-family: "Cabaletta";
+  margin: 2px;
+}
 .trinites.sheet.actor .grid-zodiaque {
   display: grid;
   grid-template-columns: 2em 1fr repeat(5, 3.5em) 2em 2em;
@@ -2178,6 +2191,12 @@
   justify-content: center;
   margin: 3px;
 }
+.trinites.dialog .karma .col4 {
+  grid-column: 7 / 9;
+  display: flex;
+  justify-content: center;
+  margin: 3px;
+}
 .trinites.dialog .karma .moins {
   display: flex;
   justify-content: right;
@@ -2223,6 +2242,13 @@
 .trinites.dialog .karma .grid-karma-3col {
   display: grid;
   grid-template-columns: repeat(6, 1fr);
+  align-items: center;
+  margin: 5px;
+  font-family: "Cabaletta";
+}
+.trinites.dialog .karma .grid-karma-4col {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
   align-items: center;
   margin: 5px;
   font-family: "Cabaletta";

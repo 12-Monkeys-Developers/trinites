@@ -6,7 +6,7 @@
       },
   
       "Item": {
-        "vieanterieure": "Vie Antérieure",
+        "vieAnterieure": "Vie Antérieure",
         "metier": "Métier",
         "arme": "Arme",
         "armure": "Armure",

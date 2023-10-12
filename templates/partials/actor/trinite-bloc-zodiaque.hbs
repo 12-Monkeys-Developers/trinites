@@ -1,4 +1,15 @@
 <div class="zodiaque">
+    {{#ifgt affZodiaque 2}}
+        <h3 style="margin-top:1em"><i class="fas fa-mars-stroke-v"></i> ELOHIM</h3>
+
+        <div class="elohim">
+                <label style="margin-left:2em">Karma Elohim</label>
+                <input name="system.zodiaque.karmaElohim.value" type="number" value="{{data.system.zodiaque.karmaElohim.value}}" placeholder="0" min="0" max="{{data.system.zodiaque.karmaElohim.max}}">
+                <label> / </label>
+                <input name="system.zodiaque.karmaElohim.max" type="number" value="{{data.system.zodiaque.karmaElohim.max}}" {{#unless unlocked}}readonly{{/unless}}>
+        </div>
+    {{/ifgt}}
+
     <h3><i class="fas fa-mars-stroke-v"></i> AURAS</h3>
     <div class="grid-zodiaque">
         <div class="col-titre titre"><label>Aura</label></div>

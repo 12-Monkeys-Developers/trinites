@@ -1,9 +1,7 @@
 import TrinitesActor from "./actor.js";
 import DepenseKarmaFormApplication from "../appli/DepenseKarmaFormApp.js";
 
-
 export default class TrinitesTrinite extends TrinitesActor {
-
   prepareData() {
     super.prepareData();
     let system = this.system;
@@ -180,7 +178,7 @@ export default class TrinitesTrinite extends TrinitesActor {
   }
 
   get metierId() {
-    return this.hasMetier ? this.items.find((i) => i.type === "metier")._id : null
+    return this.hasMetier ? this.items.find((i) => i.type === "metier")._id : null;
   }
 
   get vieAnterieureId() {
@@ -198,7 +196,7 @@ export default class TrinitesTrinite extends TrinitesActor {
   get sousType() {
     return "trinite";
   }
-  
+
   get canUseSouffle() {
     return this.system.themeAstral.affinite === "zodiaque";
   }
@@ -206,11 +204,11 @@ export default class TrinitesTrinite extends TrinitesActor {
   get adamTypeKarma() {
     return this.system.trinite.adam.karma.type;
   }
-  
+
   affLvl(affinite) {
-      if(this.system.themeAstral.affinite === affinite) return parseInt(this.system.themeAstral.affiniteDecan);
-      else if(this.system.themeAstral.affinite2 === affinite) return parseInt(this.system.themeAstral.affinite2Decan);
-      else if(this.system.themeAstral.affinite3 === affinite) return parseInt(this.system.themeAstral.affinite3Decan);
+    if (this.system.themeAstral.affinite === affinite) return parseInt(this.system.themeAstral.affiniteDecan);
+    else if (this.system.themeAstral.affinite2 === affinite) return parseInt(this.system.themeAstral.affinite2Decan);
+    else if (this.system.themeAstral.affinite3 === affinite) return parseInt(this.system.themeAstral.affinite3Decan);
     return 0;
   }
 
@@ -226,22 +224,27 @@ export default class TrinitesTrinite extends TrinitesActor {
     if (typeKarma === "dragon") {
       karmaDisponible += data.lameSoeur.dragon.karmaLumiere.value;
     } 
-    else if (typeKarma === "neutre") {
-      karmaDisponible += data.trinite.deva.karma.value + data.trinite.archonte.karma.value + data.trinite.adam.karma.value;
-    } 
     else {
-      if (typeKarma === "lumiere") {
-        karmaDisponible += data.trinite.deva.karma.value;
-      } else if (typeKarma === "tenebre") {
-        karmaDisponible += data.trinite.archonte.karma.value;
+      if (typeKarma === "neutre") {
+        karmaDisponible += data.trinite.deva.karma.value + data.trinite.archonte.karma.value + data.trinite.adam.karma.value;
+      } 
+      else {
+        if (typeKarma === "lumiere") {
+          karmaDisponible += data.trinite.deva.karma.value;
+        } 
+        else if (typeKarma === "tenebre") {
+          karmaDisponible += data.trinite.archonte.karma.value;
+        }
+        // Si le Karma de l'Adam' correspond au type de Karma
+        if (typeKarma === data.trinite.adam.karma.type) {
+          karmaDisponible += data.trinite.adam.karma.value;
+        }        
       }
-
-      // Si le Karma de l'Adam' correspond au type de Karma
-      if (typeKarma === data.trinite.adam.karma.type) {
-        karmaDisponible += data.trinite.adam.karma.value;
+      // Karma Elohim
+      if (this.affLvl("zodiaque") >= 3) {
+        karmaDisponible += data.zodiaque.karmaElohim.value;
       }
     }
-
     return karmaDisponible;
   }
 
@@ -293,8 +296,8 @@ export default class TrinitesTrinite extends TrinitesActor {
 
   // Vide toutes les sources de Karma (Esprit et Adam) du type donné
   /**
-   * 
-   * @param {*} typeKarma 
+   *
+   * @param {*} typeKarma
    */
   viderKarma(typeKarma) {
     let data = this.system;
@@ -303,17 +306,15 @@ export default class TrinitesTrinite extends TrinitesActor {
       this.update({ "system.trinite.deva.karma.value": 0 });
       this.update({ "system.trinite.archonte.karma.value": 0 });
       this.update({ "system.trinite.adam.karma.value": 0 });
-    }
-    else if (typeKarma === "lumiere") {
+    } else if (typeKarma === "lumiere") {
       this.update({ "system.trinite.deva.karma.value": 0 });
-    }
-    else if (typeKarma === "tenebre") {
+    } else if (typeKarma === "tenebre") {
       this.update({ "system.trinite.archonte.karma.value": 0 });
-    }
-    else if (typeKarma === "dragon") {
+    } else if (typeKarma === "dragon") {
       this.update({ "system.lameSoeur.dragon.karmaLumiere.value": 0 });
+    } else if (typeKarma === "elohim") {
+      this.update({ "system.zodiaque.karmaElohim.value": 0 });
     }
-
 
     if (typeKarma === data.trinite.adam.karma.type) {
       this.update({ "system.trinite.adam.karma.value": 0 });
@@ -336,13 +337,20 @@ export default class TrinitesTrinite extends TrinitesActor {
       case "dragon":
         this.update({ "system.lameSoeur.dragon.karmaLumiere.value": data.lameSoeur.dragon.karmaLumiere.value - coutPouvoir });
         break;
+      case "elohim":
+        this.update({ "system.zodiaque.karmaElohim.value": data.zodiaque.karmaElohim.value - coutPouvoir });
+        break;
     }
   }
 
   // Mise à jour de la réserve de karma du type donné à la valeur cible
   majKarma(reserve, valeur) {
-    let reserveData = `system.trinite.${reserve}.karma.value`;
-    this.update({ [reserveData]: valeur });
+    if (reserve === "elohim") {
+      this.update({ "system.zodiaque.karmaElohim.value": valeur });
+    } else {
+      let reserveData = `system.trinite.${reserve}.karma.value`;
+      this.update({ [reserveData]: valeur });
+    }
   }
 
   /**
@@ -432,16 +440,16 @@ export default class TrinitesTrinite extends TrinitesActor {
     const domaines = metier.system.listeDomaines;
 
     if (domaines !== "") {
-      let liste = domaines.split(',');
+      let liste = domaines.split(",");
       for (const domaine of liste) {
-        await this.createEmbeddedDocuments("Item", [{type: "domaine", name: domaine}]);
+        await this.createEmbeddedDocuments("Item", [{ type: "domaine", name: domaine }]);
       }
-  
+
       const nbDomaines = metier.system.nbDomaines;
       const domainesRestant = nbDomaines - liste.length;
-  
+
       for (let index = 0; index < domainesRestant; index++) {
-        await this.createEmbeddedDocuments("Item", [{type: "domaine", name: "?"}]);      
+        await this.createEmbeddedDocuments("Item", [{ type: "domaine", name: "?" }]);
       }
     }
 
@@ -477,13 +485,13 @@ export default class TrinitesTrinite extends TrinitesActor {
     this.update(updateObj);
 
     // Suppression des domaines
-    const domainesId = this.items.filter(i=>i.type === "domaine").map(i=>i._id);
+    const domainesId = this.items.filter((i) => i.type === "domaine").map((i) => i._id);
     await this.deleteEmbeddedDocuments("Item", domainesId);
 
     // Suppression du métier
     await this.deleteEmbeddedDocuments("Item", [metier._id]);
   }
-  
+
   regenereKarmaLumiere() {
     this.majKarma("deva", this.system.trinite.deva.karma.max);
     if (this.adamTypeKarma === "lumiere") this.majKarma("adam", this.system.trinite.adam.karma.max);

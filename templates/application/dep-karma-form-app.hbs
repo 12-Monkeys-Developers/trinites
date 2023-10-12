@@ -1,4 +1,6 @@
 <form class="karma">
+    {{log 'karma' this}}
+    {{log 'affZodiaque' affZodiaque}}
     <div class="entete">
         <div class="titre-entete">Sélectionnez la source de {{#if (eq typeKarma "neutre")}} Karma{{/if}}</div>
         {{#if (eq typeKarma "lumiere")}}<div class="titre-entete">Karma-Lumière</div>{{/if}}
@@ -10,43 +12,61 @@
         <div class="val"><input name="" type="number" value="{{coutPouvoir}}" readonly></div>
     </div>
     {{#if (eq typeKarma "lumiere")}}
-        <div class="grid-karma-2col">
+        <div class="{{#if isElohim}}grid-karma-3col{{else}}grid-karma-2col{{/if}}">
             <div class="col1 titre">Deva</div>
             <div class="col2 titre">Adam'</div>
+            {{#if isElohim}}<div class="col3 titre">Elohim</div>{{/if}}
             <div class="col1"><input class="karmaDeva" name="karmaDeva.valeur" type="number" value="{{karmaDeva.valeur}}" placeholder="0" min="0" max="{{karmaDeva.valeurInit}}" readonly></div>
             <div class="col2"><input class="karmaAdam" name="karmaAdam.valeur" type="number" value="{{karmaAdam.valeur}}" placeholder="0" min="0" max="{{karmaAdam.valeurInit}}" readonly></div>
+            {{#if isElohim}}<div class="col3"><input class="karmaElohim" name="karmaElohim.valeur" type="number" value="{{karmaElohim.valeur}}" placeholder="0" min="0" max="{{karmaElohim.valeurInit}}" readonly></div>{{/if}}
             <div class="moins"><a class="select deva" title="Utiliser"><i class="fas fa-arrow-circle-down"></i></a></div>
             <div class="plus"><a class="deselect deva" title="Rétablir"><i class="fas fa-arrow-circle-up"></i></a></div>
             <div class="moins"><a class="select adam" title="Utiliser"><i class="fas fa-arrow-circle-down"></i></a></div>
             <div class="plus"><a class="deselect adam" title="Rétablir"><i class="fas fa-arrow-circle-up"></i></a></div>
+            {{#if isElohim}}
+                <div class="moins"><a class="select elohim" title="Utiliser"><i class="fas fa-arrow-circle-down"></i></a></div>
+                <div class="plus"><a class="deselect elohim" title="Rétablir"><i class="fas fa-arrow-circle-up"></i></a></div>            
+            {{/if}}
         </div>
     {{/if}}
     {{#if (eq typeKarma "tenebre")}}
-        <div class="grid-karma-2col">
+        <div class="{{#if isElohim}}grid-karma-3col{{else}}grid-karma-2col{{/if}}">
             <div class="col1 titre">Adam'</div>
-            <div class="col2 titre">Archonte</div>            
+            <div class="col2 titre">Archonte</div>
+            {{#if isElohim}}<div class="col3 titre">Elohim</div>{{/if}}          
             <div class="col1"><input class="karmaAdam" name="karmaAdam.valeur" type="number" value="{{karmaAdam.valeur}}" placeholder="0" min="0" max="{{karmaAdam.valeurInit}}" readonly></div>
             <div class="col2"><input class="karmaArchonte" name="karmaArchonte.valeur" type="number" value="{{karmaArchonte.valeur}}" placeholder="0" min="0" max="{{karmaArchonte.valeurInit}}" readonly></div>
+            {{#if isElohim}}<div class="col3"><input class="karmaElohim" name="karmaElohim.valeur" type="number" value="{{karmaElohim.valeur}}" placeholder="0" min="0" max="{{karmaElohim.valeurInit}}" readonly></div>{{/if}}
             <div class="moins"><a class="select adam" title="Utiliser"><i class="fas fa-arrow-circle-down"></i></a></div>
             <div class="plus"><a class="deselect adam" title="Rétablir"><i class="fas fa-arrow-circle-up"></i></a></div>
             <div class="moins"><a class="select archonte" title="Utiliser"><i class="fas fa-arrow-circle-down"></i></a></div>
             <div class="plus"><a class="deselect archonte" title="Rétablir"><i class="fas fa-arrow-circle-up"></i></a></div>
+            {{#if isElohim}}
+                <div class="moins"><a class="select elohim" title="Utiliser"><i class="fas fa-arrow-circle-down"></i></a></div>
+                <div class="plus"><a class="deselect elohim" title="Rétablir"><i class="fas fa-arrow-circle-up"></i></a></div>            
+            {{/if}}
         </div>
     {{/if}}
     {{#if (eq typeKarma "neutre")}}
-        <div class="grid-karma-3col">
+        <div class="{{#if isElohim}}grid-karma-4col{{else}}grid-karma-3col{{/if}}">
             <div class="col1 titre">Deva</div>
             <div class="col2 titre">Adam'</div>
             <div class="col3 titre">Archonte</div>
+            {{#if isElohim}}<div class="col4 titre">Elohim</div>{{/if}}
             <div class="col1"><input class="karmaDeva" name="karmaDeva.valeur" type="number" value="{{karmaDeva.valeur}}" placeholder="0" min="0" max="{{karmaDeva.valeurInit}}" readonly></div>
             <div class="col2"><input class="karmaAdam" name="karmaAdam.valeur" type="number" value="{{karmaAdam.valeur}}" placeholder="0" min="0" max="{{karmaAdam.valeurInit}}" readonly></div>
             <div class="col3"><input class="karmaArchonte" name="karmaArchonte.valeur" type="number" value="{{karmaArchonte.valeur}}" placeholder="0" min="0" max="{{karmaArchonte.valeurInit}}" readonly></div>
+            {{#if isElohim}}<div class="col4"><input class="karmaElohim" name="karmaElohim.valeur" type="number" value="{{karmaElohim.valeur}}" placeholder="0" min="0" max="{{karmaElohim.valeurInit}}" readonly></div>{{/if}}
             <div class="moins"><a class="select deva" title="Utiliser"><i class="fas fa-arrow-circle-down"></i></a></div>
             <div class="plus"><a class="deselect deva" title="Rétablir"><i class="fas fa-arrow-circle-up"></i></a></div>
             <div class="moins"><a class="select adam" title="Utiliser"><i class="fas fa-arrow-circle-down"></i></a></div>
             <div class="plus"><a class="deselect adam" title="Rétablir"><i class="fas fa-arrow-circle-up"></i></a></div>
             <div class="moins"><a class="select archonte" title="Utiliser"><i class="fas fa-arrow-circle-down"></i></a></div>
             <div class="plus"><a class="deselect archonte" title="Rétablir"><i class="fas fa-arrow-circle-up"></i></a></div>
+            {{#if isElohim}}
+                <div class="moins"><a class="select elohim" title="Utiliser"><i class="fas fa-arrow-circle-down"></i></a></div>
+                <div class="plus"><a class="deselect elohim" title="Rétablir"><i class="fas fa-arrow-circle-up"></i></a></div>            
+            {{/if}}
         </div>
     {{/if}}
     <div class="pouvoir">

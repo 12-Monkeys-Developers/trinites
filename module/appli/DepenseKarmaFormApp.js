@@ -71,6 +71,15 @@ export default class DepenseKarmaFormApplication extends FormApplication {
       this.karmaAdam = karmaAdam;
     }
 
+    let karmaElohim = {
+      valeurInit: this.actor.system.zodiaque.karmaElohim.value,
+      valeur: this.actor.system.zodiaque.karmaElohim.value
+    };
+
+    if (!this.karmaElohim) {
+      this.karmaElohim = karmaElohim;
+    }
+
     if (this.typeKarma == "lumiere") {
       templateData.karmaDeva = this.karmaDeva;
       templateData.karmaAdam = this.typeKarma === this.karmaAdam.type ? this.karmaAdam : "";
@@ -82,6 +91,12 @@ export default class DepenseKarmaFormApplication extends FormApplication {
       templateData.karmaDeva = this.karmaDeva;
       templateData.karmaArchonte = this.karmaArchonte;
       templateData.karmaAdam = this.karmaAdam;
+    }
+
+    templateData.isElohim = this.actor.affLvl("zodiaque") >= 3 ? true : false;
+
+    if (templateData.isElohim) {
+      templateData.karmaElohim = this.karmaElohim;
     }
 
     return templateData;
@@ -111,6 +126,10 @@ export default class DepenseKarmaFormApplication extends FormApplication {
         this.karmaAdam.valeur -= 1;
         this.karmaAttribue += 1;
       }
+      if (element.classList.contains("elohim") && this.karmaElohim.valeur > 0) {
+        this.karmaElohim.valeur -= 1;
+        this.karmaAttribue += 1;
+      }
     }
 
     this.btnVisible = this.karmaAttribue == this.coutPouvoir;
@@ -134,6 +153,10 @@ export default class DepenseKarmaFormApplication extends FormApplication {
       }
       if (element.classList.contains("adam") && this.karmaAdam.valeur < this.karmaAdam.valeurInit) {
         this.karmaAdam.valeur += 1;
+        this.karmaAttribue -= 1;
+      }
+      if (element.classList.contains("elohim") && this.karmaElohim.valeur < this.karmaElohim.valeurInit) {
+        this.karmaElohim.valeur += 1;
         this.karmaAttribue -= 1;
       }
     }
@@ -160,6 +183,10 @@ export default class DepenseKarmaFormApplication extends FormApplication {
       this.actor.majKarma("archonte", this.karmaArchonte.valeur);
     }
 
+    if (this.karmaElohim.valeur != this.karmaElohim.valeurInit) {
+      this.actor.majKarma("elohim", this.karmaElohim.valeur);
+    }
+
     if (this.typePouvoir == "aura") {
       let aura = this.actor.items.get(this.idPouvoir);
       aura.update({ "system.deploiement": "cosme" });
@@ -180,7 +207,7 @@ export default class DepenseKarmaFormApplication extends FormApplication {
     }
 
     if (this.typePouvoir == "verset") {
-      Chat.carteVersetActive({
+      await Chat.carteVersetActive({
         actor: this.actor,
         versetId: this.idPouvoir,
       });

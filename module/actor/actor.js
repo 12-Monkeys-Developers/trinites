@@ -71,7 +71,7 @@ export default class TrinitesActor extends Actor {
   get canUseSouffle() {
     return false;
   }
-  
+
   affLvl(affinite) {
     return 0;
   }
@@ -137,6 +137,11 @@ export default class TrinitesActor extends Actor {
       else ui.notifications.warn("Vous n'avez pas assez de Karma disponible pour réciter ce verset !");
       return;
     }
+    // Karma Elohim - Zodiaque 3ieme Decan
+    else if (this.isTrinite && this.affLvl("zodiaque") >= 3) {
+      activable = await DepenseKarmaFormApplication.open(this, this.system.trinite, typeKarma, "verset", coutPouvoir, versetId);
+      return;
+    }
     // Juste ce qu'il faut de Karma
     else if (karmaDisponible == coutPouvoir) {
       this.viderKarma(typeKarma);
@@ -187,6 +192,11 @@ export default class TrinitesActor extends Actor {
       ui.notifications.warn("Vous n'avez pas assez de Karma disponible pour déployer cette aura !");
       return;
     }
+    // Karma Elohim - Zodiaque 3ieme Decan
+    else if (this.isTrinite && this.affLvl("zodiaque") >= 3) {
+      activable = await DepenseKarmaFormApplication.open(this, this.system.trinite, typeKarma, "aura", coutPouvoir, auraId);
+      return;
+    }
     // Juste ce qu'il faut de Karma
     else if (karmaDisponible == coutPouvoir) {
       this.viderKarma(typeKarma);
@@ -212,5 +222,4 @@ export default class TrinitesActor extends Actor {
     }
     return null;
   }
-
 }

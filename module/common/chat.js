@@ -106,7 +106,15 @@ export class TrinitesChat {
       data.flags = this.flags;
     }
 
-    switch (this.data.rollMode) {
+    let visibilityMode = this.data.rollMode ?? game.settings.get('core', 'rollMode');
+
+    // Jet des PNJs
+    if(this.actor.type === "pnj" && game.user.isGM) visibilityMode = "gmroll";
+
+    // Le jouer a choisi de chuchoter au le MJ
+    if (this.data.isWhisper) visibilityMode = "gmroll";
+
+    switch (visibilityMode) {
       case "gmroll":
         data.whisper = ChatMessage.getWhisperRecipients("GM").map((u) => u.id);
         break;
@@ -118,9 +126,10 @@ export class TrinitesChat {
         data.whisper = [game.user.id];
         break;
     }
-  
+
     // Create the chat
     this.chatData = data;
+    console.log('chat create', this);
     return this;
   }
 
@@ -131,7 +140,8 @@ export class TrinitesChat {
   async _createContent() {
     // Update the data to provide to the template
     const data = duplicate(this.data);
-    data.owner = this.actor.id;
+    //TODO owner pour faire quoi ?
+    data.owner = this.actor.id; 
 
     // Call the template renderer.
     return await renderTemplate(this.template, data);

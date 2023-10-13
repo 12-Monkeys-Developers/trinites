@@ -154,7 +154,7 @@ export async function jetCompetence({
   let resultatJet = _getResult(nbDes, actor, karmaAdam, resultDeva, resultArchonte);
 
   let resultModificateurs = await handleModificateurs(actor, modificateurs);
-  let flags = { world: Object.assign({}, resultModificateurs !== {} ? { modificateurs: true } : { modificateurs: false }, resultModificateurs, resultatJet) };
+  let flags = { world: Object.assign({}, Object.keys(resultModificateurs).length !== 0 ? { modificateurs: true } : { modificateurs: false }, resultModificateurs, resultatJet) };
 
   // Primes et pénalités
   rollData.modificateurs = modificateurs;

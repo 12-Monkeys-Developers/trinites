@@ -4,6 +4,7 @@
 - Ajout d'une liste des pouvoirs dans l'onglet description d'une trinité
 - Amélioration de la visibilité des messages des différents pouvoirs : toujours privé si c'est le MJ; pour les joueurs, message de chat privé par défaut, SHIFT + clic pour qu'il soit public avec prise en compte du paramétrage local du joueur si différent de "Tout le monde"
 - Les boutons d'actions des messages des différents pouvoirs sont uniquement visibles par le joueur lui-même et le MJ
+- Jet de compétence : restriction de la sélection des dés à l'auteur du jeu
 
 1.0.2
 - Correction : FAWS dans les journaux

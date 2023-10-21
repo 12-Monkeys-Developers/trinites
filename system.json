@@ -1,5 +1,5 @@
 {
-    "name": "trinites",
+    "id": "trinites",
     "title": "Trinités",
     "description": "Le système Trinités pour FoundryVTT",
     "version": "#{VERSION}#",

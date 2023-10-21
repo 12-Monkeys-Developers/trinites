@@ -189,13 +189,11 @@ export default class TrinitesActor extends Actor {
     }
     // Pas assez de Karma
     else if (karmaDisponible < coutPouvoir) {
-      ui.notifications.warn("Vous n'avez pas assez de Karma disponible pour déployer cette aura !");
-      return;
+      return ui.notifications.warn("Vous n'avez pas assez de Karma disponible pour déployer cette aura !");
     }
     // Karma Elohim - Zodiaque 3ieme Decan
     else if (this.isTrinite && this.affLvl("zodiaque") >= 3) {
       activable = await DepenseKarmaFormApplication.open(this, this.system.trinite, typeKarma, "aura", coutPouvoir, auraId);
-      return;
     }
     // Juste ce qu'il faut de Karma
     else if (karmaDisponible == coutPouvoir) {
@@ -211,7 +209,7 @@ export default class TrinitesActor extends Actor {
     }
 
     if (activable) {
-      await aura.update({ "data.deploiement": "corps" });
+      await aura.update({ "system.deploiement": "corps" });
 
       // MAJ de la carte
       return {

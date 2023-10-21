@@ -1,3 +1,7 @@
+1.0.4
+- Correction sur le déploiement d'aura en général et avec le karma Elohim en particulier
+- Déploiement des auras pour le MJ : SHIFT + Clic pour éviter les contrôles et la dépense de Karma
+
 1.0.3
 - Ajout du Karma Elohim pour le 3ieme décan du Zodiaque
 - Correction de la régénération non fonctionnelle pour les PNJs de type Archonte-roi et Lige

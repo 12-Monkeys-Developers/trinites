@@ -3,6 +3,7 @@ import * as Chat from "../../common/chat.js";
 import { Log } from "../../common/log.js";
 import DepenseKarmaFormApplication from "../../appli/DepenseKarmaFormApp.js";
 
+
 export default class TrinitesActorSheet extends ActorSheet {
   static get defaultOptions() {
     return mergeObject(super.defaultOptions, {
@@ -231,17 +232,26 @@ export default class TrinitesActorSheet extends ActorSheet {
     }
   }
 
-  _onZoneDeploimentAura(event) {
+  async _onZoneDeploimentAura(event) {
     event.preventDefault();
     const element = event.currentTarget;
+    const dataset = event.currentTarget.dataset;
 
-    let auraId = element.dataset.itemId;
+    let auraId = dataset.itemId;
     const aura = this.actor.items.get(auraId);
-    let zone = element.dataset.zone;
+    let zone = dataset.zone;
 
     if (aura.system.deploiement === "cosme" && zone === "cosme") {
       return;
     }
+
+    // Exception pour le MJ qui clic avec Shift : pas de contôle, pas de dépense de Karma
+    if (event.shiftKey && game.user.isGM) {
+      if (aura) {
+        return await aura.update({ "system.deploiement": zone });
+      }
+    }
+
 
     // Pour une trinité, contrôle du nombre d'aura, sauf pour une affinité du Zodiaque de décan 2 ou 3
     if (this.actor.isTrinite && this.actor.affLvl("zodiaque") > 1) {

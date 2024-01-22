@@ -1,3 +1,6 @@
+1.0.5
+- Release technique avec statistiques des mondes
+
 1.0.4
 - Correction sur le déploiement d'aura en général et avec le karma Elohim en particulier
 - Déploiement des auras pour le MJ : SHIFT + Clic pour éviter les contrôles et la dépense de Karma

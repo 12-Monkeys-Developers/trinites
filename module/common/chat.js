@@ -106,12 +106,18 @@ export class TrinitesChat {
       data.flags = this.flags;
     }
 
+    // Si rollMode n'est pas défini, on prend celui par défaut (celui du chat)
     let visibilityMode = this.data.rollMode ?? game.settings.get('core', 'rollMode');
 
-    // Jet des PNJs
-    if(this.actor.type === "pnj" && game.user.isGM) visibilityMode = "gmroll";
+    // Visibilité des jet des PNJs en fonction de l'option choisie
+    if (this.actor.type === "pnj" && game.user.isGM) {
+      let visibilityChoice = game.settings.get("trinites", "visibiliteJetsPNJ");
+      if (visibilityChoice === "public") visibilityMode = "publicroll";
+      else if (visibilityChoice === "private") visibilityMode = "gmroll";
+      else if (visibilityChoice === "depends") visibilityMode = game.settings.get('core', 'rollMode');
+    }
 
-    // Le jouer a choisi de chuchoter au le MJ
+    // Le joueur a choisi de chuchoter au le MJ
     if (this.data.isWhisper) visibilityMode = "gmroll";
 
     switch (visibilityMode) {
@@ -127,9 +133,11 @@ export class TrinitesChat {
         break;
     }
 
+    data.rollMode = visibilityMode;
+
     // Create the chat
     this.chatData = data;
-    console.log('chat create', this);
+    // console.log('chat create', this);
     return this;
   }
 

@@ -147,7 +147,7 @@ export class TrinitesChat {
    */
   async _createContent() {
     // Update the data to provide to the template
-    const data = duplicate(this.data);
+    const data = foundry.utils.duplicate(this.data);
     //TODO owner pour faire quoi ?
     data.owner = this.actor.id; 
 

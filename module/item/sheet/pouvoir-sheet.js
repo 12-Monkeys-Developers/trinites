@@ -4,7 +4,7 @@ import TrinitesItemSheet from "./item-sheet.js";
 export default class TrinitesPouvoirSheet extends TrinitesItemSheet {
 
   static get defaultOptions() {
-    return mergeObject(super.defaultOptions, {
+    return foundry.utils.mergeObject(super.defaultOptions, {
       width: 620,
       height: 380
     });

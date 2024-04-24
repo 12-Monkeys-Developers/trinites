@@ -6,7 +6,7 @@ import { Log } from "../../common/log.js";
 
 export default class TrinitesPnjSheet extends TrinitesActorSheet {
   static get defaultOptions() {
-    return mergeObject(super.defaultOptions, {
+    return foundry.utils.mergeObject(super.defaultOptions, {
       width: 744,
       height: 958,
       classes: ["trinites", "sheet", "actor", "pnj"],
@@ -29,7 +29,7 @@ export default class TrinitesPnjSheet extends TrinitesActorSheet {
    */
   async _onDropItem(event, data) {
     Item.fromDropData(data).then((item) => {
-      const itemData = duplicate(item);
+      const itemData = foundry.utils.duplicate(item);
       switch (itemData.type) {
         case "metier":
           return ;

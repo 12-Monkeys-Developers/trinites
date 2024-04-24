@@ -5,7 +5,7 @@ import { Log } from "../../common/log.js";
 
 export default class TrinitesTriniteSheet extends TrinitesActorSheet {
   static get defaultOptions() {
-    return mergeObject(super.defaultOptions, {
+    return foundry.utils.mergeObject(super.defaultOptions, {
       width: 745,
       height: 960,
       classes: ["trinites", "sheet", "actor", "trinite"],
@@ -43,7 +43,7 @@ export default class TrinitesTriniteSheet extends TrinitesActorSheet {
    */
   async _onDropItem(event, data) {
     Item.fromDropData(data).then((item) => {
-      const itemData = duplicate(item);
+      const itemData = foundry.utils.duplicate(item);
       switch (itemData.type) {
         case "metier":
           return this._onDropMetierItem(event, itemData);

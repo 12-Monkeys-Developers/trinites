@@ -36,7 +36,7 @@ export default function registerHooks() {
 
   Hooks.on('preCreateActor', (doc, createData, options, userid) => {
     let createChanges = {};
-    mergeObject(createChanges, {
+    foundry.utils.mergeObject(createChanges, {
       'prototypeToken.displayName': CONST.TOKEN_DISPLAY_MODES.OWNER_HOVER,
       'prototypeToken.disposition': CONST.TOKEN_DISPOSITIONS.NEUTRAL
     });

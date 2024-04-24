@@ -6,7 +6,7 @@ import DepenseKarmaFormApplication from "../../appli/DepenseKarmaFormApp.js";
 
 export default class TrinitesActorSheet extends ActorSheet {
   static get defaultOptions() {
-    return mergeObject(super.defaultOptions, {
+    return foundry.utils.mergeObject(super.defaultOptions, {
       width: 744,
       height: 958,
       classes: ["trinites", "sheet", "actor"],

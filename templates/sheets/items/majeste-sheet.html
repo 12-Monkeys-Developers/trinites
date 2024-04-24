@@ -6,11 +6,8 @@
     <div class="sheet-content arme" data-item-id="{{item.id}}">
         <label class="marge-edit">Signe</label>
         <select class="marge-edit" name="system.signe">
-            {{#select data.system.signe}}
-            {{#each config.signes as |signe keySigne|}}
-                <option value="{{keySigne}}">{{signe}}</option>
-            {{/each}}
-            {{/select}}</select>
+            {{selectOptions config.signes selected=data.system.signe}}
+        </select>
             <div class="titre-desc">Manifestation</div> 
             {{editor data.system.manifestation target="system.manifestation" button=true owner=true editable=true}}
             <div class="titre-desc">Effets</div> 

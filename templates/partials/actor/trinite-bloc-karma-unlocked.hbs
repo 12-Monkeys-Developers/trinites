@@ -5,11 +5,7 @@
             <div class="colStats-titre"><label>Choeur</label></div>
             <div class="colStats-valeur">
                 <select name="system.trinite.deva.choeur" {{#unless unlocked}}disabled {{/unless}}>
-                    {{#select data.system.trinite.deva.choeur}}
-                    {{#each config.choeurs as |choeur keyChoeur|}}
-                        <option value="{{keyChoeur}}">{{choeur}}</option>
-                    {{/each}}
-                    {{/select}} 
+                    {{selectOptions config.choeurs selected=data.system.trinite.deva.choeur}}
                 </select>
             </div>
             <div class="colStats-titre"><label>Karma</label></div>
@@ -44,11 +40,7 @@
             <div class="colStats-titre"><label>Légion</label></div>
             <div class="colStats-valeur">
                 <select name="system.trinite.archonte.legion" {{#unless unlocked}}disabled {{/unless}}>
-                    {{#select data.system.trinite.archonte.legion}}
-                    {{#each config.legions as |legion keyLegion|}}
-                        <option value="{{keyLegion}}">{{legion}}</option>
-                    {{/each}}
-                    {{/select}} 
+                    {{selectOptions config.legions selected=data.system.trinite.archonte.legion}}
                 </select>
             </div>
             <div class="colStats-titre"><label>Karma</label></div>

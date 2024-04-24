@@ -7,19 +7,11 @@
         <div class="grid-item-atout">
             <label>Epée de Feu</label>
             <select name="system.messager">
-                {{#select data.system.messager}}
-                {{#each config.epeesFeu as |epee keyEpee|}}
-                    <option value="{{keyEpee}}">{{epee.label}}</option>
-                {{/each}}
-                {{/select}} 
+                {{selectOptions config.epeesFeu selected=data.system.messager labelAttr="label"}}
             </select>
             <label>Couleur</label>
             <select name="system.couleur">
-                {{#select data.system.couleur}}
-                {{#each config.couleurs as |couleur keyCouleur|}}
-                    <option value="{{keyCouleur}}">{{couleur}}</option>
-                {{/each}}
-                {{/select}} 
+                {{selectOptions config.couleurs selected=data.system.couleur}}
             </select>
         </div>
         <div class="titre-desc occulte">Effet de l'atout</div> 

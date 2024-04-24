@@ -158,6 +158,23 @@ TRINITES.affinites = {
   lameSoeur: "Lame-soeur"
 };
 
+TRINITES.cout_1_3 = {
+  "1": "1",
+  "2": "2",
+  "3": "3",
+};
+
+TRINITES.cout_0_2 = {
+  "0": "0",
+  "1": "1",
+  "2": "2",
+};
+
+TRINITES.cout_1_2 = {
+  "1": "1",
+  "2": "2",
+};
+
 TRINITES.etatSante = {
   aucun: "",
   indemne: "Indemne",
@@ -344,4 +361,3 @@ TRINITES.typePnj = {
     lige: "Lige",
     humain: "Humain"
   };
-

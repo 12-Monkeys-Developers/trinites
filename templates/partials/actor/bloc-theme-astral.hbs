@@ -3,68 +3,36 @@
   <div class="ligne-theme">
     <label>Archétype</label>
     <select name="system.themeAstral.archetype" {{#unless unlocked}}disabled {{/unless}}>
-      {{#select data.system.themeAstral.archetype}}
-        {{#each config.signes as |signe keySigne|}}
-          <option value="{{keySigne}}">{{signe}}</option>
-        {{/each}}
-      {{/select}}
+      {{selectOptions config.signes selected=data.system.themeAstral.archetype}}
     </select>
     {{#if (eq data.type "trinite")}}
       <label>Affinité</label>
       <select name="system.themeAstral.affinite" {{#unless unlocked}}disabled {{/unless}}>
-        {{#select data.system.themeAstral.affinite}}
-          {{#each config.affinites as |affinite keyAffinite|}}
-            <option value="{{keyAffinite}}">{{affinite}}</option>
-          {{/each}}
-        {{/select}}
+        {{selectOptions config.affinites selected=data.system.themeAstral.affinite}}
       </select>
       <label>Décan</label>
       <select name="system.themeAstral.affiniteDecan" {{#unless unlocked}}disabled {{/unless}}>
-        {{#select data.system.themeAstral.affiniteDecan}}
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-        {{/select}}
+        {{selectOptions config.cout_1_3 selected=data.system.themeAstral.affiniteDecan}}
       </select>
     {{/if}}
   </div>
   <div class="grid-theme">
     <label class="col-ascendant lig-titre">Ascendants</label>
     <select class="col-ascendant lig-theme-1" name="system.themeAstral.ascendant1" {{#unless unlocked}}disabled {{/unless}}>
-      {{#select data.system.themeAstral.ascendant1}}
-        {{#each config.signes as |signe keySigne|}}
-          <option value="{{keySigne}}">{{signe}}</option>
-        {{/each}}
-      {{/select}}
+      {{selectOptions config.signes selected=data.system.themeAstral.ascendant1}}
     </select>
     <select class="col-ascendant lig-theme-2" name="system.themeAstral.ascendant2" {{#unless unlocked}}disabled {{/unless}}>
-      {{#select data.system.themeAstral.ascendant2}}
-        {{#each config.signes as |signe keySigne|}}
-          <option value="{{keySigne}}">{{signe}}</option>
-        {{/each}}
-      {{/select}}
+      {{selectOptions config.signes selected=data.system.themeAstral.ascendant2}}
     </select>
     <label class="col-descendant lig-titre">Descendants</label>
     <select class="col-descendant lig-theme-1" name="system.themeAstral.descendant1" {{#unless unlocked}}disabled {{/unless}}>
-      {{#select data.system.themeAstral.descendant1}}
-        {{#each config.signes as |signe keySigne|}}
-          <option value="{{keySigne}}">{{signe}}</option>
-        {{/each}}
-      {{/select}}
+      {{selectOptions config.signes selected=data.system.themeAstral.descendant1}}
     </select>
     <select class="col-descendant lig-theme-2" name="system.themeAstral.descendant2" {{#unless unlocked}}disabled {{/unless}}>
-      {{#select data.system.themeAstral.descendant2}}
-        {{#each config.signes as |signe keySigne|}}
-          <option value="{{keySigne}}">{{signe}}</option>
-        {{/each}}
-      {{/select}}
+      {{selectOptions config.signes selected=data.system.themeAstral.descendant2}}
     </select>
     <select class="col-descendant lig-theme-3" name="system.themeAstral.descendant3" {{#unless unlocked}}disabled {{/unless}}>
-      {{#select data.system.themeAstral.descendant3}}
-        {{#each config.signes as |signe keySigne|}}
-          <option value="{{keySigne}}">{{signe}}</option>
-        {{/each}}
-      {{/select}}
+      {{selectOptions config.signes selected=data.system.themeAstral.descendant3}}
     </select>
   </div>
 </div>

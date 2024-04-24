@@ -14,11 +14,7 @@
             <div><label>Compétence</label></div>
             <div>
                 <select name="system.competence">
-                    {{#select data.system.competence}}           
-                        {{#each config.competencesCombat as |competence keyCompetence|}}
-                            <option value="{{keyCompetence}}">{{competence}}</option>
-                        {{/each}}
-                    {{/select}} 
+                    {{selectOptions config.competencesCombat selected=data.system.competence}}
                 </select>
             </div>
         </div>

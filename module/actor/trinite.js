@@ -401,9 +401,9 @@ export default class TrinitesTrinite extends TrinitesActor {
     if (bonusType !== "aucun") {
       if (["influence", "richesse", "reseau"].includes(bonusType)) {
         bonus = `system.ressources.${bonusType}.bonusVA`;
-      } else if (bonusType === "karma-lumiere") {
+      } else if (bonusType === "karma-lumiere" || bonusType === "karmalumiere") {
         bonus = "system.trinite.deva.karma.bonusVA";
-      } else if (bonusType === "karma-tenebres") {
+      } else if (bonusType === "karma-tenebres" || bonusType === "karmatenebres") {
         bonus = "system.trinite.archonte.karma.bonusVA";
       } else {
         bonus = `system.competences.${bonusType}.bonusVA`;

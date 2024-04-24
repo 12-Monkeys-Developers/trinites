@@ -1,3 +1,6 @@
+2.0.0
+- Modifications pour Foundry v12
+
 1.0.6
 - Ajout d'une option de visibilité des jets de dés des PNJs (Toujours privés, toujours publiques, selon le paramétrage du chat du MJ)
 

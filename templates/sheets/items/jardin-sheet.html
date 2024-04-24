@@ -6,9 +6,7 @@
   <div class="grid-item-jardin">
     <label class="marge-edit">Signe</label>
     <select class="marge-edit" name="system.archetype">
-      {{#select data.system.archetype}} {{#each config.signes as |signe keySigne|}}
-      <option value="{{keySigne}}">{{signe}}</option>
-      {{/each}} {{/select}}</select
+      {{selectOptions config.signes selected=data.system.archetype}}</select
     ><label>Localisation</label>
     <input name="system.localisation" type="text" value="{{data.system.localisation}}" placeholder="Localisation" />
     <label>Seuil</label>

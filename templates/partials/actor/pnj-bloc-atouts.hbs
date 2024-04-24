@@ -4,11 +4,7 @@
         <div class="param">
             <label>Coût pour jouer un atout : </label>
             <select name="system.cout.atout">
-                {{#select data.system.cout.atout}}
-                    <option value="0">0</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                {{/select}}					
+                {{selectOptions config.cout_0_2 selected=data.system.cout.atout}}
             </select>
         </div>
     {{/if}}    

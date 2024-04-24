@@ -4,7 +4,7 @@ export default class TrinitesItemSheet extends ItemSheet {
     return mergeObject(super.defaultOptions, {
       width: 650,
       height: 500,
-      classes: ["trinites", "sheet", "item"]
+      classes: ["trinites", "sheet", "item"],
     });
   }
 
@@ -19,7 +19,14 @@ export default class TrinitesItemSheet extends ItemSheet {
 
     const sortedCompetencesArray = Object.entries(game.trinites.config.competences).sort((a, b) => a[1].localeCompare(b[1]));
     const competencesTriees = Object.fromEntries(sortedCompetencesArray);
-    data.config.competencesTriees = competencesTriees; 
+    data.config.competencesTriees = competencesTriees;
+    data.config.optionsVA = competencesTriees;
+    data.config.optionsVA.aucun = "";
+    data.config.optionsVA.influence = "Influence";
+    data.config.optionsVA.reseau = "Réseau";
+    data.config.optionsVA.richesse = "Richesse";
+    data.config.optionsVA.karmalumiere = "Karma-Lumière";
+    data.config.optionsVA.karmatenebres = "Karma-Ténèbres";
 
     return data;
   }
@@ -27,5 +34,4 @@ export default class TrinitesItemSheet extends ItemSheet {
   activateListeners(html) {
     super.activateListeners(html);
   }
-
 }

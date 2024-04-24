@@ -13,11 +13,7 @@
     <div class="sous-type">
       <label>Type</label>
       <select name="system.sousType" {{#unless unlocked}}disabled {{/unless}}>
-        {{#select data.system.sousType}}
-          {{#each config.typePnj as |pnj keyPnj|}}
-            <option value="{{keyPnj}}">{{pnj}}</option>
-          {{/each}}
-        {{/select}}
+        {{selectOptions config.typePnj selected=data.system.sousType}}
       </select>
     </div> 
     <div class="middle-size"><a class="sheet-change-lock" title="{{localize 'TRINITES.label.unlockSheet'}}">

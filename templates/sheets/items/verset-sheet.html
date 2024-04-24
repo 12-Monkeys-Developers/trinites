@@ -7,23 +7,17 @@
     <div class="grid-item-verset">
       <label>Karma</label>
       <select name="system.karma">
-        {{#select data.system.karma}} {{#each config.karmas as |karma keyKarma|}}
-        <option value="{{keyKarma}}">{{karma}}</option>
-        {{/each}} {{/select}}
+        {{selectOptions config.karmas selected=data.system.karma}}
       </select>
       {{#if (eq data.system.karma "lumiere")}}
       <label>Choeur</label>
       <select name="system.choeurLegion">
-        {{#select data.system.choeurLegion}} {{#each config.choeurs as |choeur keyChoeur|}}
-        <option value="{{keyChoeur}}">{{choeur}}</option>
-        {{/each}} {{/select}}
+        {{selectOptions config.choeurs selected=data.system.choeurLegion}}
       </select>
       {{/if}} {{#if (eq data.system.karma "tenebre")}}
       <label>Légion</label>
       <select name="system.choeurLegion">
-        {{#select data.system.choeurLegion}} {{#each config.legions as |legion keyLegion|}}
-        <option value="{{keyLegion}}">{{legion}}</option>
-        {{/each}} {{/select}}
+        {{selectOptions config.legions selected=data.system.choeurLegion}}
       </select>
       {{/if}} {{#if (eq data.system.karma "aucun")}}
       <label>Groupe</label>

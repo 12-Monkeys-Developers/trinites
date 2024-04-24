@@ -4,11 +4,7 @@
         <div class="param">
             <label>Coût pour réciter un verset : </label>
             <select name="system.cout.verset">
-                {{#select data.system.cout.verset}}
-                    <option value="0">0</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                {{/select}}					
+                {{selectOptions config.cout_0_2 selected=data.system.cout.verset}}		
             </select>
         </div>
     {{/if}}

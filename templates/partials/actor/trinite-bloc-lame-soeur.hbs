@@ -3,11 +3,7 @@
     <div class="grid-lame">
         <label>Messager</label>
         <select name="system.lameSoeur.messager" {{#unless unlocked}}disabled {{/unless}}>
-            {{#select data.system.lameSoeur.messager}}
-            {{#each config.messagers as |messager keyMessager|}}
-                <option value="{{keyMessager}}">{{messager.label}}</option>
-            {{/each}}
-            {{/select}} 
+            {{selectOptions config.messagers selected=data.system.lameSoeur.messager labelAttr="label"}}
         </select>
         <div class="centrer"><a class="roll-lame" title="Jet de lame-soeur"><i class="fas fa-dice"></i></a></div>
         <label>Dégâts 4</label>

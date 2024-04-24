@@ -9,12 +9,7 @@
         <div class="grid-data">
             <label>Domaine appliqué au jet</label>
             <select name="domaine">
-                {{#select domaine}}
-                <!-- <option value="">Aucun</option> -->
-                {{#each domaines as |domaine keyDomaine|}}
-                    <option value="{{domaine.id}}">{{domaine.name}}</option>
-                {{/each}}
-                {{/select}} 
+            {{selectOptions domaines selected=domaine labelAttr="name"}}
             </select>
         </div>
     {{/if}}

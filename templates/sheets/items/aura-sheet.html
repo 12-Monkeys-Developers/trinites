@@ -8,11 +8,7 @@
         {{#if data.system.edit}}
             <label class="marge-edit">Signe</label>
             <select class="marge-edit" name="system.signe">
-                {{#select data.system.signe}}
-                {{#each config.signes as |signe keySigne|}}
-                    <option value="{{keySigne}}">{{signe}}</option>
-                {{/each}}
-                {{/select}} 
+                {{selectOptions config.signes selected=data.system.signe}}
             </select>
             <label class="marge-edit">Déploiement</label>
                 <div class="zone-aura">
@@ -30,11 +26,7 @@
         {{else}}
             <label>Signe</label>
             <select name="system.signe">
-                {{#select data.system.signe}}
-                {{#each config.signes as |signe keySigne|}}
-                    <option value="{{keySigne}}">{{signe}}</option>
-                {{/each}}
-                {{/select}} 
+                {{selectOptions config.signes selected=data.system.signe}}
             </select>
             <label>Déploiement</label>
             <input name="" type="text" value="{{configVal 'deploiement' data.system.deploiement}}" readonly>

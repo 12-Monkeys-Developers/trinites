@@ -6,9 +6,7 @@
     <div class="sheet-content pouvoir" data-item-id="{{item.id}}">
       <label>Savoir Occulte</label>
       <select name="system.savoirOcculte">
-        {{#select data.system.savoirOcculte}} {{#each config.savoirsOccultes as |savoir keySavoir|}}
-        <option value="{{keySavoir}}">{{savoir.label}}</option>
-        {{/each}} {{/select}}
+        {{selectOptions config.savoirsOccultes selected=data.system.savoirOcculte labelAttr="label"}}
       </select>
       <label>Origine : </label>{{origine}}
         <div class="titre-desc">Description du pouvoir</div> 

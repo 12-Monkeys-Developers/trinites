@@ -6,11 +6,7 @@
     <div class="sheet-content pouvoir" data-item-id="{{item.id}}">
         <label>Epée de Feu</label>
         <select name="system.messager">
-            {{#select data.system.messager}}
-            {{#each config.epeesFeu as |epee keyEpee|}}
-                <option value="{{keyEpee}}">{{epee.label}}</option>
-            {{/each}}
-            {{/select}} 
+            {{selectOptions config.epeesFeu selected=data.system.messager labelAttr="label"}}
         </select>
         <div class="titre-desc">Description du pouvoir</div> 
         {{editor data.system.description target="system.description" button=true owner=true editable=true}}

@@ -17,8 +17,8 @@ export default class TrinitesTriniteSheet extends TrinitesActorSheet {
     return "systems/trinites/templates/sheets/actors/trinite-sheet.html";
   }
 
-  getData() {
-    const data = super.getData();
+  async getData() {
+    const data = await super.getData();
 
     data.hasMetier = this.actor.hasMetier;
     data.hasVieAnterieure = this.actor.hasVieAnterieure;
@@ -28,7 +28,6 @@ export default class TrinitesTriniteSheet extends TrinitesActorSheet {
     data.affZodiaque = this.actor.affLvl("zodiaque");
     data.affGrandLivre = this.actor.affLvl("grandLivre");
     data.affLamesoeur = this.actor.affLvl("lameSoeur");
-
     return data;
   }
 

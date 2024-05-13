@@ -13,8 +13,8 @@ export default class TrinitesItemSheet extends ItemSheet {
     return `systems/trinites/templates/sheets/items/${this.item.type.toLowerCase()}-sheet.html`;
   }
 
-  getData() {
-    const data = super.getData();
+  async getData() {
+    const data = await super.getData();
     data.config = game.trinites.config;
 
     const sortedCompetencesArray = Object.entries(game.trinites.config.competences).sort((a, b) => a[1].localeCompare(b[1]));

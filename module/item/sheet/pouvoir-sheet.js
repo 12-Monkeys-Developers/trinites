@@ -10,8 +10,8 @@ export default class TrinitesPouvoirSheet extends TrinitesItemSheet {
     });
   }
 
-  getData() {
-    const data = super.getData();
+  async getData() {
+    const data = await super.getData();
     data.origine= data.config.savoirsOccultes[this.item.system.savoirOcculte].origine;
     data.isLocked = this.item.actor?.isLocked;
     return data;

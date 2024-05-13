@@ -1,3 +1,6 @@
+2.0.1
+-bug: les icones de suppression VA et métier n'apparaissaient pas
+
 2.0.0
 - Modifications pour Foundry v12
 

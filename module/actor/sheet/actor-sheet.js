@@ -3,7 +3,6 @@ import * as Chat from "../../common/chat.js";
 import { Log } from "../../common/log.js";
 import DepenseKarmaFormApplication from "../../appli/DepenseKarmaFormApp.js";
 
-
 export default class TrinitesActorSheet extends ActorSheet {
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
@@ -15,7 +14,7 @@ export default class TrinitesActorSheet extends ActorSheet {
   }
 
   async getData() {
-    const data = super.getData();
+    const data = await super.getData();
     data.config = game.trinites.config;
 
     data.armes = data.items.filter((item) => item.type === "arme");
@@ -191,10 +190,9 @@ export default class TrinitesActorSheet extends ActorSheet {
           break;
       }
     } else if (this.actor.type === "pnj") {
-        if (this.actor.system.sousType === "archonteRoi" || this.actor.system.sousType === "lige") {
-              typeKarma = "tenebre";
-        }
-        else return;
+      if (this.actor.system.sousType === "archonteRoi" || this.actor.system.sousType === "lige") {
+        typeKarma = "tenebre";
+      } else return;
     }
 
     let karmaDisponible = this.actor.karmaDisponible(typeKarma);
@@ -211,7 +209,7 @@ export default class TrinitesActorSheet extends ActorSheet {
       await DepenseKarmaFormApplication.open(this.actor, this.actor.system.trinite, typeKarma, "regen", 1, null);
       activationOk = true;
       return;
-    }    
+    }
     // Juste ce qu'il faut de Karma
     else if (karmaDisponible == 1) {
       this.actor.viderKarma(typeKarma);
@@ -221,8 +219,7 @@ export default class TrinitesActorSheet extends ActorSheet {
     else if (this.actor.sourceUnique(typeKarma)) {
       this.actor.consommerSourceKarma(this.actor.sourceUnique(typeKarma), 1);
       activationOk = true;
-    } 
-    else {
+    } else {
       await DepenseKarmaFormApplication.open(this.actor, this.actor.system.trinite, typeKarma, "regen", 1, null);
       activationOk = true;
     }
@@ -251,7 +248,6 @@ export default class TrinitesActorSheet extends ActorSheet {
         return await aura.update({ "system.deploiement": zone });
       }
     }
-
 
     // Pour une trinité, contrôle du nombre d'aura, sauf pour une affinité du Zodiaque de décan 2 ou 3
     if (this.actor.isTrinite && this.actor.affLvl("zodiaque") > 1) {
@@ -318,7 +314,7 @@ export default class TrinitesActorSheet extends ActorSheet {
       actor: this.actor,
       signe: dataset.signe,
       competence: dataset.competence,
-      type: "competence"
+      type: "competence",
     });
   }
 
@@ -328,7 +324,7 @@ export default class TrinitesActorSheet extends ActorSheet {
 
     Roll.jetRessource({
       actor: this.actor,
-      ressource: dataset.ressource
+      ressource: dataset.ressource,
     });
   }
 
@@ -339,7 +335,7 @@ export default class TrinitesActorSheet extends ActorSheet {
     Chat.carteAtout({
       actor: this.actor,
       atoutId: dataset.itemId,
-      whisper: !event.shiftKey
+      whisper: !event.shiftKey,
     });
   }
 
@@ -350,7 +346,7 @@ export default class TrinitesActorSheet extends ActorSheet {
     Chat.carteDragon({
       actor: this.actor,
       dragonId: dataset.itemId,
-      whisper: !event.shiftKey
+      whisper: !event.shiftKey,
     });
   }
 
@@ -361,7 +357,7 @@ export default class TrinitesActorSheet extends ActorSheet {
     Chat.carteAura({
       actor: this.actor,
       auraId: dataset.itemId,
-      whisper: !event.shiftKey
+      whisper: !event.shiftKey,
     });
   }
 
@@ -372,7 +368,7 @@ export default class TrinitesActorSheet extends ActorSheet {
     Chat.carteMajeste({
       actor: this.actor,
       majesteId: dataset.itemId,
-      whisper: !event.shiftKey
+      whisper: !event.shiftKey,
     });
   }
 
@@ -383,7 +379,7 @@ export default class TrinitesActorSheet extends ActorSheet {
     Chat.carteVerset({
       actor: this.actor,
       versetId: dataset.itemId,
-      whisper: !event.shiftKey
+      whisper: !event.shiftKey,
     });
   }
 

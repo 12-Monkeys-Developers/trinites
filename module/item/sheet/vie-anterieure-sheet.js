@@ -9,8 +9,8 @@ export default class TrinitesVieAnterieureSheet extends TrinitesItemSheet {
     });
   }
 
-  getData() {
-    const data = super.getData();
+  async getData() {
+    const data = await super.getData();
 
     data.isLocked = this.item.actor?.isLocked;
     return data;

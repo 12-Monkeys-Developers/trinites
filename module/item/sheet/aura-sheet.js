@@ -3,8 +3,8 @@ import TrinitesItemSheet from "./item-sheet.js";
 
 export default class TrinitesAuraSheet extends TrinitesItemSheet {
   
-  getData() {
-    const data = super.getData();
+  async getData() {
+    const data = await super.getData();
 
     const myItemData = data.data.system;
 

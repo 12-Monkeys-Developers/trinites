@@ -29,7 +29,7 @@ export default class DepenseKarmaFormApplication extends FormApplication {
     });
   }
 
-  getData() {
+  async getData() {
     // Send data to the template
     let templateData = {
       typeKarma: this.typeKarma,

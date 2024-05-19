@@ -1,5 +1,5 @@
-2.0.2
-- compatyibilité Foundry v12
+2.1.0
+- compatibilité Foundry v12
 
 2.0.1
 -bug: les icones de suppression VA et métier n'apparaissaient pas

@@ -52,7 +52,7 @@
     "primaryTokenAttribute": "",
     "compatibility": {
       "minimum": "11",
-      "verified": "11"
+      "verified": "12"
     },
     "url": "#{URL}#",
     "manifest": "#{MANIFEST}#",

@@ -144,7 +144,7 @@ export async function jetCompetence({
   nbDes = actor.nbDes ?? nbDes;
   let rollFormula = _getFormula(nbDes, actor, modFormula);
 
-  let rollResult = await new Roll(rollFormula, rollData).roll({ async: true });
+  let rollResult = await new Roll(rollFormula, rollData).roll();
 
   let { resultDeva, resultArchonte } = _getDicesResult(nbDes, rollResult);
   rollData.resultDeva = resultDeva;
@@ -330,7 +330,7 @@ export async function jetRessource({ actor = null, ressource = null, coutAcquisi
     rollData.dette = game.trinites.config.dettes[typeTest.dette];
   }
 
-  let rollResult = await new Roll(rollFormula, rollData).roll({ async: true });
+  let rollResult = await new Roll(rollFormula, rollData).roll();
 
   rollData.dieResult = rollResult.dice[0].total;
   rollData.rollTotal = rollResult.total;
@@ -679,7 +679,7 @@ export async function jetInitiative({ actor = null } = {}) {
   let nbDes = actor.nbDes ?? nbDes;
   let rollFormula = _getFormula(nbDes, actor, modFormula);
 
-  let rollResult = await new Roll(rollFormula, rollData).roll({ async: true });
+  let rollResult = await new Roll(rollFormula, rollData).roll();
 
   let { resultDeva, resultArchonte } = _getDicesResult(nbDes, rollResult);
 

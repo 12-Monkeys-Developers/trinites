@@ -1,3 +1,6 @@
+2.1.1
+-  bug calcul de la base des competences des trinités
+
 2.1.0
 - compatibilité Foundry v12
 

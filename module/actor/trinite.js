@@ -9,14 +9,6 @@ export default class TrinitesTrinite extends TrinitesActor {
     let pointsCreDepenses = 0;
 
     /*
-     * Bonus de 1 pour les 3 compétences de la vierge et dans Langues
-     */
-    system.competences.vierge.clairvoyance.base = 1;
-    system.competences.vierge.emprise.base = 1;
-    system.competences.vierge.meditation.base = 1;
-    system.competences.poisson.langues.base = 1;
-
-    /*
      *  Calcul des bonus de Signes
      */
 
@@ -54,10 +46,12 @@ export default class TrinitesTrinite extends TrinitesActor {
 
     /*
      * Calcul de la base des compétences : base = baseMetier + points de Création du métier + bonus de la Vie Antérieure + niveau obtenu par l'expérience
+     * Bonus de 1 pour les 3 compétences de la vierge et dans Langues
      */
     for (let [keySigne, compsSigne] of Object.entries(system.competences)) {
       for (let [keyComp, competence] of Object.entries(compsSigne)) {
         system.competences[keySigne][keyComp].base =
+          ["clairvoyance","emprise","meditation","langues"].includes(keyComp) ? 1 : 0 +
           system.competences[keySigne][keyComp].baseMetier +
           system.competences[keySigne][keyComp].pointsCrea +
           system.competences[keySigne][keyComp].bonusVA +

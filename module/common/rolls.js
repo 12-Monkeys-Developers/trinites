@@ -211,7 +211,7 @@ export async function jetCompetence({
 
     if (actor.type === "pnj" && game.user.isGM) templateContext.rollMode = "gmroll";
 
-    let chat = await new TrinitesChat(actor).withTemplate(messageTemplate).withData(templateContext).withRoll(rollResult).withFlags(flags).create();
+    let chat = await new TrinitesChat(actor).withTemplate(messageTemplate).withData(templateContext).withRolls(rollResult).withFlags(flags).create();
     await chat.display();
   }
 }
@@ -354,7 +354,7 @@ export async function jetRessource({ actor = null, ressource = null, coutAcquisi
       roll: renderedRoll,
     };
 
-    let chat = await new TrinitesChat(actor).withTemplate(messageTemplate).withData(templateContext).withRoll(rollResult).create();
+    let chat = await new TrinitesChat(actor).withTemplate(messageTemplate).withData(templateContext).withRolls(rollResult).create();
     await chat.display();
   }
 
@@ -708,7 +708,7 @@ export async function jetInitiative({ actor = null } = {}) {
 
   if (actor.type === "pnj" && game.user.isGM) templateContext.rollMode = "gmroll";
 
-  let chat = await new TrinitesChat(actor).withTemplate(messageTemplate).withData(templateContext).withRoll(rollResult).create();
+  let chat = await new TrinitesChat(actor).withTemplate(messageTemplate).withData(templateContext).withRolls(rollResult).create();
   await chat.display();
 
   // Retourne la valeur d'initiative

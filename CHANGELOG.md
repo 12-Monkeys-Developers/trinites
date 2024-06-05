@@ -1,3 +1,6 @@
+3.0.0
+- Version Compatible V12 avec correction des jets de dés Dice So Nice qui n'étaient pas affichés.
+
 2.1.3
 - Dernière version pour Foundry V11
 
@@ -8,10 +11,10 @@
 - bug calcul de la base des competences des trinités
 
 2.1.0
-- compatibilité Foundry v12
+- Compatibilité Foundry v12
 
 2.0.1
--bug: les icones de suppression VA et métier n'apparaissaient pas
+- Correction: les icônes de suppression VA et métier n'apparaissaient pas
 
 2.0.0
 - Modifications pour Foundry v12

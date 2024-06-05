@@ -14,7 +14,7 @@ export class TrinitesChat {
     this.data = null;
     this.chatData = null;
     this.flags = null;
-    this.roll = null;
+    this.rolls = null;
   }
 
   /**
@@ -62,8 +62,8 @@ export class TrinitesChat {
    * @param roll The roll.
    * @returns the instance.
    */
-  withRoll(roll) {
-    this.roll = roll;
+  withRolls(rolls) {
+    this.rolls = rolls instanceof Array ? rolls : [rolls];    
     return this;
   }
 
@@ -95,10 +95,10 @@ export class TrinitesChat {
     };
 
     // Set the roll parameter if necessary
-    if (this.roll) {
+    if (this.rolls) {
       data.rollMode = this.data.rollMode;
-      data.type = CONST.CHAT_MESSAGE_TYPES.ROLL; 
-      data.roll = this.roll;
+      data.type = CONST.CHAT_MESSAGE_STYLES.OTHER; 
+      data.rolls = this.rolls;
     }
 
     // Set the flags parameter if necessary

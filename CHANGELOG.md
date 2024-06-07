@@ -1,3 +1,6 @@
+3.0.1
+- Correction calcul de la base des competences de la Vierge d'une trinité
+
 3.0.0
 - Version Compatible V12 avec correction des jets de dés Dice So Nice qui n'étaient pas affichés.
 
@@ -8,7 +11,7 @@
 - Correction du fix de la 2.1.1
 
 2.1.1
-- bug calcul de la base des competences des trinités
+- Correction calcul de la base des competences des trinités
 
 2.1.0
 - Compatibilité Foundry v12

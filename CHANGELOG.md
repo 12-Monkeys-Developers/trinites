@@ -1,3 +1,6 @@
+2.1.4
+- Correction calcul de la base des competences de la Vierge d'une trinité
+
 2.1.3
 - Dernière version pour Foundry V11
 

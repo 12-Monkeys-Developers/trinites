@@ -51,7 +51,7 @@ export default class TrinitesTrinite extends TrinitesActor {
     for (let [keySigne, compsSigne] of Object.entries(system.competences)) {
       for (let [keyComp, competence] of Object.entries(compsSigne)) {
         system.competences[keySigne][keyComp].base =
-          ["clairvoyance","emprise","meditation","langues"].includes(keyComp) ? 1 : 0 +
+          (["clairvoyance","emprise","meditation","langues"].includes(keyComp) ? 1 : 0) +
           system.competences[keySigne][keyComp].baseMetier +
           system.competences[keySigne][keyComp].pointsCrea +
           system.competences[keySigne][keyComp].bonusVA +

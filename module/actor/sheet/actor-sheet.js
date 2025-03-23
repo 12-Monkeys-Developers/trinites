@@ -3,7 +3,7 @@ import * as Chat from "../../common/chat.js";
 import { Log } from "../../common/log.js";
 import DepenseKarmaFormApplication from "../../appli/DepenseKarmaFormApp.js";
 
-export default class TrinitesActorSheet extends ActorSheet {
+export default class TrinitesActorSheet extends foundry.appv1.sheets.ActorSheet {
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
       width: 744,

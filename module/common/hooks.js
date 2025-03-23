@@ -1,29 +1,25 @@
 import { TrinitesChat } from "./chat.js ";
 
 export default function registerHooks() {
-  Hooks.on("renderChatLog", (app, html, data) => {
-    html.on("click", "button.dette", TrinitesChat.onDetteEsprit);
-    html.on("click", "a.activer.souffle", TrinitesChat.onActiverSouffle);
-    html.on("click", "a.activer.verset", TrinitesChat.onActiverVerset);
-    html.on("click", "a.activer.majeste", TrinitesChat.onActiverMajeste);
-    html.on("click", "a.activer.dragon", TrinitesChat.onActiverDragon);
-    html.on("click", "a.activer.atout", TrinitesChat.onActiverAtout);
-    html.on("click", "a.details.aura", TrinitesChat.onDetailsAura);
-    html.on("click", "a.details.souffle", TrinitesChat.onDetailsSouffle);
-    html.on("click", "a.details.atout", TrinitesChat.onDetailsAtout);
-    html.on("click", "a.details.dragon", TrinitesChat.onDetailsDragon);
-    html.on("click", "a.details.verset", TrinitesChat.onDetailsVerset);
-    html.on("click", "a.details.majeste", TrinitesChat.onDetailsMajeste);
-    html.on("click", "a.details.effetsMajeste", TrinitesChat.onDetailsEffetsMajeste);
-
-    
-  });
 
   Hooks.on("renderChatMessage", (message, html, data) => {
     if (message.isAuthor) {
-      html.find("a.activer.aura").click(ev => TrinitesChat.onActiverAura(ev, data.message));   
-      html.find(".dice-deva.deux-des").click(ev => TrinitesChat.onSelectDice(ev, data.message));   
+      html.find("button.dette").click(ev => TrinitesChat.onDetteEsprit(ev, data.message));
+      html.find("a.activer.aura").click(ev => TrinitesChat.onActiverAura(ev, data.message));
+      html.find("a.activer.atout").click(ev => TrinitesChat.onActiverAtout(ev, data.message));
+      html.find("a.activer.dragon").click(ev => TrinitesChat.onActiverDragon(ev, data.message));
+      html.find("a.activer.majeste").click(ev => TrinitesChat.onActiverMajeste(ev, data.message));
+      html.find("a.activer.souffle").click(ev => TrinitesChat.onActiverSouffle(ev, data.message));
+      html.find("a.activer.verset").click(ev => TrinitesChat.onActiverVerset(ev, data.message));
+      html.find(".dice-deva.deux-des").click(ev => TrinitesChat.onSelectDice(ev, data.message));
       html.find(".dice-archonte.deux-des").click(ev => TrinitesChat.onSelectDice(ev, data.message));
+      html.find("a.details.atout").click(ev => TrinitesChat.onDetailsAtout(ev, data.message));
+      html.find("a.details.dragon").click(ev => TrinitesChat.onDetailsDragon(ev, data.message));
+      html.find("a.details.aura").click(ev => TrinitesChat.onDetailsAura(ev, data.message));
+      html.find("a.details.majeste").click(ev => TrinitesChat.onDetailsMajeste(ev, data.message));
+      html.find("a.details.souffle").click(ev => TrinitesChat.onDetailsSouffle(ev, data.message));
+      html.find("a.details.verset").click(ev => TrinitesChat.onDetailsVerset(ev, data.message));
+      html.find("a.details.effetsMajeste").click(ev => TrinitesChat.onDetailsEffetsMajeste(ev, data.message));
     }
 
     if (!message.isAuthor && !game.user.isGM) {

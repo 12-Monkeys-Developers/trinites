@@ -1,5 +1,5 @@
 import { Log } from "../../common/log.js";
-export default class TrinitesItemSheet extends ItemSheet {
+export default class TrinitesItemSheet extends foundry.appv1.sheets.ItemSheet {
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
       width: 650,

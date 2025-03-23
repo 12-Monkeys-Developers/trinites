@@ -3,7 +3,10 @@
     "title": "Trinités",
     "description": "Le système Trinités pour FoundryVTT",
     "version": "#{VERSION}#",
-    "templateVersion": 2,
+    "compatibility": {
+      "minimum": "13",
+      "verified": "13"
+    },
     "authors": [
       {
         "name": "Khaali"
@@ -17,14 +20,12 @@
     ],
     "esmodules": [ "trinites.js" ],
     "styles": [ "trinites.css" ],
-    "scripts": [],
     "packs": [],
     "languages": [
       {
         "lang": "en",
         "name": "English",
-        "path": "lang/fr.json",
-        "flags": {}
+        "path": "lang/fr.json"
       },
       {
         "lang": "fr",
@@ -48,15 +49,11 @@
     ],
     "grid": {      
       "distance": 1.5,
-      "units": "m"
+      "units": "m",
+      "type": 0
     },
     "initiative": "min(round((1d12 + @competences.capricorne.rapidite.valeur) / 2),12)",
     "primaryTokenAttribute": "",
-    "compatibility": {
-      "minimum": "12",
-      "verified": "12",
-      "maximum": "12"
-    },
     "url": "#{URL}#",
     "manifest": "#{MANIFEST}#",
     "download": "#{DOWNLOAD}#"

@@ -4,6 +4,11 @@ import { Log } from "../../common/log.js";
 import DepenseKarmaFormApplication from "../../appli/DepenseKarmaFormApp.js";
 
 export default class TrinitesActorSheet extends foundry.appv1.sheets.ActorSheet {
+
+   // Variable to check if the appV1 is used : will remove warning
+  // TODO : To migrate before V16
+  static _warnedAppV1 = true
+  
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
       width: 744,
@@ -34,8 +39,8 @@ export default class TrinitesActorSheet extends foundry.appv1.sheets.ActorSheet 
     data.dragons = data.items.filter((item) => item.type === "dragon");
     data.pouvoirs = data.items.filter((item) => item.type === "pouvoir");
 
-    data.descriptionHtml = await TextEditor.enrichHTML(this.actor.system.description, { async: false });
-    data.notesHtml = await TextEditor.enrichHTML(this.actor.system.notes, { async: false });
+    data.descriptionHtml = await foundry.applications.ux.TextEditor.implementation.enrichHTML(this.actor.system.description, { async: false });
+    data.notesHtml = await foundry.applications.ux.TextEditor.implementation.enrichHTML(this.actor.system.notes, { async: false });
 
     data.peutRegenerer = this.actor.system.etatSante !== "indemne" && this.actor.canRegenerate;
 

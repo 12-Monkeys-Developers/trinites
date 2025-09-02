@@ -40,19 +40,19 @@ Hooks.once("init", function () {
 
   Log.debug(CONFIG);
 
-  Actors.unregisterSheet("core", ActorSheet);
-  Actors.registerSheet("trinites", TrinitesTriniteSheet, { types: ["trinite"], makeDefault: true });
-  Actors.registerSheet("trinites", TrinitesPnjSheet, { types: ["pnj"], makeDefault: true });
+  foundry.documents.collections.Actors.unregisterSheet("core", foundry.appv1.sheets.ActorSheet);
+  foundry.documents.collections.Actors.registerSheet("trinites", TrinitesTriniteSheet, { types: ["trinite"], makeDefault: true });
+  foundry.documents.collections.Actors.registerSheet("trinites", TrinitesPnjSheet, { types: ["pnj"], makeDefault: true });
 
-  Items.unregisterSheet("core", ItemSheet);
-  Items.registerSheet("trinites", TrinitesItemSheet, {
+  foundry.documents.collections.Items.unregisterSheet("core", foundry.appv1.sheets.ItemSheet);
+  foundry.documents.collections.Items.registerSheet("trinites", TrinitesItemSheet, {
     types: ["atout", "ame", "arme", "armure", "domaine", "dragon", "jardin", "majeste", "objet", "pouvoir", "verset"],
     makeDefault: true,
   });
-  Items.registerSheet("trinites", TrinitesVieAnterieureSheet, { types: ["vieAnterieure"], makeDefault: true });
-  Items.registerSheet("trinites", TrinitesAuraSheet, { types: ["aura"], makeDefault: true });
-  Items.registerSheet("trinites", TrinitesMetierSheet, { types: ["metier"], makeDefault: true });
-  Items.registerSheet("trinites", TrinitesPouvoirSheet, { types: ["pouvoir"], makeDefault: true });
+  foundry.documents.collections.Items.registerSheet("trinites", TrinitesVieAnterieureSheet, { types: ["vieAnterieure"], makeDefault: true });
+  foundry.documents.collections.Items.registerSheet("trinites", TrinitesAuraSheet, { types: ["aura"], makeDefault: true });
+  foundry.documents.collections.Items.registerSheet("trinites", TrinitesMetierSheet, { types: ["metier"], makeDefault: true });
+  foundry.documents.collections.Items.registerSheet("trinites", TrinitesPouvoirSheet, { types: ["pouvoir"], makeDefault: true });
 
   // Preload Handlebars Templates
   preloadTemplates();
@@ -77,7 +77,7 @@ function registerWorldCount(registerKey) {
   if (game.user.isGM) {
     let worldKey = game.settings.get(registerKey, "worldKey");
     if (worldKey == undefined || worldKey == "") {
-      worldKey = randomID(32);
+      worldKey = foundry.utils.randomID(32);
       game.settings.set(registerKey, "worldKey", worldKey);
     }
 

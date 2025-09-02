@@ -1,4 +1,4 @@
-export default class TrinitesCombatTracker extends CombatTracker {
+export default class TrinitesCombatTracker extends foundry.applications.sidebar.tabs.CombatTracker {
   get template() {
     return "systems/trinites/templates/combat/combat-tracker.html";
   }

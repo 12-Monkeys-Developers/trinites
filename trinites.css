@@ -2352,3 +2352,13 @@
 .hidden {
   visibility: hidden;
 }
+.scrollable {
+  padding-right: initial;
+  scrollbar-gutter: auto;
+}
+.scrollable .window-content {
+  overflow-y: scroll;
+}
+.trinites-forms .range-picker {
+  margin: 5px 20px;
+}

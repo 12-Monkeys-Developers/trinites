@@ -4,7 +4,7 @@
  * @return {Promise}
  */
 export default async function preloadTemplates() {
-  return loadTemplates([
+  return foundry.applications.handlebars.loadTemplates([
     "systems/trinites/templates/application/dep-karma-form-app.hbs",    
     "systems/trinites/templates/sheets/actors/trinite-sheet.html",  
     "systems/trinites/templates/sheets/actors/pnj-sheet.html",

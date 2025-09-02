@@ -223,10 +223,10 @@ async function getJetCompetenceOptions({ cfgData = null, compCombat = false, com
   let html;
   if (compCombat) {
     const template = "systems/trinites/templates/partials/dice/dialog-jet-arme.hbs";
-    html = await renderTemplate(template, { cfgData: cfgData, compCombat: true, infoPrimesID: infoPrimesID });
+    html = await foundry.applications.handlebars.renderTemplate(template, { cfgData: cfgData, compCombat: true, infoPrimesID: infoPrimesID });
   } else {
     const template = "systems/trinites/templates/partials/dice/dialog-jet-competence.hbs";
-    html = await renderTemplate(template, { cfgData: cfgData, compCombat: compCombat, compLibre: compLibre, infoPrimesID: infoPrimesID });
+    html = await foundry.applications.handlebars.renderTemplate(template, { cfgData: cfgData, compCombat: compCombat, compLibre: compLibre, infoPrimesID: infoPrimesID });
   }
 
   return new Promise((resolve) => {
@@ -382,7 +382,7 @@ export async function jetRessource({ actor = null, ressource = null, coutAcquisi
 async function getJetRessourceOptions({ cfgData = null, useDomaine = false, domaines = null, isTrinite = null }) {
   // Recupération du template
   const template = "systems/trinites/templates/partials/dice/dialog-jet-ressource.hbs";
-  const html = await renderTemplate(template, { cfgData: cfgData, useDomaine: useDomaine, domaines: domaines, isTrinite: isTrinite });
+  const html = await foundry.applications.handlebars.renderTemplate(template, { cfgData: cfgData, useDomaine: useDomaine, domaines: domaines, isTrinite: isTrinite });
 
   return new Promise((resolve) => {
     const data = {

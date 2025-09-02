@@ -1,3 +1,6 @@
+4.0.0
+- Version compatible Foundry v13
+
 3.0.1
 - Correction calcul de la base des competences de la Vierge d'une trinité
 

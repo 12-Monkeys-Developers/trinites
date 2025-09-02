@@ -1606,6 +1606,12 @@
   color: var(--color-text-message);
   backdrop-filter: grayscale(70%);
 }
+.chat-message .message-header h3,
+.chat-message.whisper .message-header h3,
+.chat-message .message-content h3,
+.chat-message.whisper .message-content h3 {
+  color: var(--color-text-message);
+}
 .chat-message input[type="text"]:focus,
 .chat-message.whisper input[type="text"]:focus,
 .chat-message input[type="number"]:focus,

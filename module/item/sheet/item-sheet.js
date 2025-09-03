@@ -14,8 +14,8 @@ export default class TrinitesItemSheet extends foundry.appv1.sheets.ItemSheet {
   }
 
   get template() {
-    Log.debug(`Chargement du template systems/trinites/templates/sheets/items/${this.item.type.toLowerCase()}-sheet.html`);
-    return `systems/trinites/templates/sheets/items/${this.item.type.toLowerCase()}-sheet.html`;
+    Log.debug(`Chargement du template systems/trinites/templates/sheets/items/${this.item.type.toLowerCase()}-sheet.hbs`);
+    return `systems/trinites/templates/sheets/items/${this.item.type.toLowerCase()}-sheet.hbs`;
   }
 
   async getData() {
@@ -32,6 +32,8 @@ export default class TrinitesItemSheet extends foundry.appv1.sheets.ItemSheet {
     data.config.optionsVA.richesse = "Richesse";
     data.config.optionsVA.karmalumiere = "Karma-Lumière";
     data.config.optionsVA.karmatenebres = "Karma-Ténèbres";
+    data.editable=true;
+if(this.item.system.description) data.descriptionhtml = await foundry.applications.ux.TextEditor.implementation.enrichHTML(this.item.system.description, { async: false });
 
     return data;
   }

@@ -1,4 +1,3 @@
-
 import TrinitesActorSheet from "./actor-sheet.js";
 import * as Roll from "../../common/rolls.js";
 import * as Chat from "../../common/chat.js";
@@ -10,14 +9,20 @@ export default class TrinitesPnjSheet extends TrinitesActorSheet {
       width: 744,
       height: 958,
       classes: ["trinites", "sheet", "actor", "pnj"],
-      tabs: [{ navSelector: ".sheet-tabs", contentSelector: ".sheet-body", initial: "profane" }]
+      tabs: [{ navSelector: ".sheet-tabs", contentSelector: ".sheet-body", initial: "profane" }],
     });
   }
 
   get template() {
-         return "systems/trinites/templates/sheets/actors/pnj-sheet.html";
+    return "systems/trinites/templates/sheets/actors/pnj-sheet.html";
   }
 
+  async getData() {
+    const data = await super.getData();
+    data.tactiqueHtml = await foundry.applications.ux.TextEditor.implementation.enrichHTML(this.actor.system.tactique, { async: false });
+
+    return data;
+  }
   /**
    * Handle dropping of an item reference or item data onto an Item Sheet
    *
@@ -32,9 +37,9 @@ export default class TrinitesPnjSheet extends TrinitesActorSheet {
       const itemData = foundry.utils.duplicate(item);
       switch (itemData.type) {
         case "metier":
-          return ;
+          return;
         case "vieAnterieure":
-          return ;
+          return;
         case "aura":
           return this._onDropAuraItem(event, itemData);
         default:
@@ -43,17 +48,16 @@ export default class TrinitesPnjSheet extends TrinitesActorSheet {
     });
   }
 
-   /**
+  /**
    * Handle the drop of a Aura item on the actor sheet
    *
    * @name _onDropAuraItem
    * @param {*} event
    * @param {*} itemData
    */
-    async _onDropAuraItem(event, itemData) {
-      event.preventDefault();
-      itemData.system.deploiement = "cosme";
-      await this.actor.createEmbeddedDocuments("Item", [itemData]);      
-    }
-    
+  async _onDropAuraItem(event, itemData) {
+    event.preventDefault();
+    itemData.system.deploiement = "cosme";
+    await this.actor.createEmbeddedDocuments("Item", [itemData]);
+  }
 }

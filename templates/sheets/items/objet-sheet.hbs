@@ -5,6 +5,6 @@
     </header>
     <div class="sheet-content arme" data-item-id="{{item.id}}">
         <div class="titre-desc">Description de l'objet</div> 
-        {{editor data.system.description target="system.description" button=true owner=true editable=true}}
+            {{editor descriptionhtml target="system.description" button=true engine="prosemirror" owner=owner editable=editable}}
     </div>
 </form>

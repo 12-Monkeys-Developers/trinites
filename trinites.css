@@ -1327,7 +1327,7 @@
 }
 .trinites.sheet.item .sheet-content.metier .editor .editor-content {
   background: rgba(0, 0, 0, 0.05);
-  min-height: 75px;
+  min-height: 100px;
   overflow-y: inherit;
 }
 .trinites.sheet.item .sheet-header.vie-anterieure input {
@@ -1470,13 +1470,13 @@
   font-family: "Cabaletta";
 }
 .trinites.sheet.item .sheet-content.arme .editor {
-  min-height: 50px;
+  min-height: 100px;
 }
 .trinites.sheet.item .sheet-content.arme .editor .tox.tox-tinymce {
   height: 200px !important;
 }
 .trinites.sheet.item .sheet-content.arme .editor .editor-content {
-  min-height: 50px;
+  min-height: 100px;
   overflow-y: inherit;
 }
 .trinites.sheet.item .sheet-content.arme .grid-item {
@@ -1503,13 +1503,13 @@
   font-family: "Cabaletta";
 }
 .trinites.sheet.item .sheet-content.armure .editor {
-  min-height: 50px;
+  min-height: 100px;
 }
 .trinites.sheet.item .sheet-content.armure .editor .tox.tox-tinymce {
   height: 200px !important;
 }
 .trinites.sheet.item .sheet-content.armure .editor .editor-content {
-  min-height: 50px;
+  min-height: 100px;
   overflow-y: inherit;
 }
 .trinites.sheet.item .sheet-content.armure .grid-item {
@@ -1587,7 +1587,7 @@
 }
 .trinites.sheet.item .editor .editor-content {
   background: rgba(0, 0, 0, 0.05);
-  min-height: 75px;
+  min-height: 100px;
   overflow-y: inherit;
 }
 #chat-form textarea {

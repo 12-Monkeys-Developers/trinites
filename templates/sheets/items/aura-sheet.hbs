@@ -33,8 +33,8 @@
         {{/if}}
         </div>
         <div class="titre-desc occulte">Effet de l'aura</div>
-        {{editor data.system.description target="system.description" button=true owner=true editable=true}}
+            {{editor descriptionhtml target="system.description" button=true engine="prosemirror" owner=owner editable=editable}}
         <div class="titre-desc occulte">Effet du Souffle</div>
-        {{editor data.system.souffle target="system.souffle" button=true owner=true editable=true}}
+            {{editor soufflehtml target="system.souffle" button=true engine="prosemirror" owner=owner editable=editable}}
     </div>
 </form>

@@ -8,9 +8,9 @@
         <select class="marge-edit" name="system.signe">
             {{selectOptions config.signes selected=data.system.signe}}
         </select>
-            <div class="titre-desc">Manifestation</div> 
-            {{editor data.system.manifestation target="system.manifestation" button=true owner=true editable=true}}
-            <div class="titre-desc">Effets</div> 
-            {{editor data.system.effet target="system.effet" button=true owner=true editable=true}}
+            <div class="titre-desc">Manifestation</div>
+            {{editor manifestationhtml target="system.manifestation" button=true engine="prosemirror" owner=owner editable=editable}}
+            <div class="titre-desc">Effets</div>
+            {{editor effethtml target="system.effet" button=true engine="prosemirror" owner=owner editable=editable}}
     </div>
 </form>

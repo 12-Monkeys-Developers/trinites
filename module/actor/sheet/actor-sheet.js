@@ -41,6 +41,8 @@ export default class TrinitesActorSheet extends foundry.appv1.sheets.ActorSheet 
 
     data.descriptionHtml = await foundry.applications.ux.TextEditor.implementation.enrichHTML(this.actor.system.description, { async: false });
     data.notesHtml = await foundry.applications.ux.TextEditor.implementation.enrichHTML(this.actor.system.notes, { async: false });
+    data.equipementhtml = await foundry.applications.ux.TextEditor.implementation.enrichHTML(this.actor.system.equipement, { async: false });
+    data.domainesHtml = await foundry.applications.ux.TextEditor.implementation.enrichHTML(this.actor.system.domaines, { async: false });
 
     data.peutRegenerer = this.actor.system.etatSante !== "indemne" && this.actor.canRegenerate;
 

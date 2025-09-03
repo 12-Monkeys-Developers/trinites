@@ -49,8 +49,8 @@
             <div><label>Rayon d'action (m)</label></div>
             <div><input name="system.particularites.rayon" type="number" value="{{data.system.particularites.rayon}}" placeholder="0" /></div>
         </div>
-        {{editor data.system.listeParticularites target="system.listeParticularites" button=true owner=true editable=true}}
-        <div class="titre-desc">Description de l'arme</div> 
-        {{editor data.system.description target="system.description" button=true owner=true editable=true}}        
+            {{editor listeParticulariteshtml target="system.listeParticularites" button=true engine="prosemirror" owner=owner editable=editable}}
+        <div class="titre-desc">Description de l'arme</div>
+            {{editor descriptionhtml target="system.description" button=true engine="prosemirror" owner=owner editable=editable}}
     </div>
 </form>

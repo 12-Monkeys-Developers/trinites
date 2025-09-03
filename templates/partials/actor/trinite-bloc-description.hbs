@@ -1,5 +1,5 @@
 <h3><i class="fa-regular fa-head-side"></i> DESCRIPTION</h3>
-<div class="description">{{editor descriptionHtml target="system.description" button=true owner=owner editable=editable}}</div>
+<div class="description">{{editor descriptionHtml target="system.description" button=true engine="prosemirror" owner=owner editable=editable}}</div>
 
 {{#if (gt pouvoirs.length 0)}}
     <div class="pouvoirs">
@@ -20,4 +20,4 @@
 {{/if}}
 
 <h3><i class="fa-solid fa-pencil"></i> NOTES</h3>
-<div class="notes">{{editor notesHtml target="system.notes" button=true owner=owner editable=editable}}</div>
+<div class="notes">{{editor notesHtml target="system.notes" button=true engine="prosemirror" owner=owner editable=editable}}</div>

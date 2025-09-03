@@ -15,6 +15,7 @@ export default class TrinitesAuraSheet extends TrinitesItemSheet {
       myItemData.edit = false;
     }
 
+    data.soufflehtml = await foundry.applications.ux.TextEditor.implementation.enrichHTML(this.item.system.souffle, { async: false });
     return data;
   }
 

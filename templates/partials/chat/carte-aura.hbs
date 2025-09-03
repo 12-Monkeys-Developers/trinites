@@ -20,7 +20,7 @@
                 <div class="action"><a class="activer aura deployee" title="L'aura '{{aura.name}}' est déjà déployée"><i class="fas fa-bolt"></i></a></div>
             {{/if}}
     </div>
-    <div class="desc">{{editor aura.system.description target="aura.system.description" owner=true}}</div>
+    <div class="desc">{{editor aura.system.description target="aura.system.description" button=true engine="prosemirror" owner=true}}</div>
     {{#if souffleDispo}}
     <div class="grid-carte-aura">
         <div class="titre"><a class="details souffle"><i class="fas fa-angle-right"></i></a><label>Effet du Souffle</label></div>
@@ -30,6 +30,6 @@
             <div class="action"><a class="activer souffle" title="Déclencher le Souffle de '{{aura.name}}'"><i class="fas fa-bolt"></i></a></div>
         {{/if}}
     </div>
-    <div class="descSouffle">{{editor aura.system.souffle target="aura.system.souffle" owner=true}}</div>
+    <div class="descSouffle">{{editor aura.system.souffle target="aura.system.souffle" button=true engine="prosemirror" owner=true}}</div>
     {{/if}}
 </div>

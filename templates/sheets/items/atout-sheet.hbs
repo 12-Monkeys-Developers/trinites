@@ -14,7 +14,7 @@
                 {{selectOptions config.couleurs selected=data.system.couleur}}
             </select>
         </div>
-        <div class="titre-desc occulte">Effet de l'atout</div> 
-        {{editor data.system.description target="system.description" button=true owner=true editable=true}}
+        <div class="titre-desc occulte">Effet de l'atout</div>
+            {{editor descriptionhtml target="system.description" button=true engine="prosemirror" owner=owner editable=editable}}
     </div>
 </form>

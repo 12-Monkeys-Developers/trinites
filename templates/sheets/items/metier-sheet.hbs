@@ -35,6 +35,6 @@
             <input class="domaines" name="system.listeDomaines" type="text" value="{{item.system.listeDomaines}}" placeholder="Liste des domaines séparés par une virgule"/>
         </div>
         <div class="titre-desc">Description</div>
-        {{editor data.system.description target="system.description" button=true owner=true editable=true}}
+            {{editor descriptionhtml target="system.description" button=true engine="prosemirror" owner=owner editable=editable}}
     </div>
 </form>

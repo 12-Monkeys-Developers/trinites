@@ -4,7 +4,7 @@
         <h1><input name="name" type="text" value="{{item.name}}" placeholder="Nom du domaine"/></h1>
     </header>
     <div class="sheet-content domaine" data-item-id="{{item.id}}">
-        <div class="titre-desc">Description du domaine</div> 
-        {{editor data.system.description target="system.description" button=true owner=true editable=true}}
+        <div class="titre-desc">Description du domaine</div>
+            {{editor descriptionhtml target="system.description" button=true engine="prosemirror" owner=owner editable=editable}}
     </div>
 </form>

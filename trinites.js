@@ -10,7 +10,11 @@ import TrinitesPnjSheet from "./module/actor/sheet/pnj-sheet.js";
 
 import TrinitesItemSheet from "./module/item/sheet/item-sheet.js";
 import TrinitesVieAnterieureSheet from "./module/item/sheet/vie-anterieure-sheet.js";
+import TrinitesArmeSheet from "./module/item/sheet/arme-sheet.js";
+import TrinitesArmureSheet from "./module/item/sheet/armure-sheet.js";
 import TrinitesAuraSheet from "./module/item/sheet/aura-sheet.js";
+import TrinitesJardinSheet from "./module/item/sheet/jardin-sheet.js";
+import TrinitesMajesteSheet from "./module/item/sheet/majeste-sheet.js";
 import TrinitesMetierSheet from "./module/item/sheet/metier-sheet.js";
 import TrinitesPouvoirSheet from "./module/item/sheet/pouvoir-sheet.js";
 import { TrinitesItemProxy } from "./module/item/proxy.js";
@@ -46,11 +50,15 @@ Hooks.once("init", function () {
 
   foundry.documents.collections.Items.unregisterSheet("core", foundry.appv1.sheets.ItemSheet);
   foundry.documents.collections.Items.registerSheet("trinites", TrinitesItemSheet, {
-    types: ["atout", "ame", "arme", "armure", "domaine", "dragon", "jardin", "majeste", "objet", "pouvoir", "verset"],
+    types: ["atout", "arme", "armure", "domaine", "dragon", "jardin", "majeste", "objet", "pouvoir", "verset"],
     makeDefault: true,
   });
   foundry.documents.collections.Items.registerSheet("trinites", TrinitesVieAnterieureSheet, { types: ["vieAnterieure"], makeDefault: true });
+  foundry.documents.collections.Items.registerSheet("trinites", TrinitesArmeSheet, { types: ["arme"], makeDefault: true });
+  foundry.documents.collections.Items.registerSheet("trinites", TrinitesArmureSheet, { types: ["armure"], makeDefault: true });
   foundry.documents.collections.Items.registerSheet("trinites", TrinitesAuraSheet, { types: ["aura"], makeDefault: true });
+  foundry.documents.collections.Items.registerSheet("trinites", TrinitesJardinSheet, { types: ["jardin"], makeDefault: true });
+  foundry.documents.collections.Items.registerSheet("trinites", TrinitesMajesteSheet, { types: ["majeste"], makeDefault: true });
   foundry.documents.collections.Items.registerSheet("trinites", TrinitesMetierSheet, { types: ["metier"], makeDefault: true });
   foundry.documents.collections.Items.registerSheet("trinites", TrinitesPouvoirSheet, { types: ["pouvoir"], makeDefault: true });
 

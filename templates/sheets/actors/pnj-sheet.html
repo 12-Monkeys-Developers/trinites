@@ -15,12 +15,11 @@
             {{> "systems/trinites/templates/partials/actor/bloc-equipement.hbs"}}
             <div class="tactique">
                 <h3><i class="fa-solid fa-swords"></i> TACTIQUE</h3>
-                {{editor data.system.tactique target="system.tactique" button=true owner=true editable=true}}               
+                {{editor tactiqueHtml target="system.tactique" button=true engine="prosemirror" owner=owner editable=editable}}
             </div>
             <h3><i class="fa-regular fa-head-side"></i> DESCRIPTION</h3>
-            {{editor descriptionHtml target="system.description" button=true owner=owner editable=editable}}  
-            <h3><i class="fa-solid fa-pencil"></i> NOTES</h3>
-            {{editor notesHtml target="system.notes" button=true owner=owner editable=editable}}
+            {{editor descriptionHtml target="system.description" button=true engine="prosemirror" owner=owner editable=editable}}
+            <h3><i class="fa-solid fa-pencil"></i> NOTES</h3>{{editor notesHtml target="system.notes" button=true engine="prosemirror" owner=owner editable=editable}}
         </div>
         <div class="tab tab-occulte" data-group="principal" data-tab="occulte">          
             {{> "systems/trinites/templates/partials/actor/pnj-bloc-occulte.hbs"}}

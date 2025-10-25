@@ -1699,7 +1699,7 @@
   margin: 2px;
   border: 1px solid var(--color-border-light-2);
   border-radius: 3px;
-  box-shadow: 0 0 2px #FFF inset;
+  box-shadow: 0 0 2px #fff inset;
   background: linear-gradient(to right, #ebf8e1ee, #1f546fee, #102c3bee);
 }
 .grid-jet-comp div {
@@ -1737,7 +1737,7 @@
   margin: 2px;
   border: 1px solid var(--color-border-light-2);
   border-radius: 3px;
-  box-shadow: 0 0 2px #FFF inset;
+  box-shadow: 0 0 2px #fff inset;
   /*.infos-arme {
          
     }*/
@@ -1756,7 +1756,7 @@
   flex-direction: column;
   border: 1px solid var(--color-border-light-2);
   border-radius: 3px;
-  box-shadow: 0 0 2px #FFF inset;
+  box-shadow: 0 0 2px #fff inset;
   background: url("./assets/images/parchemin-grey.jpg") repeat;
 }
 .titre-cout-ress {
@@ -1799,6 +1799,12 @@
   background: url("./assets/images/d12ressource.svg") no-repeat;
   color: white;
   background-size: 40px 40px;
+  width: 40px;
+  height: 40px;
+  background-position: center center;
+  background-repeat: no-repeat;
+  text-align: center;
+  line-height: 35px;
 }
 .dice-total {
   flex: 0 0 100%;
@@ -1844,7 +1850,7 @@
 .carte {
   border: 1px solid var(--color-border-light-2);
   border-radius: 3px;
-  box-shadow: 0 0 2px #FFF inset;
+  box-shadow: 0 0 2px #fff inset;
   background: url("./assets/images/parchemin-grey.jpg") repeat;
 }
 .carte .entete {

@@ -1,3 +1,7 @@
+4.0.1
+- Jet de ressource : Correction de la sélection du domaine
+- Jet de ressource dans le tchat : correction de l'affichage du dé
+
 4.0.0
 - Version compatible Foundry v13
 

@@ -1,3 +1,4 @@
+{{log 'jet ressource' this}}
 <form>
     <div class="titre"><label>Coût d'acquisition de la ressource</label></div>
     <div class="grid-data">
@@ -9,7 +10,7 @@
         <div class="grid-data">
             <label>Domaine appliqué au jet</label>
             <select name="domaine">
-            {{selectOptions domaines selected=domaine labelAttr="name"}}
+            {{selectOptions domaines selected=domaine valueAttr="id" labelAttr="name"}}
             </select>
         </div>
     {{/if}}

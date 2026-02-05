@@ -1,3 +1,6 @@
+4.0.2
+- Correction affichage des domaines des PNJs
+
 4.0.1
 - Jet de ressource : Correction de la sélection du domaine
 - Jet de ressource dans le tchat : correction de l'affichage du dé

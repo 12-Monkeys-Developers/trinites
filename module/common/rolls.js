@@ -209,7 +209,7 @@ export async function jetCompetence({
       jetArme: type === "arme" || type === "lameSoeur",
     };
 
-    if (actor.type === "pnj" && game.user.isGM) templateContext.rollMode = "gmroll";
+    if (actor.type === "pnj" && game.user.isGM) templateContext.rollMode = "gm";
 
     let chat = await new TrinitesChat(actor).withTemplate(messageTemplate).withData(templateContext).withRolls(rollResult).withFlags(flags).create();
     await chat.display();
@@ -249,7 +249,7 @@ async function getJetCompetenceOptions({ cfgData = null, compCombat = false, com
     };
 
     // Affichage de la boite de dialogue
-    new Dialog(data, null).render(true);
+    new Dialog(data).render(true);
   });
 }
 
@@ -406,7 +406,7 @@ async function getJetRessourceOptions({ cfgData = null, useDomaine = false, doma
     };
 
     // Affichage de la boite de dialogue
-    new Dialog(data, null).render(true);
+    new Dialog(data).render(true);
   });
 }
 
@@ -706,7 +706,7 @@ export async function jetInitiative({ actor = null } = {}) {
     roll: renderedRoll
   };
 
-  if (actor.type === "pnj" && game.user.isGM) templateContext.rollMode = "gmroll";
+  if (actor.type === "pnj" && game.user.isGM) templateContext.rollMode = "gm";
 
   let chat = await new TrinitesChat(actor).withTemplate(messageTemplate).withData(templateContext).withRolls(rollResult).create();
   await chat.display();

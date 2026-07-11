@@ -1,5 +1,6 @@
 import * as Roll from "./rolls.js";
 import DepenseKarmaFormApplication from "../appli/DepenseKarmaFormApp.js";
+import { toMessageMode } from "./roll-mode.js";
 
 export class TrinitesChat {
   /**
@@ -96,8 +97,6 @@ export class TrinitesChat {
 
     // Set the roll parameter if necessary
     if (this.rolls) {
-      data.rollMode = this.data.rollMode;
-      data.type = CONST.CHAT_MESSAGE_STYLES.OTHER; 
       data.rolls = this.rolls;
     }
 
@@ -107,33 +106,31 @@ export class TrinitesChat {
     }
 
     // Si rollMode n'est pas défini, on prend celui par défaut (celui du chat)
-    let visibilityMode = this.data.rollMode ?? game.settings.get('core', 'rollMode');
+    let visibilityMode = toMessageMode(this.data.rollMode) ?? game.settings.get('core', 'messageMode');
 
     // Visibilité des jet des PNJs en fonction de l'option choisie
     if (this.actor.type === "pnj" && game.user.isGM) {
       let visibilityChoice = game.settings.get("trinites", "visibiliteJetsPNJ");
-      if (visibilityChoice === "public") visibilityMode = "publicroll";
-      else if (visibilityChoice === "private") visibilityMode = "gmroll";
-      else if (visibilityChoice === "depends") visibilityMode = game.settings.get('core', 'rollMode');
+      if (visibilityChoice === "public") visibilityMode = "public";
+      else if (visibilityChoice === "private") visibilityMode = "gm";
+      else if (visibilityChoice === "depends") visibilityMode = game.settings.get('core', 'messageMode');
     }
 
     // Le joueur a choisi de chuchoter au le MJ
-    if (this.data.isWhisper) visibilityMode = "gmroll";
+    if (this.data.isWhisper) visibilityMode = "gm";
 
     switch (visibilityMode) {
-      case "gmroll":
+      case "gm":
         data.whisper = ChatMessage.getWhisperRecipients("GM").map((u) => u.id);
         break;
-      case "blindroll":
+      case "blind":
         data.whisper = ChatMessage.getWhisperRecipients("GM").map((u) => u.id);
         data.blind = true;
         break;
-      case "selfroll":
+      case "self":
         data.whisper = [game.user.id];
         break;
     }
-
-    data.rollMode = visibilityMode;
 
     // Create the chat
     this.chatData = data;

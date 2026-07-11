@@ -1,3 +1,6 @@
+5.0.0
+- Compatibilité Foundry v14
+
 4.0.2
 - Correction affichage des domaines des PNJs
 

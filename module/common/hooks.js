@@ -1,4 +1,4 @@
-import { TrinitesChat } from "./chat.js ";
+import { TrinitesChat } from "./chat.js";
 
 export default function registerHooks() {
   Hooks.on("renderChatMessageHTML", (message, html) => {
@@ -102,7 +102,7 @@ export default function registerHooks() {
     }
 
     if (!message.isAuthor && !game.user.isGM) {
-      html.find(".action").each((i, btn) => {
+      html.querySelectorAll(".action").forEach((btn) => {
         btn.style.display = "none";
       });
     }

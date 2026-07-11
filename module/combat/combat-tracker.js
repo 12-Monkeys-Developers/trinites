@@ -1,103 +1,60 @@
+/**
+ * CombatTracker Trinités (Foundry V14 — ApplicationV2).
+ *
+ * Ajoute la notion de position de combat (action / garde / retrait) stockée
+ * dans le flag `world.position` de chaque combattant, et regroupe les
+ * combattants par position dans le suivi.
+ */
 export default class TrinitesCombatTracker extends foundry.applications.sidebar.tabs.CombatTracker {
-  get template() {
-    return "systems/trinites/templates/combat/combat-tracker.html";
+  /** @override Ajoute l'action des boutons de position (fusionnée avec celles du cœur). */
+  static DEFAULT_OPTIONS = {
+    actions: {
+      trinitesPosition: TrinitesCombatTracker.#onSetPosition,
+    },
+  };
+
+  /** @override Remplace la part "tracker" par le template Trinités (les parts ne sont pas fusionnées). */
+  static PARTS = {
+    header: { template: "templates/sidebar/tabs/combat/header.hbs" },
+    tracker: { template: "systems/trinites/templates/combat/combat-tracker.hbs", scrollable: [""] },
+    footer: { template: "templates/sidebar/tabs/combat/footer.hbs" },
+  };
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc Enrichit chaque tour avec sa position de combat. */
+  async _prepareTurnContext(combat, combatant, index) {
+    const turn = await super._prepareTurnContext(combat, combatant, index);
+    const position = combatant.getFlag("world", "position");
+    turn.position = position;
+    turn.isAction = position === "action";
+    turn.isGarde = position === "garde";
+    turn.isRetrait = position === "retrait";
+    return turn;
   }
 
-  /** @inheritdoc */
-  async getData(options = {}) {
-    let context = await super.getData(options);
-
-    if (!context.hasCombat) {
-      return context;
-    }
-
-    for (let [i, combatant] of context.combat.turns.entries()) {
-      const position = combatant.getFlag("world", "position");
-      context.turns[i].position = position;
-      context.turns[i].isRetrait = position === "retrait";
-      context.turns[i].isGarde = position === "garde";
-      context.turns[i].isAction = position === "action";
-    }
-
-    return context;
-  }
-
-  activateListeners(html) {
-    super.activateListeners(html);
-
-    html.find(".action").click(this._onAction.bind(this));
-    html.find(".garde").click(this._onGarde.bind(this));
-    html.find(".retrait").click(this._onRetrait.bind(this));
-  }
+  /* -------------------------------------------- */
 
   /**
-   * @description
-   * @param {*} event
+   * Positionne un combattant sur une phase (action / garde / retrait).
+   * @this {TrinitesCombatTracker}
+   * @param {PointerEvent} event   L'événement déclencheur.
+   * @param {HTMLElement} target   L'élément portant data-action/data-position.
    */
-  async _onAction(event) {
+  static async #onSetPosition(event, target) {
     event.preventDefault();
     event.stopPropagation();
-    const btn = event.currentTarget;
-    const li = btn.closest(".combatant");
-    const combat = this.viewed;
-    const combatant = combat.combatants.get(li.dataset.combatantId);
-
-    if (!combatant.getFlag("world","position")) await combatant.setFlag("world", "position", "action");
-    else await combatant.setFlag("world", "position", "action");
+    const li = target.closest("[data-combatant-id]");
+    const combatant = this.viewed?.combatants.get(li?.dataset.combatantId);
+    if (!combatant) return;
+    await combatant.setFlag("world", "position", target.dataset.position);
   }
 
-  /**
-   * @description
-   * @param {*} event
-   */
-  async _onGarde(event) {
-    event.preventDefault();
-    event.stopPropagation();
-    const btn = event.currentTarget;
-    const li = btn.closest(".combatant");
-    const combat = this.viewed;
-    const combatant = combat.combatants.get(li.dataset.combatantId);
+  /* -------------------------------------------- */
 
-    if (!combatant.getFlag("world","position")) await combatant.setFlag("world", "position", "garde");
-    else await combatant.setFlag("world", "position", "garde");
-  }
-
-  /**
-   * @description
-   * @param {*} event
-   */
-  async _onRetrait(event) {
-    event.preventDefault();
-    event.stopPropagation();
-    const btn = event.currentTarget;
-    const li = btn.closest(".combatant");
-    const combat = this.viewed;
-    const combatant = combat.combatants.get(li.dataset.combatantId);
-
-    if (!combatant.getFlag("world","position")) await combatant.setFlag("world", "position", "retrait");
-    else await combatant.setFlag("world", "position", "retrait");
-  }
-
-  /**
-   * Handle toggling the defeated status effect on a combatant Token
-   * @param {Combatant} combatant     The combatant data being modified
-   * @returns {Promise}                A Promise that resolves after all operations are complete
-   * @private
-   */
+  /** @inheritDoc Un combattant vaincu passe automatiquement en retrait. */
   async _onToggleDefeatedStatus(combatant) {
-    const isDefeated = !combatant.isDefeated;
-    await combatant.update({defeated: isDefeated});
-    const token = combatant.token;
-    if ( !token ) return;
-
-    // Push the defeated status to the token
-    const status = CONFIG.statusEffects.find(e => e.id === CONFIG.specialStatusEffects.DEFEATED);
-    if ( !status && !token.object ) return;
-    const effect = token.actor && status ? status : CONFIG.controlIcons.defeated;
-    if ( token.object ) await token.object.toggleEffect(effect, {overlay: true, active: isDefeated});
-    else await token.toggleActiveEffect(effect, {overlay: true, active: isDefeated});
-
+    await super._onToggleDefeatedStatus(combatant);
     await combatant.setFlag("world", "position", "retrait");
   }
-
 }

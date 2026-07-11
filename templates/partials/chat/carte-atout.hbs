@@ -5,7 +5,7 @@
     <div class="grid-carte-atout">
         {{#if (eq atout.system.karma "lumiere")}}
         <div class="couleur">
-            <img src="systems/trinites/assets/images/couleurs/blason-{{atout.system.couleur}}.png" title="{{configVal 'couleurs' atout.system.couleur}}">
+            <img src="systems/trinites/assets/images/couleurs/blason-{{atout.system.couleur}}.png" data-tooltip="{{configVal 'couleurs' atout.system.couleur}}">
         </div>
         {{/if}}
         {{#if (eq atout.system.karma "tenebre")}}
@@ -14,7 +14,7 @@
         </div>
         {{/if}}
         <div class="messager">{{configLabel 'epeesFeu' atout.system.messager}}</div>
-        <div class="action"><a class="activer atout" title="Utiliser l'atout '{{atout.name}}'"><i class="fas fa-bolt"></i></a></div>
+        <div class="action"><a class="activer atout" data-tooltip="Utiliser l'atout '{{atout.name}}'"><i class="fas fa-bolt"></i></a></div>
         <div class="titre"><a class="details atout"><i class="fas fa-angle-right"></i></a><label>Effet de l'Atout</label></div>
     </div>
      <div class="desc">{{editor atout.system.description target="atout.system.description" button=true engine="prosemirror" owner=true}}</div>

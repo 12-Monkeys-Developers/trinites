@@ -263,7 +263,7 @@ export class TrinitesChat {
 
     aura.update({ "system.deploiement": "cosme" });
 
-    element.title = `Le Souffle est sans effet à cette portée d'aura`;
+    element.dataset.tooltip = `Le Souffle est sans effet à cette portée d'aura`;
     element.classList.add("cosme");
     element.closest(".carte.aura").getElementsByClassName("zone")[0].innerHTML = "Cosme";
   }

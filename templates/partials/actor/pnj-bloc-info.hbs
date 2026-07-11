@@ -1,8 +1,8 @@
 {{#if unlocked}}
-  <img src="{{actor.img}}" data-edit="img" title="{{actor.name}}" />
+  <img src="{{actor.img}}" data-edit="img" data-tooltip="{{actor.name}}" />
 {{else}}
   {{#if (ne actor.img "icons/svg/mystery-man.svg")}}
-    <img src="{{actor.img}}" data-edit="img" title="{{actor.name}}" />
+    <img src="{{actor.img}}" data-edit="img" data-tooltip="{{actor.name}}" />
   {{else}}
     <div style="flex:initial; width:128px;"></div>
   {{/if}}
@@ -16,7 +16,7 @@
         {{selectOptions config.typePnj selected=data.system.sousType}}
       </select>
     </div> 
-    <div class="middle-size"><a class="sheet-change-lock" title="{{localize 'TRINITES.label.unlockSheet'}}">
+    <div class="middle-size"><a class="sheet-change-lock" data-tooltip="{{localize 'TRINITES.label.unlockSheet'}}">
           {{#if unlocked}}<i class="fas fa-lock-open"></i>{{else}}<i class="fas fa-lock" ></i>{{/if}}</a>
       </div>
   </div>

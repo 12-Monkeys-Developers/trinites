@@ -1,8 +1,8 @@
 {{#if unlocked}}
-  <img src="{{actor.img}}" data-edit="img" title="{{actor.name}}" height="128" width="128" />
+  <img src="{{actor.img}}" data-edit="img" data-tooltip="{{actor.name}}" height="128" width="128" />
 {{else}}
   {{#if (ne actor.img "icons/svg/mystery-man.svg")}}
-    <img src="{{actor.img}}" data-edit="img" title="{{actor.name}}" height="128" width="128" />
+    <img src="{{actor.img}}" data-edit="img" data-tooltip="{{actor.name}}" height="128" width="128" />
   {{else}}
     <div style="flex:initial; width:128px;"></div>
   {{/if}}
@@ -18,17 +18,17 @@
       <div class="big-size {{#if hasMetier}}edit-item{{/if}}" {{#if hasMetier}}data-item-id='{{metierId}}' data-tooltip="Afficher le métier" data-tooltip-direction="UP"{{/if}}><input name="system.metier" type="text" value="{{data.system.metier}}" readonly /></div>
       {{#if hasMetier}}
         {{#if unlocked}}
-          <div><a class="delete-metier" title="Supprimer le métier"><i class="fa fa-trash"></i></a></div>
+          <div><a class="delete-metier" data-tooltip="Supprimer le métier"><i class="fa fa-trash"></i></a></div>
         {{/if}}
       {{/if}}
-      <div class="middle-size"><a class="sheet-change-lock" title="{{localize 'TRINITES.label.unlockSheet'}}">
+      <div class="middle-size"><a class="sheet-change-lock" data-tooltip="{{localize 'TRINITES.label.unlockSheet'}}">
           {{#if unlocked}}<i class="fas fa-lock-open"></i>{{else}}<i class="fas fa-lock" ></i>{{/if}}</a>
       </div>
     </div>
     <div class="actor-infos-line">
       <label>{{localize "TRINITES.label.vieAnterieure"}}</label>
       <div class="big-size {{#if hasVieAnterieure}}edit-item{{/if}}" {{#if hasVieAnterieure}}data-item-id='{{vieAnterieureId}}' data-tooltip="Afficher la vie antérieure" data-tooltip-direction="UP"{{/if}} ><input name="system.vieAnterieure" type="text" value="{{data.system.vieAnterieure}}" readonly /></div>
-      {{#if hasVieAnterieure}}{{#if unlocked}}<div><a class="delete-vie-anterieure" title="Supprimer la vie antérieure"><i class="fa fa-trash"></i></a></div>{{/if}}{{/if}}
+      {{#if hasVieAnterieure}}{{#if unlocked}}<div><a class="delete-vie-anterieure" data-tooltip="Supprimer la vie antérieure"><i class="fa fa-trash"></i></a></div>{{/if}}{{/if}}
     </div>
   {{/if}}
 

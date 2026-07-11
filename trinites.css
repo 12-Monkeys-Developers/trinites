@@ -2375,3 +2375,9 @@
 .trinites-forms .range-picker {
   margin: 5px 20px;
 }
+.trinites [data-tooltip] i,
+.carte [data-tooltip] i,
+.jet-comp [data-tooltip] i,
+.jet-arme [data-tooltip] i {
+  pointer-events: none;
+}

@@ -25,7 +25,7 @@
   
     <div class="grid-data-modificateurs">
         <div class="titre">Primes{{#if infoPrimesID}}
-            <a class="content-link" data-type="JournalEntry" data-id="{{infoPrimesID}}" data-uuid="JournalEntry.{{infoPrimesID}}" title="Consultez l'entrée de journal dédiée pour une description des primes et pénalités"><i class="fas fa-info-circle"></i></a>
+            <a class="content-link" data-type="JournalEntry" data-id="{{infoPrimesID}}" data-uuid="JournalEntry.{{infoPrimesID}}" data-tooltip="Consultez l'entrée de journal dédiée pour une description des primes et pénalités"><i class="fas fa-info-circle"></i></a>
         {{/if}}</div>
         <div></div>
         <div class="titre">Pénalités</div>
@@ -67,7 +67,7 @@
         <input type="number" id="consommation" name="consommation" min="0"  max="10" value="0" />
     </div>
 
-    <div class="titre"><label>Domaine requis </label><i class="fas fa-info-circle" title="Lors d'une action régie par un domaine que vous ne maîtrisez pas, votre base effective est de 0."></i></div>
+    <div class="titre"><label>Domaine requis </label><i class="fas fa-info-circle" data-tooltip="Lors d'une action régie par un domaine que vous ne maîtrisez pas, votre base effective est de 0."></i></div>
     <div class="grid-data">
         <label>Domaine non maitrisé</label>
         <div class="data"><input type="checkbox" name="sansDomaine"/></div>

@@ -3,10 +3,10 @@
     <div class="entete">{{aura.name}}</div>
     <div class="grid-carte-aura">
         <div class="signe">
-            <img src="systems/trinites/assets/images/signes/{{aura.system.signe}}.png" title="{{configVal 'signes' aura.system.signe}}">
+            <img src="systems/trinites/assets/images/signes/{{aura.system.signe}}.png" data-tooltip="{{configVal 'signes' aura.system.signe}}">
         </div>
         <div class="deploiement">
-            <div class="logo"><i class="far fa-dot-circle" title="Portée"></i></div>
+            <div class="logo"><i class="far fa-dot-circle" data-tooltip="Portée"></i></div>
             {{#if (eq aura.system.deploiement "cosme")}}
                 <div class="zone">Non déployée</div>
             {{else}}
@@ -15,9 +15,9 @@
         </div>
         <div class="titre"><a class="details aura"><i class="fas fa-angle-right"></i></a><label>Effet de l'Aura</label></div>
             {{#if (eq aura.system.deploiement "cosme")}}
-                <div class="action"><a class="activer aura" title="Déployer l'aura '{{aura.name}}'"><i class="fas fa-bolt"></i></a></div>
+                <div class="action"><a class="activer aura" data-tooltip="Déployer l'aura '{{aura.name}}'"><i class="fas fa-bolt"></i></a></div>
             {{else}}
-                <div class="action"><a class="activer aura deployee" title="L'aura '{{aura.name}}' est déjà déployée"><i class="fas fa-bolt"></i></a></div>
+                <div class="action"><a class="activer aura deployee" data-tooltip="L'aura '{{aura.name}}' est déjà déployée"><i class="fas fa-bolt"></i></a></div>
             {{/if}}
     </div>
     <div class="desc">{{editor aura.system.description target="aura.system.description" button=true engine="prosemirror" owner=true}}</div>
@@ -25,9 +25,9 @@
     <div class="grid-carte-aura">
         <div class="titre"><a class="details souffle"><i class="fas fa-angle-right"></i></a><label>Effet du Souffle</label></div>
         {{#if (eq aura.system.deploiement "cosme")}}
-            <div class="action"><a class="activer souffle cosme" title="Pas de Souffle lorsque l'aura est dans le Cosme"><i class="fas fa-bolt"></i></a></div>
+            <div class="action"><a class="activer souffle cosme" data-tooltip="Pas de Souffle lorsque l'aura est dans le Cosme"><i class="fas fa-bolt"></i></a></div>
         {{else}}
-            <div class="action"><a class="activer souffle" title="Déclencher le Souffle de '{{aura.name}}'"><i class="fas fa-bolt"></i></a></div>
+            <div class="action"><a class="activer souffle" data-tooltip="Déclencher le Souffle de '{{aura.name}}'"><i class="fas fa-bolt"></i></a></div>
         {{/if}}
     </div>
     <div class="descSouffle">{{editor aura.system.souffle target="aura.system.souffle" button=true engine="prosemirror" owner=true}}</div>

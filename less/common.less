@@ -115,3 +115,12 @@
         margin:5px 20px;
     }
 }
+
+// Infobulles Foundry : une icône enfant ne doit pas capturer le pointeur, sinon
+// le data-tooltip porté par l'élément parent ne s'active pas (V14 lit event.target).
+.trinites [data-tooltip] i,
+.carte [data-tooltip] i,
+.jet-comp [data-tooltip] i,
+.jet-arme [data-tooltip] i {
+    pointer-events: none;
+}

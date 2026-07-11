@@ -1,6 +1,6 @@
 <form class="{{cssClass}}" autocomplete="off">
     <header class="sheet-header occulte">
-        <img src="{{item.img}}" data-edit="img" title="{{item.name}}" height="64" width="64"/>
+        <img src="{{item.img}}" data-edit="img" data-tooltip="{{item.name}}" height="64" width="64"/>
         <h1 class="occulte"><input name="name" type="text" value="{{item.name}}" placeholder="Nom de l'aura"/></h1>
     </header>
     <div class="sheet-content aura occulte" data-item-id="{{item.id}}">
@@ -17,11 +17,11 @@
                     <div class="centrer"><label>Main</label></div>
                     <div class="centrer"><label>Epée</label></div>
                     <div class="centrer"><label>Oeil</label></div>
-                    <div class="centrer"><a class="zone-deploiement" title="Aura zone Cosme (aucune)" data-zone="cosme">{{#if (eq data.system.deploiement "cosme")}}<i class="fas fa-circle"></i>{{else}}<i class="far fa-circle"></i>{{/if}}</a></div>
-                    <div class="centrer"><a class="zone-deploiement" title="Aura zone Corps (personnelle)" data-zone="corps">{{#if (eq data.system.deploiement "corps")}}<i class="fas fa-circle"></i>{{else}}<i class="far fa-circle"></i>{{/if}}</a></div>
-                    <div class="centrer"><a class="zone-deploiement" title="Aura zone Main (1m de rayon)" data-zone="main">{{#if (eq data.system.deploiement "main")}}<i class="fas fa-circle"></i>{{else}}<i class="far fa-circle"></i>{{/if}}</a></div>
-                    <div class="centrer"><a class="zone-deploiement" title="Aura zone Epée (2m de rayon)" data-zone="epee">{{#if (eq data.system.deploiement "epee")}}<i class="fas fa-circle"></i>{{else}}<i class="far fa-circle"></i>{{/if}}</a></div>
-                    <div class="centrer"><a class="zone-deploiement" title="Aura zone Oeil (1km de rayon)" data-zone="oeil">{{#if (eq data.system.deploiement "oeil")}}<i class="fas fa-circle"></i>{{else}}<i class="far fa-circle"></i>{{/if}}</a></div>
+                    <div class="centrer"><a class="zone-deploiement" data-tooltip="Aura zone Cosme (aucune)" data-zone="cosme">{{#if (eq data.system.deploiement "cosme")}}<i class="fas fa-circle"></i>{{else}}<i class="far fa-circle"></i>{{/if}}</a></div>
+                    <div class="centrer"><a class="zone-deploiement" data-tooltip="Aura zone Corps (personnelle)" data-zone="corps">{{#if (eq data.system.deploiement "corps")}}<i class="fas fa-circle"></i>{{else}}<i class="far fa-circle"></i>{{/if}}</a></div>
+                    <div class="centrer"><a class="zone-deploiement" data-tooltip="Aura zone Main (1m de rayon)" data-zone="main">{{#if (eq data.system.deploiement "main")}}<i class="fas fa-circle"></i>{{else}}<i class="far fa-circle"></i>{{/if}}</a></div>
+                    <div class="centrer"><a class="zone-deploiement" data-tooltip="Aura zone Epée (2m de rayon)" data-zone="epee">{{#if (eq data.system.deploiement "epee")}}<i class="fas fa-circle"></i>{{else}}<i class="far fa-circle"></i>{{/if}}</a></div>
+                    <div class="centrer"><a class="zone-deploiement" data-tooltip="Aura zone Oeil (1km de rayon)" data-zone="oeil">{{#if (eq data.system.deploiement "oeil")}}<i class="fas fa-circle"></i>{{else}}<i class="far fa-circle"></i>{{/if}}</a></div>
                 </div>
         {{else}}
             <label>Signe</label>
